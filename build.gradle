@@ -1,6 +1,15 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     ext.kotlin_version = "1.4.21"
+    ext{
+        version_material_design = "1.2.1"
+        version_retrofit = "2.9.0"
+        version_gson = "2.8.6"
+        version_glide = "4.11.0"
+        version_material_calendar = "2.0.1"
+        version_lottie = "3.4.2"
+        version_circle_image = "3.1.0"
+    }
     repositories {
         google()
         jcenter()
