@@ -9,7 +9,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Cherish">
-        <activity android:name=".ui.home.MainActivity">
+
+        <activity android:name=".ui.datail.DetailUserInputActivity" />
+        <activity android:name=".ui.enrollment.EnrollmentUserActivity" />
+        <activity android:name=".ui.enrollment.EnrollmentPhoneActivity" />
+
+        <service
+            android:name=".ui.fcm.FCMService"
+            android:enabled="true"
+            android:exported="false"
+            android:permission="TODO" />
+
+        <activity android:name=".ui.tutorial.TutorialActivity" />
+        <activity android:name=".ui.datail.DetailPlantActivity" />
+        <activity android:name=".ui.calendar.CalendarActivity" />
+        <activity android:name=".ui.signup.SignUpActivity" />
+        <activity android:name=".ui.signin.SignInActivity" />
+        <activity android:name=".ui.splash.SplashActivity" />
+
+        <activity android:name=".ui.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
