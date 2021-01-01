@@ -70,4 +70,7 @@ dependencies {
 
     // circle imageView
     implementation "de.hdodenhof:circleimageview:$version_circle_image"
+
+    // dexter
+    implementation "com.karumi:dexter:$version_dexter"
 }
