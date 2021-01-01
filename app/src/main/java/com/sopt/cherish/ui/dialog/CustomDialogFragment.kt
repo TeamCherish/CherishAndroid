@@ -18,7 +18,7 @@ import com.sopt.cherish.databinding.SampleLottieBinding
  * dialog에 비즈니스 로직이 들어가지는 않는 간단한 dialog는 이 클래스를 사용해 제어
  */
 
-class LottieDialogFragment(
+class CustomDialogFragment(
         @LayoutRes private val layoutResId: Int
 ) : DialogFragment(), View.OnClickListener {
 
