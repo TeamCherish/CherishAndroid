@@ -12,6 +12,7 @@ import androidx.fragment.app.DialogFragment
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.SampleLottie2Binding
 import com.sopt.cherish.databinding.SampleLottieBinding
+import com.sopt.cherish.util.AdjustDialog
 
 /**
  * Created on 2021-1-1 by SSong-develop
@@ -40,6 +41,13 @@ class CustomDialogFragment(
                 view
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val adjustDialogSize = AdjustDialog(requireContext())
+
+        adjustDialogSize.adjustSize(dialogFragment = this, widthRatio = 0.9f, heightRatio = 0.45f)
     }
 
     override fun onClick(view: View?) {
