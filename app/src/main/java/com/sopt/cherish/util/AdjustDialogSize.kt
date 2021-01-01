@@ -6,6 +6,10 @@ import android.graphics.Point
 import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
 
+/**
+ * Create on 2021-1-1 by SSong-develop
+ * dialog 크기를 재설정 해주는 함수
+ */
 class AdjustDialog constructor(private val context: Context) {
     fun adjustSize(dialogFragment: DialogFragment, widthRatio: Float, heightRatio: Float) {
         val params: WindowManager.LayoutParams = dialogFragment.dialog!!.window!!.attributes
