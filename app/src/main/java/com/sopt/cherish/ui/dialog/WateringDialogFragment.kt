@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.DialogWateringBinding
+import com.sopt.cherish.util.AdjustDialog
 
 class WateringDialogFragment : DialogFragment(), View.OnClickListener {
 
@@ -28,4 +29,8 @@ class WateringDialogFragment : DialogFragment(), View.OnClickListener {
         dismiss()
     }
 
+    override fun onResume() {
+        super.onResume()
+        AdjustDialog(requireContext()).adjustSize(this, 0.875f, 0.5452f)
+    }
 }
