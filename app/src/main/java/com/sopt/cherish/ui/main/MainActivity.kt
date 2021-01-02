@@ -3,7 +3,7 @@ package com.sopt.cherish.ui.main
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.sopt.cherish.R
-import com.sopt.cherish.ui.dialog.CustomDialogFragment
+import com.sopt.cherish.ui.dialog.WateringDialogFragment
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -13,6 +13,6 @@ class MainActivity : AppCompatActivity() {
         /**
          * CustomDialogFragment 쓰는 법 잠시 강의 겸 버전 맞추기
          */
-        CustomDialogFragment(R.layout.sample_lottie2).show(supportFragmentManager, "MainActivity")
+        WateringDialogFragment().show(supportFragmentManager, "MainActivity")
     }
 }
