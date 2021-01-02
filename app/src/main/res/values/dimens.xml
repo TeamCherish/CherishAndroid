@@ -26,4 +26,9 @@
     <dimen name="padding_12dp">12dp</dimen>
     <dimen name="padding_8dp">8dp</dimen>
     <dimen name="padding_4dp">4dp</dimen>
+
+    <dimen name="text_16sp">16sp</dimen>
+    <dimen name="text_12sp">12sp</dimen>
+    <dimen name="text_8sp">8sp</dimen>
+    <dimen name="text_4sp">4sp</dimen>
 </resources>
