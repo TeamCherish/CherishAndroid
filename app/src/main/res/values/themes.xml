@@ -1,6 +1,6 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="Theme.Cherish" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+    <style name="Theme.Cherish" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:statusBarColor">@color/transparent</item>
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
@@ -11,10 +11,10 @@
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Customize your theme here. -->
+        <item name="bottomSheetStyle">@style/CustomBottomSheet</item>
     </style>
 
     <style name="RoundButton" parent="Widget.MaterialComponents.Button">
-        <!-- 버튼 text 대문자 or 소문자 -->
         <item name="textAllCaps">false</item>
         <item name="cornerRadius">@dimen/radius_16dp</item>
         <item name="android:layout_height">48dp</item>
@@ -34,5 +34,17 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
+    <style name="CustomShapeAppearanceOverlay.MaterialComponents.BottomSheet" parent="">
+        <item name="cornerSizeTopRight">@dimen/radius_32dp</item>
+        <item name="cornerSizeTopLeft">@dimen/radius_32dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+    </style>
+
+    <style name="CustomBottomSheet" parent="Widget.MaterialComponents.BottomSheet">
+        <item name="shapeAppearanceOverlay">
+            @style/CustomShapeAppearanceOverlay.MaterialComponents.BottomSheet
+        </item>
+    </style>
 
 </resources>
