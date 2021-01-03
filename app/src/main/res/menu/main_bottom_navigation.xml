@@ -6,12 +6,12 @@
         android:title="Home"/>
 
     <item
-        android:id="@+id/main_person"
+        android:id="@+id/main_manage_plant"
         android:icon="@drawable/main_tab_user"
         android:title="Person"/>
 
     <item
-        android:id="@+id/main_more"
+        android:id="@+id/main_setting"
         android:icon="@drawable/main_tab_more"
         android:title="More"/>
 </menu>
