@@ -11,8 +11,7 @@
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Customize your theme here. -->
-        <!--
-        <item name="bottomSheetStyle">@style/CustomBottomSheet</item>-->
+        <item name="bottomSheetStyle">@style/CustomBottomSheet</item>
     </style>
 
     <style name="RoundButton" parent="Widget.MaterialComponents.Button">

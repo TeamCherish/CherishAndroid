@@ -7,7 +7,6 @@
     app:behavior_fitToContents="false"
     app:behavior_hideable="false"
     style="?attr/bottomSheetStyle"
-    android:background="@drawable/dialog_round_corner"
     android:id="@+id/standardBottomSheet"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
     >
