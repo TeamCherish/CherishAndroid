@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/main_home"
+        android:icon="@drawable/main_icn_home"
+        android:title="Home"/>
+
+    <item
+        android:id="@+id/main_person"
+        android:icon="@drawable/main_tab_user"
+        android:title="Person"/>
+
+    <item
+        android:id="@+id/main_more"
+        android:icon="@drawable/main_tab_more"
+        android:title="More"/>
+</menu>

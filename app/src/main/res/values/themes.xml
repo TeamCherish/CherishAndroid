@@ -11,7 +11,8 @@
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Customize your theme here. -->
-        <item name="bottomSheetStyle">@style/CustomBottomSheet</item>
+        <!--
+        <item name="bottomSheetStyle">@style/CustomBottomSheet</item>-->
     </style>
 
     <style name="RoundButton" parent="Widget.MaterialComponents.Button">
@@ -27,6 +28,13 @@
         <item name="android:layout_height">48dp</item>
         <item name="android:backgroundTint">@color/cherish_green_main</item>
         <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="RoundButton.WhiteMain">
+        <item name="android:layout_height">40dp</item>
+        <item name="android:backgroundTint">@color/white</item>
+        <item name="android:textColor">@color/cherish_green_main</item>
+        <item name="cornerRadius">@dimen/radius_100dp</item>
     </style>
 
     <style name="RoundButton.Purple">
