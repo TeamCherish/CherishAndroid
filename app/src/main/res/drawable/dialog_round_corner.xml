@@ -3,11 +3,15 @@
     android:shape="rectangle"
     >
 
+<<<<<<< HEAD
 
     <corners
         android:topRightRadius="16dp"
         android:topLeftRadius="16dp"/>
 
 
+=======
+    <corners android:radius="@dimen/radius_16dp" />
+>>>>>>> 5b66adc0409764bafcecddad6f88f6b755d49ff6
     <solid android:color="@color/white"/>
 </shape>

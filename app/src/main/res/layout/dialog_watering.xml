@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="@dimen/radius_20dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/watering_image_graphic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_60dp"
+            android:src="@drawable/img_popup_gaphic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/watering_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_13dp"
+            android:fontFamily="@font/notosanscjkkr_medium"
+            android:text="@string/watering_description"
+            android:gravity="center"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@id/watering_image_graphic"
+            app:layout_constraintStart_toStartOf="@id/watering_image_graphic"
+            app:layout_constraintTop_toBottomOf="@id/watering_image_graphic" />
+
+        <Button
+            android:id="@+id/watering_accept_btn"
+            style="@style/RoundButton.GreenMain"
+            android:layout_width="280dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="@dimen/margin_18dp"
+            android:layout_marginTop="37dp"
+            android:layout_marginEnd="@dimen/margin_18dp"
+            android:text="@string/watering"
+            app:layout_constraintEnd_toEndOf="@id/watering_image_graphic"
+            app:layout_constraintStart_toStartOf="@id/watering_image_graphic"
+            app:layout_constraintTop_toBottomOf="@id/watering_description" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="17dp"
+            android:layout_marginBottom="28dp"
+            android:fontFamily="@font/notosanscjkkr_regular"
+            android:text="@string/next_time"
+            android:textColor="#404040"
+            android:textSize="@dimen/text_16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/watering_image_graphic"
+            app:layout_constraintStart_toStartOf="@id/watering_image_graphic"
+            app:layout_constraintTop_toBottomOf="@id/watering_accept_btn" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
