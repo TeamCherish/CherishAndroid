@@ -15,9 +15,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         initViewModel()
 
-        /**
-         * CustomDialogFragment 쓰는 법 잠시 강의 겸 버전 맞추기
-         */
         WateringDialogFragment().show(supportFragmentManager, "MainActivity")
     }
 
