@@ -2,8 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sopt.cherish">
 
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
@@ -13,13 +17,6 @@
         <activity android:name=".ui.datail.DetailUserInputActivity" />
         <activity android:name=".ui.enrollment.EnrollmentUserActivity" />
         <activity android:name=".ui.enrollment.EnrollmentPhoneActivity" />
-
-        <service
-            android:name=".ui.fcm.FCMService"
-            android:enabled="true"
-            android:exported="false"
-            android:permission="TODO" />
-
         <activity android:name=".ui.tutorial.TutorialActivity" />
         <activity android:name=".ui.datail.DetailPlantActivity" />
         <activity android:name=".ui.calendar.CalendarActivity" />
