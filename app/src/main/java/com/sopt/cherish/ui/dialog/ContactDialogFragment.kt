@@ -14,6 +14,7 @@ import com.sopt.cherish.R
 import com.sopt.cherish.databinding.DialogContactBinding
 import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.util.AdjustDialog
+import com.sopt.cherish.util.PermissionUtil
 
 /**
  * Created on 2020-01-03 by SSong-develop
@@ -38,7 +39,7 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
         }
 
         binding.contactMessage.setOnClickListener {
-            navigateMessage()
+            navigateToSendMessage()
         }
 
         return binding.root
@@ -53,10 +54,12 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
         AdjustDialog(requireContext()).adjustSize(this, 0.875f, 0.5452f)
     }
 
-    private fun navigateMessage() {
-        val messageIntent = Intent(Intent.ACTION_SENDTO, viewModel.dummyUserMessageNumber)
-        startActivity(messageIntent)
-        dismiss()
+    private fun navigateToSendMessage() {
+        if (PermissionUtil.isCheckedSendMessagePermission(requireContext())) {
+            startSendMessageAndDismiss()
+        } else {
+            PermissionUtil.openPermissionSettings(requireContext())
+        }
     }
 
     private fun navigateKakao() {
@@ -64,8 +67,21 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
     }
 
     private fun navigateCall() {
-        val phoneCallIntent = Intent(Intent.ACTION_CALL, viewModel.dummyUserPhoneNumber)
-        startActivity(phoneCallIntent)
+        if (PermissionUtil.isCheckedCallPermission(requireContext())) {
+            startPhoneCallAndDismiss()
+        } else {
+            PermissionUtil.openPermissionSettings(requireContext())
+        }
+    }
+
+
+    private fun startPhoneCallAndDismiss() {
+        startActivity(Intent(Intent.ACTION_CALL, viewModel.dummyUserPhoneNumber))
+        dismiss()
+    }
+
+    private fun startSendMessageAndDismiss() {
+        startActivity(Intent(Intent.ACTION_SENDTO, viewModel.dummyUserMessageNumber))
         dismiss()
     }
 }

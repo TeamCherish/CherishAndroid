@@ -3,8 +3,10 @@ package com.sopt.cherish.util
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.provider.Settings
+import androidx.core.content.ContextCompat
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.listener.multi.BaseMultiplePermissionsListener
@@ -63,6 +65,16 @@ object PermissionUtil {
         context.startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
             data = Uri.fromParts("package", context.packageName, null)
         })
+    }
+
+    fun isCheckedCallPermission(context: Context): Boolean {
+        if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) return true
+        return false
+    }
+
+    fun isCheckedSendMessagePermission(context: Context): Boolean {
+        if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) return true
+        return false
     }
 
     interface PermissionListener {
