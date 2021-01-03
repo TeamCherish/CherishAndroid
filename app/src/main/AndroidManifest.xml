@@ -13,13 +13,6 @@
         <activity android:name=".ui.datail.DetailUserInputActivity" />
         <activity android:name=".ui.enrollment.EnrollmentUserActivity" />
         <activity android:name=".ui.enrollment.EnrollmentPhoneActivity" />
-
-        <service
-            android:name=".ui.fcm.FCMService"
-            android:enabled="true"
-            android:exported="false"
-            android:permission="TODO" />
-
         <activity android:name=".ui.tutorial.TutorialActivity" />
         <activity android:name=".ui.datail.DetailPlantActivity" />
         <activity android:name=".ui.calendar.CalendarActivity" />

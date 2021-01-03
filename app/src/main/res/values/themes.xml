@@ -48,10 +48,19 @@
         <item name="cornerSizeBottomLeft">0dp</item>
     </style>
 
+    <style name="CherishFloatingActionButton" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="android:backgroundTint">@color/white</item>
+        <item name="borderWidth">0dp</item>
+    </style>
+
     <style name="CustomBottomSheet" parent="Widget.MaterialComponents.BottomSheet">
         <item name="shapeAppearanceOverlay">
             @style/CustomShapeAppearanceOverlay.MaterialComponents.BottomSheet
         </item>
+    </style>
+
+    <style name="CustomChip" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="android:backgroundTint">@color/white</item>
     </style>
 
 </resources>
