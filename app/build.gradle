@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'kotlin-android-extensions'
 }
 
 android {
@@ -9,6 +10,7 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
+
         applicationId "com.sopt.cherish"
         minSdkVersion 26
         targetSdkVersion 30
@@ -82,4 +84,10 @@ dependencies {
     testImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    //switch button
+    implementation 'com.kyleduo.switchbutton:library:2.0.0'
+
+    //progress bar 
+    implementation 'com.jackandphantom.android:circularprogressbar:1.2.0'
 }
