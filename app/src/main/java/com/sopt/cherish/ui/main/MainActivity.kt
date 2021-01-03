@@ -1,12 +1,15 @@
 package com.sopt.cherish.ui.main
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.sopt.cherish.R
+
 import com.sopt.cherish.databinding.ActivityMainBinding
 import com.sopt.cherish.ui.main.home.HomeFragment
 import com.sopt.cherish.ui.main.manageplant.ManagePlantFragment
 import com.sopt.cherish.ui.main.setting.SettingFragment
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -43,9 +46,11 @@ class MainActivity : AppCompatActivity() {
                     transAction.replace(R.id.main_fragment_container, settingFragment)
                     true
                 }else->{
-                    throw AssertionError()
-                }
+                throw AssertionError()
+            }
             }
         }
     }
+
 }
+
