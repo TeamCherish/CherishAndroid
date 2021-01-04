@@ -12,6 +12,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentHomeBinding
 
+
 /**
  * 메인 홈뷰
  * 초기상태와 중간에 있는 경우 2개 다 고려해야 합니다.
@@ -28,6 +29,7 @@ class HomeFragment : Fragment() {
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
     ): View? {
+
         _binding= FragmentHomeBinding.inflate(inflater,container,false)
         return binding.root
     }
