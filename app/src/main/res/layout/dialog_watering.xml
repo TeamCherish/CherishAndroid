@@ -53,7 +53,7 @@
             android:fontFamily="@font/notosanscjkkr_regular"
             android:text="@string/next_time"
             android:textColor="#404040"
-            android:textSize="@dimen/text_16sp"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/watering_image_graphic"
             app:layout_constraintStart_toStartOf="@id/watering_image_graphic"

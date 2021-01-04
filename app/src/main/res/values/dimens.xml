@@ -38,10 +38,8 @@
     <dimen name="margin_13dp">13dp</dimen>
     <dimen name="margin_60dp">60dp</dimen>
 
-
     <dimen name="text_11sp">11sp</dimen>
     <dimen name="text_16sp">16sp</dimen>
     <dimen name="text_28sp">28sp</dimen>
     <dimen name="text_40sp">40sp</dimen>
-
 </resources>
