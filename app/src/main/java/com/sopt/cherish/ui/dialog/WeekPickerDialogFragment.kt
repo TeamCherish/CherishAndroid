@@ -15,6 +15,7 @@ import androidx.fragment.app.DialogFragment
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.WeekpickerLayoutBinding
 
+//created by nayoung : 알람주기 설정 보여주는 팝업 창
 class WeekPickerDialogFragment(@LayoutRes
                                private val layoutResId: Int
 ) : DialogFragment(), View.OnClickListener {
@@ -24,9 +25,6 @@ class WeekPickerDialogFragment(@LayoutRes
         val view = inflater.inflate(layoutResId, container, false)
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        //val dialog2 = AlertDialog.Builder(this).create()
-        // val edialog2: LayoutInflater = LayoutInflater.from(this)
-        //  val mView2: View = edialog2.inflate(R.layout.clockpicker_layout, null)
 
         val binding = WeekpickerLayoutBinding.bind(view)
 
@@ -62,11 +60,6 @@ class WeekPickerDialogFragment(@LayoutRes
         ny.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
         ny2.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
         ny1.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
-
-
-        val color = ColorDrawable(Color.TRANSPARENT)
-        // Dialog 크기 설정
-        val inset = InsetDrawable(color, 85)
 
         return binding.root
 

@@ -15,6 +15,7 @@ import androidx.fragment.app.DialogFragment
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ClockpickerLayoutBinding
 
+//created by nayoung : 알람시간 타임피커 팝업뷰 창
 class ClockPickerDialogFragment(@LayoutRes
                                 private val layoutResId: Int
 ) : DialogFragment(), View.OnClickListener {
@@ -24,9 +25,6 @@ class ClockPickerDialogFragment(@LayoutRes
         val view = inflater.inflate(layoutResId, container, false)
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        //val dialog2 = AlertDialog.Builder(this).create()
-        // val edialog2: LayoutInflater = LayoutInflater.from(this)
-        //  val mView2: View = edialog2.inflate(R.layout.clockpicker_layout, null)
 
         val binding = ClockpickerLayoutBinding.bind(view)
         val clock: NumberPicker = view.findViewById(R.id.numberPicker_clock)
@@ -59,15 +57,6 @@ class ClockPickerDialogFragment(@LayoutRes
         clock.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
         clock2.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
         clock1.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
-
-
-        val color = ColorDrawable(Color.TRANSPARENT)
-        // Dialog 크기 설정
-        val inset = InsetDrawable(color, 85)
-        //window?.setBackgroundDrawable(inset)
-
-        //  dialog2.setView(mView2)
-        //   dialog2.show()
 
 
         return binding.root

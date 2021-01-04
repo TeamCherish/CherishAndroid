@@ -7,8 +7,8 @@ import com.sopt.cherish.databinding.ActivitySecondBinding
 import com.sopt.cherish.ui.datail.DetailPlantActivity
 import com.sopt.cherish.ui.enrollment.PhoneBookActivity
 
-
-class secondActivity : AppCompatActivity() {
+//created by nayoung : 테스트 하기 위한 activity
+class SecondActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySecondBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

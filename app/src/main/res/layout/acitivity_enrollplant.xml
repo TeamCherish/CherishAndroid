@@ -12,7 +12,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="식물 상세 입력"
-        android:textSize="16sp"
+        android:includeFontPadding="false"
+        android:fontFamily="@font/notosanscjkkr_medium"
+        android:textSize="@dimen/text_16sp"
         app:layout_constraintBottom_toBottomOf="@+id/imageButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,6 +43,8 @@
                 android:id="@+id/textname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/notosanscjkkr_medium"
+                android:textSize="@dimen/text_14sp"
                 android:text="이름"
                 android:layout_marginLeft="10dp"
                 app:layout_constraintStart_toStartOf="@+id/constop1"
@@ -50,12 +54,11 @@
                 android:id="@+id/editname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_4dp"
+                android:background="@drawable/box_add_plant_detail"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:background="@drawable/box_add_plant_detail"
-
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="10dp"
 
                 app:layout_constraintStart_toStartOf="@+id/constop1"
                 app:layout_constraintTop_toBottomOf="@+id/textname" />
@@ -75,6 +78,8 @@
                 android:id="@+id/textnick"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/notosanscjkkr_medium"
+                android:textSize="@dimen/text_14sp"
                 android:text="식물애칭"
                 android:layout_marginLeft="10dp"
                 app:layout_constraintStart_toStartOf="@+id/constop2"
@@ -84,12 +89,12 @@
                 android:id="@+id/editnick"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
+                android:layout_marginTop="@dimen/margin_4dp"
                 android:background="@drawable/box_add_plant_detail"
+                android:ems="10"
 
+                android:inputType="textPersonName"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="10dp"
 
                 app:layout_constraintStart_toStartOf="@+id/constop2"
                 app:layout_constraintTop_toBottomOf="@+id/textnick" />
@@ -104,7 +109,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="@dimen/margin_14dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cons0">
@@ -115,6 +120,8 @@
             android:layout_height="wrap_content"
             android:text="생일"
             android:layout_marginLeft="10dp"
+            android:fontFamily="@font/notosanscjkkr_medium"
+            android:textSize="@dimen/text_14sp"
             app:layout_constraintStart_toStartOf="@+id/cons1"
             app:layout_constraintTop_toTopOf="@+id/cons1" />
 
@@ -127,8 +134,7 @@
             android:background="@drawable/box_add_plant_detail"
 
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="10dp"
-
+            android:layout_marginTop="@dimen/margin_4dp"
             app:layout_constraintStart_toStartOf="@+id/cons1"
             app:layout_constraintTop_toBottomOf="@+id/textbirth" />
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -139,7 +145,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="@dimen/margin_14dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cons1">
@@ -150,6 +156,8 @@
             android:layout_height="wrap_content"
             android:text="전화번호"
             android:layout_marginLeft="10dp"
+            android:fontFamily="@font/notosanscjkkr_medium"
+            android:textSize="@dimen/text_14sp"
             app:layout_constraintStart_toStartOf="@+id/cons2"
             app:layout_constraintTop_toTopOf="@+id/cons2" />
 
@@ -162,8 +170,7 @@
             android:background="@drawable/box_add_plant_detail"
 
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="10dp"
-
+            android:layout_marginTop="@dimen/margin_4dp"
             app:layout_constraintStart_toStartOf="@+id/cons2"
             app:layout_constraintTop_toBottomOf="@+id/textphone" />
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -174,7 +181,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="@dimen/margin_14dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cons2">
@@ -184,6 +191,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="물주기알람시간"
+            android:fontFamily="@font/notosanscjkkr_medium"
+            android:textSize="@dimen/text_14sp"
             android:layout_marginLeft="10dp"
             app:layout_constraintStart_toStartOf="@+id/cons3"
             app:layout_constraintTop_toTopOf="@+id/cons3" />
@@ -195,9 +204,8 @@
             android:ems="10"
             android:inputType="textPersonName"
             android:background="@drawable/box_add_plant_detail"
-
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/margin_4dp"
             app:layout_constraintStart_toStartOf="@+id/cons3"
             app:layout_constraintTop_toBottomOf="@+id/textclock" />
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -208,7 +216,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="@dimen/margin_14dp"
         android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -221,6 +229,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:text="물주기알람주기"
+            android:fontFamily="@font/notosanscjkkr_medium"
+            android:textSize="@dimen/text_14sp"
             app:layout_constraintStart_toStartOf="@+id/cons4"
             app:layout_constraintTop_toTopOf="@+id/cons4" />
 
@@ -228,7 +238,7 @@
             android:id="@+id/editweek"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/margin_4dp"
             android:background="@drawable/box_add_plant_detail"
             android:ems="10"
             android:inputType="textPersonName"
@@ -252,12 +262,13 @@
         android:id="@+id/detail_ok_btn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="68dp"
+        android:layout_marginTop="153dp"
         android:background="@drawable/btn_next_selected"
-        android:text="다음"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="완료"
+        android:textSize="@dimen/text_16sp"
         app:layout_constraintEnd_toEndOf="@+id/cons4"
-        app:layout_constraintStart_toStartOf="@+id/cons4" />
+        app:layout_constraintStart_toStartOf="@+id/cons4"
+        app:layout_constraintTop_toBottomOf="@+id/cons4" />
 
     <ImageButton
         android:id="@+id/imageButton"
