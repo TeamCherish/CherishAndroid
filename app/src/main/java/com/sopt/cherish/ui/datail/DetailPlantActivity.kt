@@ -17,10 +17,11 @@ class DetailPlantActivity : AppCompatActivity() {
 
     private lateinit var circleProgressbar: CircleProgressbar
 
-    var memoList= arrayListOf<MemoListDataclass>(
-            MemoListDataclass("12/2","다음주에 대머리쉬 출근"),
-            MemoListDataclass("12/28","내일 대머리쉬 사퇴")
+    var memoList = arrayListOf<MemoListDataclass>(
+            MemoListDataclass("12/2", "다음주에 대머리쉬 출근"),
+            MemoListDataclass("12/28", "내일 대머리쉬 사퇴")
     )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail_plant)
@@ -28,12 +29,12 @@ class DetailPlantActivity : AppCompatActivity() {
         circleProgressbar = findViewById(R.id.test)
 
         val animationDuration = 100
-        circleProgressbar.setProgressWithAnimation(45.0f,animationDuration)
+        circleProgressbar.setProgressWithAnimation(45.0f, animationDuration)
 
-        val mAdapter =DetailMemoAdapter(memoList)
-        recycler_detail.adapter=mAdapter
+        val mAdapter = DetailMemoAdapter(memoList)
+        recycler_detail.adapter = mAdapter
 
-        recycler_detail.layoutManager=LinearLayoutManager(this)
+        recycler_detail.layoutManager = LinearLayoutManager(this)
         recycler_detail.setHasFixedSize(true)
     }
 }

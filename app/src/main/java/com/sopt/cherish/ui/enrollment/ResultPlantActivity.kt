@@ -10,41 +10,41 @@ import androidx.appcompat.app.AppCompatDialog
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityResultplantBinding
 
-class ResultPlantActivity :AppCompatActivity() {
+class ResultPlantActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityResultplantBinding
     private lateinit var progressDialog: AppCompatDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding= ActivityResultplantBinding.inflate(layoutInflater)
+        binding = ActivityResultplantBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        Log.d("asdf",intent.getStringExtra("plantkey").toString())
+        Log.d("asdf", intent.getStringExtra("plantkey").toString())
 
-            if(intent.getStringExtra("plantkey")=="1"){
-                binding.imageView2.setImageResource(R.drawable.cherry)
-            }
-            else if(intent.getStringExtra("plantkey")=="2"){
-                binding.imageView2.setImageResource(R.drawable.cherry2)
+        if (intent.getStringExtra("plantkey") == "1") {
+            binding.imageView2.setImageResource(R.drawable.cherry)
+        } else if (intent.getStringExtra("plantkey") == "2") {
+            binding.imageView2.setImageResource(R.drawable.cherry2)
 
-            }
+        }
 
 
         binding.startbtn.setOnClickListener {
             progressON()
         }
         binding.imageButton3.setOnClickListener {
-            val intent=Intent(this,EnrollPlantActicity::class.java)
+            val intent = Intent(this, EnrollPlantActicity::class.java)
             startActivity(intent)
         }
 
 
     }
-    fun progressON(){
+
+    fun progressON() {
         progressDialog = AppCompatDialog(this)
         progressDialog.setCancelable(false)
-        progressDialog.getWindow()?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        progressDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         progressDialog.setContentView(R.layout.progress_layout)
         progressDialog.show()
         /*var img_loading_framge = progressDialog.findViewById<ImageView>(R.id.GIFimage)
@@ -56,8 +56,9 @@ class ResultPlantActivity :AppCompatActivity() {
 
         })*/
     }
-    fun progressOFF(){
-        if(progressDialog != null && progressDialog.isShowing()){
+
+    fun progressOFF() {
+        if (progressDialog != null && progressDialog.isShowing) {
             progressDialog.dismiss()
         }
     }
