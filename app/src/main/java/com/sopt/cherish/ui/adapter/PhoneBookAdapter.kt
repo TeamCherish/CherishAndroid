@@ -9,14 +9,14 @@ import android.widget.RadioButton
 import androidx.recyclerview.widget.RecyclerView
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ItemLayoutBinding
-import kotlinx.android.synthetic.main.item_layout.view.*
+
 
 
 data class Phone(val id: String?, val name: String?, val phone: String?
 
 )
 
-class PhoneBookAdapter(val list2: List<Phone>) : RecyclerView.Adapter<PhoneBookAdapter.Holder>() {
+class PhoneBookAdapter(val PhoneBooklist: List<Phone>) : RecyclerView.Adapter<PhoneBookAdapter.Holder>() {
 
     private lateinit var binding: ItemLayoutBinding
 
@@ -28,15 +28,16 @@ class PhoneBookAdapter(val list2: List<Phone>) : RecyclerView.Adapter<PhoneBookA
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_layout, parent, false)
-        return Holder(view)
+        val layoutInflater =LayoutInflater.from(parent.context)
+        val binding: ItemLayoutBinding= ItemLayoutBinding.inflate(layoutInflater,parent,false)
+       // val view = LayoutInflater.from(parent.context).inflate(R.layout.item_layout, parent, false)
+        return Holder(binding)
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder.itemView.radioButton.setOnCheckedChangeListener(checkedChangeListener)
-        if (holder.itemView.radioButton.isChecked) checkedRadioButton = holder.itemView.radioButton
-        val phone = list2[position]
+        binding.radioButton.setOnCheckedChangeListener(checkedChangeListener)
+        if (binding.radioButton.isChecked) checkedRadioButton = binding.radioButton
+        val phone = PhoneBooklist[position]
         holder.setPhone(phone)
     }
 
@@ -46,7 +47,7 @@ class PhoneBookAdapter(val list2: List<Phone>) : RecyclerView.Adapter<PhoneBookA
     }
 
     override fun getItemCount(): Int {
-        return list2.size
+        return PhoneBooklist.size
 
     }
 
@@ -55,9 +56,8 @@ class PhoneBookAdapter(val list2: List<Phone>) : RecyclerView.Adapter<PhoneBookA
     }
 
     @SuppressLint("MissingPermission")
-    inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    inner class Holder( private val binding:ItemLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
         var mPhone: Phone? = null
-        var chkBox = itemView.findViewById(R.id.radioButton) as RadioButton
 
         init {
 /*
@@ -73,8 +73,8 @@ class PhoneBookAdapter(val list2: List<Phone>) : RecyclerView.Adapter<PhoneBookA
 
         fun setPhone(phone: Phone) {
             this.mPhone = phone
-            itemView.textName.text = phone.name
-            itemView.textPhone.text = phone.phone
+            binding.textName.text = phone.name
+            binding.textPhone.text = phone.phone
         }
 
 
