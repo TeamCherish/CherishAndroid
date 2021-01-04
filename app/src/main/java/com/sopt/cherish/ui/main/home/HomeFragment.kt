@@ -19,8 +19,8 @@ import com.sopt.cherish.databinding.FragmentHomeBinding
  */
 class HomeFragment : Fragment() {
 
-    private var _binding: FragmentHomeBinding?=null
-    private val binding get()=_binding!!
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
     private lateinit var standardBottomSheetBehavior: BottomSheetBehavior<*>
     private lateinit var standardBottomSheet: ConstraintLayout
     private lateinit var mViewBg: ConstraintLayout
@@ -30,16 +30,16 @@ class HomeFragment : Fragment() {
             savedInstanceState: Bundle?
     ): View? {
 
-        _binding= FragmentHomeBinding.inflate(inflater,container,false)
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mViewBg=binding.homeFragmentBg
+        mViewBg = binding.homeFragmentBg
 
-        standardBottomSheet=view.findViewById(R.id.standardBottomSheet)
+        standardBottomSheet = view.findViewById(R.id.standardBottomSheet)
 
         standardBottomSheetBehavior = BottomSheetBehavior.from(standardBottomSheet)
         standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
@@ -50,8 +50,8 @@ class HomeFragment : Fragment() {
         standardBottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
 
-                if(newState== BottomSheetBehavior.STATE_COLLAPSED){
-                    mViewBg.setBackgroundColor(ContextCompat.getColor(context!!,R.color.cherish_purple))
+                if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
+                    mViewBg.setBackgroundColor(ContextCompat.getColor(context!!, R.color.cherish_purple))
                 }
             }
 
@@ -64,12 +64,12 @@ class HomeFragment : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
-        _binding=null
+        _binding = null
     }
 
-    private fun transitionBottomSheetParentView(slideOffset: Float){
+    private fun transitionBottomSheetParentView(slideOffset: Float) {
 
-        val argbEvaluator = ArgbEvaluator().evaluate(slideOffset,0x8189b3, 0x242222)
+        val argbEvaluator = ArgbEvaluator().evaluate(slideOffset, 0x8189b3, 0x242222)
         mViewBg.setBackgroundColor(argbEvaluator as Int)
 
     }
