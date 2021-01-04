@@ -16,7 +16,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:textSize="@dimen/text_40sp"
         android:textColor="@color/white"
-        android:layout_marginLeft="@dimen/margin_16dp"
+        android:layout_marginStart="@dimen/margin_16dp"
         android:layout_marginTop="@dimen/margin_53dp"
         android:font="@font/notosanscjkkr_bold"
         android:text="D-3"/>
@@ -63,7 +63,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:src="@drawable/ic_alarm"
         android:layout_marginTop="@dimen/margin_56dp"
-        android:layout_marginRight="@dimen/margin_21dp"/>
+        android:layout_marginEnd="@dimen/margin_21dp"/>
 
     <ProgressBar
         android:id="@+id/affection_progressbar"
