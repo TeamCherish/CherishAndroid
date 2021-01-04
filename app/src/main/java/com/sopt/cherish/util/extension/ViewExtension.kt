@@ -1,7 +1,9 @@
 package com.sopt.cherish.util.extension
 
 import android.content.Context
+import android.util.TypedValue
 import android.widget.Toast
+import kotlin.math.roundToInt
 
 /**
  * Created on 2021-1-1 by SSong-develop
@@ -15,3 +17,7 @@ fun shortToast(context: Context, message: String) {
 fun longToast(context: Context, message: String) {
     Toast.makeText(context, message, Toast.LENGTH_LONG).show()
 }
+
+fun Context.dpToPx(dp: Int): Int =
+    TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp.toFloat(), resources.displayMetrics)
+        .roundToInt()

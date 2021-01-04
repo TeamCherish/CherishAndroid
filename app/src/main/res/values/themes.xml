@@ -42,6 +42,13 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
+    <style name="RoundButton.Gray">
+        <item name="android:layout_height">48dp</item>
+        <item name="android:backgroundTint">@color/cherish_light_gray</item>
+        <item name="android:textColor">@color/cherish_pass_text_gray</item>
+    </style>
+
+
     <style name="RoundButton.White">
         <item name="android:layout_height">40dp</item>
         <item name="android:backgroundTint">@color/white</item>
@@ -70,4 +77,20 @@
         <item name="android:backgroundTint">@color/white</item>
     </style>
 
+    <style name="CustomMaterialTextField" parent="Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="boxCornerRadiusTopEnd">@dimen/radius_8dp</item>
+        <item name="boxCornerRadiusBottomStart">@dimen/radius_8dp</item>
+        <item name="boxCornerRadiusBottomEnd">@dimen/radius_8dp</item>
+        <item name="boxCornerRadiusTopStart">@dimen/radius_8dp</item>
+        <item name="counterMaxLength">10</item>
+        <item name="counterEnabled">true</item>
+        <item name="android:height">44dp</item>
+    </style>
+
+    <style name="CustomEditText" parent="Widget.AppCompat.EditText">
+        <item name="android:padding">13dp</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:background">@drawable/memolist_view</item>
+        <item name="android:backgroundTint">@color/cherish_light_gray</item>
+    </style>
 </resources>

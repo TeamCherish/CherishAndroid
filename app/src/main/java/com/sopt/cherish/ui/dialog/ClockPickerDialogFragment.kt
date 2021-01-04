@@ -3,7 +3,6 @@ package com.sopt.cherish.ui.dialog
 import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.InsetDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,12 +15,17 @@ import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ClockpickerLayoutBinding
 
 //created by nayoung : 알람시간 타임피커 팝업뷰 창
-class ClockPickerDialogFragment(@LayoutRes
-                                private val layoutResId: Int
+class ClockPickerDialogFragment(
+    @LayoutRes
+    private val layoutResId: Int
 ) : DialogFragment(), View.OnClickListener {
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val view = inflater.inflate(layoutResId, container, false)
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 

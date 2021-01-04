@@ -14,6 +14,7 @@ buildscript {
         version_core_ktx = "1.3.2"
         version_fragment_ktx = "1.2.5"
         version_coroutine = "1.4.0"
+        version_flexbox = "2.0.1"
     }
     repositories {
         google()

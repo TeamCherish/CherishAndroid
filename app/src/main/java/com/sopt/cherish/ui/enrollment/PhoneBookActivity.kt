@@ -19,7 +19,6 @@ import com.sopt.cherish.ui.adapter.Phone
 import com.sopt.cherish.ui.adapter.PhoneBookAdapter
 
 
-
 class PhoneBookActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityPhonebookBinding
@@ -79,9 +78,9 @@ class PhoneBookActivity : AppCompatActivity() {
     }
 
     override fun onRequestPermissionsResult(
-            requestCode: Int,
-            permissions: Array<out String>,
-            grantResults: IntArray
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
     ) {
         if (requestCode == 99) {
             var check = true
@@ -131,7 +130,10 @@ class PhoneBookActivity : AppCompatActivity() {
         val phoneUri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI
         // 2.1 전화번호에서 가져올 컬럼 정의
         val projections = arrayOf(
-                ContactsContract.CommonDataKinds.Phone.CONTACT_ID, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME, ContactsContract.CommonDataKinds.Phone.NUMBER)
+            ContactsContract.CommonDataKinds.Phone.CONTACT_ID,
+            ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
+            ContactsContract.CommonDataKinds.Phone.NUMBER
+        )
         // 2.2 조건 정의
         var where: String? = null
         var whereValues: Array<String>? = null

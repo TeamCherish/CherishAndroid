@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         val settingFragment = SettingFragment()
 
         supportFragmentManager.beginTransaction()
-                .add(R.id.main_fragment_container, homeFragment).commit()
+            .add(R.id.main_fragment_container, homeFragment).commit()
 
 
         binding.mainBottomNavi.setOnNavigationItemSelectedListener {
@@ -58,9 +58,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initViewModel() {
-        viewModel = ViewModelProvider(this@MainActivity, Injection.provideMainViewModelFactory()).get(
+        viewModel =
+            ViewModelProvider(this@MainActivity, Injection.provideMainViewModelFactory()).get(
                 MainViewModel::class.java
-        )
+            )
     }
 
 

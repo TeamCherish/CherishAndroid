@@ -3,7 +3,6 @@ package com.sopt.cherish.ui.dialog
 import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.InsetDrawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,12 +15,17 @@ import com.sopt.cherish.R
 import com.sopt.cherish.databinding.WeekpickerLayoutBinding
 
 //created by nayoung : 알람주기 설정 보여주는 팝업 창
-class WeekPickerDialogFragment(@LayoutRes
-                               private val layoutResId: Int
+class WeekPickerDialogFragment(
+    @LayoutRes
+    private val layoutResId: Int
 ) : DialogFragment(), View.OnClickListener {
 
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val view = inflater.inflate(layoutResId, container, false)
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 

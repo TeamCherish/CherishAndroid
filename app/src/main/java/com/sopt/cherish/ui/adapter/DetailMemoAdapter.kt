@@ -9,9 +9,14 @@ import com.sopt.cherish.R
 import com.sopt.cherish.remote.model.MemoListDataclass
 
 //created by nayoung : 식물상세뷰에서 사용자가 남긴 메모를 보여주는 adapter
-class DetailMemoAdapter(val memolist: ArrayList<MemoListDataclass>) : RecyclerView.Adapter<DetailMemoAdapter.itemViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DetailMemoAdapter.itemViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.detail_item_layout, parent, false)
+class DetailMemoAdapter(val memolist: ArrayList<MemoListDataclass>) :
+    RecyclerView.Adapter<DetailMemoAdapter.itemViewHolder>() {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): DetailMemoAdapter.itemViewHolder {
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.detail_item_layout, parent, false)
 
         return itemViewHolder(view)
     }

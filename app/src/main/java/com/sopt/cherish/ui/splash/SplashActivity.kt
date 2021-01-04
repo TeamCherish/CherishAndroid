@@ -36,7 +36,10 @@ class SplashActivity : AppCompatActivity() {
                 openSettings()
             }
 
-            override fun onAnyPermissionPermanentlyDenied(deniedPermissions: List<String>, permanentDeniedPermissions: List<String>) {
+            override fun onAnyPermissionPermanentlyDenied(
+                deniedPermissions: List<String>,
+                permanentDeniedPermissions: List<String>
+            ) {
                 shortToast(this@SplashActivity, "권한 허용이 영구적으로 거부되었습니다. $permanentDeniedPermissions")
                 openSettings()
             }

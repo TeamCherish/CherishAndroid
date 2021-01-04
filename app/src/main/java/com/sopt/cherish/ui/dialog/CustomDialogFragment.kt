@@ -19,10 +19,14 @@ import com.sopt.cherish.util.AdjustDialog
  */
 
 class CustomDialogFragment(
-        @LayoutRes private val layoutResId: Int
+    @LayoutRes private val layoutResId: Int
 ) : DialogFragment(), View.OnClickListener {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val view = inflater.inflate(layoutResId, container, false)
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 

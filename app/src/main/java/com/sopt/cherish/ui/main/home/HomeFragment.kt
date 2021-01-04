@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentHomeBinding
+import com.sopt.cherish.ui.dialog.WateringDialogFragment
 
 
 /**
@@ -26,11 +27,15 @@ class HomeFragment : Fragment() {
     private lateinit var mViewBg: ConstraintLayout
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        // conflict 날 수 있는 자리
+        binding.buttonWater.setOnClickListener {
+            WateringDialogFragment().show(parentFragmentManager, "HomeFragment")
+        }
         return binding.root
     }
 
@@ -47,11 +52,17 @@ class HomeFragment : Fragment() {
         standardBottomSheetBehavior.expandedOffset = 158
 
 
-        standardBottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+        standardBottomSheetBehavior.addBottomSheetCallback(object :
+            BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
 
                 if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
-                    mViewBg.setBackgroundColor(ContextCompat.getColor(context!!, R.color.cherish_purple))
+                    mViewBg.setBackgroundColor(
+                        ContextCompat.getColor(
+                            context!!,
+                            R.color.cherish_purple
+                        )
+                    )
                 }
             }
 
