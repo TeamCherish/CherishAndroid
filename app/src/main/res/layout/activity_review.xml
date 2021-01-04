@@ -107,7 +107,7 @@
             app:layout_constraintTop_toBottomOf="@id/review_memo" />
 
         <Button
-            android:id="@+id/review_pass_accept"
+            android:id="@+id/review_ignore_accept"
             style="@style/RoundButton.Gray"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

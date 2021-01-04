@@ -1,7 +1,6 @@
 package com.sopt.cherish.ui.review
 
 import android.os.Bundle
-import android.util.Log
 import android.view.KeyEvent
 import android.widget.EditText
 import androidx.activity.viewModels
@@ -21,16 +20,24 @@ class ReviewActivity : AppCompatActivity() {
         val binding: ActivityReviewBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_review)
 
+        binding.mainViewModel = viewModel
         binding.reviewEditKeyword.setOnKeyListener { view, keyCode, keyEvent ->
             if (keyEvent.action == KeyEvent.ACTION_DOWN || keyCode == KeyEvent.KEYCODE_ENTER) {
                 val et = view as EditText
                 val name = et.text.toString()
-                Log.d("hehe", name)
                 binding.reviewFlexBox.addChip(name)
                 et.text = null
             }
             return@setOnKeyListener false
         }
-        binding.mainViewModel = viewModel
+
+
+        binding.reviewAdminAccept.setOnClickListener {
+
+        }
+
+        binding.reviewIgnoreAccept.setOnClickListener {
+
+        }
     }
 }
