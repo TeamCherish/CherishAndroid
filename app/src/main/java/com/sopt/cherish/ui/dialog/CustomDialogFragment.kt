@@ -29,6 +29,7 @@ class CustomDialogFragment(
         return when (layoutResId) {
             R.layout.sample_lottie -> {
                 val binding = SampleLottieBinding.bind(view)
+
                 binding.root
             }
             R.layout.sample_lottie2 -> {

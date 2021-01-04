@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#ffffff"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="식물 상세 입력"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cons0"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constop1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toStartOf="@+id/constop2"
+            app:layout_constraintTop_toTopOf="@+id/cons0"
+            app:layout_constraintStart_toStartOf="@+id/cons0">
+
+            <TextView
+                android:id="@+id/textname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="이름"
+                android:layout_marginLeft="10dp"
+                app:layout_constraintStart_toStartOf="@+id/constop1"
+                app:layout_constraintTop_toTopOf="@+id/constop1" />
+
+            <EditText
+                android:id="@+id/editname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:background="@drawable/box_add_plant_detail"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="10dp"
+
+                app:layout_constraintStart_toStartOf="@+id/constop1"
+                app:layout_constraintTop_toBottomOf="@+id/textname" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constop2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="18dp"
+            app:layout_constraintEnd_toEndOf="@+id/cons0"
+            app:layout_constraintTop_toTopOf="@+id/cons0"
+            app:layout_constraintStart_toEndOf="@+id/constop1">
+
+            <TextView
+                android:id="@+id/textnick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="식물애칭"
+                android:layout_marginLeft="10dp"
+                app:layout_constraintStart_toStartOf="@+id/constop2"
+                app:layout_constraintTop_toTopOf="@+id/constop2" />
+
+            <EditText
+                android:id="@+id/editnick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:background="@drawable/box_add_plant_detail"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="10dp"
+
+                app:layout_constraintStart_toStartOf="@+id/constop2"
+                app:layout_constraintTop_toBottomOf="@+id/textnick" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cons1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="14dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cons0">
+
+        <TextView
+            android:id="@+id/textbirth"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="생일"
+            android:layout_marginLeft="10dp"
+            app:layout_constraintStart_toStartOf="@+id/cons1"
+            app:layout_constraintTop_toTopOf="@+id/cons1" />
+
+        <EditText
+            android:id="@+id/editbirth"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:background="@drawable/box_add_plant_detail"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="10dp"
+
+            app:layout_constraintStart_toStartOf="@+id/cons1"
+            app:layout_constraintTop_toBottomOf="@+id/textbirth" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cons2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="14dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cons1">
+
+        <TextView
+            android:id="@+id/textphone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="전화번호"
+            android:layout_marginLeft="10dp"
+            app:layout_constraintStart_toStartOf="@+id/cons2"
+            app:layout_constraintTop_toTopOf="@+id/cons2" />
+
+        <EditText
+            android:id="@+id/editphone"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:background="@drawable/box_add_plant_detail"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="10dp"
+
+            app:layout_constraintStart_toStartOf="@+id/cons2"
+            app:layout_constraintTop_toBottomOf="@+id/textphone" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cons3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="14dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cons2">
+
+        <TextView
+            android:id="@+id/textclock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="물주기알람시간"
+            android:layout_marginLeft="10dp"
+            app:layout_constraintStart_toStartOf="@+id/cons3"
+            app:layout_constraintTop_toTopOf="@+id/cons3" />
+
+        <TextView
+            android:id="@+id/editclock"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:background="@drawable/box_add_plant_detail"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="@+id/cons3"
+            app:layout_constraintTop_toBottomOf="@+id/textclock" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cons4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cons3">
+
+        <TextView
+            android:id="@+id/textweek"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="물주기알람주기"
+            app:layout_constraintStart_toStartOf="@+id/cons4"
+            app:layout_constraintTop_toTopOf="@+id/cons4" />
+
+        <TextView
+            android:id="@+id/editweek"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/box_add_plant_detail"
+            android:ems="10"
+            android:inputType="textPersonName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/cons4"
+            app:layout_constraintTop_toBottomOf="@+id/textweek" />
+
+        <Switch
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:thumb="@drawable/knob"
+            android:track="@drawable/track"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/editweek"
+            tools:ignore="UseSwitchCompatOrMaterialXml" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/detail_ok_btn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="68dp"
+        android:background="@drawable/btn_next_selected"
+        android:text="다음"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/cons4"
+        app:layout_constraintStart_toStartOf="@+id/cons4" />
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:background="#ffffff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/group_360" />
+</androidx.constraintlayout.widget.ConstraintLayout>
