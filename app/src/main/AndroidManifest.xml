@@ -14,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Cherish">
-        <activity android:name=".ui.review.ReviewActivity"></activity>
+        <activity android:name=".ui.review.ReviewActivity" />
         <activity android:name=".ui.datail.DetailUserInputActivity" />
         <activity android:name=".ui.enrollment.EnrollmentUserActivity" />
         <activity android:name=".ui.enrollment.EnrollmentPhoneActivity" />
