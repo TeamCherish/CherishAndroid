@@ -13,17 +13,18 @@ import com.sopt.cherish.databinding.WeekpickerLayoutBinding
 import com.sopt.cherish.ui.dialog.ClockPickerDialogFragment
 import com.sopt.cherish.ui.dialog.WeekPickerDialogFragment
 
+//created by nayoung : 식물 등록 버튼 눌렀을 때 나오는 진행중 팝업 창
 class EnrollPlantActicity : AppCompatActivity() {
 
     private lateinit var binding: AcitivityEnrollplantBinding
-    private lateinit var bindingpicker: WeekpickerLayoutBinding
 
     private lateinit var progressDialog: AppCompatDialog
-    private val time: Long = 500
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = AcitivityEnrollplantBinding.inflate(layoutInflater)
-        bindingpicker = WeekpickerLayoutBinding.inflate(layoutInflater)
+
         setContentView(binding.root)
 
         binding.imageButton.setOnClickListener {
@@ -32,15 +33,9 @@ class EnrollPlantActicity : AppCompatActivity() {
         }
         binding.detailOkBtn.setOnClickListener {
             progressON()
-            Handler().postDelayed({
-                // This method will be executed once the timer is over
-                // Start your app main activity
 
-                //startActivity(Intent(this, MainActivity::class.java))
-                progressOFF()
-                // close this activity
-                finish()
-            }, time)
+            progressOFF()
+
 
 
             val intent = Intent(this, ResultPlantActivity::class.java)

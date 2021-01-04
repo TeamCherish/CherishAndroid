@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatDialog
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityResultplantBinding
 
+//created by nayoung : 식물 배정된 창이 나오는 activity
 class ResultPlantActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityResultplantBinding
@@ -47,14 +48,7 @@ class ResultPlantActivity : AppCompatActivity() {
         progressDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         progressDialog.setContentView(R.layout.progress_layout)
         progressDialog.show()
-        /*var img_loading_framge = progressDialog.findViewById<ImageView>(R.id.GIFimage)
-        var frameAnimation = img_loading_framge?.getBackground() as AnimationDrawable
-        img_loading_framge?.post(object : Runnable{
-            override fun run() {
-                frameAnimation.start()
-            }
 
-        })*/
     }
 
     fun progressOFF() {

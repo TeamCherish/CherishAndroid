@@ -15,16 +15,12 @@ import com.sopt.cherish.databinding.ItemLayoutBinding
 data class Phone(val id: String?, val name: String?, val phone: String?
 
 )
-
+// created by nayoung : 사용자 연락처들을 받아서 보여주는 adapter
 class PhoneBookAdapter(val PhoneBooklist: List<Phone>) : RecyclerView.Adapter<PhoneBookAdapter.Holder>() {
 
     private lateinit var binding: ItemLayoutBinding
 
     private var checkedRadioButton: CompoundButton? = null
-
-    interface OnSingleClickListener {
-        fun send(month: Phone)
-    }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
@@ -60,14 +56,6 @@ class PhoneBookAdapter(val PhoneBooklist: List<Phone>) : RecyclerView.Adapter<Ph
         var mPhone: Phone? = null
 
         init {
-/*
-            itemView.btnPhone.setOnClickListener {
-                mPhone?.phone.let { phoneNumber ->
-                    val uri = Uri.parse("tel:${phoneNumber.toString()}")
-                    val intent = Intent(Intent.ACTION_CALL, uri)
-                    itemView.context.startActivity(intent)
-                }
-            }*/
 
         }
 
