@@ -7,7 +7,8 @@ import com.jackandphantom.circularprogressbar.CircleProgressbar
 import com.sopt.cherish.R
 import com.sopt.cherish.remote.model.MemoListDataclass
 import com.sopt.cherish.ui.adapter.DetailMemoAdapter
-import kotlinx.android.synthetic.main.activity_detailplant.*
+import kotlinx.android.synthetic.main.activity_detail_plant.*
+
 
 /**
  * 식물 상세보기
@@ -22,7 +23,7 @@ class DetailPlantActivity : AppCompatActivity() {
     )
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_detailplant)
+        setContentView(R.layout.activity_detail_plant)
 
         circleProgressbar = findViewById(R.id.test)
 

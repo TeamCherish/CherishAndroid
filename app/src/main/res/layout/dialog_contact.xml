@@ -38,7 +38,7 @@
                 android:includeFontPadding="false"
                 android:text="@{mainViewModel.dummyUserName}"
                 android:textColor="@color/cherish_light_black"
-                android:textSize="@dimen/text_22sp"
+                android:textSize="22sp"
                 app:layout_constraintBottom_toTopOf="@id/contact_common_text"
                 app:layout_constraintEnd_toEndOf="@id/contact_image_graphic"
                 app:layout_constraintStart_toStartOf="@id/contact_image_graphic"
@@ -52,7 +52,7 @@
                 android:includeFontPadding="false"
                 android:text="@string/contact_common_text"
                 android:textColor="@color/cherish_light_black"
-                android:textSize="@dimen/text_22sp"
+                android:textSize="22sp"
                 app:layout_constraintEnd_toEndOf="@id/contact_image_graphic"
                 app:layout_constraintStart_toStartOf="@id/contact_image_graphic"
                 app:layout_constraintTop_toBottomOf="@id/contact_user_name" />
