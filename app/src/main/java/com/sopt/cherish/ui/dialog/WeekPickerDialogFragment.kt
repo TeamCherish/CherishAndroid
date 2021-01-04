@@ -29,9 +29,9 @@ class WeekPickerDialogFragment(@LayoutRes
         val binding = WeekpickerLayoutBinding.bind(view)
 
 
-        val ny: NumberPicker = view.findViewById(R.id.numberPicker)
-        val ny1: NumberPicker = view.findViewById(R.id.numberPicker2)
-        val ny2: NumberPicker = view.findViewById(R.id.numberPicker3)
+        val week_every: NumberPicker = view.findViewById(R.id.numberPicker)
+        val week_number: NumberPicker = view.findViewById(R.id.numberPicker2)
+        val week_month: NumberPicker = view.findViewById(R.id.numberPicker3)
 
         val cancel: Button = view.findViewById(R.id.button_alarm)
         cancel.setOnClickListener {
@@ -41,25 +41,25 @@ class WeekPickerDialogFragment(@LayoutRes
         val list = resources.getStringArray(R.array.cycle)
         val list2 = resources.getStringArray(R.array.week)
 
-        ny.removeDivider()
-        ny1.removeDivider()
-        ny2.removeDivider()
+        week_every.removeDivider()
+        week_number.removeDivider()
+        week_month.removeDivider()
 
-        ny.minValue = 0
-        ny.maxValue = list2.size - 1
+        week_every.minValue = 0
+        week_every.maxValue = list2.size - 1
 
-        ny1.minValue = 1
-        ny1.maxValue = 3
+        week_number.minValue = 1
+        week_number.maxValue = 3
 
-        ny2.minValue = 0
-        ny2.maxValue = list.size - 1
+        week_month.minValue = 0
+        week_month.maxValue = list.size - 1
 
-        ny.displayedValues = list2
-        ny2.displayedValues = list
+        week_every.displayedValues = list2
+        week_month.displayedValues = list
 
-        ny.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
-        ny2.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
-        ny1.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
+        week_every.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
+        week_month.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
+        week_number.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
 
         return binding.root
 

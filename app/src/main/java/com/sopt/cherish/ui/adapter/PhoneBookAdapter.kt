@@ -1,6 +1,7 @@
 package com.sopt.cherish.ui.adapter
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import android.widget.CompoundButton
 import android.widget.RadioButton
 import androidx.recyclerview.widget.RecyclerView
 import com.sopt.cherish.R
+import com.sopt.cherish.databinding.ActivityPhonebookBinding
 import com.sopt.cherish.databinding.ItemLayoutBinding
 
 
@@ -19,20 +21,30 @@ data class Phone(val id: String?, val name: String?, val phone: String?
 class PhoneBookAdapter(val PhoneBooklist: List<Phone>) : RecyclerView.Adapter<PhoneBookAdapter.Holder>() {
 
     private lateinit var binding: ItemLayoutBinding
+    private lateinit var binding_phonebook: ActivityPhonebookBinding
 
     private var checkedRadioButton: CompoundButton? = null
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
+
+
         val layoutInflater =LayoutInflater.from(parent.context)
         val binding: ItemLayoutBinding= ItemLayoutBinding.inflate(layoutInflater,parent,false)
+        val binding_phonebook: ActivityPhonebookBinding= ActivityPhonebookBinding.inflate(layoutInflater,parent,false)
        // val view = LayoutInflater.from(parent.context).inflate(R.layout.item_layout, parent, false)
+        binding.radioButton.setOnCheckedChangeListener(checkedChangeListener)
+      /*  binding.radioButton.setOnCheckedChangeListener { button, b ->
+            binding_phonebook.buttonnext.setBackgroundColor(Color.GREEN)
+        }
+*/
+        if (binding.radioButton.isChecked) checkedRadioButton = binding.radioButton
+
         return Holder(binding)
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        binding.radioButton.setOnCheckedChangeListener(checkedChangeListener)
-        if (binding.radioButton.isChecked) checkedRadioButton = binding.radioButton
+
         val phone = PhoneBooklist[position]
         holder.setPhone(phone)
     }

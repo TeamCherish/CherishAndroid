@@ -262,13 +262,13 @@
         android:id="@+id/detail_ok_btn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="153dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/btn_next_selected"
         android:text="완료"
         android:textSize="@dimen/text_16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/cons4"
-        app:layout_constraintStart_toStartOf="@+id/cons4"
-        app:layout_constraintTop_toBottomOf="@+id/cons4" />
+        app:layout_constraintStart_toStartOf="@+id/cons4" />
 
     <ImageButton
         android:id="@+id/imageButton"
