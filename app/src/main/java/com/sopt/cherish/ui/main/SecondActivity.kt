@@ -8,7 +8,7 @@ import com.sopt.cherish.ui.datail.DetailPlantActivity
 import com.sopt.cherish.ui.enrollment.PhoneBookActivity
 
 
-class secondActivity : AppCompatActivity(){
+class secondActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySecondBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
