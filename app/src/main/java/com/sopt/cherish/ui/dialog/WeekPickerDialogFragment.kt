@@ -1,5 +1,6 @@
 package com.sopt.cherish.ui.dialog
 
+import android.app.Activity
 import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -14,6 +15,7 @@ import androidx.fragment.app.DialogFragment
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.WeekpickerLayoutBinding
 
+
 //created by nayoung : 알람주기 설정 보여주는 팝업 창
 class WeekPickerDialogFragment(
     @LayoutRes
@@ -22,6 +24,27 @@ class WeekPickerDialogFragment(
 
     lateinit var weektext:String
 
+    interface TestDialogFragmentListener {
+        fun onTestDialogweek(dialog: DialogFragment?, someData: String?)
+    }
+
+    var testDialogFragmentListener: TestDialogFragmentListener? = null
+    override fun onAttach(activity: Activity) {
+        super.onAttach(activity)
+        testDialogFragmentListener = try {
+            activity as TestDialogFragmentListener
+        } catch (e: ClassCastException) {
+            throw ClassCastException(
+                activity.toString()
+                        + " must implement TestDialogFragmentListener"
+            )
+        }
+    }
+    fun someAction() {
+        testDialogFragmentListener!!.onTestDialogweek(
+            this@WeekPickerDialogFragment, weektext
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -76,7 +99,8 @@ class WeekPickerDialogFragment(
         val btn_ok: Button = view.findViewById(R.id.button_ok)
         btn_ok.setOnClickListener {
 
-            week_every.value.toString()+" "+week_month.value.toString()+" "+week_number.value
+            weektext=list2[week_every.value]+" "+week_number.value.toString()+" "+list[week_month.value]
+            someAction()
             dialog?.dismiss()
 
         }

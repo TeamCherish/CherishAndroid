@@ -5,8 +5,10 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDialog
+import androidx.fragment.app.DialogFragment
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.AcitivityEnrollplantBinding
 import com.sopt.cherish.databinding.WeekpickerLayoutBinding
@@ -14,12 +16,13 @@ import com.sopt.cherish.ui.dialog.ClockPickerDialogFragment
 import com.sopt.cherish.ui.dialog.WeekPickerDialogFragment
 
 //created by nayoung : 식물 등록 버튼 눌렀을 때 나오는 진행중 팝업 창
-class EnrollPlantActicity : AppCompatActivity() {
+class EnrollPlantActicity : AppCompatActivity(),WeekPickerDialogFragment.TestDialogFragmentListener,ClockPickerDialogFragment.TestDialogFragmentListener {
 
     private lateinit var binding: AcitivityEnrollplantBinding
 
     private lateinit var progressDialog: AppCompatDialog
 
+    lateinit var weektime: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -40,7 +43,7 @@ class EnrollPlantActicity : AppCompatActivity() {
 
             val intent = Intent(this, ResultPlantActivity::class.java)
 
-            intent.putExtra("plantkey", binding.editweek.text.toString())
+            intent.putExtra("plantkey", binding.waterAlarmWeek.text.toString())
             startActivity(intent)
 
         }
@@ -82,4 +85,15 @@ class EnrollPlantActicity : AppCompatActivity() {
             progressDialog.dismiss()
         }
     }
+
+    override fun onTestDialogweek(dialog: DialogFragment?, someData: String?) {
+
+        binding.waterAlarmWeek.text=someData.toString()
+        Log.d("qqqq",someData.toString())}
+
+    override fun onTestDialogClock(dialog: DialogFragment?, someData: String?) {
+        binding.waterAlarmTime.text=someData.toString()
+        Log.d("clock",someData.toString())}
+
+
 }

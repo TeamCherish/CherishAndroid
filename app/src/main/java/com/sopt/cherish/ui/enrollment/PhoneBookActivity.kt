@@ -16,13 +16,14 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.databinding.adapters.CompoundButtonBindingAdapter.setChecked
+import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityPhonebookBinding
 import com.sopt.cherish.databinding.ItemLayoutBinding
 import com.sopt.cherish.ui.adapter.Phone
 import com.sopt.cherish.ui.adapter.PhoneBookAdapter
-
+import com.sopt.cherish.ui.dialog.WeekPickerDialogFragment
 
 
 class PhoneBookActivity : AppCompatActivity() {
@@ -45,9 +46,9 @@ class PhoneBookActivity : AppCompatActivity() {
         setContentView(binding.root)
         checkAndStart()
 
-        // 버튼 클릭하면 라디오 버튼 선택한 데이터가 다음 식물등록 뷰에 보여지는 부분 
+        // 버튼 클릭하면 라디오 버튼 선택한 데이터가 다음 식물등록 뷰에 보여지는 부분
         binding.buttonnext.setOnClickListener {
-            val intent = Intent(parent.applicationContext, EnrollPlantActicity::class.java)
+            val intent = Intent(this, EnrollPlantActicity::class.java)
             startActivity(intent)
         }
 
@@ -176,6 +177,7 @@ class PhoneBookActivity : AppCompatActivity() {
 
         return list
     }
+
 
 
 }
