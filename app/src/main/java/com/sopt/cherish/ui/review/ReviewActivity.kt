@@ -58,6 +58,7 @@ class ReviewActivity : AppCompatActivity() {
         lifecycleScope.launch(Dispatchers.IO) {
             CustomDialogFragment(R.layout.sample_lottie).show(supportFragmentManager, "TAG")
             delay(2000)
+            // 만약에 홈 프라그먼트에서 물 주는 애니메이션을 해야한다 그러면 finishActivity로 변경해야할 수도 있음
             finish()
         }
     }
