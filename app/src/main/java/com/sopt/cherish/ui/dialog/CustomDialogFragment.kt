@@ -33,7 +33,6 @@ class CustomDialogFragment(
         return when (layoutResId) {
             R.layout.sample_lottie -> {
                 val binding = SampleLottieBinding.bind(view)
-
                 binding.root
             }
             R.layout.sample_lottie2 -> {
@@ -50,7 +49,7 @@ class CustomDialogFragment(
         super.onResume()
         val adjustDialogSize = AdjustDialog(requireContext())
 
-        adjustDialogSize.adjustSize(dialogFragment = this, widthRatio = 0.9f, heightRatio = 0.45f)
+        adjustDialogSize.adjustSize(dialogFragment = this, widthRatio = 0.694f, heightRatio = 0.169f)
     }
 
     override fun onClick(view: View?) {
