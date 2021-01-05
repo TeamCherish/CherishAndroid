@@ -8,9 +8,13 @@ import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentHomeBinding
+import com.sopt.cherish.remote.model.CherryDataclass
+import com.sopt.cherish.ui.adapter.MainBottomSheetAdapter
 
 
 /**
@@ -19,11 +23,12 @@ import com.sopt.cherish.databinding.FragmentHomeBinding
  */
 class HomeFragment : Fragment() {
 
-    private var _binding: FragmentHomeBinding? = null
+    private var _binding: FragmentHomeBinding?=null
     private val binding get() = _binding!!
     private lateinit var standardBottomSheetBehavior: BottomSheetBehavior<*>
     private lateinit var standardBottomSheet: ConstraintLayout
-    private lateinit var mViewBg: ConstraintLayout
+    private lateinit var homeFragmentBg: ConstraintLayout
+    private lateinit var adapter: MainBottomSheetAdapter
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -31,27 +36,32 @@ class HomeFragment : Fragment() {
     ): View? {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
+        adapter = MainBottomSheetAdapter()
+        setAdapterData(adapter)
+        setAdapter(binding, adapter)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mViewBg = binding.homeFragmentBg
+        homeFragmentBg = binding.homeFragmentBg
 
-        standardBottomSheet = view.findViewById(R.id.standardBottomSheet)
+        standardBottomSheet = view.findViewById(R.id.main_bottom_sheet)
 
         standardBottomSheetBehavior = BottomSheetBehavior.from(standardBottomSheet)
         standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         standardBottomSheetBehavior.peekHeight = 160
         standardBottomSheetBehavior.expandedOffset = 158
+        standardBottomSheetBehavior.isHideable=false
 
+        initRecyclerView(homeFragmentBg,adapter)
 
         standardBottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
 
                 if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
-                    mViewBg.setBackgroundColor(ContextCompat.getColor(context!!, R.color.cherish_purple))
+                    homeFragmentBg.setBackgroundColor(ContextCompat.getColor(context!!, R.color.cherish_purple))
                 }
             }
 
@@ -67,10 +77,70 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
+    private fun initRecyclerView(standardBottomSheet: ConstraintLayout?, mainAdapter: MainBottomSheetAdapter) {
+        val recyclerView = standardBottomSheet?.findViewById<RecyclerView>(R.id.main_list)
+        recyclerView?.apply {
+            adapter = mainAdapter
+            layoutManager = GridLayoutManager(context, 5)
+        }
+    }
     private fun transitionBottomSheetParentView(slideOffset: Float) {
 
         val argbEvaluator = ArgbEvaluator().evaluate(slideOffset, 0x8189b3, 0x242222)
-        mViewBg.setBackgroundColor(argbEvaluator as Int)
+        homeFragmentBg.setBackgroundColor(argbEvaluator as Int)
+
+    }
+
+    private fun setAdapterData(adapter: MainBottomSheetAdapter) {
+        adapter.data = mutableListOf(
+                CherryDataclass("안녕"),
+                CherryDataclass("반가워"),
+                CherryDataclass("잘가"),
+                CherryDataclass("반가워"),
+                CherryDataclass("반가워"),
+                CherryDataclass("반가워"),
+                CherryDataclass("반가워"),
+                CherryDataclass("안녕"),
+                CherryDataclass("반가워"),
+                CherryDataclass("잘가"),
+                CherryDataclass("반가워"),
+                CherryDataclass("반가워"),
+                CherryDataclass("반가워"),
+                CherryDataclass("반가워"),
+                CherryDataclass("안녕"),
+                CherryDataclass("반가워"),
+                CherryDataclass("잘가"),
+                CherryDataclass("반가워"),
+                CherryDataclass("반가워"),
+                CherryDataclass("반가워"),
+                CherryDataclass("반가워"),
+                CherryDataclass("안녕"),
+                CherryDataclass("반가워"),
+                CherryDataclass("잘가"),
+                CherryDataclass("반가워"),
+                CherryDataclass("반가워"),
+                CherryDataclass("반가워"),
+                CherryDataclass("반가워"),
+                CherryDataclass("안녕"),
+                CherryDataclass("안녕"),
+                CherryDataclass("반가워"),
+                CherryDataclass("잘가"),
+                CherryDataclass("반가워"),
+                CherryDataclass("반가워"),
+                CherryDataclass("반가워"),
+                CherryDataclass("반가워"),
+                CherryDataclass("안녕"),
+                CherryDataclass("반가워"),
+                CherryDataclass("반가워"),
+                CherryDataclass("반가워"),
+        )
+        adapter.notifyDataSetChanged()
+    }
+    private fun setAdapter(binding: FragmentHomeBinding, mainAdapter: MainBottomSheetAdapter) {
+        binding.mainBottomSheet.mainList.apply {
+            adapter = mainAdapter
+            layoutManager = GridLayoutManager(context, 5)
+        }
 
     }
 }
