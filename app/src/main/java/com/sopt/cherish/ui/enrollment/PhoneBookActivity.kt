@@ -8,13 +8,18 @@ import android.os.Bundle
 import android.provider.ContactsContract
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.View
+import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.databinding.adapters.CompoundButtonBindingAdapter.setChecked
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityPhonebookBinding
+import com.sopt.cherish.databinding.ItemLayoutBinding
 import com.sopt.cherish.ui.adapter.Phone
 import com.sopt.cherish.ui.adapter.PhoneBookAdapter
 
@@ -23,6 +28,8 @@ import com.sopt.cherish.ui.adapter.PhoneBookAdapter
 class PhoneBookActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityPhonebookBinding
+    private lateinit var binding_item: ItemLayoutBinding
+
 
     val permissions = arrayOf(Manifest.permission.READ_CONTACTS, Manifest.permission.CALL_PHONE)
     lateinit var madapter: PhoneBookAdapter
@@ -33,17 +40,22 @@ class PhoneBookActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPhonebookBinding.inflate(layoutInflater)
+        binding_item = ItemLayoutBinding.inflate(layoutInflater)
+
         setContentView(binding.root)
         checkAndStart()
+
+        // 버튼 클릭하면 라디오 버튼 선택한 데이터가 다음 식물등록 뷰에 보여지는 부분 
         binding.buttonnext.setOnClickListener {
-            val intent = Intent(this, EnrollPlantActicity::class.java)
+            val intent = Intent(parent.applicationContext, EnrollPlantActicity::class.java)
             startActivity(intent)
         }
+
+
         binding.imageButtonphone.setOnClickListener {
             val intent = Intent(this, PhoneBookActivity::class.java)
             startActivity(intent)
         }
-
 
     }
 
@@ -165,23 +177,7 @@ class PhoneBookActivity : AppCompatActivity() {
         return list
     }
 
+
 }
 
-class OnSingleClickListener(private val onSingleClick: (View) -> Unit) : View.OnClickListener {
-    companion object {
-        const val CLICK_INTERVAL = 500
-    }
 
-    private var lastClickedTime: Long = 0L
-
-    override fun onClick(v: View?) {
-        if (isSafe() && v != null) {
-            onSingleClick(v)
-        }
-        lastClickedTime = System.currentTimeMillis()
-    }
-
-    private fun isSafe(): Boolean {
-        return System.currentTimeMillis() - lastClickedTime > CLICK_INTERVAL
-    }
-}

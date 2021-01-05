@@ -184,7 +184,7 @@
         android:layout_marginTop="@dimen/margin_14dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cons2">
+        app:layout_constraintTop_toBottomOf="@+id/cons4">
 
         <TextView
             android:id="@+id/textclock"
@@ -221,7 +221,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cons3">
+        app:layout_constraintTop_toBottomOf="@+id/cons2">
 
         <TextView
             android:id="@+id/textweek"
@@ -241,7 +241,6 @@
             android:layout_marginTop="@dimen/margin_4dp"
             android:background="@drawable/box_add_plant_detail"
             android:ems="10"
-            android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/cons4"
             app:layout_constraintTop_toBottomOf="@+id/textweek" />

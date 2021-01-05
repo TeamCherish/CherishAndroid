@@ -44,7 +44,7 @@ class EnrollPlantActicity : AppCompatActivity() {
             startActivity(intent)
 
         }
-
+        //timepicker 나오는 부분
         binding.editclock.setOnClickListener {
             val needWaterDialog = ClockPickerDialogFragment(R.layout.clockpicker_layout).show(supportFragmentManager, "MainActivity")
 
@@ -52,7 +52,7 @@ class EnrollPlantActicity : AppCompatActivity() {
         }
         binding.editweek.setOnClickListener {
 
-            WeekPickerDialogFragment(R.layout.weekpicker_layout).show(supportFragmentManager, "MainActivity")
+           val needweek= WeekPickerDialogFragment(R.layout.weekpicker_layout).show(supportFragmentManager, "MainActivity")
 
 
         }
