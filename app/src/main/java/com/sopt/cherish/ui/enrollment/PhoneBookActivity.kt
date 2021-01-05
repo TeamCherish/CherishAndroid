@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.sopt.cherish.databinding.ActivityPhonebookBinding
 import com.sopt.cherish.ui.adapter.Phone
 import com.sopt.cherish.ui.adapter.PhoneBookAdapter
-import kotlinx.android.synthetic.main.activity_phonebook.*
+
 
 
 class PhoneBookActivity : AppCompatActivity() {
@@ -100,7 +100,7 @@ class PhoneBookActivity : AppCompatActivity() {
     }
 
     fun setSearchListener() {
-        editSearch.addTextChangedListener(object : TextWatcher {
+        binding.editSearch.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {}
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
@@ -120,8 +120,8 @@ class PhoneBookActivity : AppCompatActivity() {
     fun setList() {
         phonelist.addAll(getPhoneNumbers(sortText, searchText))
         madapter = PhoneBookAdapter(phonelist)
-        recycler.adapter = madapter
-        recycler.layoutManager = LinearLayoutManager(this)
+        binding.recycler.adapter = madapter
+        binding.recycler.layoutManager = LinearLayoutManager(this)
     }
 
     fun getPhoneNumbers(sort: String, name: String): List<Phone> {

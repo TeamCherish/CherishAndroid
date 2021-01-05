@@ -15,4 +15,15 @@
         android:font="@font/notosanscjkkr_regular"
         android:fontStyle="normal"
         android:fontWeight="400" />
+
+    <font
+        android:font="@font/roboto_regular"
+        android:fontStyle="normal"
+        android:fontWeight="400" />
+
+    <font
+        android:font="@font/notosanscjkkr_light"
+        android:fontStyle="normal"
+        android:fontWeight="200" />
+
 </font-family>
