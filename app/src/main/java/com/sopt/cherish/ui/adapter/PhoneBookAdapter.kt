@@ -2,19 +2,16 @@ package com.sopt.cherish.ui.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
-import android.widget.RadioButton
 import androidx.recyclerview.widget.RecyclerView
-import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ItemLayoutBinding
-
 
 
 data class Phone(val id: String?, val name: String?, val phone: String?
 
 )
+
 // created by nayoung : 사용자 연락처들을 받아서 보여주는 adapter
 class PhoneBookAdapter(val PhoneBooklist: List<Phone>) : RecyclerView.Adapter<PhoneBookAdapter.Holder>() {
 
@@ -24,9 +21,9 @@ class PhoneBookAdapter(val PhoneBooklist: List<Phone>) : RecyclerView.Adapter<Ph
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-        val layoutInflater =LayoutInflater.from(parent.context)
-        val binding: ItemLayoutBinding= ItemLayoutBinding.inflate(layoutInflater,parent,false)
-       // val view = LayoutInflater.from(parent.context).inflate(R.layout.item_layout, parent, false)
+        val layoutInflater = LayoutInflater.from(parent.context)
+        val binding: ItemLayoutBinding = ItemLayoutBinding.inflate(layoutInflater, parent, false)
+        // val view = LayoutInflater.from(parent.context).inflate(R.layout.item_layout, parent, false)
         return Holder(binding)
     }
 
@@ -52,7 +49,7 @@ class PhoneBookAdapter(val PhoneBooklist: List<Phone>) : RecyclerView.Adapter<Ph
     }
 
     @SuppressLint("MissingPermission")
-    inner class Holder( private val binding:ItemLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class Holder(private val binding: ItemLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
         var mPhone: Phone? = null
 
         init {

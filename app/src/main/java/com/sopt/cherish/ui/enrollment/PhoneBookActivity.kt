@@ -19,7 +19,6 @@ import com.sopt.cherish.ui.adapter.Phone
 import com.sopt.cherish.ui.adapter.PhoneBookAdapter
 
 
-
 class PhoneBookActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityPhonebookBinding

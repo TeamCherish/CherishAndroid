@@ -24,7 +24,7 @@ import com.sopt.cherish.ui.adapter.MainBottomSheetAdapter
  */
 class HomeFragment : Fragment() {
 
-    private var _binding: FragmentHomeBinding?=null
+    private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private lateinit var standardBottomSheetBehavior: BottomSheetBehavior<*>
     private lateinit var standardBottomSheet: ConstraintLayout
@@ -54,9 +54,9 @@ class HomeFragment : Fragment() {
         standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         standardBottomSheetBehavior.peekHeight = 160
         standardBottomSheetBehavior.expandedOffset = 158
-        standardBottomSheetBehavior.isHideable=false
+        standardBottomSheetBehavior.isHideable = false
 
-        initRecyclerView(homeFragmentBg,adapter)
+        initRecyclerView(homeFragmentBg, adapter)
         updateProgressBar(binding)
 
         standardBottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
@@ -86,6 +86,7 @@ class HomeFragment : Fragment() {
             layoutManager = GridLayoutManager(context, 5)
         }
     }
+
     private fun transitionBottomSheetParentView(slideOffset: Float) {
 
         val argbEvaluator = ArgbEvaluator().evaluate(slideOffset, 0x8189b3, 0x242222)
@@ -138,6 +139,7 @@ class HomeFragment : Fragment() {
         )
         adapter.notifyDataSetChanged()
     }
+
     private fun setAdapter(binding: FragmentHomeBinding, mainAdapter: MainBottomSheetAdapter) {
         binding.mainBottomSheet.mainList.apply {
             adapter = mainAdapter
@@ -145,11 +147,11 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun updateProgressBar(binding: FragmentHomeBinding){
-        val rating=binding.affectionProgressbar.progress
+    private fun updateProgressBar(binding: FragmentHomeBinding) {
+        val rating = binding.affectionProgressbar.progress
 
-        if(rating<=30){
-            binding.affectionProgressbar.progressDrawable=ResourcesCompat.getDrawable(resources,R.drawable.progress_drawable_verticle_red,null)
+        if (rating <= 30) {
+            binding.affectionProgressbar.progressDrawable = ResourcesCompat.getDrawable(resources, R.drawable.progress_drawable_verticle_red, null)
         }
     }
 }

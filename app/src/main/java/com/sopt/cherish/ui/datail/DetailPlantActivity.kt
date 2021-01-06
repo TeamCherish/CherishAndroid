@@ -5,11 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jackandphantom.circularprogressbar.CircleProgressbar
 import com.sopt.cherish.R
-import com.sopt.cherish.databinding.AcitivityEnrollplantBinding
 import com.sopt.cherish.databinding.ActivityDetailPlantBinding
 import com.sopt.cherish.remote.model.MemoListDataclass
 import com.sopt.cherish.ui.adapter.DetailMemoAdapter
-
 
 
 /**
@@ -20,7 +18,7 @@ import com.sopt.cherish.ui.adapter.DetailMemoAdapter
 class DetailPlantActivity : AppCompatActivity() {
 
     private lateinit var circleProgressbar: CircleProgressbar
-    private lateinit var binding:ActivityDetailPlantBinding
+    private lateinit var binding: ActivityDetailPlantBinding
 
     var memoList = arrayListOf<MemoListDataclass>(
             MemoListDataclass("12/2", "다음주에 대머리쉬 출근"),

@@ -4,12 +4,10 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDialog
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.AcitivityEnrollplantBinding
-import com.sopt.cherish.databinding.WeekpickerLayoutBinding
 import com.sopt.cherish.ui.dialog.ClockPickerDialogFragment
 import com.sopt.cherish.ui.dialog.WeekPickerDialogFragment
 
@@ -35,7 +33,6 @@ class EnrollPlantActicity : AppCompatActivity() {
             progressON()
 
             progressOFF()
-
 
 
             val intent = Intent(this, ResultPlantActivity::class.java)
