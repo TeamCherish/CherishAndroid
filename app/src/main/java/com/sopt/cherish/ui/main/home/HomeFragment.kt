@@ -11,7 +11,6 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentHomeBinding
-import com.sopt.cherish.ui.dialog.WateringDialogFragment
 
 
 /**
@@ -32,10 +31,6 @@ class HomeFragment : Fragment() {
     ): View? {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        // conflict 날 수 있는 자리
-        binding.buttonWater.setOnClickListener {
-            WateringDialogFragment().show(parentFragmentManager, "HomeFragment")
-        }
         return binding.root
     }
 
