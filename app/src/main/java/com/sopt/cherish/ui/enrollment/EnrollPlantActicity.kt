@@ -33,7 +33,7 @@ class EnrollPlantActicity : AppCompatActivity(),WeekPickerDialogFragment.TestDia
         binding.phoneName.text=intent.getStringExtra("phonename")
         binding.phoneNumber.text=intent.getStringExtra("phonenumber")
 
-      //  intent.getStringExtra("phonenumber")
+        //  intent.getStringExtra("phonenumber")
 
         binding.imageButton.setOnClickListener {
             val intent = Intent(this, PhoneBookActivity::class.java)
@@ -60,7 +60,7 @@ class EnrollPlantActicity : AppCompatActivity(),WeekPickerDialogFragment.TestDia
         }
         binding.editweek.setOnClickListener {
 
-           val needweek= WeekPickerDialogFragment(R.layout.weekpicker_layout).show(supportFragmentManager, "MainActivity")
+            val needweek= WeekPickerDialogFragment(R.layout.weekpicker_layout).show(supportFragmentManager, "MainActivity")
 
 
         }
@@ -81,7 +81,6 @@ class EnrollPlantActicity : AppCompatActivity(),WeekPickerDialogFragment.TestDia
             override fun run() {
                 frameAnimation.start()
             }
-
         })*/
     }
 

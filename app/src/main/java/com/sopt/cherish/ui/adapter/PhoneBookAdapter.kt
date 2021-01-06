@@ -19,7 +19,7 @@ import kotlin.coroutines.coroutineContext
 
 
 data class Phone(
-    val id: String?, val name: String?, val phone: String?
+        val id: String?, val name: String?, val phone: String?
 
 )
 // created by nayoung : 사용자 연락처들을 받아서 보여주는 adapter
@@ -38,7 +38,7 @@ class PhoneBookAdapter(val PhoneBooklist: List<Phone>) : RecyclerView.Adapter<Ph
 
         val binding: ItemLayoutBinding= ItemLayoutBinding.inflate(layoutInflater, parent, false)
 
-       // val view = LayoutInflater.from(parent.context).inflate(R.layout.item_layout, parent, false)
+        // val view = LayoutInflater.from(parent.context).inflate(R.layout.item_layout, parent, false)
         //binding.radioButton.setOnCheckedChangeListener(checkedChangeListener)
 
         if (binding.radioButton.isChecked) checkedRadioButton = binding.radioButton
@@ -96,5 +96,3 @@ class PhoneBookAdapter(val PhoneBooklist: List<Phone>) : RecyclerView.Adapter<Ph
 
     }
 }
-
-

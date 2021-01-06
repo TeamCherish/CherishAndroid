@@ -161,7 +161,6 @@ class PhoneBookActivity : AppCompatActivity() {
         /*if(name.isNotEmpty()){
             where= ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME+"= ?"
             whereValues= arrayOf(name)
-
         }*/
         val optionSort = ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " $sort"
 
@@ -186,5 +185,3 @@ class PhoneBookActivity : AppCompatActivity() {
 
 
 }
-
-
