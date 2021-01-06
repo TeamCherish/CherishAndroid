@@ -19,8 +19,6 @@ import com.sopt.cherish.util.extension.showKeyboard
 import com.sopt.cherish.view.calendar.DotDecorator
 
 class CalendarFragment : Fragment() {
-    // ViewModel 로 넘겨버릴겁니다.
-
     private val viewModel: DetailPlantViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -35,16 +33,30 @@ class CalendarFragment : Fragment() {
     }
 
     private fun initializeCalendar(binding: FragmentCalendarBinding) {
-        // need 서버에서 데이터 가져온 거 check
+        allowCalendarCache(binding)
+        takeNotes(binding)
+        addDecorator(binding)
+        addDateClickListener(binding)
+    }
 
-        // Color value , context가 들어가서 뺄 수가 없음
+    private fun allowCalendarCache(binding: FragmentCalendarBinding) {
+        binding.calendarView.state().edit().isCacheCalendarPositionEnabled(true)
+    }
+
+    private fun addDecorator(binding: FragmentCalendarBinding) {
         val colorPinkSub = ContextCompat.getColor(requireContext(), R.color.cherish_green_sub)
         val colorGreenSub = ContextCompat.getColor(requireContext(), R.color.cherish_pink_sub)
 
-        // Cache 허용
-        binding.calendarView.state().edit().isCacheCalendarPositionEnabled(true)
+        viewModel.dummyNeedWateringListDay.forEach {
+            binding.calendarView.addDecorator(DotDecorator(colorGreenSub, it))
+        }
+        viewModel.dummyWateringListDay.forEach {
+            binding.calendarView.addDecorator(DotDecorator(colorPinkSub, it))
+        }
+    }
 
-        // addMemo function
+    private fun takeNotes(binding: FragmentCalendarBinding) {
+        // 메모를 할 수 있게하다 라는 뜻을 원하는데 마땅히 떠오르는게 없어서 일단 이케 적음
         binding.calendarViewMemoCreateBtn.setOnClickListener { view ->
             view.showKeyboard()
             binding.calendarView.changeCalendarModeWeeks()
@@ -54,21 +66,10 @@ class CalendarFragment : Fragment() {
             binding.calendarView.changeCalendarModeMonths()
         }
 
-        // decorate
-        viewModel.dummyNeedWateringListDay.forEach {
-            binding.calendarView.addDecorator(DotDecorator(colorGreenSub, it))
-        }
-        viewModel.dummyWateringListDay.forEach {
-            binding.calendarView.addDecorator(DotDecorator(colorPinkSub, it))
-        }
+    }
 
-        // date ClickListener
+    private fun addDateClickListener(binding: FragmentCalendarBinding) {
         binding.calendarView.setOnDateChangedListener { widget, date, selected ->
-            // widget : materialcalendar에 대한 widget이 그냥 넘어오는 것 같다. 자세히는 모름
-            // date : 선택된 날짜
-            // selected : boolean 값으로 select가 되었는지 안되었는지를 판단하게 해주는 값
-
-            // 선택되면 그에 따라서 메모가 나온다던지 ~ 그런기능을 해주면 될 거 같고
             showDate(binding, date)
             showMemo(binding)
             showChips(binding)
@@ -90,5 +91,4 @@ class CalendarFragment : Fragment() {
         binding.reviewAllText.text = " "
         binding.reviewAllText.text = viewModel.dummyMemo
     }
-
 }
