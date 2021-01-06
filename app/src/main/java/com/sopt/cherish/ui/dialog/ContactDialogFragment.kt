@@ -14,7 +14,7 @@ import com.sopt.cherish.R
 import com.sopt.cherish.databinding.DialogContactBinding
 import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.ui.review.ReviewActivity
-import com.sopt.cherish.util.AdjustDialog
+import com.sopt.cherish.util.DialogUtil
 import com.sopt.cherish.util.PermissionUtil
 
 /**
@@ -54,7 +54,7 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
 
     override fun onResume() {
         super.onResume()
-        AdjustDialog(requireContext()).adjustSize(this, 0.875f, 0.5452f)
+        DialogUtil.adjustDialogSize(this, 0.875f, 0.542f)
     }
 
     override fun onClick(view: View?) {

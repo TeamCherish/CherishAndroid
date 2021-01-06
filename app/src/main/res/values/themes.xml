@@ -92,4 +92,8 @@
         <item name="android:background">@drawable/memolist_view</item>
         <item name="android:backgroundTint">@color/cherish_light_gray</item>
     </style>
+
+    <style name="ImageButton.White" parent="Widget.AppCompat.ImageButton">
+        <item name="android:backgroundTint">@color/white</item>
+    </style>
 </resources>

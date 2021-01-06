@@ -12,6 +12,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
+        android:name=".MainApplication"
         android:supportsRtl="true"
         android:theme="@style/Theme.Cherish">
         <activity android:name=".ui.review.ReviewActivity" />
@@ -20,7 +21,6 @@
         <activity android:name=".ui.enrollment.EnrollmentPhoneActivity" />
         <activity android:name=".ui.tutorial.TutorialActivity" />
         <activity android:name=".ui.datail.DetailPlantActivity" />
-        <activity android:name=".ui.calendar.CalendarActivity" />
         <activity android:name=".ui.signup.SignUpActivity" />
         <activity android:name=".ui.signin.SignInActivity" />
         <activity android:name=".ui.splash.SplashActivity" />
