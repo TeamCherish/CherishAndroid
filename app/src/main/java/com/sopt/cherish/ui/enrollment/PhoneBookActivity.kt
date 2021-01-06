@@ -46,9 +46,14 @@ class PhoneBookActivity : AppCompatActivity() {
         setContentView(binding.root)
         checkAndStart()
 
+
         // 버튼 클릭하면 라디오 버튼 선택한 데이터가 다음 식물등록 뷰에 보여지는 부분
         binding.buttonnext.setOnClickListener {
             val intent = Intent(this, EnrollPlantActicity::class.java)
+            Toast.makeText(this,madapter.phonename,Toast.LENGTH_LONG).show()
+            intent.putExtra("phonename",madapter.phonename)
+            intent.putExtra("phonenumber",madapter.phonenumber)
+            Log.d("vvvv",madapter.phonename.toString())
             startActivity(intent)
         }
 

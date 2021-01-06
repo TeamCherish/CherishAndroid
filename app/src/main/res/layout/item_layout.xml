@@ -46,7 +46,8 @@
 
         android:id="@+id/radioButton"
         android:layout_width="0dp"
-        android:layout_height="22dp"
+        android:layout_height="wrap_content"
+        android:button="@drawable/radio"
         app:layout_constraintBottom_toBottomOf="@+id/textPhone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textName" />

@@ -30,6 +30,11 @@ class EnrollPlantActicity : AppCompatActivity(),WeekPickerDialogFragment.TestDia
 
         setContentView(binding.root)
 
+        binding.phoneName.text=intent.getStringExtra("phonename")
+        binding.phoneNumber.text=intent.getStringExtra("phonenumber")
+
+      //  intent.getStringExtra("phonenumber")
+
         binding.imageButton.setOnClickListener {
             val intent = Intent(this, PhoneBookActivity::class.java)
             startActivity(intent)

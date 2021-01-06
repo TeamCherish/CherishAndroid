@@ -1,6 +1,7 @@
 package com.sopt.cherish.ui.adapter
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.Application
 import android.content.Intent
 import android.util.Log
@@ -9,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
 import androidx.core.content.ContextCompat.startActivity
+import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.RecyclerView
 import com.sopt.cherish.databinding.ActivityPhonebookBinding
 import com.sopt.cherish.databinding.ItemLayoutBinding
@@ -26,7 +28,8 @@ class PhoneBookAdapter(val PhoneBooklist: List<Phone>) : RecyclerView.Adapter<Ph
 
 
     private var checkedRadioButton: CompoundButton? = null
-
+    lateinit var phonename:String
+    lateinit var phonenumber:String
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
 
@@ -52,6 +55,8 @@ class PhoneBookAdapter(val PhoneBooklist: List<Phone>) : RecyclerView.Adapter<Ph
 
             if(isChecked){
                 Log.d("asdf", "${PhoneBooklist[position].name}")
+                phonename= PhoneBooklist[position].name.toString()
+                phonenumber= PhoneBooklist[position].phone.toString()
 
             }
 
