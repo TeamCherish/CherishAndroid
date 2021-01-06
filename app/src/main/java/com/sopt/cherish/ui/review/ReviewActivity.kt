@@ -30,8 +30,23 @@ class ReviewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding: ActivityReviewBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_review)
-
         binding.mainViewModel = viewModel
+
+        addUserStatusWithChip(binding)
+        sendReviewToServer(binding)
+        ignoreSendReviewToServer(binding)
+    }
+
+    private fun showLoadingDialog() {
+        lifecycleScope.launch(Dispatchers.IO) {
+            CustomDialogFragment(R.layout.sample_lottie).show(supportFragmentManager, TAG)
+            delay(2000)
+            // 만약에 홈 프라그먼트에서 물 주는 애니메이션을 해야한다 그러면 finishActivity로 변경해야할 수도 있음
+            finish()
+        }
+    }
+
+    private fun addUserStatusWithChip(binding: ActivityReviewBinding) {
         binding.reviewEditKeyword.setOnKeyListener { view, keyCode, keyEvent ->
             if (keyEvent.action == KeyEvent.ACTION_DOWN || keyCode == KeyEvent.KEYCODE_ENTER) {
                 val et = view as EditText
@@ -41,25 +56,21 @@ class ReviewActivity : AppCompatActivity() {
             }
             return@setOnKeyListener false
         }
+    }
 
+    private fun sendReviewToServer(binding: ActivityReviewBinding) {
         binding.reviewAdminAccept.setOnClickListener {
             // 물주는 모션이 뜨면서 다시 main으로 넘어가면 됨
             // 리뷰를 전부 적지 않으면 안된다는 것이라던지에 대한 로직만 넣으면 해결됨
             showLoadingDialog()
         }
+    }
 
+    private fun ignoreSendReviewToServer(binding: ActivityReviewBinding) {
         binding.reviewIgnoreAccept.setOnClickListener {
             // 건너 뛰는 것도 뭐~ 그냥 main으로 넘어오면 됨
             finish()
         }
     }
 
-    private fun showLoadingDialog() {
-        lifecycleScope.launch(Dispatchers.IO) {
-            CustomDialogFragment(R.layout.sample_lottie).show(supportFragmentManager, "TAG")
-            delay(2000)
-            // 만약에 홈 프라그먼트에서 물 주는 애니메이션을 해야한다 그러면 finishActivity로 변경해야할 수도 있음
-            finish()
-        }
-    }
 }
