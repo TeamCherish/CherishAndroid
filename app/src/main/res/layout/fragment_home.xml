@@ -77,7 +77,7 @@
         style="@android:style/Widget.ProgressBar.Horizontal"
         android:progressDrawable="@drawable/progress_drawable_vertical"
         android:max="100"
-        android:progress="73" />
+        android:progress="15" />
 
     <TextView
         android:id="@+id/affection_rating"
@@ -89,7 +89,7 @@
         android:textSize="12sp"
         android:textColor="@color/white"
         android:font="@font/notosanscjkkr_regular"
-        android:text="73%"/>
+        android:text="15"/>
 
     <TextView
         android:layout_width="wrap_content"

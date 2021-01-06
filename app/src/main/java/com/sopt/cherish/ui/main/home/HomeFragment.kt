@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -56,6 +57,7 @@ class HomeFragment : Fragment() {
         standardBottomSheetBehavior.isHideable=false
 
         initRecyclerView(homeFragmentBg,adapter)
+        updateProgressBar(binding)
 
         standardBottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
@@ -141,6 +143,13 @@ class HomeFragment : Fragment() {
             adapter = mainAdapter
             layoutManager = GridLayoutManager(context, 5)
         }
+    }
 
+    private fun updateProgressBar(binding: FragmentHomeBinding){
+        val rating=binding.affectionProgressbar.progress
+
+        if(rating<=30){
+            binding.affectionProgressbar.progressDrawable=ResourcesCompat.getDrawable(resources,R.drawable.progress_drawable_verticle_red,null)
+        }
     }
 }
