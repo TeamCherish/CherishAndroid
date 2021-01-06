@@ -27,7 +27,7 @@ class PhoneBookAdapter(val PhoneBooklist: List<Phone>) : RecyclerView.Adapter<Ph
 
 
 
-    private var checkedRadioButton: CompoundButton? = null
+     var checkedRadioButton: CompoundButton? = null
     lateinit var phonename:String
     lateinit var phonenumber:String
 

@@ -1,10 +1,13 @@
 package com.sopt.cherish.ui.main.home
 
 import android.animation.ArgbEvaluator
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
@@ -16,6 +19,7 @@ import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentHomeBinding
 import com.sopt.cherish.remote.model.CherryDataclass
 import com.sopt.cherish.ui.adapter.MainBottomSheetAdapter
+import com.sopt.cherish.ui.enrollment.PhoneBookActivity
 
 
 /**
@@ -30,6 +34,7 @@ class HomeFragment : Fragment() {
     private lateinit var standardBottomSheet: ConstraintLayout
     private lateinit var homeFragmentBg: ConstraintLayout
     private lateinit var adapter: MainBottomSheetAdapter
+    private lateinit var useraddbtn: TextView
 
     override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -40,6 +45,9 @@ class HomeFragment : Fragment() {
         adapter = MainBottomSheetAdapter()
         setAdapterData(adapter)
         setAdapter(binding, adapter)
+
+
+
         return binding.root
     }
 
@@ -49,6 +57,12 @@ class HomeFragment : Fragment() {
         homeFragmentBg = binding.homeFragmentBg
 
         standardBottomSheet = view.findViewById(R.id.main_bottom_sheet)
+        useraddbtn = view.findViewById(R.id.user_add_btn)
+        useraddbtn.setOnClickListener {
+
+            val intent = Intent(context, PhoneBookActivity::class.java)
+            startActivity(intent)
+        }
 
         standardBottomSheetBehavior = BottomSheetBehavior.from(standardBottomSheet)
         standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED

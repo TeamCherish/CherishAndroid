@@ -9,6 +9,8 @@ import android.provider.ContactsContract
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.RadioGroup
 import android.widget.Toast
@@ -24,6 +26,7 @@ import com.sopt.cherish.databinding.ItemLayoutBinding
 import com.sopt.cherish.ui.adapter.Phone
 import com.sopt.cherish.ui.adapter.PhoneBookAdapter
 import com.sopt.cherish.ui.dialog.WeekPickerDialogFragment
+import com.sopt.cherish.ui.main.MainActivity
 
 
 class PhoneBookActivity : AppCompatActivity() {
@@ -43,27 +46,48 @@ class PhoneBookActivity : AppCompatActivity() {
         binding = ActivityPhonebookBinding.inflate(layoutInflater)
         binding_item = ItemLayoutBinding.inflate(layoutInflater)
 
+        setSupportActionBar(binding.toolbar)
+        val ab = supportActionBar!!
+        ab.setDisplayShowTitleEnabled(false)
+        ab.setDisplayHomeAsUpEnabled(true)
+
+
         setContentView(binding.root)
         checkAndStart()
 
 
         // 버튼 클릭하면 라디오 버튼 선택한 데이터가 다음 식물등록 뷰에 보여지는 부분
         binding.buttonnext.setOnClickListener {
+            if(madapter.checkedRadioButton!=null){
             val intent = Intent(this, EnrollPlantActicity::class.java)
-            Toast.makeText(this,madapter.phonename,Toast.LENGTH_LONG).show()
+            //Toast.makeText(this,madapter.phonename,Toast.LENGTH_LONG).show()
             intent.putExtra("phonename",madapter.phonename)
             intent.putExtra("phonenumber",madapter.phonenumber)
             Log.d("vvvv",madapter.phonename.toString())
             startActivity(intent)
+            }
         }
 
 
-        binding.imageButtonphone.setOnClickListener {
-            val intent = Intent(this, PhoneBookActivity::class.java)
+       /* binding.imageButtonphone.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
-        }
+        }*/
 
     }
+
+    // toolbar에서 뒤로가기 버튼 부분
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId
+        when (id) {
+            android.R.id.home -> {
+                finish()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
 
     fun startProcess() {
         setList()

@@ -6,6 +6,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDialog
 import androidx.fragment.app.DialogFragment
@@ -28,6 +29,11 @@ class EnrollPlantActicity : AppCompatActivity(),WeekPickerDialogFragment.TestDia
 
         binding = AcitivityEnrollplantBinding.inflate(layoutInflater)
 
+
+        setSupportActionBar(binding.toolbarEnroll)
+        val ab = supportActionBar!!
+        ab.setDisplayShowTitleEnabled(false)
+        ab.setDisplayHomeAsUpEnabled(true)
         setContentView(binding.root)
 
         binding.phoneName.text=intent.getStringExtra("phonename")
@@ -35,10 +41,10 @@ class EnrollPlantActicity : AppCompatActivity(),WeekPickerDialogFragment.TestDia
 
         //  intent.getStringExtra("phonenumber")
 
-        binding.imageButton.setOnClickListener {
+    /*    binding.imageButton.setOnClickListener {
             val intent = Intent(this, PhoneBookActivity::class.java)
             startActivity(intent)
-        }
+        }*/
         binding.detailOkBtn.setOnClickListener {
             progressON()
 
@@ -67,7 +73,16 @@ class EnrollPlantActicity : AppCompatActivity(),WeekPickerDialogFragment.TestDia
 
 
     }
-
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId
+        when (id) {
+            android.R.id.home -> {
+                finish()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     fun progressON() {
         progressDialog = AppCompatDialog(this)
