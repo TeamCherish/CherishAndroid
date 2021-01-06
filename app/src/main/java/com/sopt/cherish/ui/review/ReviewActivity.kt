@@ -29,7 +29,7 @@ class ReviewActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding: ActivityReviewBinding =
-                DataBindingUtil.setContentView(this, R.layout.activity_review)
+            DataBindingUtil.setContentView(this, R.layout.activity_review)
 
         binding.mainViewModel = viewModel
         binding.reviewEditKeyword.setOnKeyListener { view, keyCode, keyEvent ->

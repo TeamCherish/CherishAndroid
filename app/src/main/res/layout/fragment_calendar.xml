@@ -68,6 +68,15 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
+                <ImageButton
+                    android:id="@+id/test_image_btn"
+                    style="@style/ImageButton.White"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_test_24"
+                    app:layout_constraintEnd_toStartOf="@id/calendarView_memo_create_btn"
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <com.google.android.flexbox.FlexboxLayout
                     android:id="@+id/calendarView_chip_layout"
                     android:layout_width="match_parent"

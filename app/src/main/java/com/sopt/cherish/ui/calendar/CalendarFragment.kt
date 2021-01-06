@@ -10,6 +10,8 @@ import androidx.fragment.app.Fragment
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentCalendarBinding
+import com.sopt.cherish.util.extension.hideKeyboard
+import com.sopt.cherish.util.extension.showKeyboard
 import com.sopt.cherish.view.calendar.DotDecorator
 
 class CalendarFragment : Fragment() {
@@ -26,11 +28,12 @@ class CalendarFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val binding: FragmentCalendarBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_calendar, container, false)
 
         initializeCalendar(binding)
+        addCalendarListener(binding)
 
         return binding.root
     }
@@ -44,6 +47,16 @@ class CalendarFragment : Fragment() {
         // Cache 허용
         binding.calendarView.state().edit().isCacheCalendarPositionEnabled(true)
 
+        // addMemo function
+        binding.calendarViewMemoCreateBtn.setOnClickListener { view ->
+            view.showKeyboard()
+            binding.calendarView.changeCalendarModeWeeks()
+        }
+        binding.testImageBtn.setOnClickListener { view ->
+            view.hideKeyboard()
+            binding.calendarView.changeCalendarModeMonths()
+        }
+
         // decorate
         dummyNeedWateringListDay.forEach {
             binding.calendarView.addDecorator(DotDecorator(colorGreenSub, it))
@@ -52,4 +65,15 @@ class CalendarFragment : Fragment() {
             binding.calendarView.addDecorator(DotDecorator(colorPinkSub, it))
         }
     }
+
+    private fun addCalendarListener(binding: FragmentCalendarBinding) {
+        binding.calendarView.setOnDateChangedListener { widget, date, selected ->
+            // widget : materialcalendar에 대한 widget이 그냥 넘어오는 것 같다. 자세히는 x
+            // date : 선택된 날짜
+            // selected : boolean 값으로 select가 되었는지 안되었는지를 판단하게 해주는 값
+
+            binding.calendarViewSelectedDate.text = "${date.year}년 ${date.month}월 ${date.day}일"
+        }
+    }
+
 }
