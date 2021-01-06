@@ -1,6 +1,7 @@
 package com.sopt.cherish.di
 
 import androidx.lifecycle.ViewModelProvider
+import com.sopt.cherish.ui.factory.DetailViewModelFactory
 import com.sopt.cherish.ui.factory.MainViewModelFactory
 
 /**
@@ -10,5 +11,9 @@ import com.sopt.cherish.ui.factory.MainViewModelFactory
 object Injection {
     fun provideMainViewModelFactory(): ViewModelProvider.Factory {
         return MainViewModelFactory()
+    }
+
+    fun provideDetailViewModelFactory(): ViewModelProvider.Factory {
+        return DetailViewModelFactory()
     }
 }

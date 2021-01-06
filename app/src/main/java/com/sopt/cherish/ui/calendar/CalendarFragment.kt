@@ -7,23 +7,21 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentCalendarBinding
+import com.sopt.cherish.ui.datail.DetailPlantViewModel
+import com.sopt.cherish.util.extension.FlexBoxExtension.addChip
+import com.sopt.cherish.util.extension.FlexBoxExtension.clearChips
 import com.sopt.cherish.util.extension.hideKeyboard
 import com.sopt.cherish.util.extension.showKeyboard
 import com.sopt.cherish.view.calendar.DotDecorator
 
 class CalendarFragment : Fragment() {
     // ViewModel 로 넘겨버릴겁니다.
-    private val dummyWateringListDay = listOf(
-        CalendarDay.from(2021, 1, 10),
-        CalendarDay.from(2021, 1, 13)
-    )
-    private val dummyNeedWateringListDay = listOf(
-        CalendarDay.from(2021, 1, 15),
-        CalendarDay.from(2021, 1, 20)
-    )
+
+    private val viewModel: DetailPlantViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,7 +37,7 @@ class CalendarFragment : Fragment() {
     private fun initializeCalendar(binding: FragmentCalendarBinding) {
         // need 서버에서 데이터 가져온 거 check
 
-        // Color value 또한
+        // Color value , context가 들어가서 뺄 수가 없음
         val colorPinkSub = ContextCompat.getColor(requireContext(), R.color.cherish_green_sub)
         val colorGreenSub = ContextCompat.getColor(requireContext(), R.color.cherish_pink_sub)
 
@@ -57,10 +55,10 @@ class CalendarFragment : Fragment() {
         }
 
         // decorate
-        dummyNeedWateringListDay.forEach {
+        viewModel.dummyNeedWateringListDay.forEach {
             binding.calendarView.addDecorator(DotDecorator(colorGreenSub, it))
         }
-        dummyWateringListDay.forEach {
+        viewModel.dummyWateringListDay.forEach {
             binding.calendarView.addDecorator(DotDecorator(colorPinkSub, it))
         }
 
@@ -82,11 +80,15 @@ class CalendarFragment : Fragment() {
     }
 
     private fun showChips(binding: FragmentCalendarBinding) {
-        // dummy Data로 구현하면 될 듯
+        binding.calendarViewChipLayout.clearChips()
+        viewModel.dummyChips.forEach {
+            binding.calendarViewChipLayout.addChip(it)
+        }
     }
 
     private fun showMemo(binding: FragmentCalendarBinding) {
-
+        binding.reviewAllText.text = " "
+        binding.reviewAllText.text = viewModel.dummyMemo
     }
 
 }

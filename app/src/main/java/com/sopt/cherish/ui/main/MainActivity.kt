@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.sopt.cherish.R
-
 import com.sopt.cherish.databinding.ActivityMainBinding
 import com.sopt.cherish.di.Injection
 import com.sopt.cherish.ui.main.home.HomeFragment
@@ -24,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        initViewModel()
+        initializeViewModel()
 
         val homeFragment = HomeFragment()
         val managePlantFragment = ManagePlantFragment()
@@ -47,7 +46,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.main_setting -> {
-                    transAction.replace(R.id.main_fragment_container, settingFragment)
+                    transAction.replace(R.id.main_fragment_container, settingFragment).commit()
                     true
                 }
                 else -> {
@@ -57,7 +56,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun initViewModel() {
+    private fun initializeViewModel() {
         viewModel =
             ViewModelProvider(this@MainActivity, Injection.provideMainViewModelFactory()).get(
                 MainViewModel::class.java
