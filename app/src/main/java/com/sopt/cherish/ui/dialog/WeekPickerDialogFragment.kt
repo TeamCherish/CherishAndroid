@@ -18,45 +18,42 @@ import com.sopt.cherish.databinding.WeekpickerLayoutBinding
 
 //created by nayoung : 알람주기 설정 보여주는 팝업 창
 class WeekPickerDialogFragment(
-    @LayoutRes
-    private val layoutResId: Int
+        @LayoutRes
+        private val layoutResId: Int
 ) : DialogFragment(), View.OnClickListener {
 
-    lateinit var weektext: String
+    lateinit var weektext:String
 
     interface TestDialogFragmentListener {
         fun onTestDialogweek(dialog: DialogFragment?, someData: String?)
     }
 
     var testDialogFragmentListener: TestDialogFragmentListener? = null
-    override fun onAttach(activity: Activity) {
-        super.onAttach(activity)
-        testDialogFragmentListener = try {
-            activity as TestDialogFragmentListener
-        } catch (e: ClassCastException) {
-            throw ClassCastException(
-                activity.toString()
-                        + " must implement TestDialogFragmentListener"
-            )
-        }
-    }
 
     fun someAction() {
         testDialogFragmentListener!!.onTestDialogweek(
-            this@WeekPickerDialogFragment, weektext
+                this@WeekPickerDialogFragment, weektext
         )
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(layoutResId, container, false)
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-
+        testDialogFragmentListener = try {
+            activity as TestDialogFragmentListener
+        } catch (e: ClassCastException) {
+            throw ClassCastException(
+                    activity.toString()
+                            + " must implement TestDialogFragmentListener"
+            )
+        }
         val binding = WeekpickerLayoutBinding.bind(view)
+
 
 
         val week_every: NumberPicker = view.findViewById(R.id.numberPicker)
@@ -70,35 +67,36 @@ class WeekPickerDialogFragment(
         }
 
 
-        val list = resources.getStringArray(R.array.cycle)
-        val list2 = resources.getStringArray(R.array.week)
+
+        val list_cycle = resources.getStringArray(R.array.cycle)
+        val list_every = resources.getStringArray(R.array.week)
 
         week_every.removeDivider()
         week_number.removeDivider()
         week_month.removeDivider()
 
         week_every.minValue = 0
-        week_every.maxValue = list2.size - 1
+        week_every.maxValue = list_every.size - 1
 
         week_number.minValue = 1
         week_number.maxValue = 3
 
         week_month.minValue = 0
-        week_month.maxValue = list.size - 1
+        week_month.maxValue = list_cycle.size - 1
 
-        week_every.displayedValues = list2
-        week_month.displayedValues = list
+        week_every.displayedValues = list_every
+        week_month.displayedValues = list_cycle
 
         week_every.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
         week_month.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
         week_number.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
 
 
+
         val btn_ok: Button = view.findViewById(R.id.button_ok)
         btn_ok.setOnClickListener {
 
-            weektext =
-                list2[week_every.value] + " " + week_number.value.toString() + " " + list[week_month.value]
+            weektext=list_every[week_every.value]+" "+week_number.value.toString()+" "+list_cycle[week_month.value]
             someAction()
             dialog?.dismiss()
 
