@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sopt.cherish.databinding.MainCherryItemBinding
-import com.sopt.cherish.remote.model.CherryDataclass
+import com.sopt.cherish.ui.domain.CherryDataclass
 
 class MainBottomSheetAdapter : RecyclerView.Adapter<MainBottomSheetAdapter.MainViewHolder>() {
     var data = mutableListOf<CherryDataclass>()

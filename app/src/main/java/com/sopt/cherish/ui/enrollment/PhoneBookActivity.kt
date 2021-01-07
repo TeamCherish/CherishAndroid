@@ -32,6 +32,7 @@ class PhoneBookActivity : AppCompatActivity() {
     var searchText = ""
     var sortText = "asc"
 
+    // todo : 퍼미션 util 쓸거고 로직들 다시한번 확인하고 왜 지워야지 주석처리 하는지 모르겠음
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPhonebookBinding.inflate(layoutInflater)
@@ -80,7 +81,7 @@ class PhoneBookActivity : AppCompatActivity() {
     }
 
 
-    fun startProcess() {
+    private fun startProcess() {
         setList()
         setSearchListener()
 
@@ -89,7 +90,7 @@ class PhoneBookActivity : AppCompatActivity() {
     }
 
     // 권한처리 코드
-    fun checkAndStart() {
+    private fun checkAndStart() {
         if (isLower23() || isPermitted()) {
             startProcess()
         } else {
@@ -97,7 +98,7 @@ class PhoneBookActivity : AppCompatActivity() {
         }
     }
 
-    fun isLower23(): Boolean {
+    private fun isLower23(): Boolean {
         return Build.VERSION.SDK_INT < Build.VERSION_CODES.M
     }
 

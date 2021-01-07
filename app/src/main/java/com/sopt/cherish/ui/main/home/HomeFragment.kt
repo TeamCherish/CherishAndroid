@@ -16,8 +16,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentHomeBinding
-import com.sopt.cherish.remote.model.CherryDataclass
 import com.sopt.cherish.ui.adapter.MainBottomSheetAdapter
+import com.sopt.cherish.ui.domain.CherryDataclass
 import com.sopt.cherish.ui.enrollment.PhoneBookActivity
 
 
@@ -27,6 +27,7 @@ import com.sopt.cherish.ui.enrollment.PhoneBookActivity
  */
 class HomeFragment : Fragment() {
 
+    // todo : 변수명 설정할 때 아직 이해 못한거 같음
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private lateinit var standardBottomSheetBehavior: BottomSheetBehavior<*>
@@ -44,8 +45,6 @@ class HomeFragment : Fragment() {
         adapter = MainBottomSheetAdapter()
         setAdapterData(adapter)
         setAdapter(binding, adapter)
-
-
 
         return binding.root
     }
@@ -110,10 +109,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun transitionBottomSheetParentView(slideOffset: Float) {
-
         val argbEvaluator = ArgbEvaluator().evaluate(slideOffset, 0x8189b3, 0x242222)
         homeFragmentBg.setBackgroundColor(argbEvaluator as Int)
-
     }
 
     private fun setAdapterData(adapter: MainBottomSheetAdapter) {

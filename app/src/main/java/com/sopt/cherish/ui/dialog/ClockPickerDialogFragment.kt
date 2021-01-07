@@ -56,9 +56,9 @@ class ClockPickerDialogFragment(
 
 
         val binding = ClockpickerLayoutBinding.bind(view)
-        val clock_hour: NumberPicker = view.findViewById(R.id.numberPicker_clock)
-        val clock_minute: NumberPicker = view.findViewById(R.id.numberPicker2_clock)
-        val clock_ampm: NumberPicker = view.findViewById(R.id.numberPicker3_clock)
+        val clockHour: NumberPicker = view.findViewById(R.id.numberPicker_clock)
+        val clockMinute: NumberPicker = view.findViewById(R.id.numberPicker2_clock)
+        val clockAmPm: NumberPicker = view.findViewById(R.id.numberPicker3_clock)
 
         val cancel: Button = view.findViewById(R.id.button_cancel_clock)
         cancel.setOnClickListener {
@@ -68,30 +68,30 @@ class ClockPickerDialogFragment(
         val list = resources.getStringArray(R.array.ampm)
 
 
-        clock_hour.removeDivider()
-        clock_minute.removeDivider()
-        clock_ampm.removeDivider()
+        clockHour.removeDivider()
+        clockMinute.removeDivider()
+        clockAmPm.removeDivider()
 
-        clock_hour.minValue = 1
-        clock_hour.maxValue = 12
+        clockHour.minValue = 1
+        clockHour.maxValue = 12
 
-        clock_minute.minValue = 0
-        clock_minute.maxValue = 59
+        clockMinute.minValue = 0
+        clockMinute.maxValue = 59
 
-        clock_ampm.minValue = 0
-        clock_ampm.maxValue = list.size - 1
+        clockAmPm.minValue = 0
+        clockAmPm.maxValue = list.size - 1
 
-        clock_ampm.displayedValues = list
+        clockAmPm.displayedValues = list
 
-        clock_hour.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
-        clock_ampm.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
-        clock_minute.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
+        clockHour.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
+        clockAmPm.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
+        clockMinute.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
 
         val btn_ok: Button = view.findViewById(R.id.button_ok_clock)
         btn_ok.setOnClickListener {
 
             clocktext =
-                clock_hour.value.toString() + ":" + clock_minute.value.toString() + " " + list[clock_ampm.value]
+                clockHour.value.toString() + ":" + clockMinute.value.toString() + " " + list[clockAmPm.value]
             someAction()
             dialog?.dismiss()
 

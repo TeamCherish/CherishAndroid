@@ -23,7 +23,8 @@ class EnrollPlantActicity : AppCompatActivity(),
 
     private lateinit var progressDialog: AppCompatDialog
 
-    lateinit var weektime: String
+    // todo : 이거 왜 있는건지?
+    lateinit var weekTime: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -38,6 +39,8 @@ class EnrollPlantActicity : AppCompatActivity(),
 
         binding.phoneName.text = intent.getStringExtra("phonename")
         binding.phoneNumber.text = intent.getStringExtra("phonenumber")
+
+        // todo : 왜 주석처리한거야 지울거면 지우고 아님 말고지
 
         //  intent.getStringExtra("phonenumber")
 
@@ -90,7 +93,7 @@ class EnrollPlantActicity : AppCompatActivity(),
         return super.onOptionsItemSelected(item)
     }
 
-    fun progressON() {
+    private fun progressON() {
         progressDialog = AppCompatDialog(this)
         progressDialog.setCancelable(false)
         progressDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -105,7 +108,7 @@ class EnrollPlantActicity : AppCompatActivity(),
         })*/
     }
 
-    fun progressOFF() {
+    private fun progressOFF() {
         if (progressDialog != null && progressDialog.isShowing) {
             progressDialog.dismiss()
         }

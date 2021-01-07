@@ -23,7 +23,7 @@ import com.sopt.cherish.util.PermissionUtil
  */
 
 class ContactDialogFragment : DialogFragment(), View.OnClickListener {
-    private val codeReviewPage = 1001
+    private val codeThatReviewPage = 1001
     private val viewModel: MainViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -84,14 +84,14 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
     private fun startPhoneCall() {
         startActivityForResult(
             Intent(Intent.ACTION_CALL, viewModel.dummyUserPhoneNumber),
-            codeReviewPage
+            codeThatReviewPage
         )
     }
 
     private fun startSendMessage() {
         startActivityForResult(
             Intent(Intent.ACTION_SENDTO, viewModel.dummyUserMessageNumber),
-            codeReviewPage
+            codeThatReviewPage
         )
     }
 
@@ -102,7 +102,7 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == codeReviewPage) {
+        if (requestCode == codeThatReviewPage) {
             startReviewAndDismiss()
         }
     }
