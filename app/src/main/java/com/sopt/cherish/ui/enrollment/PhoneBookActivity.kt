@@ -1,6 +1,5 @@
 package com.sopt.cherish.ui.enrollment
 
-import android.Manifest
 import android.content.Intent
 import android.os.Bundle
 import android.provider.ContactsContract
@@ -20,12 +19,10 @@ class PhoneBookActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPhonebookBinding
     private lateinit var binding_item: ItemLayoutBinding
 
-
-    val permissions = arrayOf(Manifest.permission.READ_CONTACTS, Manifest.permission.CALL_PHONE)
     lateinit var madapter: PhoneBookAdapter
-    var phonelist = mutableListOf<Phone>()
-    var searchText = ""
-    var sortText = "asc"
+    private var phonelist = mutableListOf<Phone>()
+    private var searchText = ""
+    private var sortText = "asc"
 
     // todo : 퍼미션 util 쓸거고 로직들 다시한번 확인하고 왜 지워야지 주석처리 하는지 모르겠음
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,13 +33,10 @@ class PhoneBookActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         val ab = supportActionBar!!
         ab.setDisplayShowTitleEnabled(false)
-        //ab.setLogo(R.drawable.icn_gnb_back)
         ab.setDisplayHomeAsUpEnabled(true)
-
 
         setContentView(binding.root)
         startProcess()
-
 
         // 버튼 클릭하면 라디오 버튼 선택한 데이터가 다음 식물등록 뷰에 보여지는 부분
         binding.buttonnext.setOnClickListener {
@@ -55,13 +49,6 @@ class PhoneBookActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         }
-
-
-        /* binding.imageButtonphone.setOnClickListener {
-             val intent = Intent(this, MainActivity::class.java)
-             startActivity(intent)
-         }*/
-
     }
 
     // toolbar에서 뒤로가기 버튼 부분
@@ -76,16 +63,12 @@ class PhoneBookActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-
     private fun startProcess() {
         setList()
         setSearchListener()
-
-        // setContentView(R.layout.activity_main)
-
     }
 
-    fun setSearchListener() {
+    private fun setSearchListener() {
         binding.editSearch.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {}
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -96,21 +79,21 @@ class PhoneBookActivity : AppCompatActivity() {
         })
     }
 
-    fun changeList() {
+    private fun changeList() {
         val newList = getPhoneNumbers(sortText, searchText)
         this.phonelist.clear()
         this.phonelist.addAll(newList)
         this.madapter.notifyDataSetChanged()
     }
 
-    fun setList() {
+    private fun setList() {
         phonelist.addAll(getPhoneNumbers(sortText, searchText))
         madapter = PhoneBookAdapter(phonelist)
         binding.recycler.adapter = madapter
         binding.recycler.layoutManager = LinearLayoutManager(this)
     }
 
-    fun getPhoneNumbers(sort: String, name: String): List<Phone> {
+    private fun getPhoneNumbers(sort: String, name: String): List<Phone> {
         val list = mutableListOf<Phone>()
 
         val phonUri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI
@@ -149,9 +132,7 @@ class PhoneBookActivity : AppCompatActivity() {
             }
         }
         // 결과목록 반환
-
         return list
     }
-
 
 }

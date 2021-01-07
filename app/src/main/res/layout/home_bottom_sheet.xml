@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/home_standardBottomSheet"
+    style="?attr/bottomSheetStyle"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:behavior_fitToContents="false"
+    app:behavior_hideable="false"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+    <TextView
+        android:id="@+id/home_bottom_sheet_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="19dp"
+        android:fontFamily="@font/notosanscjkkr_bold"
+        android:text="@string/home_bottom_sheet_title_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/home_cherry_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="19dp"
+        android:fontFamily="@font/notosanscjkkr_bold"
+        android:text="24"
+        android:textColor="@color/cherish_green_main"
+        app:layout_constraintStart_toEndOf="@+id/home_bottom_sheet_title"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/home_user_add_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/notosanscjkkr_medium"
+        android:text="추가하기"
+        android:textColor="@color/cherish_text_gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/home_user_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/home_user_add_btn" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -40,46 +40,28 @@ class EnrollPlantActicity : AppCompatActivity(),
         binding.phoneName.text = intent.getStringExtra("phonename")
         binding.phoneNumber.text = intent.getStringExtra("phonenumber")
 
-        // todo : 왜 주석처리한거야 지울거면 지우고 아님 말고지
-
-        //  intent.getStringExtra("phonenumber")
-
-        /*    binding.imageButton.setOnClickListener {
-                val intent = Intent(this, PhoneBookActivity::class.java)
-                startActivity(intent)
-            }*/
         binding.detailOkBtn.setOnClickListener {
             progressON()
-
             progressOFF()
-
-
             val intent = Intent(this, ResultPlantActivity::class.java)
 
             intent.putExtra("plantkey", binding.waterAlarmWeek.text.toString())
             startActivity(intent)
-
         }
+
         //timepicker 나오는 부분
         binding.editclock.setOnClickListener {
             val needWaterDialog = ClockPickerDialogFragment(R.layout.clockpicker_layout).show(
                 supportFragmentManager,
                 "MainActivity"
             )
-
-
         }
         binding.editweek.setOnClickListener {
-
             val needweek = WeekPickerDialogFragment(R.layout.weekpicker_layout).show(
                 supportFragmentManager,
                 "MainActivity"
             )
-
-
         }
-
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
