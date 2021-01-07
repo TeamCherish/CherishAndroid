@@ -58,7 +58,6 @@ class ClockPickerDialogFragment(
         val cancel: Button = view.findViewById(R.id.button_cancel_clock)
         cancel.setOnClickListener {
             dismiss()
-
         }
         val list = resources.getStringArray(R.array.ampm)
 
