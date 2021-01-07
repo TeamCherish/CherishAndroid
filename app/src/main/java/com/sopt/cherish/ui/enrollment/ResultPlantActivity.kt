@@ -1,10 +1,10 @@
 package com.sopt.cherish.ui.enrollment
 
-import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDialog
 import com.sopt.cherish.R
@@ -19,6 +19,12 @@ class ResultPlantActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityResultplantBinding.inflate(layoutInflater)
+
+        setSupportActionBar(binding.toolbarResult)
+        val ab = supportActionBar!!
+        ab.setDisplayShowTitleEnabled(false)
+        ab.setDisplayHomeAsUpEnabled(true)
+
         setContentView(binding.root)
 
         Log.d("asdf", intent.getStringExtra("plantkey").toString())
@@ -34,12 +40,23 @@ class ResultPlantActivity : AppCompatActivity() {
         binding.startbtn.setOnClickListener {
             progressON()
         }
-        binding.imageButton3.setOnClickListener {
+        /*binding.imageButton3.setOnClickListener {
             val intent = Intent(this, EnrollPlantActicity::class.java)
             startActivity(intent)
         }
+*/
 
+    }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId
+        when (id) {
+            android.R.id.home -> {
+                finish()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     fun progressON() {

@@ -1,6 +1,7 @@
 package com.sopt.cherish.ui.adapter
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.CompoundButton
@@ -17,30 +18,45 @@ data class Phone(
 class PhoneBookAdapter(val PhoneBooklist: List<Phone>) :
     RecyclerView.Adapter<PhoneBookAdapter.Holder>() {
 
-    private lateinit var binding: ItemLayoutBinding
 
-    private var checkedRadioButton: CompoundButton? = null
-
+    var checkedRadioButton: CompoundButton? = null
+    lateinit var phonename: String
+    lateinit var phonenumber: String
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
+
+
         val layoutInflater = LayoutInflater.from(parent.context)
+
         val binding: ItemLayoutBinding = ItemLayoutBinding.inflate(layoutInflater, parent, false)
+
         // val view = LayoutInflater.from(parent.context).inflate(R.layout.item_layout, parent, false)
+        //binding.radioButton.setOnCheckedChangeListener(checkedChangeListener)
+
+        if (binding.radioButton.isChecked) checkedRadioButton = binding.radioButton
+
         return Holder(binding)
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        binding.radioButton.setOnCheckedChangeListener(checkedChangeListener)
-        if (binding.radioButton.isChecked) checkedRadioButton = binding.radioButton
+
+        holder.radioButton.setOnCheckedChangeListener { compoundButton, isChecked ->
+
+            checkedRadioButton?.apply { setChecked(!isChecked) }
+            checkedRadioButton = compoundButton.apply { setChecked(isChecked) }
+
+            if (isChecked) {
+                Log.d("asdf", "${PhoneBooklist[position].name}")
+                phonename = PhoneBooklist[position].name.toString()
+                phonenumber = PhoneBooklist[position].phone.toString()
+
+            }
+
+        }
         val phone = PhoneBooklist[position]
         holder.setPhone(phone)
     }
 
-    private val checkedChangeListener =
-        CompoundButton.OnCheckedChangeListener { compoundButton, isChecked ->
-            checkedRadioButton?.apply { setChecked(!isChecked) }
-            checkedRadioButton = compoundButton.apply { setChecked(isChecked) }
-        }
 
     override fun getItemCount(): Int {
         return PhoneBooklist.size
@@ -55,8 +71,10 @@ class PhoneBookAdapter(val PhoneBooklist: List<Phone>) :
     inner class Holder(private val binding: ItemLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
         var mPhone: Phone? = null
+        val radioButton = binding.radioButton
 
         init {
+
 
         }
 
@@ -69,5 +87,3 @@ class PhoneBookAdapter(val PhoneBooklist: List<Phone>) :
 
     }
 }
-
-
