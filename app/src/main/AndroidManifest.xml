@@ -24,7 +24,6 @@
         <activity android:name=".ui.signup.SignUpActivity" />
         <activity android:name=".ui.signin.SignInActivity" />
         <activity android:name=".ui.splash.SplashActivity" />
-        <activity android:name=".ui.main.SecondActivity" />
         <activity android:name=".ui.enrollment.PhoneBookActivity" />
         <activity android:name=".ui.enrollment.EnrollPlantActicity" />
         <activity android:name=".ui.enrollment.ResultPlantActivity" />

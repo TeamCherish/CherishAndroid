@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModel
 class MainViewModel : ViewModel() {
     private val dummyLoginUserName = "또령"
 
-    val dummyUserName = "남쿵둥이"
+    private val dummyUserName = "남쿵둥이"
     val contactDummyUserName = "${dummyUserName}와는"
 
     val reviewDescription = "${dummyUserName}과의 물주기를 기록해주세요"

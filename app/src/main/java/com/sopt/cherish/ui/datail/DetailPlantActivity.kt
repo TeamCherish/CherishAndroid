@@ -51,6 +51,7 @@ class DetailPlantActivity : AppCompatActivity() {
 
         binding.recyclerDetail.layoutManager = LinearLayoutManager(this)
         binding.recyclerDetail.setHasFixedSize(true)
+
     }
 
     private fun initializeViewModel() {
