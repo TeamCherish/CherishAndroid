@@ -8,21 +8,32 @@ import android.os.Bundle
 import android.provider.ContactsContract
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
+import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
+import androidx.databinding.adapters.CompoundButtonBindingAdapter.setChecked
+import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityPhonebookBinding
+import com.sopt.cherish.databinding.ItemLayoutBinding
 import com.sopt.cherish.ui.adapter.Phone
 import com.sopt.cherish.ui.adapter.PhoneBookAdapter
-
+import com.sopt.cherish.ui.dialog.WeekPickerDialogFragment
+import com.sopt.cherish.ui.main.MainActivity
 
 
 class PhoneBookActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityPhonebookBinding
+    private lateinit var binding_item: ItemLayoutBinding
+
 
     val permissions = arrayOf(Manifest.permission.READ_CONTACTS, Manifest.permission.CALL_PHONE)
     lateinit var madapter: PhoneBookAdapter
@@ -33,19 +44,50 @@ class PhoneBookActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPhonebookBinding.inflate(layoutInflater)
+        binding_item = ItemLayoutBinding.inflate(layoutInflater)
+
+        setSupportActionBar(binding.toolbar)
+        val ab = supportActionBar!!
+        ab.setDisplayShowTitleEnabled(false)
+        ab.setDisplayHomeAsUpEnabled(true)
+
+
         setContentView(binding.root)
         checkAndStart()
+
+
+        // 버튼 클릭하면 라디오 버튼 선택한 데이터가 다음 식물등록 뷰에 보여지는 부분
         binding.buttonnext.setOnClickListener {
+            if(madapter.checkedRadioButton!=null){
             val intent = Intent(this, EnrollPlantActicity::class.java)
+            //Toast.makeText(this,madapter.phonename,Toast.LENGTH_LONG).show()
+            intent.putExtra("phonename",madapter.phonename)
+            intent.putExtra("phonenumber",madapter.phonenumber)
+            Log.d("vvvv",madapter.phonename.toString())
             startActivity(intent)
-        }
-        binding.imageButtonphone.setOnClickListener {
-            val intent = Intent(this, PhoneBookActivity::class.java)
-            startActivity(intent)
+            }
         }
 
+
+       /* binding.imageButtonphone.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }*/
 
     }
+
+    // toolbar에서 뒤로가기 버튼 부분
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId
+        when (id) {
+            android.R.id.home -> {
+                finish()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
 
     fun startProcess() {
         setList()
@@ -143,7 +185,6 @@ class PhoneBookActivity : AppCompatActivity() {
         /*if(name.isNotEmpty()){
             where= ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME+"= ?"
             whereValues= arrayOf(name)
-
         }*/
         val optionSort = ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " $sort"
 
@@ -165,23 +206,6 @@ class PhoneBookActivity : AppCompatActivity() {
         return list
     }
 
-}
 
-class OnSingleClickListener(private val onSingleClick: (View) -> Unit) : View.OnClickListener {
-    companion object {
-        const val CLICK_INTERVAL = 500
-    }
 
-    private var lastClickedTime: Long = 0L
-
-    override fun onClick(v: View?) {
-        if (isSafe() && v != null) {
-            onSingleClick(v)
-        }
-        lastClickedTime = System.currentTimeMillis()
-    }
-
-    private fun isSafe(): Boolean {
-        return System.currentTimeMillis() - lastClickedTime > CLICK_INTERVAL
-    }
 }
