@@ -27,17 +27,7 @@ class ClockPickerDialogFragment(@LayoutRes
     }
 
     var testDialogFragmentListener: TestDialogFragmentListener? = null
-    override fun onAttach(activity: Activity) {
-        super.onAttach(activity)
-        testDialogFragmentListener = try {
-            activity as TestDialogFragmentListener
-        } catch (e: ClassCastException) {
-            throw ClassCastException(
-                activity.toString()
-                        + " must implement TestDialogFragmentListener"
-            )
-        }
-    }
+
     fun someAction() {
         testDialogFragmentListener!!.onTestDialogClock(
             this@ClockPickerDialogFragment, clocktext
@@ -47,7 +37,14 @@ class ClockPickerDialogFragment(@LayoutRes
         val view = inflater.inflate(layoutResId, container, false)
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-
+        testDialogFragmentListener = try {
+            activity as TestDialogFragmentListener
+        } catch (e: ClassCastException) {
+            throw ClassCastException(
+                    activity.toString()
+                            + " must implement TestDialogFragmentListener"
+            )
+        }
         val binding = ClockpickerLayoutBinding.bind(view)
         val clock_hour: NumberPicker = view.findViewById(R.id.numberPicker_clock)
         val clock_minute: NumberPicker = view.findViewById(R.id.numberPicker2_clock)
