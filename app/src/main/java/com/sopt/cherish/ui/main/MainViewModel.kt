@@ -22,19 +22,19 @@ class MainViewModel : ViewModel() {
     val dummyUserMessageNumber: Uri = Uri.parse("smsto:010-2563-9702")
 
     val dummyCherry = mutableListOf(
-        CherryDataclass("안녕"),
-        CherryDataclass("반가워"),
-        CherryDataclass("잘가"),
-        CherryDataclass("반가워"),
-        CherryDataclass("반가워"),
-        CherryDataclass("반가워"),
-        CherryDataclass("반가워"),
-        CherryDataclass("안녕"),
-        CherryDataclass("반가워"),
-        CherryDataclass("잘가"),
-        CherryDataclass("반가워"),
-        CherryDataclass("반가워"),
-        CherryDataclass("반가워")
+        CherryDataclass("1"),
+        CherryDataclass("2"),
+        CherryDataclass("3"),
+        CherryDataclass("4"),
+        CherryDataclass("5"),
+        CherryDataclass("6"),
+        CherryDataclass("7"),
+        CherryDataclass("8"),
+        CherryDataclass("9"),
+        CherryDataclass("10"),
+        CherryDataclass("11"),
+        CherryDataclass("12"),
+        CherryDataclass("13")
     )
 
     // homeFragment dummy Data
