@@ -20,11 +20,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding: ActivityMainBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_main)
-        initializeViewModel()
 
-        initialFragment()
-        // bottomNavi 보단 bottomNavigation? or something 로직 함수로 뺴놓으면 좋을거 같음
-        navigateFragment(binding)
+        initializeViewModel()
+        showInitialFragment()
+        setBottomNavigationListener(binding)
     }
 
     private fun initializeViewModel() {
@@ -34,12 +33,12 @@ class MainActivity : AppCompatActivity() {
             )
     }
 
-    private fun initialFragment() {
+    private fun showInitialFragment() {
         supportFragmentManager.beginTransaction()
             .add(R.id.main_fragment_container, HomeFragment()).commit()
     }
 
-    private fun navigateFragment(binding: ActivityMainBinding) {
+    private fun setBottomNavigationListener(binding: ActivityMainBinding) {
         binding.mainBottomNavi.setOnNavigationItemSelectedListener {
             val transAction = supportFragmentManager.beginTransaction()
 
