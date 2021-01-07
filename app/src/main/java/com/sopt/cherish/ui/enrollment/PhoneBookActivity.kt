@@ -41,6 +41,7 @@ class PhoneBookActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         val ab = supportActionBar!!
         ab.setDisplayShowTitleEnabled(false)
+        //ab.setLogo(R.drawable.icn_gnb_back)
         ab.setDisplayHomeAsUpEnabled(true)
 
 

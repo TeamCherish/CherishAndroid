@@ -1,6 +1,5 @@
 package com.sopt.cherish.ui.dialog
 
-import android.app.Activity
 import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -28,17 +27,6 @@ class ClockPickerDialogFragment(
     }
 
     var testDialogFragmentListener: TestDialogFragmentListener? = null
-    override fun onAttach(activity: Activity) {
-        super.onAttach(activity)
-        testDialogFragmentListener = try {
-            activity as TestDialogFragmentListener
-        } catch (e: ClassCastException) {
-            throw ClassCastException(
-                activity.toString()
-                        + " must implement TestDialogFragmentListener"
-            )
-        }
-    }
 
     fun someAction() {
         testDialogFragmentListener!!.onTestDialogClock(
@@ -54,11 +42,18 @@ class ClockPickerDialogFragment(
         val view = inflater.inflate(layoutResId, container, false)
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-
+        testDialogFragmentListener = try {
+            activity as TestDialogFragmentListener
+        } catch (e: ClassCastException) {
+            throw ClassCastException(
+                activity.toString()
+                        + " must implement TestDialogFragmentListener"
+            )
+        }
         val binding = ClockpickerLayoutBinding.bind(view)
-        val clockHour: NumberPicker = view.findViewById(R.id.numberPicker_clock)
-        val clockMinute: NumberPicker = view.findViewById(R.id.numberPicker2_clock)
-        val clockAmPm: NumberPicker = view.findViewById(R.id.numberPicker3_clock)
+        val clock_hour: NumberPicker = view.findViewById(R.id.numberPicker_clock)
+        val clock_minute: NumberPicker = view.findViewById(R.id.numberPicker2_clock)
+        val clock_ampm: NumberPicker = view.findViewById(R.id.numberPicker3_clock)
 
         val cancel: Button = view.findViewById(R.id.button_cancel_clock)
         cancel.setOnClickListener {
@@ -68,30 +63,30 @@ class ClockPickerDialogFragment(
         val list = resources.getStringArray(R.array.ampm)
 
 
-        clockHour.removeDivider()
-        clockMinute.removeDivider()
-        clockAmPm.removeDivider()
+        clock_hour.removeDivider()
+        clock_minute.removeDivider()
+        clock_ampm.removeDivider()
 
-        clockHour.minValue = 1
-        clockHour.maxValue = 12
+        clock_hour.minValue = 1
+        clock_hour.maxValue = 12
 
-        clockMinute.minValue = 0
-        clockMinute.maxValue = 59
+        clock_minute.minValue = 0
+        clock_minute.maxValue = 59
 
-        clockAmPm.minValue = 0
-        clockAmPm.maxValue = list.size - 1
+        clock_ampm.minValue = 0
+        clock_ampm.maxValue = list.size - 1
 
-        clockAmPm.displayedValues = list
+        clock_ampm.displayedValues = list
 
-        clockHour.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
-        clockAmPm.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
-        clockMinute.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
+        clock_hour.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
+        clock_ampm.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
+        clock_minute.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
 
         val btn_ok: Button = view.findViewById(R.id.button_ok_clock)
         btn_ok.setOnClickListener {
 
             clocktext =
-                clockHour.value.toString() + ":" + clockMinute.value.toString() + " " + list[clockAmPm.value]
+                clock_hour.value.toString() + ":" + clock_minute.value.toString() + " " + list[clock_ampm.value]
             someAction()
             dialog?.dismiss()
 
