@@ -39,10 +39,9 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         val binding: FragmentHomeBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
-
+        binding.mainViewModel = viewModel
         val homeCherryListAdapter = HomeCherryListAdapter()
 
         initializeBottomSheetBehavior(binding)
@@ -51,7 +50,7 @@ class HomeFragment : Fragment() {
             navigateWatering()
         }
 
-        binding.homeUserAddBtn.setOnClickListener {
+        binding.homeUserAddText.setOnClickListener {
             navigatePhoneBook()
         }
 
@@ -123,6 +122,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun updateProgressBar(binding: FragmentHomeBinding) {
+        // 이거 고쳐야 함
         val rating = binding.homeAffectionProgressbar.progress
         if (rating <= 30) {
             binding.homeAffectionProgressbar.progressDrawable = ResourcesCompat.getDrawable(

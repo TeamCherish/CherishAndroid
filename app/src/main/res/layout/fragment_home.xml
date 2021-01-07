@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="mainViewModel"
+            type="com.sopt.cherish.ui.main.MainViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,7 +24,7 @@
             android:layout_marginStart="@dimen/margin_16dp"
             android:layout_marginTop="@dimen/margin_53dp"
             android:font="@font/notosanscjkkr_bold"
-            android:text="D-3"
+            android:text="@{mainViewModel.dummyRestDateData}"
             android:textColor="@color/white"
             android:textSize="40sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -33,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_6dp"
             android:font="@font/notosanscjkkr_bold"
-            android:text="아직 수명이 탄탄한"
+            android:text="@{mainViewModel.dummyUserDescription}"
             android:textColor="@color/white"
             android:textSize="28sp"
             app:layout_constraintStart_toStartOf="@+id/home_remain_date"
@@ -44,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:font="@font/notosanscjkkr_bold"
-            android:text="남쿵둥이님"
+            android:text="@{mainViewModel.dummyUserName}"
             android:textColor="@color/white"
             android:textSize="28sp"
             app:layout_constraintStart_toStartOf="@+id/home_selected_user_status"
@@ -58,7 +61,7 @@
             android:layout_marginTop="@dimen/margin_16dp"
             android:drawableLeft="@drawable/icn_water"
             android:font="@font/notosanscjkkr_medium"
-            android:text="물주기"
+            android:text="@string/home_watering_text"
             app:layout_constraintStart_toStartOf="@+id/home_selected_user_name"
             app:layout_constraintTop_toBottomOf="@+id/home_selected_user_name" />
 
@@ -80,7 +83,7 @@
             android:layout_marginStart="@dimen/margin_29dp"
             android:layout_marginTop="@dimen/margin_50dp"
             android:max="100"
-            android:progress="15"
+            android:progress="@{mainViewModel.dummyUserAffectionGauge}"
             android:progressDrawable="@drawable/progress_drawable_vertical"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/home_watering_btn" />
@@ -91,7 +94,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_26dp"
             android:font="@font/notosanscjkkr_regular"
-            android:text="15"
+            android:text="@{mainViewModel.dummyUserAffectionText}"
             android:textColor="@color/white"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -140,19 +143,19 @@
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="19dp"
                     android:fontFamily="@font/notosanscjkkr_bold"
-                    android:text="24"
+                    android:text="@{mainViewModel.dummyUserCount}"
                     android:textColor="@color/cherish_green_main"
                     app:layout_constraintStart_toEndOf="@+id/home_bottom_sheet_title"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/home_user_add_btn"
+                    android:id="@+id/home_user_add_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:layout_marginEnd="16dp"
                     android:fontFamily="@font/notosanscjkkr_medium"
-                    android:text="추가하기"
+                    android:text="@string/home_user_add_text"
                     android:textColor="@color/cherish_text_gray"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -161,7 +164,7 @@
                     android:id="@+id/home_user_list"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@id/home_user_add_btn" />
+                    app:layout_constraintTop_toBottomOf="@id/home_user_add_text" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

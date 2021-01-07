@@ -36,4 +36,6 @@
 
     <string name="home_user_affection">애정도</string>
     <string name="home_bottom_sheet_title_text">나의 소중한 사람들</string>
+    <string name="home_watering_text">물주기</string>
+    <string name="home_user_add_text">추가하기</string>
 </resources>

@@ -2,6 +2,7 @@ package com.sopt.cherish.ui.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityMainBinding
@@ -14,22 +15,16 @@ import com.sopt.cherish.ui.main.setting.SettingFragment
 class MainActivity : AppCompatActivity() {
 
     private lateinit var viewModel: MainViewModel
-    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        val view = binding.root
-
-        setContentView(view)
-
+        val binding: ActivityMainBinding =
+            DataBindingUtil.setContentView(this, R.layout.activity_main)
         initializeViewModel()
 
-        supportFragmentManager.beginTransaction()
-            .add(R.id.main_fragment_container, HomeFragment()).commit()
-
+        initialFragment()
         // bottomNavi 보단 bottomNavigation? or something 로직 함수로 뺴놓으면 좋을거 같음
-        navigate(binding)
+        navigateFragment(binding)
     }
 
     private fun initializeViewModel() {
@@ -39,7 +34,12 @@ class MainActivity : AppCompatActivity() {
             )
     }
 
-    private fun navigate(binding: ActivityMainBinding) {
+    private fun initialFragment() {
+        supportFragmentManager.beginTransaction()
+            .add(R.id.main_fragment_container, HomeFragment()).commit()
+    }
+
+    private fun navigateFragment(binding: ActivityMainBinding) {
         binding.mainBottomNavi.setOnNavigationItemSelectedListener {
             val transAction = supportFragmentManager.beginTransaction()
 

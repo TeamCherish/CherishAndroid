@@ -11,7 +11,7 @@ import com.sopt.cherish.ui.domain.CherryDataclass
 class MainViewModel : ViewModel() {
     private val dummyLoginUserName = "또령"
 
-    private val dummyUserName = "남쿵둥이"
+    val dummyUserName = "남쿵둥이"
     val contactDummyUserName = "${dummyUserName}와는"
 
     val reviewDescription = "${dummyUserName}과의 물주기를 기록해주세요"
@@ -36,4 +36,12 @@ class MainViewModel : ViewModel() {
         CherryDataclass("반가워"),
         CherryDataclass("반가워")
     )
+
+    // homeFragment dummy Data
+    val dummyRestDateData = "D-3"
+    val dummyUserDescription = "아직 수명이 탄탄한"
+    val dummyUserAffectionGauge = 70
+    val dummyUserAffectionText = "70"
+    val dummyUserCount = dummyCherry.size.toString()
+
 }
