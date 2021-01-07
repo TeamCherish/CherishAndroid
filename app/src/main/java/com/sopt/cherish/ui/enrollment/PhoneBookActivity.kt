@@ -9,25 +9,16 @@ import android.provider.ContactsContract
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import android.widget.RadioGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
-import androidx.databinding.adapters.CompoundButtonBindingAdapter.setChecked
-import androidx.fragment.app.DialogFragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityPhonebookBinding
 import com.sopt.cherish.databinding.ItemLayoutBinding
 import com.sopt.cherish.ui.adapter.Phone
 import com.sopt.cherish.ui.adapter.PhoneBookAdapter
-import com.sopt.cherish.ui.dialog.WeekPickerDialogFragment
-import com.sopt.cherish.ui.main.MainActivity
-
 
 class PhoneBookActivity : AppCompatActivity() {
 
@@ -58,21 +49,21 @@ class PhoneBookActivity : AppCompatActivity() {
 
         // 버튼 클릭하면 라디오 버튼 선택한 데이터가 다음 식물등록 뷰에 보여지는 부분
         binding.buttonnext.setOnClickListener {
-            if(madapter.checkedRadioButton!=null){
-            val intent = Intent(this, EnrollPlantActicity::class.java)
-            //Toast.makeText(this,madapter.phonename,Toast.LENGTH_LONG).show()
-            intent.putExtra("phonename",madapter.phonename)
-            intent.putExtra("phonenumber",madapter.phonenumber)
-            Log.d("vvvv",madapter.phonename.toString())
-            startActivity(intent)
+            if (madapter.checkedRadioButton != null) {
+                val intent = Intent(this, EnrollPlantActicity::class.java)
+                //Toast.makeText(this,madapter.phonename,Toast.LENGTH_LONG).show()
+                intent.putExtra("phonename", madapter.phonename)
+                intent.putExtra("phonenumber", madapter.phonenumber)
+                Log.d("vvvv", madapter.phonename.toString())
+                startActivity(intent)
             }
         }
 
 
-       /* binding.imageButtonphone.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }*/
+        /* binding.imageButtonphone.setOnClickListener {
+             val intent = Intent(this, MainActivity::class.java)
+             startActivity(intent)
+         }*/
 
     }
 
@@ -121,9 +112,9 @@ class PhoneBookActivity : AppCompatActivity() {
     }
 
     override fun onRequestPermissionsResult(
-            requestCode: Int,
-            permissions: Array<out String>,
-            grantResults: IntArray
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
     ) {
         if (requestCode == 99) {
             var check = true
@@ -173,7 +164,10 @@ class PhoneBookActivity : AppCompatActivity() {
         val phoneUri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI
         // 2.1 전화번호에서 가져올 컬럼 정의
         val projections = arrayOf(
-                ContactsContract.CommonDataKinds.Phone.CONTACT_ID, ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME, ContactsContract.CommonDataKinds.Phone.NUMBER)
+            ContactsContract.CommonDataKinds.Phone.CONTACT_ID,
+            ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME,
+            ContactsContract.CommonDataKinds.Phone.NUMBER
+        )
         // 2.2 조건 정의
         var where: String? = null
         var whereValues: Array<String>? = null

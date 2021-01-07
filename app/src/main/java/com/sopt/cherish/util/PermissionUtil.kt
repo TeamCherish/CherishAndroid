@@ -22,43 +22,54 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 object PermissionUtil {
     fun requestCherishPermission(activity: Activity, listener: PermissionListener) {
         requestPermissions(
-                activity,
-                listOf(
-                        android.Manifest.permission.READ_CONTACTS,
-                        android.Manifest.permission.CALL_PHONE,
-                        android.Manifest.permission.SEND_SMS
-                ), listener
+            activity,
+            listOf(
+                android.Manifest.permission.READ_CONTACTS,
+                android.Manifest.permission.CALL_PHONE,
+                android.Manifest.permission.SEND_SMS
+            ), listener
         )
     }
 
-    private fun requestPermissions(activity: Activity, permissions: Collection<String>, listener: PermissionListener) {
-        val callbackListener: MultiplePermissionsListener = object : BaseMultiplePermissionsListener() {
-            override fun onPermissionsChecked(report: MultiplePermissionsReport) {
-                val deniedPermissions = report.deniedPermissionResponses.map { it.permissionName }
-                val permanentlyDeniedPermissions =
-                        report.deniedPermissionResponses.filter { it.isPermanentlyDenied }.map { it.permissionName }
+    private fun requestPermissions(
+        activity: Activity,
+        permissions: Collection<String>,
+        listener: PermissionListener
+    ) {
+        val callbackListener: MultiplePermissionsListener =
+            object : BaseMultiplePermissionsListener() {
+                override fun onPermissionsChecked(report: MultiplePermissionsReport) {
+                    val deniedPermissions =
+                        report.deniedPermissionResponses.map { it.permissionName }
+                    val permanentlyDeniedPermissions =
+                        report.deniedPermissionResponses.filter { it.isPermanentlyDenied }
+                            .map { it.permissionName }
 
-                // 모든 권한이 허가되었다면
-                when {
-                    report.areAllPermissionsGranted() -> {
-                        listener.onPermissionGranted()
+                    // 모든 권한이 허가되었다면
+                    when {
+                        report.areAllPermissionsGranted() -> {
+                            listener.onPermissionGranted()
+                        }
+                        // 권한 중에 영구적으로 거부된 권한이 있다면
+                        report.isAnyPermissionPermanentlyDenied -> {
+                            listener.onAnyPermissionPermanentlyDenied(
+                                deniedPermissions,
+                                permanentlyDeniedPermissions
+                            )
+                        }
+                        // 권한 중에 거부된 권한이 있다면
+                        else -> {
+                            listener.onPermissionShouldBeGranted(deniedPermissions)
+                        }
                     }
-                    // 권한 중에 영구적으로 거부된 권한이 있다면
-                    report.isAnyPermissionPermanentlyDenied -> {
-                        listener.onAnyPermissionPermanentlyDenied(deniedPermissions, permanentlyDeniedPermissions)
-                    }
-                    // 권한 중에 거부된 권한이 있다면
-                    else -> {
-                        listener.onPermissionShouldBeGranted(deniedPermissions)
-                    }
+
                 }
-
             }
-        }
         /**
          * Dexter로 activity를 이용한 권한 요청
          */
-        Dexter.withContext(activity).withPermissions(permissions).withListener(callbackListener).check()
+        Dexter.withContext(activity).withPermissions(permissions).withListener(callbackListener)
+            .check()
     }
 
     fun openPermissionSettings(context: Context) {
@@ -68,12 +79,20 @@ object PermissionUtil {
     }
 
     fun isCheckedCallPermission(context: Context): Boolean {
-        if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) return true
+        if (ContextCompat.checkSelfPermission(
+                context,
+                android.Manifest.permission.CALL_PHONE
+            ) == PackageManager.PERMISSION_GRANTED
+        ) return true
         return false
     }
 
     fun isCheckedSendMessagePermission(context: Context): Boolean {
-        if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED) return true
+        if (ContextCompat.checkSelfPermission(
+                context,
+                android.Manifest.permission.SEND_SMS
+            ) == PackageManager.PERMISSION_GRANTED
+        ) return true
         return false
     }
 
@@ -96,7 +115,7 @@ object PermissionUtil {
          * @param permanentDeniedPermissions 영구적으로 거부된 권한 목록
          */
         fun onAnyPermissionPermanentlyDenied(
-                deniedPermissions: List<String>, permanentDeniedPermissions: List<String>
+            deniedPermissions: List<String>, permanentDeniedPermissions: List<String>
         ) {
 
         }

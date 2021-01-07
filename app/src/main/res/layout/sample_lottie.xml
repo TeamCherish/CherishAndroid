@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:text="hello!"
+        android:text="SampleLottieOn!!!"
         android:textSize="@dimen/text_16sp" />
 
 </androidx.cardview.widget.CardView>

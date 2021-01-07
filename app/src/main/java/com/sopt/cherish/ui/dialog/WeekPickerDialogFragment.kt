@@ -22,7 +22,7 @@ class WeekPickerDialogFragment(
     private val layoutResId: Int
 ) : DialogFragment(), View.OnClickListener {
 
-    lateinit var weektext:String
+    lateinit var weektext: String
 
     interface TestDialogFragmentListener {
         fun onTestDialogweek(dialog: DialogFragment?, someData: String?)
@@ -40,6 +40,7 @@ class WeekPickerDialogFragment(
             )
         }
     }
+
     fun someAction() {
         testDialogFragmentListener!!.onTestDialogweek(
             this@WeekPickerDialogFragment, weektext
@@ -58,7 +59,6 @@ class WeekPickerDialogFragment(
         val binding = WeekpickerLayoutBinding.bind(view)
 
 
-
         val week_every: NumberPicker = view.findViewById(R.id.numberPicker)
         val week_number: NumberPicker = view.findViewById(R.id.numberPicker2)
         val week_month: NumberPicker = view.findViewById(R.id.numberPicker3)
@@ -68,7 +68,6 @@ class WeekPickerDialogFragment(
             dismiss()
 
         }
-
 
 
         val list = resources.getStringArray(R.array.cycle)
@@ -95,11 +94,11 @@ class WeekPickerDialogFragment(
         week_number.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
 
 
-
         val btn_ok: Button = view.findViewById(R.id.button_ok)
         btn_ok.setOnClickListener {
 
-            weektext=list2[week_every.value]+" "+week_number.value.toString()+" "+list[week_month.value]
+            weektext =
+                list2[week_every.value] + " " + week_number.value.toString() + " " + list[week_month.value]
             someAction()
             dialog?.dismiss()
 
