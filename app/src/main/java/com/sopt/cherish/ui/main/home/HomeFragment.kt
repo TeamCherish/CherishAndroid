@@ -6,17 +6,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentHomeBinding
-import com.sopt.cherish.ui.adapter.MainBottomSheetAdapter
+import com.sopt.cherish.ui.adapter.HomeCherryListAdapter
 import com.sopt.cherish.ui.dialog.WateringDialogFragment
 import com.sopt.cherish.ui.enrollment.PhoneBookActivity
 import com.sopt.cherish.ui.main.MainViewModel
@@ -30,37 +29,43 @@ import com.sopt.cherish.ui.main.MainViewModel
  */
 class HomeFragment : Fragment() {
 
-    private lateinit var standardBottomSheetBehavior: BottomSheetBehavior<*>
-    private lateinit var adapter: MainBottomSheetAdapter
-
     private val viewModel: MainViewModel by activityViewModels()
 
-    private lateinit var binding: FragmentHomeBinding
+    companion object {
+        private val TAG = "HomeFragment"
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentHomeBinding.inflate(inflater, container, false)
-        navigateWatering(binding)
 
-        adapter = MainBottomSheetAdapter()
-        setAdapterData(adapter)
-        setAdapter(binding, adapter)
+        val binding: FragmentHomeBinding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
 
-        binding.homeBottomSheet.homeUserAddBtn.setOnClickListener {
+        val homeCherryListAdapter = HomeCherryListAdapter()
+
+        initializeBottomSheetBehavior(binding)
+
+        binding.homeWateringBtn.setOnClickListener {
+            navigateWatering()
+        }
+
+        binding.homeUserAddBtn.setOnClickListener {
             navigatePhoneBook()
         }
 
-        initializeBottomSheetBehavior(binding)
-        initializeRecyclerView(binding.homeFragment, adapter)
-        updateProgressBar(binding)
+        setAdapterData(homeCherryListAdapter)
+        initializeRecyclerView(binding, homeCherryListAdapter)
 
+        updateProgressBar(binding)
         return binding.root
     }
 
     private fun initializeBottomSheetBehavior(binding: FragmentHomeBinding) {
-        standardBottomSheetBehavior =
-            BottomSheetBehavior.from(binding.homeBottomSheet.homeStandardBottomSheet)
+        val standardBottomSheetBehavior =
+            BottomSheetBehavior.from(binding.homeStandardBottomSheet)
+        // bottom sheet state 지정
         standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         standardBottomSheetBehavior.peekHeight = 160
         standardBottomSheetBehavior.expandedOffset = 158
@@ -69,6 +74,7 @@ class HomeFragment : Fragment() {
         standardBottomSheetBehavior.addBottomSheetCallback(object :
             BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
+                // 이 코드 때문에 색상이 변경 안되는거 같은데 여기 로직 다시 한번 생각
                 if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
                     binding.homeFragment.setBackgroundColor(
                         ContextCompat.getColor(
@@ -80,26 +86,29 @@ class HomeFragment : Fragment() {
             }
 
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                // 이건 작동 잘함
                 transitionBottomSheetParentView(binding, slideOffset)
             }
         })
     }
 
+    private fun setAdapterData(homeCherryListAdapter: HomeCherryListAdapter) {
+        homeCherryListAdapter.data = viewModel.dummyCherry
+        homeCherryListAdapter.notifyDataSetChanged()
+    }
+
     private fun initializeRecyclerView(
-        standardBottomSheet: ConstraintLayout?,
-        mainAdapter: MainBottomSheetAdapter
+        binding: FragmentHomeBinding,
+        homeCherryListAdapter: HomeCherryListAdapter
     ) {
-        val recyclerView = standardBottomSheet?.findViewById<RecyclerView>(R.id.home_user_list)
-        recyclerView?.apply {
-            adapter = mainAdapter
+        binding.homeUserList.apply {
+            adapter = homeCherryListAdapter
             layoutManager = GridLayoutManager(context, 5)
         }
     }
 
-    private fun navigateWatering(binding: FragmentHomeBinding) {
-        binding.homeWateringBtn.setOnClickListener {
-            WateringDialogFragment().show(parentFragmentManager, "HomeFragment")
-        }
+    private fun navigateWatering() {
+        WateringDialogFragment().show(parentFragmentManager, TAG)
     }
 
     private fun navigatePhoneBook() {
@@ -109,20 +118,8 @@ class HomeFragment : Fragment() {
 
     private fun transitionBottomSheetParentView(binding: FragmentHomeBinding, slideOffset: Float) {
         val argbEvaluator =
-            ArgbEvaluator().evaluate(slideOffset, R.color.cherish_purple, R.color.cherish_black)
+            ArgbEvaluator().evaluate(slideOffset, R.color.white, R.color.black)
         binding.homeFragment.setBackgroundColor(argbEvaluator as Int)
-    }
-
-    private fun setAdapterData(adapter: MainBottomSheetAdapter) {
-        adapter.data = viewModel.dummyCherry
-        adapter.notifyDataSetChanged()
-    }
-
-    private fun setAdapter(binding: FragmentHomeBinding, mainAdapter: MainBottomSheetAdapter) {
-        binding.homeBottomSheet.homeUserList.apply {
-            adapter = mainAdapter
-            layoutManager = GridLayoutManager(context, 5)
-        }
     }
 
     private fun updateProgressBar(binding: FragmentHomeBinding) {
