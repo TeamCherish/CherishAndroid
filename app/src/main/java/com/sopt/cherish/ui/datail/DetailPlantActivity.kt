@@ -2,10 +2,12 @@ package com.sopt.cherish.ui.datail
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jackandphantom.circularprogressbar.CircleProgressbar
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityDetailPlantBinding
+import com.sopt.cherish.di.Injection
 import com.sopt.cherish.remote.model.MemoListDataclass
 import com.sopt.cherish.ui.adapter.DetailMemoAdapter
 
@@ -21,12 +23,16 @@ class DetailPlantActivity : AppCompatActivity() {
     private lateinit var binding: ActivityDetailPlantBinding
 
     var memoList = arrayListOf<MemoListDataclass>(
-            MemoListDataclass("12/2", "다음주에 대머리쉬 출근"),
-            MemoListDataclass("12/28", "내일 대머리쉬 사퇴")
+        MemoListDataclass("12/2", "다음주에 대머리쉬 출근"),
+        MemoListDataclass("12/28", "내일 대머리쉬 사퇴")
     )
+
+    private lateinit var viewModel: DetailPlantViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        initializeViewModel()
 
 
         binding = ActivityDetailPlantBinding.inflate(layoutInflater)
@@ -44,5 +50,15 @@ class DetailPlantActivity : AppCompatActivity() {
 
         binding.recyclerDetail.layoutManager = LinearLayoutManager(this)
         binding.recyclerDetail.setHasFixedSize(true)
+    }
+
+    private fun initializeViewModel() {
+        viewModel =
+            ViewModelProvider(
+                this@DetailPlantActivity,
+                Injection.provideDetailViewModelFactory()
+            ).get(
+                DetailPlantViewModel::class.java
+            )
     }
 }

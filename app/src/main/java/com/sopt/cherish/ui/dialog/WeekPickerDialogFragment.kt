@@ -18,8 +18,8 @@ import com.sopt.cherish.databinding.WeekpickerLayoutBinding
 
 //created by nayoung : 알람주기 설정 보여주는 팝업 창
 class WeekPickerDialogFragment(
-    @LayoutRes
-    private val layoutResId: Int
+        @LayoutRes
+        private val layoutResId: Int
 ) : DialogFragment(), View.OnClickListener {
 
     lateinit var weektext:String
@@ -32,14 +32,14 @@ class WeekPickerDialogFragment(
 
     fun someAction() {
         testDialogFragmentListener!!.onTestDialogweek(
-            this@WeekPickerDialogFragment, weektext
+                this@WeekPickerDialogFragment, weektext
         )
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(layoutResId, container, false)
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))

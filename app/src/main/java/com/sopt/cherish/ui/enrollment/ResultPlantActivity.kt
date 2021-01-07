@@ -1,6 +1,5 @@
 package com.sopt.cherish.ui.enrollment
 
-import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -48,6 +47,7 @@ class ResultPlantActivity : AppCompatActivity() {
 */
 
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
         when (id) {

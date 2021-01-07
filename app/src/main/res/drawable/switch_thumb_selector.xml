@@ -7,8 +7,7 @@
         android:width="12dp"
         android:height="12dp" />
 
-    <solid
-        android:color="@color/cherish_green_main" />
+    <solid android:color="@color/cherish_green_main" />
 
 </shape>
 

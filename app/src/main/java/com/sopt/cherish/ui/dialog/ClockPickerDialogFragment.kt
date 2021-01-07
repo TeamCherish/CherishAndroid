@@ -30,7 +30,7 @@ class ClockPickerDialogFragment(@LayoutRes
 
     fun someAction() {
         testDialogFragmentListener!!.onTestDialogClock(
-            this@ClockPickerDialogFragment, clocktext
+                this@ClockPickerDialogFragment, clocktext
         )
     }
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

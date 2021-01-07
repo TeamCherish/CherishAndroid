@@ -11,7 +11,7 @@ import androidx.fragment.app.DialogFragment
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.SampleLottie2Binding
 import com.sopt.cherish.databinding.SampleLottieBinding
-import com.sopt.cherish.util.AdjustDialog
+import com.sopt.cherish.util.DialogUtil
 
 /**
  * Created on 2021-1-1 by SSong-develop
@@ -19,17 +19,20 @@ import com.sopt.cherish.util.AdjustDialog
  */
 
 class CustomDialogFragment(
-        @LayoutRes private val layoutResId: Int
+    @LayoutRes private val layoutResId: Int
 ) : DialogFragment(), View.OnClickListener {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val view = inflater.inflate(layoutResId, container, false)
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         return when (layoutResId) {
             R.layout.sample_lottie -> {
                 val binding = SampleLottieBinding.bind(view)
-
                 binding.root
             }
             R.layout.sample_lottie2 -> {
@@ -44,9 +47,7 @@ class CustomDialogFragment(
 
     override fun onResume() {
         super.onResume()
-        val adjustDialogSize = AdjustDialog(requireContext())
-
-        adjustDialogSize.adjustSize(dialogFragment = this, widthRatio = 0.9f, heightRatio = 0.45f)
+        DialogUtil.adjustDialogSize(this, 0.694f, 0.169f)
     }
 
     override fun onClick(view: View?) {

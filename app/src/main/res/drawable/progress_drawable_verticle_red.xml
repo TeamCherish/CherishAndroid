@@ -2,19 +2,18 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@android:id/background">
         <shape>
-            <corners
-                android:radius="41dp"/>
+            <corners android:radius="41dp" />
 
             <gradient
-                android:startColor="#ffffff"
+                android:angle="270"
                 android:endColor="#ffffff"
-                android:angle="270" />
+                android:startColor="#ffffff" />
         </shape>
     </item>
     <item android:id="@android:id/progress">
         <scale
             android:drawable="@drawable/progressbar_custom_red"
             android:scaleHeight="100%"
-            android:scaleGravity="bottom"/>
+            android:scaleGravity="bottom" />
     </item>
 </layer-list>

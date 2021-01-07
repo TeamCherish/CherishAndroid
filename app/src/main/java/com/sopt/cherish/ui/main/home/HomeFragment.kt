@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
@@ -37,8 +36,8 @@ class HomeFragment : Fragment() {
     private lateinit var useraddbtn: TextView
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
@@ -73,11 +72,17 @@ class HomeFragment : Fragment() {
         initRecyclerView(homeFragmentBg, adapter)
         updateProgressBar(binding)
 
-        standardBottomSheetBehavior.addBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
+        standardBottomSheetBehavior.addBottomSheetCallback(object :
+            BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
 
                 if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
-                    homeFragmentBg.setBackgroundColor(ContextCompat.getColor(context!!, R.color.cherish_purple))
+                    homeFragmentBg.setBackgroundColor(
+                        ContextCompat.getColor(
+                            context!!,
+                            R.color.cherish_purple
+                        )
+                    )
                 }
             }
 
@@ -93,7 +98,10 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
-    private fun initRecyclerView(standardBottomSheet: ConstraintLayout?, mainAdapter: MainBottomSheetAdapter) {
+    private fun initRecyclerView(
+        standardBottomSheet: ConstraintLayout?,
+        mainAdapter: MainBottomSheetAdapter
+    ) {
         val recyclerView = standardBottomSheet?.findViewById<RecyclerView>(R.id.main_list)
         recyclerView?.apply {
             adapter = mainAdapter
@@ -110,46 +118,46 @@ class HomeFragment : Fragment() {
 
     private fun setAdapterData(adapter: MainBottomSheetAdapter) {
         adapter.data = mutableListOf(
-                CherryDataclass("안녕"),
-                CherryDataclass("반가워"),
-                CherryDataclass("잘가"),
-                CherryDataclass("반가워"),
-                CherryDataclass("반가워"),
-                CherryDataclass("반가워"),
-                CherryDataclass("반가워"),
-                CherryDataclass("안녕"),
-                CherryDataclass("반가워"),
-                CherryDataclass("잘가"),
-                CherryDataclass("반가워"),
-                CherryDataclass("반가워"),
-                CherryDataclass("반가워"),
-                CherryDataclass("반가워"),
-                CherryDataclass("안녕"),
-                CherryDataclass("반가워"),
-                CherryDataclass("잘가"),
-                CherryDataclass("반가워"),
-                CherryDataclass("반가워"),
-                CherryDataclass("반가워"),
-                CherryDataclass("반가워"),
-                CherryDataclass("안녕"),
-                CherryDataclass("반가워"),
-                CherryDataclass("잘가"),
-                CherryDataclass("반가워"),
-                CherryDataclass("반가워"),
-                CherryDataclass("반가워"),
-                CherryDataclass("반가워"),
-                CherryDataclass("안녕"),
-                CherryDataclass("안녕"),
-                CherryDataclass("반가워"),
-                CherryDataclass("잘가"),
-                CherryDataclass("반가워"),
-                CherryDataclass("반가워"),
-                CherryDataclass("반가워"),
-                CherryDataclass("반가워"),
-                CherryDataclass("안녕"),
-                CherryDataclass("반가워"),
-                CherryDataclass("반가워"),
-                CherryDataclass("반가워"),
+            CherryDataclass("안녕"),
+            CherryDataclass("반가워"),
+            CherryDataclass("잘가"),
+            CherryDataclass("반가워"),
+            CherryDataclass("반가워"),
+            CherryDataclass("반가워"),
+            CherryDataclass("반가워"),
+            CherryDataclass("안녕"),
+            CherryDataclass("반가워"),
+            CherryDataclass("잘가"),
+            CherryDataclass("반가워"),
+            CherryDataclass("반가워"),
+            CherryDataclass("반가워"),
+            CherryDataclass("반가워"),
+            CherryDataclass("안녕"),
+            CherryDataclass("반가워"),
+            CherryDataclass("잘가"),
+            CherryDataclass("반가워"),
+            CherryDataclass("반가워"),
+            CherryDataclass("반가워"),
+            CherryDataclass("반가워"),
+            CherryDataclass("안녕"),
+            CherryDataclass("반가워"),
+            CherryDataclass("잘가"),
+            CherryDataclass("반가워"),
+            CherryDataclass("반가워"),
+            CherryDataclass("반가워"),
+            CherryDataclass("반가워"),
+            CherryDataclass("안녕"),
+            CherryDataclass("안녕"),
+            CherryDataclass("반가워"),
+            CherryDataclass("잘가"),
+            CherryDataclass("반가워"),
+            CherryDataclass("반가워"),
+            CherryDataclass("반가워"),
+            CherryDataclass("반가워"),
+            CherryDataclass("안녕"),
+            CherryDataclass("반가워"),
+            CherryDataclass("반가워"),
+            CherryDataclass("반가워"),
         )
         adapter.notifyDataSetChanged()
     }
@@ -165,7 +173,11 @@ class HomeFragment : Fragment() {
         val rating = binding.affectionProgressbar.progress
 
         if (rating <= 30) {
-            binding.affectionProgressbar.progressDrawable = ResourcesCompat.getDrawable(resources, R.drawable.progress_drawable_verticle_red, null)
+            binding.affectionProgressbar.progressDrawable = ResourcesCompat.getDrawable(
+                resources,
+                R.drawable.progress_drawable_verticle_red,
+                null
+            )
         }
     }
 }
