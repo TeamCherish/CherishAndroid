@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityMainBinding
 import com.sopt.cherish.di.Injection
+import com.sopt.cherish.ui.calendar.CalendarFragment
 import com.sopt.cherish.ui.main.home.HomeFragment
 import com.sopt.cherish.ui.main.manageplant.ManagePlantFragment
 import com.sopt.cherish.ui.main.setting.SettingFragment
@@ -28,11 +29,13 @@ class MainActivity : AppCompatActivity() {
         val homeFragment = HomeFragment()
         val managePlantFragment = ManagePlantFragment()
         val settingFragment = SettingFragment()
+        val calendarFragment = CalendarFragment()
 
         supportFragmentManager.beginTransaction()
             .add(R.id.main_fragment_container, homeFragment).commit()
 
 
+        // bottomNavi 보단 bottomNavigation? or something 로직 함수로 뺴놓으면 좋을거 같음
         binding.mainBottomNavi.setOnNavigationItemSelectedListener {
             val transAction = supportFragmentManager.beginTransaction()
 
@@ -46,7 +49,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.main_setting -> {
-                    transAction.replace(R.id.main_fragment_container, settingFragment).commit()
+                    transAction.replace(R.id.main_fragment_container, calendarFragment).commit()
                     true
                 }
                 else -> {

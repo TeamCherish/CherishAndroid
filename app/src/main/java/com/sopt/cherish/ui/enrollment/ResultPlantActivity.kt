@@ -59,7 +59,7 @@ class ResultPlantActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    fun progressON() {
+    private fun progressON() {
         progressDialog = AppCompatDialog(this)
         progressDialog.setCancelable(false)
         progressDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -68,7 +68,7 @@ class ResultPlantActivity : AppCompatActivity() {
 
     }
 
-    fun progressOFF() {
+    private fun progressOFF() {
         if (progressDialog != null && progressDialog.isShowing) {
             progressDialog.dismiss()
         }

@@ -8,8 +8,8 @@ import com.jackandphantom.circularprogressbar.CircleProgressbar
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityDetailPlantBinding
 import com.sopt.cherish.di.Injection
-import com.sopt.cherish.remote.model.MemoListDataclass
 import com.sopt.cherish.ui.adapter.DetailMemoAdapter
+import com.sopt.cherish.ui.domain.MemoListDataclass
 
 
 /**
@@ -34,10 +34,11 @@ class DetailPlantActivity : AppCompatActivity() {
 
         initializeViewModel()
 
-
         binding = ActivityDetailPlantBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // todo : why? findViewById
+        // todo : xml id 짓는거 부터 다시~ toolbar 사용하도록
         // 유저 원형 프로그레스바 보여주는 부분
         circleProgressbar = findViewById(R.id.test)
         val animationDuration = 100

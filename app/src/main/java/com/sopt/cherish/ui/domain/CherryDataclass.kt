@@ -1,4 +1,4 @@
-package com.sopt.cherish.remote.model
+package com.sopt.cherish.ui.domain
 
 data class CherryDataclass(
         //val image:ImageView,
