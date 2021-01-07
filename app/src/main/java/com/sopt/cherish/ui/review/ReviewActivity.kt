@@ -12,6 +12,7 @@ import com.sopt.cherish.databinding.ActivityReviewBinding
 import com.sopt.cherish.ui.dialog.CustomDialogFragment
 import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.util.extension.FlexBoxExtension.addChip
+import com.sopt.cherish.util.extension.FlexBoxExtension.getChipsCount
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -47,11 +48,17 @@ class ReviewActivity : AppCompatActivity() {
     }
 
     private fun addUserStatusWithChip(binding: ActivityReviewBinding) {
+        // 한글 키보드는 ENTER를 치게 되면 줄바꿈이 된다. 이거 처리를 해줘야 한다.
+        // 이거 처리만 해주면 끝이 납니다
         binding.reviewEditKeyword.setOnKeyListener { view, keyCode, keyEvent ->
             if (keyEvent.action == KeyEvent.ACTION_DOWN || keyCode == KeyEvent.KEYCODE_ENTER) {
                 val et = view as EditText
                 val name = et.text.toString()
-                binding.reviewFlexBox.addChip(name)
+                if (binding.reviewFlexBox.getChipsCount() < 3)
+                    binding.reviewFlexBox.addChip(name)
+                else {
+                    CustomDialogFragment(R.layout.sample_lottie2).show(supportFragmentManager, TAG)
+                }
                 et.text = null
             }
             return@setOnKeyListener false

@@ -65,7 +65,6 @@ class CalendarFragment : Fragment() {
             view.hideKeyboard()
             binding.calendarView.changeCalendarModeMonths()
         }
-
     }
 
     private fun addDateClickListener(binding: FragmentCalendarBinding) {

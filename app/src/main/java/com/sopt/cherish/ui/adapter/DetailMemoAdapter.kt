@@ -41,5 +41,4 @@ class DetailMemoAdapter(val memolist: ArrayList<MemoListDataclass>) :
         }
     }
 
-
 }

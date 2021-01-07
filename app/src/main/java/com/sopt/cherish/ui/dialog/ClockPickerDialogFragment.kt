@@ -91,8 +91,6 @@ class ClockPickerDialogFragment(
 
         }
         return binding.root
-
-
     }
 
     override fun onClick(p0: View?) {
