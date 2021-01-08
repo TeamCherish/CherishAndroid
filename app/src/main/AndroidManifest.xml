@@ -19,7 +19,7 @@
         <activity android:name=".ui.enrollment.EnrollmentUserActivity" />
         <activity android:name=".ui.enrollment.EnrollmentPhoneActivity" />
         <activity android:name=".ui.tutorial.TutorialActivity" />
-        <activity android:name=".ui.datail.DetailPlantActivity" />
+        <activity android:name=".ui.main.MainActivity" />
         <activity android:name=".ui.signup.SignUpActivity" />
         <activity android:name=".ui.signin.SignInActivity" />
         <activity android:name=".ui.splash.SplashActivity" />
@@ -28,7 +28,7 @@
         <activity android:name=".ui.enrollment.EnrollPlantActicity" />
         <activity android:name=".ui.enrollment.ResultPlantActivity" />
 
-        <activity android:name=".ui.main.MainActivity">
+        <activity android:name=".ui.datail.DetailPlantActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -3,13 +3,16 @@ package com.sopt.cherish.ui.datail
 import android.graphics.Rect
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jackandphantom.circularprogressbar.CircleProgressbar
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityDetailPlantBinding
+import com.sopt.cherish.databinding.ActivityEnrollmentPhoneBinding
 import com.sopt.cherish.di.Injection
 import com.sopt.cherish.remote.model.MemoListDataclass
 import com.sopt.cherish.ui.adapter.DetailMemoAdapter
@@ -35,18 +38,21 @@ class DetailPlantActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        initializeViewModel()
-
-
+       // initializeViewModel()
         binding = ActivityDetailPlantBinding.inflate(layoutInflater)
+        setFragment(DetailPlantFragment())
+        setActionBarTitle("식물 상세")
         setContentView(binding.root)
 
-        // 유저 원형 프로그레스바 보여주는 부분
-        circleProgressbar = findViewById(R.id.test)
-        val animationDuration = 100
-        circleProgressbar.setProgressWithAnimation(45.0f, animationDuration)
+        /* binding = ActivityDetailPlantBinding.inflate(layoutInflater)
+         setContentView(binding.root)
 
-
+         // 유저 원형 프로그레스바 보여주는 부분
+         circleProgressbar = findViewById(R.id.test)
+         val animationDuration = 100
+         circleProgressbar.setProgressWithAnimation(45.0f, animationDuration)
+ */
+/*
         // memolist 어댑터 연결 부분
         val mAdapter = DetailMemoAdapter(memoList)
         binding.recyclerDetail.adapter = mAdapter
@@ -54,7 +60,25 @@ class DetailPlantActivity : AppCompatActivity() {
         binding.recyclerDetail.addItemDecoration(VerticalSpaceItemDecoration(20))
 
         binding.recyclerDetail.layoutManager = LinearLayoutManager(this)
-        binding.recyclerDetail.setHasFixedSize(true)
+        binding.recyclerDetail.setHasFixedSize(true)*/
+    }
+    fun setFragment(fragment: Fragment){
+        val transaction=supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragment_detail, fragment)
+        transaction.commit()
+    }
+
+    fun setActionBarTitle(title: String?) {
+        setSupportActionBar(binding.toolbarDetail)
+        val actionBar: ActionBar? = supportActionBar
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true)
+            actionBar.setHomeAsUpIndicator(R.drawable.icon_gnb_back)
+            actionBar.setDisplayShowTitleEnabled(false)
+
+            //actionBar.setTitle(title)
+            binding.toolbarDetailTitle.text=title
+        }
     }
 
     inner class VerticalSpaceItemDecoration(private val verticalSpaceHeight: Int) :
