@@ -22,6 +22,8 @@ class DetailMemoAdapter(val memolist: ArrayList<MemoListDataclass>) :
     }
 
     override fun onBindViewHolder(holder: DetailMemoAdapter.itemViewHolder, position: Int) {
+
+
         holder.bind(memolist[position])
     }
 

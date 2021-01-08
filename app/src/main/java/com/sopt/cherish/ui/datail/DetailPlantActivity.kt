@@ -1,9 +1,12 @@
 package com.sopt.cherish.ui.datail
 
+import android.graphics.Rect
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.jackandphantom.circularprogressbar.CircleProgressbar
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityDetailPlantBinding
@@ -24,7 +27,7 @@ class DetailPlantActivity : AppCompatActivity() {
 
     var memoList = arrayListOf<MemoListDataclass>(
         MemoListDataclass("12/2", "다음주에 대머리쉬 출근"),
-        MemoListDataclass("12/28", "내일 대머리쉬 사퇴")
+        MemoListDataclass("12/28", "내일 체리쉬 사퇴")
     )
 
     private lateinit var viewModel: DetailPlantViewModel
@@ -48,8 +51,21 @@ class DetailPlantActivity : AppCompatActivity() {
         val mAdapter = DetailMemoAdapter(memoList)
         binding.recyclerDetail.adapter = mAdapter
 
+        binding.recyclerDetail.addItemDecoration(VerticalSpaceItemDecoration(20))
+
         binding.recyclerDetail.layoutManager = LinearLayoutManager(this)
         binding.recyclerDetail.setHasFixedSize(true)
+    }
+
+    inner class VerticalSpaceItemDecoration(private val verticalSpaceHeight: Int) :
+        RecyclerView.ItemDecoration() {
+
+        override fun getItemOffsets(
+            outRect: Rect, view: View, parent: RecyclerView,
+            state: RecyclerView.State
+        ) {
+            outRect.bottom = verticalSpaceHeight
+        }
     }
 
     private fun initializeViewModel() {
