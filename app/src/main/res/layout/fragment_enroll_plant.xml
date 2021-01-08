@@ -53,7 +53,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
-                    android:text="asdf"
+                    android:text=""
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="@+id/editname"
                     app:layout_constraintTop_toTopOf="@+id/editname" />
@@ -99,6 +99,7 @@
                     android:layout_marginStart="12dp"
                     android:background="@null"
                     android:inputType="textPersonName"
+                    android:hint="ex.영나"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/editnick"
                     app:layout_constraintStart_toStartOf="@+id/editnick"
@@ -150,6 +151,7 @@
                 android:layout_marginStart="12dp"
                 android:background="@null"
                 android:inputType="textPersonName"
+                android:hint="0000/00/00"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/editbirth"
@@ -196,7 +198,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:text="asdfasf"
+                android:text=""
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/editphone"
                 app:layout_constraintTop_toTopOf="@+id/editphone" />
@@ -240,7 +242,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:text="ffsfds"
+                android:text="00:00 AM"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/editclock"
                 app:layout_constraintTop_toTopOf="@+id/editclock" />
@@ -288,7 +290,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:text="11223"
+                android:text="Every 1 week"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/editweek" />
