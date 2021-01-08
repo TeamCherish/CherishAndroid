@@ -4,6 +4,8 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -15,15 +17,16 @@ import com.sopt.cherish.ui.dialog.ClockPickerDialogFragment
 import com.sopt.cherish.ui.dialog.WeekPickerDialogFragment
 
 //created by nayoung : 식물 등록 버튼 눌렀을 때 나오는 진행중 팝업 창
-class EnrollPlantActicity : AppCompatActivity(),
-    WeekPickerDialogFragment.TestDialogFragmentListener,
-    ClockPickerDialogFragment.TestDialogFragmentListener {
+class EnrollPlantActicity : AppCompatActivity(){
 
     private lateinit var binding: AcitivityEnrollplantBinding
 
     private lateinit var progressDialog: AppCompatDialog
 
+
     lateinit var weektime: String
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -34,6 +37,9 @@ class EnrollPlantActicity : AppCompatActivity(),
         val ab = supportActionBar!!
         ab.setDisplayShowTitleEnabled(false)
         ab.setDisplayHomeAsUpEnabled(true)
+
+
+
         setContentView(binding.root)
 
         binding.phoneName.text = intent.getStringExtra("phonename")
@@ -47,6 +53,7 @@ class EnrollPlantActicity : AppCompatActivity(),
             }*/
         binding.detailOkBtn.setOnClickListener {
             progressON()
+
 
             progressOFF()
 
@@ -111,7 +118,7 @@ class EnrollPlantActicity : AppCompatActivity(),
         }
     }
 
-    override fun onTestDialogweek(dialog: DialogFragment?, someData: String?) {
+  /*  override fun onTestDialogweek(dialog: DialogFragment?, someData: String?) {
 
         binding.waterAlarmWeek.text = someData.toString()
         Log.d("qqqq", someData.toString())
@@ -120,7 +127,7 @@ class EnrollPlantActicity : AppCompatActivity(),
     override fun onTestDialogClock(dialog: DialogFragment?, someData: String?) {
         binding.waterAlarmTime.text = someData.toString()
         Log.d("clock", someData.toString())
-    }
+    }*/
 
 
 }

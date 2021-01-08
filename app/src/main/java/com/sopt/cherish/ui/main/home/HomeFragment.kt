@@ -18,6 +18,7 @@ import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentHomeBinding
 import com.sopt.cherish.remote.model.CherryDataclass
 import com.sopt.cherish.ui.adapter.MainBottomSheetAdapter
+import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
 import com.sopt.cherish.ui.enrollment.PhoneBookActivity
 
 
@@ -59,7 +60,7 @@ class HomeFragment : Fragment() {
         useraddbtn = view.findViewById(R.id.user_add_btn)
         useraddbtn.setOnClickListener {
 
-            val intent = Intent(context, PhoneBookActivity::class.java)
+            val intent = Intent(context, EnrollmentPhoneActivity::class.java)
             startActivity(intent)
         }
 

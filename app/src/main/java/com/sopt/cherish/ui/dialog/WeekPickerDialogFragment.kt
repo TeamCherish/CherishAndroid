@@ -44,14 +44,8 @@ class WeekPickerDialogFragment(
         val view = inflater.inflate(layoutResId, container, false)
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        testDialogFragmentListener = try {
-            activity as TestDialogFragmentListener
-        } catch (e: ClassCastException) {
-            throw ClassCastException(
-                    activity.toString()
-                            + " must implement TestDialogFragmentListener"
-            )
-        }
+        testDialogFragmentListener = activity as TestDialogFragmentListener
+
         val binding = WeekpickerLayoutBinding.bind(view)
 
 

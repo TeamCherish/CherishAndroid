@@ -20,7 +20,6 @@
         <activity android:name=".ui.enrollment.EnrollmentPhoneActivity" />
         <activity android:name=".ui.tutorial.TutorialActivity" />
         <activity android:name=".ui.datail.DetailPlantActivity" />
-        <activity android:name=".ui.calendar.CalendarActivity" />
         <activity android:name=".ui.signup.SignUpActivity" />
         <activity android:name=".ui.signin.SignInActivity" />
         <activity android:name=".ui.splash.SplashActivity" />
