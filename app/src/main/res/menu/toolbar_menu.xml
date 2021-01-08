@@ -2,13 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/search"
+        android:id="@+id/calendar"
         android:icon="@drawable/icn_calendar"
         app:showAsAction="always"
         android:title="캘린더">
     </item>
     <item
-        android:id="@+id/reload"
+        android:id="@+id/setting"
         android:icon="@drawable/icn_setting"
         app:showAsAction="always|withText"
         android:title="설정">

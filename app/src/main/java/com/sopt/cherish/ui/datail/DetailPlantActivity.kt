@@ -2,6 +2,8 @@ package com.sopt.cherish.ui.datail
 
 import android.graphics.Rect
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
@@ -52,6 +54,7 @@ class DetailPlantActivity : AppCompatActivity() {
          val animationDuration = 100
          circleProgressbar.setProgressWithAnimation(45.0f, animationDuration)
  */
+
 /*
         // memolist 어댑터 연결 부분
         val mAdapter = DetailMemoAdapter(memoList)
@@ -62,6 +65,33 @@ class DetailPlantActivity : AppCompatActivity() {
         binding.recyclerDetail.layoutManager = LinearLayoutManager(this)
         binding.recyclerDetail.setHasFixedSize(true)*/
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val menuInflater=menuInflater
+        menuInflater.inflate(R.menu.toolbar_menu,menu)
+        return true
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.getItemId()) {
+            R.id.home -> {
+
+                //onBackPressed()
+                return true
+            }
+            R.id.calendar -> {
+
+                return true
+            }
+
+            R.id.setting -> {
+                return true
+            }
+            else -> {
+                return super.onOptionsItemSelected(item)
+            }
+        }
+    }
+
     fun setFragment(fragment: Fragment){
         val transaction=supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_detail, fragment)
