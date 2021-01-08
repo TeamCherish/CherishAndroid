@@ -87,6 +87,15 @@ object PermissionUtil {
         return false
     }
 
+    fun isCheckedReadContactsPermission(context: Context): Boolean {
+        if (ContextCompat.checkSelfPermission(
+                context,
+                android.Manifest.permission.READ_CONTACTS
+            ) == PackageManager.PERMISSION_GRANTED
+        ) return true
+        return false
+    }
+
     fun isCheckedSendMessagePermission(context: Context): Boolean {
         if (ContextCompat.checkSelfPermission(
                 context,
