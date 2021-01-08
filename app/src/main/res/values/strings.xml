@@ -33,9 +33,11 @@
     <string name="review_memo_text">메모를 입력해주세요.</string>
     <string name="review_admin_button_text">등록완료</string>
     <string name="review_pass_button_text">건너뛰기</string>
+    <string name="review_limit_chips_number_text">키워드는 3개까지 쓸 수 있어요!</string>
 
     <string name="home_user_affection">애정도</string>
     <string name="home_bottom_sheet_title_text">나의 소중한 사람들</string>
     <string name="home_watering_text">물주기</string>
     <string name="home_user_add_text">추가하기</string>
+
 </resources>

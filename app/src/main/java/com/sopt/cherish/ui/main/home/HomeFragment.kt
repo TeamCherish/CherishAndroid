@@ -85,7 +85,7 @@ class HomeFragment : Fragment() {
             }
 
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                // 이건 작동 잘함
+                // 이건 작동은 잘하는데 색상을 어떻게 배합해야할지 생각
                 transitionBottomSheetParentView(binding, slideOffset)
             }
         })
@@ -122,7 +122,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun updateProgressBar(binding: FragmentHomeBinding) {
-        // 이거 고쳐야 함
+        // todo : fix this one
         val rating = binding.homeAffectionProgressbar.progress
         if (rating <= 30) {
             binding.homeAffectionProgressbar.progressDrawable = ResourcesCompat.getDrawable(
