@@ -8,17 +8,17 @@ import com.sopt.cherish.ui.main.MainActivity
 
 class SignInActivity : AppCompatActivity() {
 
-    private lateinit var binding:ActivitySignInBinding
+    private lateinit var binding: ActivitySignInBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding= ActivitySignInBinding.inflate(layoutInflater)
+        binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.loginBtn.setOnClickListener {
 
-            val intent= Intent(this,MainActivity::class.java)
+            val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }
     }
