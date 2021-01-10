@@ -2,7 +2,6 @@ package com.sopt.cherish.ui.enrollment
 
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.MenuItem
 import android.widget.TextView
 import androidx.appcompat.app.ActionBar
@@ -11,7 +10,6 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityEnrollmentPhoneBinding
-import com.sopt.cherish.databinding.FragmentEnrollPlantBinding
 import com.sopt.cherish.ui.dialog.ClockPickerDialogFragment
 import com.sopt.cherish.ui.dialog.WeekPickerDialogFragment
 

@@ -1,12 +1,11 @@
 package com.sopt.cherish.ui.main.manageplant
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentPlantBinding
 import com.sopt.cherish.ui.adapter.MyPageBottomSheetAdapter
 import com.sopt.cherish.ui.domain.MyPageCherryLevelDataclass

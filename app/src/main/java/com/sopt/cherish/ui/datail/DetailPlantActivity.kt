@@ -9,15 +9,12 @@ import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jackandphantom.circularprogressbar.CircleProgressbar
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityDetailPlantBinding
-import com.sopt.cherish.databinding.ActivityEnrollmentPhoneBinding
 import com.sopt.cherish.di.Injection
-import com.sopt.cherish.remote.model.MemoListDataclass
-import com.sopt.cherish.ui.adapter.DetailMemoAdapter
+import com.sopt.cherish.ui.domain.MemoListDataclass
 
 
 /**
@@ -69,7 +66,7 @@ class DetailPlantActivity : AppCompatActivity() {
         return true
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.getItemId()) {
+        when (item.itemId) {
             R.id.home -> {
 
                 //onBackPressed()
