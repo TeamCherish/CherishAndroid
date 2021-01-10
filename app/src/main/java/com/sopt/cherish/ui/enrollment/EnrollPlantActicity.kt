@@ -4,13 +4,9 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
-import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDialog
-import androidx.fragment.app.DialogFragment
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.AcitivityEnrollplantBinding
 import com.sopt.cherish.ui.dialog.ClockPickerDialogFragment
