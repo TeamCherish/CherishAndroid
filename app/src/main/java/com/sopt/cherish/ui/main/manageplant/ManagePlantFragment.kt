@@ -57,8 +57,19 @@ class ManagePlantFragment : Fragment() {
 
     private fun initializeTabLayoutView(binding: FragmentManagePlantBinding) {
 
+        /**
+        todo: 식물 5 처럼 텍스트 분리해서 탭 지정
+        연락처 탭 클릭시 상단 탭바 변경되어야 함
+         */
         binding.myPageBottomTab.addTab(binding.myPageBottomTab.newTab().setText("식물"))
         binding.myPageBottomTab.addTab(binding.myPageBottomTab.newTab().setText("연락처"))
+
+        for (i in 0 until binding.myPageBottomTab.tabCount) {
+            val tab = (binding.myPageBottomTab.getChildAt(0) as ViewGroup).getChildAt(i)
+            val p = tab.layoutParams as ViewGroup.MarginLayoutParams
+            p.setMargins(24, 0, 0, 0)
+            tab.requestLayout()
+        }
 
         activity?.supportFragmentManager!!.beginTransaction()
             .add(R.id.my_page_bottom_container, PlantFragment()).commit()
