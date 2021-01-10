@@ -39,11 +39,11 @@ class DetailPlantActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         initializeViewModel()
-
-        invalidateOptionsMenu()
-
         binding = ActivityDetailPlantBinding.inflate(layoutInflater)
         setFragment(DetailPlantFragment())
+
+
+
         setActionBarTitle("식물 상세")
         setContentView(binding.root)
     }
@@ -54,34 +54,38 @@ class DetailPlantActivity : AppCompatActivity() {
         return true
     }
 
+
+    override fun onOptionsMenuClosed(menu: Menu?) {
+        super.onOptionsMenuClosed(menu)
+        setVisible(false)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId
+        when (id) {
+            android.R.id.home -> {
+                onBackPressed()
+                return true
+            }
 
+        }
         when (item.itemId) {
-            R.id.home -> {
-                finish()
-                return true
-            }
             R.id.calendar -> {
-
-
-                setFragment(CalendarFragment())
-
+                val transaction = supportFragmentManager.beginTransaction()
+                transaction.replace(R.id.fragment_detail, CalendarFragment())
+                if (transaction == null) {
+                    transaction.addToBackStack(null)
+                }
+                transaction.commit()
                 return true
-            }
-
-            R.id.setting -> {
-                return true
-            }
-            else -> {
-                return super.onOptionsItemSelected(item)
             }
         }
+        return super.onOptionsItemSelected(item)
     }
 
     fun setFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_detail, fragment)
-        transaction.addToBackStack(null)
         transaction.commit()
     }
 

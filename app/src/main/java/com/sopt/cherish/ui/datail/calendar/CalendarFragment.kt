@@ -2,10 +2,7 @@ package com.sopt.cherish.ui.datail.calendar
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -45,20 +42,6 @@ class CalendarFragment : Fragment() {
 
         }
     }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val id = item.itemId
-
-        when (id) {
-            android.R.id.home -> {
-
-                activity?.finish()
-                return true
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
 
     private fun initializeCalendar(binding: FragmentCalendarBinding) {
         allowCalendarCache(binding)
