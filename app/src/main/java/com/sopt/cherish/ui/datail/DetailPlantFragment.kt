@@ -55,6 +55,7 @@ class DetailPlantFragment : Fragment() {
 
         return binding.root
     }
+
     inner class VerticalSpaceItemDecoration(private val verticalSpaceHeight: Int) :
         RecyclerView.ItemDecoration() {
 

@@ -11,14 +11,18 @@ data class User(
     @SerializedName("thumbnail_image_url") val thumbnailImageUrl: String
 )
 
-data class CreateUserRequest
+data class CreateUserRequest(
+    @SerializedName("sample") val sample: String
+)
 
-data class EditUserRequest
+data class EditUserRequest(
+    @SerializedName("sample") val sample: String
+)
 
 data class UserResult(
     @SerializedName("success") val success: Boolean,
     @SerializedName("message") val message: String,
-    @SerializedName("data") val
+    @SerializedName("data") val userData: List<User>
 )
 
 interface UserAPI

@@ -21,7 +21,7 @@ class ClockPickerDialogFragment(
     private val layoutResId: Int
 ) : DialogFragment(), View.OnClickListener {
 
-    lateinit var clocktext:String
+    lateinit var clocktext: String
 
     interface TestDialogFragmentListener {
         fun onTestDialogClock(dialog: DialogFragment?, someData: String?)
@@ -39,15 +39,16 @@ class ClockPickerDialogFragment(
         super.onAttach(context)
         testDialogFragmentListener = context as TestDialogFragmentListener
     }
+
     override fun onCreateView(
-       inflater: LayoutInflater,
-       container: ViewGroup?,
-       savedInstanceState: Bundle?
-   ): View? {
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val view = inflater.inflate(layoutResId, container, false)
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-       // testDialogFragmentListener = activity as TestDialogFragmentListener
+        // testDialogFragmentListener = activity as TestDialogFragmentListener
 
         val binding = ClockpickerLayoutBinding.bind(view)
         val clock_hour: NumberPicker = view.findViewById(R.id.numberPicker_clock)
@@ -84,7 +85,8 @@ class ClockPickerDialogFragment(
         val btn_ok: Button = view.findViewById(R.id.button_ok_clock)
         btn_ok.setOnClickListener {
 
-            clocktext=clock_hour.value.toString()+":"+clock_minute.value.toString()+" "+list[clock_ampm.value]
+            clocktext =
+                clock_hour.value.toString() + ":" + clock_minute.value.toString() + " " + list[clock_ampm.value]
             someAction()
 
             dialog?.dismiss()
