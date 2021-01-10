@@ -3,6 +3,7 @@ package com.sopt.cherish.remote.model
 import com.google.gson.annotations.SerializedName
 
 // Request param id
+// MyPage 조회
 data class MyPageUserData(
     @SerializedName("postponeCount") val postponeCount: Int,
     @SerializedName("waterCount") val waterCount: Int,
