@@ -39,7 +39,6 @@ class ClockPickerDialogFragment(
         super.onAttach(context)
         testDialogFragmentListener = context as TestDialogFragmentListener
     }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

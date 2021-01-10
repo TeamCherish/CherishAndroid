@@ -48,6 +48,7 @@ class WeekPickerDialogFragment(
         val binding = WeekpickerLayoutBinding.bind(view)
 
 
+
         val week_every: NumberPicker = view.findViewById(R.id.numberPicker)
         val week_number: NumberPicker = view.findViewById(R.id.numberPicker2)
         val week_month: NumberPicker = view.findViewById(R.id.numberPicker3)
