@@ -53,16 +53,16 @@ data class User(
     @SerializedName("thumbnail_image_url") val thumbnailImageUrl: String
 )
 
-data class UserResult(
+data class UserData(
     @SerializedName("result") val userResult: List<User>,
     @SerializedName("totalCherish") val totalUser: Int
 )
 
-// main user response
-data class UserRes(
+// main user result
+data class UserResult(
     @SerializedName("success") val success: Boolean,
     @SerializedName("message") val message: String,
-    @SerializedName("data") val userResult: UserResult
+    @SerializedName("data") val userData: UserData
 )
 
 /**
