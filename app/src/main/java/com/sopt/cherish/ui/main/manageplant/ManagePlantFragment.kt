@@ -46,16 +46,16 @@ class ManagePlantFragment : Fragment() {
         standardBottomSheetBehavior.addBottomSheetCallback(object :
             BottomSheetBehavior.BottomSheetCallback() { //모달 처리 추후 수정
             override fun onStateChanged(bottomSheet: View, newState: Int) {
-                
+
             }
 
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                
+
             }
         })
     }
 
-    private fun initializeTabLayoutView(binding:FragmentManagePlantBinding){
+    private fun initializeTabLayoutView(binding: FragmentManagePlantBinding) {
 
         binding.myPageBottomTab.addTab(binding.myPageBottomTab.newTab().setText("식물"))
         binding.myPageBottomTab.addTab(binding.myPageBottomTab.newTab().setText("연락처"))
@@ -63,15 +63,15 @@ class ManagePlantFragment : Fragment() {
         activity?.supportFragmentManager!!.beginTransaction()
             .add(R.id.my_page_bottom_container, PlantFragment()).commit()
 
-        binding.myPageBottomTab.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener{
+        binding.myPageBottomTab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
 
             override fun onTabReselected(tab: TabLayout.Tab?) {}
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                val tabIndex=binding.myPageBottomTab.selectedTabPosition
+                val tabIndex = binding.myPageBottomTab.selectedTabPosition
 
-                when(tabIndex){
-                    0->{
+                when (tabIndex) {
+                    0 -> {
                         (activity as MainActivity).replaceFragment(tabIndex)
                     }
                     /*

@@ -20,7 +20,7 @@ import com.sopt.cherish.ui.adapter.PhoneBookAdapter
 
 class PhoneBookFragment : Fragment() {
 
-   // val permissions = arrayOf(Manifest.permission.READ_CONTACTS, Manifest.permission.CALL_PHONE)
+    // val permissions = arrayOf(Manifest.permission.READ_CONTACTS, Manifest.permission.CALL_PHONE)
     lateinit var madapter: PhoneBookAdapter
     var phonelist = mutableListOf<Phone>()
     var searchText = ""
@@ -35,7 +35,7 @@ class PhoneBookFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view=inflater.inflate(R.layout.fragment_phone_book, container, false)
+        val view = inflater.inflate(R.layout.fragment_phone_book, container, false)
 
         binding = FragmentPhoneBookBinding.bind(view)
 
@@ -45,13 +45,13 @@ class PhoneBookFragment : Fragment() {
 
         binding.buttonnext.setOnClickListener {
             if (madapter.checkedRadioButton != null) {
-              //  val intent = Intent(view.context, EnrollPlantActicity::class.java)
+                //  val intent = Intent(view.context, EnrollPlantActicity::class.java)
                 //Toast.makeText(this,madapter.phonename,Toast.LENGTH_LONG).show()
 
-               // intent.putExtra("phonename", madapter.phonename)
-               // intent.putExtra("phonenumber", madapter.phonenumber)
+                // intent.putExtra("phonename", madapter.phonename)
+                // intent.putExtra("phonenumber", madapter.phonenumber)
                 Log.d("vvvv", madapter.phonename.toString())
-               // startActivity(intent)
+                // startActivity(intent)
                 /*val transaction=parentFragmentManager.beginTransaction()
                 transaction.replace(R.id.fragment_enroll,EnrollPlantFragment().apply {
                     arguments=Bundle().apply {
@@ -93,9 +93,9 @@ class PhoneBookFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
 
-    fun setFragment(fragment: Fragment){
-        val transaction=parentFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragment_enroll,fragment.apply {
+    fun setFragment(fragment: Fragment) {
+        val transaction = parentFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragment_enroll, fragment.apply {
             arguments = Bundle().apply {
                 putString("phonename", madapter.phonename)
                 putString("phonenumber", madapter.phonenumber)
@@ -115,8 +115,6 @@ class PhoneBookFragment : Fragment() {
         // setContentView(R.layout.activity_main)
 
     }
-
-
 
 
     fun setSearchListener() {
@@ -186,7 +184,6 @@ class PhoneBookFragment : Fragment() {
 
         return list
     }
-
 
 
 }

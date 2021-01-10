@@ -18,7 +18,6 @@ import com.sopt.cherish.databinding.FragmentHomeBinding
 import com.sopt.cherish.ui.adapter.HomeCherryListAdapter
 import com.sopt.cherish.ui.dialog.WateringDialogFragment
 import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
-import com.sopt.cherish.ui.enrollment.PhoneBookActivity
 import com.sopt.cherish.ui.main.MainViewModel
 
 

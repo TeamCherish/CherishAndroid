@@ -15,8 +15,7 @@ import com.sopt.cherish.ui.dialog.ClockPickerDialogFragment
 import com.sopt.cherish.ui.dialog.WeekPickerDialogFragment
 
 
-class EnrollPlantFragment : Fragment(){
-
+class EnrollPlantFragment : Fragment() {
 
 
     private lateinit var binding: FragmentEnrollPlantBinding
@@ -33,7 +32,7 @@ class EnrollPlantFragment : Fragment(){
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view=inflater.inflate(R.layout.fragment_enroll_plant, container, false)
+        val view = inflater.inflate(R.layout.fragment_enroll_plant, container, false)
 
         binding = FragmentEnrollPlantBinding.bind(view)
 
@@ -54,8 +53,8 @@ class EnrollPlantFragment : Fragment(){
 
             //val intent = Intent(context, ResultPlantActivity::class.java)
 
-           // intent.putExtra("plantkey", binding.waterAlarmWeek.text.toString())
-           // startActivity(intent)
+            // intent.putExtra("plantkey", binding.waterAlarmWeek.text.toString())
+            // startActivity(intent)
 
             //setFragment(ResultPlantFragment())
 
@@ -64,7 +63,7 @@ class EnrollPlantFragment : Fragment(){
         }
         //timepicker 나오는 부분
         binding.editclock.setOnClickListener {
-            val needWaterDialog =ClockPickerDialogFragment(R.layout.clockpicker_layout) .show(
+            val needWaterDialog = ClockPickerDialogFragment(R.layout.clockpicker_layout).show(
                 parentFragmentManager,
                 "MainActivity"
             )
@@ -96,8 +95,8 @@ class EnrollPlantFragment : Fragment(){
     }
 
 
-    fun setFragment(fragment: Fragment){
-        val transaction=parentFragmentManager.beginTransaction()
+    fun setFragment(fragment: Fragment) {
+        val transaction = parentFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_enroll, fragment.apply {
             arguments = Bundle().apply {
                 putString("plantkey", binding.waterAlarmWeek.text.toString())
@@ -130,7 +129,6 @@ class EnrollPlantFragment : Fragment(){
             progressDialog.dismiss()
         }
     }
-
 
 
 }

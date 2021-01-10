@@ -27,7 +27,7 @@ class ResultPlantFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
 
-        val view=inflater.inflate(R.layout.fragment_result_plant, container, false)
+        val view = inflater.inflate(R.layout.fragment_result_plant, container, false)
         //enrollToolbar.title="식물 결과"
         binding = FragmentResultPlantBinding.bind(view)
 
