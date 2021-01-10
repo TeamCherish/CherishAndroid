@@ -132,7 +132,6 @@ class HomeFragment : Fragment() {
     }
 
     private fun updateProgressBar(binding: FragmentHomeBinding) {
-        // todo : fix this one
         val rating = binding.homeAffectionProgressbar.progress
         if (rating <= 30) {
             binding.homeAffectionProgressbar.progressDrawable = ResourcesCompat.getDrawable(

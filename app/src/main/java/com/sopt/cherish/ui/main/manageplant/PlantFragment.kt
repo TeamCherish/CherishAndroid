@@ -17,6 +17,7 @@ import com.sopt.cherish.ui.domain.MyPageCherryLevelDataclass
 
 class PlantFragment : Fragment() {
 
+
     private var _binding: FragmentPlantBinding? = null
     private val binding get() = _binding!!
     private lateinit var adapter: MyPageBottomSheetAdapter

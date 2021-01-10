@@ -2,9 +2,7 @@ package com.sopt.cherish.ui.signin
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
-import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivitySignInBinding
 import com.sopt.cherish.ui.main.MainActivity
 

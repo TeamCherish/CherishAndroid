@@ -15,7 +15,6 @@ import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityDetailPlantBinding
 import com.sopt.cherish.di.Injection
 import com.sopt.cherish.ui.datail.calendar.CalendarFragment
-
 import com.sopt.cherish.ui.domain.MemoListDataclass
 
 
@@ -40,28 +39,13 @@ class DetailPlantActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         initializeViewModel()
+
         invalidateOptionsMenu()
 
         binding = ActivityDetailPlantBinding.inflate(layoutInflater)
         setFragment(DetailPlantFragment())
-        //setActionBarTitle("식물 상세")
+        setActionBarTitle("식물 상세")
         setContentView(binding.root)
-
-        /* binding = ActivityDetailPlantBinding.inflate(layoutInflater)
-         setContentView(binding.root)
-         // 유저 원형 프로그레스바 보여주는 부분
-         circleProgressbar = findViewById(R.id.test)
-         val animationDuration = 100
-         circleProgressbar.setProgressWithAnimation(45.0f, animationDuration)
- */
-
-/*
-        // memolist 어댑터 연결 부분
-        val mAdapter = DetailMemoAdapter(memoList)
-        binding.recyclerDetail.adapter = mAdapter
-        binding.recyclerDetail.addItemDecoration(VerticalSpaceItemDecoration(20))
-        binding.recyclerDetail.layoutManager = LinearLayoutManager(this)
-        binding.recyclerDetail.setHasFixedSize(true)*/
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -79,10 +63,8 @@ class DetailPlantActivity : AppCompatActivity() {
             }
             R.id.calendar -> {
 
-                val transaction = supportFragmentManager.beginTransaction()
-                transaction.replace(R.id.fragment_detail, CalendarFragment())
-                transaction.addToBackStack(null)
-                transaction.commit()
+
+                setFragment(CalendarFragment())
 
                 return true
             }
@@ -96,10 +78,10 @@ class DetailPlantActivity : AppCompatActivity() {
         }
     }
 
-
-    private fun setFragment(fragment: Fragment) {
+    fun setFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_detail, fragment)
+        transaction.addToBackStack(null)
         transaction.commit()
     }
 

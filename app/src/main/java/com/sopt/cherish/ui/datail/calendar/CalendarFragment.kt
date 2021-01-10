@@ -2,8 +2,10 @@ package com.sopt.cherish.ui.datail.calendar
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.view.*
-import androidx.appcompat.app.ActionBar
+import android.view.LayoutInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -13,7 +15,6 @@ import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentCalendarBinding
 import com.sopt.cherish.ui.datail.DetailPlantActivity
 import com.sopt.cherish.ui.datail.DetailPlantViewModel
-import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
 import com.sopt.cherish.util.extension.FlexBoxExtension.addChip
 import com.sopt.cherish.util.extension.FlexBoxExtension.clearChips
 import com.sopt.cherish.util.extension.hideKeyboard
