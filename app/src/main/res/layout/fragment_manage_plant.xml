@@ -6,6 +6,7 @@
 
     </data>
 
+    <!-- background color 추가해주세요!-->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -103,7 +104,7 @@
             android:textSize="12sp" />
 
         <TextView
-            android:id="@+id/bar_1"
+            android:id="@+id/divide_bar_1"
             android:layout_width="1dp"
             android:layout_height="32dp"
             android:background="@color/cherish_divide_gray"
@@ -116,7 +117,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@+id/bar_1"
+            app:layout_constraintStart_toStartOf="@+id/divide_bar_1"
             app:layout_constraintTop_toTopOf="@+id/my_page_box"
             android:text="4"
             android:font="@font/notosanscjkkr_bold"
@@ -138,7 +139,7 @@
             android:textSize="12sp" />
 
         <TextView
-            android:id="@+id/bar_2"
+            android:id="@+id/divide_bar_2"
             android:layout_width="1dp"
             android:layout_height="32dp"
             app:layout_constraintStart_toEndOf="@+id/my_page_postpone_cnt"
@@ -150,7 +151,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@+id/bar_2"
+            app:layout_constraintStart_toEndOf="@+id/divide_bar_2"
             app:layout_constraintTop_toTopOf="@+id/my_page_box"
             android:text="8"
             android:font="@font/notosanscjkkr_bold"
@@ -184,28 +185,31 @@
                 app:behavior_hideable="false"
                 app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
-            <com.google.android.material.tabs.TabLayout
-                android:layout_width="match_parent"
-                android:layout_height="58dp"
-                android:id="@+id/my_page_bottom_tab"
-                app:tabIndicatorColor="@color/cherish_light_black"
-                app:tabSelectedTextColor="@color/cherish_light_black"
-                app:tabTextColor="#aaaaaa"
-                app:tabIndicatorHeight="3dp"
-                app:tabIndicatorFullWidth="false"
-                style="?attr/bottomSheetStyle"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                <!-- tabTextColor 추가해주세요!-->
+                <com.google.android.material.tabs.TabLayout
+                    android:id="@+id/my_page_bottom_tab"
+                    style="?attr/bottomSheetStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="58dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tabGravity="start"
+                    app:tabIndicatorColor="@color/cherish_light_black"
+                    app:tabIndicatorHeight="3dp"
+                    app:tabMode="scrollable"
+                    app:tabSelectedTextColor="@color/cherish_light_black"
+                    app:tabTextColor="#aaaaaa" />
 
-            <TextView
-                android:id="@+id/tab_bar_line"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#e9e9e9"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/my_page_bottom_tab"/>
+                <!-- background color 추가해주세요!-->
+                <TextView
+                    android:id="@+id/tab_bar_line"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#e9e9e9"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/my_page_bottom_tab" />
 
 
             <androidx.constraintlayout.widget.ConstraintLayout

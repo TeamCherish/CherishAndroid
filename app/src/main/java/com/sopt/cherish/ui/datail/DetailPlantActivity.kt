@@ -50,7 +50,6 @@ class DetailPlantActivity : AppCompatActivity() {
         menuInflater.inflate(R.menu.toolbar_menu, menu)
         return true
     }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.home -> {
