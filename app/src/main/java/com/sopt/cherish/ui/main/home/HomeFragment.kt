@@ -16,10 +16,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentHomeBinding
+import com.sopt.cherish.remote.model.CherryDataclass
 import com.sopt.cherish.ui.adapter.MainBottomSheetAdapter
-import com.sopt.cherish.ui.domain.CherryDataclass
 import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
-
+import com.sopt.cherish.ui.enrollment.PhoneBookActivity
 
 /**
  * 메인 홈뷰

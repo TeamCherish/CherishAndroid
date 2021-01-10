@@ -9,12 +9,15 @@ import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jackandphantom.circularprogressbar.CircleProgressbar
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityDetailPlantBinding
+import com.sopt.cherish.databinding.ActivityEnrollmentPhoneBinding
 import com.sopt.cherish.di.Injection
-import com.sopt.cherish.ui.domain.MemoListDataclass
+import com.sopt.cherish.remote.model.MemoListDataclass
+import com.sopt.cherish.ui.adapter.DetailMemoAdapter
 
 
 /**
@@ -37,7 +40,7 @@ class DetailPlantActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // initializeViewModel()
+       // initializeViewModel()
         binding = ActivityDetailPlantBinding.inflate(layoutInflater)
         setFragment(DetailPlantFragment())
         setActionBarTitle("식물 상세")
@@ -61,12 +64,12 @@ class DetailPlantActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        val menuInflater = menuInflater
-        menuInflater.inflate(R.menu.toolbar_menu, menu)
+        val menuInflater=menuInflater
+        menuInflater.inflate(R.menu.toolbar_menu,menu)
         return true
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
+        when (item.getItemId()) {
             R.id.home -> {
 
                 //onBackPressed()
@@ -86,8 +89,8 @@ class DetailPlantActivity : AppCompatActivity() {
         }
     }
 
-    fun setFragment(fragment: Fragment) {
-        val transaction = supportFragmentManager.beginTransaction()
+    fun setFragment(fragment: Fragment){
+        val transaction=supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_detail, fragment)
         transaction.commit()
     }
@@ -101,7 +104,7 @@ class DetailPlantActivity : AppCompatActivity() {
             actionBar.setDisplayShowTitleEnabled(false)
 
             //actionBar.setTitle(title)
-            binding.toolbarDetailTitle.text = title
+            binding.toolbarDetailTitle.text=title
         }
     }
 
