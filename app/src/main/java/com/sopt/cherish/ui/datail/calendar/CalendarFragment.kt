@@ -34,6 +34,7 @@ class CalendarFragment : Fragment() {
         return binding.root
     }
 
+
     private fun initializeCalendar(binding: FragmentCalendarBinding) {
         allowCalendarCache(binding)
         takeNotes(binding)
