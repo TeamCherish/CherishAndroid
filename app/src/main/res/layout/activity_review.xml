@@ -53,58 +53,104 @@
             app:layout_constraintStart_toStartOf="@id/review_user"
             app:layout_constraintTop_toBottomOf="@id/review_common_text" />
 
-        <EditText
-            android:id="@+id/review_edit_keyword"
-            style="@style/CustomEditText"
-            android:layout_width="0dp"
-            android:layout_height="44dp"
-            android:layout_marginTop="28dp"
-            android:layout_marginEnd="@dimen/margin_16dp"
-            android:fontFamily="@font/notosanscjkkr_regular"
-            android:hint="@string/review_keyword_text"
-            android:includeFontPadding="false"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/review_user"
-            app:layout_constraintTop_toBottomOf="@id/review_description" />
-
-        <com.google.android.flexbox.FlexboxLayout
-            android:id="@+id/review_flex_box"
+        <ScrollView
+            android:id="@+id/review_scroll"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:alignContent="stretch"
-            app:alignItems="stretch"
-            app:flexWrap="wrap"
-            app:layout_constraintEnd_toEndOf="@id/review_edit_keyword"
+            android:layout_marginTop="28dp"
+            android:fillViewport="true"
+            android:layout_marginEnd="@dimen/margin_16dp"
             app:layout_constraintStart_toStartOf="@id/review_user"
-            app:layout_constraintTop_toBottomOf="@id/review_edit_keyword"></com.google.android.flexbox.FlexboxLayout>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/review_description">
 
-        <EditText
-            android:id="@+id/review_memo"
-            style="@style/CustomEditText"
-            android:layout_width="0dp"
-            android:layout_height="194dp"
-            android:layout_marginTop="15dp"
-            android:fontFamily="@font/notosanscjkkr_regular"
-            android:gravity="top|left"
-            android:hint="@string/review_memo_text"
-            android:includeFontPadding="false"
-            app:layout_constraintEnd_toEndOf="@id/review_edit_keyword"
-            app:layout_constraintStart_toStartOf="@id/review_user"
-            app:layout_constraintTop_toBottomOf="@id/review_flex_box"
-            tools:ignore="RtlHardcoded" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/review_edit_keyword"
+                    style="@style/CustomEditText"
+                    android:layout_width="match_parent"
+                    android:layout_height="44dp"
+                    android:layout_marginTop="28dp"
+                    android:fontFamily="@font/notosanscjkkr_regular"
+                    android:hint="@string/review_keyword_text"
+                    android:includeFontPadding="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <com.google.android.flexbox.FlexboxLayout
+                    android:id="@+id/review_flex_box"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:alignContent="stretch"
+                    app:alignItems="stretch"
+                    app:flexWrap="wrap"
+                    app:layout_constraintBottom_toTopOf="@id/review_memo"
+                    app:layout_constraintEnd_toStartOf="@id/review_max_keyword"
+                    app:layout_constraintStart_toStartOf="@id/review_edit_keyword"
+                    app:layout_constraintTop_toBottomOf="@id/review_edit_keyword" />
+
+                <TextView
+                    android:id="@+id/review_number_of_characters"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toStartOf="@id/review_max_keyword"
+                    app:layout_constraintTop_toBottomOf="@id/review_edit_keyword" />
+
+                <include
+                    android:id="@+id/review_max_keyword"
+                    layout="@layout/view_max_keyword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="@id/review_edit_keyword"
+                    app:layout_constraintTop_toBottomOf="@id/review_edit_keyword" />
+
+                <EditText
+                    android:id="@+id/review_memo"
+                    style="@style/CustomEditText"
+                    android:layout_width="0dp"
+                    android:layout_height="194dp"
+                    android:layout_marginTop="36dp"
+                    android:fontFamily="@font/notosanscjkkr_regular"
+                    android:gravity="top|left"
+                    android:hint="@string/review_memo_text"
+                    android:includeFontPadding="false"
+                    app:layout_constraintEnd_toEndOf="@id/review_edit_keyword"
+                    app:layout_constraintStart_toStartOf="@id/review_edit_keyword"
+                    app:layout_constraintTop_toBottomOf="@id/review_max_keyword"
+                    tools:ignore="RtlHardcoded" />
+
+                <TextView
+                    android:id="@+id/review_number_of_memo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toStartOf="@id/review_max_memo"
+                    app:layout_constraintTop_toBottomOf="@id/review_memo" />
+
+                <include
+                    android:id="@+id/review_max_memo"
+                    layout="@layout/view_max_memo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="@id/review_edit_keyword"
+                    app:layout_constraintTop_toBottomOf="@id/review_memo" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
 
         <Button
             android:id="@+id/review_admin_accept"
             style="@style/RoundButton.GreenMain"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="144dp"
+            android:layout_marginTop="120dp"
             android:fontFamily="@font/notosanscjkkr_regular"
             android:includeFontPadding="false"
             android:text="@string/review_admin_button_text"
-            app:layout_constraintEnd_toEndOf="@id/review_edit_keyword"
-            app:layout_constraintStart_toStartOf="@id/review_user"
-            app:layout_constraintTop_toBottomOf="@id/review_memo" />
+            app:layout_constraintEnd_toEndOf="@id/review_scroll"
+            app:layout_constraintStart_toStartOf="@id/review_scroll"
+            app:layout_constraintTop_toBottomOf="@id/review_scroll" />
 
         <Button
             android:id="@+id/review_ignore_accept"
@@ -115,8 +161,8 @@
             android:fontFamily="@font/notosanscjkkr_regular"
             android:includeFontPadding="false"
             android:text="@string/review_pass_button_text"
-            app:layout_constraintEnd_toEndOf="@id/review_edit_keyword"
-            app:layout_constraintStart_toStartOf="@id/review_user"
+            app:layout_constraintEnd_toEndOf="@id/review_admin_accept"
+            app:layout_constraintStart_toStartOf="@id/review_admin_accept"
             app:layout_constraintTop_toBottomOf="@id/review_admin_accept" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

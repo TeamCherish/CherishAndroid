@@ -13,6 +13,8 @@ import com.sopt.cherish.ui.dialog.CustomDialogFragment
 import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.util.extension.FlexBoxExtension.addChip
 import com.sopt.cherish.util.extension.FlexBoxExtension.getChipsCount
+import com.sopt.cherish.util.extension.countNumberOfCharacters
+import com.sopt.cherish.util.extension.shortToast
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -34,8 +36,31 @@ class ReviewActivity : AppCompatActivity() {
         binding.mainViewModel = viewModel
 
         addUserStatusWithChip(binding)
+        addLimitNumberOfKeywordCharacters(binding)
+        addLimitNumberOfMemoCharacters(binding)
         sendReviewToServer(binding)
         ignoreSendReviewToServer(binding)
+    }
+
+    private fun addLimitNumberOfMemoCharacters(binding: ActivityReviewBinding) {
+        binding.reviewMemo.countNumberOfCharacters { memo ->
+            binding.reviewNumberOfMemo.text = memo?.length.toString()
+            if (memo?.length!! > 100) {
+                shortToast(this, "100자를 초과했습니다.")
+            }
+        }
+    }
+
+    private fun addLimitNumberOfKeywordCharacters(binding: ActivityReviewBinding) {
+        binding.reviewEditKeyword.countNumberOfCharacters { keyword ->
+            binding.reviewNumberOfCharacters.text = keyword?.length.toString()
+            if (keyword?.length!! > 5) {
+                CustomDialogFragment(R.layout.sample_wordcount_error).show(
+                    supportFragmentManager,
+                    TAG
+                )
+            }
+        }
     }
 
     private fun showLoadingDialog() {
@@ -50,6 +75,8 @@ class ReviewActivity : AppCompatActivity() {
     private fun addUserStatusWithChip(binding: ActivityReviewBinding) {
         // todo : 한글 키보드는 ENTER를 치게 되면 줄바꿈이 된다. 이거 처리를 해줘야 한다.
         // 이거 처리만 해주면 끝이 납니다
+        // 글자수에 따라 엔터를 먹히지 않게 한다던지 하면 될거 같음
+        // 칩이 늘어날 떄 스크롤 뷰도 expand되어야 하는데 이 이슈가 조금 힘들거 같음
         binding.reviewEditKeyword.setOnKeyListener { view, keyCode, keyEvent ->
             if (keyEvent.action == KeyEvent.ACTION_DOWN || keyCode == KeyEvent.KEYCODE_ENTER) {
                 val et = view as EditText

@@ -34,6 +34,7 @@ class CalendarFragment : Fragment() {
         initializeCalendar(binding)
         return binding.root
     }
+
     override fun onResume() {
         super.onResume()
         val activity = activity
