@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -74,6 +73,7 @@ class HomeFragment : Fragment() {
             BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 // 이 코드 때문에 색상이 변경 안되는거 같은데 여기 로직 다시 한번 생각
+                /*
                 if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
                     binding.homeFragment.setBackgroundColor(
                         ContextCompat.getColor(
@@ -81,7 +81,7 @@ class HomeFragment : Fragment() {
                             R.color.cherish_purple
                         )
                     )
-                }
+                } */
             }
 
             override fun onSlide(bottomSheet: View, slideOffset: Float) {

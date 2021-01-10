@@ -46,32 +46,43 @@ class ManagePlantFragment : Fragment() {
         standardBottomSheetBehavior.addBottomSheetCallback(object :
             BottomSheetBehavior.BottomSheetCallback() { //모달 처리 추후 수정
             override fun onStateChanged(bottomSheet: View, newState: Int) {
-                
+
             }
 
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                
+
             }
         })
     }
 
-    private fun initializeTabLayoutView(binding:FragmentManagePlantBinding){
+    private fun initializeTabLayoutView(binding: FragmentManagePlantBinding) {
 
+        /**
+        todo: 식물 5 처럼 텍스트 분리해서 탭 지정
+        연락처 탭 클릭시 상단 탭바 변경되어야 함
+         */
         binding.myPageBottomTab.addTab(binding.myPageBottomTab.newTab().setText("식물"))
         binding.myPageBottomTab.addTab(binding.myPageBottomTab.newTab().setText("연락처"))
+
+        for (i in 0 until binding.myPageBottomTab.tabCount) {
+            val tab = (binding.myPageBottomTab.getChildAt(0) as ViewGroup).getChildAt(i)
+            val p = tab.layoutParams as ViewGroup.MarginLayoutParams
+            p.setMargins(24, 0, 0, 0)
+            tab.requestLayout()
+        }
 
         activity?.supportFragmentManager!!.beginTransaction()
             .add(R.id.my_page_bottom_container, PlantFragment()).commit()
 
-        binding.myPageBottomTab.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener{
+        binding.myPageBottomTab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
 
             override fun onTabReselected(tab: TabLayout.Tab?) {}
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                val tabIndex=binding.myPageBottomTab.selectedTabPosition
+                val tabIndex = binding.myPageBottomTab.selectedTabPosition
 
-                when(tabIndex){
-                    0->{
+                when (tabIndex) {
+                    0 -> {
                         (activity as MainActivity).replaceFragment(tabIndex)
                     }
                     /*

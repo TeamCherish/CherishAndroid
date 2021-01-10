@@ -34,31 +34,34 @@ class PlantFragment : Fragment() {
 
     private fun setAdapterData(adapter: MyPageBottomSheetAdapter) {
         adapter.data = mutableListOf(
-            MyPageCherryLevelDataclass("안녕","스투키 Lv1"),
-            MyPageCherryLevelDataclass("안녕","스투키 Lv1"),
-            MyPageCherryLevelDataclass("안녕","스투키 Lv1"),
-            MyPageCherryLevelDataclass("안녕","스투키 Lv1"),
-            MyPageCherryLevelDataclass("안녕","스투키 Lv1"),
-            MyPageCherryLevelDataclass("안녕","스투키 Lv1"),
-            MyPageCherryLevelDataclass("안녕","스투키 Lv1"),
-            MyPageCherryLevelDataclass("안녕","스투키 Lv1"),
-            MyPageCherryLevelDataclass("안녕","스투키 Lv1"),
-            MyPageCherryLevelDataclass("안녕","스투키 Lv1"),
-            MyPageCherryLevelDataclass("안녕","스투키 Lv1"),
-            MyPageCherryLevelDataclass("안녕","스투키 Lv1"),
-            MyPageCherryLevelDataclass("안녕","스투키 Lv1"),
-            MyPageCherryLevelDataclass("안녕","스투키 Lv1"),
-            MyPageCherryLevelDataclass("안녕","스투키 Lv1"),
-            MyPageCherryLevelDataclass("안녕","스투키 Lv1")
+            MyPageCherryLevelDataclass("안녕", "스투키 Lv1"),
+            MyPageCherryLevelDataclass("안녕", "스투키 Lv1"),
+            MyPageCherryLevelDataclass("안녕", "스투키 Lv1"),
+            MyPageCherryLevelDataclass("안녕", "스투키 Lv1"),
+            MyPageCherryLevelDataclass("안녕", "스투키 Lv1"),
+            MyPageCherryLevelDataclass("안녕", "스투키 Lv1"),
+            MyPageCherryLevelDataclass("안녕", "스투키 Lv1"),
+            MyPageCherryLevelDataclass("안녕", "스투키 Lv1"),
+            MyPageCherryLevelDataclass("안녕", "스투키 Lv1"),
+            MyPageCherryLevelDataclass("안녕", "스투키 Lv1"),
+            MyPageCherryLevelDataclass("안녕", "스투키 Lv1"),
+            MyPageCherryLevelDataclass("안녕", "스투키 Lv1"),
+            MyPageCherryLevelDataclass("안녕", "스투키 Lv1"),
+            MyPageCherryLevelDataclass("안녕", "스투키 Lv1"),
+            MyPageCherryLevelDataclass("안녕", "스투키 Lv1"),
+            MyPageCherryLevelDataclass("안녕", "스투키 Lv1")
         )
         adapter.notifyDataSetChanged()
     }
 
-    private fun initRecyclerView(binding:FragmentPlantBinding, mainAdapter: MyPageBottomSheetAdapter) {
+    private fun initRecyclerView(
+        binding: FragmentPlantBinding,
+        mainAdapter: MyPageBottomSheetAdapter
+    ) {
 
-        binding.mypageCherryList.apply{
-            adapter=mainAdapter
-            layoutManager= LinearLayoutManager(context)
+        binding.mypageCherryList.apply {
+            adapter = mainAdapter
+            layoutManager = LinearLayoutManager(context)
         }
     }
 

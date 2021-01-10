@@ -37,7 +37,7 @@ class DetailPlantActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-       // initializeViewModel()
+        // initializeViewModel()
         binding = ActivityDetailPlantBinding.inflate(layoutInflater)
         setFragment(DetailPlantFragment())
         setActionBarTitle("식물 상세")
@@ -61,10 +61,11 @@ class DetailPlantActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        val menuInflater=menuInflater
-        menuInflater.inflate(R.menu.toolbar_menu,menu)
+        val menuInflater = menuInflater
+        menuInflater.inflate(R.menu.toolbar_menu, menu)
         return true
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.home -> {
@@ -86,8 +87,8 @@ class DetailPlantActivity : AppCompatActivity() {
         }
     }
 
-    fun setFragment(fragment: Fragment){
-        val transaction=supportFragmentManager.beginTransaction()
+    fun setFragment(fragment: Fragment) {
+        val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_detail, fragment)
         transaction.commit()
     }
@@ -101,7 +102,7 @@ class DetailPlantActivity : AppCompatActivity() {
             actionBar.setDisplayShowTitleEnabled(false)
 
             //actionBar.setTitle(title)
-            binding.toolbarDetailTitle.text=title
+            binding.toolbarDetailTitle.text = title
         }
     }
 
