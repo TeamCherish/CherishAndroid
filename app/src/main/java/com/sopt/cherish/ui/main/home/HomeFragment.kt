@@ -17,6 +17,7 @@ import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentHomeBinding
 import com.sopt.cherish.ui.adapter.HomeCherryListAdapter
 import com.sopt.cherish.ui.dialog.WateringDialogFragment
+import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
 import com.sopt.cherish.ui.enrollment.PhoneBookActivity
 import com.sopt.cherish.ui.main.MainViewModel
 
@@ -111,7 +112,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun navigatePhoneBook() {
-        val intent = Intent(context, PhoneBookActivity::class.java)
+        val intent = Intent(context, EnrollmentPhoneActivity::class.java)
         startActivity(intent)
     }
 
