@@ -48,7 +48,6 @@ class DetailPlantActivity : AppCompatActivity() {
 
         /* binding = ActivityDetailPlantBinding.inflate(layoutInflater)
          setContentView(binding.root)
-
          // 유저 원형 프로그레스바 보여주는 부분
          circleProgressbar = findViewById(R.id.test)
          val animationDuration = 100
@@ -59,9 +58,7 @@ class DetailPlantActivity : AppCompatActivity() {
         // memolist 어댑터 연결 부분
         val mAdapter = DetailMemoAdapter(memoList)
         binding.recyclerDetail.adapter = mAdapter
-
         binding.recyclerDetail.addItemDecoration(VerticalSpaceItemDecoration(20))
-
         binding.recyclerDetail.layoutManager = LinearLayoutManager(this)
         binding.recyclerDetail.setHasFixedSize(true)*/
     }

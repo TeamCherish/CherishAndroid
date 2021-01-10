@@ -19,6 +19,7 @@ class CherishMaterialCalendarView constructor(context: Context, attrs: Attribute
     fun changeCalendarModeWeeks() {
         CoroutineScope(Dispatchers.Main).launch {
             state().edit().setCalendarDisplayMode(CalendarMode.WEEKS).commit()
+            // dp를 설정해서 하는건 그닥 좋지 못한 코딩방법
             layoutParams.height = 150.dp
         }
     }
@@ -26,6 +27,7 @@ class CherishMaterialCalendarView constructor(context: Context, attrs: Attribute
     fun changeCalendarModeMonths() {
         CoroutineScope(Dispatchers.Main).launch {
             state().edit().setCalendarDisplayMode(CalendarMode.MONTHS).commit()
+            // dp를 설정해서 하는건 그닥 좋지 못한 코딩방법
             layoutParams.height = 372.dp
         }
     }

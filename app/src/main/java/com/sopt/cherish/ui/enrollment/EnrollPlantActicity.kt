@@ -119,11 +119,9 @@ class EnrollPlantActicity : AppCompatActivity(){
     }
 
   /*  override fun onTestDialogweek(dialog: DialogFragment?, someData: String?) {
-
         binding.waterAlarmWeek.text = someData.toString()
         Log.d("qqqq", someData.toString())
     }
-
     override fun onTestDialogClock(dialog: DialogFragment?, someData: String?) {
         binding.waterAlarmTime.text = someData.toString()
         Log.d("clock", someData.toString())

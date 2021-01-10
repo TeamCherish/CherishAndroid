@@ -21,7 +21,6 @@ import com.sopt.cherish.ui.adapter.MainBottomSheetAdapter
 import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
 import com.sopt.cherish.ui.enrollment.PhoneBookActivity
 
-
 /**
  * 메인 홈뷰
  * 초기상태와 중간에 있는 경우 2개 다 고려해야 합니다.

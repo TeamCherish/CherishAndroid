@@ -33,6 +33,10 @@ class WateringDialogFragment : DialogFragment(), View.OnClickListener {
             navigateContact()
         }
 
+        binding.wateringNextTimeBtn.setOnClickListener {
+            navigateNextTimeContact()
+        }
+
         return binding.root
     }
 
@@ -41,7 +45,11 @@ class WateringDialogFragment : DialogFragment(), View.OnClickListener {
         dismiss()
     }
 
-    override fun onClick(p0: View?) {
+    private fun navigateNextTimeContact() {
+        dismiss()
+    }
+
+    override fun onClick(view: View?) {
         dismiss()
     }
 

@@ -1,19 +1,13 @@
 package com.sopt.cherish.ui.enrollment
 
-import android.Manifest
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Bundle
 import android.provider.ContactsContract
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.MenuItem
-import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sopt.cherish.databinding.ActivityPhonebookBinding
 import com.sopt.cherish.databinding.ItemLayoutBinding
@@ -25,13 +19,12 @@ class PhoneBookActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPhonebookBinding
     private lateinit var binding_item: ItemLayoutBinding
 
-
-    val permissions = arrayOf(Manifest.permission.READ_CONTACTS, Manifest.permission.CALL_PHONE)
     lateinit var madapter: PhoneBookAdapter
-    var phonelist = mutableListOf<Phone>()
-    var searchText = ""
-    var sortText = "asc"
+    private var phonelist = mutableListOf<Phone>()
+    private var searchText = ""
+    private var sortText = "asc"
 
+    // todo : 퍼미션 util 쓸거고 로직들 다시한번 확인하고 왜 지워야지 주석처리 하는지 모르겠음
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPhonebookBinding.inflate(layoutInflater)
@@ -40,13 +33,10 @@ class PhoneBookActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbar)
         val ab = supportActionBar!!
         ab.setDisplayShowTitleEnabled(false)
-        //ab.setLogo(R.drawable.icn_gnb_back)
         ab.setDisplayHomeAsUpEnabled(true)
 
-
         setContentView(binding.root)
-        checkAndStart()
-
+        startProcess()
 
         // 버튼 클릭하면 라디오 버튼 선택한 데이터가 다음 식물등록 뷰에 보여지는 부분
         binding.buttonnext.setOnClickListener {
@@ -59,13 +49,6 @@ class PhoneBookActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         }
-
-
-        /* binding.imageButtonphone.setOnClickListener {
-             val intent = Intent(this, MainActivity::class.java)
-             startActivity(intent)
-         }*/
-
     }
 
     // toolbar에서 뒤로가기 버튼 부분
@@ -80,60 +63,12 @@ class PhoneBookActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-
-    fun startProcess() {
+    private fun startProcess() {
         setList()
         setSearchListener()
-
-        // setContentView(R.layout.activity_main)
-
     }
 
-    // 권한처리 코드
-    fun checkAndStart() {
-        if (isLower23() || isPermitted()) {
-            startProcess()
-        } else {
-            ActivityCompat.requestPermissions(this, permissions, 99)
-        }
-    }
-
-    fun isLower23(): Boolean {
-        return Build.VERSION.SDK_INT < Build.VERSION_CODES.M
-    }
-
-    @RequiresApi(Build.VERSION_CODES.M)
-    fun isPermitted(): Boolean {
-        for (perm in permissions) {
-            if (checkSelfPermission(perm) != PackageManager.PERMISSION_GRANTED) {
-                return false
-            }
-        }
-        return true
-    }
-
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        if (requestCode == 99) {
-            var check = true
-            for (grant in grantResults) {
-                if (grant != PackageManager.PERMISSION_GRANTED) {
-                    check = false
-                    break
-                }
-            }
-            if (check) startProcess()
-            else {
-                Toast.makeText(this, "권한 승인을 하셔야지만 앱을 사용할 수 있습니다.", Toast.LENGTH_LONG).show()
-                finish()
-            }
-        }
-    }
-
-    fun setSearchListener() {
+    private fun setSearchListener() {
         binding.editSearch.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {}
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -144,21 +79,21 @@ class PhoneBookActivity : AppCompatActivity() {
         })
     }
 
-    fun changeList() {
+    private fun changeList() {
         val newList = getPhoneNumbers(sortText, searchText)
         this.phonelist.clear()
         this.phonelist.addAll(newList)
         this.madapter.notifyDataSetChanged()
     }
 
-    fun setList() {
+    private fun setList() {
         phonelist.addAll(getPhoneNumbers(sortText, searchText))
         madapter = PhoneBookAdapter(phonelist)
         binding.recycler.adapter = madapter
         binding.recycler.layoutManager = LinearLayoutManager(this)
     }
 
-    fun getPhoneNumbers(sort: String, name: String): List<Phone> {
+    private fun getPhoneNumbers(sort: String, name: String): List<Phone> {
         val list = mutableListOf<Phone>()
 
         val phonUri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI
@@ -197,10 +132,7 @@ class PhoneBookActivity : AppCompatActivity() {
             }
         }
         // 결과목록 반환
-
         return list
     }
-
-
 
 }

@@ -8,16 +8,15 @@ import android.widget.CompoundButton
 import androidx.recyclerview.widget.RecyclerView
 import com.sopt.cherish.databinding.ItemLayoutBinding
 
-
+// todo : Data class 뺴놔야 함
 data class Phone(
     val id: String?, val name: String?, val phone: String?
 
 )
 
 // created by nayoung : 사용자 연락처들을 받아서 보여주는 adapter
-class PhoneBookAdapter(val PhoneBooklist: List<Phone>) :
+class PhoneBookAdapter(private val phoneBookList: List<Phone>) :
     RecyclerView.Adapter<PhoneBookAdapter.Holder>() {
-
 
     var checkedRadioButton: CompoundButton? = null
     lateinit var phonename: String
@@ -30,6 +29,7 @@ class PhoneBookAdapter(val PhoneBooklist: List<Phone>) :
 
         val binding: ItemLayoutBinding = ItemLayoutBinding.inflate(layoutInflater, parent, false)
 
+        // todo : 왜 주석처리로 했는지?
         // val view = LayoutInflater.from(parent.context).inflate(R.layout.item_layout, parent, false)
         //binding.radioButton.setOnCheckedChangeListener(checkedChangeListener)
 
@@ -40,41 +40,34 @@ class PhoneBookAdapter(val PhoneBooklist: List<Phone>) :
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
 
+        // todo : 로직 설명 들어봐야 알거같음
         holder.radioButton.setOnCheckedChangeListener { compoundButton, isChecked ->
 
             checkedRadioButton?.apply { setChecked(!isChecked) }
             checkedRadioButton = compoundButton.apply { setChecked(isChecked) }
 
             if (isChecked) {
-                Log.d("asdf", "${PhoneBooklist[position].name}")
-                phonename = PhoneBooklist[position].name.toString()
-                phonenumber = PhoneBooklist[position].phone.toString()
-
+                Log.d("asdf", "${phoneBookList[position].name}")
+                phonename = phoneBookList[position].name.toString()
+                phonenumber = phoneBookList[position].phone.toString()
             }
-
         }
-        val phone = PhoneBooklist[position]
+        val phone = phoneBookList[position]
         holder.setPhone(phone)
     }
 
+    override fun getItemCount(): Int = phoneBookList.size
 
-    override fun getItemCount(): Int {
-        return PhoneBooklist.size
-
-    }
-
-    override fun getItemId(position: Int): Long {
-        return position.toLong()
-    }
+    override fun getItemId(position: Int): Long = position.toLong()
 
     @SuppressLint("MissingPermission")
     inner class Holder(private val binding: ItemLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
         var mPhone: Phone? = null
         val radioButton = binding.radioButton
 
         init {
-
 
         }
 
@@ -83,7 +76,6 @@ class PhoneBookAdapter(val PhoneBooklist: List<Phone>) :
             binding.textName.text = phone.name
             binding.textPhone.text = phone.phone
         }
-
-
     }
+
 }
