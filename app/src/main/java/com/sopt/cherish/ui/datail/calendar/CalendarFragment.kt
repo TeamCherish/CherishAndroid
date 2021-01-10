@@ -31,8 +31,11 @@ class CalendarFragment : Fragment() {
             DataBindingUtil.inflate(inflater, R.layout.fragment_calendar, container, false)
 
         initializeCalendar(binding)
+
+
         return binding.root
     }
+
     override fun onResume() {
         super.onResume()
         val activity = activity
@@ -44,8 +47,10 @@ class CalendarFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
+
         when (id) {
             android.R.id.home -> {
+
                 activity?.finish()
                 return true
             }

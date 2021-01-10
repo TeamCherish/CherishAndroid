@@ -40,6 +40,7 @@ class DetailPlantActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         initializeViewModel()
+        invalidateOptionsMenu()
 
         binding = ActivityDetailPlantBinding.inflate(layoutInflater)
         setFragment(DetailPlantFragment())
@@ -70,7 +71,7 @@ class DetailPlantActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        
+
         when (item.itemId) {
             R.id.home -> {
                 finish()
@@ -82,6 +83,7 @@ class DetailPlantActivity : AppCompatActivity() {
                 transaction.replace(R.id.fragment_detail, CalendarFragment())
                 transaction.addToBackStack(null)
                 transaction.commit()
+
                 return true
             }
 

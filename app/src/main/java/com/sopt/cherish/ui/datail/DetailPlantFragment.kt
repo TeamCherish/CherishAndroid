@@ -56,6 +56,7 @@ class DetailPlantFragment : Fragment() {
 
         return binding.root
     }
+
     override fun onResume() {
         super.onResume()
         val activity = activity
@@ -64,6 +65,7 @@ class DetailPlantFragment : Fragment() {
 
         }
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
         when (id) {
