@@ -9,6 +9,7 @@ import com.sopt.cherish.databinding.ActivityMainBinding
 import com.sopt.cherish.di.Injection
 import com.sopt.cherish.ui.main.home.HomeFragment
 import com.sopt.cherish.ui.main.manageplant.ManagePlantFragment
+import com.sopt.cherish.ui.main.manageplant.PlantFragment
 import com.sopt.cherish.ui.main.setting.SettingFragment
 
 
@@ -59,6 +60,20 @@ class MainActivity : AppCompatActivity() {
                 else -> {
                     throw AssertionError()
                 }
+            }
+        }
+    }
+
+    fun replaceFragment(index:Int){
+        val transAction = supportFragmentManager.beginTransaction()
+
+        when(index){
+            0->{
+                transAction.replace(R.id.my_page_bottom_container, PlantFragment()).commit()
+            }
+            1->{
+                //transAction.replace(R.id.my_page_bottom_container,BlankFragment()).commit()
+                //true
             }
         }
     }
