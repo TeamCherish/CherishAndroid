@@ -13,7 +13,7 @@ import com.sopt.cherish.ui.dialog.ClockPickerDialogFragment
 import com.sopt.cherish.ui.dialog.WeekPickerDialogFragment
 
 //created by nayoung : 식물 등록 버튼 눌렀을 때 나오는 진행중 팝업 창
-class EnrollPlantActicity : AppCompatActivity(){
+class EnrollPlantActicity : AppCompatActivity() {
 
     private lateinit var binding: AcitivityEnrollplantBinding
 

@@ -39,10 +39,11 @@ class DetailPlantActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // initializeViewModel()
+        initializeViewModel()
+
         binding = ActivityDetailPlantBinding.inflate(layoutInflater)
         setFragment(DetailPlantFragment())
-        setActionBarTitle("식물 상세")
+        //setActionBarTitle("식물 상세")
         setContentView(binding.root)
 
         /* binding = ActivityDetailPlantBinding.inflate(layoutInflater)
@@ -69,13 +70,18 @@ class DetailPlantActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        
         when (item.itemId) {
             R.id.home -> {
                 finish()
                 return true
             }
             R.id.calendar -> {
-                setFragment(CalendarFragment())
+
+                val transaction = supportFragmentManager.beginTransaction()
+                transaction.replace(R.id.fragment_detail, CalendarFragment())
+                transaction.addToBackStack(null)
+                transaction.commit()
                 return true
             }
 
@@ -88,7 +94,8 @@ class DetailPlantActivity : AppCompatActivity() {
         }
     }
 
-    fun setFragment(fragment: Fragment) {
+
+    private fun setFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_detail, fragment)
         transaction.commit()

@@ -22,9 +22,7 @@ class EnrollmentPhoneActivity : AppCompatActivity(),
     ClockPickerDialogFragment.TestDialogFragmentListener {
 
 
-    private lateinit var binding:ActivityEnrollmentPhoneBinding
-
-
+    private lateinit var binding: ActivityEnrollmentPhoneBinding
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,14 +39,14 @@ class EnrollmentPhoneActivity : AppCompatActivity(),
         setFragment(PhoneBookFragment())
     }
 
-    private fun setToolbar(){
+    private fun setToolbar() {
 
 
         // 툴바 왼쪽 버튼 설정
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)  // 왼쪽 버튼 사용 여부 true
         supportActionBar!!.setHomeAsUpIndicator(R.drawable.icon_gnb_back)  // 왼쪽 버튼 이미지 설정
         supportActionBar!!.setDisplayShowTitleEnabled(true)    // 타이틀 안보이게 하기
-        supportActionBar!!.title="식물 선택"
+        supportActionBar!!.title = "식물 선택"
     }
 
     fun setActionBarTitle(title: String?) {
@@ -60,9 +58,10 @@ class EnrollmentPhoneActivity : AppCompatActivity(),
             actionBar.setDisplayShowTitleEnabled(false)
 
             //actionBar.setTitle(title)
-            binding.toolbarTitle.text=title
+            binding.toolbarTitle.text = title
         }
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> onBackPressed()
@@ -70,22 +69,22 @@ class EnrollmentPhoneActivity : AppCompatActivity(),
         return super.onOptionsItemSelected(item)
     }
 
-    fun setFragment(fragment: Fragment){
-        val transaction=supportFragmentManager.beginTransaction()
+    fun setFragment(fragment: Fragment) {
+        val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_enroll, fragment)
         transaction.commit()
     }
 
     override fun onTestDialogweek(dialog: DialogFragment?, someData: String?) {
-        Log.d("nana",someData.toString())
-        var textweek :TextView =findViewById(R.id.water_alarm_week)
+        Log.d("nana", someData.toString())
+        var textweek: TextView = findViewById(R.id.water_alarm_week)
         textweek.text = someData.toString()
 
     }
 
     override fun onTestDialogClock(dialog: DialogFragment?, someData: String?) {
-        Log.d("nana",someData.toString())
-        var textclock :TextView =findViewById(R.id.water_alarm_time)
+        Log.d("nana", someData.toString())
+        var textclock: TextView = findViewById(R.id.water_alarm_time)
         textclock.text = someData.toString()
     }
 

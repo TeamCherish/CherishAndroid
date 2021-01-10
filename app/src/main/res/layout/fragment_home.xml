@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_16dp"
-            android:layout_marginTop="@dimen/margin_53dp"
+            android:layout_marginTop="32dp"
             android:font="@font/roboto_bold"
             android:text="@{mainViewModel.dummyRestDateData}"
             android:textColor="@color/white"
@@ -66,12 +66,20 @@
             app:layout_constraintTop_toBottomOf="@+id/home_selected_user_name" />
 
         <ImageView
+            android:id="@+id/home_dummy_flower_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_16dp"
+            android:src="@drawable/img_main_dandelion"
+            app:layout_constraintEnd_toEndOf="@id/home_show_all_alarm"
+            app:layout_constraintTop_toBottomOf="@id/home_show_all_alarm" />
+
+        <ImageView
             android:id="@+id/home_show_all_alarm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="@dimen/margin_21dp"
-            android:contentDescription="StringValue"
             android:src="@drawable/ic_alarm"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -115,7 +123,9 @@
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/home_standardBottomSheet"

@@ -16,9 +16,9 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentHomeBinding
 import com.sopt.cherish.ui.adapter.HomeCherryListAdapter
+import com.sopt.cherish.ui.datail.DetailPlantActivity
 import com.sopt.cherish.ui.dialog.WateringDialogFragment
 import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
-import com.sopt.cherish.ui.enrollment.PhoneBookActivity
 import com.sopt.cherish.ui.main.MainViewModel
 
 
@@ -55,11 +55,20 @@ class HomeFragment : Fragment() {
             navigatePhoneBook()
         }
 
+        binding.homeDummyFlowerImage.setOnClickListener {
+            navigateDetailPlant()
+        }
+
         setAdapterData(homeCherryListAdapter)
         initializeRecyclerView(binding, homeCherryListAdapter)
 
         updateProgressBar(binding)
         return binding.root
+    }
+
+    private fun navigateDetailPlant() {
+        val intent = Intent(requireContext(), DetailPlantActivity::class.java)
+        startActivity(intent)
     }
 
     private fun initializeBottomSheetBehavior(binding: FragmentHomeBinding) {

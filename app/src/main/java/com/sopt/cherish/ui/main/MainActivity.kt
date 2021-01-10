@@ -64,14 +64,14 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun replaceFragment(index:Int){
+    fun replaceFragment(index: Int) {
         val transAction = supportFragmentManager.beginTransaction()
 
-        when(index){
-            0->{
+        when (index) {
+            0 -> {
                 transAction.replace(R.id.my_page_bottom_container, PlantFragment()).commit()
             }
-            1->{
+            1 -> {
                 //transAction.replace(R.id.my_page_bottom_container,BlankFragment()).commit()
                 //true
             }
