@@ -18,6 +18,7 @@ import com.sopt.cherish.databinding.ActivityEnrollmentPhoneBinding
 import com.sopt.cherish.di.Injection
 import com.sopt.cherish.remote.model.MemoListDataclass
 import com.sopt.cherish.ui.adapter.DetailMemoAdapter
+import com.sopt.cherish.ui.calendar.CalendarFragment
 
 
 /**
@@ -74,12 +75,11 @@ class DetailPlantActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.getItemId()) {
             R.id.home -> {
-
-                //onBackPressed()
+                finish()
                 return true
             }
             R.id.calendar -> {
-
+                setFragment(CalendarFragment())
                 return true
             }
 
@@ -95,6 +95,7 @@ class DetailPlantActivity : AppCompatActivity() {
     fun setFragment(fragment: Fragment){
         val transaction=supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_detail, fragment)
+        transaction.addToBackStack(null)
         transaction.commit()
     }
 
