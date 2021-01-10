@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/cherish_light_gray"
-        tools:context=".ui.calendar.CalendarFragment">
+        tools:context=".ui.datail.calendar.CalendarFragment">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/calendar_card_view"

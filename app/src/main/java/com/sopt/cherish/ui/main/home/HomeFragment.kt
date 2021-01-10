@@ -117,12 +117,12 @@ class HomeFragment : Fragment() {
 
     private fun transitionBottomSheetParentView(binding: FragmentHomeBinding, slideOffset: Float) {
         val argbEvaluator =
-            ArgbEvaluator().evaluate(slideOffset, R.color.white, R.color.black)
+            ArgbEvaluator().evaluate(slideOffset, R.color.cherish_purple, R.color.cherish_purple)
         binding.homeFragment.setBackgroundColor(argbEvaluator as Int)
     }
 
     private fun updateProgressBar(binding: FragmentHomeBinding) {
-        // 이거 고쳐야 함
+        // todo : fix this one
         val rating = binding.homeAffectionProgressbar.progress
         if (rating <= 30) {
             binding.homeAffectionProgressbar.progressDrawable = ResourcesCompat.getDrawable(
