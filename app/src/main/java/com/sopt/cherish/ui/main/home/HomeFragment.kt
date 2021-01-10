@@ -85,7 +85,7 @@ class HomeFragment : Fragment() {
             }
 
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                // 이건 작동은 잘하는데 색상을 어떻게 배합해야할지 생각
+                // 이건 작동 잘함
                 transitionBottomSheetParentView(binding, slideOffset)
             }
         })
@@ -117,7 +117,7 @@ class HomeFragment : Fragment() {
 
     private fun transitionBottomSheetParentView(binding: FragmentHomeBinding, slideOffset: Float) {
         val argbEvaluator =
-            ArgbEvaluator().evaluate(slideOffset, R.color.white, R.color.black)
+            ArgbEvaluator().evaluate(slideOffset, R.color.cherish_purple, R.color.cherish_purple)
         binding.homeFragment.setBackgroundColor(argbEvaluator as Int)
     }
 
