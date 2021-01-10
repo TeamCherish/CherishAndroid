@@ -1,5 +1,6 @@
-package com.sopt.cherish.ui.calendar
+package com.sopt.cherish.ui.datail.calendar
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -66,7 +67,6 @@ class CalendarFragment : Fragment() {
             view.hideKeyboard()
             binding.calendarView.changeCalendarModeMonths()
         }
-
     }
 
     private fun addDateClickListener(binding: FragmentCalendarBinding) {
@@ -77,6 +77,7 @@ class CalendarFragment : Fragment() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun showDate(binding: FragmentCalendarBinding, date: CalendarDay) {
         binding.calendarViewSelectedDate.text = "${date.year}년 ${date.month}월 ${date.day}일"
     }

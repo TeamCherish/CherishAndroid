@@ -1,7 +1,7 @@
 <resources>
     <!-- Base application theme. -->
     <style name="Theme.Cherish" parent="Theme.MaterialComponents.Light.NoActionBar">
-        <item name="android:statusBarColor">@color/transparent</item>
+        <item name="android:statusBarColor">@color/cherish_status_bar_color</item>
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>

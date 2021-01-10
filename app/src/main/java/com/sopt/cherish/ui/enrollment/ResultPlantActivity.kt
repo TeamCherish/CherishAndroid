@@ -3,7 +3,6 @@ package com.sopt.cherish.ui.enrollment
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDialog
@@ -27,8 +26,6 @@ class ResultPlantActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
-        Log.d("asdf", intent.getStringExtra("plantkey").toString())
-
         if (intent.getStringExtra("plantkey") == "1") {
             binding.imageView2.setImageResource(R.drawable.cherry)
         } else if (intent.getStringExtra("plantkey") == "2") {
@@ -36,16 +33,9 @@ class ResultPlantActivity : AppCompatActivity() {
 
         }
 
-
         binding.startbtn.setOnClickListener {
             progressON()
         }
-        /*binding.imageButton3.setOnClickListener {
-            val intent = Intent(this, EnrollPlantActicity::class.java)
-            startActivity(intent)
-        }
-*/
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -59,16 +49,15 @@ class ResultPlantActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    fun progressON() {
+    private fun progressON() {
         progressDialog = AppCompatDialog(this)
         progressDialog.setCancelable(false)
         progressDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         progressDialog.setContentView(R.layout.progress_layout)
         progressDialog.show()
-
     }
 
-    fun progressOFF() {
+    private fun progressOFF() {
         if (progressDialog != null && progressDialog.isShowing) {
             progressDialog.dismiss()
         }

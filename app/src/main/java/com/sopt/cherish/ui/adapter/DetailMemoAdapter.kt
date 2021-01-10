@@ -6,11 +6,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.sopt.cherish.R
-import com.sopt.cherish.remote.model.MemoListDataclass
+import com.sopt.cherish.ui.domain.MemoListDataclass
 
 //created by nayoung : 식물상세뷰에서 사용자가 남긴 메모를 보여주는 adapter
 class DetailMemoAdapter(val memolist: ArrayList<MemoListDataclass>) :
     RecyclerView.Adapter<DetailMemoAdapter.itemViewHolder>() {
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -41,6 +42,5 @@ class DetailMemoAdapter(val memolist: ArrayList<MemoListDataclass>) :
             usermemo.text = memolist.memo
         }
     }
-
 
 }

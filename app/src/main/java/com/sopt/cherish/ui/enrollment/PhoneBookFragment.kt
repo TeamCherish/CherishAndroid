@@ -16,7 +16,6 @@ import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentPhoneBookBinding
 import com.sopt.cherish.ui.adapter.Phone
 import com.sopt.cherish.ui.adapter.PhoneBookAdapter
-import com.sopt.cherish.ui.main.MainActivity
 
 
 class PhoneBookFragment : Fragment() {
@@ -30,11 +29,6 @@ class PhoneBookFragment : Fragment() {
 
     private lateinit var binding: FragmentPhoneBookBinding
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

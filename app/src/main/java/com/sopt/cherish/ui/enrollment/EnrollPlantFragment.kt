@@ -3,14 +3,11 @@ package com.sopt.cherish.ui.enrollment
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatDialog
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentEnrollPlantBinding
@@ -30,12 +27,6 @@ class EnrollPlantFragment : Fragment(){
 
     lateinit var weektime: String
 
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -103,15 +94,6 @@ class EnrollPlantFragment : Fragment(){
 
         }
     }
-
-    override fun onViewStateRestored(savedInstanceState: Bundle?) {
-        super.onViewStateRestored(savedInstanceState)
-
-
-
-
-    }
-
 
 
     fun setFragment(fragment: Fragment){
