@@ -69,7 +69,7 @@
             android:id="@+id/home_dummy_flower_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_16dp"
+            android:layout_marginTop="73dp"
             android:src="@drawable/img_main_dandelion"
             app:layout_constraintEnd_toEndOf="@id/home_show_all_alarm"
             app:layout_constraintTop_toBottomOf="@id/home_show_all_alarm" />
@@ -91,7 +91,7 @@
             android:layout_width="13dp"
             android:layout_height="165dp"
             android:layout_marginStart="@dimen/margin_29dp"
-            android:layout_marginTop="@dimen/margin_50dp"
+            android:layout_marginTop="165dp"
             android:max="100"
             android:progress="@{mainViewModel.dummyUserAffectionGauge}"
             android:progressDrawable="@drawable/progress_drawable_vertical"

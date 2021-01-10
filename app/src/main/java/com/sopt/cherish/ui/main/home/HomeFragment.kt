@@ -20,6 +20,7 @@ import com.sopt.cherish.ui.datail.DetailPlantActivity
 import com.sopt.cherish.ui.dialog.WateringDialogFragment
 import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
 import com.sopt.cherish.ui.main.MainViewModel
+import com.sopt.cherish.util.PixelUtil.dp
 
 
 /**
@@ -76,8 +77,8 @@ class HomeFragment : Fragment() {
             BottomSheetBehavior.from(binding.homeStandardBottomSheet)
         // bottom sheet state 지정
         standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-        standardBottomSheetBehavior.peekHeight = 600
-        standardBottomSheetBehavior.expandedOffset = 158
+        standardBottomSheetBehavior.peekHeight = 60.dp
+        standardBottomSheetBehavior.expandedOffset = 50.dp
         standardBottomSheetBehavior.isHideable = false
 
         standardBottomSheetBehavior.addBottomSheetCallback(object :
