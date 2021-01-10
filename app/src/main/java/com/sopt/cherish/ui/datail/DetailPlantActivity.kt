@@ -71,7 +71,7 @@ class DetailPlantActivity : AppCompatActivity() {
         }
     }
 
-    private fun setFragment(fragment: Fragment) {
+    fun setFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_detail, fragment)
         transaction.addToBackStack(null)
