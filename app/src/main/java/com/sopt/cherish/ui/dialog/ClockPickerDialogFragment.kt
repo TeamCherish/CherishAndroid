@@ -1,5 +1,6 @@
 package com.sopt.cherish.ui.dialog
 
+import android.content.Context
 import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -34,6 +35,11 @@ class ClockPickerDialogFragment(
         )
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        testDialogFragmentListener = context as TestDialogFragmentListener
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -42,14 +48,8 @@ class ClockPickerDialogFragment(
         val view = inflater.inflate(layoutResId, container, false)
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        testDialogFragmentListener = try {
-            activity as TestDialogFragmentListener
-        } catch (e: ClassCastException) {
-            throw ClassCastException(
-                activity.toString()
-                        + " must implement TestDialogFragmentListener"
-            )
-        }
+        // testDialogFragmentListener = activity as TestDialogFragmentListener
+
         val binding = ClockpickerLayoutBinding.bind(view)
         val clock_hour: NumberPicker = view.findViewById(R.id.numberPicker_clock)
         val clock_minute: NumberPicker = view.findViewById(R.id.numberPicker2_clock)
@@ -58,6 +58,7 @@ class ClockPickerDialogFragment(
         val cancel: Button = view.findViewById(R.id.button_cancel_clock)
         cancel.setOnClickListener {
             dismiss()
+
         }
         val list = resources.getStringArray(R.array.ampm)
 
@@ -87,10 +88,13 @@ class ClockPickerDialogFragment(
             clocktext =
                 clock_hour.value.toString() + ":" + clock_minute.value.toString() + " " + list[clock_ampm.value]
             someAction()
+
             dialog?.dismiss()
 
         }
         return binding.root
+
+
     }
 
     override fun onClick(p0: View?) {
