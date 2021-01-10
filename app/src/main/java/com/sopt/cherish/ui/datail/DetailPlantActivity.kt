@@ -14,7 +14,10 @@ import com.jackandphantom.circularprogressbar.CircleProgressbar
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityDetailPlantBinding
 import com.sopt.cherish.di.Injection
+import com.sopt.cherish.ui.datail.calendar.CalendarFragment
+
 import com.sopt.cherish.ui.domain.MemoListDataclass
+
 
 /**
  * 식물 상세보기
@@ -67,12 +70,11 @@ class DetailPlantActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.home -> {
-
-                //onBackPressed()
+                finish()
                 return true
             }
             R.id.calendar -> {
-
+                setFragment(CalendarFragment())
                 return true
             }
 
@@ -88,6 +90,7 @@ class DetailPlantActivity : AppCompatActivity() {
     private fun setFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_detail, fragment)
+        transaction.addToBackStack(null)
         transaction.commit()
     }
 
