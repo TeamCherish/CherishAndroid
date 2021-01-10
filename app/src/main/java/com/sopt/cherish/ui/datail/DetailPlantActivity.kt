@@ -16,7 +16,6 @@ import com.sopt.cherish.databinding.ActivityDetailPlantBinding
 import com.sopt.cherish.di.Injection
 import com.sopt.cherish.ui.domain.MemoListDataclass
 
-
 /**
  * 식물 상세보기
  */
@@ -37,7 +36,7 @@ class DetailPlantActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-       // initializeViewModel()
+        initializeViewModel()
         binding = ActivityDetailPlantBinding.inflate(layoutInflater)
         setFragment(DetailPlantFragment())
         setActionBarTitle("식물 상세")
@@ -86,13 +85,13 @@ class DetailPlantActivity : AppCompatActivity() {
         }
     }
 
-    fun setFragment(fragment: Fragment){
-        val transaction=supportFragmentManager.beginTransaction()
+    private fun setFragment(fragment: Fragment) {
+        val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_detail, fragment)
         transaction.commit()
     }
 
-    fun setActionBarTitle(title: String?) {
+    private fun setActionBarTitle(title: String?) {
         setSupportActionBar(binding.toolbarDetail)
         val actionBar: ActionBar? = supportActionBar
         if (actionBar != null) {
@@ -101,7 +100,7 @@ class DetailPlantActivity : AppCompatActivity() {
             actionBar.setDisplayShowTitleEnabled(false)
 
             //actionBar.setTitle(title)
-            binding.toolbarDetailTitle.text=title
+            binding.toolbarDetailTitle.text = title
         }
     }
 
