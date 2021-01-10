@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -15,8 +16,9 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentHomeBinding
 import com.sopt.cherish.ui.adapter.HomeCherryListAdapter
+import com.sopt.cherish.ui.datail.DetailPlantActivity
 import com.sopt.cherish.ui.dialog.WateringDialogFragment
-import com.sopt.cherish.ui.enrollment.PhoneBookActivity
+import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
 import com.sopt.cherish.ui.main.MainViewModel
 
 
@@ -53,11 +55,20 @@ class HomeFragment : Fragment() {
             navigatePhoneBook()
         }
 
+        binding.homeDummyFlowerImage.setOnClickListener {
+            navigateDetailPlant()
+        }
+
         setAdapterData(homeCherryListAdapter)
         initializeRecyclerView(binding, homeCherryListAdapter)
 
         updateProgressBar(binding)
         return binding.root
+    }
+
+    private fun navigateDetailPlant() {
+        val intent = Intent(requireContext(), DetailPlantActivity::class.java)
+        startActivity(intent)
     }
 
     private fun initializeBottomSheetBehavior(binding: FragmentHomeBinding) {
@@ -73,7 +84,6 @@ class HomeFragment : Fragment() {
             BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 // 이 코드 때문에 색상이 변경 안되는거 같은데 여기 로직 다시 한번 생각
-                /*
                 if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
                     binding.homeFragment.setBackgroundColor(
                         ContextCompat.getColor(
@@ -81,7 +91,7 @@ class HomeFragment : Fragment() {
                             R.color.cherish_purple
                         )
                     )
-                } */
+                }
             }
 
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
@@ -111,7 +121,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun navigatePhoneBook() {
-        val intent = Intent(context, PhoneBookActivity::class.java)
+        val intent = Intent(context, EnrollmentPhoneActivity::class.java)
         startActivity(intent)
     }
 

@@ -66,6 +66,15 @@
             app:layout_constraintTop_toBottomOf="@+id/home_selected_user_name" />
 
         <ImageView
+            android:id="@+id/home_dummy_flower_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_16dp"
+            android:src="@drawable/img_main_dandelion"
+            app:layout_constraintEnd_toEndOf="@id/home_show_all_alarm"
+            app:layout_constraintTop_toBottomOf="@id/home_show_all_alarm" />
+
+        <ImageView
             android:id="@+id/home_show_all_alarm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -115,7 +124,9 @@
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/home_standardBottomSheet"

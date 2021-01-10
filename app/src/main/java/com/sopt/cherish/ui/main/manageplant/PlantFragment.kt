@@ -10,6 +10,10 @@ import com.sopt.cherish.databinding.FragmentPlantBinding
 import com.sopt.cherish.ui.adapter.MyPageBottomSheetAdapter
 import com.sopt.cherish.ui.domain.MyPageCherryLevelDataclass
 
+/**
+ * Create on 01-08 by Yejin
+ * bottom sheet에서 보여지는 recyclerview fragment
+ */
 
 class PlantFragment : Fragment() {
 
@@ -21,13 +25,13 @@ class PlantFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentPlantBinding.inflate(inflater, container, false)
 
         adapter = MyPageBottomSheetAdapter()
         setAdapterData(adapter)
-        initRecyclerView(binding, adapter)
+        initialRecyclerView(binding, adapter)
 
         return binding.root
     }
@@ -54,7 +58,7 @@ class PlantFragment : Fragment() {
         adapter.notifyDataSetChanged()
     }
 
-    private fun initRecyclerView(
+    private fun initialRecyclerView(
         binding: FragmentPlantBinding,
         mainAdapter: MyPageBottomSheetAdapter
     ) {
