@@ -22,6 +22,8 @@ import com.sopt.cherish.ui.main.MainViewModel
 class ManagePlantFragment : Fragment() {
 
     private val viewModel: MainViewModel by activityViewModels()
+    private var tabIndex: Int = 0
+    private var isCollapsed: Boolean = true
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,22 +54,33 @@ class ManagePlantFragment : Fragment() {
         standardBottomSheetBehavior.addBottomSheetCallback(object :
             BottomSheetBehavior.BottomSheetCallback() {
 
-            val tabIndex = binding.myPageBottomTab.selectedTabPosition
-
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 if (tabIndex == 0) {
-                    if (newState == BottomSheetBehavior.STATE_EXPANDED)
+                    binding.myPageResetBtn.visibility = View.GONE
+                    if (newState == BottomSheetBehavior.STATE_EXPANDED) {
                         binding.myPageAddPlantBtn.visibility = View.VISIBLE
+                        isCollapsed = false
+                    }
 
-                    if (newState == BottomSheetBehavior.STATE_COLLAPSED)
+                    if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
                         binding.myPageAddPlantBtn.visibility = View.GONE
+                        isCollapsed = true
+                    }
+
                 }
                 if (tabIndex == 1) {
-                    if (newState == BottomSheetBehavior.STATE_EXPANDED)
+                    binding.myPageAddPlantBtn.visibility = View.GONE
+                    if (newState == BottomSheetBehavior.STATE_EXPANDED) {
                         binding.myPageResetBtn.visibility = View.VISIBLE
+                        isCollapsed = false
+                    }
 
-                    if (newState == BottomSheetBehavior.STATE_COLLAPSED)
+
+                    if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
                         binding.myPageResetBtn.visibility = View.GONE
+                        isCollapsed = true
+                    }
+
                 }
             }
 
@@ -101,7 +114,23 @@ class ManagePlantFragment : Fragment() {
             override fun onTabReselected(tab: TabLayout.Tab?) {}
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                val tabIndex = binding.myPageBottomTab.selectedTabPosition
+                tabIndex = binding.myPageBottomTab.selectedTabPosition
+
+                if (tabIndex == 0) {
+                    binding.myPageResetBtn.visibility = View.GONE
+                    if (isCollapsed) {
+                        binding.myPageAddPlantBtn.visibility = View.GONE
+                    } else
+                        binding.myPageAddPlantBtn.visibility = View.VISIBLE
+                }
+                if (tabIndex == 1) {
+                    binding.myPageAddPlantBtn.visibility = View.GONE
+                    if (isCollapsed) {
+                        binding.myPageResetBtn.visibility = View.GONE
+                    } else {
+                        binding.myPageResetBtn.visibility = View.VISIBLE
+                    }
+                }
 
                 (activity as MainActivity).replaceFragment(tabIndex)
             }
