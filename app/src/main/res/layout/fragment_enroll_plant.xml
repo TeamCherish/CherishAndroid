@@ -313,7 +313,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        android:background="@drawable/btn_next_selected"
+        style="@style/RoundButton.GreenMain"
         android:text="완료"
         android:textSize="@dimen/text_16sp"
         app:layout_constraintBottom_toBottomOf="parent"

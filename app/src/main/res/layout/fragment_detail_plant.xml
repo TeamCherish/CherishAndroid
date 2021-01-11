@@ -313,7 +313,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:layout_marginBottom="16dp"
-            android:background="@drawable/plantdetail_btn_watering"
+            style="@style/RoundButton.GreenMain"
             android:fontFamily="@font/notosanscjkkr_medium"
             android:includeFontPadding="false"
             android:text="물주기"
