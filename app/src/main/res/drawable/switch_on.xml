@@ -7,13 +7,12 @@
         android:radius="15dp" />
 
     <size
-        android:width="75dp"
-        android:height="25dp" />
+        android:width="34dp"
+        android:height="10dp" />
     <solid
-        android:color="#ffd464" />
-    <stroke
-        android:width="2dp"
-        android:color="#ffd464" />
+        android:color="#1ad287"
+        />
+
 </shape>
 
 

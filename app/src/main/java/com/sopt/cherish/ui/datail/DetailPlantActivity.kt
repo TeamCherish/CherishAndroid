@@ -41,9 +41,13 @@ class DetailPlantActivity : AppCompatActivity() {
         initializeViewModel()
         binding = ActivityDetailPlantBinding.inflate(layoutInflater)
         setFragment(DetailPlantFragment())
+
+
+
         setActionBarTitle("식물 상세")
         setContentView(binding.root)
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val menuInflater = menuInflater
@@ -52,31 +56,42 @@ class DetailPlantActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.home -> {
-                finish()
-                return true
-            }
-            R.id.calendar -> {
-                setFragment(CalendarFragment())
+        val id = item.itemId
+        when (id) {
+            android.R.id.home -> {
+                onBackPressed()
                 return true
             }
 
-            R.id.setting -> {
+        }
+        when (item.itemId) {
+            R.id.calendar -> {
+                val transaction = supportFragmentManager.beginTransaction()
+                transaction.replace(R.id.fragment_detail, CalendarFragment())
+                // if (transaction == null) {
+                transaction.addToBackStack(null)
+                // }
+                transaction.commit()
+
                 return true
             }
-            else -> {
-                return super.onOptionsItemSelected(item)
-            }
         }
+        return super.onOptionsItemSelected(item)
     }
 
     fun setFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_detail, fragment)
-        transaction.addToBackStack(null)
         transaction.commit()
     }
+
+    fun OptionsMenu(menu: Menu): Boolean {
+        menu.getItem(0).isVisible = false //disable menuitem 5
+        menu.getItem(1).isVisible = false // invisible menuitem 2
+        invalidateOptionsMenu()
+        return true
+    }
+
 
     fun setActionBarTitle(title: String?) {
         setSupportActionBar(binding.toolbarDetail)

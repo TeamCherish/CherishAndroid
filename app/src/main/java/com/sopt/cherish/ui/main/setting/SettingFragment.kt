@@ -25,7 +25,18 @@ class SettingFragment : Fragment() {
         val binding: FragmentSettingBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_setting, container, false)
 
+        binding.constraintLayoutAlarm.setOnClickListener {
+            setFragment(SettingAlarmFragment())
+
+        }
+
         return binding.root
+    }
+
+    fun setFragment(fragment: Fragment) {
+        val transaction = parentFragmentManager.beginTransaction()
+        transaction.replace(R.id.main_fragment_container, fragment)
+        transaction.commit()
     }
 
 }

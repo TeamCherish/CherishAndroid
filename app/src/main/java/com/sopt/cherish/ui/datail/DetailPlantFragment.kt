@@ -2,10 +2,7 @@ package com.sopt.cherish.ui.datail
 
 import android.graphics.Rect
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -16,7 +13,9 @@ import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentDetailPlantBinding
 import com.sopt.cherish.di.Injection
 import com.sopt.cherish.ui.adapter.DetailMemoAdapter
+import com.sopt.cherish.ui.datail.calendar.CalendarFragment
 import com.sopt.cherish.ui.domain.MemoListDataclass
+import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
 
 
 class DetailPlantFragment : Fragment() {
@@ -57,14 +56,6 @@ class DetailPlantFragment : Fragment() {
         return binding.root
     }
 
-    override fun onResume() {
-        super.onResume()
-        val activity = activity
-        if (activity != null) {
-            (activity as DetailPlantActivity).setActionBarTitle("식물 상세")
-
-        }
-    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
@@ -73,9 +64,19 @@ class DetailPlantFragment : Fragment() {
                 activity?.finish()
                 return true
             }
+
+        }
+        when (item.itemId) {
+            R.id.calendar -> {
+                val transaction = childFragmentManager.beginTransaction()
+                transaction.replace(R.id.fragment_detail, CalendarFragment())
+                transaction.commit()
+                return true
+            }
         }
         return super.onOptionsItemSelected(item)
     }
+
 
     inner class VerticalSpaceItemDecoration(private val verticalSpaceHeight: Int) :
         RecyclerView.ItemDecoration() {

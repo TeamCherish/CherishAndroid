@@ -106,7 +106,6 @@ class ManagePlantFragment : Fragment() {
                 val tabIndex = binding.myPageBottomTab.selectedTabPosition
 
                 (activity as MainActivity).replaceFragment(tabIndex)
-
             }
         })
 
