@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityMainBinding
 import com.sopt.cherish.di.Injection
+import com.sopt.cherish.ui.enrollment.PhoneBookFragment
 import com.sopt.cherish.ui.main.home.HomeFragment
 import com.sopt.cherish.ui.main.manageplant.ManagePlantFragment
 import com.sopt.cherish.ui.main.manageplant.PlantFragment
@@ -72,8 +73,7 @@ class MainActivity : AppCompatActivity() {
                 transAction.replace(R.id.my_page_bottom_container, PlantFragment()).commit()
             }
             1 -> {
-                //transAction.replace(R.id.my_page_bottom_container,BlankFragment()).commit()
-                //true
+                transAction.replace(R.id.my_page_bottom_container,PhoneBookFragment()).commit()
             }
         }
     }
