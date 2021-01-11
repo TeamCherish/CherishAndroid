@@ -14,6 +14,21 @@
         android:background="#eff1f5"
         tools:context=".ui.main.manageplant.ManagePlantFragment">
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:contentDescription="null"
+            android:id="@+id/my_page_add_plant_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_16dp"
+            android:layout_marginBottom="14dp"
+            android:backgroundTint="@color/cherish_green_main"
+            app:borderWidth="0dp"
+            android:visibility="gone"
+            android:src="@drawable/icon_plus"
+            app:tint="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
         <TextView
             android:id="@+id/my_page_text"
             android:layout_width="wrap_content"
@@ -22,8 +37,8 @@
             app:layout_constraintTop_toTopOf="parent"
             android:textColor="@color/cherish_light_black"
             android:font="@font/notosanscjkkr_medium"
-            android:layout_marginTop="12dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginTop="@dimen/margin_12dp"
+            android:layout_marginStart="@dimen/margin_16dp"
             android:text="My Page"/>
 
         <ImageView
@@ -34,8 +49,8 @@
             app:layout_constraintTop_toTopOf="parent"
             android:src="@drawable/icn_search_box"
             android:contentDescription="StringValue"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="20dp"/>
+            android:layout_marginTop="@dimen/margin_16dp"
+            android:layout_marginEnd="@dimen/margin_20dp"/>
 
 
         <ImageView
@@ -88,7 +103,7 @@
             android:font="@font/notosanscjkkr_bold"
             android:textColor="@color/cherish_light_black"
             android:layout_marginStart="44dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/margin_20dp"
             android:textSize="18sp"
             android:id="@+id/my_page_watering_cnt"/>
 
@@ -123,7 +138,7 @@
             android:font="@font/notosanscjkkr_bold"
             android:textColor="@color/cherish_light_black"
             android:layout_marginStart="49dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/margin_20dp"
             android:textSize="18sp"
             android:id="@+id/my_page_postpone_cnt"/>
 
@@ -157,7 +172,7 @@
             android:font="@font/notosanscjkkr_bold"
             android:textColor="@color/cherish_light_black"
             android:layout_marginStart="49dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/margin_20dp"
             android:textSize="18sp"
             android:id="@+id/my_page_finish_cnt"/>
 
@@ -171,6 +186,7 @@
             android:font="@font/notosanscjkkr_regular"
             android:textColor="@color/cherish_light_black"
             android:textSize="12sp" />
+
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
@@ -200,6 +216,19 @@
                     app:tabMode="scrollable"
                     app:tabSelectedTextColor="@color/cherish_light_black"
                     app:tabTextColor="#aaaaaa" />
+
+                <ImageView
+                    android:contentDescription="null"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/my_page_reset_btn"
+                    android:clickable="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/icn_reset"
+                    android:visibility="gone"
+                    android:layout_marginEnd="22dp"
+                    android:layout_marginTop="@dimen/margin_20dp"/>
 
                 <!-- background color 추가해주세요!-->
                 <TextView

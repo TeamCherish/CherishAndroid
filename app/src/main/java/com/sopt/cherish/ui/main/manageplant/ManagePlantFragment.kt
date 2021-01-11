@@ -1,16 +1,20 @@
 package com.sopt.cherish.ui.main.manageplant
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.databinding.adapters.TextViewBindingAdapter.setText
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayout
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentManagePlantBinding
+import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
 import com.sopt.cherish.ui.main.MainActivity
 import com.sopt.cherish.ui.main.MainViewModel
 
@@ -28,8 +32,12 @@ class ManagePlantFragment : Fragment() {
         val binding: FragmentManagePlantBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_manage_plant, container, false)
 
-        initializeBottomSheetBehavior(binding)
         initializeTabLayoutView(binding)
+        initializeBottomSheetBehavior(binding)
+
+        binding.myPageAddPlantBtn.setOnClickListener{
+            navigatePhoneBook()
+        }
 
         return binding.root
     }
@@ -44,9 +52,25 @@ class ManagePlantFragment : Fragment() {
         standardBottomSheetBehavior.isHideable = false
 
         standardBottomSheetBehavior.addBottomSheetCallback(object :
-            BottomSheetBehavior.BottomSheetCallback() { //모달 처리 추후 수정
-            override fun onStateChanged(bottomSheet: View, newState: Int) {
+            BottomSheetBehavior.BottomSheetCallback() {
 
+            val tabIndex = binding.myPageBottomTab.selectedTabPosition
+
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                if(tabIndex==0){
+                    if(newState==BottomSheetBehavior.STATE_EXPANDED)
+                        binding.myPageAddPlantBtn.visibility = View.VISIBLE
+
+                    if(newState==BottomSheetBehavior.STATE_COLLAPSED)
+                        binding.myPageAddPlantBtn.visibility=View.GONE
+                }
+                if(tabIndex==1){
+                    if(newState==BottomSheetBehavior.STATE_EXPANDED)
+                        binding.myPageResetBtn.visibility = View.VISIBLE
+
+                    if(newState==BottomSheetBehavior.STATE_COLLAPSED)
+                        binding.myPageResetBtn.visibility=View.GONE
+                }
             }
 
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
@@ -86,6 +110,11 @@ class ManagePlantFragment : Fragment() {
             }
         })
 
+    }
+
+    private fun navigatePhoneBook() {
+        val intent = Intent(context, EnrollmentPhoneActivity::class.java)
+        startActivity(intent)
     }
 
 }
