@@ -46,6 +46,7 @@ class WateringDialogFragment : DialogFragment(), View.OnClickListener {
     }
 
     private fun navigateNextTimeContact() {
+        DelayWateringDialogFragment().show(parentFragmentManager, TAG)
         dismiss()
     }
 
@@ -55,6 +56,6 @@ class WateringDialogFragment : DialogFragment(), View.OnClickListener {
 
     override fun onResume() {
         super.onResume()
-        DialogUtil.adjustDialogSize(this, 0.875f, 0.542f)
+        DialogUtil.adjustDialogSize(this, 0.875f, 0.57f)
     }
 }
