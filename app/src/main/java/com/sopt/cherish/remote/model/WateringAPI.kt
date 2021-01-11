@@ -28,3 +28,5 @@ data class ReviewWateringRes(
     // 이거 질문 있음
     val reviewWateringResponse: UtilResponse,
 )
+
+interface WateringAPI

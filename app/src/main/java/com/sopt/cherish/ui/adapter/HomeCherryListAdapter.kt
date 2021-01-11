@@ -4,15 +4,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sopt.cherish.databinding.MainCherryItemBinding
-import com.sopt.cherish.ui.domain.CherryDataclass
+import com.sopt.cherish.remote.model.User
 
 class HomeCherryListAdapter : RecyclerView.Adapter<HomeCherryListAdapter.MainViewHolder>() {
-    var data = mutableListOf<CherryDataclass>()
+    var data = mutableListOf<User>()
 
     class MainViewHolder(private val binding: MainCherryItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(testData: CherryDataclass) {
-            binding.mainUserName.text = testData.name
+        fun bind(userData: User) {
+            binding.homeUserData = userData
         }
     }
 

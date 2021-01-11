@@ -13,3 +13,5 @@ data class DetailPlantData(
     @SerializedName("description") val description: String,
     @SerializedName("image_url") val imageUrl: String,
 )
+
+interface PlantDetailAPI

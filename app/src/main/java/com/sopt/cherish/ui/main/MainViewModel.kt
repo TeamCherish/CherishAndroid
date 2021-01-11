@@ -1,14 +1,21 @@
 package com.sopt.cherish.ui.main
 
 import android.net.Uri
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.sopt.cherish.remote.model.UserResult
+import com.sopt.cherish.repository.MainRepository
 import com.sopt.cherish.ui.domain.CherryDataclass
+import kotlinx.coroutines.launch
 
 /**
  * Created by SSong-develop on 2020-12-30
  */
 
-class MainViewModel : ViewModel() {
+class MainViewModel(
+    private val mainRepository: MainRepository
+) : ViewModel() {
     private val dummyLoginUserName = "또령"
 
     val dummyUserName = "남쿵둥이"
@@ -44,4 +51,14 @@ class MainViewModel : ViewModel() {
     val dummyUserAffectionText = "70"
     val dummyUserCount = dummyCherry.size.toString()
 
+    // Server connection
+    private val dummyUserId = 1
+
+    private val _users = MutableLiveData<UserResult>()
+    val users: MutableLiveData<UserResult>
+        get() = _users
+
+    fun fetchUsers() = viewModelScope.launch {
+        _users.postValue(mainRepository.fetchCherishUser(dummyUserId))
+    }
 }

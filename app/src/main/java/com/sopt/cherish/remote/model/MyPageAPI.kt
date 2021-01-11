@@ -16,3 +16,5 @@ data class MyPageUserRes(
     val myPageUserResponse: UtilResponse,
     @SerializedName("data") val myPageUserData: MyPageUserData
 )
+
+interface MyPageAPI
