@@ -81,15 +81,7 @@ class ManagePlantFragment : Fragment() {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 val tabIndex = binding.myPageBottomTab.selectedTabPosition
 
-                when (tabIndex) {
-                    0 -> {
-                        (activity as MainActivity).replaceFragment(tabIndex)
-                    }
-                    /*
-                    1->{
-                        (activity as MainActivity).replaceFragment(tabIndex) -> 나영이 부분 붙여야함. 아마도?
-                    } */
-                }
+                (activity as MainActivity).replaceFragment(tabIndex)
 
             }
         })

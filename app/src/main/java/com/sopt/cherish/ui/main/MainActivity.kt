@@ -73,8 +73,7 @@ class MainActivity : AppCompatActivity() {
                 transAction.replace(R.id.my_page_bottom_container, PlantFragment()).commit()
             }
             1 -> {
-                //transAction.replace(R.id.my_page_bottom_container,BlankFragment()).commit()
-                //true
+                transAction.replace(R.id.my_page_bottom_container,PhoneBookFragment()).commit()
             }
         }
     }
