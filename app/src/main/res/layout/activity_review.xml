@@ -73,10 +73,10 @@
                     style="@style/CustomEditText"
                     android:layout_width="match_parent"
                     android:layout_height="44dp"
-                    android:layout_marginTop="28dp"
                     android:fontFamily="@font/notosanscjkkr_regular"
                     android:hint="@string/review_keyword_text"
                     android:includeFontPadding="false"
+                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent" />
 
@@ -87,7 +87,6 @@
                     app:alignContent="stretch"
                     app:alignItems="stretch"
                     app:flexWrap="wrap"
-                    app:layout_constraintBottom_toTopOf="@id/review_memo"
                     app:layout_constraintEnd_toStartOf="@id/review_max_keyword"
                     app:layout_constraintStart_toStartOf="@id/review_edit_keyword"
                     app:layout_constraintTop_toBottomOf="@id/review_edit_keyword" />
