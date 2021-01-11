@@ -18,6 +18,10 @@ class MainViewModel(
 ) : ViewModel() {
     private val dummyLoginUserName = "또령"
 
+    init {
+
+    }
+
     val dummyUserName = "남쿵둥이"
     val contactDummyUserName = "${dummyUserName}와는"
 
@@ -51,8 +55,8 @@ class MainViewModel(
     val dummyUserAffectionText = "70"
     val dummyUserCount = dummyCherry.size.toString()
 
-    // Server connection
-    private val dummyUserId = 1
+    // [home] Server connection
+    private val dummyUserId = 1 // login 시 서버에서 가져온 id 값을 그대로 사용하면 됨
 
     private val _users = MutableLiveData<UserResult>()
     val users: MutableLiveData<UserResult>
@@ -61,4 +65,11 @@ class MainViewModel(
     fun fetchUsers() = viewModelScope.launch {
         _users.postValue(mainRepository.fetchCherishUser(dummyUserId))
     }
+
+    // [MyPage] Server connection it has an error!~!!
+/*    lateinit var myPageUserData : MyPageUserRes
+    private fun fetchMyPageUserData() = viewModelScope.launch {
+        myPageUserData = mainRepository.fetchCherishUserPageData(dummyUserId)
+    }*/
+
 }

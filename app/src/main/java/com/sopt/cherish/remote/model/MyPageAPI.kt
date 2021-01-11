@@ -1,6 +1,8 @@
 package com.sopt.cherish.remote.model
 
 import com.google.gson.annotations.SerializedName
+import retrofit2.http.GET
+import retrofit2.http.Path
 
 // Request param id
 // MyPage 조회
@@ -17,4 +19,9 @@ data class MyPageUserRes(
     @SerializedName("data") val myPageUserData: MyPageUserData
 )
 
-interface MyPageAPI
+interface MyPageAPI {
+    @GET("user/{id}")
+    suspend fun fetchUserPage(
+        @Path("id") userId: Int
+    ): MyPageUserRes
+}

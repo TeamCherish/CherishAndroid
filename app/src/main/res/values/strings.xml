@@ -48,4 +48,10 @@
     <string name="dialog_delay_watering_sub_description">(현재까지 미룬 횟수</string>
     <string name="dialog_delay_watering_sub_description_next_word">회)</string>
     <string name="dialog_delay_watering_admin_text">확인</string>
+
+    <string name="myPage_title_text">My Page</string>
+    <string name="myPage_user_description_text">의 체리쉬가든</string>
+    <string name="myPage_watering_text">물주기 횟수</string>
+    <string name="myPage_postpone_text">미룬 횟수</string>
+    <string name="myPage_complete_text">성장완료</string>
 </resources>
