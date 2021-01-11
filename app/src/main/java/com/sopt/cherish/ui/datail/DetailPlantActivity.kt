@@ -48,16 +48,11 @@ class DetailPlantActivity : AppCompatActivity() {
         setContentView(binding.root)
     }
 
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val menuInflater = menuInflater
         menuInflater.inflate(R.menu.toolbar_menu, menu)
         return true
-    }
-
-
-    override fun onOptionsMenuClosed(menu: Menu?) {
-        super.onOptionsMenuClosed(menu)
-        setVisible(false)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -73,10 +68,11 @@ class DetailPlantActivity : AppCompatActivity() {
             R.id.calendar -> {
                 val transaction = supportFragmentManager.beginTransaction()
                 transaction.replace(R.id.fragment_detail, CalendarFragment())
-                if (transaction == null) {
-                    transaction.addToBackStack(null)
-                }
+                // if (transaction == null) {
+                transaction.addToBackStack(null)
+                // }
                 transaction.commit()
+
                 return true
             }
         }
@@ -88,6 +84,14 @@ class DetailPlantActivity : AppCompatActivity() {
         transaction.replace(R.id.fragment_detail, fragment)
         transaction.commit()
     }
+
+    fun OptionsMenu(menu: Menu): Boolean {
+        menu.getItem(0).isVisible = false //disable menuitem 5
+        menu.getItem(1).isVisible = false // invisible menuitem 2
+        invalidateOptionsMenu()
+        return true
+    }
+
 
     fun setActionBarTitle(title: String?) {
         setSupportActionBar(binding.toolbarDetail)

@@ -55,7 +55,9 @@ class DetailPlantFragment : Fragment() {
 
         return binding.root
     }
-/*    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
         when (id) {
             android.R.id.home -> {
@@ -64,8 +66,8 @@ class DetailPlantFragment : Fragment() {
             }
 
         }
-        when (item.itemId){
-            R.id.calendar->{
+        when (item.itemId) {
+            R.id.calendar -> {
                 val transaction = childFragmentManager.beginTransaction()
                 transaction.replace(R.id.fragment_detail, CalendarFragment())
                 transaction.commit()
@@ -73,7 +75,7 @@ class DetailPlantFragment : Fragment() {
             }
         }
         return super.onOptionsItemSelected(item)
-    }*/
+    }
 
 
     inner class VerticalSpaceItemDecoration(private val verticalSpaceHeight: Int) :

@@ -11,6 +11,7 @@ import androidx.fragment.app.DialogFragment
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.SampleLottie2Binding
 import com.sopt.cherish.databinding.SampleLottieBinding
+import com.sopt.cherish.databinding.SampleWordcountErrorBinding
 import com.sopt.cherish.util.DialogUtil
 
 /**
@@ -37,6 +38,10 @@ class CustomDialogFragment(
             }
             R.layout.sample_lottie2 -> {
                 val binding = SampleLottie2Binding.bind(view)
+                binding.root
+            }
+            R.layout.sample_wordcount_error -> {
+                val binding = SampleWordcountErrorBinding.bind(view)
                 binding.root
             }
             else -> {
