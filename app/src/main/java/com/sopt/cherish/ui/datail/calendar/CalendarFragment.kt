@@ -3,8 +3,6 @@ package com.sopt.cherish.ui.datail.calendar
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.*
-import androidx.appcompat.app.ActionBar
-import androidx.core.app.ActivityCompat.invalidateOptionsMenu
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment

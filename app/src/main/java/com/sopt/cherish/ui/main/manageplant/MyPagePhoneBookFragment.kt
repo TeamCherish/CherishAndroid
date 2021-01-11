@@ -2,11 +2,7 @@ package com.sopt.cherish.ui.enrollment
 
 import android.os.Bundle
 import android.provider.ContactsContract
-import android.text.Editable
-import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
@@ -14,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentMyPagePhoneBookBinding
-import com.sopt.cherish.databinding.FragmentPhoneBookBinding
 import com.sopt.cherish.ui.adapter.Phone
 import com.sopt.cherish.ui.adapter.PhoneBookAdapter
 

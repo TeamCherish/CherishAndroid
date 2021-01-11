@@ -8,10 +8,8 @@ import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityMainBinding
 import com.sopt.cherish.di.Injection
 import com.sopt.cherish.ui.enrollment.MyPagePhoneBookFragment
-import com.sopt.cherish.ui.enrollment.PhoneBookFragment
 import com.sopt.cherish.ui.main.home.HomeFragment
 import com.sopt.cherish.ui.main.manageplant.ManagePlantFragment
-
 import com.sopt.cherish.ui.main.manageplant.PlantFragment
 import com.sopt.cherish.ui.main.setting.SettingFragment
 

@@ -43,4 +43,9 @@
     <string name="home_watering_text">물주기</string>
     <string name="home_user_add_text">추가하기</string>
 
+    <string name="dialog_delay_watering_text">일 후 물주기</string>
+    <string name="dialog_delay_watering_description">*미루기는 세번까지만 가능해요</string>
+    <string name="dialog_delay_watering_sub_description">(현재까지 미룬 횟수</string>
+    <string name="dialog_delay_watering_sub_description_next_word">회)</string>
+    <string name="dialog_delay_watering_admin_text">확인</string>
 </resources>
