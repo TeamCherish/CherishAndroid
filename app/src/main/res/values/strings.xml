@@ -34,6 +34,9 @@
     <string name="review_admin_button_text">등록완료</string>
     <string name="review_pass_button_text">건너뛰기</string>
     <string name="review_limit_chips_number_text">키워드는 3개까지 쓸 수 있어요!</string>
+    <string name="review_max_keyword">5</string>
+    <string name="review_max_memo">100</string>
+    <string name="review_word_count_divider">/</string>
 
     <string name="home_user_affection">애정도</string>
     <string name="home_bottom_sheet_title_text">나의 소중한 사람들</string>

@@ -3,6 +3,7 @@ package com.sopt.cherish.ui.datail.calendar
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
@@ -12,6 +13,7 @@ import androidx.fragment.app.activityViewModels
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentCalendarBinding
+import com.sopt.cherish.ui.datail.DetailPlantActivity
 import com.sopt.cherish.ui.datail.DetailPlantViewModel
 import com.sopt.cherish.util.extension.FlexBoxExtension.addChip
 import com.sopt.cherish.util.extension.FlexBoxExtension.clearChips
@@ -32,6 +34,27 @@ class CalendarFragment : Fragment() {
         initializeCalendar(binding)
         return binding.root
     }
+
+    override fun onResume() {
+        super.onResume()
+        val activity = activity
+        if (activity != null) {
+            (activity as DetailPlantActivity).setActionBarTitle("식물 캘린더")
+
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId
+        when (id) {
+            android.R.id.home -> {
+                activity?.finish()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
 
     private fun initializeCalendar(binding: FragmentCalendarBinding) {
         allowCalendarCache(binding)

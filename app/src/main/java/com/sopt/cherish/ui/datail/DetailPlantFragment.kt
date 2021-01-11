@@ -3,6 +3,7 @@ package com.sopt.cherish.ui.datail
 import android.graphics.Rect
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
@@ -54,6 +55,26 @@ class DetailPlantFragment : Fragment() {
         binding.recyclerDetail.setHasFixedSize(true)
 
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val activity = activity
+        if (activity != null) {
+            (activity as DetailPlantActivity).setActionBarTitle("식물 상세")
+
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val id = item.itemId
+        when (id) {
+            android.R.id.home -> {
+                activity?.finish()
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     inner class VerticalSpaceItemDecoration(private val verticalSpaceHeight: Int) :
