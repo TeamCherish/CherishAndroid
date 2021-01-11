@@ -4,8 +4,8 @@
     android:shape="oval">
 
     <size
-        android:width="12dp"
-        android:height="12dp" />
+        android:width="20dp"
+        android:height="20dp" />
 
     <solid android:color="@color/cherish_green_main" />
 
