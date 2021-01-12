@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatDialog
 import androidx.fragment.app.Fragment
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentEnrollPlantBinding
-import com.sopt.cherish.remote.api.RetrofitBuilder
+
 import com.sopt.cherish.remote.model.RequestEnrollData
 import com.sopt.cherish.remote.model.ResponseEnrollData
 import com.sopt.cherish.ui.dialog.ClockPickerDialogFragment
@@ -62,7 +62,7 @@ class EnrollPlantFragment : Fragment() {
                 cycle_date =7 ,
                 notice_time ="15:00" ,
             UserId= 2)
-            val call: Call<ResponseEnrollData> = RetrofitBuilder.retrofitService.postUsers(body)
+            /*val call: Call<ResponseEnrollData> = RetrofitBuilder.retrofitService.postUsers(body)
             call.enqueue(object : Callback<ResponseEnrollData> {
                 override fun onFailure(call: Call<ResponseEnrollData>, t: Throwable) {
                     Log.d("response", "실패")
@@ -100,7 +100,7 @@ class EnrollPlantFragment : Fragment() {
                 }
             })
 
-
+*/
 
 
             //val intent = Intent(context, ResultPlantActivity::class.java)

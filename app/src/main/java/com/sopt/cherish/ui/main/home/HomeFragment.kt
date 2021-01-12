@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentHomeBinding
+import com.sopt.cherish.remote.api.User
 import com.sopt.cherish.ui.adapter.HomeCherryListAdapter
 import com.sopt.cherish.ui.datail.DetailPlantActivity
 import com.sopt.cherish.ui.dialog.WateringDialogFragment
@@ -84,7 +85,6 @@ class HomeFragment : Fragment() {
         standardBottomSheetBehavior.addBottomSheetCallback(object :
             BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
-                // 이 코드 때문에 색상이 변경 안되는거 같은데 여기 로직 다시 한번 생각
                 if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
                     binding.homeFragment.setBackgroundColor(
                         ContextCompat.getColor(
@@ -96,15 +96,17 @@ class HomeFragment : Fragment() {
             }
 
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                // 이건 작동 잘함
                 transitionBottomSheetParentView(binding, slideOffset)
             }
         })
     }
 
     private fun setAdapterData(homeCherryListAdapter: HomeCherryListAdapter) {
-        homeCherryListAdapter.data = viewModel.dummyCherry
-        homeCherryListAdapter.notifyDataSetChanged()
+        viewModel.fetchUsers()
+        viewModel.users.observe(viewLifecycleOwner) {
+            homeCherryListAdapter.data = it.userData.userList as MutableList<User>
+            homeCherryListAdapter.notifyDataSetChanged()
+        }
     }
 
     private fun initializeRecyclerView(
@@ -128,7 +130,7 @@ class HomeFragment : Fragment() {
 
     private fun transitionBottomSheetParentView(binding: FragmentHomeBinding, slideOffset: Float) {
         val argbEvaluator =
-            ArgbEvaluator().evaluate(slideOffset, R.color.cherish_purple, R.color.cherish_purple)
+            ArgbEvaluator().evaluate(slideOffset, R.color.cherish_purple, R.color.cherish_black)
         binding.homeFragment.setBackgroundColor(argbEvaluator as Int)
     }
 

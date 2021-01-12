@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatDialog
 import androidx.fragment.app.Fragment
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentResultPlantBinding
-import com.sopt.cherish.remote.api.RetrofitBuilder
+
 import com.sopt.cherish.remote.model.ResponseEnrollData
 import retrofit2.Call
 import retrofit2.Callback

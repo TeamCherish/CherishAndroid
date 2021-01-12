@@ -4,6 +4,9 @@
 
     <data>
 
+        <variable
+            name="mainViewModel"
+            type="com.sopt.cherish.ui.main.MainViewModel" />
     </data>
 
     <!-- background color 추가해주세요!-->
@@ -15,7 +18,6 @@
         tools:context=".ui.main.manageplant.ManagePlantFragment">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:contentDescription="null"
             android:id="@+id/my_page_add_plant_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -39,7 +41,7 @@
             android:font="@font/notosanscjkkr_medium"
             android:layout_marginTop="@dimen/margin_12dp"
             android:layout_marginStart="@dimen/margin_16dp"
-            android:text="My Page"/>
+            android:text="@string/myPage_title_text" />
 
         <ImageView
             android:id="@+id/search_box"
@@ -48,7 +50,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:src="@drawable/icn_search_box"
-            android:contentDescription="StringValue"
             android:layout_marginTop="@dimen/margin_16dp"
             android:layout_marginEnd="@dimen/margin_20dp"/>
 
@@ -60,7 +61,6 @@
             app:layout_constraintStart_toStartOf="@+id/my_page_text"
             app:layout_constraintTop_toBottomOf="@+id/my_page_text"
             android:src="@drawable/img_mypage_user"
-            android:contentDescription="StringValue"
             android:layout_marginTop="38dp" />
 
         <TextView
@@ -74,6 +74,7 @@
             android:font="@font/notosanscjkkr_bold"
             android:textColor="@color/cherish_light_black"
             android:id="@+id/my_page_user_name"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -81,7 +82,7 @@
             app:layout_constraintTop_toTopOf="@+id/my_page_user_name"
             android:font="@font/notosanscjkkr_bold"
             android:textColor="@color/cherish_light_black"
-            android:text="의 체리쉬 가든"/>
+            android:text="@string/myPage_user_description_text" />
 
         <ImageView
             android:layout_width="328dp"
@@ -91,7 +92,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="25dp"
             android:id="@+id/my_page_box"
-            android:contentDescription="StringValue"
             android:background="@drawable/my_page_box"/>
 
         <TextView
@@ -99,7 +99,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@+id/my_page_box"
             app:layout_constraintTop_toTopOf="@+id/my_page_box"
-            android:text="12"
+            android:text=""
             android:font="@font/notosanscjkkr_bold"
             android:textColor="@color/cherish_light_black"
             android:layout_marginStart="44dp"
@@ -113,7 +113,7 @@
             app:layout_constraintTop_toBottomOf="@+id/my_page_watering_cnt"
             app:layout_constraintStart_toStartOf="@+id/my_page_watering_cnt"
             app:layout_constraintEnd_toEndOf="@+id/my_page_watering_cnt"
-            android:text="물주기 횟수"
+            android:text="@string/myPage_watering_text"
             android:font="@font/notosanscjkkr_regular"
             android:textColor="@color/cherish_light_black"
             android:textSize="12sp" />
@@ -134,7 +134,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@+id/divide_bar_1"
             app:layout_constraintTop_toTopOf="@+id/my_page_box"
-            android:text="4"
+            android:text=""
             android:font="@font/notosanscjkkr_bold"
             android:textColor="@color/cherish_light_black"
             android:layout_marginStart="49dp"
@@ -148,7 +148,7 @@
             app:layout_constraintTop_toBottomOf="@+id/my_page_postpone_cnt"
             app:layout_constraintStart_toStartOf="@+id/my_page_postpone_cnt"
             app:layout_constraintEnd_toEndOf="@+id/my_page_postpone_cnt"
-            android:text="미룬 횟수"
+            android:text="@string/myPage_postpone_text"
             android:font="@font/notosanscjkkr_regular"
             android:textColor="@color/cherish_light_black"
             android:textSize="12sp" />
@@ -168,7 +168,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toEndOf="@+id/divide_bar_2"
             app:layout_constraintTop_toTopOf="@+id/my_page_box"
-            android:text="8"
+            android:text=""
             android:font="@font/notosanscjkkr_bold"
             android:textColor="@color/cherish_light_black"
             android:layout_marginStart="49dp"
@@ -182,7 +182,7 @@
             app:layout_constraintTop_toBottomOf="@+id/my_page_finish_cnt"
             app:layout_constraintStart_toStartOf="@+id/my_page_finish_cnt"
             app:layout_constraintEnd_toEndOf="@+id/my_page_finish_cnt"
-            android:text="성장완료"
+            android:text="@string/myPage_complete_text"
             android:font="@font/notosanscjkkr_regular"
             android:textColor="@color/cherish_light_black"
             android:textSize="12sp" />

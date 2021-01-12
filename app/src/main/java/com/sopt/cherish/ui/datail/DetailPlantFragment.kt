@@ -13,8 +13,8 @@ import com.jackandphantom.circularprogressbar.CircleProgressbar
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentDetailPlantBinding
 import com.sopt.cherish.di.Injection
-import com.sopt.cherish.remote.api.RetrofitBuilder
 import com.sopt.cherish.remote.model.ResponseDetailData
+import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.adapter.DetailMemoAdapter
 import com.sopt.cherish.ui.datail.calendar.CalendarFragment
 import com.sopt.cherish.ui.domain.MemoListDataclass

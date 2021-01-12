@@ -1,15 +1,26 @@
 package com.sopt.cherish.ui.main
 
 import android.net.Uri
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.sopt.cherish.remote.api.UserResult
+import com.sopt.cherish.repository.MainRepository
 import com.sopt.cherish.ui.domain.CherryDataclass
+import kotlinx.coroutines.launch
 
 /**
  * Created by SSong-develop on 2020-12-30
  */
 
-class MainViewModel : ViewModel() {
+class MainViewModel(
+    private val mainRepository: MainRepository
+) : ViewModel() {
     private val dummyLoginUserName = "또령"
+
+    init {
+
+    }
 
     val dummyUserName = "남쿵둥이"
     val contactDummyUserName = "${dummyUserName}와는"
@@ -43,5 +54,22 @@ class MainViewModel : ViewModel() {
     val dummyUserAffectionGauge = 70
     val dummyUserAffectionText = "70"
     val dummyUserCount = dummyCherry.size.toString()
+
+    // [home] Server connection
+    private val dummyUserId = 1 // login 시 서버에서 가져온 id 값을 그대로 사용하면 됨
+
+    private val _users = MutableLiveData<UserResult>()
+    val users: MutableLiveData<UserResult>
+        get() = _users
+
+    fun fetchUsers() = viewModelScope.launch {
+        _users.postValue(mainRepository.fetchCherishUser(dummyUserId))
+    }
+
+    // [MyPage] Server connection it has an error!~!!
+/*    lateinit var myPageUserData : MyPageUserRes
+    private fun fetchMyPageUserData() = viewModelScope.launch {
+        myPageUserData = mainRepository.fetchCherishUserPageData(dummyUserId)
+    }*/
 
 }
