@@ -2,16 +2,18 @@ package com.sopt.cherish.ui.datail
 
 import android.graphics.Rect
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jackandphantom.circularprogressbar.CircleProgressbar
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentDetailPlantBinding
-import com.sopt.cherish.di.Injection
 import com.sopt.cherish.ui.adapter.DetailMemoAdapter
 import com.sopt.cherish.ui.datail.calendar.CalendarFragment
 import com.sopt.cherish.ui.domain.MemoListDataclass
@@ -20,7 +22,7 @@ import com.sopt.cherish.ui.domain.MemoListDataclass
 class DetailPlantFragment : Fragment() {
 
     private lateinit var circleProgressbar: CircleProgressbar
-    private lateinit var viewModel: DetailPlantViewModel
+    private val viewModel: DetailPlantViewModel by activityViewModels()
 
     var memoList = arrayListOf<MemoListDataclass>(
         MemoListDataclass("12/2", "다음주에 대머리쉬 출근"),
@@ -30,12 +32,9 @@ class DetailPlantFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-
+    ): View {
         val binding: FragmentDetailPlantBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_detail_plant, container, false)
-        initializeViewModel()
 
         // 유저 원형 프로그레스바 보여주는 부분
         circleProgressbar = binding.test
@@ -87,15 +86,4 @@ class DetailPlantFragment : Fragment() {
             outRect.bottom = verticalSpaceHeight
         }
     }
-
-    private fun initializeViewModel() {
-        viewModel =
-            ViewModelProvider(
-                this@DetailPlantFragment,
-                Injection.provideDetailViewModelFactory()
-            ).get(
-                DetailPlantViewModel::class.java
-            )
-    }
-
 }

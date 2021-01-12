@@ -12,6 +12,7 @@ import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentCalendarBinding
 import com.sopt.cherish.ui.datail.DetailPlantActivity
 import com.sopt.cherish.ui.datail.DetailPlantViewModel
+import com.sopt.cherish.util.DateUtil
 import com.sopt.cherish.util.extension.FlexBoxExtension.addChip
 import com.sopt.cherish.util.extension.FlexBoxExtension.clearChips
 import com.sopt.cherish.util.extension.hideKeyboard
@@ -21,6 +22,7 @@ import com.sopt.cherish.view.calendar.DotDecorator
 class CalendarFragment : Fragment() {
     private val viewModel: DetailPlantViewModel by activityViewModels()
 
+    private var testBool = true
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -28,8 +30,12 @@ class CalendarFragment : Fragment() {
         setHasOptionsMenu(true)
         val binding: FragmentCalendarBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_calendar, container, false)
-
+        // kotlin에서 받을 때 DateFormat으로 받기
+        viewModel.fetchCalendarData()
+        binding.detailPlantViewModel = viewModel
         initializeCalendar(binding)
+
+        // viewModel 작업
 
         return binding.root
     }
@@ -77,32 +83,65 @@ class CalendarFragment : Fragment() {
     private fun addDecorator(binding: FragmentCalendarBinding) {
         val colorPinkSub = ContextCompat.getColor(requireContext(), R.color.cherish_green_sub)
         val colorGreenSub = ContextCompat.getColor(requireContext(), R.color.cherish_pink_sub)
-
-        viewModel.dummyNeedWateringListDay.forEach {
-            binding.calendarView.addDecorator(DotDecorator(colorGreenSub, it))
+        viewModel.calendarData.observe(viewLifecycleOwner) {
+            binding.calendarView.addDecorator(
+                DotDecorator(
+                    colorPinkSub,
+                    DateUtil.convertDateToCalendarDay(it.waterData.futureWaterDate)
+                )
+            )
+            it.waterData.calendarData.forEach {
+                binding.calendarView.addDecorator(
+                    DotDecorator(
+                        colorGreenSub,
+                        DateUtil.convertDateToCalendarDay(it.wateredDate)
+                    )
+                )
+            }
         }
-        viewModel.dummyWateringListDay.forEach {
-            binding.calendarView.addDecorator(DotDecorator(colorPinkSub, it))
-        }
+        /*binding.calendarView.addDecorator(DotDecorator(colorPinkSub,viewModel.futureWateringDay))*/
     }
 
     private fun takeNotes(binding: FragmentCalendarBinding) {
         // 메모를 할 수 있게하다 라는 뜻을 원하는데 마땅히 떠오르는게 없어서 일단 이케 적음
         binding.calendarViewMemoCreateBtn.setOnClickListener { view ->
-            view.showKeyboard()
-            binding.calendarView.changeCalendarModeWeeks()
-        }
-        binding.testImageBtn.setOnClickListener { view ->
-            view.hideKeyboard()
-            binding.calendarView.changeCalendarModeMonths()
+            if (testBool) {
+                view.showKeyboard()
+                binding.calendarView.changeCalendarModeWeeks()
+                testBool = false
+            } else {
+                view.hideKeyboard()
+                binding.calendarView.changeCalendarModeMonths()
+                testBool = true
+            }
+
         }
     }
 
     private fun addDateClickListener(binding: FragmentCalendarBinding) {
         binding.calendarView.setOnDateChangedListener { widget, date, selected ->
             showDate(binding, date)
-            showMemo(binding)
-            showChips(binding)
+            binding.calendarViewChipLayout.clearChips()
+            viewModel.calendarData.observe(viewLifecycleOwner) {
+                val wateredDayList = mutableListOf<CalendarDay?>()
+                val waterDayMemoList = mutableListOf<String?>()
+                val waterDayChipList = mutableListOf<List<String?>>()
+                it.waterData.calendarData.forEach {
+                    wateredDayList.add(DateUtil.convertDateToCalendarDay(it.wateredDate))
+                    waterDayMemoList.add(it.review)
+                    waterDayChipList.add(listOf(it.userStatus1, it.userStatus2, it.userStatus3))
+                }
+                // 함수화 해야합니다.
+                for (i in 0 until wateredDayList.size) {
+                    if (wateredDayList[i] == date) {
+                        waterDayMemoList[i]?.let { it1 -> showMemo(binding, it1) }
+                        showChips(binding, waterDayChipList[i])
+                        break
+                    } else {
+                        binding.reviewAllText.text = " "
+                    }
+                }
+            }
         }
     }
 
@@ -111,15 +150,15 @@ class CalendarFragment : Fragment() {
         binding.calendarViewSelectedDate.text = "${date.year}년 ${date.month}월 ${date.day}일"
     }
 
-    private fun showChips(binding: FragmentCalendarBinding) {
+    private fun showChips(binding: FragmentCalendarBinding, wateredChip: List<String?>) {
         binding.calendarViewChipLayout.clearChips()
-        viewModel.dummyChips.forEach {
-            binding.calendarViewChipLayout.addChip(it)
+        wateredChip.forEach {
+            it?.let { it1 -> binding.calendarViewChipLayout.addChip(it1) }
         }
     }
 
-    private fun showMemo(binding: FragmentCalendarBinding) {
+    private fun showMemo(binding: FragmentCalendarBinding, waterMemo: String) {
         binding.reviewAllText.text = " "
-        binding.reviewAllText.text = viewModel.dummyMemo
+        binding.reviewAllText.text = waterMemo
     }
 }

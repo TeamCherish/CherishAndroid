@@ -1,9 +1,18 @@
 package com.sopt.cherish.ui.datail
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.prolificinteractive.materialcalendarview.CalendarDay
+import com.sopt.cherish.remote.api.CalendarRes
+import com.sopt.cherish.repository.DetailPlantRepository
+import com.sopt.cherish.util.DateUtil
+import kotlinx.coroutines.launch
 
-class DetailPlantViewModel : ViewModel() {
+class DetailPlantViewModel(
+    private val detailPlantRepository: DetailPlantRepository
+) : ViewModel() {
+
     val dummyWateringListDay = listOf(
         CalendarDay.from(2021, 1, 10),
         CalendarDay.from(2021, 1, 13)
@@ -18,4 +27,26 @@ class DetailPlantViewModel : ViewModel() {
     val dummyChips = listOf(
         "인생이란", "왜 항상 배고픈걸까", "곱창먹고싶다"
     )
+
+    // Keyword , Review 조회하기
+    private val dummyCherishId = 1
+
+    private val _calendarData = MutableLiveData<CalendarRes>()
+    val calendarData: MutableLiveData<CalendarRes>
+        get() = _calendarData
+
+    fun fetchCalendarData() = viewModelScope.launch {
+        _calendarData.postValue(detailPlantRepository.fetchCalendarData(dummyCherishId))
+    }
+
+
+    @JvmName("CustomGetWateredDay")
+    fun getWateredDay(): MutableList<CalendarDay> {
+        val list = mutableListOf<CalendarDay>()
+        _calendarData.value?.waterData?.calendarData?.forEach {
+            list.add(DateUtil.convertDateToCalendarDay(it.wateredDate))
+        }
+        return list
+    }
+
 }
