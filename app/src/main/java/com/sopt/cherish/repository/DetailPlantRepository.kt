@@ -2,8 +2,6 @@ package com.sopt.cherish.repository
 
 import com.sopt.cherish.remote.api.CalendarAPI
 import com.sopt.cherish.remote.api.CalendarRes
-import com.sopt.cherish.util.DateUtil
-import com.sopt.cherish.util.SimpleLogger
 
 /**
  * Created on 01-07 by SSong-develop
@@ -13,7 +11,6 @@ class DetailPlantRepository(
 ) {
     // repository가 알고있어야 할 것은 retrofitService interface
     suspend fun fetchCalendarData(cherishId: Int): CalendarRes {
-        SimpleLogger.logI(DateUtil.convertDateToString(calendarAPI.getCalendarData(1).waterData.calendarData[0].wateredDate))
         return calendarAPI.getCalendarData(cherishId)
     }
 }

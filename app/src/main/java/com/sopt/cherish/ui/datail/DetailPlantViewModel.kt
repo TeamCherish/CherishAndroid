@@ -6,11 +6,13 @@ import androidx.lifecycle.viewModelScope
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.sopt.cherish.remote.api.CalendarRes
 import com.sopt.cherish.repository.DetailPlantRepository
+import com.sopt.cherish.util.DateUtil
 import kotlinx.coroutines.launch
 
 class DetailPlantViewModel(
     private val detailPlantRepository: DetailPlantRepository
 ) : ViewModel() {
+
     val dummyWateringListDay = listOf(
         CalendarDay.from(2021, 1, 10),
         CalendarDay.from(2021, 1, 13)
@@ -37,5 +39,14 @@ class DetailPlantViewModel(
         _calendarData.postValue(detailPlantRepository.fetchCalendarData(dummyCherishId))
     }
 
+
+    @JvmName("CustomGetWateredDay")
+    fun getWateredDay(): MutableList<CalendarDay> {
+        val list = mutableListOf<CalendarDay>()
+        _calendarData.value?.waterData?.calendarData?.forEach {
+            list.add(DateUtil.convertDateToCalendarDay(it.wateredDate))
+        }
+        return list
+    }
 
 }

@@ -38,11 +38,9 @@ class DetailPlantActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        initializeViewModel()
         binding = ActivityDetailPlantBinding.inflate(layoutInflater)
         setFragment(DetailPlantFragment())
-
-
+        initializeViewModel()
 
         setActionBarTitle("식물 상세")
         setContentView(binding.root)
