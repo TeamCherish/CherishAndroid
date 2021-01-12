@@ -28,6 +28,14 @@ object FlexBoxExtension {
         }
     }
 
+    fun FlexboxLayout.getChip(id: Int): Chip? {
+        return if (getChildAt(id) == null) {
+            null
+        } else {
+            getChildAt(id) as Chip
+        }
+    }
+
     fun FlexboxLayout.getChipsCount(): Int = childCount
 
     fun FlexboxLayout.clearChips() {

@@ -3,6 +3,7 @@ package com.sopt.cherish.di
 import androidx.lifecycle.ViewModelProvider
 import com.sopt.cherish.remote.api.CalendarAPI
 import com.sopt.cherish.remote.api.MyPageAPI
+import com.sopt.cherish.remote.api.ReviewAPI
 import com.sopt.cherish.remote.api.UserAPI
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.repository.DetailPlantRepository
@@ -26,8 +27,12 @@ object Injection {
         return RetrofitBuilder.myPageAPI
     }
 
+    private fun provideReviewAPI(): ReviewAPI {
+        return RetrofitBuilder.reviewAPI
+    }
+
     private fun provideMainRepository(): MainRepository {
-        return MainRepository(provideUserAPI(), provideMyPageAPI())
+        return MainRepository(provideUserAPI(), provideMyPageAPI(), provideReviewAPI())
     }
 
     fun provideMainViewModelFactory(): ViewModelProvider.Factory {

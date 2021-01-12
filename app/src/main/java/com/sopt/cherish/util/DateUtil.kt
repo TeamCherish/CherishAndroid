@@ -10,7 +10,8 @@ object DateUtil {
 
     private fun convertDateToString(date: Date): String = simpleDateFormatBar.format(date)
 
-    fun convertStringToDate(stringDate: String): Date? = simpleDateFormatKorean.parse(stringDate)
+    private fun convertStringToDate(stringDate: String): Date? =
+        simpleDateFormatKorean.parse(stringDate)
 
     // CalendarDay로 변환되는 녀석이 하나 필요
     private fun getYear(stringDate: String) = Integer.parseInt(stringDate.substring(0, 4))
