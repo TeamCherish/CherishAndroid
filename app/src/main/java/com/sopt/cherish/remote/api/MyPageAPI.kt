@@ -1,6 +1,7 @@
 package com.sopt.cherish.remote.api
 
 import com.google.gson.annotations.SerializedName
+import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
 
@@ -9,7 +10,7 @@ import retrofit2.http.Path
 data class MyPageUserData(
     @SerializedName("postponeCount") val postponeCount: Int,
     @SerializedName("waterCount") val waterCount: Int,
-    @SerializedName("completeCount") val compleCount: Int,
+    @SerializedName("completeCount") val completeCount: Int,
     @SerializedName("totalCherish") val totalCherish: Int,
     @SerializedName("result") val result: List<Any>
 )
@@ -21,7 +22,7 @@ data class MyPageUserRes(
 
 interface MyPageAPI {
     @GET("user/{id}")
-    suspend fun fetchUserPage(
+    fun fetchUserPage(
         @Path("id") userId: Int
-    ): MyPageUserRes
+    ): Call<MyPageUserRes>
 }

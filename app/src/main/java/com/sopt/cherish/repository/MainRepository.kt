@@ -17,8 +17,8 @@ class MainRepository(
         SimpleLogger.logI(userAPI.getCherishUser(1).toString())
         return userAPI.getCherishUser(userId)
     }
-
+/*
     suspend fun fetchCherishUserPageData(userId: Int): MyPageUserRes {
         return myPageAPI.fetchUserPage(userId)
-    }
+    } */
 }
