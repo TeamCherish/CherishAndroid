@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="detailPlantViewModel"
+            type="com.sopt.cherish.ui.datail.DetailPlantViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -38,7 +41,7 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/calendar_memo_view"
             android:layout_width="0dp"
-            android:layout_height="220dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
             app:cardCornerRadius="@dimen/radius_20dp"
             app:layout_constraintEnd_toEndOf="@id/calendar_card_view"
@@ -66,15 +69,6 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_baseline_create_24"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageButton
-                    android:id="@+id/test_image_btn"
-                    style="@style/ImageButton.White"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_test_24"
-                    app:layout_constraintEnd_toStartOf="@id/calendarView_memo_create_btn"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.flexbox.FlexboxLayout

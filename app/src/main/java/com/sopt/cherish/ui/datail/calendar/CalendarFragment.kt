@@ -14,7 +14,6 @@ import com.sopt.cherish.ui.datail.DetailPlantActivity
 import com.sopt.cherish.ui.datail.DetailPlantViewModel
 import com.sopt.cherish.util.extension.FlexBoxExtension.addChip
 import com.sopt.cherish.util.extension.FlexBoxExtension.clearChips
-import com.sopt.cherish.util.extension.hideKeyboard
 import com.sopt.cherish.util.extension.showKeyboard
 import com.sopt.cherish.view.calendar.DotDecorator
 
@@ -28,8 +27,14 @@ class CalendarFragment : Fragment() {
         setHasOptionsMenu(true)
         val binding: FragmentCalendarBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_calendar, container, false)
+        // kotlin에서 받을 때 DateFormat으로 받기
+        viewModel.fetchCalendarData()
+        binding.detailPlantViewModel = viewModel
+
 
         initializeCalendar(binding)
+
+        // viewModel 작업
 
         return binding.root
     }
@@ -92,17 +97,13 @@ class CalendarFragment : Fragment() {
             view.showKeyboard()
             binding.calendarView.changeCalendarModeWeeks()
         }
-        binding.testImageBtn.setOnClickListener { view ->
-            view.hideKeyboard()
-            binding.calendarView.changeCalendarModeMonths()
-        }
     }
 
     private fun addDateClickListener(binding: FragmentCalendarBinding) {
         binding.calendarView.setOnDateChangedListener { widget, date, selected ->
             showDate(binding, date)
-            showMemo(binding)
-            showChips(binding)
+/*            showMemo(binding)
+            showChips(binding)*/
         }
     }
 

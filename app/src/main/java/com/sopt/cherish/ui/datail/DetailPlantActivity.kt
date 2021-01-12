@@ -48,6 +48,15 @@ class DetailPlantActivity : AppCompatActivity() {
         setContentView(binding.root)
     }
 
+    private fun initializeViewModel() {
+        viewModel =
+            ViewModelProvider(
+                this@DetailPlantActivity,
+                Injection.provideDetailViewModelFactory()
+            ).get(
+                DetailPlantViewModel::class.java
+            )
+    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val menuInflater = menuInflater
@@ -117,13 +126,5 @@ class DetailPlantActivity : AppCompatActivity() {
         }
     }
 
-    private fun initializeViewModel() {
-        viewModel =
-            ViewModelProvider(
-                this@DetailPlantActivity,
-                Injection.provideDetailViewModelFactory()
-            ).get(
-                DetailPlantViewModel::class.java
-            )
-    }
+
 }

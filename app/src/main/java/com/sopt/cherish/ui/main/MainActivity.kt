@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity() {
                 return@OnCompleteListener
             }
             val token = task.result
+            SimpleLogger.logI(token.toString())
         })
     }
 
