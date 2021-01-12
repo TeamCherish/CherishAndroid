@@ -20,11 +20,9 @@ object MainBindingAdapter {
     @JvmStatic
     @BindingAdapter("android:waterVisibility")
     fun waterVisibility(imageView: ImageView, dDay: Int) {
-        if (dDay < 21)
+        if (dDay > 21)
             imageView.visibility = View.INVISIBLE
         else
             imageView.visibility = View.VISIBLE
     }
-
-
 }

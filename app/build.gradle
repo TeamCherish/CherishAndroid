@@ -2,12 +2,12 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
-
+    id 'com.google.gms.google-services'
 }
 
 android {
     compileSdkVersion 30
-    buildToolsVersion "30.0.2"
+    buildToolsVersion "30.0.3"
 
     defaultConfig {
 
@@ -93,4 +93,10 @@ dependencies {
 
     //progress bar 
     implementation 'com.jackandphantom.android:circularprogressbar:1.2.0'
+
+    // Firebase BoM
+    implementation platform('com.google.firebase:firebase-bom:26.2.0')
+
+    // Firebase analytics
+    implementation 'com.google.firebase:firebase-analytics-ktx'
 }
