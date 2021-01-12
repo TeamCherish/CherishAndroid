@@ -14,5 +14,4 @@ data class PostPoneWateringRes(
 )
 
 
-
 interface WateringAPI

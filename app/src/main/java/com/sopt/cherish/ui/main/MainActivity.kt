@@ -38,7 +38,6 @@ class MainActivity : AppCompatActivity() {
                 SimpleLogger.logI("Fetching FCM registration token failed ${task.exception}")
                 return@OnCompleteListener
             }
-
             val token = task.result
         })
     }
