@@ -3,6 +3,7 @@ package com.sopt.cherish.ui.enrollment
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -12,6 +13,11 @@ import androidx.appcompat.app.AppCompatDialog
 import androidx.fragment.app.Fragment
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentResultPlantBinding
+import com.sopt.cherish.remote.api.RetrofitBuilder
+import com.sopt.cherish.remote.model.ResponseEnrollData
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class ResultPlantFragment : Fragment() {
@@ -31,12 +37,18 @@ class ResultPlantFragment : Fragment() {
         //enrollToolbar.title="식물 결과"
         binding = FragmentResultPlantBinding.bind(view)
 
-        if (arguments?.getString("plantkey") == "1") {
+      /*  if (arguments?.getString("plantkey") == "1") {
             binding.imageView2.setImageResource(R.drawable.cherry)
         } else if (arguments?.getString("plantkey") == "2") {
             binding.imageView2.setImageResource(R.drawable.cherry2)
 
-        }
+        }*/
+
+        //val token = MyApplication.mySharedPreferences.getValue("token","")
+
+        binding.textView11.text=arguments?.getString("id")
+        binding.textView21.text=arguments?.getString("name")
+        binding.plantExplanation.text=arguments?.getString("explanation")
 
 
         binding.startbtn.setOnClickListener {

@@ -91,6 +91,14 @@ dependencies {
     //switch button
     implementation 'com.kyleduo.switchbutton:library:2.0.0'
 
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    // Retrofit 라이브러리 응답으로 가짜 객체를 만들기 위함
+    implementation 'com.squareup.retrofit2:retrofit-mock:2.9.0'
+    // https://github.com/google/gson
+    implementation 'com.google.code.gson:gson:2.8.6'
+    // Retrofit에서 Gson을 사용하기 위한 라이브러리
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
     //progress bar 
     implementation 'com.jackandphantom.android:circularprogressbar:1.2.0'
 }

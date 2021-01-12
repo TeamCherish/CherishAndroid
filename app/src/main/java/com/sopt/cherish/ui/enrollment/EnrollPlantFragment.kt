@@ -3,16 +3,24 @@ package com.sopt.cherish.ui.enrollment
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatDialog
 import androidx.fragment.app.Fragment
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentEnrollPlantBinding
+import com.sopt.cherish.remote.api.RetrofitBuilder
+import com.sopt.cherish.remote.model.RequestEnrollData
+import com.sopt.cherish.remote.model.ResponseEnrollData
 import com.sopt.cherish.ui.dialog.ClockPickerDialogFragment
 import com.sopt.cherish.ui.dialog.WeekPickerDialogFragment
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class EnrollPlantFragment : Fragment() {
@@ -45,10 +53,54 @@ class EnrollPlantFragment : Fragment() {
 
 
         binding.detailOkBtn.setOnClickListener {
-            progressON()
+          //  progressON()
+
+            val body = RequestEnrollData(name = "안나영",
+                nickname ="nayoung",
+                birth="19930512",
+                phone= "010-1111-1111",
+                cycle_date =7 ,
+                notice_time ="15:00" ,
+            UserId= 2)
+            val call: Call<ResponseEnrollData> = RetrofitBuilder.retrofitService.postUsers(body)
+            call.enqueue(object : Callback<ResponseEnrollData> {
+                override fun onFailure(call: Call<ResponseEnrollData>, t: Throwable) {
+                    Log.d("response", "실패")
+                }
+                override fun onResponse(
+                    call: Call<ResponseEnrollData>,
+                    response: Response<ResponseEnrollData>
+                ) {
+                    Log.d("response", response.body().toString())
+                    response.takeIf { it.isSuccessful }
+                        ?.body()
+                        ?.let {
 
 
-            progressOFF()
+                            Log.d("apple", it.data.plant.name)
+
+                            val transaction = parentFragmentManager.beginTransaction()
+                            transaction.replace(R.id.fragment_enroll, ResultPlantFragment().apply {
+                                arguments = Bundle().apply {
+                                    putString("id", it.data.plant.id.toString())
+                                    putString("name", it.data.plant.name.toString())
+                                    putString("explanation", it.data.plant.explanation.toString())
+                                    putString("modifier", it.data.plant.modifier.toString())
+                                    putString("flower_meaning", it.data.plant.flower_meaning.toString())
+
+                                }
+                            })
+                            transaction.addToBackStack(null)
+
+                            transaction.commit()
+                        //    it.data.plant.PlantStatusId
+                            progressOFF()
+                           // setFragment(ResultPlantFragment())
+                        } ?: Toast.makeText(view!!.context, "error", Toast.LENGTH_SHORT).show()
+                }
+            })
+
+
 
 
             //val intent = Intent(context, ResultPlantActivity::class.java)
