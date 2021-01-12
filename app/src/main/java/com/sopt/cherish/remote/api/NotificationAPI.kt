@@ -6,6 +6,7 @@ import retrofit2.http.Body
 import retrofit2.http.Headers
 import retrofit2.http.POST
 
+// 아직 sample 단계임
 const val serverKey =
     "AAAAJ13TVxs:APA91bHoV_xPXOYoRT5Hs0-LH6ew179hHqHQJLzb4sKFphe202XAnlGqW09xdQKZP4YWwPK7v7MGDIZnSXJJiriMzr1trnMNzGgq2UiOmH3Pw7hR_pDaDhaL7oxGrHrrg6C8dYLBrTvQ"
 
@@ -22,12 +23,9 @@ data class PushNotification(
 )
 
 interface NotificationAPI {
-
     @Headers("Authorization: key=$serverKey", "Content-Type:$contentType")
     @POST("fcm/send")
     suspend fun postNotification(
         @Body notification: PushNotification
     ): Response<ResponseBody>
-
-
 }
