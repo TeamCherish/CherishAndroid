@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentHomeBinding
-import com.sopt.cherish.remote.model.User
+import com.sopt.cherish.remote.api.User
 import com.sopt.cherish.ui.adapter.HomeCherryListAdapter
 import com.sopt.cherish.ui.datail.DetailPlantActivity
 import com.sopt.cherish.ui.dialog.WateringDialogFragment

@@ -4,7 +4,7 @@ import android.net.Uri
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sopt.cherish.remote.model.UserResult
+import com.sopt.cherish.remote.api.UserResult
 import com.sopt.cherish.repository.MainRepository
 import com.sopt.cherish.ui.domain.CherryDataclass
 import kotlinx.coroutines.launch

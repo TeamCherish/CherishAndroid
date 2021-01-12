@@ -1,4 +1,4 @@
-package com.sopt.cherish.remote.model
+package com.sopt.cherish.remote.api
 
 import com.google.gson.annotations.SerializedName
 

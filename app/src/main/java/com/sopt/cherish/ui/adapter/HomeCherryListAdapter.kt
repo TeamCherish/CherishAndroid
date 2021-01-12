@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sopt.cherish.databinding.MainCherryItemBinding
-import com.sopt.cherish.remote.model.User
+import com.sopt.cherish.remote.api.User
 
 class HomeCherryListAdapter : RecyclerView.Adapter<HomeCherryListAdapter.MainViewHolder>() {
     var data = mutableListOf<User>()

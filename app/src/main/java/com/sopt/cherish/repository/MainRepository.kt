@@ -1,9 +1,9 @@
 package com.sopt.cherish.repository
 
-import com.sopt.cherish.remote.model.MyPageAPI
-import com.sopt.cherish.remote.model.MyPageUserRes
-import com.sopt.cherish.remote.model.UserAPI
-import com.sopt.cherish.remote.model.UserResult
+import com.sopt.cherish.remote.api.MyPageAPI
+import com.sopt.cherish.remote.api.MyPageUserRes
+import com.sopt.cherish.remote.api.UserAPI
+import com.sopt.cherish.remote.api.UserResult
 import com.sopt.cherish.util.SimpleLogger
 
 /**

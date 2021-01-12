@@ -1,9 +1,9 @@
 package com.sopt.cherish.di
 
 import androidx.lifecycle.ViewModelProvider
-import com.sopt.cherish.remote.api.RetrofitBuilder
-import com.sopt.cherish.remote.model.MyPageAPI
-import com.sopt.cherish.remote.model.UserAPI
+import com.sopt.cherish.remote.api.MyPageAPI
+import com.sopt.cherish.remote.api.UserAPI
+import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.repository.MainRepository
 import com.sopt.cherish.ui.factory.DetailViewModelFactory
 import com.sopt.cherish.ui.factory.EnrollmentViewModelFactory
