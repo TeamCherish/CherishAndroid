@@ -21,7 +21,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Cherish"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+    >
 
         <service
             android:name=".ui.notification.FirebaseNotificationService"

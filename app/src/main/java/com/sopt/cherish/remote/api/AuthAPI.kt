@@ -1,6 +1,9 @@
 package com.sopt.cherish.remote.api
 
 import com.google.gson.annotations.SerializedName
+import com.sopt.cherish.remote.model.RequestSigninData
+import retrofit2.Call
+import retrofit2.http.*
 
 // 로그인 req
 data class EditUserReq(
@@ -31,4 +34,10 @@ data class CreateUserRes(
     @SerializedName("data") val userNickName: UserNickName
 )
 
-interface AuthAPI
+interface AuthAPI{
+    @Headers("Content-Type:multipart/application-json")
+    @POST("login/signin")
+    fun getid(
+        @Body body : EditUserReq
+    ): Call<EditUserRes>
+}
