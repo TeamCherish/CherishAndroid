@@ -99,4 +99,7 @@ dependencies {
 
     // Firebase analytics
     implementation 'com.google.firebase:firebase-analytics-ktx'
+
+    // Firebase Messaging
+    implementation 'com.google.firebase:firebase-messaging'
 }

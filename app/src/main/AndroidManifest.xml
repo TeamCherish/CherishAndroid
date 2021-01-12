@@ -21,7 +21,11 @@
         <service
             android:name=".ui.notification.FirebaseNotificationService"
             android:enabled="true"
-            android:exported="true" />
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
 
         <activity android:name=".ui.datail.DetailUserInputActivity" />
         <activity android:name=".ui.enrollment.EnrollmentUserActivity" />
