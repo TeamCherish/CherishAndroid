@@ -4,6 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityMainBinding
 import com.sopt.cherish.di.Injection
@@ -12,6 +14,7 @@ import com.sopt.cherish.ui.main.home.HomeFragment
 import com.sopt.cherish.ui.main.manageplant.ManagePlantFragment
 import com.sopt.cherish.ui.main.manageplant.PlantFragment
 import com.sopt.cherish.ui.main.setting.SettingFragment
+import com.sopt.cherish.util.SimpleLogger
 
 
 class MainActivity : AppCompatActivity() {
@@ -26,6 +29,17 @@ class MainActivity : AppCompatActivity() {
         initializeViewModel()
         showInitialFragment()
         setBottomNavigationListener(binding)
+        getFirebaseDeviceToken()
+    }
+
+    private fun getFirebaseDeviceToken() {
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                SimpleLogger.logI("Fetching FCM registration token failed ${task.exception}")
+                return@OnCompleteListener
+            }
+            val token = task.result
+        })
     }
 
     private fun initializeViewModel() {

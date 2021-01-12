@@ -1,6 +1,9 @@
-package com.sopt.cherish.remote.api
+package com.sopt.cherish.remote.singleton
 
 import com.sopt.cherish.remote.RetrofitService
+import com.sopt.cherish.remote.api.MyPageAPI
+import com.sopt.cherish.remote.api.NotificationAPI
+import com.sopt.cherish.remote.api.UserAPI
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -14,5 +17,12 @@ object RetrofitBuilder {
             .build()
     }
 
+    // Sample Code
     val retrofitService: RetrofitService = getRetrofit().create(RetrofitService::class.java)
+
+    val userAPI: UserAPI = getRetrofit().create(UserAPI::class.java)
+
+    val myPageAPI: MyPageAPI = getRetrofit().create(MyPageAPI::class.java)
+
+    val notificationAPI: NotificationAPI = getRetrofit().create(NotificationAPI::class.java)
 }

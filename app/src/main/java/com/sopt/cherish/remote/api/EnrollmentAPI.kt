@@ -1,7 +1,9 @@
-package com.sopt.cherish.remote.model
+package com.sopt.cherish.remote.api
 
 import com.google.gson.annotations.SerializedName
-import java.util.*
+import retrofit2.http.Body
+import retrofit2.http.Headers
+import retrofit2.http.POST
 
 // Cherish 등록
 data class EnrollCherishReq(
@@ -44,28 +46,10 @@ data class ReviseCherishRes(
     val reviseResponse: UtilResponse
 )
 
-// Cherish 상세보기
-// Param으로 CherishId가 들어감
-data class DetailCherishRes(
-    @SerializedName("nickname") val nickName: String,
-    @SerializedName("dDay") val remainWateringDay: Number,
-    @SerializedName("birth") val birth: String,
-    @SerializedName("plant_name") val plantName: String,
-    @SerializedName("plant_thumbnail_image_url") val plantThumbnailImageUrl: String,
-    @SerializedName("duration") val duration: Int,
-    @SerializedName("keyword1") val userStatus1: String,
-    @SerializedName("keyword2") val userStatus2: String,
-    @SerializedName("keyword3") val userStatus3: String,
-    @SerializedName("reviews") val reviews: List<ReviewData>
-)
-
-data class ReviewData(
-    @SerializedName("id") val id: Int,
-    @SerializedName("review") val review: String,
-    @SerializedName("water_date") val waterDate: Date,
-    @SerializedName("keyword1") val userStatus1: String,
-    @SerializedName("keyword2") val userStatus2: String,
-    @SerializedName("keyword3") val userStatus3: String,
-)
-
-interface PlantAPI
+interface EnrollmentAPI {
+    @POST("/cherish")
+    @Headers("Content-Type:application/json")
+    fun enrollCherish(
+        @Body enrollCherishReq: EnrollCherishReq
+    ): EnrollCherishRes
+}

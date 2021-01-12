@@ -1,18 +1,9 @@
-package com.sopt.cherish.remote.model
+package com.sopt.cherish.remote.api
 
 import com.google.gson.annotations.SerializedName
+import retrofit2.http.Body
+import retrofit2.http.POST
 import java.util.*
-
-// 물주기 미루기 , 물주기 미루기가 3회 미만인지 check
-data class PostPoneWateringReq(
-    @SerializedName("id") val id: Int,
-    @SerializedName("postpone") val postpone: Int,
-    @SerializedName("is_limit_postpone_number") val postponeCountingNumber: Int,
-)
-
-data class PostPoneWateringRes(
-    val postponeWateringResponse: UtilResponse
-)
 
 // request param 필요 , 리뷰 물주기
 data class ReviewWateringReq(
@@ -27,4 +18,12 @@ data class ReviewWateringReq(
 data class ReviewWateringRes(
     // 이거 질문 있음
     val reviewWateringResponse: UtilResponse,
+    @SerializedName("data") val increasedCount: Int
 )
+
+interface ReviewAPI {
+    @POST("/water")
+    fun reviewWatering(
+        @Body reviewWateringReq: ReviewWateringReq
+    ): ReviewWateringRes
+}

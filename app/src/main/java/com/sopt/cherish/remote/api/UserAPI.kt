@@ -1,6 +1,8 @@
-package com.sopt.cherish.remote.model
+package com.sopt.cherish.remote.api
 
 import com.google.gson.annotations.SerializedName
+import retrofit2.http.GET
+import retrofit2.http.Path
 
 /**
  * created on 01-11 by SSong-develop
@@ -25,7 +27,7 @@ data class User(
 )
 
 data class UserData(
-    @SerializedName("result") val userResult: List<User>,
+    @SerializedName("result") val userList: List<User>,
     @SerializedName("totalCherish") val totalUser: Int
 )
 
@@ -39,4 +41,9 @@ data class UserResult(
 /**
  * Retrofit Service가 이 안에 들어갈겁니다.
  */
-interface UserAPI
+interface UserAPI {
+    @GET("cherish/{id}")
+    suspend fun getCherishUser(
+        @Path("id") cherishId: Int
+    ): UserResult
+}

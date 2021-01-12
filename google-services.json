@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "169077856027",
+    "project_id": "cherish-e6ec2",
+    "storage_bucket": "cherish-e6ec2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:169077856027:android:47df47ba04a71d3df425be",
+        "android_client_info": {
+          "package_name": "com.sopt.cherish"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "169077856027-seb72tpfeee6i1fsnugn6vpgf956difl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sopt.cherish",
+            "certificate_hash": "d5bee78b4c19ad07a86fc8fb80027c7ae9c3b8ca"
+          }
+        },
+        {
+          "client_id": "169077856027-6sngkaq6in55sr0qijf56f5i15hb57up.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5ms6uV0ALTO81DDda7WyemsUS8Xa40w4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "169077856027-6sngkaq6in55sr0qijf56f5i15hb57up.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

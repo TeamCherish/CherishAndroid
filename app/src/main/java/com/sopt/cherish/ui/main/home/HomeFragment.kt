@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
@@ -16,6 +15,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentHomeBinding
+import com.sopt.cherish.remote.api.User
 import com.sopt.cherish.ui.adapter.HomeCherryListAdapter
 import com.sopt.cherish.ui.datail.DetailPlantActivity
 import com.sopt.cherish.ui.dialog.WateringDialogFragment
@@ -102,8 +102,11 @@ class HomeFragment : Fragment() {
     }
 
     private fun setAdapterData(homeCherryListAdapter: HomeCherryListAdapter) {
-        homeCherryListAdapter.data = viewModel.dummyCherry
-        homeCherryListAdapter.notifyDataSetChanged()
+        viewModel.fetchUsers()
+        viewModel.users.observe(viewLifecycleOwner) {
+            homeCherryListAdapter.data = it.userData.userList as MutableList<User>
+            homeCherryListAdapter.notifyDataSetChanged()
+        }
     }
 
     private fun initializeRecyclerView(
