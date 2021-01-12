@@ -13,10 +13,8 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayout
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentManagePlantBinding
-import com.sopt.cherish.remote.api.MyPageUserData
 import com.sopt.cherish.remote.api.MyPageUserRes
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
-
 import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
 import com.sopt.cherish.ui.main.MainActivity
 import com.sopt.cherish.ui.main.MainViewModel
@@ -32,7 +30,7 @@ class ManagePlantFragment : Fragment() {
     private val viewModel: MainViewModel by activityViewModels()
     private var tabIndex: Int = 0
     private var isCollapsed: Boolean = true
-    private val requestData= RetrofitBuilder
+    private val requestData = RetrofitBuilder
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -153,26 +151,25 @@ class ManagePlantFragment : Fragment() {
         startActivity(intent)
     }
 
-    private fun initializeServerRequest(){
+    private fun initializeServerRequest() {
 
         requestData.myPageAPI.fetchUserPage(1)
             .enqueue(
-                object:Callback<MyPageUserRes>{
+                object : Callback<MyPageUserRes> {
                     override fun onFailure(call: Call<MyPageUserRes>, t: Throwable) {
-                        Log.d("통신 실패",t.toString())
+                        Log.d("통신 실패", t.toString())
                     }
 
                     override fun onResponse(
                         call: Call<MyPageUserRes>,
                         response: Response<MyPageUserRes>
                     ) {
-                        Log.d("success",response.body().toString())
-                        response.takeIf{
+                        Log.d("success", response.body().toString())
+                        response.takeIf {
                             it.isSuccessful
                         }?.body()
-                            ?.let{
-                                it->
-                                Log.d("data success!",it.myPageUserData.waterCount.toString())
+                            ?.let { it ->
+                                Log.d("data success!", it.myPageUserData.waterCount.toString())
                             }
                     }
                 }
