@@ -1,7 +1,6 @@
 package com.sopt.cherish.repository
 
 import com.sopt.cherish.remote.api.MyPageAPI
-import com.sopt.cherish.remote.api.MyPageUserRes
 import com.sopt.cherish.remote.api.UserAPI
 import com.sopt.cherish.remote.api.UserResult
 import com.sopt.cherish.util.SimpleLogger
