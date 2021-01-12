@@ -11,15 +11,7 @@ object DateUtil {
 
     fun convertStringToDate(stringDate: String): Date? = simpleDateFormatKorean.parse(stringDate)
 
-    fun getYear(date: Date): String {
-        return convertDateToString(date).substring(0, 4)
-    }
+    // CalendarDay로 변환되는 녀석이 하나 필요
 
-    fun getMonth(date: Date): String {
-        return convertDateToString(date).substring(5, 7)
-    }
+// 그 CalendarDay들을 뭐라해야하지 list? 로 두는 거죠
 
-    fun getDay(date: Date): String {
-        return convertDateToString(date).substring(8, 10)
-    }
-}

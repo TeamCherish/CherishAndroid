@@ -13,9 +13,7 @@ class DetailPlantRepository(
 ) {
     // repository가 알고있어야 할 것은 retrofitService interface
     suspend fun fetchCalendarData(cherishId: Int): CalendarRes {
-        SimpleLogger.logI(calendarAPI.getCalendarData(1).waterData.calendarData.forEach {
-            DateUtil.convertDateToString(it.wateredDate)
-        }.toString())
+        SimpleLogger.logI(DateUtil.convertDateToString(calendarAPI.getCalendarData(1).waterData.calendarData[0].wateredDate))
         return calendarAPI.getCalendarData(cherishId)
     }
 }

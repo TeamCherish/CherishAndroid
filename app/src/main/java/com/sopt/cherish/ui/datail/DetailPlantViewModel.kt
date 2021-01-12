@@ -37,4 +37,5 @@ class DetailPlantViewModel(
         _calendarData.postValue(detailPlantRepository.fetchCalendarData(dummyCherishId))
     }
 
+
 }
