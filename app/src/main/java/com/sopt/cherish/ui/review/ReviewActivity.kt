@@ -108,7 +108,7 @@ class ReviewActivity : AppCompatActivity() {
             SimpleLogger.logI(date.toString())
             viewModel.sendReviewToServer(
                 reviewWateringReq = ReviewWateringReq(
-                    date, binding.reviewMemo.text.toString(),
+                    viewModel.today, binding.reviewMemo.text.toString(),
                     binding.reviewFlexBox.getChip(0)?.text.toString(),
                     binding.reviewFlexBox.getChip(1)?.text.toString(),
                     binding.reviewFlexBox.getChip(2)?.text.toString(),

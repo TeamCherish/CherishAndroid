@@ -78,13 +78,13 @@ class MainViewModel(
         myPageUserData = mainRepository.fetchCherishUserPageData(dummyUserId)
     }*/
 
-    // [Review] Server Connection
+    // [Review] Server Connection done!
     fun sendReviewToServer(reviewWateringReq: ReviewWateringReq) = viewModelScope.launch {
         mainRepository.sendReviewData(reviewWateringReq)
     }
 
-    // [DelayWatering] Server Connection
-    private val today = DateUtil.convertDateToString(Calendar.getInstance().time)
+    // [DelayWatering] Server Connection done!
+    val today = DateUtil.convertDateToString(Calendar.getInstance().time)
     private val todayMonth = DateUtil.getMonth(today).toString()
     private val todayDay = DateUtil.getDay(today).toString()
 
