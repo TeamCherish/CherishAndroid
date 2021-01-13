@@ -83,14 +83,14 @@ class CalendarFragment : Fragment() {
         viewModel.calendarData.observe(viewLifecycleOwner) {
             binding.calendarView.addDecorator(
                 DotDecorator(
-                    colorPinkSub,
+                    colorGreenSub,
                     DateUtil.convertDateToCalendarDay(it.waterData.futureWaterDate)
                 )
             )
             it.waterData.calendarData.forEach {
                 binding.calendarView.addDecorator(
                     DotDecorator(
-                        colorGreenSub,
+                        colorPinkSub,
                         DateUtil.convertDateToCalendarDay(it.wateredDate)
                     )
                 )
