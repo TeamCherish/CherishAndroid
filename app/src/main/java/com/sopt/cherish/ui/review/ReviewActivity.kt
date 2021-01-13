@@ -10,15 +10,19 @@ import androidx.lifecycle.lifecycleScope
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityReviewBinding
 import com.sopt.cherish.di.Injection
+import com.sopt.cherish.remote.api.ReviewWateringReq
 import com.sopt.cherish.ui.dialog.CustomDialogFragment
 import com.sopt.cherish.ui.main.MainViewModel
+import com.sopt.cherish.util.SimpleLogger
 import com.sopt.cherish.util.extension.FlexBoxExtension.addChip
+import com.sopt.cherish.util.extension.FlexBoxExtension.getChip
 import com.sopt.cherish.util.extension.FlexBoxExtension.getChipsCount
 import com.sopt.cherish.util.extension.countNumberOfCharacters
 import com.sopt.cherish.util.extension.shortToast
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.util.*
 
 /**
  * Created On 01-05 by SSong-develop
@@ -97,6 +101,20 @@ class ReviewActivity : AppCompatActivity() {
         binding.reviewAdminAccept.setOnClickListener {
             // 물주는 모션이 뜨면서 다시 main으로 넘어가면 됨
             // 리뷰를 전부 적지 않으면 안된다는 것이라던지에 대한 로직만 넣으면 해결됨
+
+            // reviewAPI 다시 한번 생각해보자
+            val now = System.currentTimeMillis()
+            val date = Date(now)
+            SimpleLogger.logI(date.toString())
+            viewModel.sendReviewToServer(
+                reviewWateringReq = ReviewWateringReq(
+                    date, binding.reviewMemo.text.toString(),
+                    binding.reviewFlexBox.getChip(0)?.text.toString(),
+                    binding.reviewFlexBox.getChip(1)?.text.toString(),
+                    binding.reviewFlexBox.getChip(2)?.text.toString(),
+                    1
+                )
+            )
             showLoadingDialog()
         }
     }
