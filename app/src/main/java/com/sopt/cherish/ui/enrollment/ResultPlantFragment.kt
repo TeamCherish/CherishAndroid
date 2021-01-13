@@ -37,18 +37,18 @@ class ResultPlantFragment : Fragment() {
         //enrollToolbar.title="식물 결과"
         binding = FragmentResultPlantBinding.bind(view)
 
-      /*  if (arguments?.getString("plantkey") == "1") {
-            binding.imageView2.setImageResource(R.drawable.cherry)
-        } else if (arguments?.getString("plantkey") == "2") {
-            binding.imageView2.setImageResource(R.drawable.cherry2)
+        /*  if (arguments?.getString("plantkey") == "1") {
+              binding.imageView2.setImageResource(R.drawable.cherry)
+          } else if (arguments?.getString("plantkey") == "2") {
+              binding.imageView2.setImageResource(R.drawable.cherry2)
 
-        }*/
+          }*/
 
         //val token = MyApplication.mySharedPreferences.getValue("token","")
 
-        binding.textView11.text=arguments?.getString("id")
-        binding.textView21.text=arguments?.getString("name")
-        binding.plantExplanation.text=arguments?.getString("explanation")
+        binding.textView11.text = arguments?.getString("id")
+        binding.textView21.text = arguments?.getString("name")
+        binding.plantExplanation.text = arguments?.getString("explanation")
 
 
         binding.startbtn.setOnClickListener {

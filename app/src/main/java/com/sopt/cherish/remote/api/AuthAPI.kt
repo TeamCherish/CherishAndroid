@@ -15,7 +15,10 @@ data class EditUserReq(
 data class EditUserRes(
     @SerializedName("success") val success: Boolean,
     @SerializedName("message") val message: String,
-    @SerializedName("data") val userId: UserId
+    @SerializedName("data") val userId: UserIdData
+)
+data class UserIdData(
+    @SerializedName("UserId") val userId: Int
 )
 
 // 회원가입 request
@@ -34,10 +37,10 @@ data class CreateUserRes(
     @SerializedName("data") val userNickName: UserNickName
 )
 
-interface AuthAPI{
+interface AuthAPI {
     @Headers("Content-Type:multipart/application-json")
     @POST("login/signin")
-    fun getid(
-        @Body body : EditUserReq
+    fun singinuser(
+        @Body body: EditUserReq
     ): Call<EditUserRes>
 }

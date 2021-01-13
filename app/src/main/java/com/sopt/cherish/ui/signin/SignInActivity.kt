@@ -22,7 +22,7 @@ class SignInActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignInBinding
 
-    private val requestData= RetrofitBuilder
+    private val requestData = RetrofitBuilder
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,36 +34,42 @@ class SignInActivity : AppCompatActivity() {
             val email_user = binding.editTextTextPersonName.text.toString()
             val password_user = binding.editTextTextPassword.text.toString()
 
+            val intent =
+                Intent(this@SignInActivity, MainActivity::class.java)
+            startActivity(intent)
 
-            val body = EditUserReq(email = email_user, password = password_user)
-            requestData.signinAPI.getid(body).enqueue(
-                object:Callback<EditUserRes>{
-                    override fun onFailure(call: Call<EditUserRes>, t: Throwable) {
-                        Log.d("통신 실패",t.toString())
-                    }
-
-                    override fun onResponse(
-                        call: Call<EditUserRes>,
-                        response: Response<EditUserRes>
-                    ) {
-                        Log.d("success","성공")
-                        response.takeIf{
-                            it.isSuccessful
-                        }?.body()
-                            ?.let{
-                                    it->
-                                val intent=Intent(this@SignInActivity,MainActivity::class.java)
-                                startActivity(intent)
-                                Log.d("data success!",it.userId.toString())
-                            }
-                    }
-                }
+           /* requestData.signinAPI.singinuser(
+                EditUserReq(
+                    email = email_user,
+                    password = password_user
+                )
             )
+                .enqueue(
+                    object : Callback<EditUserRes> {
+                        override fun onFailure(call: Call<EditUserRes>, t: Throwable) {
+                            Log.d("통신 실패", t.toString())
+                        }
 
+                        override fun onResponse(
+                            call: Call<EditUserRes>,
+                            response: Response<EditUserRes>
+                        ) {
+                            Log.d("success", "성공")
+                            Log.d("zzzzzzz",response.isSuccessful.toString())
+                            response.takeIf {
+                                it.isSuccessful
 
-
-
-
+                            }?.body()
+                                ?.let { it ->
+                                    val intent =
+                                        Intent(this@SignInActivity, MainActivity::class.java)
+                                    startActivity(intent)
+                                    Log.d("data success!", it.userId.toString())
+                                }
+                        }
+                    }
+                )
+*/
 
         }
     }

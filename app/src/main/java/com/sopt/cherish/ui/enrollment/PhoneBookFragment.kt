@@ -26,7 +26,7 @@ class PhoneBookFragment : Fragment() {
     var phonelist = mutableListOf<Phone>()
     var phonelistphone = mutableListOf<Phone>()
     var searchText = ""
-    var searchphone=""
+    var searchphone = ""
     var sortText = "asc"
     private lateinit var enrollToolbar: Toolbar
 
@@ -124,38 +124,46 @@ class PhoneBookFragment : Fragment() {
 
 
             object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {}
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-               // if((.contains(".*[0-9].*"))){
+                override fun afterTextChanged(s: Editable?) {}
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    // if((.contains(".*[0-9].*"))){
 
                     //    searchText = s.toString()
-                   // changeList2()
+                    // changeList2()
 
-           //     }
-              //  else {
+                    //     }
+                    //  else {
                     searchText = s.toString()
                     //searchphone=s.toString()
                     changeList()
-                    changeList2()
+                   // changeList2()
 
-           //     }
+                    //     }
 
-            }
-        })
+                }
+            })
     }
 
     fun changeList() {
 
         val newList = getPhoneNumbers(sortText, searchText)
-      //  val newListphone=getPhoneNumbers(sortText,searchphone)
+        //  val newListphone=getPhoneNumbers(sortText,searchphone)
         this.phonelist.clear()
         this.phonelist.addAll(newList)
         this.madapter.notifyDataSetChanged()
-      /*  this.phonelistphone.clear()
-        this.phonelistphone.addAll(newListphone)
-        this.madapter.notifyDataSetChanged()*/
+        /*  this.phonelistphone.clear()
+          this.phonelistphone.addAll(newListphone)
+          this.madapter.notifyDataSetChanged()*/
     }
+
     fun changeList2() {
 
         val newList = getPhoneNumbers2(sortText, searchText)
@@ -167,15 +175,17 @@ class PhoneBookFragment : Fragment() {
           this.phonelistphone.addAll(newListphone)
           this.madapter.notifyDataSetChanged()*/
     }
-    fun setList() {
 
+    fun setList() {
+        phonelist.distinct()
         phonelist.addAll(getPhoneNumbers(sortText, searchText))
+        phonelist.distinct()
         madapter = PhoneBookAdapter(phonelist)
         binding.recycler.adapter = madapter
         binding.recycler.layoutManager = LinearLayoutManager(context)
     }
 
-    fun getPhoneNumbers(sort: String, name: String): List<Phone> {
+    fun getPhoneNumbers(sort: String, search: String): List<Phone> {
         val list = mutableListOf<Phone>()
         val phonUri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI
         val phoneUri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI
@@ -187,12 +197,21 @@ class PhoneBookFragment : Fragment() {
         )
         // 2.2 조건 정의
         var where: String? = null
+        var where2: String? = null
+
+
         var whereValues: Array<String>? = null
         // searchName에 값이 있을 때만 검색을 사용한다
-        if (name.isNotEmpty()) {
-            where = ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " like ?"
+        if (search.isNotEmpty()) {
 
-            whereValues = arrayOf("%$name%")
+
+
+                where = ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " like ? "
+
+                where2 = ContactsContract.CommonDataKinds.Phone.NUMBER + " like ?"
+
+            whereValues = arrayOf("%$search%")
+
 
         }
         /*if(name.isNotEmpty()){
@@ -202,25 +221,44 @@ class PhoneBookFragment : Fragment() {
         val optionSort = ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " $sort"
 
         context?.run {
+
+
             val cursor = contentResolver.query(phonUri, projections, where, whereValues, optionSort)
+            while (cursor?.moveToNext() == true) {
+                val id = cursor?.getString(0)
+                val name = cursor?.getString(1)
+                val number = cursor?.getString(2)
 
-                while (cursor?.moveToNext() == true) {
-                    val id = cursor?.getString(0)
-                    val name = cursor?.getString(1)
-                    val number = cursor?.getString(2)
+                val phone = Phone(id, name, number)
 
-                    val phone = Phone(id, name, number)
+                list.add(phone)
+                list.distinct()
 
-                    list.add(phone)
-                }
+            }
 
 
+            val cursor2 = contentResolver.query(phonUri, projections, where2, whereValues, optionSort)
+            while (cursor2?.moveToNext() == true) {
+                val id = cursor2?.getString(0)
+                val name = cursor2?.getString(1)
+                val number = cursor2?.getString(2)
+
+                val phone = Phone(id, name, number)
+
+                list.add(phone)
+                list.distinct()
+            }
+
+            
+
+            }
 
 
-        }
+
+
         // 결과목록 반환
 
-        return list
+        return list.distinct()
     }
 
     fun getPhoneNumbers2(sort: String, name: String): List<Phone> {
@@ -252,7 +290,8 @@ class PhoneBookFragment : Fragment() {
         val optionSort2 = ContactsContract.CommonDataKinds.Phone.NUMBER + " $sort"
 
         context?.run {
-            val cursor = contentResolver.query(phonUri, projections, where2, whereValues, optionSort2)
+            val cursor =
+                contentResolver.query(phonUri, projections, where2, whereValues, optionSort2)
 
             while (cursor?.moveToNext() == true) {
                 val id = cursor?.getString(0)
@@ -263,8 +302,6 @@ class PhoneBookFragment : Fragment() {
 
                 list.add(phone)
             }
-
-
 
 
         }

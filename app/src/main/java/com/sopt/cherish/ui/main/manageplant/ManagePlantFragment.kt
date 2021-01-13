@@ -32,7 +32,7 @@ class ManagePlantFragment : Fragment() {
     private val viewModel: MainViewModel by activityViewModels()
     private var tabIndex: Int = 0
     private var isCollapsed: Boolean = true
-    private val requestData= RetrofitBuilder
+    private val requestData = RetrofitBuilder
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -153,26 +153,25 @@ class ManagePlantFragment : Fragment() {
         startActivity(intent)
     }
 
-    private fun initializeServerRequest(){
+    private fun initializeServerRequest() {
 
         requestData.myPageAPI.fetchUserPage(1)
             .enqueue(
-                object:Callback<MyPageUserRes>{
+                object : Callback<MyPageUserRes> {
                     override fun onFailure(call: Call<MyPageUserRes>, t: Throwable) {
-                        Log.d("통신 실패",t.toString())
+                        Log.d("통신 실패", t.toString())
                     }
 
                     override fun onResponse(
                         call: Call<MyPageUserRes>,
                         response: Response<MyPageUserRes>
                     ) {
-                        Log.d("success",response.body().toString())
-                        response.takeIf{
+                        Log.d("success", response.body().toString())
+                        response.takeIf {
                             it.isSuccessful
                         }?.body()
-                            ?.let{
-                                it->
-                                Log.d("data success!",it.myPageUserData.waterCount.toString())
+                            ?.let { it ->
+                                Log.d("data success!", it.myPageUserData.waterCount.toString())
                             }
                     }
                 }

@@ -19,7 +19,7 @@ interface RetrofitService {
     @Headers("Content-Type:multipart/application-json")
     @GET("PlantDetail/{id}")
     fun getDetailplant(
-        @Query("id") id : Int
+        @Query("id") id: Int
     ): Call<ResponseDetailData>
 
 
@@ -28,5 +28,5 @@ interface RetrofitService {
     @POST("login/signin")
     fun signIn(
         @Body body : RequestSigninData
-    ) : Call<ResponseSigninData>
+    ): Call<ResponseSigninData>
 }

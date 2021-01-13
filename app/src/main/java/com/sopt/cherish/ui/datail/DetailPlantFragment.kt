@@ -44,7 +44,7 @@ class DetailPlantFragment : Fragment() {
         initializeViewModel()
         //val token = MyApplication.mySharedPreferences.getValue("token","")
 
-        val call : Call<ResponseDetailData> = RetrofitBuilder.retrofitService.getDetailplant(1)
+        val call: Call<ResponseDetailData> = RetrofitBuilder.retrofitService.getDetailplant(1)
         call.enqueue(object : Callback<ResponseDetailData> {
             override fun onFailure(call: Call<ResponseDetailData>, t: Throwable) {
                 Log.d("tag", t.localizedMessage)
@@ -61,7 +61,7 @@ class DetailPlantFragment : Fragment() {
                     ?.let {
 
                             it ->
-                            binding.textView7.text= it.data[0].level.toString()
+                       // binding.textView7.text = it.data[0].level.toString()
 
 
                     }

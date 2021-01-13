@@ -1,10 +1,7 @@
 package com.sopt.cherish.remote.singleton
 
 import com.sopt.cherish.remote.RetrofitService
-import com.sopt.cherish.remote.api.AuthAPI
-import com.sopt.cherish.remote.api.MyPageAPI
-import com.sopt.cherish.remote.api.NotificationAPI
-import com.sopt.cherish.remote.api.UserAPI
+import com.sopt.cherish.remote.api.*
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -27,5 +24,7 @@ object RetrofitBuilder {
 
     val notificationAPI: NotificationAPI = getRetrofit().create(NotificationAPI::class.java)
 
-    val signinAPI:AuthAPI= getRetrofit().create(AuthAPI::class.java)
+    val signinAPI: AuthAPI = getRetrofit().create(AuthAPI::class.java)
+
+    val enrollAPI:EnrollmentAPI= getRetrofit().create(EnrollmentAPI::class.java)
 }
