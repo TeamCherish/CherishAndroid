@@ -10,6 +10,7 @@ import com.sopt.cherish.remote.api.EditUserReq
 import com.sopt.cherish.remote.api.EditUserRes
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.main.MainActivity
+import com.sopt.cherish.ui.notification.FirebaseNotificationService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -24,6 +25,7 @@ class SignInActivity : AppCompatActivity() {
 
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        startService(Intent(applicationContext, FirebaseNotificationService::class.java))
 
         binding.loginBtn.setOnClickListener {
 
