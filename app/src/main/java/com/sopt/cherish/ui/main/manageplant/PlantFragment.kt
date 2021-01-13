@@ -6,13 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sopt.cherish.databinding.FragmentPlantBinding
 import com.sopt.cherish.remote.api.MyPageUserRes
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.adapter.MyPageBottomSheetAdapter
-import com.sopt.cherish.ui.main.MainViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -62,9 +60,10 @@ class PlantFragment : Fragment() {
                         }?.body()
                             ?.let { it ->
                                 Log.d("list", it.myPageUserData.result.toString())
-                                Cherishadapter= MyPageBottomSheetAdapter(context!!,it.myPageUserData.result)
+                                Cherishadapter =
+                                    MyPageBottomSheetAdapter(context!!, it.myPageUserData.result)
 
-                                initialRecyclerView(binding,Cherishadapter)
+                                initialRecyclerView(binding, Cherishadapter)
                             }
                     }
                 })
