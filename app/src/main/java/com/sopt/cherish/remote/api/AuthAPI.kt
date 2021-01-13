@@ -46,3 +46,4 @@ interface AuthAPI {
         @Body body: EditUserReq
     ): Call<EditUserRes>
 }
+
