@@ -37,15 +37,25 @@
             android:layout_marginTop="10dp"
             android:text="남쿵둥이"
             android:textSize="16sp"
+            android:id="@+id/mypage_cherry_nickname"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@+id/mypage_cherry_nickname"
+            app:layout_constraintTop_toBottomOf="@+id/mypage_cherry_nickname"
+            android:font="@font/roboto_regular"
+            android:text="스투키"
+            android:textSize="14sp"
             android:id="@+id/mypage_cherry_name"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@+id/mypage_cherry_name"
-            app:layout_constraintTop_toBottomOf="@+id/mypage_cherry_name"
+            app:layout_constraintStart_toEndOf="@+id/mypage_cherry_name"
+            app:layout_constraintTop_toTopOf="@+id/mypage_cherry_name"
             android:font="@font/roboto_regular"
-            android:text="스투키 Lv.3"
+            android:text=" Lv.2"
             android:textSize="14sp"
             android:id="@+id/mypage_cherry_level"/>
 
