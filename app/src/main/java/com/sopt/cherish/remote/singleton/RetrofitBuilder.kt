@@ -27,4 +27,6 @@ object RetrofitBuilder {
     val calendarAPI: CalendarAPI = getRetrofit().create(CalendarAPI::class.java)
 
     val reviewAPI: ReviewAPI = getRetrofit().create(ReviewAPI::class.java)
+
+    val wateringAPI: WateringAPI = getRetrofit().create(WateringAPI::class.java)
 }

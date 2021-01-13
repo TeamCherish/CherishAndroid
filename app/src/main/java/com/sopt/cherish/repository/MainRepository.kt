@@ -9,7 +9,8 @@ import com.sopt.cherish.util.SimpleLogger
 class MainRepository(
     private val userAPI: UserAPI,
     private val myPageAPI: MyPageAPI,
-    private val reviewAPI: ReviewAPI
+    private val reviewAPI: ReviewAPI,
+    private val wateringAPI: WateringAPI
 ) {
     suspend fun fetchCherishUser(userId: Int): UserResult {
         SimpleLogger.logI(userAPI.getCherishUser(1).toString())
@@ -22,4 +23,6 @@ class MainRepository(
 
     suspend fun sendReviewData(reviewWateringReq: ReviewWateringReq) =
         reviewAPI.reviewWatering(reviewWateringReq)
+
+    suspend fun getPostponeCount(cherishId: Int) = wateringAPI.getPostponeWateringCount(cherishId)
 }
