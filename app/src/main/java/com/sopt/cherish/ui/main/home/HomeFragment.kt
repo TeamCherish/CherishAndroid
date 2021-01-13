@@ -17,6 +17,7 @@ import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentHomeBinding
 import com.sopt.cherish.remote.api.User
 import com.sopt.cherish.ui.adapter.HomeCherryListAdapter
+import com.sopt.cherish.ui.adapter.OnItemClickListener
 import com.sopt.cherish.ui.datail.DetailPlantActivity
 import com.sopt.cherish.ui.dialog.WateringDialogFragment
 import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
@@ -30,9 +31,11 @@ import com.sopt.cherish.util.PixelUtil.dp
  * 여기는 어떻게 하면 더 이쁘게 나올까를 생각하면 될거 같습니다.
  * need it!!!
  */
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), OnItemClickListener {
 
     private val viewModel: MainViewModel by activityViewModels()
+
+    private lateinit var binding: FragmentHomeBinding
 
     companion object {
         private val TAG = "HomeFragment"
@@ -42,13 +45,12 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding: FragmentHomeBinding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         binding.mainViewModel = viewModel
-        initializeView(binding)
-        val homeCherryListAdapter = HomeCherryListAdapter()
+        initializeView()
+        val homeCherryListAdapter = HomeCherryListAdapter(this)
 
-        initializeBottomSheetBehavior(binding)
+        initializeBottomSheetBehavior()
 
         binding.homeWateringBtn.setOnClickListener {
             navigateWatering()
@@ -63,13 +65,13 @@ class HomeFragment : Fragment() {
         }
 
         setAdapterData(homeCherryListAdapter)
-        initializeRecyclerView(binding, homeCherryListAdapter)
+        initializeRecyclerView(homeCherryListAdapter)
 
-        updateProgressBar(binding)
+        updateProgressBar()
         return binding.root
     }
 
-    private fun initializeView(binding: FragmentHomeBinding) {
+    private fun initializeView() {
         // 나의 소중한 사람들 count
         viewModel.users.observe(viewLifecycleOwner) {
             binding.homeCherryNumber.text = it.userData.totalUser.toString()
@@ -81,7 +83,7 @@ class HomeFragment : Fragment() {
         startActivity(intent)
     }
 
-    private fun initializeBottomSheetBehavior(binding: FragmentHomeBinding) {
+    private fun initializeBottomSheetBehavior() {
         val standardBottomSheetBehavior =
             BottomSheetBehavior.from(binding.homeStandardBottomSheet)
         // bottom sheet state 지정
@@ -89,22 +91,20 @@ class HomeFragment : Fragment() {
         standardBottomSheetBehavior.peekHeight = 60.dp
         standardBottomSheetBehavior.expandedOffset = 50.dp
         standardBottomSheetBehavior.isHideable = false
-
+        binding.homeFragment.setBackgroundColor(
+            ContextCompat.getColor(
+                requireContext(),
+                R.color.cherish_purple
+            )
+        )
         standardBottomSheetBehavior.addBottomSheetCallback(object :
             BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
-                if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
-                    binding.homeFragment.setBackgroundColor(
-                        ContextCompat.getColor(
-                            context!!,
-                            R.color.cherish_purple
-                        )
-                    )
-                }
+
             }
 
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                transitionBottomSheetParentView(binding, slideOffset)
+                /* transitionBottomSheetParentView(slideOffset)*/
             }
         })
     }
@@ -118,7 +118,6 @@ class HomeFragment : Fragment() {
     }
 
     private fun initializeRecyclerView(
-        binding: FragmentHomeBinding,
         homeCherryListAdapter: HomeCherryListAdapter
     ) {
         binding.homeUserList.apply {
@@ -136,13 +135,13 @@ class HomeFragment : Fragment() {
         startActivity(intent)
     }
 
-    private fun transitionBottomSheetParentView(binding: FragmentHomeBinding, slideOffset: Float) {
+    private fun transitionBottomSheetParentView(slideOffset: Float) {
         val argbEvaluator =
-            ArgbEvaluator().evaluate(slideOffset, R.color.cherish_purple, R.color.cherish_black)
+            ArgbEvaluator().evaluate(slideOffset, R.color.white, R.color.black)
         binding.homeFragment.setBackgroundColor(argbEvaluator as Int)
     }
 
-    private fun updateProgressBar(binding: FragmentHomeBinding) {
+    private fun updateProgressBar() {
         val rating = binding.homeAffectionProgressbar.progress
         if (rating <= 30) {
             binding.homeAffectionProgressbar.progressDrawable = ResourcesCompat.getDrawable(
@@ -151,5 +150,27 @@ class HomeFragment : Fragment() {
                 null
             )
         }
+    }
+
+    // recyclerview Item click event
+    override fun onItemClick(user: User) {
+        if (user.dDay > 21) {
+            binding.homeFragment.setBackgroundColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.cherish_stuki_background_color
+                )
+            )
+            binding.homeDummyFlowerImage.setImageResource(R.drawable.main_img_stuki)
+        } else {
+            binding.homeFragment.setBackgroundColor(
+                ContextCompat.getColor(
+                    requireContext(),
+                    R.color.cherish_sun_background_color
+                )
+            )
+            binding.homeDummyFlowerImage.setImageResource(R.drawable.main_img_sun)
+        }
+
     }
 }
