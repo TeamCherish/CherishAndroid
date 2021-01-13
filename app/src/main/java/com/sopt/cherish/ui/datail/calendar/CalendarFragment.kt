@@ -15,15 +15,12 @@ import com.sopt.cherish.ui.datail.DetailPlantViewModel
 import com.sopt.cherish.util.DateUtil
 import com.sopt.cherish.util.extension.FlexBoxExtension.addChip
 import com.sopt.cherish.util.extension.FlexBoxExtension.clearChips
-import com.sopt.cherish.util.extension.hideKeyboard
-import com.sopt.cherish.util.extension.showKeyboard
 import com.sopt.cherish.view.calendar.DotDecorator
 
 class CalendarFragment : Fragment() {
     private val viewModel: DetailPlantViewModel by activityViewModels()
 
     // keyboard Boolean 디자이너와 얘기 끝나면 제대로 정해서 할 예정
-    private var testBool = true
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -104,16 +101,13 @@ class CalendarFragment : Fragment() {
     private fun takeNotes(binding: FragmentCalendarBinding) {
         // 메모를 할 수 있게하다 라는 뜻을 원하는데 마땅히 떠오르는게 없어서 일단 이케 적음
         binding.calendarViewMemoCreateBtn.setOnClickListener { view ->
-            if (testBool) {
-                view.showKeyboard()
-                binding.calendarView.changeCalendarModeWeeks()
-                testBool = false
-            } else {
-                view.hideKeyboard()
-                binding.calendarView.changeCalendarModeMonths()
-                testBool = true
-            }
-
+            binding.calendarView.changeCalendarModeMonths()
+        }
+        binding.reviewBack.setOnClickListener { view ->
+            // 클릭 시 화살표의 모양이 왔다갔다 하면서 바뀌도록 하면 됨
+            // review button 이 눌림에 따라
+            // textview의 ellipsize 와 maxLine의 수를 바꿔주면 된다.
+            binding.calendarView.changeCalendarModeWeeks()
         }
     }
 
