@@ -59,6 +59,7 @@ class DelayWateringDialogFragment : DialogFragment() {
     }
 
     private fun sendDelayDayToServer(binding: DialogDelayWateringBinding) {
+        // 함수화 해야합니다 진짜.
         binding.delayWateringAcceptBtn.setOnClickListener {
             viewModel.postponeData.observe(viewLifecycleOwner) {
                 if (it.postponeData.isPostpone) {
