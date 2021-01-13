@@ -58,12 +58,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="28dp"
-            android:fillViewport="true"
             android:layout_marginEnd="@dimen/margin_16dp"
-            app:layout_constraintStart_toStartOf="@id/review_user"
+            android:fillViewport="true"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/review_user"
             app:layout_constraintTop_toBottomOf="@id/review_description">
-
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -76,9 +75,9 @@
                     android:fontFamily="@font/notosanscjkkr_regular"
                     android:hint="@string/review_keyword_text"
                     android:includeFontPadding="false"
-                    app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.flexbox.FlexboxLayout
                     android:id="@+id/review_flex_box"
@@ -111,7 +110,7 @@
                     style="@style/CustomEditText"
                     android:layout_width="0dp"
                     android:layout_height="194dp"
-                    android:layout_marginTop="36dp"
+                    android:layout_marginTop="24dp"
                     android:fontFamily="@font/notosanscjkkr_regular"
                     android:gravity="top|left"
                     android:hint="@string/review_memo_text"
@@ -143,7 +142,7 @@
             style="@style/RoundButton.GreenMain"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="120dp"
+            android:layout_marginTop="84dp"
             android:fontFamily="@font/notosanscjkkr_regular"
             android:includeFontPadding="false"
             android:text="@string/review_admin_button_text"
@@ -157,9 +156,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_10dp"
+            android:layout_marginBottom="68dp"
             android:fontFamily="@font/notosanscjkkr_regular"
             android:includeFontPadding="false"
             android:text="@string/review_pass_button_text"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/review_admin_accept"
             app:layout_constraintStart_toStartOf="@id/review_admin_accept"
             app:layout_constraintTop_toBottomOf="@id/review_admin_accept" />

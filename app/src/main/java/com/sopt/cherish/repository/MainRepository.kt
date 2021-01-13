@@ -1,8 +1,6 @@
 package com.sopt.cherish.repository
 
-import com.sopt.cherish.remote.api.MyPageAPI
-import com.sopt.cherish.remote.api.UserAPI
-import com.sopt.cherish.remote.api.UserResult
+import com.sopt.cherish.remote.api.*
 import com.sopt.cherish.util.SimpleLogger
 
 /**
@@ -10,7 +8,9 @@ import com.sopt.cherish.util.SimpleLogger
  */
 class MainRepository(
     private val userAPI: UserAPI,
-    private val myPageAPI: MyPageAPI
+    private val myPageAPI: MyPageAPI,
+    private val reviewAPI: ReviewAPI,
+    private val wateringAPI: WateringAPI
 ) {
     suspend fun fetchCherishUser(userId: Int): UserResult {
         SimpleLogger.logI(userAPI.getCherishUser(1).toString())
@@ -20,4 +20,12 @@ class MainRepository(
     suspend fun fetchCherishUserPageData(userId: Int): MyPageUserRes {
         return myPageAPI.fetchUserPage(userId)
     } */
+
+    suspend fun sendReviewData(reviewWateringReq: ReviewWateringReq) =
+        reviewAPI.reviewWatering(reviewWateringReq)
+
+    suspend fun getPostponeCount(cherishId: Int) = wateringAPI.getPostponeWateringCount(cherishId)
+
+    suspend fun postponeWateringDate(postponeWateringDateReq: PostponeWateringDateReq) =
+        wateringAPI.postponeWateringDate(postponeWateringDateReq)
 }

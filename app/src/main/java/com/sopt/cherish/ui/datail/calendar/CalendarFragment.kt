@@ -22,6 +22,7 @@ import com.sopt.cherish.view.calendar.DotDecorator
 class CalendarFragment : Fragment() {
     private val viewModel: DetailPlantViewModel by activityViewModels()
 
+    // keyboard Boolean 디자이너와 얘기 끝나면 제대로 정해서 할 예정
     private var testBool = true
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,16 +31,15 @@ class CalendarFragment : Fragment() {
         setHasOptionsMenu(true)
         val binding: FragmentCalendarBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_calendar, container, false)
-        // kotlin에서 받을 때 DateFormat으로 받기
+
+        // viewModel 작업
         viewModel.fetchCalendarData()
         binding.detailPlantViewModel = viewModel
         initializeCalendar(binding)
 
-        // viewModel 작업
 
         return binding.root
     }
-
 
     override fun onResume() {
         super.onResume()
@@ -99,7 +99,6 @@ class CalendarFragment : Fragment() {
                 )
             }
         }
-        /*binding.calendarView.addDecorator(DotDecorator(colorPinkSub,viewModel.futureWateringDay))*/
     }
 
     private fun takeNotes(binding: FragmentCalendarBinding) {
