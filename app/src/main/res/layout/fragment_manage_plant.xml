@@ -161,7 +161,7 @@
             app:layout_constraintTop_toTopOf="@+id/my_page_box"
             android:layout_marginTop="24dp"
             android:background="@color/cherish_divide_gray"
-            android:layout_marginStart="44dp"/>
+            android:layout_marginStart="48dp" />
 
         <TextView
             android:layout_width="wrap_content"

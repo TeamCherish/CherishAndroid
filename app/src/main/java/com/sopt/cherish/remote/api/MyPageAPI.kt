@@ -12,12 +12,22 @@ data class MyPageUserData(
     @SerializedName("waterCount") val waterCount: Int,
     @SerializedName("completeCount") val completeCount: Int,
     @SerializedName("totalCherish") val totalCherish: Int,
-    @SerializedName("result") val result: List<Any>
+    @SerializedName("result") val result: List<MyPageCherishData>
 )
 
 data class MyPageUserRes(
     val myPageUserResponse: UtilResponse,
     @SerializedName("data") val myPageUserData: MyPageUserData
+)
+
+data class MyPageCherishData(
+    @SerializedName("id") val id: Int,
+    @SerializedName("dDay") val dDay: Int,
+    @SerializedName("nickname") val nickName: String,
+    @SerializedName("name") val name: String,
+    @SerializedName("thumbnail_image_url") val thumbnailImageUrl: String,
+    @SerializedName("level") val level: String,
+    @SerializedName("PlantId") val plantId: String
 )
 
 interface MyPageAPI {
