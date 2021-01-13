@@ -36,10 +36,13 @@ object RetrofitBuilder {
 
     val wateringAPI: WateringAPI = getRetrofit().create(WateringAPI::class.java)
 
+
     val authAPI:AuthAPI=getRetrofit().create(AuthAPI::class.java)
 
     val plantDetailAPI:PlantDetailAPI= getRetrofit().create(PlantDetailAPI::class.java)
 
     val ResponsePlantCardData:ResponsePlantCardData= getRetrofit().create(com.sopt.cherish.remote.api.ResponsePlantCardData::class.java)
+
+
 
 }

@@ -102,10 +102,7 @@ class MyPagePhoneBookFragment : Fragment() {
             where = ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " like ?"
             whereValues = arrayOf("%$name%")
         }
-        /*if(name.isNotEmpty()){
-            where= ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME+"= ?"
-            whereValues= arrayOf(name)
-        }*/
+
         val optionSort = ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " $sort"
 
         context?.run {

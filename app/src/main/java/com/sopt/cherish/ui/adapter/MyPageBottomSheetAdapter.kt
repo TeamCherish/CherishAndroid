@@ -1,19 +1,22 @@
 package com.sopt.cherish.ui.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sopt.cherish.databinding.MyPageCherryItemBinding
-import com.sopt.cherish.ui.domain.MyPageCherryLevelDataclass
+import com.sopt.cherish.remote.api.MyPageCherishData
 
-class MyPageBottomSheetAdapter : RecyclerView.Adapter<MyPageBottomSheetAdapter.MainViewHolder>() {
-    var data = mutableListOf<MyPageCherryLevelDataclass>()
+class MyPageBottomSheetAdapter(private var context: Context, var data: List<MyPageCherishData>) :
+    RecyclerView.Adapter<MyPageBottomSheetAdapter.MainViewHolder>() {
 
-    class MainViewHolder(private val binding: MyPageCherryItemBinding) :
+    class MainViewHolder(private var binding: MyPageCherryItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(testData: MyPageCherryLevelDataclass) {
-            binding.mypageCherryName.text = testData.name
-            binding.mypageCherryLevel.text = testData.level
+        fun bind(cherishData: MyPageCherishData) {
+            binding.mypageCherryNickname.text = cherishData.nickName
+            binding.mypageCherryName.text = cherishData.name
+            binding.mypageCherryLevel.text = cherishData.level
+            binding.myPageDDay.text = cherishData.dDay.toString()
         }
     }
 

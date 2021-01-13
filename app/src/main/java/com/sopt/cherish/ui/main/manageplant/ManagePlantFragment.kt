@@ -42,9 +42,10 @@ class ManagePlantFragment : Fragment() {
         val binding: FragmentManagePlantBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_manage_plant, container, false)
 
+        initializeServerRequest(binding)
         initializeTabLayoutView(binding)
         initializeBottomSheetBehavior(binding)
-        initializeServerRequest(binding)
+
 
         binding.myPageAddPlantBtn.setOnClickListener {
             navigatePhoneBook()
@@ -184,6 +185,13 @@ class ManagePlantFragment : Fragment() {
                                     it.myPageUserData.postponeCount.toString()
                                 binding.myPageFinishCnt.text =
                                     it.myPageUserData.completeCount.toString()
+
+
+
+                                val tabText = "식물 " + it.myPageUserData.totalCherish.toString()
+                                binding.myPageBottomTab.getTabAt(0)!!.text = tabText
+
+                                Log.d("list", it.myPageUserData.result.toString())
 
                             }
                     }
