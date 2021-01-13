@@ -5,6 +5,9 @@
 
     <data>
 
+        <variable
+            name="detailPlantViewModel"
+            type="com.sopt.cherish.ui.datail.DetailPlantViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,20 +28,87 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.sopt.cherish.view.calendar.CherishMaterialCalendarView
-                android:id="@+id/calendar_view"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:mcv_calendarMode="month"
-                app:mcv_selectionColor="@color/cherish_text_gray"
-                app:mcv_selectionMode="single"
-                app:mcv_showOtherDates="all" />
+                android:layout_height="match_parent">
+
+                <com.sopt.cherish.view.calendar.CherishMaterialCalendarView
+                    android:id="@+id/calendar_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:mcv_calendarMode="month"
+                    app:mcv_selectionColor="@color/cherish_text_gray"
+                    app:mcv_selectionMode="single"
+                    app:mcv_showOtherDates="all" />
+
+                <TextView
+                    android:id="@+id/calendar_future_watering_day"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_10dp"
+                    android:layout_marginBottom="@dimen/margin_14dp"
+                    android:fontFamily="@font/notosanscjkkr_regular"
+                    android:includeFontPadding="false"
+                    android:text="@string/calendar_future_watering_text"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/calendar_view" />
+
+                <TextView
+                    android:id="@+id/calendar_future_watering_day_indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="@dimen/margin_14dp"
+                    android:text="@string/calendar_day_bullet"
+                    android:textColor="@color/cherish_pink_sub"
+                    android:textSize="@dimen/text_12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/calendar_future_watering_day"
+                    app:layout_constraintTop_toBottomOf="@id/calendar_view" />
+
+                <TextView
+                    android:id="@+id/calendar_watered_day"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_14dp"
+                    android:layout_marginBottom="@dimen/margin_14dp"
+                    android:fontFamily="@font/notosanscjkkr_regular"
+                    android:includeFontPadding="false"
+                    android:text="@string/calendar_watered_text"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/calendar_future_watering_day_indicator"
+                    app:layout_constraintTop_toBottomOf="@id/calendar_view" />
+
+                <TextView
+                    android:id="@+id/calendar_watered_day_indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="@dimen/margin_14dp"
+                    android:text="@string/calendar_day_bullet"
+                    android:textColor="@color/cherish_green_sub"
+                    android:textSize="@dimen/text_12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/calendar_watered_day"
+                    app:layout_constraintTop_toBottomOf="@id/calendar_view" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
         </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/calendar_memo_view"
             android:layout_width="0dp"
-            android:layout_height="220dp"
+            android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
             app:cardCornerRadius="@dimen/radius_20dp"
             app:layout_constraintEnd_toEndOf="@id/calendar_card_view"
@@ -47,14 +117,13 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_margin="15dp">
 
                 <TextView
                     android:id="@+id/calendarView_selected_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginTop="22dp"
                     android:fontFamily="@font/roboto_bold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -66,15 +135,6 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_baseline_create_24"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageButton
-                    android:id="@+id/test_image_btn"
-                    style="@style/ImageButton.White"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_test_24"
-                    app:layout_constraintEnd_toStartOf="@id/calendarView_memo_create_btn"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <com.google.android.flexbox.FlexboxLayout

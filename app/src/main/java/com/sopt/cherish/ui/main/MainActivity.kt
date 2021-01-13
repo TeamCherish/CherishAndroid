@@ -14,6 +14,7 @@ import com.sopt.cherish.ui.main.home.HomeFragment
 import com.sopt.cherish.ui.main.manageplant.ManagePlantFragment
 import com.sopt.cherish.ui.main.manageplant.PlantFragment
 import com.sopt.cherish.ui.main.setting.SettingFragment
+import com.sopt.cherish.util.PermissionUtil
 import com.sopt.cherish.util.SimpleLogger
 
 
@@ -39,6 +40,7 @@ class MainActivity : AppCompatActivity() {
                 return@OnCompleteListener
             }
             val token = task.result
+            SimpleLogger.logI(token.toString())
         })
     }
 
@@ -87,8 +89,14 @@ class MainActivity : AppCompatActivity() {
                 transAction.replace(R.id.my_page_bottom_container, PlantFragment()).commit()
             }
             1 -> {
-                transAction.replace(R.id.my_page_bottom_container, MyPagePhoneBookFragment())
-                    .commit()
+                // todo : 일단 퍼미션 처리는 했는데 , 이것보다 좀 더 좋게 해줄 수 있을거 같아 예진아
+                if (PermissionUtil.isCheckedReadContactsPermission(this)) {
+                    transAction.replace(R.id.my_page_bottom_container, MyPagePhoneBookFragment())
+                        .commit()
+                } else {
+                    PermissionUtil.openPermissionSettings(this)
+                }
+
                 //true
             }
         }

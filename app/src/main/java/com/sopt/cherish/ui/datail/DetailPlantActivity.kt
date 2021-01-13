@@ -38,16 +38,23 @@ class DetailPlantActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        initializeViewModel()
         binding = ActivityDetailPlantBinding.inflate(layoutInflater)
         setFragment(DetailPlantFragment())
-
-
+        initializeViewModel()
 
         setActionBarTitle("식물 상세")
         setContentView(binding.root)
     }
 
+    private fun initializeViewModel() {
+        viewModel =
+            ViewModelProvider(
+                this@DetailPlantActivity,
+                Injection.provideDetailViewModelFactory()
+            ).get(
+                DetailPlantViewModel::class.java
+            )
+    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val menuInflater = menuInflater
@@ -117,13 +124,5 @@ class DetailPlantActivity : AppCompatActivity() {
         }
     }
 
-    private fun initializeViewModel() {
-        viewModel =
-            ViewModelProvider(
-                this@DetailPlantActivity,
-                Injection.provideDetailViewModelFactory()
-            ).get(
-                DetailPlantViewModel::class.java
-            )
-    }
+
 }

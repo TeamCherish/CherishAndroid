@@ -14,12 +14,17 @@ import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.sopt.cherish.R
 import com.sopt.cherish.ui.main.MainActivity
+import com.sopt.cherish.util.SimpleLogger
 import kotlin.random.Random
 
 class FirebaseNotificationService : FirebaseMessagingService() {
 
     companion object {
         const val CHANNEL_ID = "cherish_channel"
+    }
+
+    init {
+        SimpleLogger.logI("MessagingService is Running~")
     }
 
     override fun onNewToken(token: String) {

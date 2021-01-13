@@ -1,6 +1,7 @@
 package com.sopt.cherish.remote.singleton
 
 import com.sopt.cherish.remote.RetrofitService
+import com.sopt.cherish.remote.api.CalendarAPI
 import com.sopt.cherish.remote.api.MyPageAPI
 import com.sopt.cherish.remote.api.NotificationAPI
 import com.sopt.cherish.remote.api.UserAPI
@@ -25,4 +26,6 @@ object RetrofitBuilder {
     val myPageAPI: MyPageAPI = getRetrofit().create(MyPageAPI::class.java)
 
     val notificationAPI: NotificationAPI = getRetrofit().create(NotificationAPI::class.java)
+
+    val calendarAPI: CalendarAPI = getRetrofit().create(CalendarAPI::class.java)
 }

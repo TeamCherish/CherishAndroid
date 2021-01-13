@@ -54,4 +54,8 @@
     <string name="myPage_watering_text">물주기 횟수</string>
     <string name="myPage_postpone_text">미룬 횟수</string>
     <string name="myPage_complete_text">성장완료</string>
+
+    <string name="calendar_future_watering_text">물 주는 날</string>
+    <string name="calendar_watered_text">물 준 날</string>
+    <string name="calendar_day_bullet">●</string>
 </resources>
