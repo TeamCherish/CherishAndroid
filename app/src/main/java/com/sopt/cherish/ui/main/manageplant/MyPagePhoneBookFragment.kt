@@ -2,6 +2,7 @@ package com.sopt.cherish.ui.enrollment
 
 import android.os.Bundle
 import android.provider.ContactsContract
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentMyPagePhoneBookBinding
 import com.sopt.cherish.ui.adapter.Phone
 import com.sopt.cherish.ui.adapter.PhoneBookAdapter
+import com.sopt.cherish.util.MyApplication
 
 
 class MyPagePhoneBookFragment : Fragment() {
@@ -62,7 +64,6 @@ class MyPagePhoneBookFragment : Fragment() {
 
     fun startProcess() {
         setList()
-
     }
 
 
@@ -75,10 +76,12 @@ class MyPagePhoneBookFragment : Fragment() {
 
     fun setList() {
         phonelist.addAll(getPhoneNumbers(sortText, searchText))
+
         madapter = PhoneBookAdapter(phonelist)
         binding.recyclerMypage.adapter = madapter
         binding.recyclerMypage.layoutManager = LinearLayoutManager(context)
     }
+
 
     fun getPhoneNumbers(sort: String, name: String): List<Phone> {
         val list = mutableListOf<Phone>()

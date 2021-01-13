@@ -37,6 +37,7 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
         val binding: DialogContactBinding =
             DataBindingUtil.inflate(inflater, R.layout.dialog_contact, container, false)
         binding.mainViewModel = viewModel
+        // ViewModel 사용 x
 
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 

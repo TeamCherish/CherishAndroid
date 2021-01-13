@@ -1,9 +1,9 @@
 package com.sopt.cherish.di
 
 import androidx.lifecycle.ViewModelProvider
-import com.sopt.cherish.remote.api.MyPageAPI
-import com.sopt.cherish.remote.api.UserAPI
+import com.sopt.cherish.remote.api.*
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
+import com.sopt.cherish.repository.DetailPlantRepository
 import com.sopt.cherish.repository.MainRepository
 import com.sopt.cherish.ui.factory.DetailViewModelFactory
 import com.sopt.cherish.ui.factory.EnrollmentViewModelFactory
@@ -24,8 +24,19 @@ object Injection {
         return RetrofitBuilder.myPageAPI
     }
 
+    private fun provideReviewAPI(): ReviewAPI {
+        return RetrofitBuilder.reviewAPI
+    }
+
+    private fun provideWateringAPI(): WateringAPI {
+        return RetrofitBuilder.wateringAPI
+    }
+
     private fun provideMainRepository(): MainRepository {
-        return MainRepository(provideUserAPI(), provideMyPageAPI())
+        return MainRepository(
+            provideUserAPI(), provideMyPageAPI(), provideReviewAPI(),
+            provideWateringAPI()
+        )
     }
 
     fun provideMainViewModelFactory(): ViewModelProvider.Factory {
@@ -33,8 +44,16 @@ object Injection {
     }
 
     // Detail di
+    private fun provideCalendarAPI(): CalendarAPI {
+        return RetrofitBuilder.calendarAPI
+    }
+
+    private fun provideDetailPlantRepository(): DetailPlantRepository {
+        return DetailPlantRepository(provideCalendarAPI())
+    }
+
     fun provideDetailViewModelFactory(): ViewModelProvider.Factory {
-        return DetailViewModelFactory()
+        return DetailViewModelFactory(provideDetailPlantRepository())
     }
 
     // enrollment di

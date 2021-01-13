@@ -185,6 +185,10 @@ class PhoneBookFragment : Fragment() {
         binding.recycler.layoutManager = LinearLayoutManager(context)
     }
 
+    fun getcount():String{
+        return phonelist.size.toString()
+    }
+
     fun getPhoneNumbers(sort: String, search: String): List<Phone> {
         val list = mutableListOf<Phone>()
         val phonUri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI
@@ -249,7 +253,7 @@ class PhoneBookFragment : Fragment() {
                 list.distinct()
             }
 
-            
+
 
             }
 

@@ -13,13 +13,14 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayout
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentManagePlantBinding
-import com.sopt.cherish.remote.api.MyPageUserData
 import com.sopt.cherish.remote.api.MyPageUserRes
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
-
 import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
+import com.sopt.cherish.ui.enrollment.MyPagePhoneBookFragment
+import com.sopt.cherish.ui.enrollment.PhoneBookFragment
 import com.sopt.cherish.ui.main.MainActivity
 import com.sopt.cherish.ui.main.MainViewModel
+import com.sopt.cherish.util.MyApplication
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -43,7 +44,7 @@ class ManagePlantFragment : Fragment() {
 
         initializeTabLayoutView(binding)
         initializeBottomSheetBehavior(binding)
-        initializeServerRequest()
+        initializeServerRequest(binding)
 
         binding.myPageAddPlantBtn.setOnClickListener {
             navigatePhoneBook()
@@ -106,6 +107,7 @@ class ManagePlantFragment : Fragment() {
         todo: 식물 5 처럼 텍스트 분리해서 탭 지정
         연락처 탭 클릭시 상단 탭바 변경되어야 함
          */
+
         binding.myPageBottomTab.addTab(binding.myPageBottomTab.newTab().setText("식물"))
         binding.myPageBottomTab.addTab(binding.myPageBottomTab.newTab().setText("연락처"))
 
@@ -153,7 +155,9 @@ class ManagePlantFragment : Fragment() {
         startActivity(intent)
     }
 
-    private fun initializeServerRequest() {
+
+
+    private fun initializeServerRequest(binding: FragmentManagePlantBinding) {
 
         requestData.myPageAPI.fetchUserPage(1)
             .enqueue(
@@ -171,11 +175,19 @@ class ManagePlantFragment : Fragment() {
                             it.isSuccessful
                         }?.body()
                             ?.let { it ->
+
                                 Log.d("data success!", it.myPageUserData.waterCount.toString())
+
+                                binding.myPageWateringCnt.text =
+                                    it.myPageUserData.waterCount.toString()
+                                binding.myPagePostponeCnt.text =
+                                    it.myPageUserData.postponeCount.toString()
+                                binding.myPageFinishCnt.text =
+                                    it.myPageUserData.completeCount.toString()
+
                             }
                     }
-                }
-            )
+                })
     }
 
 }

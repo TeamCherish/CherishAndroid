@@ -2,22 +2,30 @@ package com.sopt.cherish.ui.datail
 
 import android.graphics.Rect
 import android.os.Bundle
+
 import android.util.Log
-import android.view.*
+
+import android.view.LayoutInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
+
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.jackandphantom.circularprogressbar.CircleProgressbar
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentDetailPlantBinding
-import com.sopt.cherish.di.Injection
-import com.sopt.cherish.remote.model.ResponseDetailData
+import com.sopt.cherish.remote.api.ResponsePlantCardDatas
+
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
+
 import com.sopt.cherish.ui.adapter.DetailMemoAdapter
 import com.sopt.cherish.ui.datail.calendar.CalendarFragment
 import com.sopt.cherish.ui.domain.MemoListDataclass
+import com.sopt.cherish.util.MyApplication
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -26,61 +34,82 @@ import retrofit2.Response
 class DetailPlantFragment : Fragment() {
 
     private lateinit var circleProgressbar: CircleProgressbar
-    private lateinit var viewModel: DetailPlantViewModel
+    private val viewModel: DetailPlantViewModel by activityViewModels()
+    private val requestData = RetrofitBuilder
 
-    var memoList = arrayListOf<MemoListDataclass>(
-        MemoListDataclass("12/2", "다음주에 대머리쉬 출근"),
-        MemoListDataclass("12/28", "내일 체리쉬 사퇴")
-    )
+    //lateinit var memoList:ArrayList<MemoListDataclass>
 
+   // private lateinit var memoList: ArrayList<MemoListDataclass>
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-
+    ): View {
         val binding: FragmentDetailPlantBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_detail_plant, container, false)
-        initializeViewModel()
-        //val token = MyApplication.mySharedPreferences.getValue("token","")
 
-        val call: Call<ResponseDetailData> = RetrofitBuilder.retrofitService.getDetailplant(1)
-        call.enqueue(object : Callback<ResponseDetailData> {
-            override fun onFailure(call: Call<ResponseDetailData>, t: Throwable) {
-                Log.d("tag", t.localizedMessage)
-            }
-
-            override fun onResponse(
-                call: Call<ResponseDetailData>,
-                response: Response<ResponseDetailData>
-            ) {
-
-                response.takeIf { it.isSuccessful }
-
-                    ?.body()
-                    ?.let {
-
-                            it ->
-                       // binding.textView7.text = it.data[0].level.toString()
-
-
-                    }
-            }
-        })
-        // 유저 원형 프로그레스바 보여주는 부분
         circleProgressbar = binding.test
         val animationDuration = 100
-        circleProgressbar.setProgressWithAnimation(45.0f, animationDuration)
+
+
+        requestData.ResponsePlantCardData.Detailcherishcard(1)
+            .enqueue(
+                object : Callback<ResponsePlantCardDatas> {
+                    override fun onFailure(call: Call<ResponsePlantCardDatas>, t: Throwable) {
+                        Log.d("통신 실패", t.toString())
+                    }
+
+                    override fun onResponse(
+                        call: Call<ResponsePlantCardDatas>,
+                        response: Response<ResponsePlantCardDatas>
+                    ) {
+                        Log.d("success", response.body().toString())
+                        response.takeIf {
+                            it.isSuccessful
+                        }?.body()
+                            ?.let { it ->
+                                binding.textViewNick.text=it.data.nickname
+                                binding.textViewName.text=it.data.name
+                                binding.textViewPlantname.text=it.data.plant_name
+                                binding.textViewDday.text="D-"+it.data.dDay.toString()
+                                binding.textViewDuration.text=it.data.duration.toString()
+                                binding.textViewBirth.text=it.data.birth.toString()
+                                binding.textView1WithName.text=it.data.name.toString()
+                                circleProgressbar.setProgressWithAnimation(it.data.gage.toFloat(), animationDuration)
+
+                                binding.chip.text=it.data.keyword1
+                                binding.chip2.text=it.data.keyword2
+                                binding.chip3.text=it.data.keyword3
+
+
+                                var memoList = arrayListOf<MemoListDataclass>(
+
+                                    MemoListDataclass(it.data.reviews[0].water_date, it.data.reviews[0].review),
+                                    MemoListDataclass(it.data.reviews[1].water_date, it.data.reviews[1].review)
+                                )
+
+                               //memoList.add(MemoListDataclass(it.data.reviews[0].water_date, it.data.reviews[0].review))
+                               //memoList.add(MemoListDataclass(it.data.reviews[1].water_date, it.data.reviews[1].review))
+
+                                Log.d("data success!",  it.data.reviews[0].review.toString())
+
+
+                                val mAdapter = DetailMemoAdapter(memoList)
+                                binding.recyclerDetail.adapter = mAdapter
+
+                                binding.recyclerDetail.addItemDecoration(VerticalSpaceItemDecoration(20))
+
+                                binding.recyclerDetail.layoutManager = LinearLayoutManager(context)
+                                binding.recyclerDetail.setHasFixedSize(true)
+
+                            }
+                    }
+                })
+        // 유저 원형 프로그레스바 보여주는 부분
+
 
 
         // memolist 어댑터 연결 부분
-        val mAdapter = DetailMemoAdapter(memoList)
-        binding.recyclerDetail.adapter = mAdapter
 
-        binding.recyclerDetail.addItemDecoration(VerticalSpaceItemDecoration(20))
-
-        binding.recyclerDetail.layoutManager = LinearLayoutManager(context)
-        binding.recyclerDetail.setHasFixedSize(true)
 
         return binding.root
     }
@@ -117,15 +146,4 @@ class DetailPlantFragment : Fragment() {
             outRect.bottom = verticalSpaceHeight
         }
     }
-
-    private fun initializeViewModel() {
-        viewModel =
-            ViewModelProvider(
-                this@DetailPlantFragment,
-                Injection.provideDetailViewModelFactory()
-            ).get(
-                DetailPlantViewModel::class.java
-            )
-    }
-
 }

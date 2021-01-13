@@ -1,72 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:cardCornerRadius="@dimen/radius_20dp">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <data>
+
+        <variable
+            name="mainViewModel"
+            type="com.sopt.cherish.ui.main.MainViewModel" />
+    </data>
+
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/radius_20dp">
 
-        <TextView
-            android:id="@+id/delay_watering_date_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="44dp"
-            android:fontFamily="@font/notosanscjkkr_bold"
-            android:text="1월 4일에 물주기"
-            android:textSize="@dimen/text_14sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/delay_watering_date_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="44dp"
+                android:fontFamily="@font/notosanscjkkr_bold"
+                android:text="@{mainViewModel.delayWateringDateText}"
+                android:textSize="@dimen/text_14sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
-        <NumberPicker
-            android:id="@+id/delay_watering_day_picker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="80dp"
-            android:layout_marginTop="@dimen/margin_8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/delay_watering_date_text" />
+            <NumberPicker
+                android:id="@+id/delay_watering_day_picker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="80dp"
+                android:layout_marginTop="@dimen/margin_8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/delay_watering_date_text" />
 
-        <TextView
-            android:id="@+id/delay_watering_day_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="11dp"
-            android:layout_marginTop="86dp"
-            android:fontFamily="@font/notosanscjkkr_medium"
-            android:includeFontPadding="false"
-            android:text="@string/dialog_delay_watering_text"
-            android:textColor="@color/cherish_light_black"
-            android:textSize="18sp"
-            app:layout_constraintStart_toEndOf="@id/delay_watering_day_picker"
-            app:layout_constraintTop_toBottomOf="@id/delay_watering_date_text" />
+            <TextView
+                android:id="@+id/delay_watering_day_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="11dp"
+                android:layout_marginTop="86dp"
+                android:fontFamily="@font/notosanscjkkr_medium"
+                android:includeFontPadding="false"
+                android:text="@string/dialog_delay_watering_text"
+                android:textColor="@color/cherish_light_black"
+                android:textSize="18sp"
+                app:layout_constraintStart_toEndOf="@id/delay_watering_day_picker"
+                app:layout_constraintTop_toBottomOf="@id/delay_watering_date_text" />
 
-        <TextView
-            android:id="@+id/delay_watering_description_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="31dp"
-            android:text="@string/dialog_delay_watering_description"
-            app:layout_constraintEnd_toEndOf="@id/delay_watering_day_text"
-            app:layout_constraintTop_toBottomOf="@id/delay_watering_day_picker" />
+            <TextView
+                android:id="@+id/delay_watering_description_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="31dp"
+                android:fontFamily="@font/notosanscjkkr_regular"
+                android:includeFontPadding="false"
+                android:text="@string/dialog_delay_watering_description"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="@id/delay_watering_day_text"
+                app:layout_constraintTop_toBottomOf="@id/delay_watering_day_picker" />
 
-        <Button
-            android:id="@+id/delay_watering_accept_btn"
-            style="@style/RoundButton.DarkGray"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="19dp"
-            android:layout_marginTop="19dp"
-            android:layout_marginEnd="19dp"
-            android:layout_marginBottom="@dimen/margin_29dp"
-            android:text="@string/dialog_delay_watering_admin_text"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/delay_watering_description_text" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.cardview.widget.CardView>
+            <TextView
+                android:id="@+id/current_delay_watering_description_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosanscjkkr_regular"
+                android:includeFontPadding="false"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="@id/delay_watering_day_text"
+                app:layout_constraintStart_toStartOf="@id/delay_watering_description_text"
+                app:layout_constraintTop_toBottomOf="@id/delay_watering_description_text" />
+
+            <Button
+                android:id="@+id/delay_watering_accept_btn"
+                style="@style/RoundButton.DarkGray"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="19dp"
+                android:layout_marginTop="19dp"
+                android:layout_marginEnd="19dp"
+                android:layout_marginBottom="@dimen/margin_29dp"
+                android:text="@string/dialog_delay_watering_admin_text"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/current_delay_watering_description_text" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>
