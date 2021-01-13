@@ -4,6 +4,7 @@ import android.net.Uri
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sopt.cherish.remote.api.PostponeWateringDateReq
 import com.sopt.cherish.remote.api.PostponeWateringRes
 import com.sopt.cherish.remote.api.ReviewWateringReq
 import com.sopt.cherish.remote.api.UserResult
@@ -60,7 +61,7 @@ class MainViewModel(
     val dummyUserCount = dummyCherry.size.toString()
 
     // [home] Server connection
-    private val dummyUserId = 1 // login 시 서버에서 가져온 id 값을 그대로 사용하면 됨
+    val dummyUserId = 1 // login 시 서버에서 가져온 id 값을 그대로 사용하면 됨
     private val dummyCherishId = 1
 
     private val _users = MutableLiveData<UserResult>()
@@ -96,4 +97,9 @@ class MainViewModel(
     fun getPostPoneWateringCount() = viewModelScope.launch {
         _postponeData.postValue(mainRepository.getPostponeCount(dummyCherishId))
     }
+
+    fun postponeWateringDate(postponeWateringDateReq: PostponeWateringDateReq) =
+        viewModelScope.launch {
+            mainRepository.postponeWateringDate(postponeWateringDateReq)
+        }
 }

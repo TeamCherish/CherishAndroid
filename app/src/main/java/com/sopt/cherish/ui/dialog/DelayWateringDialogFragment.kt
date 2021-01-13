@@ -11,6 +11,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.DialogDelayWateringBinding
+import com.sopt.cherish.remote.api.PostponeWateringDateReq
 import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.util.DialogUtil
 import com.sopt.cherish.util.extension.shortToast
@@ -59,7 +60,27 @@ class DelayWateringDialogFragment : DialogFragment() {
 
     private fun sendDelayDayToServer(binding: DialogDelayWateringBinding) {
         binding.delayWateringAcceptBtn.setOnClickListener {
-            shortToast(requireContext(), "서버통신해야함")
+            viewModel.postponeData.observe(viewLifecycleOwner) {
+                if (it.postponeData.isPostpone) {
+                    val postponeWateringDateReq = PostponeWateringDateReq(
+                        viewModel.dummyUserId,
+                        binding.delayWateringDayPicker.value,
+                        it.postponeData.isPostpone
+                    )
+                    viewModel.postponeWateringDate(postponeWateringDateReq)
+                    shortToast(requireContext(), "[미루기 성공]3회 초과하였습니다 , 식물 애정도가 차감되었습니다.")
+                    dismiss()
+                } else {
+                    val postponeWateringDateReq = PostponeWateringDateReq(
+                        viewModel.dummyUserId,
+                        binding.delayWateringDayPicker.value,
+                        it.postponeData.isPostpone
+                    )
+                    viewModel.postponeWateringDate(postponeWateringDateReq)
+                    shortToast(requireContext(), "미루기 성공!")
+                    dismiss()
+                }
+            }
         }
     }
 }

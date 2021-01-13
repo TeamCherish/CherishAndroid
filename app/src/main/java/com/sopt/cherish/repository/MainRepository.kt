@@ -25,4 +25,7 @@ class MainRepository(
         reviewAPI.reviewWatering(reviewWateringReq)
 
     suspend fun getPostponeCount(cherishId: Int) = wateringAPI.getPostponeWateringCount(cherishId)
+
+    suspend fun postponeWateringDate(postponeWateringDateReq: PostponeWateringDateReq) =
+        wateringAPI.postponeWateringDate(postponeWateringDateReq)
 }
