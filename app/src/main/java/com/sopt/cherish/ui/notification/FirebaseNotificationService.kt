@@ -14,7 +14,7 @@ import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import com.sopt.cherish.R
-import com.sopt.cherish.ui.main.MainActivity
+import com.sopt.cherish.ui.signin.SignInActivity
 import com.sopt.cherish.util.SimpleLogger
 import kotlin.random.Random
 
@@ -41,7 +41,7 @@ class FirebaseNotificationService : FirebaseMessagingService() {
     override fun onMessageReceived(message: RemoteMessage) {
         super.onMessageReceived(message)
 
-        val intent = Intent(this, MainActivity::class.java)
+        val intent = Intent(this, SignInActivity::class.java)
         val notificationManager =
             getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val notificationId = Random.nextInt()
