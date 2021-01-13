@@ -41,7 +41,7 @@ class ManagePlantFragment : Fragment() {
 
         initializeTabLayoutView(binding)
         initializeBottomSheetBehavior(binding)
-        initializeServerRequest()
+        initializeServerRequest(binding)
 
         binding.myPageAddPlantBtn.setOnClickListener {
             navigatePhoneBook()
@@ -151,7 +151,7 @@ class ManagePlantFragment : Fragment() {
         startActivity(intent)
     }
 
-    private fun initializeServerRequest() {
+    private fun initializeServerRequest(binding: FragmentManagePlantBinding) {
 
         requestData.myPageAPI.fetchUserPage(1)
             .enqueue(
@@ -169,11 +169,15 @@ class ManagePlantFragment : Fragment() {
                             it.isSuccessful
                         }?.body()
                             ?.let { it ->
-                                Log.d("data success!", it.myPageUserData.waterCount.toString())
+                                binding.myPageWateringCnt.text =
+                                    it.myPageUserData.waterCount.toString()
+                                binding.myPagePostponeCnt.text =
+                                    it.myPageUserData.postponeCount.toString()
+                                binding.myPageFinishCnt.text =
+                                    it.myPageUserData.completeCount.toString()
                             }
                     }
-                }
-            )
+                })
     }
 
 }

@@ -1,6 +1,10 @@
 package com.sopt.cherish.remote.api
 
 import com.google.gson.annotations.SerializedName
+import retrofit2.Call
+import retrofit2.http.Body
+import retrofit2.http.Headers
+import retrofit2.http.POST
 
 // 로그인 req
 data class EditUserReq(
@@ -12,7 +16,11 @@ data class EditUserReq(
 data class EditUserRes(
     @SerializedName("success") val success: Boolean,
     @SerializedName("message") val message: String,
-    @SerializedName("data") val userId: UserId
+    @SerializedName("data") val userId: UserPk
+)
+
+data class UserPk(
+    @SerializedName("UserId") val userId: Int
 )
 
 // 회원가입 request
@@ -31,4 +39,10 @@ data class CreateUserRes(
     @SerializedName("data") val userNickName: UserNickName
 )
 
-interface AuthAPI
+interface AuthAPI {
+    @Headers("Content-Type:application/json")
+    @POST("login/signin")
+    fun postLogin(
+        @Body body: EditUserReq
+    ): Call<EditUserRes>
+}
