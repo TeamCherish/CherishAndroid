@@ -29,4 +29,6 @@ object RetrofitBuilder {
     val reviewAPI: ReviewAPI = getRetrofit().create(ReviewAPI::class.java)
 
     val wateringAPI: WateringAPI = getRetrofit().create(WateringAPI::class.java)
+
+    val authAPI:AuthAPI=getRetrofit().create(AuthAPI::class.java)
 }
