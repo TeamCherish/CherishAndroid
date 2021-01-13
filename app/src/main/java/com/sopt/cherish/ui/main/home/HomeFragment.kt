@@ -45,6 +45,7 @@ class HomeFragment : Fragment() {
         val binding: FragmentHomeBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         binding.mainViewModel = viewModel
+        initializeView(binding)
         val homeCherryListAdapter = HomeCherryListAdapter()
 
         initializeBottomSheetBehavior(binding)
@@ -66,6 +67,13 @@ class HomeFragment : Fragment() {
 
         updateProgressBar(binding)
         return binding.root
+    }
+
+    private fun initializeView(binding: FragmentHomeBinding) {
+        // 나의 소중한 사람들 count
+        viewModel.users.observe(viewLifecycleOwner) {
+            binding.homeCherryNumber.text = it.userData.totalUser.toString()
+        }
     }
 
     private fun navigateDetailPlant() {

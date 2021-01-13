@@ -23,6 +23,8 @@
     <color name="cherish_purple">#8189b3</color>
     <color name="cherish_gray">#c4c4c4</color>
     <color name="cherish_next_watering_btn_color">#5c5c5c</color>
+    <color name="cherish_calendar_chip_background_color">#ddf8ed</color>
+    <color name="cherish_calendar_chip_text_color">#19b777</color>
 
     <color name="cherish_pass_text_gray">#c4c4c4</color>
 

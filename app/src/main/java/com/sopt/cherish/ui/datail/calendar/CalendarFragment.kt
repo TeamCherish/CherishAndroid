@@ -13,7 +13,7 @@ import com.sopt.cherish.databinding.FragmentCalendarBinding
 import com.sopt.cherish.ui.datail.DetailPlantActivity
 import com.sopt.cherish.ui.datail.DetailPlantViewModel
 import com.sopt.cherish.util.DateUtil
-import com.sopt.cherish.util.extension.FlexBoxExtension.addChip
+import com.sopt.cherish.util.extension.FlexBoxExtension.addChipCalendar
 import com.sopt.cherish.util.extension.FlexBoxExtension.clearChips
 import com.sopt.cherish.view.calendar.DotDecorator
 
@@ -107,7 +107,17 @@ class CalendarFragment : Fragment() {
             // 클릭 시 화살표의 모양이 왔다갔다 하면서 바뀌도록 하면 됨
             // review button 이 눌림에 따라
             // textview의 ellipsize 와 maxLine의 수를 바꿔주면 된다.
-            binding.calendarView.changeCalendarModeWeeks()
+            // SingleLiveData로 제어를 해야하는데 지금 귀찮음 나중에 하자
+            if (viewModel.calendarAllowChange) {
+                viewModel.calendarAllowChange = false
+                binding.reviewBack.setImageResource(R.drawable.icn_allow)
+                binding.calendarView.changeCalendarModeWeeks()
+            } else {
+                viewModel.calendarAllowChange = true
+                binding.reviewBack.setImageResource(R.drawable.icn_allow_top)
+                binding.calendarView.changeCalendarModeMonths()
+            }
+
         }
     }
 
@@ -146,7 +156,7 @@ class CalendarFragment : Fragment() {
     private fun showChips(binding: FragmentCalendarBinding, wateredChip: List<String?>) {
         binding.calendarViewChipLayout.clearChips()
         wateredChip.forEach {
-            it?.let { it1 -> binding.calendarViewChipLayout.addChip(it1) }
+            it?.let { it1 -> binding.calendarViewChipLayout.addChipCalendar(it1) }
         }
     }
 

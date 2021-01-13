@@ -164,7 +164,6 @@
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="19dp"
                     android:fontFamily="@font/notosanscjkkr_bold"
-                    android:text="@{mainViewModel.dummyUserCount}"
                     android:textColor="@color/cherish_green_main"
                     app:layout_constraintStart_toEndOf="@+id/home_bottom_sheet_title"
                     app:layout_constraintTop_toTopOf="parent" />

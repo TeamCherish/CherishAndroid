@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.sopt.cherish.databinding.ActivitySignInBinding
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.main.MainActivity
-import com.sopt.cherish.ui.notification.FirebaseNotificationService
 
 class SignInActivity : AppCompatActivity() {
 
@@ -19,7 +18,6 @@ class SignInActivity : AppCompatActivity() {
 
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        startService(Intent(applicationContext, FirebaseNotificationService::class.java))
 
         binding.loginBtn.setOnClickListener {
 
