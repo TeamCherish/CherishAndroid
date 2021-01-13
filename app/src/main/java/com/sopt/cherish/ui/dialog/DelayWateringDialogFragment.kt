@@ -20,6 +20,7 @@ class DelayWateringDialogFragment : DialogFragment() {
 
     private val viewModel: MainViewModel by activityViewModels()
 
+    // todo : 오늘 하루 만약에 버튼을 클릭했다면 , 그 다음에는 불가능 하도록 해야함
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
