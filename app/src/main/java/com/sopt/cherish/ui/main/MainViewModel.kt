@@ -60,6 +60,9 @@ class MainViewModel(
     val cherishUserId: MutableLiveData<Int>
         get() = _cherishUserId
 
+    val reviewText = "${userNickName.value}님! ${cherishUser.value?.nickName}님과의"
+
+    val reviewDescription = "${cherishUser.value?.nickName}과의 물주기를 기록하세요"
     fun fetchUsers() = viewModelScope.launch {
         try {
             _cherishUsers.postValue(mainRepository.fetchCherishUser(userId.value!!))

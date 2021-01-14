@@ -1,7 +1,6 @@
 package com.sopt.cherish.repository
 
 import com.sopt.cherish.remote.api.*
-import com.sopt.cherish.util.SimpleLogger
 
 /**
  * Created on 01-07 by SSong-develop
@@ -13,7 +12,6 @@ class MainRepository(
     private val wateringAPI: WateringAPI
 ) {
     suspend fun fetchCherishUser(userId: Int): UserResult {
-        SimpleLogger.logI(userAPI.getCherishUser(1).toString())
         return userAPI.getCherishUser(userId)
     }
 /*

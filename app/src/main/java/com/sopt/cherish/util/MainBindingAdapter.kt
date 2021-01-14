@@ -28,16 +28,6 @@ object MainBindingAdapter {
     }
 
     @JvmStatic
-    @BindingAdapter("android:showOnClick")
-    fun circleBorderVisibility(imageView: ImageView, focus: Boolean) {
-        if (focus) {
-            imageView.visibility = View.VISIBLE
-        } else {
-            imageView.visibility = View.INVISIBLE
-        }
-    }
-
-    @JvmStatic
     @BindingAdapter("android:allowChange")
     fun allowChange(imageView: ImageView, focus: Boolean) {
         if (focus) {

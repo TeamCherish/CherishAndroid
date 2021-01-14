@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentHomeBinding
+import com.sopt.cherish.databinding.MainCherryItemBinding
 import com.sopt.cherish.remote.api.User
 import com.sopt.cherish.ui.adapter.HomeCherryListAdapter
 import com.sopt.cherish.ui.adapter.OnItemClickListener
@@ -178,13 +179,18 @@ class HomeFragment : Fragment(), OnItemClickListener {
     // 5. 배경 색 -> 이건 어쩔 수 없이 뷰 코드에서 진행 -> O
     // 빠트린건 없나 다시 생각
     @SuppressLint("SetTextI18n")
-    override fun onItemClick(user: User) {
+    override fun onItemClick(itemBinding: MainCherryItemBinding, user: User) {
         // bottomSheetBehavior 초기화 , 안되는데 왜 안되는 지는 모르겠음
         standardBottomSheetBehavior.peekHeight = 60.dp
-
+        // 클릭 이벤트 다시한번 생각
+        if (itemBinding.userImgSelected.visibility == View.INVISIBLE) {
+            itemBinding.userImgSelected.visibility = View.VISIBLE
+        } else {
+            itemBinding.userImgSelected.visibility = View.INVISIBLE
+        }
         // 뷰모델에 선택된 유저의 상황 넣어주기
         viewModel.cherishUser.value = user
-
+        // cherishId를 쏴줘야지
         // 선택된 유저 이름 변경
         // 음수로 가면 -> -1 이면 , 물주기 까지 하루 남음
         // 양수로 가면 -> 이미 그만큼 지난거임 , if 7 이면 물줘야하는게 7일지난거임

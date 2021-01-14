@@ -52,12 +52,10 @@ class ReviewActivity : AppCompatActivity() {
     @SuppressLint("SetTextI18n")
     private fun initializeView(binding: ActivityReviewBinding) {
         // 야매로함 , 근데 이거 안됨
-        viewModel.cherishUser.observe(this) {
-            binding.reviewUser.text =
-                "${intent.getStringExtra("userNickname")}님! ${intent.getStringExtra("cherishNickname")}님과의"
-            binding.reviewDescription.text =
-                "${intent.getStringExtra("cherishNickname")}님과의 물주기를 기록해주세요"
-        }
+        binding.reviewUser.text =
+            "${intent.getStringExtra("userNickname")}님! ${intent.getStringExtra("cherishNickname")}님과의"
+        binding.reviewDescription.text =
+            "${intent.getStringExtra("cherishNickname")}님과의 물주기를 기록해주세요"
     }
 
     private fun addLimitNumberOfMemoCharacters(binding: ActivityReviewBinding) {

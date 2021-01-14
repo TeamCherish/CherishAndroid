@@ -52,6 +52,7 @@ class DetailPlantFragment : Fragment() {
         val animationDuration = 100
 
         binding.buttonWater.setOnClickListener {
+            // 이거 매개변수 바꿔야 함
             WateringDialogFragment().show(parentFragmentManager, "DetailPlantFragment")
         }
         val cherishid = arguments?.getInt("plantidgo")

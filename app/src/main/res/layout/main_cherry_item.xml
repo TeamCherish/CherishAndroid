@@ -9,8 +9,9 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:id="@+id/main_item_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/user_img_selected"
@@ -23,8 +24,8 @@
 
         <ImageView
             android:id="@+id/main_user_img"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
             android:setProfile="@{homeUserData.thumbnailImageUrl}"
             app:layout_constraintBottom_toBottomOf="@+id/user_img_selected"
             app:layout_constraintEnd_toEndOf="@+id/user_img_selected"

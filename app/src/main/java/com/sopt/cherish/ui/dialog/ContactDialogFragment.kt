@@ -19,6 +19,7 @@ import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.ui.review.ReviewActivity
 import com.sopt.cherish.util.DialogUtil
 import com.sopt.cherish.util.PermissionUtil
+import com.sopt.cherish.util.SimpleLogger
 import com.sopt.cherish.util.extension.shortToast
 
 /**
@@ -86,8 +87,12 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
         if (findKakaoTalk()) {
             val kakaoIntent = context?.packageManager?.getLaunchIntentForPackage("com.kakao.talk")
             kakaoIntent?.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            kakaoIntent?.putExtra("userNickname", viewModel.userNickName.value)
-            kakaoIntent?.putExtra("cherishNickname", viewModel.cherishUser.value?.nickName)
+            viewModel.userNickName.observe(viewLifecycleOwner) {
+                kakaoIntent?.putExtra("userNickname", it)
+            }
+            viewModel.cherishUser.observe(viewLifecycleOwner) {
+                kakaoIntent?.putExtra("cherishNickname", it.nickName)
+            }
             startActivityForResult(kakaoIntent, codeThatReviewPage)
         } else {
             shortToast(requireContext(), "카카오톡이 없어요 ㅠ")
@@ -111,9 +116,13 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
             Intent.ACTION_SENDTO,
             Uri.parse("smsto:${viewModel.cherishUser.value?.phoneNumber}")
         )
-        messageIntent
-            .putExtra("userNickname", viewModel.userNickName.value)
-        messageIntent.putExtra("cherishNickname", viewModel.cherishUser.value?.nickName)
+        viewModel.userNickName.observe(viewLifecycleOwner) {
+            SimpleLogger.logI(it)
+            messageIntent.putExtra("userNickname", it)
+        }
+        viewModel.cherishUser.observe(viewLifecycleOwner) {
+            messageIntent.putExtra("cherishNickname", it.nickName)
+        }
 
         startActivityForResult(
             messageIntent,

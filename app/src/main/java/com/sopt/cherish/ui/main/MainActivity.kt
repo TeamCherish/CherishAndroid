@@ -13,6 +13,7 @@ import com.sopt.cherish.ui.main.manageplant.ManagePlantFragment
 import com.sopt.cherish.ui.main.manageplant.PlantFragment
 import com.sopt.cherish.ui.main.setting.SettingFragment
 import com.sopt.cherish.util.PermissionUtil
+import com.sopt.cherish.util.SimpleLogger
 
 
 class MainActivity : AppCompatActivity() {
@@ -33,6 +34,7 @@ class MainActivity : AppCompatActivity() {
     private fun initializeViewModelData() {
         viewModel.userId.value = intent.getIntExtra("userId", 0)
         viewModel.userNickName.value = intent.getStringExtra("userNickname")
+        SimpleLogger.logI(viewModel.userNickName.value.toString())
     }
 
     private fun initializeViewModel() {
