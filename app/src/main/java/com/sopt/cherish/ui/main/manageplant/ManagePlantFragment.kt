@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -43,7 +44,6 @@ class ManagePlantFragment : Fragment() {
         initializeTabLayoutView(binding)
         initializeBottomSheetBehavior(binding)
 
-
         binding.myPageAddPlantBtn.setOnClickListener {
             navigatePhoneBook()
         }
@@ -67,26 +67,61 @@ class ManagePlantFragment : Fragment() {
                 if (tabIndex == 0) {
                     binding.myPageResetBtn.visibility = View.GONE
                     if (newState == BottomSheetBehavior.STATE_EXPANDED) {
+                        binding.myPageBg.setBackgroundColor(
+                            ContextCompat.getColor(
+                                binding.root.context,
+                                R.color.white
+                            )
+                        )
                         binding.myPageAddPlantBtn.visibility = View.VISIBLE
                         isCollapsed = false
                     }
 
                     if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
+                        binding.myPageBg.setBackgroundColor(
+                            ContextCompat.getColor(
+                                binding.root.context,
+                                R.color.cherish_my_page_bg
+                            )
+                        )
                         binding.myPageAddPlantBtn.visibility = View.GONE
                         isCollapsed = true
                     }
 
                 }
                 if (tabIndex == 1) {
-                    binding.myPageAddPlantBtn.visibility = View.GONE
                     if (newState == BottomSheetBehavior.STATE_EXPANDED) {
                         binding.myPageResetBtn.visibility = View.VISIBLE
+                        binding.constraint1.visibility = View.VISIBLE
+                        binding.cancelText.visibility = View.VISIBLE
+
+                        binding.myPageText.visibility = View.GONE
+                        binding.searchBox.visibility = View.GONE
+
+                        binding.myPageBg.setBackgroundColor(
+                            ContextCompat.getColor(
+                                binding.root.context,
+                                R.color.white
+                            )
+                        )
                         isCollapsed = false
                     }
 
 
                     if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
+                        binding.myPageBg.setBackgroundColor(
+                            ContextCompat.getColor(
+                                binding.root.context,
+                                R.color.cherish_my_page_bg
+                            )
+                        )
                         binding.myPageResetBtn.visibility = View.GONE
+                        binding.constraint1.visibility = View.GONE
+                        binding.cancelText.visibility = View.GONE
+
+                        binding.myPageText.visibility = View.VISIBLE
+                        binding.searchBox.visibility = View.VISIBLE
+
                         isCollapsed = true
                     }
 
@@ -100,11 +135,6 @@ class ManagePlantFragment : Fragment() {
     }
 
     private fun initializeTabLayoutView(binding: FragmentManagePlantBinding) {
-
-        /**
-        todo: 식물 5 처럼 텍스트 분리해서 탭 지정
-        연락처 탭 클릭시 상단 탭바 변경되어야 함
-         */
 
         binding.myPageBottomTab.addTab(binding.myPageBottomTab.newTab().setText("식물"))
         binding.myPageBottomTab.addTab(binding.myPageBottomTab.newTab().setText("연락처"))
@@ -128,17 +158,60 @@ class ManagePlantFragment : Fragment() {
 
                 if (tabIndex == 0) {
                     binding.myPageResetBtn.visibility = View.GONE
+                    binding.myPageResetBtn.visibility = View.GONE
+                    binding.constraint1.visibility = View.GONE
+                    binding.cancelText.visibility = View.GONE
+
+                    binding.myPageText.visibility = View.VISIBLE
+                    binding.searchBox.visibility = View.VISIBLE
                     if (isCollapsed) {
+                        binding.myPageBg.setBackgroundColor(
+                            ContextCompat.getColor(
+                                binding.root.context,
+                                R.color.cherish_my_page_bg
+                            )
+                        )
                         binding.myPageAddPlantBtn.visibility = View.GONE
-                    } else
+                    } else {
+                        binding.myPageBg.setBackgroundColor(
+                            ContextCompat.getColor(
+                                binding.root.context,
+                                R.color.white
+                            )
+                        )
                         binding.myPageAddPlantBtn.visibility = View.VISIBLE
+                    }
+
                 }
                 if (tabIndex == 1) {
-                    binding.myPageAddPlantBtn.visibility = View.GONE
+
                     if (isCollapsed) {
+                        binding.constraint1.visibility = View.GONE
+                        binding.cancelText.visibility = View.GONE
+
+                        binding.myPageText.visibility = View.VISIBLE
+                        binding.searchBox.visibility = View.VISIBLE
+                        binding.myPageBg.setBackgroundColor(
+                            ContextCompat.getColor(
+                                binding.root.context,
+                                R.color.cherish_my_page_bg
+                            )
+                        )
                         binding.myPageResetBtn.visibility = View.GONE
                     } else {
+                        binding.myPageBg.setBackgroundColor(
+                            ContextCompat.getColor(
+                                binding.root.context,
+                                R.color.white
+                            )
+                        )
+
+                        binding.myPageText.visibility = View.GONE
+                        binding.searchBox.visibility = View.GONE
+
                         binding.myPageResetBtn.visibility = View.VISIBLE
+                        binding.constraint1.visibility = View.VISIBLE
+                        binding.cancelText.visibility = View.VISIBLE
                     }
                 }
 
@@ -187,6 +260,7 @@ class ManagePlantFragment : Fragment() {
                                 binding.myPageBottomTab.getTabAt(0)!!.text = tabText
 
                                 Log.d("list", it.myPageUserData.result.toString())
+
 
                             }
                     }
