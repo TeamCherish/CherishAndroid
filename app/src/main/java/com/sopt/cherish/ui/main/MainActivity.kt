@@ -1,6 +1,7 @@
 package com.sopt.cherish.ui.main
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -55,7 +56,13 @@ class MainActivity : AppCompatActivity() {
 
             when (it.itemId) {
                 R.id.main_home -> {
-                    transAction.replace(R.id.main_fragment_container, HomeFragment()).commit()
+                    transAction.replace(R.id.main_fragment_container, HomeFragment().apply {
+                        arguments = Bundle().apply {
+                            putInt("userid", intent.getIntExtra("userId", 0))
+                            Log.d("mainactivity",intent.getIntExtra("userId", 0).toString())
+                        }
+
+                    }).commit()
                     true
                 }
                 R.id.main_manage_plant -> {
