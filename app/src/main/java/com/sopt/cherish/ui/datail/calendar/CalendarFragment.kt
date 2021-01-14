@@ -61,7 +61,7 @@ class CalendarFragment : Fragment() {
         when (id) {
             android.R.id.home -> {
                 activity?.onBackPressed()
-
+                return true
             }
 
         }

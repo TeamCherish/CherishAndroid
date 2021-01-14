@@ -1,6 +1,7 @@
 package com.sopt.cherish.ui.datail
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.Rect
 import android.graphics.drawable.ColorDrawable
@@ -43,7 +44,6 @@ class DetailPlantFragment : Fragment() {
     private lateinit var circleProgressbar: CircleProgressbar
     private val viewModel: DetailPlantViewModel by activityViewModels()
     private val requestData = RetrofitBuilder
-
     //lateinit var memoList:ArrayList<MemoListDataclass>
 
     // private lateinit var memoList: ArrayList<MemoListDataclass>
@@ -115,6 +115,7 @@ class DetailPlantFragment : Fragment() {
 
 
                                 val mAdapter = DetailMemoAdapter(memoList)
+
                                 binding.recyclerDetail.adapter = mAdapter
 
                                 binding.recyclerDetail.addItemDecoration(
@@ -122,6 +123,16 @@ class DetailPlantFragment : Fragment() {
                                         20
                                     )
                                 )
+                                mAdapter.setItemClickListener( object : DetailMemoAdapter.ItemClickListener{
+                                    override fun onClick(view: View, position: Int) {
+                                        val item = mAdapter.memolist [position]
+                                        Log.d("SSS", "${position}번 리스트 선택")
+                                        val transaction = parentFragmentManager.beginTransaction()
+                                        transaction.replace(R.id.fragment_detail, CalendarFragment())
+                                        transaction.addToBackStack(null)
+                                        transaction.commit()
+                                    }
+                                })
 
                                 binding.recyclerDetail.layoutManager = LinearLayoutManager(context)
                                 binding.recyclerDetail.setHasFixedSize(true)
@@ -133,7 +144,6 @@ class DetailPlantFragment : Fragment() {
 
 
         // memolist 어댑터 연결 부분
-
 
         return binding.root
     }
