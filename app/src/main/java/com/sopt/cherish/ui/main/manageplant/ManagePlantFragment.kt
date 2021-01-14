@@ -105,6 +105,7 @@ class ManagePlantFragment : Fragment() {
         todo: 식물 5 처럼 텍스트 분리해서 탭 지정
         연락처 탭 클릭시 상단 탭바 변경되어야 함
          */
+
         binding.myPageBottomTab.addTab(binding.myPageBottomTab.newTab().setText("식물"))
         binding.myPageBottomTab.addTab(binding.myPageBottomTab.newTab().setText("연락처"))
 
@@ -152,6 +153,7 @@ class ManagePlantFragment : Fragment() {
         startActivity(intent)
     }
 
+
     private fun initializeServerRequest(binding: FragmentManagePlantBinding) {
 
         requestData.myPageAPI.fetchUserPage(1)
@@ -170,6 +172,9 @@ class ManagePlantFragment : Fragment() {
                             it.isSuccessful
                         }?.body()
                             ?.let { it ->
+
+                                Log.d("data success!", it.myPageUserData.waterCount.toString())
+
                                 binding.myPageWateringCnt.text =
                                     it.myPageUserData.waterCount.toString()
                                 binding.myPagePostponeCnt.text =
@@ -177,10 +182,12 @@ class ManagePlantFragment : Fragment() {
                                 binding.myPageFinishCnt.text =
                                     it.myPageUserData.completeCount.toString()
 
+
                                 val tabText = "식물 " + it.myPageUserData.totalCherish.toString()
                                 binding.myPageBottomTab.getTabAt(0)!!.text = tabText
 
                                 Log.d("list", it.myPageUserData.result.toString())
+
                             }
                     }
                 })

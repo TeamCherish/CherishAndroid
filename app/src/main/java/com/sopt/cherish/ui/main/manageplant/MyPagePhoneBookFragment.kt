@@ -62,7 +62,6 @@ class MyPagePhoneBookFragment : Fragment() {
 
     fun startProcess() {
         setList()
-
     }
 
 
@@ -75,10 +74,12 @@ class MyPagePhoneBookFragment : Fragment() {
 
     fun setList() {
         phonelist.addAll(getPhoneNumbers(sortText, searchText))
+
         madapter = PhoneBookAdapter(phonelist)
         binding.recyclerMypage.adapter = madapter
         binding.recyclerMypage.layoutManager = LinearLayoutManager(context)
     }
+
 
     fun getPhoneNumbers(sort: String, name: String): List<Phone> {
         val list = mutableListOf<Phone>()

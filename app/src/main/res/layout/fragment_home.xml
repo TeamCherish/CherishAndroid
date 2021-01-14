@@ -126,7 +126,7 @@
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteX="42dp"
             tools:layout_editor_absoluteY="0dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -141,11 +141,11 @@
                 <TextView
                     android:layout_width="150dp"
                     android:layout_height="10dp"
-                    android:background="#f0f0f0"
                     android:layout_marginTop="5dp"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:background="#f0f0f0"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
 
                 <TextView

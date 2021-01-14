@@ -24,11 +24,24 @@ object RetrofitBuilder {
 
     val notificationAPI: NotificationAPI = getRetrofit().create(NotificationAPI::class.java)
 
+
+    val signinAPI: AuthAPI = getRetrofit().create(AuthAPI::class.java)
+
+    val enrollAPI: EnrollmentAPI = getRetrofit().create(EnrollmentAPI::class.java)
+
     val calendarAPI: CalendarAPI = getRetrofit().create(CalendarAPI::class.java)
 
     val reviewAPI: ReviewAPI = getRetrofit().create(ReviewAPI::class.java)
 
     val wateringAPI: WateringAPI = getRetrofit().create(WateringAPI::class.java)
 
+
     val authAPI: AuthAPI = getRetrofit().create(AuthAPI::class.java)
+
+    val plantDetailAPI: PlantDetailAPI = getRetrofit().create(PlantDetailAPI::class.java)
+
+    val ResponsePlantCardData: ResponsePlantCardData =
+        getRetrofit().create(com.sopt.cherish.remote.api.ResponsePlantCardData::class.java)
+
+
 }
