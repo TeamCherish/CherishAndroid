@@ -184,7 +184,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
     private fun initializeViewOnItemClick(user: User) {
         binding.homeSelectedUserName.text = user.nickName
         binding.homeSelectedUserStatus.text = user.plantModifier
-        binding.homeAffectionRating.text = user.growth.toString()
+        binding.homeAffectionRating.text = "${user.growth}%"
         binding.homeAffectionProgressbar.progress = user.growth
         when {
             user.dDay < 0 -> {
