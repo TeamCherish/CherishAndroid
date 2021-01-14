@@ -55,8 +55,14 @@ class HomeFragment : Fragment(), OnItemClickListener {
         binding.mainViewModel = viewModel
 
         val homeCherryListAdapter = HomeCherryListAdapter(this)
-        initializeBottomSheetBehavior()
         viewModel.fetchUsers()
+        initializeView()
+        initializeBottomSheetBehavior()
+        setAdapterData(homeCherryListAdapter)
+        initializeRecyclerView(homeCherryListAdapter)
+        updateProgressBar()
+
+        // onClick
         binding.homeWateringBtn.setOnClickListener {
             // 물주기 플로우 뭐가 필요한지 생각
             navigateWatering()
@@ -71,31 +77,20 @@ class HomeFragment : Fragment(), OnItemClickListener {
             // 식물GIF 클릭 시 이동
             navigateDetailPlant(viewModel.userId.value!!, viewModel.cherishUser.value?.id!!)
         }
-
-        setAdapterData(homeCherryListAdapter)
-        initializeRecyclerView(homeCherryListAdapter)
-        updateProgressBar()
         return binding.root
     }
 
-    private fun navigateDetailPlant(userId: Int, cherishId: Int) {
-        val intent = Intent(activity, DetailPlantActivity::class.java)
-        intent.putExtra("userId", userId)
-        intent.putExtra("cherishId", cherishId)
-        startActivity(intent)
-    }
-
-    // todo : bottom sheet corner 유지
-    // todo : 중간에 걸치는게 1줄짜리로 걸치길 희망
     private fun initializeBottomSheetBehavior() {
         standardBottomSheetBehavior =
             BottomSheetBehavior.from(binding.homeStandardBottomSheet)
         // bottom sheet state 지정
         standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         standardBottomSheetBehavior.peekHeight = 60.dp
-        standardBottomSheetBehavior.expandedOffset = 50.dp
+        standardBottomSheetBehavior.expandedOffset = 100.dp
+        standardBottomSheetBehavior.halfExpandedRatio = 0.23f
         standardBottomSheetBehavior.isHideable = false
         binding.homeFragment.setBackgroundColor(
+            // 하드코딩
             ContextCompat.getColor(
                 requireContext(),
                 R.color.cherish_purple
@@ -120,6 +115,12 @@ class HomeFragment : Fragment(), OnItemClickListener {
         }
     }
 
+    private fun initializeView() {
+        viewModel.cherishUsers.observe(viewLifecycleOwner) {
+            binding.homeCherryNumber.text = it.userData.totalUser.toString()
+        }
+    }
+
     private fun initializeRecyclerView(
         homeCherryListAdapter: HomeCherryListAdapter
     ) {
@@ -129,6 +130,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
         }
     }
 
+    // navigate
     private fun navigateWatering() {
         WateringDialogFragment().show(parentFragmentManager, TAG)
     }
@@ -142,6 +144,14 @@ class HomeFragment : Fragment(), OnItemClickListener {
         startActivity(intent)
     }
 
+    private fun navigateDetailPlant(userId: Int, cherishId: Int) {
+        val intent = Intent(activity, DetailPlantActivity::class.java)
+        intent.putExtra("userId", userId)
+        intent.putExtra("cherishId", cherishId)
+        startActivity(intent)
+    }
+
+    // progressBar
     private fun updateProgressBar() {
         val rating = viewModel.cherishUser.value?.growth?.toInt()
         if (rating != null) {
@@ -157,12 +167,12 @@ class HomeFragment : Fragment(), OnItemClickListener {
     }
 
     // recyclerview Item click event
-    // 유저를 클릭할 때 마다 유저 데이터가 viewModel에 변경되어서 observe 되어야 함
     override fun onItemClick(itemBinding: MainCherryItemBinding, position: Int) {
         viewModel.cherishUsers.observe(viewLifecycleOwner) {
-            binding.homeCherryNumber.text = it.userData.totalUser.toString()
             it.userData.userList[position].apply {
                 initializeViewOnItemClick(this)
+            }.also { positionUser ->
+                viewModel.cherishUser.value = positionUser
             }
         }
     }

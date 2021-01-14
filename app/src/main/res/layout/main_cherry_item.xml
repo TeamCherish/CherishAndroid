@@ -10,36 +10,31 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main_item_view"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-        <ImageView
-            android:id="@+id/user_img_selected"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/main_icn_bg"
-            android:visibility="invisible"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/main_user_img"
             android:layout_width="56dp"
             android:layout_height="56dp"
+            android:layout_marginTop="@dimen/margin_8dp"
+            android:background="@drawable/home_bottom_sheet_item_selector"
             android:setProfile="@{homeUserData.thumbnailImageUrl}"
-            app:layout_constraintBottom_toBottomOf="@+id/user_img_selected"
-            app:layout_constraintEnd_toEndOf="@+id/user_img_selected"
-            app:layout_constraintStart_toStartOf="@+id/user_img_selected"
-            app:layout_constraintTop_toTopOf="@+id/user_img_selected" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/water_bg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/main_water_bg"
+            android:layout_marginStart="28dp"
             android:waterVisibility="@{homeUserData.dDay}"
-            app:layout_constraintBottom_toBottomOf="@+id/user_img_selected"
-            app:layout_constraintEnd_toEndOf="@+id/user_img_selected" />
+            app:layout_constraintBottom_toBottomOf="@id/main_user_img"
+            app:layout_constraintEnd_toEndOf="@+id/main_user_img"
+            app:layout_constraintStart_toStartOf="@id/main_user_img"
+            app:layout_constraintTop_toBottomOf="@id/main_user_img" />
 
         <ImageView
             android:id="@+id/main_user_water"
@@ -47,10 +42,11 @@
             android:layout_height="wrap_content"
             android:src="@drawable/group_359"
             android:waterVisibility="@{homeUserData.dDay}"
-            app:layout_constraintBottom_toBottomOf="@+id/water_bg"
-            app:layout_constraintEnd_toEndOf="@+id/water_bg"
-            app:layout_constraintStart_toStartOf="@+id/water_bg"
-            app:layout_constraintTop_toTopOf="@+id/water_bg" />
+            android:layout_marginStart="28dp"
+            app:layout_constraintBottom_toBottomOf="@id/main_user_img"
+            app:layout_constraintEnd_toEndOf="@+id/main_user_img"
+            app:layout_constraintStart_toStartOf="@id/main_user_img"
+            app:layout_constraintTop_toBottomOf="@id/main_user_img" />
 
         <TextView
             android:id="@+id/main_user_name"
@@ -59,8 +55,8 @@
             android:layout_marginTop="4dp"
             android:text="@{homeUserData.nickName}"
             android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@+id/user_img_selected"
-            app:layout_constraintStart_toStartOf="@+id/user_img_selected"
-            app:layout_constraintTop_toBottomOf="@+id/user_img_selected" />
+            app:layout_constraintEnd_toEndOf="@+id/main_user_img"
+            app:layout_constraintStart_toStartOf="@+id/main_user_img"
+            app:layout_constraintTop_toBottomOf="@+id/main_user_img" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
