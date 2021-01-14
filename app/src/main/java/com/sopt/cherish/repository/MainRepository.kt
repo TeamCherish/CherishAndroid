@@ -9,7 +9,8 @@ class MainRepository(
     private val userAPI: UserAPI,
     private val myPageAPI: MyPageAPI,
     private val reviewAPI: ReviewAPI,
-    private val wateringAPI: WateringAPI
+    private val wateringAPI: WateringAPI,
+    private val calendarAPI: CalendarAPI
 ) {
     suspend fun fetchCherishUser(userId: Int): UserResult {
         return userAPI.getCherishUser(userId)
@@ -26,4 +27,7 @@ class MainRepository(
 
     suspend fun postponeWateringDate(postponeWateringDateReq: PostponeWateringDateReq) =
         wateringAPI.postponeWateringDate(postponeWateringDateReq)
+
+    suspend fun getChipsData(cherishId: Int) = calendarAPI.getCalendarData(cherishId)
+
 }

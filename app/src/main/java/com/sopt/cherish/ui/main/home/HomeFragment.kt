@@ -27,7 +27,6 @@ import com.sopt.cherish.ui.dialog.WateringDialogFragment
 import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
 import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.util.PixelUtil.dp
-import com.sopt.cherish.util.extension.shortToast
 
 
 /**
@@ -56,9 +55,8 @@ class HomeFragment : Fragment(), OnItemClickListener {
         binding.mainViewModel = viewModel
         initializeView()
         val homeCherryListAdapter = HomeCherryListAdapter(this)
-        viewModel.fetchUsers()
         initializeBottomSheetBehavior()
-
+        viewModel.fetchUsers()
         binding.homeWateringBtn.setOnClickListener {
             // 물주기 플로우 뭐가 필요한지 생각
             navigateWatering()
@@ -71,7 +69,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
 
         binding.homePlantImage.setOnClickListener {
             // 식물GIF 클릭 시 이동
-            navigateDetailPlant()
+            navigateDetailPlant(viewModel.userId.value!!, viewModel.cherishUser.value?.id!!)
         }
 
         setAdapterData(homeCherryListAdapter)
@@ -90,8 +88,11 @@ class HomeFragment : Fragment(), OnItemClickListener {
         // 유저 닉네임은 가지고 있다가 review화면에서 보여줘야 함
     }
 
-    private fun navigateDetailPlant() {
-        val intent = Intent(requireContext(), DetailPlantActivity::class.java)
+    private fun navigateDetailPlant(userId: Int, cherishId: Int) {
+        // 나영이가 userId값 보내달라고 한거 보내줌
+        val intent = Intent(activity, DetailPlantActivity::class.java)
+        intent.putExtra("userId", userId)
+        intent.putExtra("cherishId", cherishId)
         startActivity(intent)
     }
 
@@ -122,7 +123,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
     }
 
     private fun setAdapterData(homeCherryListAdapter: HomeCherryListAdapter) {
-        viewModel.fetchUsers()
+
         viewModel.cherishUsers.observe(viewLifecycleOwner) {
             homeCherryListAdapter.data = it.userData.userList as MutableList<User>
             homeCherryListAdapter.notifyDataSetChanged()
@@ -177,12 +178,14 @@ class HomeFragment : Fragment(), OnItemClickListener {
     // 3. 남쿵둥이와 같은 유저의 닉네임 home_selected_user_name -> O
     // 4. 유저 식물 -> 이건 서버에서 url을 줄거니까 bindingAdapter를 이용해서 사용할 수 있습니다. -> O
     // 5. 배경 색 -> 이건 어쩔 수 없이 뷰 코드에서 진행 -> O
+    // 6. detailPlant activity에 userId 값 보내주기 -> O
+    // 7.
     // 빠트린건 없나 다시 생각
     @SuppressLint("SetTextI18n")
     override fun onItemClick(itemBinding: MainCherryItemBinding, user: User) {
         // bottomSheetBehavior 초기화 , 안되는데 왜 안되는 지는 모르겠음
         standardBottomSheetBehavior.peekHeight = 60.dp
-        // 클릭 이벤트 다시한번 생각
+        // 클릭 이벤트 다시한번 생각 , 지금 이거 존나 별로임 , 생각이 안나
         if (itemBinding.userImgSelected.visibility == View.INVISIBLE) {
             itemBinding.userImgSelected.visibility = View.VISIBLE
         } else {
@@ -218,7 +221,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
 
         // 이미지 애니메이션 테스트 , gif , server에서 받아서 해도 됨 지금은 그냥 raw파일에서 받아서 넣어준 상태
         if (user.plantAnimationUrl != "없지롱") {
-            shortToast(requireContext(), "없지롱!")
+
         } else {
             Glide.with(binding.homePlantImage)
                 .asGif()

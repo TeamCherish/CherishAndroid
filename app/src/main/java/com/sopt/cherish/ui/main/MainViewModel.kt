@@ -71,6 +71,14 @@ class MainViewModel(
         }
     }
 
+    // Contact Dialog
+    private val _calendarData = MutableLiveData<CalendarRes>()
+    val calendarData: MutableLiveData<CalendarRes>
+        get() = _calendarData
+
+    fun fetchCalendarData() = viewModelScope.launch {
+        _calendarData.postValue(mainRepository.getChipsData(cherishUser.value?.id!!))
+    }
 
     // [Review] Server Connection done!
     fun sendReviewToServer(reviewWateringReq: ReviewWateringReq) = viewModelScope.launch {
