@@ -1,6 +1,8 @@
 package com.sopt.cherish.remote.api
 
 import com.google.gson.annotations.SerializedName
+import retrofit2.Call
+import retrofit2.http.*
 
 // request param id
 data class DetailPlantRes(
@@ -14,4 +16,11 @@ data class DetailPlantData(
     @SerializedName("image_url") val imageUrl: String,
 )
 
-interface PlantDetailAPI
+interface PlantDetailAPI {
+
+    @GET("/plantDetail/{id}")
+    @Headers("Content-Type:application/json")
+    fun Detailcherish(
+        @Path("id") id: Int
+    ): Call<ResponseDetailData>
+}

@@ -60,12 +60,12 @@
 
     <Button
         android:id="@+id/buttonnext"
+        style="@style/RoundButton.GreenMain"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="534dp"
         android:text="다음"
-        android:background="@drawable/btn_next_unselected"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/recycler"
-        app:layout_constraintStart_toStartOf="@+id/recycler" />
+        app:layout_constraintStart_toStartOf="@+id/recycler"
+        app:layout_constraintTop_toBottomOf="@+id/constraint1" />
 </androidx.constraintlayout.widget.ConstraintLayout>

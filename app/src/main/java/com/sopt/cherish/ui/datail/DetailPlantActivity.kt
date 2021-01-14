@@ -15,7 +15,9 @@ import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityDetailPlantBinding
 import com.sopt.cherish.di.Injection
 import com.sopt.cherish.ui.datail.calendar.CalendarFragment
+import com.sopt.cherish.ui.dialog.DeletePlantDialogFragment
 import com.sopt.cherish.ui.domain.MemoListDataclass
+import com.sopt.cherish.ui.enrollment.EnrollModifyPlantFragment
 
 
 /**
@@ -27,11 +29,6 @@ class DetailPlantActivity : AppCompatActivity() {
 
     private lateinit var circleProgressbar: CircleProgressbar
     private lateinit var binding: ActivityDetailPlantBinding
-
-    var memoList = arrayListOf<MemoListDataclass>(
-        MemoListDataclass("12/2", "다음주에 대머리쉬 출근"),
-        MemoListDataclass("12/28", "내일 체리쉬 사퇴")
-    )
 
     private lateinit var viewModel: DetailPlantViewModel
 
@@ -56,6 +53,15 @@ class DetailPlantActivity : AppCompatActivity() {
             )
     }
 
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        if (menu != null) {
+            menu.getItem(2).isVisible = false
+        } // invisible menuitem 2
+
+        invalidateOptionsMenu()
+        return super.onPrepareOptionsMenu(menu)
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val menuInflater = menuInflater
         menuInflater.inflate(R.menu.toolbar_menu, menu)
@@ -75,6 +81,16 @@ class DetailPlantActivity : AppCompatActivity() {
             R.id.calendar -> {
                 val transaction = supportFragmentManager.beginTransaction()
                 transaction.replace(R.id.fragment_detail, CalendarFragment())
+                // if (transaction == null) {
+                transaction.addToBackStack(null)
+                // }
+                transaction.commit()
+
+                return true
+            }
+            R.id.setting -> {
+                val transaction = supportFragmentManager.beginTransaction()
+                transaction.replace(R.id.fragment_detail, EnrollModifyPlantFragment())
                 // if (transaction == null) {
                 transaction.addToBackStack(null)
                 // }

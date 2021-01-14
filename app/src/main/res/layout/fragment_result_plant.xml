@@ -44,6 +44,7 @@
         app:srcCompat="@drawable/img_graphic" />
 
     <TextView
+        android:id="@+id/plant_explanation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -57,10 +58,10 @@
 
     <Button
         android:id="@+id/startbtn"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        android:background="@drawable/btn_final_selected"
+        style="@style/RoundButton.GreenMain"
         android:text="시작하기"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/imageView2"

@@ -37,7 +37,6 @@ class SignInActivity : AppCompatActivity() {
                         override fun onFailure(call: Call<EditUserRes>, t: Throwable) {
                             Log.d("통신 실패", t.toString())
                         }
-
                         override fun onResponse(
                             call: Call<EditUserRes>,
                             response: Response<EditUserRes>

@@ -3,16 +3,30 @@ package com.sopt.cherish.ui.enrollment
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatDialog
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.RequestBuilder
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentEnrollPlantBinding
+import com.sopt.cherish.remote.api.EnrollCherishReq
+import com.sopt.cherish.remote.api.EnrollCherishRes
+import com.sopt.cherish.remote.api.EnrollCherishResult
+import com.sopt.cherish.remote.api.MyPageUserRes
+
+import com.sopt.cherish.remote.model.RequestEnrollData
+import com.sopt.cherish.remote.model.ResponseEnrollData
+import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.dialog.ClockPickerDialogFragment
 import com.sopt.cherish.ui.dialog.WeekPickerDialogFragment
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class EnrollPlantFragment : Fragment() {
@@ -23,7 +37,7 @@ class EnrollPlantFragment : Fragment() {
     private lateinit var progressDialog: AppCompatDialog
     private lateinit var enrollToolbar: Toolbar
 
-
+    private val requestData = RetrofitBuilder
     lateinit var weektime: String
 
 
@@ -45,10 +59,40 @@ class EnrollPlantFragment : Fragment() {
 
 
         binding.detailOkBtn.setOnClickListener {
-            progressON()
+            //  progressON()
+
+            val body = EnrollCherishReq(
+                name = "안나영",
+                nickName = "nayoung",
+                birth = "19930512",
+                phone = "010-1111-1111",
+                cycleDate = 7,
+                noticeTime = "15:00",
+                userId = 2
+            )
 
 
-            progressOFF()
+            requestData.enrollAPI.enrollCherish(body)
+                .enqueue(
+                    object : Callback<EnrollCherishResult> {
+                        override fun onFailure(call: Call<EnrollCherishResult>, t: Throwable) {
+                            Log.d("통신 실패", t.toString())
+                        }
+
+                        override fun onResponse(
+                            call: Call<EnrollCherishResult>,
+                            response: Response<EnrollCherishResult>
+                        ) {
+                            Log.d("success", response.body().toString())
+                            response.takeIf {
+                                it.isSuccessful
+                            }?.body()
+                                ?.let { it ->
+                                    Log.d("data success!", it.plant.explanation.toString())
+                                }
+                        }
+                    }
+                )
 
 
             //val intent = Intent(context, ResultPlantActivity::class.java)

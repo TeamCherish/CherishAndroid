@@ -1,6 +1,7 @@
 package com.sopt.cherish.ui.main
 
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -40,6 +41,7 @@ class MainActivity : AppCompatActivity() {
                 return@OnCompleteListener
             }
             val token = task.result
+            Log.d("token", token.toString())
             SimpleLogger.logI(token.toString())
         })
     }
