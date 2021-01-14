@@ -4,7 +4,6 @@ import android.animation.ArgbEvaluator
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -115,9 +114,13 @@ class HomeFragment : Fragment(), OnItemClickListener {
         }
     }
 
+    // 최초 화면이 보여질때
     private fun initializeView() {
         viewModel.cherishUsers.observe(viewLifecycleOwner) {
             binding.homeCherryNumber.text = it.userData.totalUser.toString()
+            it.userData.userList[0].apply {
+                initializeViewOnItemClick(this)
+            }
         }
     }
 
@@ -139,7 +142,6 @@ class HomeFragment : Fragment(), OnItemClickListener {
         // phoneBook
         val intent = Intent(context, EnrollmentPhoneActivity::class.java)
         intent.putExtra("userId", viewModel.userId.value)
-        Log.d("Homefragment", viewModel.userId.value.toString())
 
         startActivity(intent)
     }
@@ -177,6 +179,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
         }
     }
 
+    // 유저 클릭 시 보여지는 화면
     @SuppressLint("SetTextI18n")
     private fun initializeViewOnItemClick(user: User) {
         binding.homeSelectedUserName.text = user.nickName
@@ -196,7 +199,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
         }
         // animationUrl 데이터 갱신해달라고 해야함
         Glide.with(requireContext())
-            .load(user.plantAnimationUrl)
+            .load(user.userPlantImageUrl)
             .into(binding.homePlantImage)
     }
 
