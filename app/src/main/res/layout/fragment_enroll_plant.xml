@@ -12,7 +12,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="32dp"
         android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -94,13 +93,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/textnick">
 
                 <EditText
+                    android:id="@+id/edit_nickname"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:background="@null"
-                    android:inputType="textPersonName"
                     android:hint="ex.영나"
-                    android:id="@+id/edit_nickname"
+                    android:inputType="textPersonName"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/editnick"
                     app:layout_constraintStart_toStartOf="@+id/editnick"
@@ -147,15 +146,16 @@
             app:layout_constraintTop_toBottomOf="@+id/textbirth">
 
             <EditText
+                android:id="@+id/edit_birth"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:background="@null"
-                android:inputType="textPersonName"
                 android:hint="0000/00/00"
-                android:id="@+id/edit_birth"
+                android:inputType="textPersonName"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="@+id/editbirth"
                 app:layout_constraintTop_toTopOf="@+id/editbirth" />
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -299,11 +299,12 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Switch
+            android:id="@+id/alarm_switch"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="20dp"
             android:thumb="@drawable/switch_thumb_selector"
-            android:track="@drawable/track"
+            android:track="@drawable/switch_selector"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/editweek"
@@ -312,15 +313,15 @@
 
     <Button
         android:id="@+id/detail_ok_btn"
+        style="@style/RoundButton.GreenMain"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        style="@style/RoundButton.GreenMain"
+        android:layout_marginTop="100dp"
         android:text="완료"
         android:textSize="@dimen/text_16sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/cons4"
-        app:layout_constraintStart_toStartOf="@+id/cons4" />
+        app:layout_constraintStart_toStartOf="@+id/cons4"
+        app:layout_constraintTop_toBottomOf="@+id/cons3" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,7 +10,9 @@ import com.google.firebase.messaging.FirebaseMessaging
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityMainBinding
 import com.sopt.cherish.di.Injection
+import com.sopt.cherish.ui.adapter.PhoneBookAdapter
 import com.sopt.cherish.ui.enrollment.MyPagePhoneBookFragment
+import com.sopt.cherish.ui.enrollment.PhoneBookFragment
 import com.sopt.cherish.ui.main.home.HomeFragment
 import com.sopt.cherish.ui.main.manageplant.ManagePlantFragment
 import com.sopt.cherish.ui.main.manageplant.PlantFragment
@@ -93,7 +95,10 @@ class MainActivity : AppCompatActivity() {
             1 -> {
                 // todo : 일단 퍼미션 처리는 했는데 , 이것보다 좀 더 좋게 해줄 수 있을거 같아 예진아
                 if (PermissionUtil.isCheckedReadContactsPermission(this)) {
-                    transAction.replace(R.id.my_page_bottom_container, MyPagePhoneBookFragment())
+                    transAction.replace(R.id.my_page_bottom_container, MyPagePhoneBookFragment()
+
+
+                    )
                         .commit()
                 } else {
                     PermissionUtil.openPermissionSettings(this)

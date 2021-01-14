@@ -54,6 +54,7 @@ class PhoneBookFragment : Fragment() {
         return view
     }
 
+
     override fun onResume() {
         super.onResume()
         val activity = activity
@@ -124,9 +125,9 @@ class PhoneBookFragment : Fragment() {
 
 
     fun setList() {
-        phonelist.distinct()
+
         phonelist.addAll(getPhoneNumbers(sortText, searchText))
-        phonelist.distinct()
+
         madapter = PhoneBookAdapter(phonelist)
         binding.recycler.adapter = madapter
         binding.recycler.layoutManager = LinearLayoutManager(context)
@@ -176,7 +177,7 @@ class PhoneBookFragment : Fragment() {
                 val phone = Phone(id, name, number)
 
                 list.add(phone)
-                list.distinct()
+                //list.distinct()
 
             }
 
@@ -190,13 +191,13 @@ class PhoneBookFragment : Fragment() {
                 val phone = Phone(id, name, number)
 
                 list.add(phone)
-                list.distinct()
+               // list.distinct()
             }
 
         }
 
         // 결과목록 반환
-
+        Log.d("listsize",list.size.toString())
         return list.distinct()
     }
 
