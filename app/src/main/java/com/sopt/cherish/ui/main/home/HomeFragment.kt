@@ -47,6 +47,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
 
     // 마이 페이지 userId 값
     // 식물 등록 userId
+    // todo : 다음에 할게요 누를때 datepicker api 더미데이터 변경
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

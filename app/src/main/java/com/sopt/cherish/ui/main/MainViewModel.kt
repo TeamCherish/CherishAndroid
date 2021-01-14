@@ -97,7 +97,7 @@ class MainViewModel(
         get() = _postponeData
 
     fun getPostPoneWateringCount() = viewModelScope.launch {
-        _postponeData.postValue(mainRepository.getPostponeCount(dummyCherishId))
+        _postponeData.postValue(mainRepository.getPostponeCount(cherishUser.value?.id!!))
     }
 
     fun postponeWateringDate(postponeWateringDateReq: PostponeWateringDateReq) =

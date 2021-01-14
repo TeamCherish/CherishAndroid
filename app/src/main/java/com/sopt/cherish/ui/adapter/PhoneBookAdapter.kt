@@ -1,6 +1,5 @@
 package com.sopt.cherish.ui.adapter
 
-import android.annotation.SuppressLint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -54,7 +53,6 @@ class PhoneBookAdapter(private val phoneBookList: List<Phone>) :
 
     override fun getItemId(position: Int): Long = position.toLong()
 
-    @SuppressLint("MissingPermission")
     inner class Holder(private val binding: ItemLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
