@@ -24,7 +24,7 @@ class EnrollmentPhoneActivity : AppCompatActivity(),
 
     private lateinit var binding: ActivityEnrollmentPhoneBinding
 
-
+     var count = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -32,10 +32,11 @@ class EnrollmentPhoneActivity : AppCompatActivity(),
 
         setContentView(binding.root)
 
+        val userid = intent.getStringExtra("userId").toString()
 
         //setToolbar()
         //phoneBookFragment=findViewById(R.layout.fragment_phone_book)
-
+        count = intent.getIntExtra("userId", 0)
         setFragment(PhoneBookFragment())
     }
 
@@ -71,7 +72,13 @@ class EnrollmentPhoneActivity : AppCompatActivity(),
 
     fun setFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragment_enroll, fragment)
+        transaction.replace(R.id.fragment_enroll, fragment.apply {
+            arguments = Bundle().apply {
+                putInt("useridenroll", count)
+                Log.d("Enrollmentphoneactiviy", count.toString())
+
+            }
+        })
         transaction.commit()
     }
 

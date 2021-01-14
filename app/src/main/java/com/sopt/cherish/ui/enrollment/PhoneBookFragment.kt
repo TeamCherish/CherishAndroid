@@ -26,6 +26,7 @@ class PhoneBookFragment : Fragment() {
     var searchText = ""
     var searchphone = ""
     var sortText = "asc"
+    var countphonebook = 0
     private lateinit var enrollToolbar: Toolbar
 
     private lateinit var binding: FragmentPhoneBookBinding
@@ -39,7 +40,7 @@ class PhoneBookFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_phone_book, container, false)
 
         binding = FragmentPhoneBookBinding.bind(view)
-
+        countphonebook = arguments?.getInt("useridenroll")!!
         startProcess()
 
         binding.buttonnext.setOnClickListener {
@@ -80,8 +81,11 @@ class PhoneBookFragment : Fragment() {
             arguments = Bundle().apply {
                 putString("phonename", madapter.phonename)
                 putString("phonenumber", madapter.phonenumber)
-
+                putInt("useridend", countphonebook)
             }
+            Log.d("phonebookfragment", countphonebook.toString())
+
+
         })
         transaction.addToBackStack(null)
 

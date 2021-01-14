@@ -4,6 +4,7 @@ import android.animation.ArgbEvaluator
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -55,6 +56,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         binding.mainViewModel = viewModel
         initializeView()
+
         val homeCherryListAdapter = HomeCherryListAdapter(this)
         initializeBottomSheetBehavior()
         viewModel.fetchUsers()
@@ -147,6 +149,9 @@ class HomeFragment : Fragment(), OnItemClickListener {
     private fun navigatePhoneBook() {
         // phoneBook
         val intent = Intent(context, EnrollmentPhoneActivity::class.java)
+        intent.putExtra("userId", viewModel.userId.value)
+        Log.d("Homefragment", viewModel.userId.value.toString())
+
         startActivity(intent)
     }
 
