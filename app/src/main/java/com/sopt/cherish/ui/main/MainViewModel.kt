@@ -19,13 +19,12 @@ class MainViewModel(
 ) : ViewModel() {
 
     // todo : 서버통신을 한번만 하도록 주기를 설정해줘야함
+    // todo : review페이지를 넘어갈 떄 viewModel이 새로 생성되는게 문제임
     val dummyUserName = "남쿵둥이"
     val contactDummyUserName = "${dummyUserName}와는"
 
-    val reviewDescription = "${dummyUserName}과의 물주기를 기록해주세요"
-
-
     // 실 기기가 공기계라서 전화랑 메시지는 불가능 하다. 카카오톡은 켜짐!
+    // 이것도 바꿔야함
     val dummyUserStatus = arrayListOf<String>("생일", "취업준비중", "헤어짐")
     val dummyUserPhoneNumber: Uri = Uri.parse("tel:010-2563-9702")
     val dummyUserMessageNumber: Uri = Uri.parse("smsto:010-2563-9702")
@@ -60,8 +59,6 @@ class MainViewModel(
     private val _cherishUserId = MutableLiveData<Int>()
     val cherishUserId: MutableLiveData<Int>
         get() = _cherishUserId
-
-    val reviewText = "${userNickName}님! ${cherishUser.value?.nickName}님과의"
 
     fun fetchUsers() = viewModelScope.launch {
         try {

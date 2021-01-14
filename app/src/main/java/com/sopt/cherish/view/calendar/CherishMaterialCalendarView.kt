@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 
 /**
  * Created on 01-06 by SSong-develop
- * defalut MaterialCalendarView height = 372dp
+ * default MaterialCalendarView height = 372dp
  */
 class CherishMaterialCalendarView constructor(context: Context, attrs: AttributeSet) :
     MaterialCalendarView(context, attrs) {

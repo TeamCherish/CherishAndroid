@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.pm.ResolveInfo
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -83,29 +84,39 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
 
     private fun navigateKakao() {
         if (findKakaoTalk()) {
-            val intent = context?.packageManager?.getLaunchIntentForPackage("com.kakao.talk")
-            intent?.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
+            val kakaoIntent = context?.packageManager?.getLaunchIntentForPackage("com.kakao.talk")
+            kakaoIntent?.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            kakaoIntent?.putExtra("userNickname", viewModel.userNickName.value)
+            kakaoIntent?.putExtra("cherishNickname", viewModel.cherishUser.value?.nickName)
+            startActivityForResult(kakaoIntent, codeThatReviewPage)
         } else {
-            // 카카오톡을 깔게 할지 or 그냥 카카오톡이 없다고 할지?
-            /*val kakaoTalkPackageUri = "com.kakao.talk"
-            val url = "market://details?id=$kakaoTalkPackageUri"
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-            startActivity(intent)*/
             shortToast(requireContext(), "카카오톡이 없어요 ㅠ")
         }
     }
 
     private fun startPhoneCall() {
+        // 함수화 해야합니다.
+        val callIntent =
+            Intent(Intent.ACTION_CALL, Uri.parse("tel:${viewModel.cherishUser.value?.phoneNumber}"))
+        callIntent.putExtra("userNickname", viewModel.userNickName.value)
+        callIntent.putExtra("cherishNickname", viewModel.cherishUser.value?.nickName)
         startActivityForResult(
-            Intent(Intent.ACTION_CALL, viewModel.dummyUserPhoneNumber),
+            callIntent,
             codeThatReviewPage
         )
     }
 
     private fun startSendMessage() {
+        val messageIntent = Intent(
+            Intent.ACTION_SENDTO,
+            Uri.parse("smsto:${viewModel.cherishUser.value?.phoneNumber}")
+        )
+        messageIntent
+            .putExtra("userNickname", viewModel.userNickName.value)
+        messageIntent.putExtra("cherishNickname", viewModel.cherishUser.value?.nickName)
+
         startActivityForResult(
-            Intent(Intent.ACTION_SENDTO, viewModel.dummyUserMessageNumber),
+            messageIntent,
             codeThatReviewPage
         )
     }

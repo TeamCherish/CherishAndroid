@@ -1,5 +1,6 @@
 package com.sopt.cherish.ui.review
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.KeyEvent
 import android.widget.EditText
@@ -39,7 +40,7 @@ class ReviewActivity : AppCompatActivity() {
         val binding: ActivityReviewBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_review)
         binding.mainViewModel = viewModel
-
+        SimpleLogger.logI(intent.getStringExtra("userNickname").toString())
         initializeView(binding)
         addUserStatusWithChip(binding)
         addLimitNumberOfKeywordCharacters(binding)
@@ -48,9 +49,14 @@ class ReviewActivity : AppCompatActivity() {
         ignoreSendReviewToServer(binding)
     }
 
+    @SuppressLint("SetTextI18n")
     private fun initializeView(binding: ActivityReviewBinding) {
-        viewModel.userNickName.observe(this) {
-            binding.reviewUser.text = it
+        // 야매로함 , 근데 이거 안됨
+        viewModel.cherishUser.observe(this) {
+            binding.reviewUser.text =
+                "${intent.getStringExtra("userNickname")}님! ${intent.getStringExtra("cherishNickname")}님과의"
+            binding.reviewDescription.text =
+                "${intent.getStringExtra("cherishNickname")}님과의 물주기를 기록해주세요"
         }
     }
 

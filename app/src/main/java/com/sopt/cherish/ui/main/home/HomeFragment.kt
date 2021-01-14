@@ -55,7 +55,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
         binding.mainViewModel = viewModel
         initializeView()
         val homeCherryListAdapter = HomeCherryListAdapter(this)
-
+        viewModel.fetchUsers()
         initializeBottomSheetBehavior()
 
         binding.homeWateringBtn.setOnClickListener {
