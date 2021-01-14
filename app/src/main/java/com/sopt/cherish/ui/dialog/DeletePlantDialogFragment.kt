@@ -10,12 +10,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.DialogFragment
-import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentDeletePlantDialogBinding
 import com.sopt.cherish.remote.api.ResponseDeleteData
-import com.sopt.cherish.remote.model.ResponseEnrollData
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
-import com.sopt.cherish.ui.enrollment.ResultPlantFragment
 import com.sopt.cherish.ui.main.MainActivity
 import retrofit2.Call
 import retrofit2.Callback

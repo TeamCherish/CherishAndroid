@@ -19,7 +19,7 @@ class HomeCherryListAdapter(
                 executePendingBindings()
             }
             binding.root.setOnClickListener {
-                clickListener.onItemClick(userData)
+                clickListener.onItemClick(binding, userData)
             }
         }
     }
@@ -40,5 +40,5 @@ class HomeCherryListAdapter(
 }
 
 interface OnItemClickListener {
-    fun onItemClick(user: User)
+    fun onItemClick(itemBinding: MainCherryItemBinding, user: User)
 }

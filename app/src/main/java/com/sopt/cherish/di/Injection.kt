@@ -32,10 +32,11 @@ object Injection {
         return RetrofitBuilder.wateringAPI
     }
 
+
     private fun provideMainRepository(): MainRepository {
         return MainRepository(
             provideUserAPI(), provideMyPageAPI(), provideReviewAPI(),
-            provideWateringAPI()
+            provideWateringAPI(), provideCalendarAPI()
         )
     }
 

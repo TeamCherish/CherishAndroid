@@ -39,7 +39,6 @@ class DetailPlantActivity : AppCompatActivity() {
         setFragment(DetailPlantFragment())
         initializeViewModel()
 
-
         //Log.d("qwer",intent.getIntExtra("plantId",100).toString())
 
         setActionBarTitle("식물 상세")

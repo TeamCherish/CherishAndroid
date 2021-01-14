@@ -12,15 +12,16 @@ data class EditUserReq(
     @SerializedName("password") val password: String
 )
 
-// 로그인 res , 혹시 nickName은 안받고 나가는 건지 의문?
+// 로그인 res
 data class EditUserRes(
     @SerializedName("success") val success: Boolean,
     @SerializedName("message") val message: String,
-    @SerializedName("data") val userId: UserPk
+    @SerializedName("data") val editUserData: EditUserData
 )
 
-data class UserPk(
-    @SerializedName("UserId") val userId: Int
+data class EditUserData(
+    @SerializedName("UserId") val userId: Int,
+    @SerializedName("user_nickname") val userNickName: String
 )
 
 // 회원가입 request

@@ -14,7 +14,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="188dp"
         android:src="@drawable/downflower"
-        android:id="@+id/down_flower"/>
+        android:id="@+id/down_flower" />
 
     <TextView
         android:id="@+id/blank_text"

@@ -1,18 +1,13 @@
 package com.sopt.cherish.ui.main
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.messaging.FirebaseMessaging
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityMainBinding
 import com.sopt.cherish.di.Injection
-import com.sopt.cherish.ui.adapter.PhoneBookAdapter
 import com.sopt.cherish.ui.enrollment.MyPagePhoneBookFragment
-import com.sopt.cherish.ui.enrollment.PhoneBookFragment
 import com.sopt.cherish.ui.main.home.HomeFragment
 import com.sopt.cherish.ui.main.manageplant.ManagePlantFragment
 import com.sopt.cherish.ui.main.manageplant.PlantFragment
@@ -31,21 +26,15 @@ class MainActivity : AppCompatActivity() {
             DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         initializeViewModel()
+        initializeViewModelData()
         showInitialFragment()
         setBottomNavigationListener(binding)
-        getFirebaseDeviceToken()
     }
 
-    private fun getFirebaseDeviceToken() {
-        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
-            if (!task.isSuccessful) {
-                SimpleLogger.logI("Fetching FCM registration token failed ${task.exception}")
-                return@OnCompleteListener
-            }
-            val token = task.result
-            Log.d("token", token.toString())
-            SimpleLogger.logI(token.toString())
-        })
+    private fun initializeViewModelData() {
+        viewModel.userId.value = intent.getIntExtra("userId", 0)
+        viewModel.userNickName.value = intent.getStringExtra("userNickname")
+        SimpleLogger.logI(viewModel.userNickName.value.toString())
     }
 
     private fun initializeViewModel() {
@@ -87,7 +76,6 @@ class MainActivity : AppCompatActivity() {
 
     fun replaceFragment(index: Int) {
         val transAction = supportFragmentManager.beginTransaction()
-
         when (index) {
             0 -> {
                 transAction.replace(R.id.my_page_bottom_container, PlantFragment()).commit()
@@ -104,7 +92,6 @@ class MainActivity : AppCompatActivity() {
                 } else {
                     PermissionUtil.openPermissionSettings(this)
                 }
-
                 //true
             }
         }

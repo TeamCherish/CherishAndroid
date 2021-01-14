@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import androidx.annotation.Nullable
 
 
+// 안쓰는 거임 일단
 class MySharedPreferences(context: Context) {
 
     private val NAME = "SharedPreferences"
