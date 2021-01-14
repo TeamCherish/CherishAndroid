@@ -117,6 +117,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
     // 최초 화면이 보여질때
     private fun initializeView() {
         viewModel.cherishUsers.observe(viewLifecycleOwner) {
+            viewModel.cherishUser.value = it.userData.userList[0]
             binding.homeCherryNumber.text = it.userData.totalUser.toString()
             it.userData.userList[0].apply {
                 initializeViewOnItemClick(this)
@@ -171,6 +172,8 @@ class HomeFragment : Fragment(), OnItemClickListener {
     // recyclerview Item click event
     override fun onItemClick(itemBinding: MainCherryItemBinding, position: Int) {
         viewModel.cherishUsers.observe(viewLifecycleOwner) {
+            // contact Dialog
+            viewModel.cherishUser.value = it.userData.userList[position]
             it.userData.userList[position].apply {
                 initializeViewOnItemClick(this)
             }.also { positionUser ->

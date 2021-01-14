@@ -39,7 +39,6 @@ class ReviewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding: ActivityReviewBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_review)
-        binding.mainViewModel = viewModel
         SimpleLogger.logI(intent.getStringExtra("userNickname").toString())
         initializeView(binding)
         addUserStatusWithChip(binding)
@@ -92,7 +91,6 @@ class ReviewActivity : AppCompatActivity() {
         // todo : 한글 키보드는 ENTER를 치게 되면 줄바꿈이 된다. 이거 처리를 해줘야 한다.
         // 이거 처리만 해주면 끝이 납니다
         // 글자수에 따라 엔터를 먹히지 않게 한다던지 하면 될거 같음
-        // 칩이 늘어날 떄 스크롤 뷰도 expand되어야 하는데 이 이슈가 조금 힘들거 같음
         binding.reviewEditKeyword.setOnKeyListener { view, keyCode, keyEvent ->
             if (keyEvent.action == KeyEvent.ACTION_DOWN || keyCode == KeyEvent.KEYCODE_ENTER) {
                 val et = view as EditText
@@ -136,5 +134,4 @@ class ReviewActivity : AppCompatActivity() {
             finish()
         }
     }
-
 }

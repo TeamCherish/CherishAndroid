@@ -38,11 +38,10 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
     ): View {
         val binding: DialogContactBinding =
             DataBindingUtil.inflate(inflater, R.layout.dialog_contact, container, false)
-/*        viewModel.fetchCalendarData()*/
+        viewModel.fetchCalendarData()
         binding.mainViewModel = viewModel
+        initializeChip(binding)
 
-
-        // 유저 닉네임과 상태 chip들을 서버에서 받은 값으로 전해서 표현해야한다.
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         binding.contactCall.setOnClickListener {
@@ -60,6 +59,21 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
         return binding.root
     }
 
+    private fun initializeChip(binding: DialogContactBinding) {
+        viewModel.calendarData.observe(viewLifecycleOwner) {
+            if (it.waterData.calendarData.isEmpty()) {
+                binding.contactUserStatusFirstChip.text = "채워줘ㅠ"
+                binding.contactUserStatusSecondChip.text = "채워줘ㅠ"
+                binding.contactUserStatusThridChip.text = "채워줘ㅠ"
+            } else {
+                viewModel.userStatus1.value = it.waterData.calendarData[0].userStatus1
+                viewModel.userStatus2.value = it.waterData.calendarData[0].userStatus2
+                viewModel.userStatus3.value = it.waterData.calendarData[0].userStatus3
+                setChip(binding)
+            }
+        }
+    }
+
     override fun onResume() {
         super.onResume()
         DialogUtil.adjustDialogSize(this, 0.875f, 0.542f)
@@ -67,6 +81,27 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
 
     override fun onClick(view: View?) {
         dismiss()
+    }
+
+    private fun setChip(binding: DialogContactBinding) {
+        viewModel.userStatus1.observe(viewLifecycleOwner) {
+            if (it == null) {
+                binding.contactUserStatusFirstChip.text = " "
+            }
+            binding.contactUserStatusFirstChip.text = it
+        }
+        viewModel.userStatus2.observe(viewLifecycleOwner) {
+            if (it == null) {
+                binding.contactUserStatusSecondChip.text = " "
+            }
+            binding.contactUserStatusSecondChip.text = it
+        }
+        viewModel.userStatus3.observe(viewLifecycleOwner) {
+            if (it == null) {
+                binding.contactUserStatusThridChip.text = " "
+            }
+            binding.contactUserStatusThridChip.text = it
+        }
     }
 
     private fun navigateCall() {
