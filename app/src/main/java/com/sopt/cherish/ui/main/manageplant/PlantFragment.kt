@@ -80,7 +80,7 @@ class PlantFragment : Fragment() {
                                             )
                                             Log.d(
                                                 "plantId",
-                                                it.myPageUserData.result[position].plantId
+                                                it.myPageUserData.result[position].plantId.toString()
                                             )
                                             startActivityForResult(intent, 100)
                                         }

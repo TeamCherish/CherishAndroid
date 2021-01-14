@@ -20,8 +20,8 @@ class MyPageBottomSheetAdapter(private var context: Context, var data: List<MyPa
         fun bind(cherishData: MyPageCherishData) {
             binding.mypageCherryNickname.text = cherishData.nickName
             binding.mypageCherryName.text = cherishData.name
-            binding.mypageCherryLevel.text = "Lv. "+cherishData.level
-            binding.myPageDDay.text = "D-"+cherishData.dDay.toString()
+            binding.mypageCherryLevel.text = "Lv. " + cherishData.level
+            binding.myPageDDay.text = "D-" + cherishData.dDay.toString()
         }
     }
 
