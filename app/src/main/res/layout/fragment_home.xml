@@ -7,16 +7,22 @@
         <variable
             name="mainViewModel"
             type="com.sopt.cherish.ui.main.MainViewModel" />
-
-
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/home_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/cherish_purple"
         tools:context=".ui.main.home.HomeFragment">
+
+        <ImageView
+            android:id="@+id/home_plant_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/home_remain_date"
@@ -67,15 +73,6 @@
             app:layout_constraintTop_toBottomOf="@+id/home_selected_user_name" />
 
         <ImageView
-            android:id="@+id/home_dummy_flower_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="73dp"
-            android:src="@drawable/img_main_dandelion"
-            app:layout_constraintEnd_toEndOf="@id/home_show_all_alarm"
-            app:layout_constraintTop_toBottomOf="@id/home_show_all_alarm" />
-
-        <ImageView
             android:id="@+id/home_show_all_alarm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -94,7 +91,6 @@
             android:layout_marginStart="@dimen/margin_29dp"
             android:layout_marginTop="165dp"
             android:max="100"
-            android:progress="@{mainViewModel.dummyUserAffectionGauge}"
             android:progressDrawable="@drawable/progress_drawable_vertical"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/home_watering_btn" />
@@ -105,7 +101,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_26dp"
             android:font="@font/notosanscjkkr_regular"
-            android:text="@{mainViewModel.dummyUserAffectionText}"
             android:textColor="@color/white"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
@@ -126,7 +121,7 @@
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:layout_editor_absoluteX="42dp"
+            tools:layout_editor_absoluteX="-16dp"
             tools:layout_editor_absoluteY="0dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -186,6 +181,7 @@
                     android:id="@+id/home_user_list"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="11dp"
                     app:layout_constraintTop_toBottomOf="@id/home_user_add_text" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.coordinatorlayout.widget.CoordinatorLayout>

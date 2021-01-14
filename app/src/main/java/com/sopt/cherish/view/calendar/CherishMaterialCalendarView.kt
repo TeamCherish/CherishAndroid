@@ -16,6 +16,7 @@ import kotlinx.coroutines.launch
 class CherishMaterialCalendarView constructor(context: Context, attrs: AttributeSet) :
     MaterialCalendarView(context, attrs) {
 
+    // todo :애뮬 상에서는 캘린더 줄어드는게 괜찮은데 , 실 기기에서는 잘 안줄어들음
     fun changeCalendarModeWeeks() {
         CoroutineScope(Dispatchers.Main).launch {
             state().edit().setCalendarDisplayMode(CalendarMode.WEEKS).commit()

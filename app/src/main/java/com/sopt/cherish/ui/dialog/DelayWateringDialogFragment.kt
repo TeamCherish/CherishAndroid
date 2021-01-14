@@ -65,7 +65,7 @@ class DelayWateringDialogFragment : DialogFragment() {
             viewModel.postponeData.observe(viewLifecycleOwner) {
                 if (it.postponeData.isPostpone) {
                     val postponeWateringDateReq = PostponeWateringDateReq(
-                        viewModel.dummyUserId,
+                        viewModel.userId.value!!,
                         binding.delayWateringDayPicker.value,
                         it.postponeData.isPostpone
                     )
@@ -74,7 +74,7 @@ class DelayWateringDialogFragment : DialogFragment() {
                     dismiss()
                 } else {
                     val postponeWateringDateReq = PostponeWateringDateReq(
-                        viewModel.dummyUserId,
+                        viewModel.userId.value!!,
                         binding.delayWateringDayPicker.value,
                         it.postponeData.isPostpone
                     )

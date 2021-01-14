@@ -4,6 +4,7 @@ import androidx.annotation.Px
 import com.sopt.cherish.MainApplication
 
 object PixelUtil {
+    // naming 다시
     val Number.pixel: Int
         @Px get() = MainApplication.pixelRatio.toDP(this.toInt())
 

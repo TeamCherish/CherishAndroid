@@ -46,4 +46,13 @@ object MainBindingAdapter {
             imageView.setImageResource(R.drawable.icn_allow)
         }
     }
+
+    @JvmStatic
+    @BindingAdapter("android:setImage")
+    fun setBackgroundImage(imageView: ImageView, imageUrl: String) {
+        Glide.with(imageView)
+            .load(imageUrl)
+            .apply(RequestOptions.centerCropTransform())
+            .into(imageView)
+    }
 }

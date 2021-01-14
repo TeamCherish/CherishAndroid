@@ -21,9 +21,13 @@ data class User(
     @SerializedName("id") val id: Int,
     @SerializedName("dDay") val dDay: Int,
     @SerializedName("nickname") val nickName: String,
+    @SerializedName("phone") val phoneNumber: String,
     @SerializedName("growth") val growth: Int,
     @SerializedName("image_url") val userPlantImageUrl: String,
-    @SerializedName("thumbnail_image_url") val thumbnailImageUrl: String
+    @SerializedName("thumbnail_image_url") val thumbnailImageUrl: String,
+    @SerializedName("plantName") val plantName: String,
+    @SerializedName("gif") val plantAnimationUrl: String,
+    @SerializedName("modifier") val plantModifier: String
 )
 
 data class UserData(

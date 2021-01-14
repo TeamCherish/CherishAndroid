@@ -40,11 +40,18 @@ class ReviewActivity : AppCompatActivity() {
             DataBindingUtil.setContentView(this, R.layout.activity_review)
         binding.mainViewModel = viewModel
 
+        initializeView(binding)
         addUserStatusWithChip(binding)
         addLimitNumberOfKeywordCharacters(binding)
         addLimitNumberOfMemoCharacters(binding)
         sendReviewToServer(binding)
         ignoreSendReviewToServer(binding)
+    }
+
+    private fun initializeView(binding: ActivityReviewBinding) {
+        viewModel.userNickName.observe(this) {
+            binding.reviewUser.text = it
+        }
     }
 
     private fun addLimitNumberOfMemoCharacters(binding: ActivityReviewBinding) {
