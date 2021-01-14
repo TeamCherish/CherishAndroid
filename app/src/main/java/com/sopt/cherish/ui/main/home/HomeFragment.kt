@@ -171,6 +171,5 @@ class HomeFragment : Fragment(), OnItemClickListener {
             )
             binding.homeDummyFlowerImage.setImageResource(R.drawable.main_img_sun)
         }
-
     }
 }
