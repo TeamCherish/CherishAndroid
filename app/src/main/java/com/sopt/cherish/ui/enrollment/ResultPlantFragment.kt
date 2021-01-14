@@ -55,20 +55,20 @@ class ResultPlantFragment : Fragment() {
 
         binding.textView1Mean.text = arguments?.getString("plant_mean")
 
-        val urlstring=arguments?.getString("plant_url")
-        Log.d("url",urlstring.toString())
+        val urlstring = arguments?.getString("plant_url")
+        Log.d("url", urlstring.toString())
         Glide.with(this).load(urlstring.toString()).into(binding.imageViewUrl)
 
         //binding.imageViewUrl. =
 
         //  binding.textView21.text = arguments?.getString("name")
-       // binding.plantExplanation.text = arguments?.getString("explanation")
+        // binding.plantExplanation.text = arguments?.getString("explanation")
 
 
         binding.startbtn.setOnClickListener {
             progressON()
 
-            val intent= Intent(context,MainActivity::class.java)
+            val intent = Intent(context, MainActivity::class.java)
             startActivity(intent)
 
             progressOFF()

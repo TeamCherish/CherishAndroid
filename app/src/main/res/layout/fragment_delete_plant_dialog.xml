@@ -23,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button_cancel"
         style="@style/RoundButton.White"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -34,7 +34,7 @@
         android:textColor="#4286f6"
         android:textSize="13sp"
 
-        app:layout_constraintEnd_toStartOf="@+id/button3"
+        app:layout_constraintEnd_toStartOf="@+id/button_delete_plant"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
@@ -42,7 +42,7 @@
         android:layout_width="0dp"
         android:layout_height="2dp"
         android:background="#dbdbdb"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/button_cancel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -50,13 +50,13 @@
         android:layout_width="2dp"
         android:layout_height="0dp"
         android:background="#dbdbdb"
-        app:layout_constraintBottom_toBottomOf="@+id/button"
-        app:layout_constraintEnd_toEndOf="@+id/button"
-        app:layout_constraintStart_toEndOf="@+id/button"
-        app:layout_constraintTop_toTopOf="@+id/button" />
+        app:layout_constraintBottom_toBottomOf="@+id/button_cancel"
+        app:layout_constraintEnd_toEndOf="@+id/button_cancel"
+        app:layout_constraintStart_toEndOf="@+id/button_cancel"
+        app:layout_constraintTop_toTopOf="@+id/button_cancel" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/button_delete_plant"
         style="@style/RoundButton.White"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -66,6 +66,6 @@
         android:textColor="#fe6827"
         android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/button"
-        app:layout_constraintTop_toTopOf="@+id/button" />
+        app:layout_constraintStart_toEndOf="@+id/button_cancel"
+        app:layout_constraintTop_toTopOf="@+id/button_cancel" />
 </androidx.constraintlayout.widget.ConstraintLayout>

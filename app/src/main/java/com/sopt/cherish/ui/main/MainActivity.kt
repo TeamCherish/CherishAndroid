@@ -95,7 +95,8 @@ class MainActivity : AppCompatActivity() {
             1 -> {
                 // todo : 일단 퍼미션 처리는 했는데 , 이것보다 좀 더 좋게 해줄 수 있을거 같아 예진아
                 if (PermissionUtil.isCheckedReadContactsPermission(this)) {
-                    transAction.replace(R.id.my_page_bottom_container, MyPagePhoneBookFragment()
+                    transAction.replace(
+                        R.id.my_page_bottom_container, MyPagePhoneBookFragment()
 
 
                     )

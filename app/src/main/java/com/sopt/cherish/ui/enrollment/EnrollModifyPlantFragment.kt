@@ -18,6 +18,20 @@ class EnrollModifyPlantFragment : Fragment() {
         // Inflate the layout for this fragment
         setHasOptionsMenu(true)
         val view = inflater.inflate(R.layout.fragment_enroll_modify_plant, container, false)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         return view
     }
 
@@ -45,6 +59,8 @@ class EnrollModifyPlantFragment : Fragment() {
         when (id) {
             android.R.id.home -> {
                 activity?.onBackPressed()
+                return true
+
 
             }
             R.id.trash -> {
@@ -52,6 +68,7 @@ class EnrollModifyPlantFragment : Fragment() {
                     DeletePlantDialogFragment(R.layout.fragment_delete_plant_dialog).show(
                         parentFragmentManager, "asdf"
                     )
+                return true
                 /*val dialog = AlertDialog.Builder(context).create()
                 val edialog: LayoutInflater = LayoutInflater.from(context)
                 val mView: View = edialog.inflate(R.layout.fragment_delete_plant_dialog, null)

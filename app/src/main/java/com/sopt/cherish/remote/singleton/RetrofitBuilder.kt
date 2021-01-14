@@ -41,8 +41,10 @@ object RetrofitBuilder {
 
     val plantDetailAPI: PlantDetailAPI = getRetrofit().create(PlantDetailAPI::class.java)
 
-    val ResponsePlantCardData: ResponsePlantCardData =
-        getRetrofit().create(com.sopt.cherish.remote.api.ResponsePlantCardData::class.java)
+    val responsePlantCardData: ResponsePlantCardData =
+        getRetrofit().create(ResponsePlantCardData::class.java)
+
+    val deleteAPI: DeleteAPI = getRetrofit().create(DeleteAPI::class.java)
 
 
 }

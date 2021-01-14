@@ -33,7 +33,7 @@ class EnrollPlantFragment : Fragment() {
 
     private val requestData = RetrofitBuilder
     lateinit var weektime: String
-     var switchvalue:Boolean =false
+    var switchvalue: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,8 +50,8 @@ class EnrollPlantFragment : Fragment() {
         binding.phoneNumber.text = arguments?.getString("phonenumber")
 
         binding.alarmSwitch.setOnCheckedChangeListener { button, isChecked ->
-            if(isChecked){
-                switchvalue=true
+            if (isChecked) {
+                switchvalue = true
             }
 
         }
@@ -62,15 +62,18 @@ class EnrollPlantFragment : Fragment() {
             //  progressON()
             progressON()
 
-            val username=arguments?.getString("phonename")
-            val usernickname=binding.editNickname.text.toString()
-            val userbirth=binding.editBirth.text.toString()
+            val username = arguments?.getString("phonename")
+            val usernickname = binding.editNickname.text.toString()
+            val userbirth = binding.editBirth.text.toString()
 
-            val userphone=arguments?.getString("phonenumber")
-            val userphonebook=userphone?.substring(0,3)+"-"+userphone?.substring(3,7)+"-"+userphone?.substring(7)
-            val userwater=binding.waterAlarmWeek.text.toString()
-               val user_water=userwater.substring(6,7).toInt()
-            val usertime=binding.waterAlarmTime.text.toString()
+            val userphone = arguments?.getString("phonenumber")
+            val userphonebook = userphone?.substring(0, 3) + "-" + userphone?.substring(
+                3,
+                7
+            ) + "-" + userphone?.substring(7)
+            val userwater = binding.waterAlarmWeek.text.toString()
+            val user_water = userwater.substring(6, 7).toInt()
+            val usertime = binding.waterAlarmTime.text.toString()
 
             //val userid=MyApplication.mySharedPreferences.getValue("userid","")
             val body = RequestEnrollData(
@@ -80,7 +83,7 @@ class EnrollPlantFragment : Fragment() {
                 phone = userphonebook,
                 cycle_date = user_water,
                 notice_time = usertime,
-                water_notice=switchvalue ,
+                water_notice = switchvalue,
                 UserId = 1
             )
 
@@ -105,16 +108,24 @@ class EnrollPlantFragment : Fragment() {
                                     Log.d("data success!", it.data.plant.flower_meaning)
 
                                     val transaction = parentFragmentManager.beginTransaction()
-                                    transaction.replace(R.id.fragment_enroll, ResultPlantFragment().apply {
-                                        arguments = Bundle().apply {
-                                            //putString("plantkey", binding.waterAlarmWeek.text.toString())
-                                            putString("plant_explanation", it.data.plant.explanation)
-                                            putString("plant_modify", it.data.plant.modifier)
-                                            putString("plant_mean", it.data.plant.flower_meaning)
-                                           putString("plant_url", it.data.plant.image_url)
+                                    transaction.replace(
+                                        R.id.fragment_enroll,
+                                        ResultPlantFragment().apply {
+                                            arguments = Bundle().apply {
+                                                //putString("plantkey", binding.waterAlarmWeek.text.toString())
+                                                putString(
+                                                    "plant_explanation",
+                                                    it.data.plant.explanation
+                                                )
+                                                putString("plant_modify", it.data.plant.modifier)
+                                                putString(
+                                                    "plant_mean",
+                                                    it.data.plant.flower_meaning
+                                                )
+                                                putString("plant_url", it.data.plant.image_url)
 
-                                        }
-                                    })
+                                            }
+                                        })
                                     transaction.addToBackStack(null)
 
                                     transaction.commit()
