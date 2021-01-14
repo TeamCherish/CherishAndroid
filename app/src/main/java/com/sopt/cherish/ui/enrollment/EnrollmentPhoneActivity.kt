@@ -24,7 +24,7 @@ class EnrollmentPhoneActivity : AppCompatActivity(),
 
     private lateinit var binding: ActivityEnrollmentPhoneBinding
 
-     var count = 0
+    var count = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

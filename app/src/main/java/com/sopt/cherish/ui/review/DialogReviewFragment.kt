@@ -1,20 +1,24 @@
 package com.sopt.cherish.ui.review
 
 import android.annotation.SuppressLint
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.KeyEvent
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.EditText
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityReviewBinding
-import com.sopt.cherish.di.Injection
 import com.sopt.cherish.remote.api.ReviewWateringReq
 import com.sopt.cherish.ui.dialog.CustomDialogFragment
 import com.sopt.cherish.ui.main.MainViewModel
+import com.sopt.cherish.util.DialogUtil
 import com.sopt.cherish.util.SimpleLogger
 import com.sopt.cherish.util.extension.FlexBoxExtension.addChip
 import com.sopt.cherish.util.extension.FlexBoxExtension.getChip
@@ -26,45 +30,50 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.*
 
-/**
- * Created On 01-05 by SSong-develop
- * data 이동은 liveData를 사용해서 할 예정
- * 이 뷰 안씀!!!!
- * 안쓰는데 혹시 몰라서 디자이너랑 상의해봐야함
- */
-class ReviewActivity : AppCompatActivity() {
+class DialogReviewFragment : DialogFragment() {
 
-    private val TAG = "ReviewActivity"
+    private val TAG = "ReviewFragment"
 
-    private val viewModel: MainViewModel by viewModels { Injection.provideMainViewModelFactory() }
+    private val viewModel: MainViewModel by activityViewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
         val binding: ActivityReviewBinding =
-            DataBindingUtil.setContentView(this, R.layout.activity_review)
-        Log.d("hello", intent.getBundleExtra("user")?.getString("userNickname").toString())
+            DataBindingUtil.inflate(inflater, R.layout.activity_review, container, false)
+
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
         initializeView(binding)
         addUserStatusWithChip(binding)
         addLimitNumberOfKeywordCharacters(binding)
         addLimitNumberOfMemoCharacters(binding)
         sendReviewToServer(binding)
         ignoreSendReviewToServer(binding)
+        return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        DialogUtil.adjustDialogSize(this, 1.0f, 0.975f)
     }
 
     @SuppressLint("SetTextI18n")
     private fun initializeView(binding: ActivityReviewBinding) {
         // 야매로함 , 근데 이거 안됨
         binding.reviewUser.text =
-            "${intent.getStringExtra("userNickname")}님! ${intent.getStringExtra("cherishNickname")}님과의"
+            "${viewModel.userNickName.value}님! ${viewModel.cherishUser.value?.nickName}님과의"
         binding.reviewDescription.text =
-            "${intent.getStringExtra("cherishNickname")}님과의 물주기를 기록해주세요"
+            "${viewModel.cherishUser.value?.nickName}님과의 물주기를 기록해주세요"
     }
 
     private fun addLimitNumberOfMemoCharacters(binding: ActivityReviewBinding) {
         binding.reviewMemo.countNumberOfCharacters { memo ->
             binding.reviewNumberOfMemo.text = memo?.length.toString()
             if (memo?.length!! > 100) {
-                shortToast(this, "100자를 초과했습니다.")
+                shortToast(requireContext(), "100자를 초과했습니다.")
             }
         }
     }
@@ -74,7 +83,7 @@ class ReviewActivity : AppCompatActivity() {
             binding.reviewNumberOfCharacters.text = keyword?.length.toString()
             if (keyword?.length!! > 5) {
                 CustomDialogFragment(R.layout.sample_wordcount_error).show(
-                    supportFragmentManager,
+                    parentFragmentManager,
                     TAG
                 )
             }
@@ -83,10 +92,10 @@ class ReviewActivity : AppCompatActivity() {
 
     private fun showLoadingDialog() {
         lifecycleScope.launch(Dispatchers.IO) {
-            CustomDialogFragment(R.layout.dialog_loading).show(supportFragmentManager, TAG)
+            CustomDialogFragment(R.layout.dialog_loading).show(parentFragmentManager, TAG)
             delay(2000)
             // 만약에 홈 프라그먼트에서 물 주는 애니메이션을 해야한다 그러면 finishActivity로 변경해야할 수도 있음
-            finish()
+            dismiss()
         }
     }
 
@@ -101,7 +110,7 @@ class ReviewActivity : AppCompatActivity() {
                 if (binding.reviewFlexBox.getChipsCount() < 3)
                     binding.reviewFlexBox.addChip(name)
                 else {
-                    CustomDialogFragment(R.layout.sample_lottie2).show(supportFragmentManager, TAG)
+                    CustomDialogFragment(R.layout.sample_lottie2).show(parentFragmentManager, TAG)
                 }
                 et.text = null
             }
@@ -134,7 +143,7 @@ class ReviewActivity : AppCompatActivity() {
     private fun ignoreSendReviewToServer(binding: ActivityReviewBinding) {
         binding.reviewIgnoreAccept.setOnClickListener {
             // 건너 뛰는 것도 뭐~ 그냥 main으로 넘어오면 됨
-            finish()
+            dismiss()
         }
     }
 }

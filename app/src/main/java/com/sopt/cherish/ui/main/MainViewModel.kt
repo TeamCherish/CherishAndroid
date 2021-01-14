@@ -78,7 +78,6 @@ class MainViewModel(
         })
     }
 
-
     // [Review] Server Connection done!
     fun sendReviewToServer(reviewWateringReq: ReviewWateringReq) = viewModelScope.launch {
         mainRepository.sendReviewData(reviewWateringReq)

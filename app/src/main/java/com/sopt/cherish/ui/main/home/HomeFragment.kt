@@ -46,6 +46,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
     }
 
     // 마이 페이지 userId 값
+    // 물주기를 완료한 다음에도
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
