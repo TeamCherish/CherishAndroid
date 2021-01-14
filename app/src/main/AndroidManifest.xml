@@ -22,6 +22,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Cherish"
         android:usesCleartextTraffic="true"
+
     >
 
         <service

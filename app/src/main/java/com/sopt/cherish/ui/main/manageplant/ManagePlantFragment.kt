@@ -107,7 +107,7 @@ class ManagePlantFragment : Fragment() {
         todo: 식물 5 처럼 텍스트 분리해서 탭 지정
         연락처 탭 클릭시 상단 탭바 변경되어야 함
          */
-
+        //val count=arguments?.getString("phonecount")
         binding.myPageBottomTab.addTab(binding.myPageBottomTab.newTab().setText("식물"))
         binding.myPageBottomTab.addTab(binding.myPageBottomTab.newTab().setText("연락처"))
 

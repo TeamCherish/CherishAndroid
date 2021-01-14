@@ -5,6 +5,8 @@ import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.EventLog
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,6 +24,8 @@ class ClockPickerDialogFragment(
 ) : DialogFragment(), View.OnClickListener {
 
     lateinit var clocktext: String
+    lateinit var  listminute :ArrayList<String>
+
 
     interface TestDialogFragmentListener {
         fun onTestDialogClock(dialog: DialogFragment?, someData: String?)
@@ -84,10 +88,40 @@ class ClockPickerDialogFragment(
 
         val btn_ok: Button = view.findViewById(R.id.button_ok_clock)
         btn_ok.setOnClickListener {
+            Log.d("clock",clock_ampm.value.toString())
+            if((clock_minute.value.toString()).length<2){
+                    if(list[clock_ampm.value]=="AM") {
+                        clocktext =
+                            clock_hour.value.toString() + ":0" + clock_minute.value.toString() + " " + list[clock_ampm.value]
+                        Log.d("clock1", clocktext.toString())
+                        someAction()
+                    }
+                else{
+                        val clock = clock_hour.value + 12
+                        clocktext =
+                            clock.toString() + ":0" + clock_minute.value.toString() + " " + list[clock_ampm.value]
+                        Log.d("clock1", clocktext.toString())
+                        someAction()
+                    }
+            }
+            else{
+                if(list[clock_ampm.value]=="PM") {
+                    val clock = clock_hour.value + 12
+                    clocktext =
+                        clock.toString() + ":" + clock_minute.value.toString() + " " + list[clock_ampm.value]
+                    Log.d("clock2", clocktext.toString())
 
-            clocktext =
-                clock_hour.value.toString() + ":" + clock_minute.value.toString() + " " + list[clock_ampm.value]
-            someAction()
+                    someAction()
+                }
+                else{
+                    clocktext =
+                        clock_hour.toString() + ":" + clock_minute.value.toString() + " " + list[clock_ampm.value]
+                    Log.d("clock2", clocktext.toString())
+
+                    someAction()
+                }
+            }
+
 
             dialog?.dismiss()
 

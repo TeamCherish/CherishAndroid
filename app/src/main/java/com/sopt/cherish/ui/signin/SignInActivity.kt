@@ -5,8 +5,14 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.sopt.cherish.databinding.ActivitySignInBinding
+import com.sopt.cherish.remote.api.EditUserReq
+import com.sopt.cherish.remote.api.EditUserRes
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.main.MainActivity
+import com.sopt.cherish.util.MyApplication
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class SignInActivity : AppCompatActivity() {
 
@@ -30,7 +36,7 @@ class SignInActivity : AppCompatActivity() {
             val intent =
                 Intent(this@SignInActivity, MainActivity::class.java)
             startActivity(intent)
-            /*
+
             requestData.authAPI.postLogin(EditUserReq(email, pw))
                 .enqueue(
                     object : Callback<EditUserRes> {
@@ -46,13 +52,15 @@ class SignInActivity : AppCompatActivity() {
                                 it.isSuccessful
                             }?.body()
                                 ?.let { it ->
+                                    //it.userId
+                                  //  MyApplication.mySharedPreferences.setValue("userid",it.userId.toString())
                                     Log.d("isSuccess", response.body().toString())
                                     val intent =
                                         Intent(this@SignInActivity, MainActivity::class.java)
                                     startActivity(intent)
                                 }
                         }
-                    }) */
+                    })
         }
     }
 }
