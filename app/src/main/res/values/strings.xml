@@ -58,4 +58,6 @@
     <string name="calendar_future_watering_text">물 주는 날</string>
     <string name="calendar_watered_text">물 준 날</string>
     <string name="calendar_day_bullet">●</string>
+
+    <string name="review_keyword_count_error">키워드는 3개까지 쓸 수 있어요!</string>
 </resources>

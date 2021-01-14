@@ -47,15 +47,12 @@ class HomeFragment : Fragment(), OnItemClickListener {
     }
 
     // 마이 페이지 userId 값
-    // 식물 등록 userId
-    // todo : 다음에 할게요 누를때 datepicker api 더미데이터 변경
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         binding.mainViewModel = viewModel
-        initializeView()
 
         val homeCherryListAdapter = HomeCherryListAdapter(this)
         initializeBottomSheetBehavior()
@@ -81,24 +78,15 @@ class HomeFragment : Fragment(), OnItemClickListener {
         return binding.root
     }
 
-    private fun initializeView() {
-        // 나의 소중한 사람들 count
-
-        // HomeRemainDate는 user의 각 dDay를 보여주면 될거 같음
-        viewModel.cherishUsers.observe(viewLifecycleOwner) {
-            binding.homeCherryNumber.text = it.userData.totalUser.toString()
-        }
-        // 유저 닉네임은 가지고 있다가 review화면에서 보여줘야 함
-    }
-
     private fun navigateDetailPlant(userId: Int, cherishId: Int) {
-        // 나영이가 userId값 보내달라고 한거 보내줌
         val intent = Intent(activity, DetailPlantActivity::class.java)
         intent.putExtra("userId", userId)
         intent.putExtra("cherishId", cherishId)
         startActivity(intent)
     }
 
+    // todo : bottom sheet corner 유지
+    // todo : 중간에 걸치는게 1줄짜리로 걸치길 희망
     private fun initializeBottomSheetBehavior() {
         standardBottomSheetBehavior =
             BottomSheetBehavior.from(binding.homeStandardBottomSheet)
@@ -126,7 +114,6 @@ class HomeFragment : Fragment(), OnItemClickListener {
     }
 
     private fun setAdapterData(homeCherryListAdapter: HomeCherryListAdapter) {
-
         viewModel.cherishUsers.observe(viewLifecycleOwner) {
             homeCherryListAdapter.data = it.userData.userList as MutableList<User>
             homeCherryListAdapter.notifyDataSetChanged()
@@ -155,12 +142,6 @@ class HomeFragment : Fragment(), OnItemClickListener {
         startActivity(intent)
     }
 
-    private fun transitionBottomSheetParentView(slideOffset: Float) {
-        val argbEvaluator =
-            ArgbEvaluator().evaluate(slideOffset, R.color.white, R.color.black)
-        binding.homeFragment.setBackgroundColor(argbEvaluator as Int)
-    }
-
     private fun updateProgressBar() {
         val rating = viewModel.cherishUser.value?.growth?.toInt()
         if (rating != null) {
@@ -177,62 +158,41 @@ class HomeFragment : Fragment(), OnItemClickListener {
 
     // recyclerview Item click event
     // 유저를 클릭할 때 마다 유저 데이터가 viewModel에 변경되어서 observe 되어야 함
-
-    // recyclerView 아이템이 클릭되었을 때 변경되어야 할 것은?
-    // 1. dDay home_remain_date -> O
-    // 2. 아직 수명이 탄탄한 과 같은 유저의 상태 메시지 home_selected_user_status -> O
-    // 3. 남쿵둥이와 같은 유저의 닉네임 home_selected_user_name -> O
-    // 4. 유저 식물 -> 이건 서버에서 url을 줄거니까 bindingAdapter를 이용해서 사용할 수 있습니다. -> O
-    // 5. 배경 색 -> 이건 어쩔 수 없이 뷰 코드에서 진행 -> O
-    // 6. detailPlant activity에 userId 값 보내주기 -> O
-    // 7.
-    // 빠트린건 없나 다시 생각
-    @SuppressLint("SetTextI18n")
-    override fun onItemClick(itemBinding: MainCherryItemBinding, user: User) {
-        // bottomSheetBehavior 초기화 , 안되는데 왜 안되는 지는 모르겠음
-        standardBottomSheetBehavior.peekHeight = 60.dp
-        // 클릭 이벤트 다시한번 생각 , 지금 이거 존나 별로임 , 생각이 안나
-        if (itemBinding.userImgSelected.visibility == View.INVISIBLE) {
-            itemBinding.userImgSelected.visibility = View.VISIBLE
-        } else {
-            itemBinding.userImgSelected.visibility = View.INVISIBLE
-        }
-        // 뷰모델에 선택된 유저의 상황 넣어주기
-        viewModel.cherishUser.value = user
-        // cherishId를 쏴줘야지
-        // 선택된 유저 이름 변경
-        // 음수로 가면 -> -1 이면 , 물주기 까지 하루 남음
-        // 양수로 가면 -> 이미 그만큼 지난거임 , if 7 이면 물줘야하는게 7일지난거임
-        // 유저 닉네임
-        viewModel.cherishUser.observe(viewLifecycleOwner) {
-            // 선택된 유저 상태
-            binding.homeSelectedUserStatus.text = user.plantModifier
-            // 선택된 유저 닉네임
-            binding.homeSelectedUserName.text = user.nickName
-            // 선택된 유저 물주기 날짜
-            when {
-                user.dDay < 0 -> {
-                    binding.homeRemainDate.text = "D${viewModel.cherishUser.value!!.dDay}"
-                }
-                user.dDay > 0 -> {
-                    binding.homeRemainDate.text = "D+${viewModel.cherishUser.value!!.dDay}"
-                }
-                else -> {
-                    binding.homeRemainDate.text = "D-Day"
-                }
+    override fun onItemClick(itemBinding: MainCherryItemBinding, position: Int) {
+        viewModel.cherishUsers.observe(viewLifecycleOwner) {
+            binding.homeCherryNumber.text = it.userData.totalUser.toString()
+            it.userData.userList[position].apply {
+                initializeViewOnItemClick(this)
             }
-            binding.homeAffectionRating.text = viewModel.cherishUser.value!!.growth.toString()
-            binding.homeAffectionProgressbar.progress = viewModel.cherishUser.value!!.growth
         }
+    }
 
-        // 이미지 애니메이션 테스트 , gif , server에서 받아서 해도 됨 지금은 그냥 raw파일에서 받아서 넣어준 상태
-        if (user.plantAnimationUrl != "없지롱") {
-
-        } else {
-            Glide.with(binding.homePlantImage)
-                .asGif()
-                .load(R.raw.real_min_ver2)
-                .into(binding.homePlantImage)
+    @SuppressLint("SetTextI18n")
+    private fun initializeViewOnItemClick(user: User) {
+        binding.homeSelectedUserName.text = user.nickName
+        binding.homeSelectedUserStatus.text = user.plantModifier
+        binding.homeAffectionRating.text = user.growth.toString()
+        binding.homeAffectionProgressbar.progress = user.growth
+        when {
+            user.dDay < 0 -> {
+                binding.homeRemainDate.text = "D${user.dDay}"
+            }
+            user.dDay > 0 -> {
+                binding.homeRemainDate.text = "D+${user.dDay}"
+            }
+            else -> {
+                binding.homeRemainDate.text = "D-Day"
+            }
         }
+        // animationUrl 데이터 갱신해달라고 해야함
+        Glide.with(requireContext())
+            .load(user.plantAnimationUrl)
+            .into(binding.homePlantImage)
+    }
+
+    private fun transitionBottomSheetParentView(slideOffset: Float) {
+        val argbEvaluator =
+            ArgbEvaluator().evaluate(slideOffset, R.color.white, R.color.black)
+        binding.homeFragment.setBackgroundColor(argbEvaluator as Int)
     }
 }

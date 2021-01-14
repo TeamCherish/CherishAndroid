@@ -38,7 +38,7 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
     ): View {
         val binding: DialogContactBinding =
             DataBindingUtil.inflate(inflater, R.layout.dialog_contact, container, false)
-        viewModel.fetchCalendarData()
+/*        viewModel.fetchCalendarData()*/
         binding.mainViewModel = viewModel
 
 

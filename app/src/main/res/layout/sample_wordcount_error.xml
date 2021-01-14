@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:text="글자수는 최대 5자!"
+        android:text="@string/review_keyword_count_error"
         android:textSize="@dimen/text_16sp" />
 
 </androidx.cardview.widget.CardView>

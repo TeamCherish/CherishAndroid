@@ -23,7 +23,7 @@ data class ReviewWateringData(
 data class ReviewWateringRes(
     @SerializedName("success") val success: Boolean,
     @SerializedName("message") val message: String,
-    @SerializedName("data") val reviewWateringData: ReviewWateringData
+    @SerializedName("data") val reviewScore: Int
 )
 
 interface ReviewAPI {

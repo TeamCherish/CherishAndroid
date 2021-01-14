@@ -8,9 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.DialogFragment
+import com.bumptech.glide.Glide
 import com.sopt.cherish.R
+import com.sopt.cherish.databinding.DialogLoadingBinding
 import com.sopt.cherish.databinding.SampleLottie2Binding
-import com.sopt.cherish.databinding.SampleLottieBinding
 import com.sopt.cherish.databinding.SampleWordcountErrorBinding
 import com.sopt.cherish.util.DialogUtil
 
@@ -32,8 +33,13 @@ class CustomDialogFragment(
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         return when (layoutResId) {
-            R.layout.sample_lottie -> {
-                val binding = SampleLottieBinding.bind(view)
+            R.layout.dialog_loading -> {
+                // 등록 후에 보낼 loading 화면
+                val binding = DialogLoadingBinding.bind(view)
+                Glide.with(requireContext())
+                    .asGif()
+                    .load(R.raw.cherish_loading)
+                    .into(binding.dialogLoadingImage)
                 binding.root
             }
             R.layout.sample_lottie2 -> {
