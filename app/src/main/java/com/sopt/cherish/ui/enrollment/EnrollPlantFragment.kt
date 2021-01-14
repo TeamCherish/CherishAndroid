@@ -75,65 +75,70 @@ class EnrollPlantFragment : Fragment() {
             val user_water = userwater.substring(6, 7).toInt()
             val usertime = binding.waterAlarmTime.text.toString()
 
-            //val userid=MyApplication.mySharedPreferences.getValue("userid","")
-            val body = RequestEnrollData(
-                name = username.toString(),
-                nickname = usernickname,
-                birth = userbirth,
-                phone = userphonebook,
-                cycle_date = user_water,
-                notice_time = usertime,
-                water_notice = switchvalue,
-                UserId = 1
-            )
-
-
-            requestData.enrollAPI.enrollCherish(body)
-                .enqueue(
-                    object : Callback<ResponseEnrollData> {
-                        override fun onFailure(call: Call<ResponseEnrollData>, t: Throwable) {
-                            Log.d("통신 실패", t.toString())
-                        }
-
-                        override fun onResponse(
-                            call: Call<ResponseEnrollData>,
-                            response: Response<ResponseEnrollData>
-                        ) {
-                            Log.d("success", response.body().toString())
-                            response.takeIf {
-                                it.isSuccessful
-                            }?.body()
-                                ?.let { it ->
-
-                                    Log.d("data success!", it.data.plant.flower_meaning)
-
-                                    val transaction = parentFragmentManager.beginTransaction()
-                                    transaction.replace(
-                                        R.id.fragment_enroll,
-                                        ResultPlantFragment().apply {
-                                            arguments = Bundle().apply {
-                                                //putString("plantkey", binding.waterAlarmWeek.text.toString())
-                                                putString(
-                                                    "plant_explanation",
-                                                    it.data.plant.explanation
-                                                )
-                                                putString("plant_modify", it.data.plant.modifier)
-                                                putString(
-                                                    "plant_mean",
-                                                    it.data.plant.flower_meaning
-                                                )
-                                                putString("plant_url", it.data.plant.image_url)
-
-                                            }
-                                        })
-                                    transaction.addToBackStack(null)
-
-                                    transaction.commit()
-
-                                }
-                        }
-                    }
+            val userid= arguments?.getInt("useridend")?.toInt()
+            Log.d("enrollplnatfrgment",userid.toString())
+            val body = userid?.let { it1 ->
+                RequestEnrollData(
+                    name = username.toString(),
+                    nickname = usernickname,
+                    birth = userbirth,
+                    phone = userphonebook,
+                    cycle_date = user_water,
+                    notice_time = usertime,
+                    water_notice = switchvalue,
+                    UserId = it1
                 )
+            }
+
+
+            if (body != null) {
+                requestData.enrollAPI.enrollCherish(body)
+                    .enqueue(
+                        object : Callback<ResponseEnrollData> {
+                            override fun onFailure(call: Call<ResponseEnrollData>, t: Throwable) {
+                                Log.d("통신 실패", t.toString())
+                            }
+
+                            override fun onResponse(
+                                call: Call<ResponseEnrollData>,
+                                response: Response<ResponseEnrollData>
+                            ) {
+                                Log.d("success", response.body().toString())
+                                response.takeIf {
+                                    it.isSuccessful
+                                }?.body()
+                                    ?.let { it ->
+
+                                        Log.d("data success!", it.data.plant.flower_meaning)
+
+                                        val transaction = parentFragmentManager.beginTransaction()
+                                        transaction.replace(
+                                            R.id.fragment_enroll,
+                                            ResultPlantFragment().apply {
+                                                arguments = Bundle().apply {
+                                                    //putString("plantkey", binding.waterAlarmWeek.text.toString())
+                                                    putString(
+                                                        "plant_explanation",
+                                                        it.data.plant.explanation
+                                                    )
+                                                    putString("plant_modify", it.data.plant.modifier)
+                                                    putString(
+                                                        "plant_mean",
+                                                        it.data.plant.flower_meaning
+                                                    )
+                                                    putString("plant_url", it.data.plant.image_url)
+
+                                                }
+                                            })
+                                        transaction.addToBackStack(null)
+
+                                        transaction.commit()
+
+                                    }
+                            }
+                        }
+                    )
+            }
 
 
             //val intent = Intent(context, ResultPlantActivity::class.java)
