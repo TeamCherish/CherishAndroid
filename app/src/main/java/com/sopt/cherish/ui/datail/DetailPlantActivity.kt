@@ -92,7 +92,13 @@ class DetailPlantActivity : AppCompatActivity() {
             }
             R.id.setting -> {
                 val transaction = supportFragmentManager.beginTransaction()
-                transaction.replace(R.id.fragment_detail, EnrollModifyPlantFragment())
+                transaction.replace(R.id.fragment_detail, EnrollModifyPlantFragment().apply {
+                    arguments = Bundle().apply {
+
+                        putInt("plantidgo_delete", intent.getIntExtra("plantId", 100))
+
+                    }
+                })
                 // if (transaction == null) {
                 transaction.addToBackStack(null)
                 // }

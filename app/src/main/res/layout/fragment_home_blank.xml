@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.main.home.HomeBlankFragment">
+    tools:context=".ui.main.home.HomeBlankActivity">
 
     <ImageView
         android:layout_width="wrap_content"
@@ -14,7 +14,7 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="188dp"
         android:src="@drawable/downflower"
-        android:id="@+id/down_flower"/>
+        android:id="@+id/down_flower" />
 
     <TextView
         android:id="@+id/blank_text"

@@ -1,8 +1,7 @@
-package com.sopt.cherish.remote.model
+package com.sopt.cherish.remote.api
 
-
-data class ResponseEnrollData(
-    val data: Data,
+data class ResponseEnrollmentData(
+    val `data`: Data,
     val message: String,
     val success: Boolean
 ) {

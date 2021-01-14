@@ -12,8 +12,9 @@ import androidx.appcompat.app.AppCompatDialog
 import androidx.fragment.app.Fragment
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentEnrollPlantBinding
-import com.sopt.cherish.remote.api.EnrollCherishReq
-import com.sopt.cherish.remote.api.EnrollCherishResult
+import com.sopt.cherish.remote.model.RequestEnrollData
+import com.sopt.cherish.remote.model.ResponseEnrollData
+
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.dialog.ClockPickerDialogFragment
 import com.sopt.cherish.ui.dialog.WeekPickerDialogFragment
@@ -32,7 +33,7 @@ class EnrollPlantFragment : Fragment() {
 
     private val requestData = RetrofitBuilder
     lateinit var weektime: String
-
+    var switchvalue: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,40 +49,87 @@ class EnrollPlantFragment : Fragment() {
         binding.phoneName.text = arguments?.getString("phonename")
         binding.phoneNumber.text = arguments?.getString("phonenumber")
 
+        binding.alarmSwitch.setOnCheckedChangeListener { button, isChecked ->
+            if (isChecked) {
+                switchvalue = true
+            }
+
+        }
 
 
 
         binding.detailOkBtn.setOnClickListener {
             //  progressON()
+            progressON()
 
-            val body = EnrollCherishReq(
-                name = "안나영",
-                nickName = "nayoung",
-                birth = "19930512",
-                phone = "010-1111-1111",
-                cycleDate = 7,
-                noticeTime = "15:00",
-                userId = 2
+            val username = arguments?.getString("phonename")
+            val usernickname = binding.editNickname.text.toString()
+            val userbirth = binding.editBirth.text.toString()
+
+            val userphone = arguments?.getString("phonenumber")
+            val userphonebook = userphone?.substring(0, 3) + "-" + userphone?.substring(
+                3,
+                7
+            ) + "-" + userphone?.substring(7)
+            val userwater = binding.waterAlarmWeek.text.toString()
+            val user_water = userwater.substring(6, 7).toInt()
+            val usertime = binding.waterAlarmTime.text.toString()
+
+            //val userid=MyApplication.mySharedPreferences.getValue("userid","")
+            val body = RequestEnrollData(
+                name = username.toString(),
+                nickname = usernickname,
+                birth = userbirth,
+                phone = userphonebook,
+                cycle_date = user_water,
+                notice_time = usertime,
+                water_notice = switchvalue,
+                UserId = 1
             )
 
 
             requestData.enrollAPI.enrollCherish(body)
                 .enqueue(
-                    object : Callback<EnrollCherishResult> {
-                        override fun onFailure(call: Call<EnrollCherishResult>, t: Throwable) {
+                    object : Callback<ResponseEnrollData> {
+                        override fun onFailure(call: Call<ResponseEnrollData>, t: Throwable) {
                             Log.d("통신 실패", t.toString())
                         }
 
                         override fun onResponse(
-                            call: Call<EnrollCherishResult>,
-                            response: Response<EnrollCherishResult>
+                            call: Call<ResponseEnrollData>,
+                            response: Response<ResponseEnrollData>
                         ) {
                             Log.d("success", response.body().toString())
                             response.takeIf {
                                 it.isSuccessful
                             }?.body()
                                 ?.let { it ->
-                                    Log.d("data success!", it.plant.explanation.toString())
+
+                                    Log.d("data success!", it.data.plant.flower_meaning)
+
+                                    val transaction = parentFragmentManager.beginTransaction()
+                                    transaction.replace(
+                                        R.id.fragment_enroll,
+                                        ResultPlantFragment().apply {
+                                            arguments = Bundle().apply {
+                                                //putString("plantkey", binding.waterAlarmWeek.text.toString())
+                                                putString(
+                                                    "plant_explanation",
+                                                    it.data.plant.explanation
+                                                )
+                                                putString("plant_modify", it.data.plant.modifier)
+                                                putString(
+                                                    "plant_mean",
+                                                    it.data.plant.flower_meaning
+                                                )
+                                                putString("plant_url", it.data.plant.image_url)
+
+                                            }
+                                        })
+                                    transaction.addToBackStack(null)
+
+                                    transaction.commit()
+
                                 }
                         }
                     }
@@ -94,8 +142,8 @@ class EnrollPlantFragment : Fragment() {
             // startActivity(intent)
 
             //setFragment(ResultPlantFragment())
+            progressOFF()
 
-            setFragment(ResultPlantFragment())
 
         }
         //timepicker 나오는 부분

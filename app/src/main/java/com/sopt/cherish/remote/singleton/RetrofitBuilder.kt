@@ -2,6 +2,7 @@ package com.sopt.cherish.remote.singleton
 
 import com.sopt.cherish.remote.RetrofitService
 import com.sopt.cherish.remote.api.*
+import com.sopt.cherish.remote.model.EnrollmentAPI
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -52,8 +53,10 @@ object RetrofitBuilder {
 
     val plantDetailAPI: PlantDetailAPI = getRetrofit().create(PlantDetailAPI::class.java)
 
-    val ResponsePlantCardData: ResponsePlantCardData =
-        getRetrofit().create(com.sopt.cherish.remote.api.ResponsePlantCardData::class.java)
+    val responsePlantCardData: ResponsePlantCardData =
+        getRetrofit().create(ResponsePlantCardData::class.java)
+
+    val deleteAPI: DeleteAPI = getRetrofit().create(DeleteAPI::class.java)
 
 
 }

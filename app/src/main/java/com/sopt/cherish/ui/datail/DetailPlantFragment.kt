@@ -57,91 +57,93 @@ class DetailPlantFragment : Fragment() {
         }
         val cherishid = arguments?.getInt("plantidgo")
         Log.d("gogo", cherishid.toString())
-        if (cherishid != null) {
-            requestData.ResponsePlantCardData.Detailcherishcard(cherishid)
-                .enqueue(
-                    object : Callback<ResponsePlantCardDatas> {
-                        override fun onFailure(call: Call<ResponsePlantCardDatas>, t: Throwable) {
-                            Log.d("통신 실패", t.toString())
-                        }
 
-                        override fun onResponse(
-                            call: Call<ResponsePlantCardDatas>,
-                            response: Response<ResponsePlantCardDatas>
-                        ) {
-                            Log.d("success", response.body().toString())
-                            response.takeIf {
-                                it.isSuccessful
-                            }?.body()
-                                ?.let { it ->
-                                    binding.textViewNick.text = it.data.nickname
-                                    binding.textViewName.text = it.data.name
-                                    binding.textViewPlantname.text = it.data.plant_name
-                                    binding.textViewDday.text = "D-" + it.data.dDay.toString()
-                                    binding.textViewDuration.text = it.data.duration.toString()
-                                    binding.textViewBirth.text = it.data.birth.toString()
-                                    binding.textView1WithName.text = it.data.name.toString()
-                                    circleProgressbar.setProgressWithAnimation(
-                                        it.data.gage.toFloat(),
-                                        animationDuration
+        requestData.responsePlantCardData.Detailcherishcard(1)
+            .enqueue(
+                object : Callback<ResponsePlantCardDatas> {
+                    override fun onFailure(call: Call<ResponsePlantCardDatas>, t: Throwable) {
+                        Log.d("통신 실패", t.toString())
+                    }
+
+                    override fun onResponse(
+                        call: Call<ResponsePlantCardDatas>,
+                        response: Response<ResponsePlantCardDatas>
+                    ) {
+                        Log.d("success", response.body().toString())
+                        response.takeIf {
+                            it.isSuccessful
+                        }?.body()
+                            ?.let { it ->
+                                binding.textViewNick.text = it.data.nickname
+                                binding.textViewName.text = it.data.name
+                                binding.textViewPlantname.text = it.data.plant_name
+                                binding.textViewDday.text = "D-" + it.data.dDay.toString()
+                                binding.textViewDuration.text = it.data.duration.toString()
+                                binding.textViewBirth.text = it.data.birth.toString()
+                                binding.textView1WithName.text = it.data.name.toString()
+
+
+                                circleProgressbar.setProgressWithAnimation(
+                                    it.data.gage.toFloat(),
+                                    animationDuration
+                                )
+
+                                binding.chip.text = it.data.keyword1
+                                binding.chip2.text = it.data.keyword2
+                                binding.chip3.text = it.data.keyword3
+
+
+                                var memoList = arrayListOf<MemoListDataclass>(
+
+                                    MemoListDataclass(
+                                        it.data.reviews[0].water_date,
+                                        it.data.reviews[0].review
+                                    ),
+                                    MemoListDataclass(
+                                        it.data.reviews[1].water_date,
+                                        it.data.reviews[1].review
                                     )
+                                )
 
-                                    binding.chip.text = it.data.keyword1
-                                    binding.chip2.text = it.data.keyword2
-                                    binding.chip3.text = it.data.keyword3
+                                //memoList.add(MemoListDataclass(it.data.reviews[0].water_date, it.data.reviews[0].review))
+                                //memoList.add(MemoListDataclass(it.data.reviews[1].water_date, it.data.reviews[1].review))
+
+                                Log.d("data success!", it.data.reviews[0].review.toString())
 
 
-                                    var memoList = arrayListOf<MemoListDataclass>(
+                                val mAdapter = DetailMemoAdapter(memoList)
 
-                                        MemoListDataclass(
-                                            it.data.reviews[0].water_date,
-                                            it.data.reviews[0].review
-                                        ),
-                                        MemoListDataclass(
-                                            it.data.reviews[1].water_date,
-                                            it.data.reviews[1].review
+                                binding.recyclerDetail.adapter = mAdapter
+
+                                binding.recyclerDetail.addItemDecoration(
+                                    VerticalSpaceItemDecoration(
+                                        20
+                                    )
+                                )
+                                mAdapter.setItemClickListener(object :
+                                    DetailMemoAdapter.ItemClickListener {
+                                    override fun onClick(view: View, position: Int) {
+                                        val item = mAdapter.memolist[position]
+                                        Log.d("SSS", "${position}번 리스트 선택")
+                                        val transaction =
+                                            parentFragmentManager.beginTransaction()
+                                        transaction.replace(
+                                            R.id.fragment_detail,
+                                            CalendarFragment()
                                         )
-                                    )
+                                        transaction.addToBackStack(null)
+                                        transaction.commit()
+                                    }
+                                })
 
-                                    //memoList.add(MemoListDataclass(it.data.reviews[0].water_date, it.data.reviews[0].review))
-                                    //memoList.add(MemoListDataclass(it.data.reviews[1].water_date, it.data.reviews[1].review))
+                                binding.recyclerDetail.layoutManager =
+                                    LinearLayoutManager(context)
+                                binding.recyclerDetail.setHasFixedSize(true)
 
-                                    Log.d("data success!", it.data.reviews[0].review.toString())
+                            }
+                    }
+                })
 
-
-                                    val mAdapter = DetailMemoAdapter(memoList)
-
-                                    binding.recyclerDetail.adapter = mAdapter
-
-                                    binding.recyclerDetail.addItemDecoration(
-                                        VerticalSpaceItemDecoration(
-                                            20
-                                        )
-                                    )
-                                    mAdapter.setItemClickListener(object :
-                                        DetailMemoAdapter.ItemClickListener {
-                                        override fun onClick(view: View, position: Int) {
-                                            val item = mAdapter.memolist[position]
-                                            Log.d("SSS", "${position}번 리스트 선택")
-                                            val transaction =
-                                                parentFragmentManager.beginTransaction()
-                                            transaction.replace(
-                                                R.id.fragment_detail,
-                                                CalendarFragment()
-                                            )
-                                            transaction.addToBackStack(null)
-                                            transaction.commit()
-                                        }
-                                    })
-
-                                    binding.recyclerDetail.layoutManager =
-                                        LinearLayoutManager(context)
-                                    binding.recyclerDetail.setHasFixedSize(true)
-
-                                }
-                        }
-                    })
-        }
         // 유저 원형 프로그레스바 보여주는 부분
 
 

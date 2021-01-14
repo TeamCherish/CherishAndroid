@@ -54,6 +54,7 @@ class PhoneBookFragment : Fragment() {
         return view
     }
 
+
     override fun onResume() {
         super.onResume()
         val activity = activity
@@ -124,9 +125,9 @@ class PhoneBookFragment : Fragment() {
 
 
     fun setList() {
-        phonelist.distinct()
+
         phonelist.addAll(getPhoneNumbers(sortText, searchText))
-        phonelist.distinct()
+
         madapter = PhoneBookAdapter(phonelist)
         binding.recycler.adapter = madapter
         binding.recycler.layoutManager = LinearLayoutManager(context)
@@ -169,34 +170,34 @@ class PhoneBookFragment : Fragment() {
 
             val cursor = contentResolver.query(phonUri, projections, where, whereValues, optionSort)
             while (cursor?.moveToNext() == true) {
-                val id = cursor?.getString(0)
-                val name = cursor?.getString(1)
-                val number = cursor?.getString(2)
+                val id = cursor.getString(0)
+                val name = cursor.getString(1)
+                val number = cursor.getString(2)
 
                 val phone = Phone(id, name, number)
 
                 list.add(phone)
-                list.distinct()
+                //list.distinct()
 
             }
 
             val cursor2 =
                 contentResolver.query(phonUri, projections, where2, whereValues, optionSort)
             while (cursor2?.moveToNext() == true) {
-                val id = cursor2?.getString(0)
-                val name = cursor2?.getString(1)
-                val number = cursor2?.getString(2)
+                val id = cursor2.getString(0)
+                val name = cursor2.getString(1)
+                val number = cursor2.getString(2)
 
                 val phone = Phone(id, name, number)
 
                 list.add(phone)
-                list.distinct()
+                // list.distinct()
             }
 
         }
 
         // 결과목록 반환
-
+        Log.d("listsize", list.size.toString())
         return list.distinct()
     }
 
