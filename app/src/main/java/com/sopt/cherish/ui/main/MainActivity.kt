@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
                 return@OnCompleteListener
             }
             val token = task.result
-            Log.d("token",token.toString())
+            Log.d("token", token.toString())
             SimpleLogger.logI(token.toString())
         })
     }

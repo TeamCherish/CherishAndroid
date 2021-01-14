@@ -16,11 +16,11 @@ data class DetailPlantData(
     @SerializedName("image_url") val imageUrl: String,
 )
 
-interface PlantDetailAPI{
+interface PlantDetailAPI {
 
-        @GET("/plantDetail/{id}")
-        @Headers("Content-Type:application/json")
-        fun Detailcherish(
-            @Path("id") id : Int
+    @GET("/plantDetail/{id}")
+    @Headers("Content-Type:application/json")
+    fun Detailcherish(
+        @Path("id") id: Int
     ): Call<ResponseDetailData>
 }

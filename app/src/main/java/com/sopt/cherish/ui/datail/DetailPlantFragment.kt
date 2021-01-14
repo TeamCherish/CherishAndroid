@@ -1,14 +1,14 @@
 package com.sopt.cherish.ui.datail
 
+import android.app.AlertDialog
+import android.graphics.Color
 import android.graphics.Rect
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.InsetDrawable
 import android.os.Bundle
 
 import android.util.Log
-
-import android.view.LayoutInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -24,7 +24,14 @@ import com.sopt.cherish.remote.singleton.RetrofitBuilder
 
 import com.sopt.cherish.ui.adapter.DetailMemoAdapter
 import com.sopt.cherish.ui.datail.calendar.CalendarFragment
+import com.sopt.cherish.ui.dialog.DeletePlantDialogFragment
+import com.sopt.cherish.ui.dialog.WateringDialogFragment
+import com.sopt.cherish.ui.dialog.WeekPickerDialogFragment
 import com.sopt.cherish.ui.domain.MemoListDataclass
+import com.sopt.cherish.ui.enrollment.EnrollModifyPlantFragment
+
+import com.sopt.cherish.ui.enrollment.EnrollPlantFragment
+import com.sopt.cherish.ui.main.home.HomeFragment
 import com.sopt.cherish.util.MyApplication
 import retrofit2.Call
 import retrofit2.Callback
@@ -39,17 +46,22 @@ class DetailPlantFragment : Fragment() {
 
     //lateinit var memoList:ArrayList<MemoListDataclass>
 
-   // private lateinit var memoList: ArrayList<MemoListDataclass>
+    // private lateinit var memoList: ArrayList<MemoListDataclass>
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
+
         val binding: FragmentDetailPlantBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_detail_plant, container, false)
 
         circleProgressbar = binding.test
         val animationDuration = 100
 
+        binding.buttonWater.setOnClickListener {
+            WateringDialogFragment().show(parentFragmentManager, "DetailPlantFragment")
+        }
 
         requestData.ResponsePlantCardData.Detailcherishcard(1)
             .enqueue(
@@ -67,36 +79,49 @@ class DetailPlantFragment : Fragment() {
                             it.isSuccessful
                         }?.body()
                             ?.let { it ->
-                                binding.textViewNick.text=it.data.nickname
-                                binding.textViewName.text=it.data.name
-                                binding.textViewPlantname.text=it.data.plant_name
-                                binding.textViewDday.text="D-"+it.data.dDay.toString()
-                                binding.textViewDuration.text=it.data.duration.toString()
-                                binding.textViewBirth.text=it.data.birth.toString()
-                                binding.textView1WithName.text=it.data.name.toString()
-                                circleProgressbar.setProgressWithAnimation(it.data.gage.toFloat(), animationDuration)
+                                binding.textViewNick.text = it.data.nickname
+                                binding.textViewName.text = it.data.name
+                                binding.textViewPlantname.text = it.data.plant_name
+                                binding.textViewDday.text = "D-" + it.data.dDay.toString()
+                                binding.textViewDuration.text = it.data.duration.toString()
+                                binding.textViewBirth.text = it.data.birth.toString()
+                                binding.textView1WithName.text = it.data.name.toString()
+                                circleProgressbar.setProgressWithAnimation(
+                                    it.data.gage.toFloat(),
+                                    animationDuration
+                                )
 
-                                binding.chip.text=it.data.keyword1
-                                binding.chip2.text=it.data.keyword2
-                                binding.chip3.text=it.data.keyword3
+                                binding.chip.text = it.data.keyword1
+                                binding.chip2.text = it.data.keyword2
+                                binding.chip3.text = it.data.keyword3
 
 
                                 var memoList = arrayListOf<MemoListDataclass>(
 
-                                    MemoListDataclass(it.data.reviews[0].water_date, it.data.reviews[0].review),
-                                    MemoListDataclass(it.data.reviews[1].water_date, it.data.reviews[1].review)
+                                    MemoListDataclass(
+                                        it.data.reviews[0].water_date,
+                                        it.data.reviews[0].review
+                                    ),
+                                    MemoListDataclass(
+                                        it.data.reviews[1].water_date,
+                                        it.data.reviews[1].review
+                                    )
                                 )
 
-                               //memoList.add(MemoListDataclass(it.data.reviews[0].water_date, it.data.reviews[0].review))
-                               //memoList.add(MemoListDataclass(it.data.reviews[1].water_date, it.data.reviews[1].review))
+                                //memoList.add(MemoListDataclass(it.data.reviews[0].water_date, it.data.reviews[0].review))
+                                //memoList.add(MemoListDataclass(it.data.reviews[1].water_date, it.data.reviews[1].review))
 
-                                Log.d("data success!",  it.data.reviews[0].review.toString())
+                                Log.d("data success!", it.data.reviews[0].review.toString())
 
 
                                 val mAdapter = DetailMemoAdapter(memoList)
                                 binding.recyclerDetail.adapter = mAdapter
 
-                                binding.recyclerDetail.addItemDecoration(VerticalSpaceItemDecoration(20))
+                                binding.recyclerDetail.addItemDecoration(
+                                    VerticalSpaceItemDecoration(
+                                        20
+                                    )
+                                )
 
                                 binding.recyclerDetail.layoutManager = LinearLayoutManager(context)
                                 binding.recyclerDetail.setHasFixedSize(true)
@@ -107,13 +132,20 @@ class DetailPlantFragment : Fragment() {
         // 유저 원형 프로그레스바 보여주는 부분
 
 
-
         // memolist 어댑터 연결 부분
 
 
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        val activity = activity
+        if (activity != null) {
+            (activity as DetailPlantActivity).setActionBarTitle("식물 카드")
+
+        }
+    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
@@ -124,14 +156,26 @@ class DetailPlantFragment : Fragment() {
             }
 
         }
-        when (item.itemId) {
+
+        /*when (item.itemId) {
             R.id.calendar -> {
                 val transaction = childFragmentManager.beginTransaction()
                 transaction.replace(R.id.fragment_detail, CalendarFragment())
                 transaction.commit()
                 return true
             }
-        }
+            R.id.setting->{
+                Log.d("click","ASDf")
+                val transaction = childFragmentManager.beginTransaction()
+                transaction.replace(R.id.fragment_detail, EnrollModifyPlantFragment())
+                // if (transaction == null) {
+                transaction.addToBackStack(null)
+                // }
+                transaction.commit()
+
+                return true
+            }
+        }*/
         return super.onOptionsItemSelected(item)
     }
 

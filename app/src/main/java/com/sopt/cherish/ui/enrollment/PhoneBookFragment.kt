@@ -144,7 +144,7 @@ class PhoneBookFragment : Fragment() {
                     searchText = s.toString()
                     //searchphone=s.toString()
                     changeList()
-                   // changeList2()
+                    // changeList2()
 
                     //     }
 
@@ -185,7 +185,7 @@ class PhoneBookFragment : Fragment() {
         binding.recycler.layoutManager = LinearLayoutManager(context)
     }
 
-    fun getcount():String{
+    fun getcount(): String {
         return phonelist.size.toString()
     }
 
@@ -209,10 +209,9 @@ class PhoneBookFragment : Fragment() {
         if (search.isNotEmpty()) {
 
 
+            where = ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " like ? "
 
-                where = ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " like ? "
-
-                where2 = ContactsContract.CommonDataKinds.Phone.NUMBER + " like ?"
+            where2 = ContactsContract.CommonDataKinds.Phone.NUMBER + " like ?"
 
             whereValues = arrayOf("%$search%")
 
@@ -241,7 +240,8 @@ class PhoneBookFragment : Fragment() {
             }
 
 
-            val cursor2 = contentResolver.query(phonUri, projections, where2, whereValues, optionSort)
+            val cursor2 =
+                contentResolver.query(phonUri, projections, where2, whereValues, optionSort)
             while (cursor2?.moveToNext() == true) {
                 val id = cursor2?.getString(0)
                 val name = cursor2?.getString(1)
@@ -254,10 +254,7 @@ class PhoneBookFragment : Fragment() {
             }
 
 
-
-            }
-
-
+        }
 
 
         // 결과목록 반환

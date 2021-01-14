@@ -2,7 +2,6 @@ package com.sopt.cherish.ui.datail
 
 import android.graphics.Rect
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -15,13 +14,10 @@ import com.jackandphantom.circularprogressbar.CircleProgressbar
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityDetailPlantBinding
 import com.sopt.cherish.di.Injection
-import com.sopt.cherish.remote.api.ResponsePlantCardDatas
-import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.datail.calendar.CalendarFragment
+import com.sopt.cherish.ui.dialog.DeletePlantDialogFragment
 import com.sopt.cherish.ui.domain.MemoListDataclass
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.sopt.cherish.ui.enrollment.EnrollModifyPlantFragment
 
 
 /**
@@ -33,11 +29,6 @@ class DetailPlantActivity : AppCompatActivity() {
 
     private lateinit var circleProgressbar: CircleProgressbar
     private lateinit var binding: ActivityDetailPlantBinding
-    private val requestData = RetrofitBuilder
-lateinit var memoList:ArrayList<MemoListDataclass>
-
-lateinit var memodate:String
-    lateinit var memoreview:String
 
     private lateinit var viewModel: DetailPlantViewModel
 
@@ -46,10 +37,9 @@ lateinit var memodate:String
 
         binding = ActivityDetailPlantBinding.inflate(layoutInflater)
         setFragment(DetailPlantFragment())
-
         initializeViewModel()
 
-        setActionBarTitle("식물 카드")
+        setActionBarTitle("식물 상세")
         setContentView(binding.root)
     }
 
@@ -61,6 +51,15 @@ lateinit var memodate:String
             ).get(
                 DetailPlantViewModel::class.java
             )
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+        if (menu != null) {
+            menu.getItem(2).isVisible = false
+        } // invisible menuitem 2
+
+        invalidateOptionsMenu()
+        return super.onPrepareOptionsMenu(menu)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -89,6 +88,16 @@ lateinit var memodate:String
 
                 return true
             }
+            R.id.setting -> {
+                val transaction = supportFragmentManager.beginTransaction()
+                transaction.replace(R.id.fragment_detail, EnrollModifyPlantFragment())
+                // if (transaction == null) {
+                transaction.addToBackStack(null)
+                // }
+                transaction.commit()
+
+                return true
+            }
         }
         return super.onOptionsItemSelected(item)
     }
@@ -96,7 +105,6 @@ lateinit var memodate:String
     fun setFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_detail, fragment)
-
         transaction.commit()
     }
 

@@ -157,7 +157,6 @@ class ManagePlantFragment : Fragment() {
     }
 
 
-
     private fun initializeServerRequest(binding: FragmentManagePlantBinding) {
 
         requestData.myPageAPI.fetchUserPage(1)
@@ -185,7 +184,6 @@ class ManagePlantFragment : Fragment() {
                                     it.myPageUserData.postponeCount.toString()
                                 binding.myPageFinishCnt.text =
                                     it.myPageUserData.completeCount.toString()
-
 
 
                                 val tabText = "식물 " + it.myPageUserData.totalCherish.toString()

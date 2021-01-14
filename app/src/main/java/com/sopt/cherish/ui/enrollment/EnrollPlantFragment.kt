@@ -95,8 +95,6 @@ class EnrollPlantFragment : Fragment() {
                 )
 
 
-
-
             //val intent = Intent(context, ResultPlantActivity::class.java)
 
             // intent.putExtra("plantkey", binding.waterAlarmWeek.text.toString())

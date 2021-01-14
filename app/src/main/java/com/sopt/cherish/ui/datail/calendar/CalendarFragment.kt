@@ -50,6 +50,8 @@ class CalendarFragment : Fragment() {
     override fun onPrepareOptionsMenu(menu: Menu) {
         menu.getItem(0).isVisible = false //disable menuitem 5
         menu.getItem(1).isVisible = false // invisible menuitem 2
+        menu.getItem(2).isVisible = false // invisible menuitem 2
+
         (activity as DetailPlantActivity).invalidateOptionsMenu()
 
     }

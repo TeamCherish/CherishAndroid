@@ -32,10 +32,10 @@ data class ResponsePlantCardDatas(
     }
 }
 
-interface ResponsePlantCardData{
+interface ResponsePlantCardData {
 
     @GET("cherish")
     fun Detailcherishcard(
-        @Query("CherishId") CherishId : Int
+        @Query("CherishId") CherishId: Int
     ): Call<ResponsePlantCardDatas>
 }

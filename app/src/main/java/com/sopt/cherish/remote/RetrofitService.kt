@@ -28,6 +28,6 @@ interface RetrofitService {
     @Headers("Content-Type:multipart/application-json")
     @POST("login/signin")
     fun signIn(
-        @Body body : RequestSigninData
+        @Body body: RequestSigninData
     ): Call<ResponseSigninData>
 }

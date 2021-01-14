@@ -13,6 +13,12 @@
         app:showAsAction="always|withText"
         android:title="설정">
     </item>
+    <item
+        android:id="@+id/trash"
+        android:icon="@drawable/icn_delete"
+        app:showAsAction="always|withText"
+        android:title="설정">
+    </item>
 
 
 </menu>
