@@ -9,19 +9,13 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatDialog
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentResultPlantBinding
-
-import com.sopt.cherish.remote.model.ResponseEnrollData
 import com.sopt.cherish.ui.main.MainActivity
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 
 class ResultPlantFragment : Fragment() {
@@ -55,20 +49,20 @@ class ResultPlantFragment : Fragment() {
 
         binding.textView1Mean.text = arguments?.getString("plant_mean")
 
-        val urlstring=arguments?.getString("plant_url")
-        Log.d("url",urlstring.toString())
+        val urlstring = arguments?.getString("plant_url")
+        Log.d("url", urlstring.toString())
         Glide.with(this).load(urlstring.toString()).into(binding.imageViewUrl)
 
         //binding.imageViewUrl. =
 
         //  binding.textView21.text = arguments?.getString("name")
-       // binding.plantExplanation.text = arguments?.getString("explanation")
+        // binding.plantExplanation.text = arguments?.getString("explanation")
 
 
         binding.startbtn.setOnClickListener {
             progressON()
 
-            val intent= Intent(context,MainActivity::class.java)
+            val intent = Intent(context, MainActivity::class.java)
             startActivity(intent)
 
             progressOFF()

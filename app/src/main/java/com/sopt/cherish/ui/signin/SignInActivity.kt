@@ -5,14 +5,8 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.sopt.cherish.databinding.ActivitySignInBinding
-import com.sopt.cherish.remote.api.EditUserReq
-import com.sopt.cherish.remote.api.EditUserRes
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.main.MainActivity
-import com.sopt.cherish.util.MyApplication
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class SignInActivity : AppCompatActivity() {
 
