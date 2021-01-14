@@ -2,6 +2,7 @@ package com.sopt.cherish.ui.datail
 
 import android.graphics.Rect
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -30,12 +31,16 @@ class DetailPlantActivity : AppCompatActivity() {
 
     private lateinit var viewModel: DetailPlantViewModel
 
+    var plantid: Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityDetailPlantBinding.inflate(layoutInflater)
         setFragment(DetailPlantFragment())
         initializeViewModel()
+
+
+        //Log.d("qwer",intent.getIntExtra("plantId",100).toString())
 
         setActionBarTitle("식물 상세")
         setContentView(binding.root)
@@ -102,7 +107,13 @@ class DetailPlantActivity : AppCompatActivity() {
 
     fun setFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragment_detail, fragment)
+        transaction.replace(R.id.fragment_detail, fragment.apply {
+            arguments = Bundle().apply {
+
+                putInt("plantidgo", intent.getIntExtra("plantId", 100))
+                Log.d("nanana", intent.getIntExtra("plantId", 100).toString())
+            }
+        })
         transaction.commit()
     }
 
@@ -140,3 +151,4 @@ class DetailPlantActivity : AppCompatActivity() {
 
 
 }
+

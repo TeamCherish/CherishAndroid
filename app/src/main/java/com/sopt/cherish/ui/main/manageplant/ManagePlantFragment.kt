@@ -43,7 +43,6 @@ class ManagePlantFragment : Fragment() {
         initializeTabLayoutView(binding)
         initializeBottomSheetBehavior(binding)
 
-
         binding.myPageAddPlantBtn.setOnClickListener {
             navigatePhoneBook()
         }

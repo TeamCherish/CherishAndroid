@@ -23,7 +23,8 @@ data class ResponsePlantCardDatas(
         val plant_name: String,
         val plant_thumbnail_image_url: String,
         val reviews: List<Review>,
-        val status_message: String
+        val status_message: String,
+        val status: String
     ) {
         data class Review(
             val review: String,

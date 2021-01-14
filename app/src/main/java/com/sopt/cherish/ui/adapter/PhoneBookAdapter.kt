@@ -24,14 +24,9 @@ class PhoneBookAdapter(private val phoneBookList: List<Phone>) :
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
 
-
         val layoutInflater = LayoutInflater.from(parent.context)
 
         val binding: ItemLayoutBinding = ItemLayoutBinding.inflate(layoutInflater, parent, false)
-
-        // todo : 왜 주석처리로 했는지?
-        // val view = LayoutInflater.from(parent.context).inflate(R.layout.item_layout, parent, false)
-        //binding.radioButton.setOnCheckedChangeListener(checkedChangeListener)
 
         if (binding.radioButton.isChecked) checkedRadioButton = binding.radioButton
 
@@ -42,12 +37,11 @@ class PhoneBookAdapter(private val phoneBookList: List<Phone>) :
 
         // todo : 로직 설명 들어봐야 알거같음
         holder.radioButton.setOnCheckedChangeListener { compoundButton, isChecked ->
-
             checkedRadioButton?.apply { setChecked(!isChecked) }
             checkedRadioButton = compoundButton.apply { setChecked(isChecked) }
 
             if (isChecked) {
-                Log.d("asdf", "${phoneBookList[position].name}")
+                Log.d("phonebook", "${phoneBookList[position].name}")
                 phonename = phoneBookList[position].name.toString()
                 phonenumber = phoneBookList[position].phone.toString()
             }
@@ -66,10 +60,6 @@ class PhoneBookAdapter(private val phoneBookList: List<Phone>) :
 
         var mPhone: Phone? = null
         val radioButton = binding.radioButton
-
-        init {
-
-        }
 
         fun setPhone(phone: Phone) {
             this.mPhone = phone
