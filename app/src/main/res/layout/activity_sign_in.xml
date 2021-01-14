@@ -104,7 +104,8 @@
         style="@style/RoundButton.GreenMain"
         app:layout_constraintEnd_toEndOf="@+id/constraintLayout6"
         app:layout_constraintStart_toStartOf="@+id/constraintLayout6"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout6" />
+        android:layout_marginBottom="268dp"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
     <TextView
         android:id="@+id/textView4"

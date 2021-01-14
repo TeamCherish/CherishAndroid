@@ -67,13 +67,23 @@ class ManagePlantFragment : Fragment() {
                 if (tabIndex == 0) {
                     binding.myPageResetBtn.visibility = View.GONE
                     if (newState == BottomSheetBehavior.STATE_EXPANDED) {
-                        binding.myPageBg.setBackgroundColor(ContextCompat.getColor(binding.root.context,R.color.white))
+                        binding.myPageBg.setBackgroundColor(
+                            ContextCompat.getColor(
+                                binding.root.context,
+                                R.color.white
+                            )
+                        )
                         binding.myPageAddPlantBtn.visibility = View.VISIBLE
                         isCollapsed = false
                     }
 
                     if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
-                        binding.myPageBg.setBackgroundColor(ContextCompat.getColor(binding.root.context,R.color.cherish_my_page_bg))
+                        binding.myPageBg.setBackgroundColor(
+                            ContextCompat.getColor(
+                                binding.root.context,
+                                R.color.cherish_my_page_bg
+                            )
+                        )
                         binding.myPageAddPlantBtn.visibility = View.GONE
                         isCollapsed = true
                     }
@@ -82,22 +92,36 @@ class ManagePlantFragment : Fragment() {
                 if (tabIndex == 1) {
                     if (newState == BottomSheetBehavior.STATE_EXPANDED) {
                         binding.myPageResetBtn.visibility = View.VISIBLE
-                        binding.constraint1.visibility=View.VISIBLE
-                        binding.cancelText.visibility=View.VISIBLE
+                        binding.constraint1.visibility = View.VISIBLE
+                        binding.cancelText.visibility = View.VISIBLE
 
-                        binding.myPageText.visibility=View.GONE
-                        binding.searchBox.visibility=View.GONE
+                        binding.myPageText.visibility = View.GONE
+                        binding.searchBox.visibility = View.GONE
 
-                        binding.myPageBg.setBackgroundColor(ContextCompat.getColor(binding.root.context,R.color.white))
+                        binding.myPageBg.setBackgroundColor(
+                            ContextCompat.getColor(
+                                binding.root.context,
+                                R.color.white
+                            )
+                        )
                         isCollapsed = false
                     }
 
 
                     if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
-                        binding.myPageBg.setBackgroundColor(ContextCompat.getColor(binding.root.context,R.color.cherish_my_page_bg))
+                        binding.myPageBg.setBackgroundColor(
+                            ContextCompat.getColor(
+                                binding.root.context,
+                                R.color.cherish_my_page_bg
+                            )
+                        )
                         binding.myPageResetBtn.visibility = View.GONE
-                        binding.constraint1.visibility=View.GONE
-                        binding.cancelText.visibility=View.GONE
+                        binding.constraint1.visibility = View.GONE
+                        binding.cancelText.visibility = View.GONE
+
+                        binding.myPageText.visibility = View.VISIBLE
+                        binding.searchBox.visibility = View.VISIBLE
+
                         isCollapsed = true
                     }
 
@@ -135,16 +159,26 @@ class ManagePlantFragment : Fragment() {
                 if (tabIndex == 0) {
                     binding.myPageResetBtn.visibility = View.GONE
                     binding.myPageResetBtn.visibility = View.GONE
-                    binding.constraint1.visibility=View.GONE
-                    binding.cancelText.visibility=View.GONE
+                    binding.constraint1.visibility = View.GONE
+                    binding.cancelText.visibility = View.GONE
 
-                    binding.myPageText.visibility=View.VISIBLE
-                    binding.searchBox.visibility=View.VISIBLE
+                    binding.myPageText.visibility = View.VISIBLE
+                    binding.searchBox.visibility = View.VISIBLE
                     if (isCollapsed) {
-                        binding.myPageBg.setBackgroundColor(ContextCompat.getColor(binding.root.context,R.color.cherish_my_page_bg))
+                        binding.myPageBg.setBackgroundColor(
+                            ContextCompat.getColor(
+                                binding.root.context,
+                                R.color.cherish_my_page_bg
+                            )
+                        )
                         binding.myPageAddPlantBtn.visibility = View.GONE
-                    } else{
-                        binding.myPageBg.setBackgroundColor(ContextCompat.getColor(binding.root.context,R.color.white))
+                    } else {
+                        binding.myPageBg.setBackgroundColor(
+                            ContextCompat.getColor(
+                                binding.root.context,
+                                R.color.white
+                            )
+                        )
                         binding.myPageAddPlantBtn.visibility = View.VISIBLE
                     }
 
@@ -152,22 +186,32 @@ class ManagePlantFragment : Fragment() {
                 if (tabIndex == 1) {
 
                     if (isCollapsed) {
-                        binding.constraint1.visibility=View.GONE
-                        binding.cancelText.visibility=View.GONE
+                        binding.constraint1.visibility = View.GONE
+                        binding.cancelText.visibility = View.GONE
 
-                        binding.myPageText.visibility=View.VISIBLE
-                        binding.searchBox.visibility=View.VISIBLE
-                        binding.myPageBg.setBackgroundColor(ContextCompat.getColor(binding.root.context,R.color.cherish_my_page_bg))
+                        binding.myPageText.visibility = View.VISIBLE
+                        binding.searchBox.visibility = View.VISIBLE
+                        binding.myPageBg.setBackgroundColor(
+                            ContextCompat.getColor(
+                                binding.root.context,
+                                R.color.cherish_my_page_bg
+                            )
+                        )
                         binding.myPageResetBtn.visibility = View.GONE
                     } else {
-                        binding.myPageBg.setBackgroundColor(ContextCompat.getColor(binding.root.context,R.color.white))
+                        binding.myPageBg.setBackgroundColor(
+                            ContextCompat.getColor(
+                                binding.root.context,
+                                R.color.white
+                            )
+                        )
 
-                        binding.myPageText.visibility=View.GONE
-                        binding.searchBox.visibility=View.GONE
+                        binding.myPageText.visibility = View.GONE
+                        binding.searchBox.visibility = View.GONE
 
                         binding.myPageResetBtn.visibility = View.VISIBLE
-                        binding.constraint1.visibility=View.VISIBLE
-                        binding.cancelText.visibility=View.VISIBLE
+                        binding.constraint1.visibility = View.VISIBLE
+                        binding.cancelText.visibility = View.VISIBLE
                     }
                 }
 
