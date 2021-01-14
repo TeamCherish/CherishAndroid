@@ -1,5 +1,6 @@
 package com.sopt.cherish.ui.main.manageplant
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -11,6 +12,7 @@ import com.sopt.cherish.databinding.FragmentPlantBinding
 import com.sopt.cherish.remote.api.MyPageUserRes
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.adapter.MyPageBottomSheetAdapter
+import com.sopt.cherish.ui.datail.DetailPlantActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -25,7 +27,7 @@ class PlantFragment : Fragment() {
 
     private var _binding: FragmentPlantBinding? = null
     private val binding get() = _binding!!
-    private lateinit var Cherishadapter: MyPageBottomSheetAdapter
+    private lateinit var cherishAdapter: MyPageBottomSheetAdapter
     private val requestData = RetrofitBuilder
     //private val viewModel: MainViewModel by activityViewModels()
 
@@ -60,10 +62,30 @@ class PlantFragment : Fragment() {
                         }?.body()
                             ?.let { it ->
                                 Log.d("list", it.myPageUserData.result.toString())
-                                Cherishadapter =
+                                cherishAdapter =
                                     MyPageBottomSheetAdapter(context!!, it.myPageUserData.result)
 
-                                initialRecyclerView(binding, Cherishadapter)
+                                initialRecyclerView(binding, cherishAdapter)
+                                cherishAdapter.notifyDataSetChanged()
+
+                                cherishAdapter.setItemClickListener(
+                                    object : MyPageBottomSheetAdapter.ItemClickListener {
+                                        override fun onClick(view: View, position: Int) {
+                                            Log.d("onclick", "success")
+                                            val intent =
+                                                Intent(context, DetailPlantActivity::class.java)
+                                            intent.putExtra(
+                                                "plantId",
+                                                it.myPageUserData.result[position].plantId
+                                            )
+                                            Log.d(
+                                                "plantId",
+                                                it.myPageUserData.result[position].plantId
+                                            )
+                                            startActivityForResult(intent, 100)
+                                        }
+                                    }
+                                )
                             }
                     }
                 })
