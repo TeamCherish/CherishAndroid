@@ -14,7 +14,7 @@ data class RequestEnrollData(
     val phone: String,
     val cycle_date: Int,
     val notice_time: String,
-    val water_notice:Boolean,
+    val water_notice: Boolean,
     val UserId: Int
 
 )
@@ -40,6 +40,7 @@ data class ResponseEnrollData(
         )
     }
 }
+
 interface EnrollmentAPI {
     @POST("/cherish")
     @Headers("Content-Type:application/json")

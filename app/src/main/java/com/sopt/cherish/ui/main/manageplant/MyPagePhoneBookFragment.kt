@@ -21,7 +21,7 @@ class MyPagePhoneBookFragment : Fragment() {
     var phonelist = mutableListOf<Phone>()
     var searchText = ""
     var sortText = "asc"
-    var phonecount=0
+    var phonecount = 0
     private lateinit var enrollToolbar: Toolbar
 
     private lateinit var binding: FragmentMyPagePhoneBookBinding
@@ -118,7 +118,7 @@ class MyPagePhoneBookFragment : Fragment() {
             }
         }
         // 결과목록 반환
-        phonecount=list.size
+        phonecount = list.size
         return list
     }
 
