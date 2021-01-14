@@ -1,17 +1,10 @@
 package com.sopt.cherish.ui.enrollment
 
-import android.app.AlertDialog
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.InsetDrawable
 import android.os.Bundle
 import android.view.*
-import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.sopt.cherish.R
 import com.sopt.cherish.ui.datail.DetailPlantActivity
-import com.sopt.cherish.ui.datail.calendar.CalendarFragment
-import com.sopt.cherish.ui.dialog.ClockPickerDialogFragment
 import com.sopt.cherish.ui.dialog.DeletePlantDialogFragment
 
 

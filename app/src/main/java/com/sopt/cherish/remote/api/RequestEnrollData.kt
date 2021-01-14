@@ -1,7 +1,5 @@
 package com.sopt.cherish.remote.model
 
-import android.provider.ContactsContract
-
 data class RequestEnrollData(
     val name: String,
     val nickname: String,

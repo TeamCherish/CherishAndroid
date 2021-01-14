@@ -5,20 +5,17 @@
         android:id="@+id/calendar"
         android:icon="@drawable/icn_calendar"
         app:showAsAction="always"
-        android:title="캘린더">
-    </item>
+        android:title="캘린더"></item>
     <item
         android:id="@+id/setting"
         android:icon="@drawable/icn_setting"
         app:showAsAction="always|withText"
-        android:title="설정">
-    </item>
+        android:title="설정"></item>
     <item
         android:id="@+id/trash"
         android:icon="@drawable/icn_delete"
-        app:showAsAction="always|withText"
-        android:title="설정">
-    </item>
+        android:title="설정"
+        app:showAsAction="always|withText"></item>
 
 
 </menu>

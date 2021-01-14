@@ -3,7 +3,6 @@ package com.sopt.cherish.ui.enrollment
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
@@ -13,11 +12,6 @@ import androidx.appcompat.app.AppCompatDialog
 import androidx.fragment.app.Fragment
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentResultPlantBinding
-
-import com.sopt.cherish.remote.model.ResponseEnrollData
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 
 class ResultPlantFragment : Fragment() {

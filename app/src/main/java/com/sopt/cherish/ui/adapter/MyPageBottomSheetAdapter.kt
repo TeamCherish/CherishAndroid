@@ -2,12 +2,10 @@ package com.sopt.cherish.ui.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.provider.Settings.Global.getString
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.sopt.cherish.R
 import com.sopt.cherish.databinding.MyPageCherryItemBinding
 import com.sopt.cherish.remote.api.MyPageCherishData
 

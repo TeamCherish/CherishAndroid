@@ -11,7 +11,19 @@ import kotlin.math.roundToInt
 
 object FlexBoxExtension {
     fun FlexboxLayout.addChip(text: String) {
-        val chip = LayoutInflater.from(context).inflate(R.layout.view_chip, null) as Chip
+        val chip = LayoutInflater.from(context).inflate(R.layout.view_chip_action, null) as Chip
+        chip.text = text
+        val layoutParams = ViewGroup.MarginLayoutParams(
+            ViewGroup.MarginLayoutParams.WRAP_CONTENT,
+            ViewGroup.MarginLayoutParams.WRAP_CONTENT
+        )
+        layoutParams.rightMargin = dpToPx(4)
+        chip.setOnCloseIconClickListener { removeView(chip as View) }
+        addView(chip, childCount - 1, layoutParams)
+    }
+
+    fun FlexboxLayout.addChipCalendar(text: String) {
+        val chip = LayoutInflater.from(context).inflate(R.layout.view_chip_choice, null) as Chip
         chip.text = text
         val layoutParams = ViewGroup.MarginLayoutParams(
             ViewGroup.MarginLayoutParams.WRAP_CONTENT,
