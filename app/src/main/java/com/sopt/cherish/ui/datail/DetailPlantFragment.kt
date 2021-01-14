@@ -1,16 +1,12 @@
 package com.sopt.cherish.ui.datail
 
-import android.app.AlertDialog
-import android.content.Intent
-import android.graphics.Color
 import android.graphics.Rect
-import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.InsetDrawable
 import android.os.Bundle
-
 import android.util.Log
-import android.view.*
-
+import android.view.LayoutInflater
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -20,20 +16,11 @@ import com.jackandphantom.circularprogressbar.CircleProgressbar
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentDetailPlantBinding
 import com.sopt.cherish.remote.api.ResponsePlantCardDatas
-
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
-
 import com.sopt.cherish.ui.adapter.DetailMemoAdapter
 import com.sopt.cherish.ui.datail.calendar.CalendarFragment
-import com.sopt.cherish.ui.dialog.DeletePlantDialogFragment
 import com.sopt.cherish.ui.dialog.WateringDialogFragment
-import com.sopt.cherish.ui.dialog.WeekPickerDialogFragment
 import com.sopt.cherish.ui.domain.MemoListDataclass
-import com.sopt.cherish.ui.enrollment.EnrollModifyPlantFragment
-
-import com.sopt.cherish.ui.enrollment.EnrollPlantFragment
-import com.sopt.cherish.ui.main.home.HomeFragment
-import com.sopt.cherish.util.MyApplication
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -123,12 +110,16 @@ class DetailPlantFragment : Fragment() {
                                         20
                                     )
                                 )
-                                mAdapter.setItemClickListener( object : DetailMemoAdapter.ItemClickListener{
+                                mAdapter.setItemClickListener(object :
+                                    DetailMemoAdapter.ItemClickListener {
                                     override fun onClick(view: View, position: Int) {
-                                        val item = mAdapter.memolist [position]
+                                        val item = mAdapter.memolist[position]
                                         Log.d("SSS", "${position}번 리스트 선택")
                                         val transaction = parentFragmentManager.beginTransaction()
-                                        transaction.replace(R.id.fragment_detail, CalendarFragment())
+                                        transaction.replace(
+                                            R.id.fragment_detail,
+                                            CalendarFragment()
+                                        )
                                         transaction.addToBackStack(null)
                                         transaction.commit()
                                     }

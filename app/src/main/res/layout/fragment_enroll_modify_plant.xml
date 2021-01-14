@@ -2,9 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#ffffff"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#ffffff">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -94,13 +94,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/textnick">
 
                 <EditText
+                    android:id="@+id/edit_nickname"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:background="@null"
-                    android:inputType="textPersonName"
                     android:hint="ex.영나"
-                    android:id="@+id/edit_nickname"
+                    android:inputType="textPersonName"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/editnick"
                     app:layout_constraintStart_toStartOf="@+id/editnick"
@@ -112,13 +112,14 @@
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cons1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
         android:layout_marginTop="@dimen/margin_14dp"
+        android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cons0">
@@ -127,9 +128,9 @@
             android:id="@+id/textbirth"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="생일"
             android:layout_marginLeft="10dp"
             android:fontFamily="@font/notosanscjkkr_medium"
+            android:text="생일"
             android:textSize="@dimen/text_14sp"
             app:layout_constraintStart_toStartOf="@+id/cons1"
             app:layout_constraintTop_toTopOf="@+id/cons1" />
@@ -139,21 +140,21 @@
             android:layout_width="0dp"
             android:layout_height="44dp"
 
-            android:background="@drawable/box_add_plant_detail"
-
-            app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="@dimen/margin_4dp"
+
+            android:background="@drawable/box_add_plant_detail"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/cons1"
             app:layout_constraintTop_toBottomOf="@+id/textbirth">
 
             <EditText
+                android:id="@+id/edit_birth"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:background="@null"
-                android:inputType="textPersonName"
                 android:hint="0000/00/00"
-                android:id="@+id/edit_birth"
+                android:inputType="textPersonName"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/editbirth"
@@ -166,8 +167,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
         android:layout_marginTop="@dimen/margin_14dp"
+        android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cons1">
@@ -188,10 +189,10 @@
             android:layout_width="0dp"
             android:layout_height="44dp"
 
-            android:background="@drawable/box_add_plant_detail"
-
-            app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="@dimen/margin_4dp"
+
+            android:background="@drawable/box_add_plant_detail"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/cons2"
             app:layout_constraintTop_toBottomOf="@+id/textphone">
 
@@ -212,8 +213,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
         android:layout_marginTop="@dimen/margin_14dp"
+        android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cons4">
@@ -233,9 +234,9 @@
             android:id="@+id/editclock"
             android:layout_width="0dp"
             android:layout_height="44dp"
+            android:layout_marginTop="@dimen/margin_4dp"
             android:background="@drawable/box_add_plant_detail"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="@dimen/margin_4dp"
             app:layout_constraintStart_toStartOf="@+id/cons3"
             app:layout_constraintTop_toBottomOf="@+id/textclock">
 
@@ -312,10 +313,10 @@
 
     <Button
         android:id="@+id/detail_ok_btn"
+        style="@style/RoundButton.GreenMain"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        style="@style/RoundButton.GreenMain"
         android:text="완료"
         android:textSize="@dimen/text_16sp"
         app:layout_constraintBottom_toBottomOf="parent"

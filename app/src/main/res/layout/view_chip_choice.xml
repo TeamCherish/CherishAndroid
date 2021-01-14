@@ -4,9 +4,11 @@
     style="@style/Widget.MaterialComponents.Chip.Action"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
+    android:backgroundTint="@color/cherish_calendar_chip_background_color"
     android:fontFamily="@font/notosanscjkkr_regular"
+    android:gravity="center"
     android:includeFontPadding="false"
-    android:theme="@style/Widget.MaterialComponents.Chip.Action"
-    app:chipStrokeColor="@color/cherish_light_black"
-    app:chipStrokeWidth="1dp"
-    app:closeIconEnabled="true" />
+    android:textColor="@color/cherish_calendar_chip_text_color"
+    android:textSize="@dimen/text_12sp"
+    android:theme="@style/Widget.MaterialComponents.Chip.Choice"
+    app:chipStrokeColor="@color/cherish_calendar_chip_background_color" />

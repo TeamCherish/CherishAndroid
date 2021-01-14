@@ -15,8 +15,6 @@ import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityDetailPlantBinding
 import com.sopt.cherish.di.Injection
 import com.sopt.cherish.ui.datail.calendar.CalendarFragment
-import com.sopt.cherish.ui.dialog.DeletePlantDialogFragment
-import com.sopt.cherish.ui.domain.MemoListDataclass
 import com.sopt.cherish.ui.enrollment.EnrollModifyPlantFragment
 
 

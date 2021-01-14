@@ -2,12 +2,10 @@ package com.sopt.cherish.ui.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.provider.Settings.Global.getString
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.sopt.cherish.R
 import com.sopt.cherish.databinding.MyPageCherryItemBinding
 import com.sopt.cherish.remote.api.MyPageCherishData
 
@@ -20,8 +18,8 @@ class MyPageBottomSheetAdapter(private var context: Context, var data: List<MyPa
         fun bind(cherishData: MyPageCherishData) {
             binding.mypageCherryNickname.text = cherishData.nickName
             binding.mypageCherryName.text = cherishData.name
-            binding.mypageCherryLevel.text = "Lv. "+cherishData.level
-            binding.myPageDDay.text = "D-"+cherishData.dDay.toString()
+            binding.mypageCherryLevel.text = "Lv. " + cherishData.level
+            binding.myPageDDay.text = "D-" + cherishData.dDay.toString()
         }
     }
 

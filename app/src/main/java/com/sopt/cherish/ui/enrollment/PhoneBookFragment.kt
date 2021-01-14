@@ -10,7 +10,6 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
-import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sopt.cherish.R
@@ -228,9 +227,9 @@ class PhoneBookFragment : Fragment() {
 
             val cursor = contentResolver.query(phonUri, projections, where, whereValues, optionSort)
             while (cursor?.moveToNext() == true) {
-                val id = cursor?.getString(0)
-                val name = cursor?.getString(1)
-                val number = cursor?.getString(2)
+                val id = cursor.getString(0)
+                val name = cursor.getString(1)
+                val number = cursor.getString(2)
 
                 val phone = Phone(id, name, number)
 
@@ -243,9 +242,9 @@ class PhoneBookFragment : Fragment() {
             val cursor2 =
                 contentResolver.query(phonUri, projections, where2, whereValues, optionSort)
             while (cursor2?.moveToNext() == true) {
-                val id = cursor2?.getString(0)
-                val name = cursor2?.getString(1)
-                val number = cursor2?.getString(2)
+                val id = cursor2.getString(0)
+                val name = cursor2.getString(1)
+                val number = cursor2.getString(2)
 
                 val phone = Phone(id, name, number)
 
@@ -295,9 +294,9 @@ class PhoneBookFragment : Fragment() {
                 contentResolver.query(phonUri, projections, where2, whereValues, optionSort2)
 
             while (cursor?.moveToNext() == true) {
-                val id = cursor?.getString(0)
-                val name = cursor?.getString(1)
-                val number = cursor?.getString(2)
+                val id = cursor.getString(0)
+                val name = cursor.getString(1)
+                val number = cursor.getString(2)
 
                 val phone = Phone(id, name, number)
 

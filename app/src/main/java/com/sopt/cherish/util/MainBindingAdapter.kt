@@ -5,6 +5,7 @@ import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.sopt.cherish.R
 
 object MainBindingAdapter {
     @JvmStatic
@@ -24,5 +25,25 @@ object MainBindingAdapter {
             imageView.visibility = View.INVISIBLE
         else
             imageView.visibility = View.VISIBLE
+    }
+
+    @JvmStatic
+    @BindingAdapter("android:showOnClick")
+    fun circleBorderVisibility(imageView: ImageView, focus: Boolean) {
+        if (focus) {
+            imageView.visibility = View.VISIBLE
+        } else {
+            imageView.visibility = View.INVISIBLE
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("android:allowChange")
+    fun allowChange(imageView: ImageView, focus: Boolean) {
+        if (focus) {
+            imageView.setImageResource(R.drawable.icn_allow_top)
+        } else {
+            imageView.setImageResource(R.drawable.icn_allow)
+        }
     }
 }

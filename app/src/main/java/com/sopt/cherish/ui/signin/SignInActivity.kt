@@ -30,8 +30,7 @@ class SignInActivity : AppCompatActivity() {
             val intent =
                 Intent(this@SignInActivity, MainActivity::class.java)
             startActivity(intent)
-            /*
-            requestData.authAPI.postLogin(EditUserReq(email, pw))
+            /*requestData.authAPI.postLogin(EditUserReq(email, pw))
                 .enqueue(
                     object : Callback<EditUserRes> {
                         override fun onFailure(call: Call<EditUserRes>, t: Throwable) {

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="#ffffff"
     android:layout_height="match_parent">
@@ -58,10 +57,10 @@
 
     <Button
         android:id="@+id/startbtn"
-        android:layout_width="0dp"
+        style="@style/RoundButton.GreenMain"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
-        style="@style/RoundButton.GreenMain"
+        android:layout_width="0dp"
         android:text="시작하기"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/imageView2"

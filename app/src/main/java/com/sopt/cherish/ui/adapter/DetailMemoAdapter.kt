@@ -26,7 +26,8 @@ class DetailMemoAdapter(val memolist: ArrayList<MemoListDataclass>) :
     override fun onBindViewHolder(holder: DetailMemoAdapter.itemViewHolder, position: Int) {
         holder.itemView.setOnClickListener {
             itemClickListner.onClick(it, position)
-            Toast.makeText(it.context, "Clicked: ${memolist[position].date}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(it.context, "Clicked: ${memolist[position].date}", Toast.LENGTH_SHORT)
+                .show()
 
 
         }
