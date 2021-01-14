@@ -114,8 +114,7 @@ class ClockPickerDialogFragment(
                     someAction()
                 }
                 else{
-                    clocktext =
-                        clock_hour.toString() + ":" + clock_minute.value.toString() + " " + list[clock_ampm.value]
+                    clocktext = clock_hour.value.toString() + ":" + clock_minute.value.toString() + " " + list[clock_ampm.value]
                     Log.d("clock2", clocktext.toString())
 
                     someAction()

@@ -1,7 +1,10 @@
 package com.sopt.cherish.remote
 
 import com.sopt.cherish.remote.api.ResponseDetailData
-import com.sopt.cherish.remote.model.*
+import com.sopt.cherish.remote.model.RequestEnrollData
+import com.sopt.cherish.remote.model.RequestSigninData
+import com.sopt.cherish.remote.model.ResponseEnrollData
+import com.sopt.cherish.remote.model.ResponseSigninData
 import retrofit2.Call
 import retrofit2.http.*
 

@@ -36,7 +36,7 @@ class SignInActivity : AppCompatActivity() {
             val intent =
                 Intent(this@SignInActivity, MainActivity::class.java)
             startActivity(intent)
-
+            /*
             requestData.authAPI.postLogin(EditUserReq(email, pw))
                 .enqueue(
                     object : Callback<EditUserRes> {
@@ -52,15 +52,13 @@ class SignInActivity : AppCompatActivity() {
                                 it.isSuccessful
                             }?.body()
                                 ?.let { it ->
-                                    //it.userId
-                                  //  MyApplication.mySharedPreferences.setValue("userid",it.userId.toString())
                                     Log.d("isSuccess", response.body().toString())
                                     val intent =
                                         Intent(this@SignInActivity, MainActivity::class.java)
                                     startActivity(intent)
                                 }
                         }
-                    })
+                    }) */
         }
     }
 }

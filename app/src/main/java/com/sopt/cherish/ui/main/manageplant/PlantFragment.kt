@@ -66,6 +66,7 @@ class PlantFragment : Fragment() {
                                     MyPageBottomSheetAdapter(context!!, it.myPageUserData.result)
 
                                 initialRecyclerView(binding, cherishAdapter)
+
                                 cherishAdapter.notifyDataSetChanged()
 
                                 cherishAdapter.setItemClickListener(

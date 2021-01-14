@@ -7,22 +7,17 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatDialog
 import androidx.fragment.app.Fragment
-import com.bumptech.glide.RequestBuilder
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentEnrollPlantBinding
-
-import com.sopt.cherish.remote.api.MyPageUserRes
-
 import com.sopt.cherish.remote.model.RequestEnrollData
 import com.sopt.cherish.remote.model.ResponseEnrollData
+
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.dialog.ClockPickerDialogFragment
 import com.sopt.cherish.ui.dialog.WeekPickerDialogFragment
-import com.sopt.cherish.util.MyApplication
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

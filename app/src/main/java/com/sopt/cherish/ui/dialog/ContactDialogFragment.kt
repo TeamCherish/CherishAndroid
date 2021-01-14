@@ -37,8 +37,8 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
         val binding: DialogContactBinding =
             DataBindingUtil.inflate(inflater, R.layout.dialog_contact, container, false)
         binding.mainViewModel = viewModel
-        // ViewModel 사용 x
 
+        // 유저 닉네임과 상태 chip들을 서버에서 받은 값으로 전해서 표현해야한다.
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         binding.contactCall.setOnClickListener {

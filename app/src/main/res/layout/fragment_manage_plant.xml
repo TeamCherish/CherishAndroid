@@ -15,6 +15,7 @@
         android:layout_height="match_parent"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:background="#eff1f5"
+        android:id="@+id/my_page_bg"
         tools:context=".ui.main.manageplant.ManagePlantFragment">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -31,35 +32,100 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <TextView
-            android:id="@+id/my_page_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:textColor="@color/cherish_light_black"
-            android:font="@font/notosanscjkkr_medium"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/original_bar"
+            android:layout_width="match_parent"
+            android:layout_height="24dp"
+            android:visibility="visible"
             android:layout_marginTop="@dimen/margin_12dp"
-            android:layout_marginStart="@dimen/margin_16dp"
-            android:text="@string/myPage_title_text" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
-            android:id="@+id/search_box"
+            <TextView
+                android:id="@+id/my_page_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:textColor="@color/cherish_light_black"
+                android:font="@font/notosanscjkkr_medium"
+                android:textSize="16sp"
+                android:layout_marginStart="@dimen/margin_16dp"
+                android:text="@string/myPage_title_text" />
+
+            <ImageView
+                android:id="@+id/search_box"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:src="@drawable/icn_search_box"
+                android:layout_marginEnd="@dimen/margin_20dp"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:visibility="gone"
+            android:id="@+id/constraint1"
+            android:layout_width="280dp"
+            android:layout_height="44dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="18dp"
+            android:background="@drawable/search_box"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <EditText
+                android:id="@+id/editSearch"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:background="@null"
+                android:hint="친구검색"
+                android:inputType="textPersonName"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageView4"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/icn_search_box" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/cancelText"
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/icn_search_box"
-            android:layout_marginTop="@dimen/margin_16dp"
-            android:layout_marginEnd="@dimen/margin_20dp"/>
+            android:layout_marginTop="28dp"
+            android:text="취소"
+            android:textSize="16sp"
+            android:font="@font/notosanscjkkr_regular"
+            android:textColor="#aaaaaa"
+            android:layout_marginEnd="23dp"
+            app:layout_constraintStart_toEndOf="@+id/constraint1"/>
 
 
         <ImageView
             android:id="@+id/my_page_user_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="@+id/my_page_text"
-            app:layout_constraintTop_toBottomOf="@+id/my_page_text"
+            android:layout_marginStart="@dimen/margin_16dp"
+            app:layout_constraintStart_toStartOf="@+id/original_bar"
+            app:layout_constraintTop_toBottomOf="@+id/original_bar"
             android:src="@drawable/img_mypage_user"
             android:layout_marginTop="38dp" />
 
@@ -161,7 +227,7 @@
             app:layout_constraintTop_toTopOf="@+id/my_page_box"
             android:layout_marginTop="24dp"
             android:background="@color/cherish_divide_gray"
-            android:layout_marginStart="48dp"/>
+            android:layout_marginStart="48dp" />
 
         <TextView
             android:layout_width="wrap_content"

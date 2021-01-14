@@ -2,7 +2,6 @@ package com.sopt.cherish.ui.enrollment
 
 import android.os.Bundle
 import android.provider.ContactsContract
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +12,6 @@ import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentMyPagePhoneBookBinding
 import com.sopt.cherish.ui.adapter.Phone
 import com.sopt.cherish.ui.adapter.PhoneBookAdapter
-import com.sopt.cherish.util.MyApplication
 
 
 class MyPagePhoneBookFragment : Fragment() {

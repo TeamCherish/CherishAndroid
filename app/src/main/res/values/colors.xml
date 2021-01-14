@@ -23,7 +23,16 @@
     <color name="cherish_purple">#8189b3</color>
     <color name="cherish_gray">#c4c4c4</color>
     <color name="cherish_next_watering_btn_color">#5c5c5c</color>
+    <color name="cherish_calendar_chip_background_color">#ddf8ed</color>
+    <color name="cherish_calendar_chip_text_color">#19b777</color>
+
+    <color name="cherish_stuki_background_color">#abc3e2</color>
+    <color name="cherish_rosemary_background_color">#ccc1d4</color>
+    <color name="cherish_sun_background_color">#b8d8f4</color>
+    <color name="cherish_american_blue_background_color">#f8d67f</color>
+    <color name="cherish_dandelion_background_color">#8189b3</color>
 
     <color name="cherish_pass_text_gray">#c4c4c4</color>
+    <color name="cherish_my_page_bg">#eff1f5</color>
 
 </resources>
