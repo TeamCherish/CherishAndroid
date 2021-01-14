@@ -85,6 +85,7 @@ class EnrollmentPhoneActivity : AppCompatActivity(),
     override fun onTestDialogClock(dialog: DialogFragment?, someData: String?) {
         Log.d("nana", someData.toString())
         var textclock: TextView = findViewById(R.id.water_alarm_time)
+
         textclock.text = someData.toString()
     }
 

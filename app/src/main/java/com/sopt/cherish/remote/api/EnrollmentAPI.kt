@@ -1,56 +1,49 @@
-package com.sopt.cherish.remote.api
+package com.sopt.cherish.remote.model
 
-import com.google.gson.annotations.SerializedName
+
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.Headers
 import retrofit2.http.POST
 
-// Cherish 등록
-data class EnrollCherishReq(
-    @SerializedName("name") val name: String,
-    @SerializedName("nickname") val nickName: String,
-    @SerializedName("birth") val birth: String,
-    @SerializedName("phone") val phone: String,
-    @SerializedName("cycle_date") val cycleDate: Int,
-    @SerializedName("notice_time") val noticeTime: String,
-    @SerializedName("UserId") val userId: Int
+
+data class RequestEnrollData(
+    val name: String,
+    val nickname: String,
+    val birth: String,
+    val phone: String,
+    val cycle_date: Int,
+    val notice_time: String,
+    val water_notice:Boolean,
+    val UserId: Int
+
 )
 
-data class EnrollCherishRes(
-    @SerializedName("id") val id: Int,
-    @SerializedName("name") val name: String,
-    @SerializedName("explanation") val explanation: String,
-    @SerializedName("modifier") val modifier: String,
-    @SerializedName("flower_meaning") val flowerMeaning: String,
-    @SerializedName("PlantStatusId") val plantStatusId: Int,
-    @SerializedName("image_url") val imageUrl: String
-)
 
-data class EnrollCherishResult(
-    @SerializedName("success") val success: Boolean,
-    @SerializedName("message") val message: String,
-    @SerializedName("data") val plant: EnrollCherishRes
-)
-
-// Cherish 수정
-data class ReviseCherishReq(
-    @SerializedName("nickname") val nickName: String,
-    @SerializedName("birth") val birth: String,
-    @SerializedName("cycle_date") val cycleDate: Int,
-    @SerializedName("notice_time") val noticeTime: String,
-    @SerializedName("water_notice") val waterNotice: Boolean,
-    @SerializedName("id") val id: Int
-)
-
-data class ReviseCherishRes(
-    val reviseResponse: UtilResponse
-)
-
+data class ResponseEnrollData(
+    val data: Data,
+    val message: String,
+    val success: Boolean
+) {
+    data class Data(
+        val plant: Plant
+    ) {
+        data class Plant(
+            val PlantStatusId: Int,
+            val explanation: String,
+            val flower_meaning: String,
+            val id: Int,
+            val image_url: String,
+            val modifier: String,
+            val name: String,
+            val thumbnail_image_url: String
+        )
+    }
+}
 interface EnrollmentAPI {
     @POST("/cherish")
     @Headers("Content-Type:application/json")
     fun enrollCherish(
-        @Body enrollCherishReq: EnrollCherishReq
-    ): Call<EnrollCherishResult>
+        @Body enrollCherishReq: RequestEnrollData
+    ): Call<ResponseEnrollData>
 }
