@@ -44,7 +44,10 @@
         <activity android:name=".ui.enrollment.EnrollPlantActicity" />
         <activity android:name=".ui.enrollment.ResultPlantActivity" />
         <activity android:name=".ui.review.ReviewActivity" />
-        <activity android:name=".ui.signin.SignInActivity">
+        <activity android:name=".ui.signin.SignInActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
