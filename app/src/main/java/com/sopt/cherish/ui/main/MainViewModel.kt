@@ -30,9 +30,7 @@ class MainViewModel(
 
     // Gif Uri
     val normalFlowerAnimationUri = R.raw.mindle_flower_android
-
     val wateringFlowerAnimationUri = R.raw.watering_min_android
-
     val witherFlowerAnimationUri = R.raw.wither_min_android
 
     // 로그인 하는 cherish를 이용하는 유저
@@ -59,6 +57,7 @@ class MainViewModel(
     val reviewText = "${userNickName.value}님! ${cherishUser.value?.nickName}님과의"
 
     val reviewDescription = "${cherishUser.value?.nickName}과의 물주기를 기록하세요"
+
     fun fetchUsers() = viewModelScope.launch {
         try {
             _cherishUsers.postValue(mainRepository.fetchCherishUser(userId.value!!))
@@ -76,6 +75,10 @@ class MainViewModel(
     val userStatus1 = MutableLiveData<String>()
     val userStatus2 = MutableLiveData<String>()
     val userStatus3 = MutableLiveData<String>()
+
+    fun fetchCalendarDataByCherishId() = viewModelScope.launch {
+        _calendarData.postValue(mainRepository.getChipsData(cherishUserId.value!!))
+    }
 
     fun fetchCalendarData() = viewModelScope.launch {
         _calendarData.postValue(cherishUser.value?.id?.let {
