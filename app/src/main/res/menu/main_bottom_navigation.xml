@@ -7,7 +7,7 @@
 
     <item
         android:id="@+id/main_manage_plant"
-        android:icon="@drawable/main_tab_user"
+        android:icon="@drawable/icn_mypage"
         android:title="Person"/>
 
     <item
