@@ -2,6 +2,9 @@ package com.sopt.cherish.ui.main.manageplant
 
 import android.content.Intent
 import android.os.Bundle
+import android.provider.ContactsContract
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +19,9 @@ import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentManagePlantBinding
 import com.sopt.cherish.remote.api.MyPageUserRes
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
+import com.sopt.cherish.ui.adapter.Phone
 import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
+import com.sopt.cherish.ui.enrollment.MyPagePhoneBookFragment
 import com.sopt.cherish.ui.main.MainActivity
 import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.util.SimpleLogger
@@ -34,13 +39,16 @@ class ManagePlantFragment : Fragment() {
     private var isCollapsed: Boolean = true
     private val requestData = RetrofitBuilder
 
+
+    lateinit var binding: FragmentManagePlantBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding: FragmentManagePlantBinding =
+        binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_manage_plant, container, false)
 
+        //binding.editSearch.textCh
         // 예진이 userId , viewModel.userId.value 라고하면 userId 찾을 수 있어요
         SimpleLogger.logI(viewModel.userId.value.toString())
         initializeServerRequest(binding)
@@ -53,6 +61,8 @@ class ManagePlantFragment : Fragment() {
 
         return binding.root
     }
+
+
 
     private fun initializeBottomSheetBehavior(binding: FragmentManagePlantBinding) {
         val standardBottomSheetBehavior =
