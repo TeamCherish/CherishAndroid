@@ -14,7 +14,7 @@ import com.sopt.cherish.ui.adapter.Phone
 import com.sopt.cherish.ui.adapter.PhoneBookAdapter
 
 
-class MyPagePhoneBookFragment : Fragment() {
+class MyPagePhoneBookFragment() : Fragment() {
 
     // val permissions = arrayOf(Manifest.permission.READ_CONTACTS, Manifest.permission.CALL_PHONE)
     lateinit var madapter: PhoneBookAdapter

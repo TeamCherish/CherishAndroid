@@ -19,9 +19,8 @@ import com.sopt.cherish.databinding.FragmentPlantDetailPopUpSecondBinding
 
 class PlantDetailPopUpSecond : Fragment() {
 
-    private var _binding: FragmentPlantDetailPopUpSecondBinding?=null
-    private val binding get()=_binding!!
-
+    private var _binding: FragmentPlantDetailPopUpSecondBinding? = null
+    private val binding get() = _binding!!
 
 
     override fun onCreateView(
@@ -29,7 +28,7 @@ class PlantDetailPopUpSecond : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding= FragmentPlantDetailPopUpSecondBinding.inflate(inflater,container,false)
+        _binding = FragmentPlantDetailPopUpSecondBinding.inflate(inflater, container, false)
 
 
         return binding.root
@@ -37,8 +36,8 @@ class PlantDetailPopUpSecond : Fragment() {
 
     }
 
-    override fun onDestroy(){
+    override fun onDestroy() {
         super.onDestroy()
-        _binding=null
+        _binding = null
     }
 }

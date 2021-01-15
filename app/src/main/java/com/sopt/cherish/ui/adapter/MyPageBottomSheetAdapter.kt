@@ -26,7 +26,7 @@ class MyPageBottomSheetAdapter(private var context: Context, var data: List<MyPa
                 binding.myPageDDay.text = "D+" + cherishData.dDay.toString()
             else if (cherishData.dDay == 0)
                 binding.myPageDDay.text = "D-day"
-            else if(cherishData.dDay==1)
+            else if (cherishData.dDay == 1)
                 binding.myPageDDay.text = "D-" + cherishData.dDay.toString()
             else {
                 binding.myPageDDay.text = "D" + cherishData.dDay.toString()
@@ -39,7 +39,8 @@ class MyPageBottomSheetAdapter(private var context: Context, var data: List<MyPa
                 )
             }
 
-            Glide.with(binding.root.context).load(cherishData.thumbnailImageUrl).into(binding.mypageUserImg)
+            Glide.with(binding.root.context).load(cherishData.thumbnailImageUrl)
+                .into(binding.mypageUserImg)
 
         }
     }
