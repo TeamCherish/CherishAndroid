@@ -1,18 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="mainViewModel"
+            type="com.sopt.cherish.ui.dialog.PlantDetailPopUpFirst" />
+    </data>
+
 <androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
 <androidx.cardview.widget.CardView
-    android:layout_width="315dp"
-    android:layout_height="424dp"
-    android:layout_gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:id="@+id/dialog_first"
     app:cardCornerRadius="@dimen/radius_20dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:backgroundTint="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -32,7 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_13dp"
             android:fontFamily="@font/notosanscjkkr_medium"
-            android:text="@string/watering_description"
+            android:text="첫번째"
             android:gravity="center"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="@id/watering_image_graphic"
@@ -70,3 +77,4 @@
 
 </androidx.cardview.widget.CardView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

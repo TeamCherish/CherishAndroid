@@ -35,6 +35,11 @@ class DetailPlantFragment : Fragment() {
     //lateinit var memoList:ArrayList<MemoListDataclass>
 
     // private lateinit var memoList: ArrayList<MemoListDataclass>
+
+    companion object {
+        private val TAG = "DetailPlantFragment"
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,7 +51,7 @@ class DetailPlantFragment : Fragment() {
 
         binding.imageButton3detail.setOnClickListener {
 
-            (activity as DetailPlantActivity).setFragment(PlantDetailPopUpFirst())
+            PlantDetailPopUpFirst().show(parentFragmentManager, DetailPlantFragment.TAG)
             //3단계 식물 뷰 들어가는 곳
         }
         circleProgressbar = binding.test

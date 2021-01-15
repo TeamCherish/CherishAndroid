@@ -8,25 +8,34 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.cardview.widget.CardView
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import com.google.android.material.behavior.SwipeDismissBehavior
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentPlantDetailPopUpSecondBinding
-import com.sopt.cherish.ui.datail.DetailPlantActivity
 
 
 class PlantDetailPopUpSecond : DialogFragment() {
 
     private lateinit var binding: FragmentPlantDetailPopUpSecondBinding
 
+    companion object {
+        private val TAG = "PlantDetailPopUpSecond"
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_plant_detail_pop_up_second, container, false)
+        val binding: FragmentPlantDetailPopUpSecondBinding =
+            DataBindingUtil.inflate(
+                inflater,
+                R.layout.fragment_plant_detail_pop_up_second,
+                container,
+                false
+            )
 
-        binding = FragmentPlantDetailPopUpSecondBinding.bind(view)
 
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
@@ -41,7 +50,7 @@ class PlantDetailPopUpSecond : DialogFragment() {
             }
 
             override fun onDragStateChanged(i: Int) {
-                (activity as DetailPlantActivity).setFragment(PlantDetailPopUpThird())
+                PlantDetailPopUpThird().show(parentFragmentManager, PlantDetailPopUpSecond.TAG)
             }
         }
 
