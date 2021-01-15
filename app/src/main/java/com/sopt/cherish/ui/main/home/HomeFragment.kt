@@ -4,6 +4,7 @@ import android.animation.ArgbEvaluator
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,7 +26,9 @@ import com.sopt.cherish.ui.datail.DetailPlantActivity
 import com.sopt.cherish.ui.dialog.WateringDialogFragment
 import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
 import com.sopt.cherish.ui.main.MainViewModel
+import com.sopt.cherish.util.PixelUtil
 import com.sopt.cherish.util.PixelUtil.dp
+import com.sopt.cherish.util.PixelUtil.pixel
 
 
 /**
@@ -138,6 +141,9 @@ class HomeFragment : Fragment(), OnItemClickListener {
         val intent = Intent(activity, DetailPlantActivity::class.java)
         intent.putExtra("userId", userId)
         intent.putExtra("cherishId", cherishId)
+        intent.putExtra("cherishUserPhoneNumber", viewModel.cherishUser.value?.phoneNumber)
+        intent.putExtra("cherishNickname", viewModel.cherishUser.value?.nickName)
+        intent.putExtra("userNickname", viewModel.userNickName.value)
         startActivity(intent)
     }
 
@@ -173,8 +179,10 @@ class HomeFragment : Fragment(), OnItemClickListener {
                 binding.homeRemainDate.text = "D-Day"
             }
         }
+        Log.d("tete", PixelUtil.screenWidth.toString())
         Glide.with(requireContext())
             .load(viewModel.cherishUser.value!!.homeMainBackgroundImageUrl)
+            .override(PixelUtil.screenWidth.pixel, PixelUtil.screenHeight.pixel)
             .into(binding.homePlantImage)
     }
 

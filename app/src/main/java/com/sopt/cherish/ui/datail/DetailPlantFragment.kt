@@ -21,7 +21,7 @@ import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.adapter.DetailMemoAdapter
 import com.sopt.cherish.ui.datail.calendar.CalendarFragment
 import com.sopt.cherish.ui.dialog.AlertPlantDialogFragment
-import com.sopt.cherish.ui.dialog.WateringDialogFragment
+import com.sopt.cherish.ui.dialog.DetailWateringDialogFragment
 import com.sopt.cherish.ui.domain.MemoListDataclass
 import retrofit2.Call
 import retrofit2.Callback
@@ -65,7 +65,10 @@ class DetailPlantFragment : Fragment() {
 
         binding.buttonWater.setOnClickListener {
             // 이거 매개변수 바꿔야 함
-            WateringDialogFragment(cherishid).show(parentFragmentManager, "DetailPlantFragment")
+            DetailWateringDialogFragment(cherishid).show(
+                parentFragmentManager,
+                "DetailPlantFragment"
+            )
         }
 
         Log.d("gogo", cherishid.toString())

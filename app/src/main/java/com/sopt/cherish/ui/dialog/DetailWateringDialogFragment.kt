@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.sopt.cherish.R
-import com.sopt.cherish.databinding.DialogWateringBinding
+import com.sopt.cherish.databinding.DialogDetailPlantWateringBinding
 import com.sopt.cherish.util.DialogUtil
 
 /**
@@ -16,7 +16,8 @@ import com.sopt.cherish.util.DialogUtil
  * popUp_Watering
  */
 
-class WateringDialogFragment(private val cherishId: Int) : DialogFragment(), View.OnClickListener {
+class DetailWateringDialogFragment(private val cherishId: Int) : DialogFragment(),
+    View.OnClickListener {
     private val TAG = "WateringDialog"
 
     override fun onCreateView(
@@ -24,23 +25,25 @@ class WateringDialogFragment(private val cherishId: Int) : DialogFragment(), Vie
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view = inflater.inflate(R.layout.dialog_watering, container, false)
-        val binding = DialogWateringBinding.bind(view)
+        val view = inflater.inflate(R.layout.dialog_detail_plant_watering, container, false)
+        val binding = DialogDetailPlantWateringBinding.bind(view)
 
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        binding.wateringAcceptBtn.setOnClickListener {
+        binding.detailPlantWateringAcceptBtn.setOnClickListener {
             navigateContact()
         }
 
-        binding.wateringNextTimeBtn.setOnClickListener {
-            navigateNextTimeContact()
-        }
         return binding.root
     }
 
     private fun navigateContact() {
-        parentFragmentManager.let { fm -> ContactDialogFragment().show(fm, TAG) }
+        parentFragmentManager.let { fm ->
+            DetailPlantContactDialogFragment(cherishId).show(
+                fm,
+                TAG
+            )
+        }
         dismiss()
     }
 
