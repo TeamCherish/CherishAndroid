@@ -21,10 +21,8 @@ import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.adapter.DetailMemoAdapter
 import com.sopt.cherish.ui.datail.calendar.CalendarFragment
 import com.sopt.cherish.ui.dialog.AlertPlantDialogFragment
-import com.sopt.cherish.ui.dialog.PlantDetailPopUpFirst
 import com.sopt.cherish.ui.dialog.WateringDialogFragment
 import com.sopt.cherish.ui.domain.MemoListDataclass
-import com.sopt.cherish.ui.enrollment.EnrollModifyPlantFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
