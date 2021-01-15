@@ -94,8 +94,6 @@ class MainActivity : AppCompatActivity() {
                 if (PermissionUtil.isCheckedReadContactsPermission(this)) {
                     transAction.replace(
                         R.id.my_page_bottom_container, MyPagePhoneBookFragment()
-
-
                     )
                         .commit()
                 } else {
