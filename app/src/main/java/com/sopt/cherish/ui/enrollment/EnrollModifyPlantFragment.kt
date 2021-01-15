@@ -20,7 +20,7 @@ class EnrollModifyPlantFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_enroll_modify_plant, container, false)
 
 
-
+        "cherishidgo_delete"
 
 
 

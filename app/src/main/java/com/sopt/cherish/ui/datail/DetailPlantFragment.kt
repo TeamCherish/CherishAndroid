@@ -58,7 +58,7 @@ class DetailPlantFragment : Fragment() {
 
         binding.imageButton3detail.setOnClickListener {
 
-            AlertPlantDialogFragment().show(parentFragmentManager, DetailPlantFragment.TAG)
+            AlertPlantDialogFragment(cherishid).show(parentFragmentManager, DetailPlantFragment.TAG)
             //3단계 식물 뷰 들어가는 곳
         }
         circleProgressbar = binding.test

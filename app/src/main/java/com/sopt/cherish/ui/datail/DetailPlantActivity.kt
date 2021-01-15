@@ -103,7 +103,7 @@ class DetailPlantActivity : AppCompatActivity() {
                 transaction.replace(R.id.fragment_detail, EnrollModifyPlantFragment().apply {
                     arguments = Bundle().apply {
 
-                        putInt("cherishidgo_delete", intent.getIntExtra("cherishId", 100))
+                        putInt("cherishidgo_delete",cherishid)
 
                     }
                 })
