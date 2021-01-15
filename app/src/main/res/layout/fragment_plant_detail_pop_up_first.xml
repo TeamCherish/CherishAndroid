@@ -8,9 +8,6 @@
             type="com.sopt.cherish.ui.dialog.PlantDetailPopUpFirst" />
     </data>
 
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
 
 <androidx.cardview.widget.CardView
     android:layout_width="match_parent"
@@ -23,58 +20,30 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/watering_image_graphic"
+        <TextView
+            android:id="@+id/flower_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_60dp"
-            android:src="@drawable/img_popup_gaphic"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="20sp"
+            android:text="따뜻한 민들레"
+            android:font="@font/notosanscjkkr_bold"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="49dp"/>
 
-        <TextView
-            android:id="@+id/watering_description"
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_13dp"
-            android:fontFamily="@font/notosanscjkkr_medium"
-            android:text="첫번째"
-            android:gravity="center"
-            android:textSize="14sp"
-            app:layout_constraintEnd_toEndOf="@id/watering_image_graphic"
-            app:layout_constraintStart_toStartOf="@id/watering_image_graphic"
-            app:layout_constraintTop_toBottomOf="@id/watering_image_graphic" />
+            app:layout_constraintStart_toStartOf="@+id/flower_name"
+            app:layout_constraintEnd_toEndOf="@+id/flower_name"
+            app:layout_constraintTop_toBottomOf="@+id/flower_name"
+            android:layout_marginTop="29dp"
+            android:id="@+id/flower_img"/>
 
-        <Button
-            android:id="@+id/watering_accept_btn"
-            style="@style/RoundButton.GreenMain"
-            android:layout_width="280dp"
-            android:layout_height="48dp"
-            android:layout_marginStart="@dimen/margin_18dp"
-            android:layout_marginTop="37dp"
-            android:layout_marginEnd="@dimen/margin_18dp"
-            android:text="@string/watering"
-            app:layout_constraintEnd_toEndOf="@id/watering_image_graphic"
-            app:layout_constraintStart_toStartOf="@id/watering_image_graphic"
-            app:layout_constraintTop_toBottomOf="@id/watering_description" />
 
-        <TextView
-            android:id="@+id/watering_next_time_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="17dp"
-            android:layout_marginBottom="28dp"
-            android:fontFamily="@font/notosanscjkkr_regular"
-            android:text="@string/next_time"
-            android:textColor="#404040"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/watering_image_graphic"
-            app:layout_constraintStart_toStartOf="@id/watering_image_graphic"
-            app:layout_constraintTop_toBottomOf="@id/watering_accept_btn" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
