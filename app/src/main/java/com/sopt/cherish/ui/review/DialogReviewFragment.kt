@@ -98,6 +98,7 @@ class DialogReviewFragment : DialogFragment() {
             delay(2000)
             // 만약에 홈 프라그먼트에서 물 주는 애니메이션을 해야한다 그러면 finishActivity로 변경해야할 수도 있음
             dismiss()
+            activity?.onBackPressed()
         }
     }
 
@@ -126,12 +127,15 @@ class DialogReviewFragment : DialogFragment() {
                 )
             )
             showLoadingDialog()
+
+
         }
     }
 
     private fun ignoreSendReviewToServer(binding: ActivityReviewBinding) {
         binding.reviewIgnoreAccept.setOnClickListener {
             // 건너 뛰는 것도 뭐~ 그냥 main으로 넘어오면 됨
+
             dismiss()
 
 
