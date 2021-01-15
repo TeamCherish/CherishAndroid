@@ -26,7 +26,6 @@ import retrofit2.Response
 
 class PlantFragment : Fragment() {
 
-    private val viewModel: MainViewModel by activityViewModels()
     private var _binding: FragmentPlantBinding? = null
     private val binding get() = _binding!!
     private lateinit var cherishAdapter: MyPageBottomSheetAdapter
