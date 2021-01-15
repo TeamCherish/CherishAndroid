@@ -37,6 +37,7 @@ class DetailPlantFragment : Fragment() {
 
     //lateinit var memoList:ArrayList<MemoListDataclass>
     var cherishid = 0
+    var plantId=1
     // private lateinit var memoList: ArrayList<MemoListDataclass>
 
     companion object {
@@ -54,11 +55,13 @@ class DetailPlantFragment : Fragment() {
 
         cherishid = arguments?.getInt("cherishidgo")!!
         Log.d("0cherishiddetailplant", cherishid.toString())
+        plantId=arguments?.getInt("plantId")!!
+        Log.d("final plantId: ",plantId.toString())
 
 
         binding.imageButton3detail.setOnClickListener {
 
-            AlertPlantDialogFragment().show(parentFragmentManager, DetailPlantFragment.TAG)
+            AlertPlantDialogFragment(cherishid).show(parentFragmentManager, DetailPlantFragment.TAG)
             //3단계 식물 뷰 들어가는 곳
         }
         circleProgressbar = binding.test
