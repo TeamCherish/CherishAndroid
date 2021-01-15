@@ -100,7 +100,7 @@ class DetailPlantActivity : AppCompatActivity() {
             }
             R.id.setting -> {
                 val transaction = supportFragmentManager.beginTransaction()
-                transaction.replace(R.id.fragment_detail, EnrollModifyPlantFragment().apply {
+                transaction.replace(R.id.fragment_detail, EnrollModifyPlantFragment(cherishid).apply {
                     arguments = Bundle().apply {
 
                         putInt("cherishidgo_delete",cherishid)

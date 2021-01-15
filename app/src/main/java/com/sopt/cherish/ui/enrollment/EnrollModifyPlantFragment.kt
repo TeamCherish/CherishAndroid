@@ -4,21 +4,25 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import com.sopt.cherish.R
+import com.sopt.cherish.databinding.FragmentEnrollModifyPlantBinding
 import com.sopt.cherish.ui.datail.DetailPlantActivity
 import com.sopt.cherish.ui.dialog.DeletePlantDialogFragment
 
 
-class EnrollModifyPlantFragment : Fragment() {
+class EnrollModifyPlantFragment(cherish:Int) : Fragment() {
 
-
+    var modifycherish=cherish
+    lateinit var binding: FragmentEnrollModifyPlantBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         setHasOptionsMenu(true)
-        val view = inflater.inflate(R.layout.fragment_enroll_modify_plant, container, false)
 
+
+        val view = inflater.inflate(R.layout.fragment_enroll_modify_plant, container, false)
+        binding= FragmentEnrollModifyPlantBinding.bind(view)
 
         "cherishidgo_delete"
 
@@ -32,7 +36,8 @@ class EnrollModifyPlantFragment : Fragment() {
 
 
 
-        return view
+
+        return binding.root
     }
 
 
@@ -65,7 +70,7 @@ class EnrollModifyPlantFragment : Fragment() {
             }
             R.id.trash -> {
                 val deletedialog =
-                    DeletePlantDialogFragment(R.layout.fragment_delete_plant_dialog).show(
+                    DeletePlantDialogFragment(R.layout.fragment_delete_plant_dialog,modifycherish).show(
                         parentFragmentManager, "asdf"
                     )
                 return true

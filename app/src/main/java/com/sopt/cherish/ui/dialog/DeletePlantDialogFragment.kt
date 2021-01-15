@@ -20,12 +20,12 @@ import retrofit2.Response
 
 class DeletePlantDialogFragment(
     @LayoutRes
-    private val layoutResId: Int
+    private val layoutResId: Int,cherishid:Int
 ) : DialogFragment() {
 
     private lateinit var binding: FragmentDeletePlantDialogBinding
     private val requestData = RetrofitBuilder
-
+    val deletecherish=cherishid
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,9 +41,8 @@ class DeletePlantDialogFragment(
 
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         binding.buttonDeletePlant.setOnClickListener {
-            val aaa = arguments?.getInt("plantidgo")
-            if (aaa != null) {
-                requestData.deleteAPI.plantdelete(aaa)
+
+                requestData.deleteAPI.plantdelete(deletecherish)
                     .enqueue(
                         object : Callback<ResponseDeleteData> {
                             override fun onFailure(call: Call<ResponseDeleteData>, t: Throwable) {
@@ -69,10 +68,12 @@ class DeletePlantDialogFragment(
                             }
                         }
                     )
+
+
             }
 
 
-        }
+
 
 
         // testDialogFragmentListener = activity as TestDialogFragmentListener

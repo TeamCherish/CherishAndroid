@@ -34,7 +34,7 @@ class DetailPlantFragment : Fragment() {
     private val viewModel: DetailPlantViewModel by activityViewModels()
     private val requestData = RetrofitBuilder
     lateinit var memoList: ArrayList<MemoListDataclass>
-
+     var plant_id=0
     //lateinit var memoList:ArrayList<MemoListDataclass>
     var cherishid = 0
     // private lateinit var memoList: ArrayList<MemoListDataclass>
@@ -56,11 +56,7 @@ class DetailPlantFragment : Fragment() {
         Log.d("0cherishiddetailplant", cherishid.toString())
 
 
-        binding.imageButton3detail.setOnClickListener {
 
-            AlertPlantDialogFragment(cherishid).show(parentFragmentManager, DetailPlantFragment.TAG)
-            //3단계 식물 뷰 들어가는 곳
-        }
         circleProgressbar = binding.test
         val animationDuration = 2000
 
@@ -108,7 +104,8 @@ class DetailPlantFragment : Fragment() {
                                     .load(it.data.plant_thumbnail_image_url)
                                     .into(binding.imageViewDetailUrl)
 
-
+                                plant_id=it.data.plantId
+                                Log.d("fdfdfd",it.data.plantId.toString())
 
 
                                 circleProgressbar.setProgressWithAnimation(
@@ -221,7 +218,11 @@ class DetailPlantFragment : Fragment() {
         // 유저 원형 프로그레스바 보여주는 부분
 
         // memolist 어댑터 연결 부분
+        binding.imageButton3detail.setOnClickListener {
 
+            AlertPlantDialogFragment(plant_id).show(parentFragmentManager, DetailPlantFragment.TAG)
+            //3단계 식물 뷰 들어가는 곳
+        }
         return binding.root
     }
 
