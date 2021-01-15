@@ -14,7 +14,6 @@ import com.sopt.cherish.ui.main.manageplant.ManagePlantFragment
 import com.sopt.cherish.ui.main.manageplant.PlantFragment
 import com.sopt.cherish.ui.main.setting.SettingFragment
 import com.sopt.cherish.util.PermissionUtil
-import com.sopt.cherish.util.PixelRatio
 import com.sopt.cherish.util.SimpleLogger
 
 
@@ -27,8 +26,10 @@ class MainActivity : AppCompatActivity() {
         val binding: ActivityMainBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_main)
 
-        Log.d("hllll", PixelRatio(application).screenHeight.toString())
         initializeViewModel()
+        viewModel.fetchUsers()
+        viewModel.cherishUsers.observe(this) {
+        }
         initializeViewModelData()
         showInitialFragment()
         setBottomNavigationListener(binding)

@@ -54,6 +54,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
 
         val homeCherryListAdapter = HomeCherryListAdapter(this)
         viewModel.fetchUsers()
+
         initializeView()
         initializeBottomSheetBehavior()
         setAdapterData(homeCherryListAdapter)
