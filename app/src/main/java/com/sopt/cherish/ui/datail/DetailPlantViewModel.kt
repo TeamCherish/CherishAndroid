@@ -38,6 +38,6 @@ class DetailPlantViewModel(
         _calendarData.postValue(detailPlantRepository.fetchCalendarData(dummyCherishId))
     }
 
-    // singleEvent
     var calendarAllowChange = true
+
 }

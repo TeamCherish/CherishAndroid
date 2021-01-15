@@ -129,7 +129,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
-                    android:id="@+id/calendarView_memo_create_btn"
+                    android:id="@+id/calendarView_memo_revise_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_pencil"
@@ -141,7 +141,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:foregroundGravity="center"
-                    app:layout_constraintTop_toBottomOf="@id/calendarView_memo_create_btn" />
+                    app:layout_constraintTop_toBottomOf="@id/calendarView_memo_revise_btn" />
 
                 <TextView
                     android:id="@+id/review_all_text"
@@ -156,7 +156,6 @@
                     android:id="@+id/review_back"
                     android:layout_width="match_parent"
                     android:layout_height="15dp"
-                    android:allowChange="@{detailPlantViewModel.calendarAllowChange}"
                     android:src="@drawable/icn_allow"
                     app:layout_constraintEnd_toEndOf="@id/review_all_text"
                     app:layout_constraintStart_toStartOf="@id/review_all_text"

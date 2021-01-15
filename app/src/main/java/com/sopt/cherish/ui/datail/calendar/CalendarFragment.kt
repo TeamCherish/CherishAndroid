@@ -15,12 +15,14 @@ import com.sopt.cherish.ui.datail.DetailPlantViewModel
 import com.sopt.cherish.util.DateUtil
 import com.sopt.cherish.util.extension.FlexBoxExtension.addChipCalendar
 import com.sopt.cherish.util.extension.FlexBoxExtension.clearChips
+import com.sopt.cherish.util.extension.shortToast
 import com.sopt.cherish.view.calendar.DotDecorator
 
 class CalendarFragment : Fragment() {
+
     private val viewModel: DetailPlantViewModel by activityViewModels()
 
-    // keyboard Boolean 디자이너와 얘기 끝나면 제대로 정해서 할 예정
+    // todo : SingleLiveEvent 공부하기
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,7 +35,6 @@ class CalendarFragment : Fragment() {
         viewModel.fetchCalendarData()
         binding.detailPlantViewModel = viewModel
         initializeCalendar(binding)
-
 
         return binding.root
     }
@@ -70,9 +71,28 @@ class CalendarFragment : Fragment() {
 
     private fun initializeCalendar(binding: FragmentCalendarBinding) {
         allowCalendarCache(binding)
-        takeNotes(binding)
+        reviseNotes(binding)
+        changeCalendarMode(binding)
         addDecorator(binding)
         addDateClickListener(binding)
+    }
+
+    private fun changeCalendarMode(binding: FragmentCalendarBinding) {
+        binding.reviewBack.setOnClickListener { view ->
+            // 클릭 시 화살표의 모양이 왔다갔다 하면서 바뀌도록 하면 됨
+            // review button 이 눌림에 따라
+            // textview의 ellipsize 와 maxLine의 수를 바꿔주면 된다.
+            // SingleLiveData로 제어를 해야하는데 지금 귀찮음 나중에 하자
+            if (viewModel.calendarAllowChange) {
+                viewModel.calendarAllowChange = false
+                binding.reviewBack.setImageResource(R.drawable.icn_allow)
+                binding.calendarView.changeCalendarModeWeeks()
+            } else {
+                viewModel.calendarAllowChange = true
+                binding.reviewBack.setImageResource(R.drawable.icn_allow_top)
+                binding.calendarView.changeCalendarModeMonths()
+            }
+        }
     }
 
     private fun allowCalendarCache(binding: FragmentCalendarBinding) {
@@ -100,25 +120,11 @@ class CalendarFragment : Fragment() {
         }
     }
 
-    private fun takeNotes(binding: FragmentCalendarBinding) {
-        // 메모를 할 수 있게하다 라는 뜻을 원하는데 마땅히 떠오르는게 없어서 일단 이케 적음
-        binding.calendarViewMemoCreateBtn.setOnClickListener { view ->
-            binding.calendarView.changeCalendarModeMonths()
-        }
-        binding.reviewBack.setOnClickListener { view ->
-            // 클릭 시 화살표의 모양이 왔다갔다 하면서 바뀌도록 하면 됨
-            // review button 이 눌림에 따라
-            // textview의 ellipsize 와 maxLine의 수를 바꿔주면 된다.
-            // SingleLiveData로 제어를 해야하는데 지금 귀찮음 나중에 하자
-            if (viewModel.calendarAllowChange) {
-                viewModel.calendarAllowChange = false
-                binding.reviewBack.setImageResource(R.drawable.icn_allow)
-                binding.calendarView.changeCalendarModeWeeks()
-            } else {
-                viewModel.calendarAllowChange = true
-                binding.reviewBack.setImageResource(R.drawable.icn_allow_top)
-                binding.calendarView.changeCalendarModeMonths()
-            }
+    // 메모 수정
+    private fun reviseNotes(binding: FragmentCalendarBinding) {
+        binding.calendarViewMemoReviseBtn.setOnClickListener { view ->
+            // 2순위라서 구현 안해~
+            shortToast(requireContext(), "아직 미구현")
         }
     }
 
@@ -126,14 +132,21 @@ class CalendarFragment : Fragment() {
         binding.calendarView.setOnDateChangedListener { widget, date, selected ->
             showDate(binding, date)
             binding.calendarViewChipLayout.clearChips()
-            viewModel.calendarData.observe(viewLifecycleOwner) {
+            viewModel.calendarData.observe(viewLifecycleOwner) { calendarRes ->
                 val wateredDayList = mutableListOf<CalendarDay?>()
                 val waterDayMemoList = mutableListOf<String?>()
                 val waterDayChipList = mutableListOf<List<String?>>()
-                it.waterData.calendarData.forEach {
-                    wateredDayList.add(DateUtil.convertDateToCalendarDay(it.wateredDate))
-                    waterDayMemoList.add(it.review)
-                    waterDayChipList.add(listOf(it.userStatus1, it.userStatus2, it.userStatus3))
+
+                calendarRes.waterData.calendarData.forEach { calendarData ->
+                    wateredDayList.add(DateUtil.convertDateToCalendarDay(calendarData.wateredDate))
+                    waterDayMemoList.add(calendarData.review)
+                    waterDayChipList.add(
+                        listOf(
+                            calendarData.userStatus1,
+                            calendarData.userStatus2,
+                            calendarData.userStatus3
+                        )
+                    )
                 }
                 // 함수화 해야합니다.
                 for (i in 0 until wateredDayList.size) {

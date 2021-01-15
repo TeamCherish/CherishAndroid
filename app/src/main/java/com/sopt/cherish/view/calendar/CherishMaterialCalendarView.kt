@@ -25,6 +25,7 @@ class CherishMaterialCalendarView constructor(context: Context, attrs: Attribute
         }
     }
 
+    // todo : 실기기로 할 때 dp값 수정해야함 , 좀 작은 느낌임
     fun changeCalendarModeMonths() {
         CoroutineScope(Dispatchers.Main).launch {
             state().edit().setCalendarDisplayMode(CalendarMode.MONTHS).commit()
