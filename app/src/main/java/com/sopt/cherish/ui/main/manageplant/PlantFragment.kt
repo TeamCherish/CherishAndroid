@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sopt.cherish.databinding.FragmentPlantBinding
+import com.sopt.cherish.remote.api.MyPageCherishData
 import com.sopt.cherish.remote.api.MyPageUserRes
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.adapter.MyPageBottomSheetAdapter
@@ -32,6 +33,8 @@ class PlantFragment : Fragment() {
     private val requestData = RetrofitBuilder
     private val viewModel: MainViewModel by activityViewModels()
 
+    lateinit var list: MutableList<MyPageCherishData>
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,6 +46,11 @@ class PlantFragment : Fragment() {
         setAdapterData()
 
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setAdapterData()
     }
 
     private fun setAdapterData() {
@@ -63,13 +71,14 @@ class PlantFragment : Fragment() {
                         }?.body()
                             ?.let { it ->
                                 Log.d("list", it.myPageUserData.result.toString())
+
                                 cherishAdapter =
-                                    MyPageBottomSheetAdapter(context!!, it.myPageUserData.result)
+                                    MyPageBottomSheetAdapter(requireContext(),it.myPageUserData.result)
+
+
 
                                 initialRecyclerView(binding, cherishAdapter)
-
-                                cherishAdapter.notifyDataSetChanged()
-
+6
                                 cherishAdapter.setItemClickListener(
                                     object : MyPageBottomSheetAdapter.ItemClickListener {
                                         override fun onClick(view: View, position: Int) {
@@ -104,6 +113,7 @@ class PlantFragment : Fragment() {
 
         binding.mypageCherryList.apply {
             adapter = mainAdapter
+
             layoutManager = LinearLayoutManager(context)
         }
     }
