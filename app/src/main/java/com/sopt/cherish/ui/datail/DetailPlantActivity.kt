@@ -1,5 +1,7 @@
 package com.sopt.cherish.ui.datail
 
+import android.app.Activity
+import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
 import android.util.Log
@@ -39,7 +41,7 @@ class DetailPlantActivity : AppCompatActivity() {
         binding = ActivityDetailPlantBinding.inflate(layoutInflater)
 
 
-        //Log.d("qwer",intent.getIntExtra("plantId",100).toString())
+        Log.d("qwer", intent.getIntExtra("plantId", 100).toString())
         cherishid = intent.getIntExtra("cherishId", 0)
         Log.d("qwer", cherishid.toString())
 
@@ -160,6 +162,17 @@ class DetailPlantActivity : AppCompatActivity() {
         }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == Activity.RESULT_OK) {
+            when (requestCode) {
+                100 -> {
+                    Log.d("check", data!!.getStringExtra("cherishId").toString())
+                }
+            }
+        }
+    }
 
 }
 

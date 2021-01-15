@@ -33,6 +33,7 @@ class ContactDialogFragment(cheish: Int) : DialogFragment(), View.OnClickListene
     private val viewModel: MainViewModel by activityViewModels()
 
     //이거 갖다가 쓰면 됨
+    // 뷰모델을 생성할 수 없는 에러가 있음 근ㄷ ㅔ이거 인자로 와도 ㅗ디는건지
     var cherishid = cheish
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,9 +44,12 @@ class ContactDialogFragment(cheish: Int) : DialogFragment(), View.OnClickListene
             DataBindingUtil.inflate(inflater, R.layout.dialog_contact, container, false)
         // cherishid= arguments?.getInt("cherishid_finish")!!
         Log.d("chericontact", cherishid.toString())
-
-
-        viewModel.fetchCalendarData()
+        if (cherishid != null) {
+            viewModel.cherishUserId.value = cherishid
+            viewModel.fetchCalendarDataByCherishId()
+        } else {
+            viewModel.fetchCalendarData()
+        }
         binding.mainViewModel = viewModel
         initializeChip(binding)
 
