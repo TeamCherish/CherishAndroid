@@ -35,7 +35,8 @@ class DetailPlantFragment : Fragment() {
     private lateinit var circleProgressbar: CircleProgressbar
     private val viewModel: DetailPlantViewModel by activityViewModels()
     private val requestData = RetrofitBuilder
-    lateinit var memoList:ArrayList<MemoListDataclass>
+    lateinit var memoList: ArrayList<MemoListDataclass>
+
     //lateinit var memoList:ArrayList<MemoListDataclass>
     var cherishid = 0
     // private lateinit var memoList: ArrayList<MemoListDataclass>
@@ -94,7 +95,7 @@ class DetailPlantFragment : Fragment() {
                                 binding.textViewPlantname.text = it.data.plant_name.toString()
                                 binding.textViewDday.text = "D-" + it.data.dDay.toString()
                                 binding.textViewDuration.text = it.data.duration.toString()
-                                if(it.data.birth.toString()=="Invalid Date"){
+                                if (it.data.birth.toString() == "Invalid Date") {
                                     binding.textViewBirth.text = "미입력"
 
                                 }
@@ -110,7 +111,7 @@ class DetailPlantFragment : Fragment() {
 
 
                                 circleProgressbar.setProgressWithAnimation(
-                                    it.data.gage.toFloat()*100,
+                                    it.data.gage.toFloat() * 100,
                                     animationDuration
                                 )
 
@@ -121,7 +122,7 @@ class DetailPlantFragment : Fragment() {
 
 
 
-                                if(it.data.reviews.isEmpty()) {
+                                if (it.data.reviews.isEmpty()) {
 
 
                                     var memoList = arrayListOf<MemoListDataclass>(
@@ -164,8 +165,7 @@ class DetailPlantFragment : Fragment() {
                                         LinearLayoutManager(context)
                                     binding.recyclerDetail.setHasFixedSize(true)
 
-                                }
-                                else{
+                                } else {
 
                                     var memoList = arrayListOf<MemoListDataclass>(
 
@@ -207,15 +207,10 @@ class DetailPlantFragment : Fragment() {
                                         LinearLayoutManager(context)
                                     binding.recyclerDetail.setHasFixedSize(true)
                                 }
-
-
 
 
                                 //memoList.add(MemoListDataclass(it.data.reviews[0].water_date, it.data.reviews[0].review))
                                 //memoList.add(MemoListDataclass(it.data.reviews[1].water_date, it.data.reviews[1].review))
-
-
-
 
 
                             }

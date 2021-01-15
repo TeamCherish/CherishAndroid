@@ -63,7 +63,6 @@ class ManagePlantFragment : Fragment() {
     }
 
 
-
     private fun initializeBottomSheetBehavior(binding: FragmentManagePlantBinding) {
         val standardBottomSheetBehavior =
             BottomSheetBehavior.from(binding.homeStandardBottomSheet)
