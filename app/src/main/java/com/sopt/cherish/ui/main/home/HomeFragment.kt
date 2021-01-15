@@ -144,7 +144,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
     // recyclerview Item click event
     override fun onItemClick(itemBinding: MainCherryItemBinding, position: Int) {
         viewModel.cherishUsers.observe(viewLifecycleOwner) {
-            // contact Dialog
+            // contact Dialog , 여기서 분기처리하면 될거임~~~
             viewModel.cherishUser.value = it.userData.userList[position]
             it.userData.userList[position].apply {
                 initializeViewOnItemClick(this)
@@ -173,10 +173,6 @@ class HomeFragment : Fragment(), OnItemClickListener {
                 binding.homeRemainDate.text = "D-Day"
             }
         }
-
-        // 서버에서 url을 받아서 파싱 할거임
-        // 식물의 성장단계 3개 또한 그렇게 할거임
-        // 그럼 디자인에서 배경까지 묶은 이미지를 url로 파싱해서 주기로 함!
         Glide.with(requireContext())
             .load(viewModel.cherishUser.value!!.homeMainBackgroundImageUrl)
             .override(360.dp, 800.dp)
