@@ -175,7 +175,6 @@ class HomeFragment : Fragment(), OnItemClickListener {
         }
         Glide.with(requireContext())
             .load(viewModel.cherishUser.value!!.homeMainBackgroundImageUrl)
-            .override(360.dp, 800.dp)
             .into(binding.homePlantImage)
     }
 
