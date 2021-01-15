@@ -74,6 +74,11 @@ class HomeFragment : Fragment(), OnItemClickListener {
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.fetchUsers()
+    }
+
     private fun initializeBottomSheetBehavior() {
         standardBottomSheetBehavior =
             BottomSheetBehavior.from(binding.homeStandardBottomSheet)
@@ -177,7 +182,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
         }
         Glide.with(requireContext())
             .asGif()
-            .load(viewModel.cherishUser.value!!.plantAnimationUrl)
+            .load(viewModel.cherishUser.value!!.homeMainBackgroundImageUrl)
             .override(PixelUtil.screenWidth.pixel, PixelUtil.screenHeight.pixel)
             .into(binding.homePlantImage)
     }
