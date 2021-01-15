@@ -49,9 +49,8 @@ class HomeFragment : Fragment(), OnItemClickListener {
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         binding.mainViewModel = viewModel
-
-        val homeCherryListAdapter = HomeCherryListAdapter(this)
         viewModel.fetchUsers()
+        val homeCherryListAdapter = HomeCherryListAdapter(this)
 
         initializeView()
         initializeBottomSheetBehavior()
@@ -72,11 +71,6 @@ class HomeFragment : Fragment(), OnItemClickListener {
             navigateDetailPlant(viewModel.userId.value!!, viewModel.cherishUser.value?.id!!)
         }
         return binding.root
-    }
-
-    override fun onResume() {
-        super.onResume()
-        viewModel.fetchUsers()
     }
 
     private fun initializeBottomSheetBehavior() {
@@ -181,7 +175,6 @@ class HomeFragment : Fragment(), OnItemClickListener {
             }
         }
         Glide.with(requireContext())
-            .asGif()
             .load(viewModel.cherishUser.value!!.homeMainBackgroundImageUrl)
             .override(PixelUtil.screenWidth.pixel, PixelUtil.screenHeight.pixel)
             .into(binding.homePlantImage)

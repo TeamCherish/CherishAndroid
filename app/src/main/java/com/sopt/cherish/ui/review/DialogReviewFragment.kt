@@ -88,7 +88,6 @@ class DialogReviewFragment : DialogFragment() {
         // 이녀석을 호출하는게 맞는지 아닌지 확인해야함
         /*viewModel.fetchUsers()*/
         CustomDialogFragment(R.layout.dialog_loading).show(parentFragmentManager, TAG)
-        // 만약에 홈 프라그먼트에서 물 주는 애니메이션을 해야한다 그러면 finishActivity로 변경해야할 수도 있음
         dismiss()
     }
 
