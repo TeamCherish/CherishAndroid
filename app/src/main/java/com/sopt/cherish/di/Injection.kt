@@ -50,7 +50,7 @@ object Injection {
     }
 
     private fun provideDetailPlantRepository(): DetailPlantRepository {
-        return DetailPlantRepository(provideCalendarAPI())
+        return DetailPlantRepository(provideCalendarAPI(), provideReviewAPI())
     }
 
     fun provideDetailViewModelFactory(): ViewModelProvider.Factory {

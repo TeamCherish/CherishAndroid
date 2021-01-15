@@ -12,13 +12,13 @@ import com.sopt.cherish.databinding.FragmentAlertPlantDialogBinding
 import com.sopt.cherish.ui.adapter.DialogViewPagerAdapter
 
 
-class AlertPlantDialogFragment(plantId :Int) : DialogFragment(), View.OnClickListener {
+class AlertPlantDialogFragment(plantId: Int) : DialogFragment(), View.OnClickListener {
 
     private lateinit var viewpagerAdapter: DialogViewPagerAdapter
     private var _binding: FragmentAlertPlantDialogBinding? = null
     private val binding get() = _binding!!
 
-    var plantId=plantId
+    var plantId = plantId
 
 
 
@@ -32,10 +32,10 @@ class AlertPlantDialogFragment(plantId :Int) : DialogFragment(), View.OnClickLis
 
         //var cherishId:Int=cherishid
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        Log.d("plantid",plantId.toString())
+        Log.d("plantid", plantId.toString())
         _binding = FragmentAlertPlantDialogBinding.inflate(inflater, container, false)
 
-        Log.d("cherishId in fragment",plantId.toString())
+        Log.d("cherishId in fragment", plantId.toString())
         viewpagerAdapter = DialogViewPagerAdapter(childFragmentManager)
         viewpagerAdapter.fragments = listOf(
             PlantDetailPopUpFirst(plantId),

@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="detailPlantViewModel"
+            type="com.sopt.cherish.ui.datail.DetailPlantViewModel" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/radius_20dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/white">
+
+            <ImageView
+                android:id="@+id/detail_plant_contact_image_graphic"
+                android:layout_width="105dp"
+                android:layout_height="112dp"
+                android:layout_marginTop="48dp"
+                android:src="@drawable/asset_5_2_1"
+                app:layout_constraintBottom_toTopOf="@id/detail_plant_contact_user_name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/detail_plant_contact_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/notosanscjkkr_bold"
+                android:includeFontPadding="false"
+                android:textColor="@color/cherish_light_black"
+                android:textSize="22sp"
+                app:layout_constraintBottom_toTopOf="@id/detail_plant_contact_common_text"
+                app:layout_constraintEnd_toEndOf="@id/detail_plant_contact_image_graphic"
+                app:layout_constraintStart_toStartOf="@id/detail_plant_contact_image_graphic"
+                app:layout_constraintTop_toBottomOf="@id/detail_plant_contact_image_graphic" />
+
+            <TextView
+                android:id="@+id/detail_plant_contact_common_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosanscjkkr_bold"
+                android:includeFontPadding="false"
+                android:text="@string/contact_common_text"
+                android:textColor="@color/cherish_light_black"
+                android:textSize="22sp"
+                app:layout_constraintEnd_toEndOf="@id/detail_plant_contact_image_graphic"
+                app:layout_constraintStart_toStartOf="@id/detail_plant_contact_image_graphic"
+                app:layout_constraintTop_toBottomOf="@id/detail_plant_contact_user_name" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/detail_plant_contact_user_status_first_chip"
+                style="@style/CustomChip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_12dp"
+                android:fontFamily="@font/notosanscjkkr_regular"
+                android:includeFontPadding="false"
+                app:chipStrokeColor="@color/cherish_light_black"
+                app:chipStrokeWidth="1dp"
+                app:layout_constraintEnd_toStartOf="@id/detail_plant_contact_user_status_second_chip"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/detail_plant_contact_common_text" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/detail_plant_contact_user_status_second_chip"
+                style="@style/CustomChip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_8dp"
+                android:layout_marginTop="@dimen/margin_12dp"
+                android:layout_marginEnd="@dimen/margin_8dp"
+                android:fontFamily="@font/notosanscjkkr_regular"
+                android:includeFontPadding="false"
+                app:chipStrokeColor="@color/cherish_light_black"
+                app:chipStrokeWidth="1dp"
+                app:layout_constraintEnd_toStartOf="@id/detail_plant_contact_user_status_thrid_chip"
+                app:layout_constraintStart_toEndOf="@id/detail_plant_contact_user_status_first_chip"
+                app:layout_constraintTop_toBottomOf="@id/detail_plant_contact_common_text" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/detail_plant_contact_user_status_thrid_chip"
+                style="@style/CustomChip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_12dp"
+                android:fontFamily="@font/notosanscjkkr_regular"
+                android:includeFontPadding="false"
+                app:chipStrokeColor="@color/cherish_light_black"
+                app:chipStrokeWidth="1dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/detail_plant_contact_user_status_second_chip"
+                app:layout_constraintTop_toBottomOf="@id/detail_plant_contact_common_text" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/detail_plant_contact_call"
+                style="@style/CherishFloatingActionButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="23dp"
+                android:src="@drawable/contact_icn_call"
+                app:layout_constraintEnd_toStartOf="@id/detail_plant_contact_kakao_talk"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/detail_plant_contact_user_status_first_chip" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/detail_plant_contact_kakao_talk"
+                style="@style/CherishFloatingActionButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="23dp"
+                android:src="@drawable/contact_icn_kakaotalk"
+                app:layout_constraintEnd_toStartOf="@id/detail_plant_contact_message"
+                app:layout_constraintStart_toEndOf="@id/detail_plant_contact_call"
+                app:layout_constraintTop_toBottomOf="@id/detail_plant_contact_user_status_first_chip" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/detail_plant_contact_message"
+                style="@style/CherishFloatingActionButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="23dp"
+                android:src="@drawable/contact_icn_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/detail_plant_contact_kakao_talk"
+                app:layout_constraintTop_toBottomOf="@id/detail_plant_contact_user_status_first_chip" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

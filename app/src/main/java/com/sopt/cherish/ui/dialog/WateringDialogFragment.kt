@@ -16,10 +16,9 @@ import com.sopt.cherish.util.DialogUtil
  * popUp_Watering
  */
 
-class WateringDialogFragment(cherish: Int) : DialogFragment(), View.OnClickListener {
+class WateringDialogFragment(private val cherishId: Int) : DialogFragment(), View.OnClickListener {
     private val TAG = "WateringDialog"
 
-    var cherishid = cherish
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -27,8 +26,6 @@ class WateringDialogFragment(cherish: Int) : DialogFragment(), View.OnClickListe
     ): View {
         val view = inflater.inflate(R.layout.dialog_watering, container, false)
         val binding = DialogWateringBinding.bind(view)
-
-
 
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
@@ -39,14 +36,11 @@ class WateringDialogFragment(cherish: Int) : DialogFragment(), View.OnClickListe
         binding.wateringNextTimeBtn.setOnClickListener {
             navigateNextTimeContact()
         }
-
-
-
         return binding.root
     }
 
     private fun navigateContact() {
-        parentFragmentManager.let { fm -> ContactDialogFragment(cherishid).show(fm, TAG) }
+        parentFragmentManager.let { fm -> ContactDialogFragment().show(fm, TAG) }
         dismiss()
     }
 

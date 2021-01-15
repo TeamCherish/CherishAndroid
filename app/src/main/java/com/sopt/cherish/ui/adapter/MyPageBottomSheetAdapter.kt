@@ -59,7 +59,8 @@ class MyPageBottomSheetAdapter(private var context: Context, var data: List<MyPa
             itemClickListener.onClick(it, position)
         }
     }
-    fun update(){
+
+    fun update() {
         notifyDataSetChanged()
     }
 

@@ -14,13 +14,13 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class PlantDetailPopUpThird(plantId :Int) : Fragment() {
+class PlantDetailPopUpThird(plantId: Int) : Fragment() {
 
 
     private var _binding: FragmentPlantDetailPopUpThirdBinding? = null
     private val binding get() = _binding!!
     private val requestData = RetrofitBuilder
-    var plantId=plantId
+    var plantId = plantId
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

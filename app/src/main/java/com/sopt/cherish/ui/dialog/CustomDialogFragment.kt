@@ -8,12 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.DialogLoadingBinding
 import com.sopt.cherish.databinding.SampleLottie2Binding
 import com.sopt.cherish.databinding.SampleWordcountErrorBinding
 import com.sopt.cherish.util.DialogUtil
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 /**
  * Created on 2021-1-1 by SSong-develop
@@ -40,6 +43,10 @@ class CustomDialogFragment(
                     .asGif()
                     .load(R.raw.cherish_loading)
                     .into(binding.dialogLoadingImage)
+                lifecycleScope.launch {
+                    delay(2000)
+                    dismiss()
+                }
                 binding.root
             }
             R.layout.sample_lottie2 -> {

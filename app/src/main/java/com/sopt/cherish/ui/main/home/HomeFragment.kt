@@ -8,9 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatDialog
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -28,18 +26,16 @@ import com.sopt.cherish.ui.datail.DetailPlantActivity
 import com.sopt.cherish.ui.dialog.WateringDialogFragment
 import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
 import com.sopt.cherish.ui.main.MainViewModel
+import com.sopt.cherish.util.PixelUtil
 import com.sopt.cherish.util.PixelUtil.dp
+import com.sopt.cherish.util.PixelUtil.pixel
 
 
 /**
  * 메인 홈뷰
  * 초기상태와 중간에 있는 경우 2개 다 고려해야 합니다.
- * 여기는 어떻게 하면 더 이쁘게 나올까를 생각하면 될거 같습니다.
- * need it!!!
  */
 class HomeFragment : Fragment(), OnItemClickListener {
-    private lateinit var progressDialog: AppCompatDialog
-
     private val viewModel: MainViewModel by activityViewModels()
     private lateinit var binding: FragmentHomeBinding
     private lateinit var standardBottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
@@ -48,7 +44,6 @@ class HomeFragment : Fragment(), OnItemClickListener {
         private val TAG = "HomeFragment"
     }
 
-    // todo : 최대한 디자이너들이 작업한거 보여줄 수 있게 퍼포먼스 보여주는 방법 생각
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -63,7 +58,6 @@ class HomeFragment : Fragment(), OnItemClickListener {
         initializeBottomSheetBehavior()
         setAdapterData(homeCherryListAdapter)
         initializeRecyclerView(homeCherryListAdapter)
-        updateProgressBar()
 
         // onClick
         binding.homeWateringBtn.setOnClickListener {
@@ -72,15 +66,12 @@ class HomeFragment : Fragment(), OnItemClickListener {
         }
 
         binding.homeUserAddText.setOnClickListener {
-            // 바텀시트의 추가하기 버튼 , api 필요 x
             navigatePhoneBook()
         }
 
-        binding.homePlantImage.setOnClickListener {
-            // 식물GIF 클릭 시 이동
+        binding.homeMovePlantDetail.setOnClickListener {
             navigateDetailPlant(viewModel.userId.value!!, viewModel.cherishUser.value?.id!!)
         }
-
         return binding.root
     }
 
@@ -94,13 +85,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
         standardBottomSheetBehavior.expandedOffset = 100.dp
         standardBottomSheetBehavior.halfExpandedRatio = 0.23f
         standardBottomSheetBehavior.isHideable = false
-        binding.homeFragment.setBackgroundColor(
-            // 하드코딩
-            ContextCompat.getColor(
-                requireContext(),
-                R.color.cherish_purple
-            )
-        )
+
         standardBottomSheetBehavior.addBottomSheetCallback(object :
             BottomSheetBehavior.BottomSheetCallback() {
             override fun onStateChanged(bottomSheet: View, newState: Int) {
@@ -108,7 +93,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
             }
 
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                /* transitionBottomSheetParentView(slideOffset)*/
+                /*transitionBottomSheetParentView(slideOffset)*/
             }
         })
     }
@@ -149,7 +134,6 @@ class HomeFragment : Fragment(), OnItemClickListener {
         // phoneBook
         val intent = Intent(context, EnrollmentPhoneActivity::class.java)
         intent.putExtra("userId", viewModel.userId.value)
-
         startActivity(intent)
     }
 
@@ -157,29 +141,16 @@ class HomeFragment : Fragment(), OnItemClickListener {
         val intent = Intent(activity, DetailPlantActivity::class.java)
         intent.putExtra("userId", userId)
         intent.putExtra("cherishId", cherishId)
-        Log.d("homechrish", cherishId.toString())
+        intent.putExtra("cherishUserPhoneNumber", viewModel.cherishUser.value?.phoneNumber)
+        intent.putExtra("cherishNickname", viewModel.cherishUser.value?.nickName)
+        intent.putExtra("userNickname", viewModel.userNickName.value)
         startActivity(intent)
-    }
-
-    // progressBar
-    private fun updateProgressBar() {
-        val rating = viewModel.cherishUser.value?.growth?.toInt()
-        if (rating != null) {
-            if (rating <= 30) {
-                binding.homeAffectionProgressbar.progressDrawable = ResourcesCompat.getDrawable(
-                    resources,
-                    R.drawable.progress_drawable_verticle_red,
-                    null
-                )
-            }
-            binding.homeAffectionProgressbar.progress = rating
-        }
     }
 
     // recyclerview Item click event
     override fun onItemClick(itemBinding: MainCherryItemBinding, position: Int) {
         viewModel.cherishUsers.observe(viewLifecycleOwner) {
-            // contact Dialog
+            // contact Dialog , 여기서 분기처리하면 될거임~~~
             viewModel.cherishUser.value = it.userData.userList[position]
             it.userData.userList[position].apply {
                 initializeViewOnItemClick(this)
@@ -195,6 +166,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
         binding.homeSelectedUserName.text = user.nickName
         binding.homeSelectedUserStatus.text = user.plantModifier
         binding.homeAffectionRating.text = "${user.growth}%"
+        updateProgressBar(user.growth)
         binding.homeAffectionProgressbar.progress = user.growth
         when {
             user.dDay < 0 -> {
@@ -207,20 +179,35 @@ class HomeFragment : Fragment(), OnItemClickListener {
                 binding.homeRemainDate.text = "D-Day"
             }
         }
-        // animationUrl 데이터 갱신해달라고 해야함
-        // todo : gif처리하는것만 좀 하면 될거 같음
-        // todo : 정확하게 식물의 3단계를 표현할 것인지? 혹은 gif를 보여줄 것인지?
-
-        // todo : 일단 gif부터 시작
+        Log.d("tete", PixelUtil.screenWidth.toString())
         Glide.with(requireContext())
-            .load(viewModel.normalFlowerAnimationUri)
+            .load(viewModel.cherishUser.value!!.homeMainBackgroundImageUrl)
+            .override(PixelUtil.screenWidth.pixel, PixelUtil.screenHeight.pixel)
             .into(binding.homePlantImage)
     }
 
     // 바텀시트 뒤에 녀석 색상 변경
     private fun transitionBottomSheetParentView(slideOffset: Float) {
         val argbEvaluator =
-            ArgbEvaluator().evaluate(slideOffset, R.color.white, R.color.black)
+            ArgbEvaluator().evaluate(slideOffset, R.color.cherish_gray, R.color.black)
         binding.homeFragment.setBackgroundColor(argbEvaluator as Int)
+    }
+
+    // progressBar
+    private fun updateProgressBar(rating: Int) {
+        if (rating <= 30) {
+            binding.homeAffectionProgressbar.progressDrawable = ResourcesCompat.getDrawable(
+                resources,
+                R.drawable.progress_drawable_verticle_red,
+                null
+            )
+        } else {
+            binding.homeAffectionProgressbar.progressDrawable = ResourcesCompat.getDrawable(
+                resources,
+                R.drawable.progress_drawable_vertical,
+                null
+            )
+        }
+        binding.homeAffectionProgressbar.progress = rating
     }
 }

@@ -7,7 +7,6 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,13 +27,10 @@ import com.sopt.cherish.util.extension.shortToast
  * todo : Calendar CherishId 7번이 이상함? date 타입이 다른거 같은데
  */
 
-class ContactDialogFragment(cheish: Int) : DialogFragment(), View.OnClickListener {
+class ContactDialogFragment : DialogFragment(), View.OnClickListener {
     private val codeThatReviewPage = 1001
     private val viewModel: MainViewModel by activityViewModels()
 
-    //이거 갖다가 쓰면 됨
-    // 뷰모델을 생성할 수 없는 에러가 있음 근ㄷ ㅔ이거 인자로 와도 ㅗ디는건지
-    var cherishid = cheish
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -42,17 +38,8 @@ class ContactDialogFragment(cheish: Int) : DialogFragment(), View.OnClickListene
     ): View {
         val binding: DialogContactBinding =
             DataBindingUtil.inflate(inflater, R.layout.dialog_contact, container, false)
-        // cherishid= arguments?.getInt("cherishid_finish")!!
-        Log.d("chericontact", cherishid.toString())
-        if (cherishid != null) {
-            viewModel.cherishUserId.value = cherishid
-            viewModel.fetchCalendarDataByCherishId()
-        } else {
-            viewModel.fetchCalendarData()
-        }
         binding.mainViewModel = viewModel
         initializeChip(binding)
-
 
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
