@@ -107,12 +107,15 @@ class DialogReviewFragment : DialogFragment() {
                 )
             )
             showLoadingDialog()
+
+
         }
     }
 
     private fun ignoreSendReviewToServer(binding: ActivityReviewBinding) {
         binding.reviewIgnoreAccept.setOnClickListener {
             // 건너 뛰는 것도 뭐~ 그냥 main으로 넘어오면 됨
+
             dismiss()
         }
     }

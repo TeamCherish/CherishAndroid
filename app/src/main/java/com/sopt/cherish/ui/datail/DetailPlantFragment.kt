@@ -95,7 +95,7 @@ class DetailPlantFragment : Fragment() {
             (activity as DetailPlantActivity).setActionBarTitle("식물 카드")
 
         }
-
+        reset()
     }
 
     fun reset(){
@@ -135,8 +135,8 @@ class DetailPlantFragment : Fragment() {
                                     .load(it.data.plant_thumbnail_image_url)
                                     .into(binding.imageViewDetailUrl)
 
-                                plant_id=it.data.plantId
-                                Log.d("fdfdfd",it.data.plantId.toString())
+                                plant_id = it.data.plantId
+                                Log.d("fdfdfd", it.data.plantId.toString())
 
 
                                 circleProgressbar.setProgressWithAnimation(
@@ -196,8 +196,8 @@ class DetailPlantFragment : Fragment() {
                                 } else {
 
 
-                                    Log.d("asdfasdf",it.data.reviews.size.toString())
-                                    if(it.data.reviews.size==1){
+                                    Log.d("asdfasdf", it.data.reviews.size.toString())
+                                    if (it.data.reviews.size == 1) {
                                         var memoList = arrayListOf<MemoListDataclass>(
 
                                             MemoListDataclass(
@@ -231,8 +231,7 @@ class DetailPlantFragment : Fragment() {
                                         binding.recyclerDetail.layoutManager =
                                             LinearLayoutManager(context)
                                         binding.recyclerDetail.setHasFixedSize(true)
-                                    }
-                                    else if(it.data.reviews.size==2){
+                                    } else if (it.data.reviews.size >= 2) {
                                         var memoList = arrayListOf<MemoListDataclass>(
 
                                             MemoListDataclass(
