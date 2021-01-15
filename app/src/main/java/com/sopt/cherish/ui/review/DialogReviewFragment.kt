@@ -4,11 +4,9 @@ import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
@@ -20,11 +18,10 @@ import com.sopt.cherish.ui.dialog.CustomDialogFragment
 import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.util.DialogUtil
 import com.sopt.cherish.util.SimpleLogger
-import com.sopt.cherish.util.extension.FlexBoxExtension.addChip
 import com.sopt.cherish.util.extension.FlexBoxExtension.getChip
-import com.sopt.cherish.util.extension.FlexBoxExtension.getChipsCount
 import com.sopt.cherish.util.extension.countNumberOfCharacters
 import com.sopt.cherish.util.extension.shortToast
+import com.sopt.cherish.util.extension.writeReview
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -93,6 +90,7 @@ class DialogReviewFragment : DialogFragment() {
     }
 
     private fun showLoadingDialog() {
+        // 이녀석을 호출하는게 맞는지 아닌지 확인해야함
         viewModel.fetchUsers()
         lifecycleScope.launch(Dispatchers.IO) {
             CustomDialogFragment(R.layout.dialog_loading).show(parentFragmentManager, TAG)
@@ -106,19 +104,8 @@ class DialogReviewFragment : DialogFragment() {
         // todo : 한글 키보드는 ENTER를 치게 되면 줄바꿈이 된다. 이거 처리를 해줘야 한다.
         // 이거 처리만 해주면 끝이 납니다
         // 글자수에 따라 엔터를 먹히지 않게 한다던지 하면 될거 같음
-        binding.reviewEditKeyword.setOnKeyListener { view, keyCode, keyEvent ->
-            if (keyEvent.action == KeyEvent.ACTION_DOWN || keyCode == KeyEvent.KEYCODE_ENTER) {
-                val et = view as EditText
-                val name = et.text.toString()
-                if (binding.reviewFlexBox.getChipsCount() < 3)
-                    binding.reviewFlexBox.addChip(name)
-                else {
-                    CustomDialogFragment(R.layout.sample_lottie2).show(parentFragmentManager, TAG)
-                }
-                et.text = null
-            }
-            return@setOnKeyListener false
-        }
+        // 다이얼로그가 왜 뜨는 지 모르겠는데 일단 뜸 ㅋㅋ
+        binding.reviewEditKeyword.writeReview(binding.reviewFlexBox)
     }
 
     private fun sendReviewToServer(binding: ActivityReviewBinding) {
