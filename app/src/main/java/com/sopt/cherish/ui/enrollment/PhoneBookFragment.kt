@@ -26,6 +26,7 @@ class PhoneBookFragment : Fragment() {
     var searchText = ""
     var searchphone = ""
     var sortText = "asc"
+    var countphonebook=0
     private lateinit var enrollToolbar: Toolbar
 
     private lateinit var binding: FragmentPhoneBookBinding
@@ -39,7 +40,7 @@ class PhoneBookFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_phone_book, container, false)
 
         binding = FragmentPhoneBookBinding.bind(view)
-
+        countphonebook= arguments?.getInt("useridenroll")!!
         startProcess()
 
         binding.buttonnext.setOnClickListener {
@@ -80,8 +81,10 @@ class PhoneBookFragment : Fragment() {
             arguments = Bundle().apply {
                 putString("phonename", madapter.phonename)
                 putString("phonenumber", madapter.phonenumber)
+                putInt("useridend",countphonebook)}
+                Log.d("phonebookfragment", countphonebook.toString())
 
-            }
+
         })
         transaction.addToBackStack(null)
 
@@ -170,9 +173,9 @@ class PhoneBookFragment : Fragment() {
 
             val cursor = contentResolver.query(phonUri, projections, where, whereValues, optionSort)
             while (cursor?.moveToNext() == true) {
-                val id = cursor?.getString(0)
-                val name = cursor?.getString(1)
-                val number = cursor?.getString(2)
+                val id = cursor.getString(0)
+                val name = cursor.getString(1)
+                val number = cursor.getString(2)
 
                 val phone = Phone(id, name, number)
 
@@ -184,9 +187,9 @@ class PhoneBookFragment : Fragment() {
             val cursor2 =
                 contentResolver.query(phonUri, projections, where2, whereValues, optionSort)
             while (cursor2?.moveToNext() == true) {
-                val id = cursor2?.getString(0)
-                val name = cursor2?.getString(1)
-                val number = cursor2?.getString(2)
+                val id = cursor2.getString(0)
+                val name = cursor2.getString(1)
+                val number = cursor2.getString(2)
 
                 val phone = Phone(id, name, number)
 

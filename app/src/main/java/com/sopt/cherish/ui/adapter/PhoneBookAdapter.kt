@@ -54,7 +54,7 @@ class PhoneBookAdapter(private val phoneBookList: List<Phone>) :
 
     override fun getItemId(position: Int): Long = position.toLong()
 
-    @SuppressLint("MissingPermission")
+    //@SuppressLint("MissingPermission")
     inner class Holder(private val binding: ItemLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
 

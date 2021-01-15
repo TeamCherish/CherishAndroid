@@ -3,16 +3,28 @@ package com.sopt.cherish.remote.singleton
 import com.sopt.cherish.remote.RetrofitService
 import com.sopt.cherish.remote.api.*
 import com.sopt.cherish.remote.model.EnrollmentAPI
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitBuilder {
     private const val BaseUrl = "http://3.35.117.232:8080/"
 
+    private fun provideOkHttpClient(): OkHttpClient {
+        val loggingInterceptor = HttpLoggingInterceptor()
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+
+        return OkHttpClient.Builder()
+            .addInterceptor(loggingInterceptor)
+            .build()
+    }
+
     private fun getRetrofit(): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BaseUrl)
             .addConverterFactory(GsonConverterFactory.create())
+            .client(provideOkHttpClient())
             .build()
     }
 
@@ -41,8 +53,10 @@ object RetrofitBuilder {
 
     val plantDetailAPI: PlantDetailAPI = getRetrofit().create(PlantDetailAPI::class.java)
 
-    val ResponsePlantCardData: ResponsePlantCardData =
-        getRetrofit().create(com.sopt.cherish.remote.api.ResponsePlantCardData::class.java)
+    val responsePlantCardData: ResponsePlantCardData =
+        getRetrofit().create(ResponsePlantCardData::class.java)
+
+    val deleteAPI: DeleteAPI = getRetrofit().create(DeleteAPI::class.java)
 
 
 }

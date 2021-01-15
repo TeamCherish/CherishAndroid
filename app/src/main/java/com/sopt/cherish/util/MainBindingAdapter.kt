@@ -28,16 +28,6 @@ object MainBindingAdapter {
     }
 
     @JvmStatic
-    @BindingAdapter("android:showOnClick")
-    fun circleBorderVisibility(imageView: ImageView, focus: Boolean) {
-        if (focus) {
-            imageView.visibility = View.VISIBLE
-        } else {
-            imageView.visibility = View.INVISIBLE
-        }
-    }
-
-    @JvmStatic
     @BindingAdapter("android:allowChange")
     fun allowChange(imageView: ImageView, focus: Boolean) {
         if (focus) {
@@ -45,5 +35,14 @@ object MainBindingAdapter {
         } else {
             imageView.setImageResource(R.drawable.icn_allow)
         }
+    }
+
+    @JvmStatic
+    @BindingAdapter("android:setImage")
+    fun setBackgroundImage(imageView: ImageView, imageUrl: String) {
+        Glide.with(imageView)
+            .load(imageUrl)
+            .apply(RequestOptions.centerCropTransform())
+            .into(imageView)
     }
 }

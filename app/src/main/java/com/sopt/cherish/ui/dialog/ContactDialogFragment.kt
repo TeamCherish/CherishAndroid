@@ -5,6 +5,7 @@ import android.content.Intent
 import android.content.pm.ResolveInfo
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +19,7 @@ import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.ui.review.ReviewActivity
 import com.sopt.cherish.util.DialogUtil
 import com.sopt.cherish.util.PermissionUtil
+import com.sopt.cherish.util.SimpleLogger
 import com.sopt.cherish.util.extension.shortToast
 
 /**
@@ -36,7 +38,9 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
     ): View {
         val binding: DialogContactBinding =
             DataBindingUtil.inflate(inflater, R.layout.dialog_contact, container, false)
+        viewModel.fetchCalendarData()
         binding.mainViewModel = viewModel
+
 
         // 유저 닉네임과 상태 chip들을 서버에서 받은 값으로 전해서 표현해야한다.
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -83,29 +87,47 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
 
     private fun navigateKakao() {
         if (findKakaoTalk()) {
-            val intent = context?.packageManager?.getLaunchIntentForPackage("com.kakao.talk")
-            intent?.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
+            val kakaoIntent = context?.packageManager?.getLaunchIntentForPackage("com.kakao.talk")
+            kakaoIntent?.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            viewModel.userNickName.observe(viewLifecycleOwner) {
+                kakaoIntent?.putExtra("userNickname", it)
+            }
+            viewModel.cherishUser.observe(viewLifecycleOwner) {
+                kakaoIntent?.putExtra("cherishNickname", it.nickName)
+            }
+            startActivityForResult(kakaoIntent, codeThatReviewPage)
         } else {
-            // 카카오톡을 깔게 할지 or 그냥 카카오톡이 없다고 할지?
-            /*val kakaoTalkPackageUri = "com.kakao.talk"
-            val url = "market://details?id=$kakaoTalkPackageUri"
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-            startActivity(intent)*/
             shortToast(requireContext(), "카카오톡이 없어요 ㅠ")
         }
     }
 
     private fun startPhoneCall() {
+        // 함수화 해야합니다.
+        val callIntent =
+            Intent(Intent.ACTION_CALL, Uri.parse("tel:${viewModel.cherishUser.value?.phoneNumber}"))
+        callIntent.putExtra("userNickname", viewModel.userNickName.value)
+        callIntent.putExtra("cherishNickname", viewModel.cherishUser.value?.nickName)
         startActivityForResult(
-            Intent(Intent.ACTION_CALL, viewModel.dummyUserPhoneNumber),
+            callIntent,
             codeThatReviewPage
         )
     }
 
     private fun startSendMessage() {
+        val messageIntent = Intent(
+            Intent.ACTION_SENDTO,
+            Uri.parse("smsto:${viewModel.cherishUser.value?.phoneNumber}")
+        )
+        viewModel.userNickName.observe(viewLifecycleOwner) {
+            SimpleLogger.logI(it)
+            messageIntent.putExtra("userNickname", it)
+        }
+        viewModel.cherishUser.observe(viewLifecycleOwner) {
+            messageIntent.putExtra("cherishNickname", it.nickName)
+        }
+
         startActivityForResult(
-            Intent(Intent.ACTION_SENDTO, viewModel.dummyUserMessageNumber),
+            messageIntent,
             codeThatReviewPage
         )
     }

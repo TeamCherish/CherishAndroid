@@ -5,8 +5,6 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.messaging.FirebaseMessaging
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityMainBinding
 import com.sopt.cherish.di.Injection
@@ -29,21 +27,15 @@ class MainActivity : AppCompatActivity() {
             DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         initializeViewModel()
+        initializeViewModelData()
         showInitialFragment()
         setBottomNavigationListener(binding)
-        getFirebaseDeviceToken()
     }
 
-    private fun getFirebaseDeviceToken() {
-        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
-            if (!task.isSuccessful) {
-                SimpleLogger.logI("Fetching FCM registration token failed ${task.exception}")
-                return@OnCompleteListener
-            }
-            val token = task.result
-            Log.d("token", token.toString())
-            SimpleLogger.logI(token.toString())
-        })
+    private fun initializeViewModelData() {
+        viewModel.userId.value = intent.getIntExtra("userId", 0)
+        viewModel.userNickName.value = intent.getStringExtra("userNickname")
+        SimpleLogger.logI(viewModel.userNickName.value.toString())
     }
 
     private fun initializeViewModel() {
@@ -64,7 +56,13 @@ class MainActivity : AppCompatActivity() {
 
             when (it.itemId) {
                 R.id.main_home -> {
-                    transAction.replace(R.id.main_fragment_container, HomeFragment()).commit()
+                    transAction.replace(R.id.main_fragment_container, HomeFragment().apply {
+                        arguments = Bundle().apply {
+                            putInt("userid", intent.getIntExtra("userId", 0))
+                            Log.d("mainactivity",intent.getIntExtra("userId", 0).toString())
+                        }
+
+                    }).commit()
                     true
                 }
                 R.id.main_manage_plant -> {
@@ -85,7 +83,6 @@ class MainActivity : AppCompatActivity() {
 
     fun replaceFragment(index: Int) {
         val transAction = supportFragmentManager.beginTransaction()
-
         when (index) {
             0 -> {
                 transAction.replace(R.id.my_page_bottom_container, PlantFragment()).commit()
@@ -102,7 +99,6 @@ class MainActivity : AppCompatActivity() {
                 } else {
                     PermissionUtil.openPermissionSettings(this)
                 }
-
                 //true
             }
         }
