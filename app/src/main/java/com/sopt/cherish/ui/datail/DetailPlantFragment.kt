@@ -95,11 +95,14 @@ class DetailPlantFragment : Fragment() {
                                 binding.textViewPlantname.text = it.data.plant_name.toString()
                                 binding.textViewDday.text = "D-" + it.data.dDay.toString()
                                 binding.textViewDuration.text = it.data.duration.toString()
-                                if (it.data.birth.toString() == "Invalid Date") {
+                                if ((it.data.birth.toString()) == "Invalid Date") {
                                     binding.textViewBirth.text = "미입력"
 
                                 }
-                                binding.textViewBirth.text = it.data.birth.toString()
+                                else{
+                                    binding.textViewBirth.text = it.data.birth.toString()
+
+                                }
                                 binding.textView1WithName.text = it.data.name.toString()
                                 binding.textViewStatusMessage.text = it.data.status_message
                                 binding.textViewStatus.text = it.data.status.toString()

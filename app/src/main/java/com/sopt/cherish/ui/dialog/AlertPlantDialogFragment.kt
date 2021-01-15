@@ -1,5 +1,7 @@
 package com.sopt.cherish.ui.dialog
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -24,6 +26,8 @@ class AlertPlantDialogFragment : DialogFragment(), View.OnClickListener {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
         _binding = FragmentAlertPlantDialogBinding.inflate(inflater, container, false)
 
         viewpagerAdapter = DialogViewPagerAdapter(childFragmentManager)
