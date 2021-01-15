@@ -25,8 +25,6 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         showInitialFragment()
-        setBottomNavigationListener(binding)
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

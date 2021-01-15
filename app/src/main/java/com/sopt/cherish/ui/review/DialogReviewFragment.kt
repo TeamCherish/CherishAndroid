@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityReviewBinding
 import com.sopt.cherish.remote.api.ReviewWateringReq
@@ -21,9 +20,6 @@ import com.sopt.cherish.util.extension.FlexBoxExtension.getChip
 import com.sopt.cherish.util.extension.countNumberOfCharacters
 import com.sopt.cherish.util.extension.shortToast
 import com.sopt.cherish.util.extension.writeReview
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 class DialogReviewFragment : DialogFragment() {
 
@@ -91,12 +87,9 @@ class DialogReviewFragment : DialogFragment() {
     private fun showLoadingDialog() {
         // 이녀석을 호출하는게 맞는지 아닌지 확인해야함
         /*viewModel.fetchUsers()*/
-        lifecycleScope.launch(Dispatchers.IO) {
-            CustomDialogFragment(R.layout.dialog_loading).show(parentFragmentManager, TAG)
-            delay(2000)
-            // 만약에 홈 프라그먼트에서 물 주는 애니메이션을 해야한다 그러면 finishActivity로 변경해야할 수도 있음
-            dismiss()
-        }
+        CustomDialogFragment(R.layout.dialog_loading).show(parentFragmentManager, TAG)
+        // 만약에 홈 프라그먼트에서 물 주는 애니메이션을 해야한다 그러면 finishActivity로 변경해야할 수도 있음
+        dismiss()
     }
 
     private fun addUserStatusWithChip(binding: ActivityReviewBinding) {

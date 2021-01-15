@@ -4,7 +4,6 @@ import android.animation.ArgbEvaluator
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -75,7 +74,6 @@ class HomeFragment : Fragment(), OnItemClickListener {
         return binding.root
     }
 
-
     private fun initializeBottomSheetBehavior() {
         standardBottomSheetBehavior =
             BottomSheetBehavior.from(binding.homeStandardBottomSheet)
@@ -141,7 +139,6 @@ class HomeFragment : Fragment(), OnItemClickListener {
         val intent = Intent(activity, DetailPlantActivity::class.java)
         intent.putExtra("userId", userId)
         intent.putExtra("cherishId", viewModel.cherishUser.value?.id)
-        Log.d("log2", viewModel.cherishUser.value?.id.toString())
         intent.putExtra("cherishUserPhoneNumber", viewModel.cherishUser.value?.phoneNumber)
         intent.putExtra("cherishNickname", viewModel.cherishUser.value?.nickName)
         intent.putExtra("userNickname", viewModel.userNickName.value)
@@ -153,7 +150,6 @@ class HomeFragment : Fragment(), OnItemClickListener {
     override fun onItemClick(itemBinding: MainCherryItemBinding, position: Int) {
         viewModel.cherishUsers.observe(viewLifecycleOwner) {
             viewModel.cherishUser.value = it.userData.userList[position]
-
             it.userData.userList[position].apply {
                 initializeViewOnItemClick(this)
             }
@@ -180,7 +176,8 @@ class HomeFragment : Fragment(), OnItemClickListener {
             }
         }
         Glide.with(requireContext())
-            .load(viewModel.cherishUser.value!!.homeMainBackgroundImageUrl)
+            .asGif()
+            .load(viewModel.cherishUser.value!!.plantAnimationUrl)
             .override(PixelUtil.screenWidth.pixel, PixelUtil.screenHeight.pixel)
             .into(binding.homePlantImage)
     }

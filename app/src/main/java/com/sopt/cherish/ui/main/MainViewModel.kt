@@ -27,20 +27,11 @@ class MainViewModel(
     val wateringFlowerAnimationUri = R.raw.watering_min_android
     val witherFlowerAnimationUri = R.raw.wither_min_android
 
-    // Dummy Image Uri
-    val stukiImageUri = R.drawable.main_img_stuki
-    val sunImageUri = R.drawable.main_img_sun
-    val rosemaryImageUri = R.drawable.main_img_rosemary
-    val americanblueImageUri = R.drawable.main_img_americanblue
-
     // 로그인 하는 cherish를 이용하는 유저
     val userId = MutableLiveData<Int>()
 
     // 유저가 가지고 있는 cherish들
     val userNickName = MutableLiveData<String>()
-
-    val homeRedProgressBar = R.drawable.progress_drawable_verticle_red
-    val homeGreenProgressBar = R.drawable.progress_drawable_vertical
 
     // main Home에서 호출된 여러명
     private val _cherishUsers = MutableLiveData<UserResult>()
@@ -49,14 +40,6 @@ class MainViewModel(
 
     // recyclerview에 클릭된 유저 1명
     val cherishUser = MutableLiveData<User>()
-
-    private val _cherishUserId = MutableLiveData<Int>()
-    val cherishUserId: MutableLiveData<Int>
-        get() = _cherishUserId
-
-    val reviewText = "${userNickName.value}님! ${cherishUser.value?.nickName}님과의"
-
-    val reviewDescription = "${cherishUser.value?.nickName}과의 물주기를 기록하세요"
 
     fun fetchUsers() = viewModelScope.launch {
         try {
@@ -75,10 +58,6 @@ class MainViewModel(
     val userStatus1 = MutableLiveData<String>()
     val userStatus2 = MutableLiveData<String>()
     val userStatus3 = MutableLiveData<String>()
-
-    fun fetchCalendarDataByCherishId() = viewModelScope.launch {
-        _calendarData.postValue(mainRepository.getChipsData(cherishUserId.value!!))
-    }
 
     fun fetchCalendarData() = viewModelScope.launch {
         _calendarData.postValue(cherishUser.value?.id?.let {
@@ -113,4 +92,8 @@ class MainViewModel(
         viewModelScope.launch {
             mainRepository.postponeWateringDate(postponeWateringDateReq)
         }
+
+    override fun onCleared() {
+        onCleared()
+    }
 }
