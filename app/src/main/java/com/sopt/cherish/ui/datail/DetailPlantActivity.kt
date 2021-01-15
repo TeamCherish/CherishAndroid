@@ -31,16 +31,22 @@ class DetailPlantActivity : AppCompatActivity() {
 
     private lateinit var viewModel: DetailPlantViewModel
 
-    var plantid: Int = 0
+    // var plantid: Int =  intent.getIntExtra("plantId", 100)
+    var cherishid = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityDetailPlantBinding.inflate(layoutInflater)
-        setFragment(DetailPlantFragment())
-        initializeViewModel()
+
 
         //Log.d("qwer",intent.getIntExtra("plantId",100).toString())
+        cherishid = intent.getIntExtra("cherishId", 0)
+        Log.d("qwer", cherishid.toString())
 
+
+
+        initializeViewModel()
+        setFragment(DetailPlantFragment())
         setActionBarTitle("식물 상세")
         setContentView(binding.root)
     }
@@ -95,7 +101,7 @@ class DetailPlantActivity : AppCompatActivity() {
                 transaction.replace(R.id.fragment_detail, EnrollModifyPlantFragment().apply {
                     arguments = Bundle().apply {
 
-                        putInt("plantidgo_delete", intent.getIntExtra("plantId", 100))
+                        putInt("cherishidgo_delete", intent.getIntExtra("cherishId", 100))
 
                     }
                 })
@@ -115,8 +121,8 @@ class DetailPlantActivity : AppCompatActivity() {
         transaction.replace(R.id.fragment_detail, fragment.apply {
             arguments = Bundle().apply {
 
-                putInt("plantidgo", intent.getIntExtra("plantId", 100))
-                Log.d("nanana", intent.getIntExtra("plantId", 100).toString())
+                putInt("cherishidgo", cherishid)
+                Log.d("nanana", cherishid.toString())
             }
         })
         transaction.commit()
