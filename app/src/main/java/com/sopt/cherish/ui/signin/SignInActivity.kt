@@ -5,10 +5,10 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.sopt.cherish.databinding.ActivitySignInBinding
-import com.sopt.cherish.remote.api.EditUserReq
-import com.sopt.cherish.remote.api.EditUserRes
+import com.sopt.cherish.remote.api.*
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.main.MainActivity
+import com.sopt.cherish.ui.main.home.HomeBlankActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -50,19 +50,45 @@ class SignInActivity : AppCompatActivity() {
                         }?.body()
                             ?.let { it ->
                                 Log.d("isSuccess", response.body().toString())
-                                val mainActivityIntent =
-                                    Intent(this@SignInActivity, MainActivity::class.java)
-                                mainActivityIntent.putExtra(
-                                    "userId",
-                                    response.body()?.editUserData?.userId
+                                hasUser(
+                                    response.body()?.editUserData?.userId!!,
+                                    response.body()!!.editUserData.userNickName
                                 )
-                                mainActivityIntent.putExtra(
-                                    "userNickname",
-                                    response.body()?.editUserData?.userNickName
-                                )
-                                startActivity(mainActivityIntent)
                             }
                     }
                 })
+    }
+
+    private fun hasUser(userId: Int, userNickName: String) {
+        var trigger: Boolean
+        RetrofitBuilder.userAPI.hasUser(userId).enqueue(object : Callback<UserResult> {
+            override fun onResponse(call: Call<UserResult>, response: Response<UserResult>) {
+                if (response.isSuccessful) {
+                    if (response.body()?.userData?.totalUser == 0) {
+                        val blankHomeIntent =
+                            Intent(this@SignInActivity, HomeBlankActivity::class.java)
+                        startActivity(blankHomeIntent)
+                        finish()
+                    } else {
+                        val mainActivityIntent =
+                            Intent(this@SignInActivity, MainActivity::class.java)
+                        mainActivityIntent.putExtra(
+                            "userId",
+                            userId
+                        )
+                        mainActivityIntent.putExtra(
+                            "userNickname",
+                            userNickName
+                        )
+                        startActivity(mainActivityIntent)
+                        finish()
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<UserResult>, t: Throwable) {
+                Log.d("통신 실패", t.toString())
+            }
+        })
     }
 }

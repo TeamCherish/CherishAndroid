@@ -1,6 +1,7 @@
 package com.sopt.cherish.remote.api
 
 import com.google.gson.annotations.SerializedName
+import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
 
@@ -50,4 +51,9 @@ interface UserAPI {
     suspend fun getCherishUser(
         @Path("id") cherishId: Int
     ): UserResult
+
+    @GET("cherish/{id}")
+    fun hasUser(
+        @Path("id") userId: Int
+    ): Call<UserResult>
 }
