@@ -39,7 +39,7 @@ class PlantFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentPlantBinding.inflate(inflater, container, false)
 
-        cherishAdapter.notifyDataSetChanged()
+
         setAdapterData()
 
         return binding.root
