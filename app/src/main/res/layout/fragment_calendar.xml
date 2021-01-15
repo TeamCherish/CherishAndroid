@@ -130,7 +130,6 @@
 
                 <ImageView
                     android:id="@+id/calendarView_memo_create_btn"
-                    style="@style/ImageButton.White"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_pencil"
@@ -155,9 +154,8 @@
 
                 <ImageView
                     android:id="@+id/review_back"
-                    style="@style/ImageButton.White"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="15dp"
                     android:allowChange="@{detailPlantViewModel.calendarAllowChange}"
                     android:src="@drawable/icn_allow"
                     app:layout_constraintEnd_toEndOf="@id/review_all_text"

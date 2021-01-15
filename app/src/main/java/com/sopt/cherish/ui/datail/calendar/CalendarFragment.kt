@@ -119,7 +119,6 @@ class CalendarFragment : Fragment() {
                 binding.reviewBack.setImageResource(R.drawable.icn_allow_top)
                 binding.calendarView.changeCalendarModeMonths()
             }
-
         }
     }
 

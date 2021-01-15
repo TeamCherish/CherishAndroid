@@ -14,6 +14,7 @@ import com.sopt.cherish.ui.main.manageplant.ManagePlantFragment
 import com.sopt.cherish.ui.main.manageplant.PlantFragment
 import com.sopt.cherish.ui.main.setting.SettingFragment
 import com.sopt.cherish.util.PermissionUtil
+import com.sopt.cherish.util.PixelRatio
 import com.sopt.cherish.util.SimpleLogger
 
 
@@ -26,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         val binding: ActivityMainBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_main)
 
+        Log.d("hllll", PixelRatio(application).screenHeight.toString())
         initializeViewModel()
         initializeViewModelData()
         showInitialFragment()
@@ -92,8 +94,6 @@ class MainActivity : AppCompatActivity() {
                 if (PermissionUtil.isCheckedReadContactsPermission(this)) {
                     transAction.replace(
                         R.id.my_page_bottom_container, MyPagePhoneBookFragment()
-
-
                     )
                         .commit()
                 } else {

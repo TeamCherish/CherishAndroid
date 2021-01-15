@@ -40,6 +40,8 @@ class ManagePlantFragment : Fragment() {
         val binding: FragmentManagePlantBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_manage_plant, container, false)
 
+        // 예진이 userId , viewModel.userId.value 라고하면 userId 찾을 수 있어요
+        /*    SimpleLogger.logI(viewModel.userId.value.toString())*/
         initializeServerRequest(binding)
         initializeTabLayoutView(binding)
         initializeBottomSheetBehavior(binding)
