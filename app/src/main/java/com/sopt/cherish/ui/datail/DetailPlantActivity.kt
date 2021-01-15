@@ -42,6 +42,8 @@ class DetailPlantActivity : AppCompatActivity() {
 
         binding = ActivityDetailPlantBinding.inflate(layoutInflater)
 
+        val userId: Int
+
         initializeViewModel()
         Log.d("qwer", intent.getIntExtra("plantId", 100).toString())
         plantId = intent.getIntExtra("plantId", 0)
@@ -58,6 +60,9 @@ class DetailPlantActivity : AppCompatActivity() {
 
         userNickname = intent.getStringExtra("userNickname").toString()
         viewModel.userNickname.value = userNickname
+
+        userId = intent.getIntExtra("userId", 0)
+        viewModel.userId.value = userId
 
         viewModel.fetchCalendarData()
         setFragment(DetailPlantFragment())

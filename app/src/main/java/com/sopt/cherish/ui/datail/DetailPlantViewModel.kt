@@ -36,6 +36,8 @@ class DetailPlantViewModel(
 
     val userNickname = MutableLiveData<String>()
 
+    val userId = MutableLiveData<Int>()
+
     private val _calendarData = MutableLiveData<CalendarRes>()
     val calendarData: MutableLiveData<CalendarRes>
         get() = _calendarData
