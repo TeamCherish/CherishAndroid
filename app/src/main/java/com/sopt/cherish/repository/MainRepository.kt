@@ -7,7 +7,6 @@ import com.sopt.cherish.remote.api.*
  */
 class MainRepository(
     private val userAPI: UserAPI,
-    private val myPageAPI: MyPageAPI,
     private val reviewAPI: ReviewAPI,
     private val wateringAPI: WateringAPI,
     private val calendarAPI: CalendarAPI

@@ -64,21 +64,25 @@ class DelayWateringDialogFragment : DialogFragment() {
         binding.delayWateringAcceptBtn.setOnClickListener {
             viewModel.postponeData.observe(viewLifecycleOwner) {
                 if (it.postponeData.isPostpone) {
+                    // request Data
                     val postponeWateringDateReq = PostponeWateringDateReq(
-                        viewModel.userId.value!!,
+                        viewModel.cherishUser.value!!.id,
                         binding.delayWateringDayPicker.value,
                         it.postponeData.isPostpone
                     )
                     viewModel.postponeWateringDate(postponeWateringDateReq)
+                    viewModel.fetchUsers()
                     shortToast(requireContext(), "[미루기 성공]3회 초과하였습니다 , 식물 애정도가 차감되었습니다.")
                     dismiss()
                 } else {
+                    // request Data
                     val postponeWateringDateReq = PostponeWateringDateReq(
-                        viewModel.userId.value!!,
+                        viewModel.cherishUser.value!!.id,
                         binding.delayWateringDayPicker.value,
                         it.postponeData.isPostpone
                     )
                     viewModel.postponeWateringDate(postponeWateringDateReq)
+                    viewModel.fetchUsers()
                     shortToast(requireContext(), "미루기 성공!")
                     dismiss()
                 }

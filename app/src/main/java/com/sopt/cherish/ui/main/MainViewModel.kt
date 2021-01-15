@@ -1,12 +1,12 @@
 package com.sopt.cherish.ui.main
 
-import android.net.Uri
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.cherish.remote.api.*
 import com.sopt.cherish.repository.MainRepository
 import com.sopt.cherish.util.DateUtil
+import com.sopt.cherish.util.SimpleLogger
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -20,24 +20,15 @@ class MainViewModel(
 
     // todo : 서버통신을 한번만 하도록 주기를 설정해줘야함
     // todo : review페이지를 넘어갈 떄 viewModel이 새로 생성되는게 문제임
-    val dummyUserName = "남쿵둥이"
-    val contactDummyUserName = "${dummyUserName}와는"
-
+    // todo : 물주는 날짜를 미루는 것도 되고 다 되는데 문제는 미루는 경우, 데이터가 갱신이 되질 않음
+    // todo : 그래서 만약 데이터가 변경된다면 그거에 맞게 데이터 갱신되는 무언가가 있어야하는데
+    // todo : 물주기가 되긴 돼, 근데 데이터 갱신이 보여지지 않습니다.
     // 실 기기가 공기계라서 전화랑 메시지는 불가능 하다. 카카오톡은 켜짐!
     // 이것도 바꿔야함
     val dummyUserStatus = arrayListOf<String>("생일", "취업준비중", "헤어짐")
-    val dummyUserPhoneNumber: Uri = Uri.parse("tel:010-2563-9702")
-    val dummyUserMessageNumber: Uri = Uri.parse("smsto:010-2563-9702")
-
-    // homeFragment dummy Data
-    val dummyRestDateData = "D-3"
-    val dummyUserDescription = "아직 수명이 탄탄한"
-    val dummyUserAffectionGauge = 70
-    val dummyUserAffectionText = "70"
 
     // [home] Server connection
     // userId는 값이 1개 , fetchUser 함수를 통해서 _users에 userId가 가지고 있는 cherish들이 보인다.
-
     // login 시 intent 에서 값을 받아서 옴
     // 로그인 하는 cherish를 이용하는 유저
     val userId = MutableLiveData<Int>()
@@ -76,13 +67,23 @@ class MainViewModel(
     val calendarData: MutableLiveData<CalendarRes>
         get() = _calendarData
 
+    // userStatus Chip
+    val userStatus1 = MutableLiveData<String>()
+    val userStatus2 = MutableLiveData<String>()
+    val userStatus3 = MutableLiveData<String>()
+
     fun fetchCalendarData() = viewModelScope.launch {
-        _calendarData.postValue(mainRepository.getChipsData(cherishUser.value?.id!!))
+        _calendarData.postValue(cherishUser.value?.id?.let {
+            mainRepository.getChipsData(
+                it
+            )
+        })
     }
 
     // [Review] Server Connection done!
     fun sendReviewToServer(reviewWateringReq: ReviewWateringReq) = viewModelScope.launch {
         mainRepository.sendReviewData(reviewWateringReq)
+        SimpleLogger.logI(mainRepository.sendReviewData(reviewWateringReq).reviewScore.toString())
     }
 
     // [DelayWatering] Server Connection done!
@@ -97,7 +98,7 @@ class MainViewModel(
         get() = _postponeData
 
     fun getPostPoneWateringCount() = viewModelScope.launch {
-        _postponeData.postValue(mainRepository.getPostponeCount(dummyCherishId))
+        _postponeData.postValue(mainRepository.getPostponeCount(cherishUser.value?.id!!))
     }
 
     fun postponeWateringDate(postponeWateringDateReq: PostponeWateringDateReq) =

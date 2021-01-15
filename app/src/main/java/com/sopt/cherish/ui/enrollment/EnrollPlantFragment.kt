@@ -75,8 +75,8 @@ class EnrollPlantFragment : Fragment() {
             val user_water = userwater.substring(6, 7).toInt()
             val usertime = binding.waterAlarmTime.text.toString()
 
-            val userid= arguments?.getInt("useridend")?.toInt()
-            Log.d("enrollplnatfrgment",userid.toString())
+            val userid = arguments?.getInt("useridend")?.toInt()
+            Log.d("enrollplnatfrgment", userid.toString())
             val body = userid?.let { it1 ->
                 RequestEnrollData(
                     name = username.toString(),
@@ -121,7 +121,10 @@ class EnrollPlantFragment : Fragment() {
                                                         "plant_explanation",
                                                         it.data.plant.explanation
                                                     )
-                                                    putString("plant_modify", it.data.plant.modifier)
+                                                    putString(
+                                                        "plant_modify",
+                                                        it.data.plant.modifier
+                                                    )
                                                     putString(
                                                         "plant_mean",
                                                         it.data.plant.flower_meaning

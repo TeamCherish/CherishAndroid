@@ -2,6 +2,7 @@ package com.sopt.cherish.ui.review
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import android.widget.EditText
 import androidx.activity.viewModels
@@ -28,6 +29,8 @@ import java.util.*
 /**
  * Created On 01-05 by SSong-develop
  * data 이동은 liveData를 사용해서 할 예정
+ * 이 뷰 안씀!!!!
+ * 안쓰는데 혹시 몰라서 디자이너랑 상의해봐야함
  */
 class ReviewActivity : AppCompatActivity() {
 
@@ -39,8 +42,7 @@ class ReviewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding: ActivityReviewBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_review)
-        binding.mainViewModel = viewModel
-        SimpleLogger.logI(intent.getStringExtra("userNickname").toString())
+        Log.d("hello", intent.getBundleExtra("user")?.getString("userNickname").toString())
         initializeView(binding)
         addUserStatusWithChip(binding)
         addLimitNumberOfKeywordCharacters(binding)
@@ -81,7 +83,7 @@ class ReviewActivity : AppCompatActivity() {
 
     private fun showLoadingDialog() {
         lifecycleScope.launch(Dispatchers.IO) {
-            CustomDialogFragment(R.layout.sample_lottie).show(supportFragmentManager, TAG)
+            CustomDialogFragment(R.layout.dialog_loading).show(supportFragmentManager, TAG)
             delay(2000)
             // 만약에 홈 프라그먼트에서 물 주는 애니메이션을 해야한다 그러면 finishActivity로 변경해야할 수도 있음
             finish()
@@ -92,7 +94,6 @@ class ReviewActivity : AppCompatActivity() {
         // todo : 한글 키보드는 ENTER를 치게 되면 줄바꿈이 된다. 이거 처리를 해줘야 한다.
         // 이거 처리만 해주면 끝이 납니다
         // 글자수에 따라 엔터를 먹히지 않게 한다던지 하면 될거 같음
-        // 칩이 늘어날 떄 스크롤 뷰도 expand되어야 하는데 이 이슈가 조금 힘들거 같음
         binding.reviewEditKeyword.setOnKeyListener { view, keyCode, keyEvent ->
             if (keyEvent.action == KeyEvent.ACTION_DOWN || keyCode == KeyEvent.KEYCODE_ENTER) {
                 val et = view as EditText
@@ -119,7 +120,7 @@ class ReviewActivity : AppCompatActivity() {
             SimpleLogger.logI(date.toString())
             viewModel.sendReviewToServer(
                 reviewWateringReq = ReviewWateringReq(
-                    viewModel.today, binding.reviewMemo.text.toString(),
+                    binding.reviewMemo.text.toString(),
                     binding.reviewFlexBox.getChip(0)?.text.toString(),
                     binding.reviewFlexBox.getChip(1)?.text.toString(),
                     binding.reviewFlexBox.getChip(2)?.text.toString(),
@@ -136,5 +137,4 @@ class ReviewActivity : AppCompatActivity() {
             finish()
         }
     }
-
 }

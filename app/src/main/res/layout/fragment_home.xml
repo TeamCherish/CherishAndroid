@@ -96,7 +96,7 @@
             android:id="@+id/home_affection_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_26dp"
+            android:layout_marginStart="@dimen/margin_29dp"
             android:font="@font/notosanscjkkr_regular"
             android:textColor="@color/white"
             android:textSize="12sp"
@@ -123,18 +123,18 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/home_standardBottomSheet"
-                style="?attr/bottomSheetStyle"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@drawable/dialog_round_corner"
                 app:behavior_fitToContents="false"
                 app:behavior_hideable="false"
                 app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
-                <TextView
-                    android:layout_width="150dp"
-                    android:layout_height="10dp"
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:background="#f0f0f0"
+                    android:src="@drawable/modal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
