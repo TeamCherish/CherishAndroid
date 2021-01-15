@@ -24,6 +24,7 @@ import com.sopt.cherish.util.extension.shortToast
 /**
  * Created on 2020-01-03 by SSong-develop
  * popUp_Contact
+ * todo : Calendar CherishId 7번이 이상함? date 타입이 다른거 같은데
  */
 
 class ContactDialogFragment : DialogFragment(), View.OnClickListener {
