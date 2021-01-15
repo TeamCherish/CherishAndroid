@@ -194,43 +194,85 @@ class DetailPlantFragment : Fragment() {
                                     binding.recyclerDetail.setHasFixedSize(true)
 
                                 } else {
-                                    var memoList = arrayListOf<MemoListDataclass>(
-                                        MemoListDataclass(
-                                            "_ _",
-                                            "이 날의 기록이 없어요!"
-                                        ),
-                                        MemoListDataclass(
-                                            "_ _",
-                                            "이 날의 기록이 없어요!"
-                                        )
-                                    )
 
-                                    val mAdapter = DetailMemoAdapter(memoList)
-                                    binding.recyclerDetail.adapter = mAdapter
 
-                                    binding.recyclerDetail.addItemDecoration(
-                                        VerticalSpaceItemDecoration(
-                                            20
+                                    Log.d("asdfasdf",it.data.reviews.size.toString())
+                                    if(it.data.reviews.size==1){
+                                        var memoList = arrayListOf<MemoListDataclass>(
+
+                                            MemoListDataclass(
+                                                it.data.reviews[0].water_date,
+                                                it.data.reviews[0].review
+                                            ),
                                         )
-                                    )
-                                    mAdapter.setItemClickListener(object :
-                                        DetailMemoAdapter.ItemClickListener {
-                                        override fun onClick(view: View, position: Int) {
-                                            val item = mAdapter.memolist[position]
-                                            val transaction =
-                                                parentFragmentManager.beginTransaction()
-                                            transaction.replace(
-                                                R.id.fragment_detail,
-                                                CalendarFragment()
+                                        val mAdapter = DetailMemoAdapter(memoList)
+                                        binding.recyclerDetail.adapter = mAdapter
+
+                                        binding.recyclerDetail.addItemDecoration(
+                                            VerticalSpaceItemDecoration(
+                                                20
                                             )
-                                            transaction.addToBackStack(null)
-                                            transaction.commit()
-                                        }
-                                    })
+                                        )
+                                        mAdapter.setItemClickListener(object :
+                                            DetailMemoAdapter.ItemClickListener {
+                                            override fun onClick(view: View, position: Int) {
+                                                val item = mAdapter.memolist[position]
+                                                val transaction =
+                                                    parentFragmentManager.beginTransaction()
+                                                transaction.replace(
+                                                    R.id.fragment_detail,
+                                                    CalendarFragment()
+                                                )
+                                                transaction.addToBackStack(null)
+                                                transaction.commit()
+                                            }
+                                        })
 
-                                    binding.recyclerDetail.layoutManager =
-                                        LinearLayoutManager(context)
-                                    binding.recyclerDetail.setHasFixedSize(true)
+                                        binding.recyclerDetail.layoutManager =
+                                            LinearLayoutManager(context)
+                                        binding.recyclerDetail.setHasFixedSize(true)
+                                    }
+                                    else if(it.data.reviews.size==2){
+                                        var memoList = arrayListOf<MemoListDataclass>(
+
+                                            MemoListDataclass(
+                                                it.data.reviews[0].water_date,
+                                                it.data.reviews[0].review
+                                            ),
+                                            MemoListDataclass(
+                                                it.data.reviews[1].water_date,
+                                                it.data.reviews[1].review
+                                            )
+                                        )
+                                        val mAdapter = DetailMemoAdapter(memoList)
+                                        binding.recyclerDetail.adapter = mAdapter
+
+                                        binding.recyclerDetail.addItemDecoration(
+                                            VerticalSpaceItemDecoration(
+                                                20
+                                            )
+                                        )
+                                        mAdapter.setItemClickListener(object :
+                                            DetailMemoAdapter.ItemClickListener {
+                                            override fun onClick(view: View, position: Int) {
+                                                val item = mAdapter.memolist[position]
+                                                val transaction =
+                                                    parentFragmentManager.beginTransaction()
+                                                transaction.replace(
+                                                    R.id.fragment_detail,
+                                                    CalendarFragment()
+                                                )
+                                                transaction.addToBackStack(null)
+                                                transaction.commit()
+                                            }
+                                        })
+
+                                        binding.recyclerDetail.layoutManager =
+                                            LinearLayoutManager(context)
+                                        binding.recyclerDetail.setHasFixedSize(true)
+                                    }
+
+
                                 }
 
 
