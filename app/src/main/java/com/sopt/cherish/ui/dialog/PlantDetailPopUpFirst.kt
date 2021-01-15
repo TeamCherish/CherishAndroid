@@ -13,27 +13,29 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import com.google.android.material.behavior.SwipeDismissBehavior
 import com.sopt.cherish.R
+import com.sopt.cherish.databinding.FragmentAlertPlantDialogBinding
 import com.sopt.cherish.databinding.FragmentPlantDetailPopUpFirstBinding
 
 
 class PlantDetailPopUpFirst : Fragment() {
 
+    private var _binding: FragmentPlantDetailPopUpFirstBinding?=null
+    private val binding get()=_binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val binding: FragmentPlantDetailPopUpFirstBinding =
-            DataBindingUtil.inflate(
-                inflater,
-                R.layout.fragment_plant_detail_pop_up_first,
-                container,
-                false
-            )
+        _binding= FragmentPlantDetailPopUpFirstBinding.inflate(inflater,container,false)
+
         return binding.root
 
     }
 
+    override fun onDestroy(){
+        super.onDestroy()
+        _binding=null
+    }
 
 }
