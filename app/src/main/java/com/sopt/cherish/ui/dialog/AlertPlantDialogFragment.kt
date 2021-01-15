@@ -13,7 +13,7 @@ import com.sopt.cherish.databinding.FragmentPlantDetailPopUpFirstBinding
 import com.sopt.cherish.ui.adapter.DialogViewPagerAdapter
 
 
-class AlertPlantDialogFragment : DialogFragment() {
+class AlertPlantDialogFragment : DialogFragment(), View.OnClickListener {
 
     private lateinit var viewpagerAdapter:DialogViewPagerAdapter
     private var _binding:FragmentAlertPlantDialogBinding?=null
@@ -45,4 +45,7 @@ class AlertPlantDialogFragment : DialogFragment() {
         _binding=null
     }
 
+    override fun onClick(view: View?) {
+        dismiss()
+    }
 }

@@ -1,80 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
-        <variable
-            name="mainViewModel"
-            type="com.sopt.cherish.ui.dialog.PlantDetailPopUpFirst" />
-    </data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="315dp"
+        android:layout_height="410dp"
+        android:id="@+id/dialog_first"
+        app:cardCornerRadius="@dimen/radius_20dp">
 
-        <androidx.cardview.widget.CardView
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:backgroundTint="@color/white"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/dialog_first"
-            app:cardCornerRadius="@dimen/radius_20dp">
+            android:layout_height="match_parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:backgroundTint="@color/white"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/flower_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:text="1단계"
+                android:font="@font/notosanscjkkr_bold"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="49dp"/>
 
-                <ImageView
-                    android:id="@+id/watering_image_graphic"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_60dp"
-                    android:src="@drawable/img_popup_gaphic"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <ImageView
+                android:id="@+id/cancel_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="22dp"
+                android:src="@drawable/icn_cancel"
+                android:layout_marginEnd="22dp"/>
 
-                <TextView
-                    android:id="@+id/watering_description"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_13dp"
-                    android:fontFamily="@font/notosanscjkkr_medium"
-                    android:text="두번째"
-                    android:gravity="center"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="@id/watering_image_graphic"
-                    app:layout_constraintStart_toStartOf="@id/watering_image_graphic"
-                    app:layout_constraintTop_toBottomOf="@id/watering_image_graphic" />
+            <ImageView
+                android:layout_width="94dp"
+                android:layout_height="134dp"
+                app:layout_constraintStart_toStartOf="@+id/flower_name"
+                app:layout_constraintEnd_toEndOf="@+id/flower_name"
+                app:layout_constraintTop_toBottomOf="@+id/flower_name"
+                android:layout_marginTop="29dp"
+                android:id="@+id/flower_img"/>
 
-                <Button
-                    android:id="@+id/watering_accept_btn"
-                    style="@style/RoundButton.GreenMain"
-                    android:layout_width="280dp"
-                    android:layout_height="48dp"
-                    android:layout_marginStart="@dimen/margin_18dp"
-                    android:layout_marginTop="37dp"
-                    android:layout_marginEnd="@dimen/margin_18dp"
-                    android:text="@string/watering"
-                    app:layout_constraintEnd_toEndOf="@id/watering_image_graphic"
-                    app:layout_constraintStart_toStartOf="@id/watering_image_graphic"
-                    app:layout_constraintTop_toBottomOf="@id/watering_description" />
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip"
+                style="@style/CustomChip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:font="@font/notosanscjkkr_regular"
+                android:includeFontPadding="false"
+                android:textColor="#8189b3"
+                android:text="새싹"
+                android:textSize="@dimen/text_12sp"
+                app:chipStrokeColor="#8189b3"
+                app:chipStrokeWidth="1dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="@id/flower_img"
+                app:layout_constraintEnd_toEndOf="@+id/flower_img"
+                app:layout_constraintTop_toBottomOf="@id/flower_img" />
 
-                <TextView
-                    android:id="@+id/watering_next_time_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="17dp"
-                    android:layout_marginBottom="28dp"
-                    android:fontFamily="@font/notosanscjkkr_regular"
-                    android:text="@string/next_time"
-                    android:textColor="#404040"
-                    android:textSize="16sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@id/watering_image_graphic"
-                    app:layout_constraintStart_toStartOf="@id/watering_image_graphic"
-                    app:layout_constraintTop_toBottomOf="@id/watering_accept_btn" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/watering_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="새싹이 쏘옥 얼굴을 내밀었어요!"
+                android:textAlignment="center"
+                app:layout_constraintStart_toStartOf="@+id/chip"
+                app:layout_constraintEnd_toEndOf="@+id/chip"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@+id/chip"/>
 
-        </androidx.cardview.widget.CardView>
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
-</layout>
+            <TextView
+                android:id="@+id/first"
+                android:layout_width="7dp"
+                android:layout_height="7dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/watering_text"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="42dp"
+                android:layout_marginBottom="26dp"
+                android:background="@drawable/dialog_circle_gray"
+                android:layout_marginStart="129dp"/>
+
+            <TextView
+                android:id="@+id/second"
+                android:layout_width="7dp"
+                android:layout_height="7dp"
+                app:layout_constraintStart_toEndOf="@+id/first"
+                app:layout_constraintTop_toBottomOf="@+id/watering_text"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="42dp"
+                android:layout_marginBottom="26dp"
+                android:background="@drawable/dialog_circle_green"
+                android:layout_marginStart="10dp"/>
+
+            <TextView
+                android:id="@+id/third"
+                android:layout_width="7dp"
+                android:layout_height="7dp"
+                app:layout_constraintStart_toEndOf="@+id/second"
+                app:layout_constraintTop_toBottomOf="@+id/watering_text"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="42dp"
+                android:layout_marginBottom="26dp"
+                android:background="@drawable/dialog_circle_gray"
+                android:layout_marginStart="10dp"/>
+
+            <TextView
+                android:id="@+id/fourth"
+                android:layout_width="7dp"
+                android:layout_height="7dp"
+                app:layout_constraintStart_toEndOf="@+id/third"
+                app:layout_constraintTop_toBottomOf="@+id/watering_text"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginTop="42dp"
+                android:layout_marginBottom="26dp"
+                android:background="@drawable/dialog_circle_gray"
+                android:layout_marginStart="10dp"/>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
