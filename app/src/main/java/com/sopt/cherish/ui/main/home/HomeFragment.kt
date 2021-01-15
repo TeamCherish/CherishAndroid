@@ -178,7 +178,8 @@ class HomeFragment : Fragment(), OnItemClickListener {
         // 식물의 성장단계 3개 또한 그렇게 할거임
         // 그럼 디자인에서 배경까지 묶은 이미지를 url로 파싱해서 주기로 함!
         Glide.with(requireContext())
-            .load(viewModel.americanblueImageUri)
+            .load(viewModel.cherishUser.value!!.homeMainBackgroundImageUrl)
+            .override(360.dp, 800.dp)
             .into(binding.homePlantImage)
     }
 

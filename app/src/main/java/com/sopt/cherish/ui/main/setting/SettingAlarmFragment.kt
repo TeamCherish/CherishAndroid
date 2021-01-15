@@ -24,10 +24,7 @@ class SettingAlarmFragment : Fragment() {
 
         binding.imageViewBack.setOnClickListener {
             (activity as MainActivity).onBackPressed()
-
         }
-
-
 
         return binding.root
     }

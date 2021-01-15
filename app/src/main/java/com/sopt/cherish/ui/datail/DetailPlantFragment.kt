@@ -149,7 +149,6 @@ class DetailPlantFragment : Fragment() {
                                         DetailMemoAdapter.ItemClickListener {
                                         override fun onClick(view: View, position: Int) {
                                             val item = mAdapter.memolist[position]
-                                            Log.d("SSS", "${position}번 리스트 선택")
                                             val transaction =
                                                 parentFragmentManager.beginTransaction()
                                             transaction.replace(
@@ -166,9 +165,7 @@ class DetailPlantFragment : Fragment() {
                                     binding.recyclerDetail.setHasFixedSize(true)
 
                                 } else {
-
                                     var memoList = arrayListOf<MemoListDataclass>(
-
                                         MemoListDataclass(
                                             "_ _",
                                             "이 날의 기록이 없어요!"
@@ -191,7 +188,6 @@ class DetailPlantFragment : Fragment() {
                                         DetailMemoAdapter.ItemClickListener {
                                         override fun onClick(view: View, position: Int) {
                                             val item = mAdapter.memolist[position]
-                                            Log.d("SSS", "${position}번 리스트 선택")
                                             val transaction =
                                                 parentFragmentManager.beginTransaction()
                                             transaction.replace(
