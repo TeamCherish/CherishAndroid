@@ -32,5 +32,4 @@ class CherishMaterialCalendarView constructor(context: Context, attrs: Attribute
             layoutParams.height = 372.dp
         }
     }
-
 }
