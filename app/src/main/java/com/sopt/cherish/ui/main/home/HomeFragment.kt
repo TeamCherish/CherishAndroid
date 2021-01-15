@@ -54,6 +54,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
 
         val homeCherryListAdapter = HomeCherryListAdapter(this)
         viewModel.fetchUsers()
+
         initializeView()
         initializeBottomSheetBehavior()
         setAdapterData(homeCherryListAdapter)
@@ -114,6 +115,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
     }
 
     // 최초 화면이 보여질때
+    // todo : 등록과 이 플로우 연결 해줘야 함
     private fun initializeView() {
         viewModel.cherishUsers.observe(viewLifecycleOwner) {
             viewModel.cherishUser.value = it.userData.userList[0]

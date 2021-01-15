@@ -1,55 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.main.home.HomeBlankActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="188dp"
-        android:src="@drawable/downflower"
-        android:id="@+id/down_flower"/>
+    <data>
 
-    <TextView
-        android:id="@+id/blank_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="식물을 추가해주세요!"
-        android:font="@font/notosanscjkkr_bold"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        android:layout_marginTop="@dimen/margin_20dp"
-        app:layout_constraintTop_toBottomOf="@+id/down_flower"
-        app:layout_constraintStart_toStartOf="@+id/down_flower"
-        app:layout_constraintEnd_toEndOf="@+id/down_flower"/>
+    </data>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="아직 등록한 식물이 없어요"
-        android:font="@font/notosanscjkkr_medium"
-        android:textSize="16sp"
-        android:textColorHint="#aaaaaa"
-        android:layout_marginTop="2dp"
-        app:layout_constraintTop_toBottomOf="@+id/blank_text"
-        app:layout_constraintStart_toStartOf="@+id/blank_text"
-        app:layout_constraintEnd_toEndOf="@+id/blank_text"/>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.main.home.HomeBlankActivity">
 
-    <Button
-        android:id="@+id/startBtn"
-        android:layout_width="328dp"
-        android:layout_height="48dp"
-        style="@style/RoundButton.GreenMain"
-        android:text="시작하기"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="30dp"/>
+        <ImageView
+            android:id="@+id/down_flower"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="188dp"
+            android:src="@drawable/downflower"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/blank_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_20dp"
+            android:font="@font/notosanscjkkr_bold"
+            android:text="@string/home_blank_enroll_plant_text"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/down_flower"
+            app:layout_constraintStart_toStartOf="@+id/down_flower"
+            app:layout_constraintTop_toBottomOf="@+id/down_flower" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:font="@font/notosanscjkkr_medium"
+            android:text="@string/home_blank_no_enroll_plant_text"
+            android:textColorHint="#aaaaaa"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/blank_text"
+            app:layout_constraintStart_toStartOf="@+id/blank_text"
+            app:layout_constraintTop_toBottomOf="@+id/blank_text" />
+
+        <Button
+            android:id="@+id/startBtn"
+            style="@style/RoundButton.GreenMain"
+            android:layout_width="328dp"
+            android:layout_height="48dp"
+            android:layout_marginBottom="30dp"
+            android:text="@string/home_blank_start_btn_text"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
