@@ -19,6 +19,7 @@
             android:id="@+id/home_plant_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/cherish_light_black"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -80,46 +81,54 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageView
+            android:id="@+id/home_move_plant_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="400dp"
+            android:layout_marginEnd="19dp"
+            android:src="@drawable/main_icn_move_detailview"
+            app:layout_constraintEnd_toEndOf="@id/home_show_all_alarm"
+            app:layout_constraintTop_toBottomOf="@id/home_show_all_alarm" />
+
         <ProgressBar
             android:id="@+id/home_affection_progressbar"
             style="@android:style/Widget.ProgressBar.Horizontal"
             android:layout_width="13dp"
             android:layout_height="165dp"
             android:layout_marginStart="@dimen/margin_29dp"
-            android:layout_marginTop="165dp"
+            android:layout_marginTop="105dp"
             android:max="100"
             android:progressDrawable="@drawable/progress_drawable_vertical"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/home_watering_btn"
             app:layout_constraintTop_toBottomOf="@+id/home_watering_btn" />
 
         <TextView
             android:id="@+id/home_affection_rating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_29dp"
             android:font="@font/notosanscjkkr_regular"
             android:textColor="@color/white"
             android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/home_affection_progressbar"
+            app:layout_constraintStart_toStartOf="@id/home_affection_progressbar"
             app:layout_constraintTop_toBottomOf="@+id/home_affection_progressbar" />
 
         <TextView
             android:id="@+id/home_user_like_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_20dp"
             android:font="@font/notosanscjkkr_regular"
             android:text="@string/home_user_affection"
             android:textColor="@color/white"
             android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/home_affection_rating"
+            app:layout_constraintStart_toStartOf="@id/home_affection_rating"
             app:layout_constraintTop_toBottomOf="@+id/home_affection_rating" />
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:layout_editor_absoluteX="-16dp"
-            tools:layout_editor_absoluteY="0dp">
+            android:layout_height="match_parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/home_standardBottomSheet"

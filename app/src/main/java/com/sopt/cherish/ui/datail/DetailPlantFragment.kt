@@ -96,8 +96,7 @@ class DetailPlantFragment : Fragment() {
                                 if ((it.data.birth.toString()) == "Invalid Date") {
                                     binding.textViewBirth.text = "미입력"
 
-                                }
-                                else{
+                                } else {
                                     binding.textViewBirth.text = it.data.birth.toString()
 
                                 }
