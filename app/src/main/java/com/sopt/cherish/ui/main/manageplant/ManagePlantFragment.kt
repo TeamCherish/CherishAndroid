@@ -153,6 +153,7 @@ class ManagePlantFragment : Fragment() {
 
     private fun initializeTabLayoutView(binding: FragmentManagePlantBinding) {
 
+
         binding.myPageBottomTab.addTab(binding.myPageBottomTab.newTab().setText("식물"))
         binding.myPageBottomTab.addTab(binding.myPageBottomTab.newTab().setText("연락처"))
 
@@ -246,6 +247,7 @@ class ManagePlantFragment : Fragment() {
 
     private fun initializeServerRequest(binding: FragmentManagePlantBinding) {
 
+
         requestData.myPageAPI.fetchUserPage(viewModel.userId.value!!)
             .enqueue(
                 object : Callback<MyPageUserRes> {
@@ -275,6 +277,7 @@ class ManagePlantFragment : Fragment() {
 
                                 val tabText = "식물 " + it.myPageUserData.totalCherish.toString()
                                 binding.myPageBottomTab.getTabAt(0)!!.text = tabText
+
 
                                 Log.d("list", it.myPageUserData.result.toString())
 

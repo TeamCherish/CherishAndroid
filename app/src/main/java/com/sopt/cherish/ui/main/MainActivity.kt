@@ -20,10 +20,20 @@ import com.sopt.cherish.util.SimpleLogger
 class MainActivity : AppCompatActivity() {
 
     private lateinit var viewModel: MainViewModel
+    private lateinit var binding: ActivityMainBinding
+
+    override fun onResume() {
+        super.onResume()
+        initializeViewModel()
+        initializeViewModelData()
+        showInitialFragment()
+        setBottomNavigationListener(binding)
+
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding: ActivityMainBinding =
+        binding =
             DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         initializeViewModel()
@@ -85,6 +95,7 @@ class MainActivity : AppCompatActivity() {
         val transAction = supportFragmentManager.beginTransaction()
         when (index) {
             0 -> {
+
                 transAction.replace(R.id.my_page_bottom_container, PlantFragment()).commit()
             }
             1 -> {
