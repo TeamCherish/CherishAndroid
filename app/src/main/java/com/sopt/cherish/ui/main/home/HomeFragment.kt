@@ -45,6 +45,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
         private val TAG = "HomeFragment"
     }
 
+    // todo : 최대한 디자이너들이 작업한거 보여줄 수 있게 퍼포먼스 보여주는 방법 생각
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -115,7 +116,6 @@ class HomeFragment : Fragment(), OnItemClickListener {
     }
 
     // 최초 화면이 보여질때
-    // todo : 등록과 이 플로우 연결 해줘야 함
     private fun initializeView() {
         viewModel.cherishUsers.observe(viewLifecycleOwner) {
             viewModel.cherishUser.value = it.userData.userList[0]
