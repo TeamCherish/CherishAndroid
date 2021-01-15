@@ -42,12 +42,15 @@ class DetailPlantActivity : AppCompatActivity() {
 
         binding = ActivityDetailPlantBinding.inflate(layoutInflater)
 
+        val userId: Int
+
         initializeViewModel()
         Log.d("qwer", intent.getIntExtra("plantId", 100).toString())
         plantId = intent.getIntExtra("plantId", 0)
 
         cherishid = intent.getIntExtra("cherishId", 0)
         Log.d("qwer", cherishid.toString())
+        viewModel.cherishId.value = cherishid
 
         cherishPhoneNumber = intent.getStringExtra("cherishUserPhoneNumber").toString()
         viewModel.cherishPhoneNumber.value = cherishPhoneNumber
@@ -58,6 +61,10 @@ class DetailPlantActivity : AppCompatActivity() {
         userNickname = intent.getStringExtra("userNickname").toString()
         viewModel.userNickname.value = userNickname
 
+        userId = intent.getIntExtra("userId", 0)
+        viewModel.userId.value = userId
+
+        viewModel.fetchCalendarData()
         setFragment(DetailPlantFragment())
         setActionBarTitle("식물 상세")
         setContentView(binding.root)

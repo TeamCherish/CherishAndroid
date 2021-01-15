@@ -124,7 +124,7 @@ class DetailPlantDialogReviewFragment : DialogFragment() {
                     binding.detailPlantReviewFlexBox.getChip(0)?.text.toString(),
                     binding.detailPlantReviewFlexBox.getChip(1)?.text.toString(),
                     binding.detailPlantReviewFlexBox.getChip(2)?.text.toString(),
-                    1
+                    viewModel.cherishId.value.toString()
                 )
             )
             showLoadingDialog()

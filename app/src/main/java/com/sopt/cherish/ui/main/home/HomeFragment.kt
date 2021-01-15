@@ -140,22 +140,22 @@ class HomeFragment : Fragment(), OnItemClickListener {
     private fun navigateDetailPlant(userId: Int, cherishId: Int) {
         val intent = Intent(activity, DetailPlantActivity::class.java)
         intent.putExtra("userId", userId)
-        intent.putExtra("cherishId", cherishId)
+        intent.putExtra("cherishId", viewModel.cherishUser.value?.id)
+        Log.d("log2", viewModel.cherishUser.value?.id.toString())
         intent.putExtra("cherishUserPhoneNumber", viewModel.cherishUser.value?.phoneNumber)
         intent.putExtra("cherishNickname", viewModel.cherishUser.value?.nickName)
         intent.putExtra("userNickname", viewModel.userNickName.value)
+        intent.putExtra("userId", viewModel.userId.value)
         startActivity(intent)
     }
 
     // recyclerview Item click event
     override fun onItemClick(itemBinding: MainCherryItemBinding, position: Int) {
         viewModel.cherishUsers.observe(viewLifecycleOwner) {
-            // contact Dialog , 여기서 분기처리하면 될거임~~~
             viewModel.cherishUser.value = it.userData.userList[position]
+
             it.userData.userList[position].apply {
                 initializeViewOnItemClick(this)
-            }.also { positionUser ->
-                viewModel.cherishUser.value = positionUser
             }
         }
     }
@@ -179,7 +179,6 @@ class HomeFragment : Fragment(), OnItemClickListener {
                 binding.homeRemainDate.text = "D-Day"
             }
         }
-        Log.d("tete", PixelUtil.screenWidth.toString())
         Glide.with(requireContext())
             .load(viewModel.cherishUser.value!!.homeMainBackgroundImageUrl)
             .override(PixelUtil.screenWidth.pixel, PixelUtil.screenHeight.pixel)
