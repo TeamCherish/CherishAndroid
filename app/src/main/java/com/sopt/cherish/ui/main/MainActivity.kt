@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
                     transAction.replace(R.id.main_fragment_container, HomeFragment().apply {
                         arguments = Bundle().apply {
                             putInt("userid", intent.getIntExtra("userId", 0))
-                            Log.d("mainactivity",intent.getIntExtra("userId", 0).toString())
+                            Log.d("mainactivity", intent.getIntExtra("userId", 0).toString())
                         }
 
                     }).commit()

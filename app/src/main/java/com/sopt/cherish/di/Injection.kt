@@ -35,7 +35,7 @@ object Injection {
 
     private fun provideMainRepository(): MainRepository {
         return MainRepository(
-            provideUserAPI(), provideMyPageAPI(), provideReviewAPI(),
+            provideUserAPI(), provideReviewAPI(),
             provideWateringAPI(), provideCalendarAPI()
         )
     }

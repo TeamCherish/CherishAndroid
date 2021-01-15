@@ -14,12 +14,13 @@ class HomeCherryListAdapter(
     class MainViewHolder(private val binding: MainCherryItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(userData: User, clickListener: OnItemClickListener) {
+            val itemPosition = adapterPosition
             binding.apply {
                 homeUserData = userData
                 executePendingBindings()
             }
             binding.root.setOnClickListener {
-                clickListener.onItemClick(binding, userData)
+                clickListener.onItemClick(binding, itemPosition)
             }
         }
     }
@@ -40,5 +41,5 @@ class HomeCherryListAdapter(
 }
 
 interface OnItemClickListener {
-    fun onItemClick(itemBinding: MainCherryItemBinding, user: User)
+    fun onItemClick(itemBinding: MainCherryItemBinding, position: Int)
 }

@@ -16,10 +16,9 @@ import androidx.fragment.app.activityViewModels
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.DialogContactBinding
 import com.sopt.cherish.ui.main.MainViewModel
-import com.sopt.cherish.ui.review.ReviewActivity
+import com.sopt.cherish.ui.review.DialogReviewFragment
 import com.sopt.cherish.util.DialogUtil
 import com.sopt.cherish.util.PermissionUtil
-import com.sopt.cherish.util.SimpleLogger
 import com.sopt.cherish.util.extension.shortToast
 
 /**
@@ -40,9 +39,8 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
             DataBindingUtil.inflate(inflater, R.layout.dialog_contact, container, false)
         viewModel.fetchCalendarData()
         binding.mainViewModel = viewModel
+        initializeChip(binding)
 
-
-        // 유저 닉네임과 상태 chip들을 서버에서 받은 값으로 전해서 표현해야한다.
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         binding.contactCall.setOnClickListener {
@@ -60,6 +58,21 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
         return binding.root
     }
 
+    private fun initializeChip(binding: DialogContactBinding) {
+        viewModel.calendarData.observe(viewLifecycleOwner) {
+            if (it.waterData.calendarData.isEmpty()) {
+                binding.contactUserStatusFirstChip.text = "채워줘ㅠ"
+                binding.contactUserStatusSecondChip.text = "채워줘ㅠ"
+                binding.contactUserStatusThridChip.text = "채워줘ㅠ"
+            } else {
+                viewModel.userStatus1.value = it.waterData.calendarData[0].userStatus1
+                viewModel.userStatus2.value = it.waterData.calendarData[0].userStatus2
+                viewModel.userStatus3.value = it.waterData.calendarData[0].userStatus3
+                setChip(binding)
+            }
+        }
+    }
+
     override fun onResume() {
         super.onResume()
         DialogUtil.adjustDialogSize(this, 0.875f, 0.542f)
@@ -67,6 +80,27 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
 
     override fun onClick(view: View?) {
         dismiss()
+    }
+
+    private fun setChip(binding: DialogContactBinding) {
+        viewModel.userStatus1.observe(viewLifecycleOwner) {
+            if (it == null) {
+                binding.contactUserStatusFirstChip.text = " "
+            }
+            binding.contactUserStatusFirstChip.text = it
+        }
+        viewModel.userStatus2.observe(viewLifecycleOwner) {
+            if (it == null) {
+                binding.contactUserStatusSecondChip.text = " "
+            }
+            binding.contactUserStatusSecondChip.text = it
+        }
+        viewModel.userStatus3.observe(viewLifecycleOwner) {
+            if (it == null) {
+                binding.contactUserStatusThridChip.text = " "
+            }
+            binding.contactUserStatusThridChip.text = it
+        }
     }
 
     private fun navigateCall() {
@@ -89,12 +123,6 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
         if (findKakaoTalk()) {
             val kakaoIntent = context?.packageManager?.getLaunchIntentForPackage("com.kakao.talk")
             kakaoIntent?.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            viewModel.userNickName.observe(viewLifecycleOwner) {
-                kakaoIntent?.putExtra("userNickname", it)
-            }
-            viewModel.cherishUser.observe(viewLifecycleOwner) {
-                kakaoIntent?.putExtra("cherishNickname", it.nickName)
-            }
             startActivityForResult(kakaoIntent, codeThatReviewPage)
         } else {
             shortToast(requireContext(), "카카오톡이 없어요 ㅠ")
@@ -105,8 +133,6 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
         // 함수화 해야합니다.
         val callIntent =
             Intent(Intent.ACTION_CALL, Uri.parse("tel:${viewModel.cherishUser.value?.phoneNumber}"))
-        callIntent.putExtra("userNickname", viewModel.userNickName.value)
-        callIntent.putExtra("cherishNickname", viewModel.cherishUser.value?.nickName)
         startActivityForResult(
             callIntent,
             codeThatReviewPage
@@ -118,14 +144,6 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
             Intent.ACTION_SENDTO,
             Uri.parse("smsto:${viewModel.cherishUser.value?.phoneNumber}")
         )
-        viewModel.userNickName.observe(viewLifecycleOwner) {
-            SimpleLogger.logI(it)
-            messageIntent.putExtra("userNickname", it)
-        }
-        viewModel.cherishUser.observe(viewLifecycleOwner) {
-            messageIntent.putExtra("cherishNickname", it.nickName)
-        }
-
         startActivityForResult(
             messageIntent,
             codeThatReviewPage
@@ -133,7 +151,7 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
     }
 
     private fun startReviewAndDismiss() {
-        startActivity(Intent(requireContext(), ReviewActivity::class.java))
+        DialogReviewFragment().show(parentFragmentManager, tag)
         dismiss()
     }
 
