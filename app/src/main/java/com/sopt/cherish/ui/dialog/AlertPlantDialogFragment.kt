@@ -11,7 +11,7 @@ import com.sopt.cherish.databinding.FragmentAlertPlantDialogBinding
 import com.sopt.cherish.ui.adapter.DialogViewPagerAdapter
 
 
-class AlertPlantDialogFragment : DialogFragment(), View.OnClickListener {
+class AlertPlantDialogFragment(cherishid :Int) : DialogFragment(), View.OnClickListener {
 
     private lateinit var viewpagerAdapter: DialogViewPagerAdapter
     private var _binding: FragmentAlertPlantDialogBinding? = null

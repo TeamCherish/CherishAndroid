@@ -84,7 +84,7 @@ class EnrollPlantFragment : Fragment() {
 
 
             if (userwater.substring(8) == "month") {
-                user_water = userwater.substring(6, 7).toInt() * 31
+                user_water = userwater.substring(6, 7).toInt() * 30
                 Log.d("userwater", user_water.toString())
             } else if (userwater.substring(8) == "week") {
                 user_water = (userwater.substring(6, 7).toInt()) * 7
