@@ -20,11 +20,12 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class PlantDetailPopUpFirst : Fragment() {
+class PlantDetailPopUpFirst(cherishId :Int) : Fragment() {
 
     private var _binding: FragmentPlantDetailPopUpFirstBinding? = null
     private val binding get() = _binding!!
     private val requestData = RetrofitBuilder
+    var cherishId=cherishId
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +34,7 @@ class PlantDetailPopUpFirst : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentPlantDetailPopUpFirstBinding.inflate(inflater, container, false)
 
+        Log.d("cherishId in popup: ",cherishId.toString())
         initializeServerRequest(binding)
 
         return binding.root
@@ -47,7 +49,8 @@ class PlantDetailPopUpFirst : Fragment() {
 
     private fun initializeServerRequest(binding: FragmentPlantDetailPopUpFirstBinding) {
 
-        requestData.plantDetailAPI.fetchUserPage(1)
+        //Log.d("cherishId: ",cherishId.toString())
+        requestData.plantDetailAPI.fetchUserPage(cherishId)
             .enqueue(
                 object : Callback<PlantDetailData> {
                     override fun onFailure(call: Call<PlantDetailData>, t: Throwable) {

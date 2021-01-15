@@ -35,6 +35,8 @@ class DetailPlantActivity : AppCompatActivity() {
 
     // var plantid: Int =  intent.getIntExtra("plantId", 100)
     var cherishid = 0
+    var plantId=1
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -42,6 +44,8 @@ class DetailPlantActivity : AppCompatActivity() {
 
 
         Log.d("qwer", intent.getIntExtra("plantId", 100).toString())
+        plantId=intent.getIntExtra("plantId",0)
+
         cherishid = intent.getIntExtra("cherishId", 0)
         Log.d("qwer", cherishid.toString())
 
@@ -124,7 +128,9 @@ class DetailPlantActivity : AppCompatActivity() {
             arguments = Bundle().apply {
 
                 putInt("cherishidgo", cherishid)
-                Log.d("nanana", cherishid.toString())
+                putInt("plantId",plantId)
+
+                //Log.d("nanana", cherishid.toString())
             }
         })
         transaction.commit()
@@ -159,18 +165,6 @@ class DetailPlantActivity : AppCompatActivity() {
             state: RecyclerView.State
         ) {
             outRect.bottom = verticalSpaceHeight
-        }
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == Activity.RESULT_OK) {
-            when (requestCode) {
-                100 -> {
-                    Log.d("check", data!!.getStringExtra("cherishId").toString())
-                }
-            }
         }
     }
 

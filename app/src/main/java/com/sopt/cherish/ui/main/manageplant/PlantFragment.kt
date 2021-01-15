@@ -74,17 +74,20 @@ class PlantFragment : Fragment() {
                                     object : MyPageBottomSheetAdapter.ItemClickListener {
                                         override fun onClick(view: View, position: Int) {
                                             Log.d("onclick", "success")
+
                                             val intent =
                                                 Intent(context, DetailPlantActivity::class.java)
+
                                             intent.putExtra(
-                                                "cherishId",
-                                                it.myPageUserData.result[position].id
+                                                "plantId",
+                                                it.myPageUserData.result[position].plantId
                                             )
                                             Log.d(
-                                                "cherishId",
+                                                "plantId",
                                                 it.myPageUserData.result[position].plantId.toString()
                                             )
-                                            startActivityForResult(intent, 100)
+                                            //startActivityForResult(intent, 100)
+                                            startActivity(intent)
                                         }
                                     }
                                 )

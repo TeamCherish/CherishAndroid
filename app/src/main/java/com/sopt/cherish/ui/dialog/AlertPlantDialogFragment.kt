@@ -17,22 +17,31 @@ class AlertPlantDialogFragment(plantid :Int) : DialogFragment(), View.OnClickLis
     private lateinit var viewpagerAdapter: DialogViewPagerAdapter
     private var _binding: FragmentAlertPlantDialogBinding? = null
     private val binding get() = _binding!!
+
 var plantid=plantid
+
+
+
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+
+        //var cherishId:Int=cherishid
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         Log.d("plantid",plantid.toString())
         _binding = FragmentAlertPlantDialogBinding.inflate(inflater, container, false)
 
+        Log.d("cherishId in fragment",plantid.toString())
         viewpagerAdapter = DialogViewPagerAdapter(childFragmentManager)
         viewpagerAdapter.fragments = listOf(
-            PlantDetailPopUpFirst(),
-            PlantDetailPopUpSecond(),
-            PlantDetailPopUpThird(),
-            PlantDetailPopUpFourth()
+            PlantDetailPopUpFirst(plantid),
+            PlantDetailPopUpSecond(plantid),
+            PlantDetailPopUpThird(plantid),
+            PlantDetailPopUpFourth(plantid)
         )
 
         binding.dialogViewpager.adapter = viewpagerAdapter

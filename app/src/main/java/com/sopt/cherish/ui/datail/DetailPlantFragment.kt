@@ -37,6 +37,7 @@ class DetailPlantFragment : Fragment() {
      var plant_id=0
     //lateinit var memoList:ArrayList<MemoListDataclass>
     var cherishid = 0
+    var plantId=1
     // private lateinit var memoList: ArrayList<MemoListDataclass>
 
     companion object {
@@ -54,6 +55,8 @@ class DetailPlantFragment : Fragment() {
 
         cherishid = arguments?.getInt("cherishidgo")!!
         Log.d("0cherishiddetailplant", cherishid.toString())
+        plantId=arguments?.getInt("plantId")!!
+        Log.d("final plantId: ",plantId.toString())
 
 
 
