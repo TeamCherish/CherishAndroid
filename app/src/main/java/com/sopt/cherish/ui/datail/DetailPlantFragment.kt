@@ -95,7 +95,7 @@ class DetailPlantFragment : Fragment() {
             (activity as DetailPlantActivity).setActionBarTitle("식물 카드")
 
         }
-
+        reset()
     }
 
     fun reset(){
@@ -232,7 +232,7 @@ class DetailPlantFragment : Fragment() {
                                             LinearLayoutManager(context)
                                         binding.recyclerDetail.setHasFixedSize(true)
                                     }
-                                    else if(it.data.reviews.size==2){
+                                    else if(it.data.reviews.size>=2){
                                         var memoList = arrayListOf<MemoListDataclass>(
 
                                             MemoListDataclass(
