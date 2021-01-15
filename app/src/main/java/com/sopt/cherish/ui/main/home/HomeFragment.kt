@@ -201,6 +201,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
         }
         // animationUrl 데이터 갱신해달라고 해야함
         // todo : gif처리하는것만 좀 하면 될거 같음
+        // todo : 정확하게 식물의 3단계를 표현할 것인지? 혹은 gif를 보여줄 것인지?
         Glide.with(requireContext())
             .load(user.userPlantImageUrl)
             .into(binding.homePlantImage)
