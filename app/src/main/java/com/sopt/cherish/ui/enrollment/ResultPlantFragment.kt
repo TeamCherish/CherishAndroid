@@ -28,17 +28,7 @@ class ResultPlantFragment : Fragment() {
         // Inflate the layout for this fragment
 
         val view = inflater.inflate(R.layout.fragment_result_plant, container, false)
-        //enrollToolbar.title="식물 결과"
         binding = FragmentResultPlantBinding.bind(view)
-
-        /*  if (arguments?.getString("plantkey") == "1") {
-              binding.imageView2.setImageResource(R.drawable.cherry)
-          } else if (arguments?.getString("plantkey") == "2") {
-              binding.imageView2.setImageResource(R.drawable.cherry2)
-
-          }*/
-
-        //val token = MyApplication.mySharedPreferences.getValue("token","")
 
         binding.plantExplanation.text = arguments?.getString("plant_explanation")
         binding.textViewModify.text = arguments?.getString("plant_modify")
@@ -49,17 +39,10 @@ class ResultPlantFragment : Fragment() {
         Log.d("url", urlstring.toString())
         Glide.with(this).load(urlstring.toString()).into(binding.imageViewUrl)
 
-        //binding.imageViewUrl. =
-
-        //  binding.textView21.text = arguments?.getString("name")
-        // binding.plantExplanation.text = arguments?.getString("explanation")
-
-
         binding.startbtn.setOnClickListener {
             // LoadingDialog를 보여주면 됨
             activity?.finish()
         }
-
         return view
     }
 
