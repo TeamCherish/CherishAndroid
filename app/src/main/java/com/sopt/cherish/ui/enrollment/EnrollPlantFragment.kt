@@ -3,6 +3,8 @@ package com.sopt.cherish.ui.enrollment
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -35,6 +37,13 @@ class EnrollPlantFragment : Fragment() {
     lateinit var weektime: String
     var switchvalue: Boolean = false
 
+    lateinit var plant_explanation: String
+    lateinit var plant_modify: String
+
+    lateinit var plant_mean: String
+    lateinit var plant_url: String
+
+    var user_water = 0
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -60,7 +69,6 @@ class EnrollPlantFragment : Fragment() {
 
         binding.detailOkBtn.setOnClickListener {
             //  progressON()
-            progressON()
 
             val username = arguments?.getString("phonename")
             val usernickname = binding.editNickname.text.toString()
@@ -72,7 +80,20 @@ class EnrollPlantFragment : Fragment() {
                 7
             ) + "-" + userphone?.substring(7)
             val userwater = binding.waterAlarmWeek.text.toString()
-            val user_water = userwater.substring(6, 7).toInt()
+            user_water = userwater.substring(6, 7).toInt()
+
+
+            if (userwater.substring(8) == "month") {
+                user_water = userwater.substring(6, 7).toInt() * 31
+                Log.d("userwater", user_water.toString())
+            } else if (userwater.substring(8) == "week") {
+                user_water = (userwater.substring(6, 7).toInt()) * 7
+                Log.d("userwater", user_water.toString())
+            } else {
+                user_water = userwater.substring(6, 7).toInt()
+                Log.d("userwater", user_water.toString())
+            }
+
             val usertime = binding.waterAlarmTime.text.toString()
 
             val userid = arguments?.getInt("useridend")?.toInt()
@@ -111,38 +132,48 @@ class EnrollPlantFragment : Fragment() {
 
                                         Log.d("data success!", it.data.plant.flower_meaning)
 
-                                        val transaction = parentFragmentManager.beginTransaction()
-                                        transaction.replace(
-                                            R.id.fragment_enroll,
-                                            ResultPlantFragment().apply {
-                                                arguments = Bundle().apply {
-                                                    //putString("plantkey", binding.waterAlarmWeek.text.toString())
-                                                    putString(
-                                                        "plant_explanation",
-                                                        it.data.plant.explanation
-                                                    )
-                                                    putString(
-                                                        "plant_modify",
-                                                        it.data.plant.modifier
-                                                    )
-                                                    putString(
-                                                        "plant_mean",
-                                                        it.data.plant.flower_meaning
-                                                    )
-                                                    putString("plant_url", it.data.plant.image_url)
 
-                                                }
-                                            })
-                                        transaction.addToBackStack(null)
+                                        plant_explanation = it.data.plant.explanation
+                                        plant_modify = it.data.plant.modifier
+                                        plant_mean = it.data.plant.flower_meaning
+                                        plant_url = it.data.plant.image_url
 
-                                        transaction.commit()
 
                                     }
                             }
                         }
                     )
             }
+            progressON()
+            Handler(Looper.getMainLooper()).postDelayed({
+                val transaction = parentFragmentManager.beginTransaction()
+                transaction.replace(
+                    R.id.fragment_enroll,
+                    ResultPlantFragment().apply {
+                        arguments = Bundle().apply {
+                            //putString("plantkey", binding.waterAlarmWeek.text.toString())
+                            putString(
+                                "plant_explanation",
+                                plant_explanation
+                            )
+                            putString(
+                                "plant_modify",
+                                plant_modify
+                            )
+                            putString(
+                                "plant_mean",
+                                plant_mean
+                            )
+                            putString("plant_url", plant_url)
 
+                        }
+                    })
+                progressOFF()
+                transaction.addToBackStack(null)
+
+                transaction.commit()
+
+            }, 4000)
 
             //val intent = Intent(context, ResultPlantActivity::class.java)
 
@@ -150,7 +181,6 @@ class EnrollPlantFragment : Fragment() {
             // startActivity(intent)
 
             //setFragment(ResultPlantFragment())
-            progressOFF()
 
 
         }
