@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import androidx.fragment.app.activityViewModels
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityReviewBinding
 import com.sopt.cherish.remote.api.ReviewWateringReq
+import com.sopt.cherish.ui.datail.DetailPlantFragment
 import com.sopt.cherish.ui.dialog.CustomDialogFragment
 import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.util.DialogUtil
@@ -123,6 +125,8 @@ class DialogReviewFragment : DialogFragment() {
         binding.reviewIgnoreAccept.setOnClickListener {
             // 건너 뛰는 것도 뭐~ 그냥 main으로 넘어오면 됨
             dismiss()
+
+
         }
     }
 }
