@@ -36,6 +36,9 @@ class DialogReviewFragment : DialogFragment() {
 
     private val viewModel: MainViewModel by activityViewModels()
 
+    // todo : Review를 보내서 점수도 받았는데 서버에서 갱신이 안되는거 같음
+    // todo : Server와 얘기를 해봐야함
+    // todo : dDay인 아이만 갱신되게 해놨을 가능성이 있슴 그래서 내가 보내봤자 아무것도 오르지 않는거지
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -62,7 +65,6 @@ class DialogReviewFragment : DialogFragment() {
 
     @SuppressLint("SetTextI18n")
     private fun initializeView(binding: ActivityReviewBinding) {
-        // 야매로함 , 근데 이거 안됨
         binding.reviewUser.text =
             "${viewModel.userNickName.value}님! ${viewModel.cherishUser.value?.nickName}님과의"
         binding.reviewDescription.text =
