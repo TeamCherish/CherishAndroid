@@ -19,6 +19,7 @@ import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
 import com.sopt.cherish.ui.main.MainActivity
 import com.sopt.cherish.ui.main.MainViewModel
+import com.sopt.cherish.util.SimpleLogger
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -41,7 +42,7 @@ class ManagePlantFragment : Fragment() {
             DataBindingUtil.inflate(inflater, R.layout.fragment_manage_plant, container, false)
 
         // 예진이 userId , viewModel.userId.value 라고하면 userId 찾을 수 있어요
-        /*    SimpleLogger.logI(viewModel.userId.value.toString())*/
+        SimpleLogger.logI(viewModel.userId.value.toString())
         initializeServerRequest(binding)
         initializeTabLayoutView(binding)
         initializeBottomSheetBehavior(binding)
@@ -241,7 +242,7 @@ class ManagePlantFragment : Fragment() {
 
     private fun initializeServerRequest(binding: FragmentManagePlantBinding) {
 
-        requestData.myPageAPI.fetchUserPage(1)
+        requestData.myPageAPI.fetchUserPage(viewModel.userId.value!!)
             .enqueue(
                 object : Callback<MyPageUserRes> {
                     override fun onFailure(call: Call<MyPageUserRes>, t: Throwable) {
