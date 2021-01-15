@@ -7,12 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sopt.cherish.databinding.FragmentPlantBinding
 import com.sopt.cherish.remote.api.MyPageUserRes
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.adapter.MyPageBottomSheetAdapter
 import com.sopt.cherish.ui.datail.DetailPlantActivity
+import com.sopt.cherish.ui.main.MainViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -24,7 +26,7 @@ import retrofit2.Response
 
 class PlantFragment : Fragment() {
 
-
+    private val viewModel: MainViewModel by activityViewModels()
     private var _binding: FragmentPlantBinding? = null
     private val binding get() = _binding!!
     private lateinit var cherishAdapter: MyPageBottomSheetAdapter
@@ -45,7 +47,7 @@ class PlantFragment : Fragment() {
     }
 
     private fun setAdapterData() {
-        requestData.myPageAPI.fetchUserPage(1)
+        requestData.myPageAPI.fetchUserPage(viewModel.userId.value!!)
             .enqueue(
                 object : Callback<MyPageUserRes> {
                     override fun onFailure(call: Call<MyPageUserRes>, t: Throwable) {
@@ -76,11 +78,11 @@ class PlantFragment : Fragment() {
                                             val intent =
                                                 Intent(context, DetailPlantActivity::class.java)
                                             intent.putExtra(
-                                                "plantId",
-                                                it.myPageUserData.result[position].plantId
+                                                "cherishId",
+                                                it.myPageUserData.result[position].id
                                             )
                                             Log.d(
-                                                "plantId",
+                                                "cherishId",
                                                 it.myPageUserData.result[position].plantId.toString()
                                             )
                                             startActivityForResult(intent, 100)
