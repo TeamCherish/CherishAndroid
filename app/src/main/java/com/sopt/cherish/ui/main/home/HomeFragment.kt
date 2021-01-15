@@ -45,8 +45,6 @@ class HomeFragment : Fragment(), OnItemClickListener {
         private val TAG = "HomeFragment"
     }
 
-    // 마이 페이지 userId 값
-    // 물주기를 완료한 다음에도
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -202,11 +200,13 @@ class HomeFragment : Fragment(), OnItemClickListener {
             }
         }
         // animationUrl 데이터 갱신해달라고 해야함
+        // todo : gif처리하는것만 좀 하면 될거 같음
         Glide.with(requireContext())
             .load(user.userPlantImageUrl)
             .into(binding.homePlantImage)
     }
 
+    // 바텀시트 뒤에 녀석 색상 변경
     private fun transitionBottomSheetParentView(slideOffset: Float) {
         val argbEvaluator =
             ArgbEvaluator().evaluate(slideOffset, R.color.white, R.color.black)
