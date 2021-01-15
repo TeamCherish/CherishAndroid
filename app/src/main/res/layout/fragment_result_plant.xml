@@ -27,7 +27,7 @@
         android:layout_marginTop="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView_modify"
+        app:layout_constraintTop_toBottomOf="@+id/textView_modify_under"
         app:srcCompat="@drawable/img_graphic" />
 
     <TextView
@@ -37,6 +37,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginTop="12dp"
         android:layout_marginEnd="20dp"
+        android:gravity="center"
         android:fontFamily="@font/notosanscjkkr_regular"
         android:text="한달에 한번이지만 홀씨가 있어서 어디론가 정착을
 \n 감성적으로 주기와 관계를 연결짓는 문장이 필요하다?"
@@ -47,7 +48,7 @@
 
     <Button
         android:id="@+id/startbtn"
-        style="@style/RoundButton.GreenMain"
+        style="@style/RoundButton.Purple"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -63,12 +64,12 @@
         android:id="@+id/imageView7"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="334dp"
+        android:layout_marginTop="30dp"
         android:background="@drawable/plant_tip_box"
         app:layout_constraintEnd_toEndOf="@+id/imageView_url"
         app:layout_constraintStart_toStartOf="@+id/imageView_url"
-        app:layout_constraintTop_toTopOf="@+id/imageView_url"
-        app:srcCompat="@drawable/plant_tip_box" >
+        app:layout_constraintTop_toBottomOf="@+id/imageView_url"
+        app:srcCompat="@drawable/plant_tip_box">
 
         <View
             android:layout_width="2dp"
@@ -108,4 +109,18 @@
             app:layout_constraintTop_toTopOf="@+id/imageView7"
             app:layout_constraintVertical_bias="0.476" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/textView_modify_under"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:fontFamily="@font/notosanscjkkr_bold"
+        android:includeFontPadding="false"
+        android:text="따뜻한 민들레"
+        android:textSize="23sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_modify" />
 </androidx.constraintlayout.widget.ConstraintLayout>

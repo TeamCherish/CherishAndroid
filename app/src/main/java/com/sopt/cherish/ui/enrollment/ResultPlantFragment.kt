@@ -31,8 +31,8 @@ class ResultPlantFragment : Fragment() {
         binding = FragmentResultPlantBinding.bind(view)
 
         binding.plantExplanation.text = arguments?.getString("plant_explanation")
-        binding.textViewModify.text = arguments?.getString("plant_modify")
-
+        binding.textViewModify.text = arguments?.getString("plant_modify")?.split("\n")?.get(0)
+        binding.textViewModifyUnder.text=arguments?.getString("plant_modify")?.split("\n")?.get(1)?.toString()
         binding.textView1Mean.text = arguments?.getString("plant_mean")
 
         val urlstring = arguments?.getString("plant_url")
