@@ -19,12 +19,14 @@ import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentManagePlantBinding
 import com.sopt.cherish.remote.api.MyPageUserRes
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
+import com.sopt.cherish.ui.adapter.MyPageBottomSheetAdapter
 import com.sopt.cherish.ui.adapter.Phone
 import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
 import com.sopt.cherish.ui.enrollment.MyPagePhoneBookFragment
 import com.sopt.cherish.ui.main.MainActivity
 import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.util.SimpleLogger
+import okhttp3.internal.notify
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -158,6 +160,7 @@ class ManagePlantFragment : Fragment() {
 
     private fun initializeTabLayoutView(binding: FragmentManagePlantBinding) {
 
+
         binding.myPageBottomTab.addTab(binding.myPageBottomTab.newTab().setText("식물"))
         binding.myPageBottomTab.addTab(binding.myPageBottomTab.newTab().setText("연락처"))
 
@@ -251,6 +254,7 @@ class ManagePlantFragment : Fragment() {
 
     private fun initializeServerRequest(binding: FragmentManagePlantBinding) {
 
+
         requestData.myPageAPI.fetchUserPage(viewModel.userId.value!!)
             .enqueue(
                 object : Callback<MyPageUserRes> {
@@ -280,6 +284,7 @@ class ManagePlantFragment : Fragment() {
 
                                 val tabText = "식물 " + it.myPageUserData.totalCherish.toString()
                                 binding.myPageBottomTab.getTabAt(0)!!.text = tabText
+
 
                                 Log.d("list", it.myPageUserData.result.toString())
 

@@ -9,6 +9,7 @@ import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityMainBinding
 import com.sopt.cherish.databinding.FragmentManagePlantBinding
 import com.sopt.cherish.di.Injection
+import com.sopt.cherish.ui.adapter.MyPageBottomSheetAdapter
 import com.sopt.cherish.ui.enrollment.MyPagePhoneBookFragment
 import com.sopt.cherish.ui.main.home.HomeFragment
 import com.sopt.cherish.ui.main.manageplant.ManagePlantFragment
@@ -16,15 +17,25 @@ import com.sopt.cherish.ui.main.manageplant.PlantFragment
 import com.sopt.cherish.ui.main.setting.SettingFragment
 import com.sopt.cherish.util.PermissionUtil
 import com.sopt.cherish.util.SimpleLogger
+import okhttp3.internal.notifyAll
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var viewModel: MainViewModel
+    private lateinit var  binding: ActivityMainBinding
 
+    override fun onResume() {
+        super.onResume()
+        initializeViewModel()
+        initializeViewModelData()
+        showInitialFragment()
+        setBottomNavigationListener(binding)
+
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding: ActivityMainBinding =
+        binding =
             DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         initializeViewModel()
@@ -86,6 +97,7 @@ class MainActivity : AppCompatActivity() {
         val transAction = supportFragmentManager.beginTransaction()
         when (index) {
             0 -> {
+
                 transAction.replace(R.id.my_page_bottom_container, PlantFragment()).commit()
             }
             1 -> {
