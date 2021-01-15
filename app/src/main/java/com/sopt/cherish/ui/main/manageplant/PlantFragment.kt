@@ -26,7 +26,7 @@ import retrofit2.Response
 
 class PlantFragment : Fragment() {
 
-
+    private val viewModel: MainViewModel by activityViewModels()
     private var _binding: FragmentPlantBinding? = null
     private val binding get() = _binding!!
     private lateinit var cherishAdapter: MyPageBottomSheetAdapter
@@ -78,11 +78,11 @@ class PlantFragment : Fragment() {
                                             val intent =
                                                 Intent(context, DetailPlantActivity::class.java)
                                             intent.putExtra(
-                                                "plantId",
-                                                it.myPageUserData.result[position].plantId
+                                                "cherishId",
+                                                it.myPageUserData.result[position].id
                                             )
                                             Log.d(
-                                                "plantId",
+                                                "cherishId",
                                                 it.myPageUserData.result[position].plantId.toString()
                                             )
                                             startActivityForResult(intent, 100)
