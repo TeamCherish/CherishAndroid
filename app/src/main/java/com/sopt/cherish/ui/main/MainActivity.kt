@@ -27,9 +27,6 @@ class MainActivity : AppCompatActivity() {
             DataBindingUtil.setContentView(this, R.layout.activity_main)
 
         initializeViewModel()
-        viewModel.fetchUsers()
-        viewModel.cherishUsers.observe(this) {
-        }
         initializeViewModelData()
         showInitialFragment()
         setBottomNavigationListener(binding)
