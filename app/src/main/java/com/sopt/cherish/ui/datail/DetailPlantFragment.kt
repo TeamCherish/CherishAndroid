@@ -19,6 +19,7 @@ import com.sopt.cherish.remote.api.ResponsePlantCardDatas
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.adapter.DetailMemoAdapter
 import com.sopt.cherish.ui.datail.calendar.CalendarFragment
+import com.sopt.cherish.ui.dialog.PlantDetailPopUpFirst
 import com.sopt.cherish.ui.dialog.WateringDialogFragment
 import com.sopt.cherish.ui.domain.MemoListDataclass
 import retrofit2.Call
@@ -34,6 +35,11 @@ class DetailPlantFragment : Fragment() {
     //lateinit var memoList:ArrayList<MemoListDataclass>
 
     // private lateinit var memoList: ArrayList<MemoListDataclass>
+
+    companion object {
+        private val TAG = "DetailPlantFragment"
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,7 +51,7 @@ class DetailPlantFragment : Fragment() {
 
         binding.imageButton3detail.setOnClickListener {
 
-
+            PlantDetailPopUpFirst().show(parentFragmentManager, DetailPlantFragment.TAG)
             //3단계 식물 뷰 들어가는 곳
         }
         circleProgressbar = binding.test

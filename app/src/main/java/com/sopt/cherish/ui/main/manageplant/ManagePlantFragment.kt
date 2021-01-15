@@ -75,6 +75,11 @@ class ManagePlantFragment : Fragment() {
                                 R.color.white
                             )
                         )
+                        binding.constraint1.visibility = View.GONE
+                        binding.cancelText.visibility = View.GONE
+
+                        binding.myPageText.visibility = View.VISIBLE
+                        binding.searchBox.visibility = View.VISIBLE
                         binding.myPageAddPlantBtn.visibility = View.VISIBLE
                         isCollapsed = false
                     }
@@ -86,6 +91,11 @@ class ManagePlantFragment : Fragment() {
                                 R.color.cherish_my_page_bg
                             )
                         )
+                        binding.constraint1.visibility = View.GONE
+                        binding.cancelText.visibility = View.GONE
+
+                        binding.myPageText.visibility = View.VISIBLE
+                        binding.searchBox.visibility = View.VISIBLE
                         binding.myPageAddPlantBtn.visibility = View.GONE
                         isCollapsed = true
                     }
