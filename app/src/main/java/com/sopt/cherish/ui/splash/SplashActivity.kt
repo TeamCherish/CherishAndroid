@@ -2,8 +2,12 @@ package com.sopt.cherish.ui.splash
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import com.sopt.cherish.R
+import com.sopt.cherish.ui.main.MainActivity
+import com.sopt.cherish.ui.signin.SignInActivity
 import com.sopt.cherish.ui.tutorial.TutorialActivity
 import com.sopt.cherish.util.PermissionUtil
 import com.sopt.cherish.util.extension.shortToast
@@ -22,7 +26,12 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-        requestCherishPermissions()
+        
+       Handler(Looper.getMainLooper()).postDelayed({
+            startActivity(Intent(this, SignInActivity::class.java))
+        },3000)
+
+
     }
 
     private fun requestCherishPermissions() {
@@ -51,7 +60,7 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun startTutorialActivityAndFinish() {
-        startActivity(Intent(this, TutorialActivity::class.java))
+        startActivity(Intent(this, SignInActivity::class.java))
         finish()
     }
 }
