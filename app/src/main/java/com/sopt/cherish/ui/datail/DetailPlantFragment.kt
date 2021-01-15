@@ -33,6 +33,7 @@ class DetailPlantFragment : Fragment() {
     private lateinit var circleProgressbar: CircleProgressbar
     private val viewModel: DetailPlantViewModel by activityViewModels()
     private val requestData = RetrofitBuilder
+    lateinit var memoList: ArrayList<MemoListDataclass>
 
     //lateinit var memoList:ArrayList<MemoListDataclass>
     var cherishid = 0
@@ -81,16 +82,21 @@ class DetailPlantFragment : Fragment() {
                         call: Call<ResponsePlantCardDatas>,
                         response: Response<ResponsePlantCardDatas>
                     ) {
-                        Log.d("success", response.body().toString())
+                        Log.d("식물카드 뷰", response.body().toString())
                         response.takeIf {
                             it.isSuccessful
                         }?.body()
                             ?.let { it ->
                                 binding.textViewNick.text = it.data.nickname
-                                binding.textViewName.text = it.data.name
-                                binding.textViewPlantname.text = it.data.plant_name
+                                Log.d("textViewNick", it.data.nickname.toString())
+                                binding.textViewName.text = it.data.name.toString()
+                                binding.textViewPlantname.text = it.data.plant_name.toString()
                                 binding.textViewDday.text = "D-" + it.data.dDay.toString()
                                 binding.textViewDuration.text = it.data.duration.toString()
+                                if (it.data.birth.toString() == "Invalid Date") {
+                                    binding.textViewBirth.text = "미입력"
+
+                                }
                                 binding.textViewBirth.text = it.data.birth.toString()
                                 binding.textView1WithName.text = it.data.name.toString()
                                 binding.textViewStatusMessage.text = it.data.status_message
@@ -103,7 +109,7 @@ class DetailPlantFragment : Fragment() {
 
 
                                 circleProgressbar.setProgressWithAnimation(
-                                    it.data.gage.toFloat(),
+                                    it.data.gage.toFloat() * 100,
                                     animationDuration
                                 )
 
@@ -112,59 +118,104 @@ class DetailPlantFragment : Fragment() {
                                 binding.chip3.text = it.data.keyword3
 
 
-                                var memoList = arrayListOf<MemoListDataclass>(
 
-                                    MemoListDataclass(
-                                        it.data.reviews[0].water_date,
-                                        it.data.reviews[0].review
-                                    ),
-                                    MemoListDataclass(
-                                        it.data.reviews[1].water_date,
-                                        it.data.reviews[1].review
+
+                                if (it.data.reviews.isEmpty()) {
+
+
+                                    var memoList = arrayListOf<MemoListDataclass>(
+
+                                        MemoListDataclass(
+                                            "_ _",
+                                            "이 날의 기록이 없어요!"
+                                        ),
+                                        MemoListDataclass(
+                                            "_ _",
+                                            "이 날의 기록이 없어요!"
+                                        )
                                     )
-                                )
+
+                                    val mAdapter = DetailMemoAdapter(memoList)
+                                    binding.recyclerDetail.adapter = mAdapter
+
+                                    binding.recyclerDetail.addItemDecoration(
+                                        VerticalSpaceItemDecoration(
+                                            20
+                                        )
+                                    )
+                                    mAdapter.setItemClickListener(object :
+                                        DetailMemoAdapter.ItemClickListener {
+                                        override fun onClick(view: View, position: Int) {
+                                            val item = mAdapter.memolist[position]
+                                            Log.d("SSS", "${position}번 리스트 선택")
+                                            val transaction =
+                                                parentFragmentManager.beginTransaction()
+                                            transaction.replace(
+                                                R.id.fragment_detail,
+                                                CalendarFragment()
+                                            )
+                                            transaction.addToBackStack(null)
+                                            transaction.commit()
+                                        }
+                                    })
+
+                                    binding.recyclerDetail.layoutManager =
+                                        LinearLayoutManager(context)
+                                    binding.recyclerDetail.setHasFixedSize(true)
+
+                                } else {
+
+                                    var memoList = arrayListOf<MemoListDataclass>(
+
+                                        MemoListDataclass(
+                                            "_ _",
+                                            "이 날의 기록이 없어요!"
+                                        ),
+                                        MemoListDataclass(
+                                            "_ _",
+                                            "이 날의 기록이 없어요!"
+                                        )
+                                    )
+
+                                    val mAdapter = DetailMemoAdapter(memoList)
+                                    binding.recyclerDetail.adapter = mAdapter
+
+                                    binding.recyclerDetail.addItemDecoration(
+                                        VerticalSpaceItemDecoration(
+                                            20
+                                        )
+                                    )
+                                    mAdapter.setItemClickListener(object :
+                                        DetailMemoAdapter.ItemClickListener {
+                                        override fun onClick(view: View, position: Int) {
+                                            val item = mAdapter.memolist[position]
+                                            Log.d("SSS", "${position}번 리스트 선택")
+                                            val transaction =
+                                                parentFragmentManager.beginTransaction()
+                                            transaction.replace(
+                                                R.id.fragment_detail,
+                                                CalendarFragment()
+                                            )
+                                            transaction.addToBackStack(null)
+                                            transaction.commit()
+                                        }
+                                    })
+
+                                    binding.recyclerDetail.layoutManager =
+                                        LinearLayoutManager(context)
+                                    binding.recyclerDetail.setHasFixedSize(true)
+                                }
+
 
                                 //memoList.add(MemoListDataclass(it.data.reviews[0].water_date, it.data.reviews[0].review))
                                 //memoList.add(MemoListDataclass(it.data.reviews[1].water_date, it.data.reviews[1].review))
 
-                                Log.d("data success!", it.data.reviews[0].review.toString())
-
-
-                                val mAdapter = DetailMemoAdapter(memoList)
-
-                                binding.recyclerDetail.adapter = mAdapter
-
-                                binding.recyclerDetail.addItemDecoration(
-                                    VerticalSpaceItemDecoration(
-                                        20
-                                    )
-                                )
-                                mAdapter.setItemClickListener(object :
-                                    DetailMemoAdapter.ItemClickListener {
-                                    override fun onClick(view: View, position: Int) {
-                                        val item = mAdapter.memolist[position]
-                                        Log.d("SSS", "${position}번 리스트 선택")
-                                        val transaction =
-                                            parentFragmentManager.beginTransaction()
-                                        transaction.replace(
-                                            R.id.fragment_detail,
-                                            CalendarFragment()
-                                        )
-                                        transaction.addToBackStack(null)
-                                        transaction.commit()
-                                    }
-                                })
-
-                                binding.recyclerDetail.layoutManager =
-                                    LinearLayoutManager(context)
-                                binding.recyclerDetail.setHasFixedSize(true)
 
                             }
                     }
                 })
 
         // 유저 원형 프로그레스바 보여주는 부분
-
 
         // memolist 어댑터 연결 부분
 

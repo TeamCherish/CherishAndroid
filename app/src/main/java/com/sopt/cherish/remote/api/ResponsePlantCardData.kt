@@ -5,7 +5,7 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 data class ResponsePlantCardDatas(
-    val `data`: Data,
+    val data: Data,
     val message: String,
     val success: Boolean
 ) {
