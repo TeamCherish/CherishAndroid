@@ -18,12 +18,6 @@ import java.util.*
 class MainViewModel(
     private val mainRepository: MainRepository
 ) : ViewModel() {
-
-    // todo : 서버통신을 한번만 하도록 주기를 설정해줘야함
-    // todo : 물주는 날짜를 미루는 것도 되고 다 되는데 문제는 미루는 경우, 데이터가 갱신이 되질 않음
-    // todo : 그래서 만약 데이터가 변경된다면 그거에 맞게 데이터 갱신되는 무언가가 있어야하는데
-    // todo : 물주기가 되긴 돼, 근데 데이터 갱신이 보여지지 않습니다.
-
     // [home] Server connection
     // userId는 값이 1개 , fetchUser 함수를 통해서 _users에 userId가 가지고 있는 cherish들이 보인다.
     // login 시 intent 에서 값을 받아서 옴
@@ -33,14 +27,20 @@ class MainViewModel(
     val wateringFlowerAnimationUri = R.raw.watering_min_android
     val witherFlowerAnimationUri = R.raw.wither_min_android
 
+    // Dummy Image Uri
+    val stukiImageUri = R.drawable.main_img_stuki
+    val sunImageUri = R.drawable.main_img_sun
+    val rosemaryImageUri = R.drawable.main_img_rosemary
+    val americanblueImageUri = R.drawable.main_img_americanblue
+
     // 로그인 하는 cherish를 이용하는 유저
     val userId = MutableLiveData<Int>()
 
     // 유저가 가지고 있는 cherish들
     val userNickName = MutableLiveData<String>()
 
-    // 선택된 경우 cherishId가 변경됨
-    private val dummyCherishId = 1
+    val homeRedProgressBar = R.drawable.progress_drawable_verticle_red
+    val homeGreenProgressBar = R.drawable.progress_drawable_vertical
 
     // main Home에서 호출된 여러명
     private val _cherishUsers = MutableLiveData<UserResult>()

@@ -42,7 +42,6 @@ class PlantFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentPlantBinding.inflate(inflater, container, false)
 
-
         setAdapterData()
 
         return binding.root
@@ -73,12 +72,15 @@ class PlantFragment : Fragment() {
                                 Log.d("list", it.myPageUserData.result.toString())
 
                                 cherishAdapter =
-                                    MyPageBottomSheetAdapter(requireContext(),it.myPageUserData.result)
+                                    MyPageBottomSheetAdapter(
+                                        requireContext(),
+                                        it.myPageUserData.result
+                                    )
 
 
 
                                 initialRecyclerView(binding, cherishAdapter)
-6
+                                6
                                 cherishAdapter.setItemClickListener(
                                     object : MyPageBottomSheetAdapter.ItemClickListener {
                                         override fun onClick(view: View, position: Int) {

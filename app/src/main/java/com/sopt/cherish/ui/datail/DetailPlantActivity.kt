@@ -1,7 +1,5 @@
 package com.sopt.cherish.ui.datail
 
-import android.app.Activity
-import android.content.Intent
 import android.graphics.Rect
 import android.os.Bundle
 import android.util.Log
@@ -35,23 +33,31 @@ class DetailPlantActivity : AppCompatActivity() {
 
     // var plantid: Int =  intent.getIntExtra("plantId", 100)
     var cherishid = 0
-    var plantId=1
-
+    var plantId = 1
+    private lateinit var cherishPhoneNumber: String
+    private lateinit var cherishNickname: String
+    private lateinit var userNickname: String
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityDetailPlantBinding.inflate(layoutInflater)
 
-
+        initializeViewModel()
         Log.d("qwer", intent.getIntExtra("plantId", 100).toString())
-        plantId=intent.getIntExtra("plantId",0)
+        plantId = intent.getIntExtra("plantId", 0)
 
         cherishid = intent.getIntExtra("cherishId", 0)
         Log.d("qwer", cherishid.toString())
 
+        cherishPhoneNumber = intent.getStringExtra("cherishUserPhoneNumber").toString()
+        viewModel.cherishPhoneNumber.value = cherishPhoneNumber
 
+        cherishNickname = intent.getStringExtra("cherishNickname").toString()
+        viewModel.cherishNickname.value = cherishNickname
 
-        initializeViewModel()
+        userNickname = intent.getStringExtra("userNickname").toString()
+        viewModel.userNickname.value = userNickname
+
         setFragment(DetailPlantFragment())
         setActionBarTitle("식물 상세")
         setContentView(binding.root)
