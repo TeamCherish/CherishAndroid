@@ -1,6 +1,7 @@
 package com.sopt.cherish.remote.api
 
 import com.google.gson.annotations.SerializedName
+import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
 
@@ -23,10 +24,10 @@ data class User(
     @SerializedName("nickname") val nickName: String,
     @SerializedName("phone") val phoneNumber: String,
     @SerializedName("growth") val growth: Int,
-    @SerializedName("image_url") val userPlantImageUrl: String,
     @SerializedName("thumbnail_image_url") val thumbnailImageUrl: String,
     @SerializedName("plantName") val plantName: String,
     @SerializedName("gif") val plantAnimationUrl: String,
+    @SerializedName("main_bg") val homeMainBackgroundImageUrl: String,
     @SerializedName("modifier") val plantModifier: String
 )
 
@@ -50,4 +51,9 @@ interface UserAPI {
     suspend fun getCherishUser(
         @Path("id") cherishId: Int
     ): UserResult
+
+    @GET("cherish/{id}")
+    fun hasUser(
+        @Path("id") userId: Int
+    ): Call<UserResult>
 }

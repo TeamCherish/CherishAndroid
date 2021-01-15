@@ -16,4 +16,10 @@ object PixelUtil {
 
     val Number.dpFloat: Float
         get() = MainApplication.pixelRatio.toPixel(this.toInt()).toFloat()
+
+    val screenWidth: Int
+        get() = MainApplication.pixelRatio.screenWidth
+
+    val screenHeight: Int
+        get() = MainApplication.pixelRatio.screenHeight
 }

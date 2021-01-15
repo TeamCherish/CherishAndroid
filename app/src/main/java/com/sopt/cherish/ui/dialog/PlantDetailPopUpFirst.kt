@@ -6,10 +6,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.cardview.widget.CardView
-import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.sopt.cherish.databinding.FragmentPlantDetailPopUpFirstBinding
@@ -20,21 +16,21 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class PlantDetailPopUpFirst(plantId :Int) : Fragment() {
+class PlantDetailPopUpFirst(plantId: Int) : Fragment() {
 
     private var _binding: FragmentPlantDetailPopUpFirstBinding? = null
     private val binding get() = _binding!!
     private val requestData = RetrofitBuilder
-    var plantId=plantId
+    var plantId = plantId
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentPlantDetailPopUpFirstBinding.inflate(inflater, container, false)
 
-        Log.d("cherishId in popup: ",plantId.toString())
+        Log.d("cherishId in popup: ", plantId.toString())
         initializeServerRequest(binding)
 
         return binding.root

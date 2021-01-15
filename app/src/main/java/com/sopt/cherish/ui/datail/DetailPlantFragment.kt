@@ -21,7 +21,7 @@ import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.adapter.DetailMemoAdapter
 import com.sopt.cherish.ui.datail.calendar.CalendarFragment
 import com.sopt.cherish.ui.dialog.AlertPlantDialogFragment
-import com.sopt.cherish.ui.dialog.WateringDialogFragment
+import com.sopt.cherish.ui.dialog.DetailWateringDialogFragment
 import com.sopt.cherish.ui.domain.MemoListDataclass
 import retrofit2.Call
 import retrofit2.Callback
@@ -65,7 +65,10 @@ class DetailPlantFragment : Fragment() {
 
         binding.buttonWater.setOnClickListener {
             // 이거 매개변수 바꿔야 함
-            WateringDialogFragment(cherishid).show(parentFragmentManager, "DetailPlantFragment")
+            DetailWateringDialogFragment(cherishid).show(
+                parentFragmentManager,
+                "DetailPlantFragment"
+            )
         }
 
         Log.d("gogo", cherishid.toString())
@@ -95,8 +98,7 @@ class DetailPlantFragment : Fragment() {
                                 if ((it.data.birth.toString()) == "Invalid Date") {
                                     binding.textViewBirth.text = "미입력"
 
-                                }
-                                else{
+                                } else {
                                     binding.textViewBirth.text = it.data.birth.toString()
 
                                 }
@@ -150,7 +152,6 @@ class DetailPlantFragment : Fragment() {
                                         DetailMemoAdapter.ItemClickListener {
                                         override fun onClick(view: View, position: Int) {
                                             val item = mAdapter.memolist[position]
-                                            Log.d("SSS", "${position}번 리스트 선택")
                                             val transaction =
                                                 parentFragmentManager.beginTransaction()
                                             transaction.replace(
@@ -167,9 +168,7 @@ class DetailPlantFragment : Fragment() {
                                     binding.recyclerDetail.setHasFixedSize(true)
 
                                 } else {
-
                                     var memoList = arrayListOf<MemoListDataclass>(
-
                                         MemoListDataclass(
                                             "_ _",
                                             "이 날의 기록이 없어요!"
@@ -192,7 +191,6 @@ class DetailPlantFragment : Fragment() {
                                         DetailMemoAdapter.ItemClickListener {
                                         override fun onClick(view: View, position: Int) {
                                             val item = mAdapter.memolist[position]
-                                            Log.d("SSS", "${position}번 리스트 선택")
                                             val transaction =
                                                 parentFragmentManager.beginTransaction()
                                             transaction.replace(

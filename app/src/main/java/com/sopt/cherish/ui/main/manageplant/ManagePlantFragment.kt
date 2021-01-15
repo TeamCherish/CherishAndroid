@@ -2,9 +2,6 @@ package com.sopt.cherish.ui.main.manageplant
 
 import android.content.Intent
 import android.os.Bundle
-import android.provider.ContactsContract
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -19,14 +16,10 @@ import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentManagePlantBinding
 import com.sopt.cherish.remote.api.MyPageUserRes
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
-import com.sopt.cherish.ui.adapter.MyPageBottomSheetAdapter
-import com.sopt.cherish.ui.adapter.Phone
 import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
-import com.sopt.cherish.ui.enrollment.MyPagePhoneBookFragment
 import com.sopt.cherish.ui.main.MainActivity
 import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.util.SimpleLogger
-import okhttp3.internal.notify
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

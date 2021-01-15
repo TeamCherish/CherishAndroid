@@ -7,9 +7,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityMainBinding
-import com.sopt.cherish.databinding.FragmentManagePlantBinding
 import com.sopt.cherish.di.Injection
-import com.sopt.cherish.ui.adapter.MyPageBottomSheetAdapter
 import com.sopt.cherish.ui.enrollment.MyPagePhoneBookFragment
 import com.sopt.cherish.ui.main.home.HomeFragment
 import com.sopt.cherish.ui.main.manageplant.ManagePlantFragment
@@ -17,13 +15,12 @@ import com.sopt.cherish.ui.main.manageplant.PlantFragment
 import com.sopt.cherish.ui.main.setting.SettingFragment
 import com.sopt.cherish.util.PermissionUtil
 import com.sopt.cherish.util.SimpleLogger
-import okhttp3.internal.notifyAll
 
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var viewModel: MainViewModel
-    private lateinit var  binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
 
     override fun onResume() {
         super.onResume()
@@ -33,6 +30,7 @@ class MainActivity : AppCompatActivity() {
         setBottomNavigationListener(binding)
 
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding =
