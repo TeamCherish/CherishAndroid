@@ -48,6 +48,7 @@ class DetailPlantActivity : AppCompatActivity() {
 
         cherishid = intent.getIntExtra("cherishId", 0)
         Log.d("qwer", cherishid.toString())
+        viewModel.cherishId.value = cherishid
 
         cherishPhoneNumber = intent.getStringExtra("cherishUserPhoneNumber").toString()
         viewModel.cherishPhoneNumber.value = cherishPhoneNumber
@@ -58,6 +59,7 @@ class DetailPlantActivity : AppCompatActivity() {
         userNickname = intent.getStringExtra("userNickname").toString()
         viewModel.userNickname.value = userNickname
 
+        viewModel.fetchCalendarData()
         setFragment(DetailPlantFragment())
         setActionBarTitle("식물 상세")
         setContentView(binding.root)

@@ -149,6 +149,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
 
     // recyclerview Item click event
     override fun onItemClick(itemBinding: MainCherryItemBinding, position: Int) {
+        standardBottomSheetBehavior.peekHeight = 60.dp
         viewModel.cherishUsers.observe(viewLifecycleOwner) {
             // contact Dialog , 여기서 분기처리하면 될거임~~~
             viewModel.cherishUser.value = it.userData.userList[position]
