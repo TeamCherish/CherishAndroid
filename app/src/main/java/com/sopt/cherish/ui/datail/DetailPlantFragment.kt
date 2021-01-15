@@ -20,6 +20,7 @@ import com.sopt.cherish.remote.api.ResponsePlantCardDatas
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.adapter.DetailMemoAdapter
 import com.sopt.cherish.ui.datail.calendar.CalendarFragment
+import com.sopt.cherish.ui.dialog.AlertPlantDialogFragment
 import com.sopt.cherish.ui.dialog.PlantDetailPopUpFirst
 import com.sopt.cherish.ui.dialog.WateringDialogFragment
 import com.sopt.cherish.ui.domain.MemoListDataclass
@@ -58,7 +59,7 @@ class DetailPlantFragment : Fragment() {
 
         binding.imageButton3detail.setOnClickListener {
 
-            PlantDetailPopUpFirst().show(parentFragmentManager, DetailPlantFragment.TAG)
+            AlertPlantDialogFragment().show(parentFragmentManager, DetailPlantFragment.TAG)
             //3단계 식물 뷰 들어가는 곳
         }
         circleProgressbar = binding.test

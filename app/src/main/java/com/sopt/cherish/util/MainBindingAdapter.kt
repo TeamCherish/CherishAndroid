@@ -37,6 +37,7 @@ object MainBindingAdapter {
         }
     }
 
+    // 이미지로 할건지 gif로 할건지에 따라 수정해주면 됨
     @JvmStatic
     @BindingAdapter("android:setImage")
     fun setBackgroundImage(imageView: ImageView, imageUrl: String) {

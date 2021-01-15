@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.MyPageCherryItemBinding
 import com.sopt.cherish.remote.api.MyPageCherishData
@@ -25,6 +26,8 @@ class MyPageBottomSheetAdapter(private var context: Context, var data: List<MyPa
                 binding.myPageDDay.text = "D+" + cherishData.dDay.toString()
             else if (cherishData.dDay == 0)
                 binding.myPageDDay.text = "D-day"
+            else if(cherishData.dDay==1)
+                binding.myPageDDay.text = "D-" + cherishData.dDay.toString()
             else {
                 binding.myPageDDay.text = "D" + cherishData.dDay.toString()
                 binding.myPageDDay.setBackgroundResource(R.drawable.my_page_chip_green)
@@ -35,6 +38,8 @@ class MyPageBottomSheetAdapter(private var context: Context, var data: List<MyPa
                     )
                 )
             }
+
+            Glide.with(binding.root.context).load(cherishData.thumbnailImageUrl).into(binding.mypageUserImg)
 
         }
     }

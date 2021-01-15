@@ -48,8 +48,6 @@ class HomeFragment : Fragment(), OnItemClickListener {
         private val TAG = "HomeFragment"
     }
 
-    // 마이 페이지 userId 값
-    // 물주기를 완료한 다음에도
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -59,6 +57,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
 
         val homeCherryListAdapter = HomeCherryListAdapter(this)
         viewModel.fetchUsers()
+
         initializeView()
         initializeBottomSheetBehavior()
         setAdapterData(homeCherryListAdapter)
@@ -121,6 +120,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
     }
 
     // 최초 화면이 보여질때
+    // todo : 등록과 이 플로우 연결 해줘야 함
     private fun initializeView() {
         viewModel.cherishUsers.observe(viewLifecycleOwner) {
             viewModel.cherishUser.value = it.userData.userList[0]
@@ -208,11 +208,14 @@ class HomeFragment : Fragment(), OnItemClickListener {
             }
         }
         // animationUrl 데이터 갱신해달라고 해야함
+        // todo : gif처리하는것만 좀 하면 될거 같음
+        // todo : 정확하게 식물의 3단계를 표현할 것인지? 혹은 gif를 보여줄 것인지?
         Glide.with(requireContext())
             .load(user.userPlantImageUrl)
             .into(binding.homePlantImage)
     }
 
+    // 바텀시트 뒤에 녀석 색상 변경
     private fun transitionBottomSheetParentView(slideOffset: Float) {
         val argbEvaluator =
             ArgbEvaluator().evaluate(slideOffset, R.color.white, R.color.black)
