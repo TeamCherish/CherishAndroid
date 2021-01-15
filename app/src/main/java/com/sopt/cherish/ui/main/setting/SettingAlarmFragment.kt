@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentSettingAlarmBinding
+import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
+import com.sopt.cherish.ui.main.MainActivity
 
 
 class SettingAlarmFragment : Fragment() {
@@ -21,6 +23,10 @@ class SettingAlarmFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_setting_alarm, container, false)
         binding = FragmentSettingAlarmBinding.bind(view)
 
+        binding.imageViewBack.setOnClickListener {
+            (activity as MainActivity).onBackPressed()
+
+        }
 
 
 

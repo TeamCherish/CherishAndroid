@@ -36,6 +36,7 @@ class SettingFragment : Fragment() {
     fun setFragment(fragment: Fragment) {
         val transaction = parentFragmentManager.beginTransaction()
         transaction.replace(R.id.main_fragment_container, fragment)
+        transaction.addToBackStack(null)
         transaction.commit()
     }
 
