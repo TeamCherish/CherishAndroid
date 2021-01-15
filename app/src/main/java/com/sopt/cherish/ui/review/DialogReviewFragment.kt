@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +13,6 @@ import androidx.fragment.app.activityViewModels
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityReviewBinding
 import com.sopt.cherish.remote.api.ReviewWateringReq
-import com.sopt.cherish.ui.datail.DetailPlantFragment
 import com.sopt.cherish.ui.dialog.CustomDialogFragment
 import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.util.DialogUtil
@@ -29,10 +27,6 @@ class DialogReviewFragment : DialogFragment() {
 
     private val viewModel: MainViewModel by activityViewModels()
 
-    // todo : Review를 보내서 점수도 받았는데 서버에서 갱신이 안되는거 같음
-    // todo : Server와 얘기를 해봐야함
-    // todo : dDay인 아이만 갱신되게 해놨을 가능성이 있슴 그래서 내가 보내봤자 아무것도 오르지 않는거지
-    // todo : Review API 다시한번 듣기
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -78,10 +72,8 @@ class DialogReviewFragment : DialogFragment() {
         binding.reviewEditKeyword.countNumberOfCharacters { keyword ->
             binding.reviewNumberOfCharacters.text = keyword?.length.toString()
             if (keyword?.length!! > 5) {
-                CustomDialogFragment(R.layout.sample_wordcount_error).show(
-                    parentFragmentManager,
-                    TAG
-                )
+                val warningDialog = CustomDialogFragment(R.layout.sample_wordcount_error)
+                warningDialog.show(parentFragmentManager, TAG)
             }
         }
     }
@@ -105,9 +97,6 @@ class DialogReviewFragment : DialogFragment() {
         binding.reviewAdminAccept.setOnClickListener {
             // 물주는 모션이 뜨면서 다시 main으로 넘어가면 됨
             // 리뷰를 전부 적지 않으면 안된다는 것이라던지에 대한 로직만 넣으면 해결됨
-
-            // reviewAPI 다시 한번 생각해보자
-
             viewModel.sendReviewToServer(
                 reviewWateringReq = ReviewWateringReq(
                     binding.reviewMemo.text.toString(),
@@ -125,8 +114,6 @@ class DialogReviewFragment : DialogFragment() {
         binding.reviewIgnoreAccept.setOnClickListener {
             // 건너 뛰는 것도 뭐~ 그냥 main으로 넘어오면 됨
             dismiss()
-
-
         }
     }
 }
