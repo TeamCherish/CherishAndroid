@@ -13,7 +13,7 @@ data class ResponsePlantCardDatas(
         val birth: String,
         val dDay: Int,
         val duration: Int,
-        val gage: Int,
+        val gage: Float,
         val keyword1: String,
         val keyword2: String,
         val keyword3: String,

@@ -60,11 +60,11 @@ class DetailPlantFragment : Fragment() {
         plantId=arguments?.getInt("plantId")!!
         Log.d("final plantId: ",plantId.toString())
 
-
+        reset()
 
         circleProgressbar = binding.test
 
-        reset()
+        //reset()
         binding.buttonWater.setOnClickListener {
             // 이거 매개변수 바꿔야 함
             DetailWateringDialogFragment(cherishid).show(
@@ -95,7 +95,7 @@ class DetailPlantFragment : Fragment() {
             (activity as DetailPlantActivity).setActionBarTitle("식물 카드")
 
         }
-        reset()
+
     }
 
     fun reset(){
