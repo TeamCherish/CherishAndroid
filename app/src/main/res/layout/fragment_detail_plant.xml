@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -40,13 +41,13 @@
                     app:cpb_foregroundProgressColor="#31d693"
                     app:cpb_foregroundProgressWidth="20"
                     app:cpb_roundedCorner="true"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-                    app:layout_constraintEnd_toEndOf="@+id/imageView3"
-                    app:layout_constraintStart_toStartOf="@+id/imageView3"
-                    app:layout_constraintTop_toTopOf="@+id/imageView3" />
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView_detail_url"
+                    app:layout_constraintEnd_toEndOf="@+id/imageView_detail_url"
+                    app:layout_constraintStart_toStartOf="@+id/imageView_detail_url"
+                    app:layout_constraintTop_toTopOf="@+id/imageView_detail_url" />
 
                 <ImageView
-                    android:id="@+id/imageView3"
+                    android:id="@+id/imageView_detail_url"
                     android:layout_width="140dp"
                     android:layout_height="140dp"
                     android:layout_marginTop="30dp"
@@ -64,19 +65,20 @@
                     android:includeFontPadding="false"
                     android:text="남쿵둥이"
                     android:textSize="@dimen/text_20sp"
-                    app:layout_constraintEnd_toEndOf="@+id/imageView3"
-                    app:layout_constraintStart_toStartOf="@+id/imageView3"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+                    app:layout_constraintEnd_toEndOf="@+id/imageView_detail_url"
+                    app:layout_constraintStart_toStartOf="@+id/imageView_detail_url"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView_detail_url" />
 
                 <ImageView
                     android:id="@+id/textView6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="12dp"
                     android:src="@drawable/plantdetail_box_name"
                     android:text="TextView"
-                    app:layout_constraintEnd_toEndOf="@+id/imageView3"
-                    app:layout_constraintStart_toStartOf="@+id/imageView3"
+                    app:layout_constraintEnd_toEndOf="@+id/imageView_detail_url"
+                    app:layout_constraintHorizontal_bias="0.478"
+                    app:layout_constraintStart_toStartOf="@+id/imageView_detail_url"
                     app:layout_constraintTop_toBottomOf="@+id/textView_nick" />
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -195,15 +197,16 @@
                     android:id="@+id/textView_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="12dp"
                     android:fontFamily="@font/notosanscjkkr_regular"
-                    android:includeFontPadding="false"
 
+                    android:includeFontPadding="false"
                     android:text="남궁선규"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="@+id/textView6"
-                    app:layout_constraintStart_toStartOf="@+id/textView6"
-                    app:layout_constraintTop_toTopOf="@+id/textView6" />
+                    app:layout_constraintEnd_toStartOf="@+id/view3"
+                    app:layout_constraintTop_toTopOf="@+id/textView6"
+                    app:layout_constraintVertical_bias="0.571" />
 
                 <View
                     android:id="@+id/view3"
@@ -211,22 +214,25 @@
                     android:layout_height="0dp"
                     android:background="#1ad287"
                     app:layout_constraintBottom_toBottomOf="@+id/textView_name"
-                    app:layout_constraintEnd_toStartOf="@+id/textView_plantname"
-                    app:layout_constraintStart_toEndOf="@+id/textView_name"
+                    app:layout_constraintEnd_toEndOf="@+id/textView6"
+                    app:layout_constraintHorizontal_bias="0.6"
+                    app:layout_constraintStart_toStartOf="@+id/textView6"
                     app:layout_constraintTop_toTopOf="@+id/textView_name"
-                    app:layout_constraintVertical_bias="0.147" />
+                    app:layout_constraintVertical_bias="1.0" />
 
                 <TextView
                     android:id="@+id/textView_plantname"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="5dp"
+                    android:layout_width="32dp"
+                    android:layout_height="16dp"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="10dp"
                     android:fontFamily="@font/notosanscjkkr_regular"
                     android:includeFontPadding="false"
                     android:text="스투키"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="@+id/textView6"
                     app:layout_constraintEnd_toEndOf="@+id/textView6"
+                    app:layout_constraintStart_toEndOf="@+id/view3"
                     app:layout_constraintTop_toTopOf="@+id/textView6" />
 
                 <ImageButton
@@ -239,6 +245,34 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/icn_info" />
+
+                <TextView
+                    android:id="@+id/textView_status_message"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="52dp"
+                    android:text="힘이 솟아요"
+                    android:textSize="@dimen/text_20sp"
+                    android:fontFamily="@font/notosanscjkkr_bold"
+                    android:includeFontPadding="false"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="@+id/test"
+                    app:layout_constraintStart_toStartOf="@+id/test"
+                    app:layout_constraintTop_toTopOf="@+id/test" />
+
+                <TextView
+                    android:id="@+id/textView_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/notosanscjkkr_bold"
+                    android:includeFontPadding="false"
+                    android:text="건강상태"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_12sp"
+                    app:layout_constraintEnd_toEndOf="@+id/test"
+                    app:layout_constraintStart_toStartOf="@+id/test"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_status_message" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

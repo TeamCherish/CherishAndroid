@@ -4,9 +4,11 @@ import android.animation.ArgbEvaluator
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatDialog
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
@@ -36,6 +38,7 @@ import com.sopt.cherish.util.PixelUtil.dp
  * need it!!!
  */
 class HomeFragment : Fragment(), OnItemClickListener {
+    private lateinit var progressDialog: AppCompatDialog
 
     private val viewModel: MainViewModel by activityViewModels()
     private lateinit var binding: FragmentHomeBinding
@@ -64,7 +67,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
         // onClick
         binding.homeWateringBtn.setOnClickListener {
             // 물주기 플로우 뭐가 필요한지 생각
-            navigateWatering()
+            navigateWatering(viewModel.cherishUser.value?.id!!)
         }
 
         binding.homeUserAddText.setOnClickListener {
@@ -76,8 +79,10 @@ class HomeFragment : Fragment(), OnItemClickListener {
             // 식물GIF 클릭 시 이동
             navigateDetailPlant(viewModel.userId.value!!, viewModel.cherishUser.value?.id!!)
         }
+
         return binding.root
     }
+
 
     private fun initializeBottomSheetBehavior() {
         standardBottomSheetBehavior =
@@ -136,8 +141,8 @@ class HomeFragment : Fragment(), OnItemClickListener {
     }
 
     // navigate
-    private fun navigateWatering() {
-        WateringDialogFragment().show(parentFragmentManager, TAG)
+    private fun navigateWatering(id: Int) {
+        WateringDialogFragment(id).show(parentFragmentManager, TAG)
     }
 
     private fun navigatePhoneBook() {
@@ -152,6 +157,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
         val intent = Intent(activity, DetailPlantActivity::class.java)
         intent.putExtra("userId", userId)
         intent.putExtra("cherishId", cherishId)
+        Log.d("homechrish", cherishId.toString())
         startActivity(intent)
     }
 
