@@ -34,6 +34,8 @@ class DetailPlantFragment : Fragment() {
     private val viewModel: DetailPlantViewModel by activityViewModels()
     private val requestData = RetrofitBuilder
     lateinit var memoList: ArrayList<MemoListDataclass>
+    lateinit var binding: FragmentDetailPlantBinding
+    val animationDuration = 2000
      var plant_id=0
     //lateinit var memoList:ArrayList<MemoListDataclass>
     var cherishid = 0
@@ -50,7 +52,7 @@ class DetailPlantFragment : Fragment() {
     ): View {
 
 
-        val binding: FragmentDetailPlantBinding =
+        binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_detail_plant, container, false)
 
         cherishid = arguments?.getInt("cherishidgo")!!
@@ -61,8 +63,8 @@ class DetailPlantFragment : Fragment() {
 
 
         circleProgressbar = binding.test
-        val animationDuration = 2000
 
+        reset()
         binding.buttonWater.setOnClickListener {
             // 이거 매개변수 바꿔야 함
             DetailWateringDialogFragment(cherishid).show(
@@ -73,6 +75,30 @@ class DetailPlantFragment : Fragment() {
 
         Log.d("gogo", cherishid.toString())
 
+
+
+        // 유저 원형 프로그레스바 보여주는 부분
+
+        // memolist 어댑터 연결 부분
+        binding.imageButton3detail.setOnClickListener {
+
+            AlertPlantDialogFragment(plant_id).show(parentFragmentManager, DetailPlantFragment.TAG)
+            //3단계 식물 뷰 들어가는 곳
+        }
+        return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        val activity = activity
+        if (activity != null) {
+            (activity as DetailPlantActivity).setActionBarTitle("식물 카드")
+
+        }
+        reset()
+    }
+
+    fun reset(){
         requestData.responsePlantCardData.Detailcherishcard(cherishid)
             .enqueue(
                 object : Callback<ResponsePlantCardDatas> {
@@ -216,26 +242,7 @@ class DetailPlantFragment : Fragment() {
                     }
                 })
 
-        // 유저 원형 프로그레스바 보여주는 부분
-
-        // memolist 어댑터 연결 부분
-        binding.imageButton3detail.setOnClickListener {
-
-            AlertPlantDialogFragment(plant_id).show(parentFragmentManager, DetailPlantFragment.TAG)
-            //3단계 식물 뷰 들어가는 곳
-        }
-        return binding.root
     }
-
-    override fun onResume() {
-        super.onResume()
-        val activity = activity
-        if (activity != null) {
-            (activity as DetailPlantActivity).setActionBarTitle("식물 카드")
-
-        }
-    }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
         when (id) {
