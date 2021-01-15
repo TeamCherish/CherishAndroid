@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.sopt.cherish.remote.api.*
 import com.sopt.cherish.repository.MainRepository
 import com.sopt.cherish.util.DateUtil
+import com.sopt.cherish.util.SimpleLogger
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -21,6 +22,7 @@ class MainViewModel(
     // todo : review페이지를 넘어갈 떄 viewModel이 새로 생성되는게 문제임
     // todo : 물주는 날짜를 미루는 것도 되고 다 되는데 문제는 미루는 경우, 데이터가 갱신이 되질 않음
     // todo : 그래서 만약 데이터가 변경된다면 그거에 맞게 데이터 갱신되는 무언가가 있어야하는데
+    // todo : 물주기가 되긴 돼, 근데 데이터 갱신이 보여지지 않습니다.
     // 실 기기가 공기계라서 전화랑 메시지는 불가능 하다. 카카오톡은 켜짐!
     // 이것도 바꿔야함
     val dummyUserStatus = arrayListOf<String>("생일", "취업준비중", "헤어짐")
@@ -81,6 +83,7 @@ class MainViewModel(
     // [Review] Server Connection done!
     fun sendReviewToServer(reviewWateringReq: ReviewWateringReq) = viewModelScope.launch {
         mainRepository.sendReviewData(reviewWateringReq)
+        SimpleLogger.logI(mainRepository.sendReviewData(reviewWateringReq).reviewScore.toString())
     }
 
     // [DelayWatering] Server Connection done!

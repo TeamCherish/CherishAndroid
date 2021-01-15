@@ -91,6 +91,7 @@ class DialogReviewFragment : DialogFragment() {
     }
 
     private fun showLoadingDialog() {
+        viewModel.fetchUsers()
         lifecycleScope.launch(Dispatchers.IO) {
             CustomDialogFragment(R.layout.dialog_loading).show(parentFragmentManager, TAG)
             delay(2000)
