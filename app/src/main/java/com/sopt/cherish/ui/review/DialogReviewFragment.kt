@@ -17,7 +17,6 @@ import com.sopt.cherish.remote.api.ReviewWateringReq
 import com.sopt.cherish.ui.dialog.CustomDialogFragment
 import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.util.DialogUtil
-import com.sopt.cherish.util.SimpleLogger
 import com.sopt.cherish.util.extension.FlexBoxExtension.getChip
 import com.sopt.cherish.util.extension.countNumberOfCharacters
 import com.sopt.cherish.util.extension.shortToast
@@ -25,7 +24,6 @@ import com.sopt.cherish.util.extension.writeReview
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import java.util.*
 
 class DialogReviewFragment : DialogFragment() {
 
@@ -92,7 +90,7 @@ class DialogReviewFragment : DialogFragment() {
 
     private fun showLoadingDialog() {
         // 이녀석을 호출하는게 맞는지 아닌지 확인해야함
-        viewModel.fetchUsers()
+        /*viewModel.fetchUsers()*/
         lifecycleScope.launch(Dispatchers.IO) {
             CustomDialogFragment(R.layout.dialog_loading).show(parentFragmentManager, TAG)
             delay(2000)
@@ -115,16 +113,14 @@ class DialogReviewFragment : DialogFragment() {
             // 리뷰를 전부 적지 않으면 안된다는 것이라던지에 대한 로직만 넣으면 해결됨
 
             // reviewAPI 다시 한번 생각해보자
-            val now = System.currentTimeMillis()
-            val date = Date(now)
-            SimpleLogger.logI(date.toString())
+
             viewModel.sendReviewToServer(
                 reviewWateringReq = ReviewWateringReq(
                     binding.reviewMemo.text.toString(),
                     binding.reviewFlexBox.getChip(0)?.text.toString(),
                     binding.reviewFlexBox.getChip(1)?.text.toString(),
                     binding.reviewFlexBox.getChip(2)?.text.toString(),
-                    1
+                    viewModel.cherishUser.value?.id!!.toString()
                 )
             )
             showLoadingDialog()
