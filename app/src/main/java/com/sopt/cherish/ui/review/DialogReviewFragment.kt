@@ -107,8 +107,6 @@ class DialogReviewFragment : DialogFragment() {
                 )
             )
             showLoadingDialog()
-
-
         }
     }
 

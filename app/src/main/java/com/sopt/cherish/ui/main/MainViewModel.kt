@@ -27,6 +27,8 @@ class MainViewModel(
     val wateringFlowerAnimationUri = R.raw.watering_min_android
     val witherFlowerAnimationUri = R.raw.wither_min_android
 
+    val animationTrigger = MutableLiveData<Boolean>(true)
+
     // 로그인 하는 cherish를 이용하는 유저
     val userId = MutableLiveData<Int>()
 
