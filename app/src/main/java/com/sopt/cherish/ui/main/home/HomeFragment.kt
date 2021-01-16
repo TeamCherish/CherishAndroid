@@ -104,13 +104,17 @@ class HomeFragment : Fragment(), OnItemClickListener {
 
     // 최초 화면이 보여질때
     private fun initializeView() {
-        viewModel.cherishUsers.observe(viewLifecycleOwner) {
+        /*viewModel.cherishUsers.observe(viewLifecycleOwner) {
             viewModel.cherishUser.value = it.userData.userList[0]
             binding.homeCherryNumber.text = it.userData.totalUser.toString()
             it.userData.userList[0].apply {
                 initializeViewOnItemClick(this)
             }
-        }
+        }*/
+        Glide.with(binding.homePlantImage)
+            .asGif()
+            .load(R.raw.mindle_flower_android)
+            .into(binding.homePlantImage)
     }
 
     private fun initializeRecyclerView(
