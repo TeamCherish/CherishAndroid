@@ -15,6 +15,7 @@ import com.sopt.cherish.databinding.DialogLoadingBinding
 import com.sopt.cherish.databinding.SampleLottie2Binding
 import com.sopt.cherish.databinding.SampleWordcountErrorBinding
 import com.sopt.cherish.util.DialogUtil
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -43,7 +44,7 @@ class CustomDialogFragment(
                     .asGif()
                     .load(R.raw.cherish_loading)
                     .into(binding.dialogLoadingImage)
-                lifecycleScope.launch {
+                lifecycleScope.launch(Dispatchers.Main) {
                     delay(2000)
                     dismiss()
                 }
@@ -51,10 +52,12 @@ class CustomDialogFragment(
             }
             R.layout.sample_lottie2 -> {
                 val binding = SampleLottie2Binding.bind(view)
+                DialogUtil.adjustDialogSize(this, 0.694f, 0.169f)
                 binding.root
             }
             R.layout.sample_wordcount_error -> {
                 val binding = SampleWordcountErrorBinding.bind(view)
+                DialogUtil.adjustDialogSize(this, 0.694f, 0.169f)
                 binding.root
             }
             else -> {
@@ -65,7 +68,7 @@ class CustomDialogFragment(
 
     override fun onResume() {
         super.onResume()
-        DialogUtil.adjustDialogSize(this, 0.694f, 0.169f)
+        DialogUtil.adjustDialogSize(this, 0.35f, 0.15f)
     }
 
     override fun onClick(view: View?) {

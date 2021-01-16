@@ -77,10 +77,7 @@ class PlantFragment : Fragment() {
                                         it.myPageUserData.result
                                     )
 
-
-
                                 initialRecyclerView(binding, cherishAdapter)
-                                6
                                 cherishAdapter.setItemClickListener(
                                     object : MyPageBottomSheetAdapter.ItemClickListener {
                                         override fun onClick(view: View, position: Int) {

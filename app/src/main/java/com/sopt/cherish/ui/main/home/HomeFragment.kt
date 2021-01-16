@@ -4,7 +4,6 @@ import android.animation.ArgbEvaluator
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,6 +38,10 @@ class HomeFragment : Fragment(), OnItemClickListener {
     private val viewModel: MainViewModel by activityViewModels()
     private lateinit var binding: FragmentHomeBinding
     private lateinit var standardBottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
+    private lateinit var homeCherryListAdapter: HomeCherryListAdapter
+
+    private val debug =
+        "https://sopt27.s3.ap-northeast-2.amazonaws.com/%E1%84%8B%E1%85%A7%E1%86%BC%E1%84%8B%E1%85%B3%E1%86%AB%E1%84%8B%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A5%E1%84%82%E1%85%B3%E1%86%AB+main_bg/main_img_min.png"
 
     companion object {
         private val TAG = "HomeFragment"
@@ -50,9 +53,8 @@ class HomeFragment : Fragment(), OnItemClickListener {
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         binding.mainViewModel = viewModel
-
-        val homeCherryListAdapter = HomeCherryListAdapter(this)
         viewModel.fetchUsers()
+        homeCherryListAdapter = HomeCherryListAdapter(this)
 
         initializeView()
         initializeBottomSheetBehavior()
@@ -75,6 +77,12 @@ class HomeFragment : Fragment(), OnItemClickListener {
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        initializeBottomSheetBehavior()
+        setAdapterData(homeCherryListAdapter)
+        initializeRecyclerView(homeCherryListAdapter)
+    }
 
     private fun initializeBottomSheetBehavior() {
         standardBottomSheetBehavior =
@@ -107,12 +115,20 @@ class HomeFragment : Fragment(), OnItemClickListener {
 
     // 최초 화면이 보여질때
     private fun initializeView() {
-        viewModel.cherishUsers.observe(viewLifecycleOwner) {
+        /*viewModel.cherishUsers.observe(viewLifecycleOwner) {
             viewModel.cherishUser.value = it.userData.userList[0]
             binding.homeCherryNumber.text = it.userData.totalUser.toString()
             it.userData.userList[0].apply {
                 initializeViewOnItemClick(this)
             }
+        }*/
+        Glide.with(binding.homePlantImage)
+            .asGif()
+            .load(R.raw.mindle_flower_android)
+            .into(binding.homePlantImage)
+
+        viewModel.cherishUsers.observe(viewLifecycleOwner) {
+            binding.homeCherryNumber.text = it.userData.totalUser.toString()
         }
     }
 
@@ -141,7 +157,6 @@ class HomeFragment : Fragment(), OnItemClickListener {
         val intent = Intent(activity, DetailPlantActivity::class.java)
         intent.putExtra("userId", userId)
         intent.putExtra("cherishId", viewModel.cherishUser.value?.id)
-        Log.d("log2", viewModel.cherishUser.value?.id.toString())
         intent.putExtra("cherishUserPhoneNumber", viewModel.cherishUser.value?.phoneNumber)
         intent.putExtra("cherishNickname", viewModel.cherishUser.value?.nickName)
         intent.putExtra("userNickname", viewModel.userNickName.value)
@@ -153,7 +168,6 @@ class HomeFragment : Fragment(), OnItemClickListener {
     override fun onItemClick(itemBinding: MainCherryItemBinding, position: Int) {
         viewModel.cherishUsers.observe(viewLifecycleOwner) {
             viewModel.cherishUser.value = it.userData.userList[position]
-
             it.userData.userList[position].apply {
                 initializeViewOnItemClick(this)
             }
@@ -179,10 +193,17 @@ class HomeFragment : Fragment(), OnItemClickListener {
                 binding.homeRemainDate.text = "D-Day"
             }
         }
-        Glide.with(requireContext())
-            .load(viewModel.cherishUser.value!!.homeMainBackgroundImageUrl)
-            .override(PixelUtil.screenWidth.pixel, PixelUtil.screenHeight.pixel)
-            .into(binding.homePlantImage)
+        if (viewModel.cherishUser.value!!.homeMainBackgroundImageUrl == debug) {
+            Glide.with(requireContext())
+                .load(viewModel.cherishUser.value!!.plantAnimationUrl)
+                .override(PixelUtil.screenWidth.pixel, PixelUtil.screenHeight.pixel)
+                .into(binding.homePlantImage)
+        } else {
+            Glide.with(requireContext())
+                .load(viewModel.cherishUser.value!!.homeMainBackgroundImageUrl)
+                .override(PixelUtil.screenWidth.pixel, PixelUtil.screenHeight.pixel)
+                .into(binding.homePlantImage)
+        }
     }
 
     // 바텀시트 뒤에 녀석 색상 변경

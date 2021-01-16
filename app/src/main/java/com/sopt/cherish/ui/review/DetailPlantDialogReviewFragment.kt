@@ -91,8 +91,6 @@ class DetailPlantDialogReviewFragment : DialogFragment() {
     }
 
     private fun showLoadingDialog() {
-        // 이녀석을 호출하는게 맞는지 아닌지 확인해야함
-        /*viewModel.fetchUsers()*/
         lifecycleScope.launch(Dispatchers.IO) {
             CustomDialogFragment(R.layout.dialog_loading).show(parentFragmentManager, TAG)
             delay(2000)
