@@ -38,7 +38,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
     private val viewModel: MainViewModel by activityViewModels()
     private lateinit var binding: FragmentHomeBinding
     private lateinit var standardBottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
-
+    private lateinit var homeCherryListAdapter: HomeCherryListAdapter
     companion object {
         private val TAG = "HomeFragment"
     }
@@ -50,7 +50,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         binding.mainViewModel = viewModel
         viewModel.fetchUsers()
-        val homeCherryListAdapter = HomeCherryListAdapter(this)
+        homeCherryListAdapter = HomeCherryListAdapter(this)
 
         initializeView()
         initializeBottomSheetBehavior()
@@ -71,6 +71,13 @@ class HomeFragment : Fragment(), OnItemClickListener {
             navigateDetailPlant(viewModel.userId.value!!, viewModel.cherishUser.value?.id!!)
         }
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+        initializeBottomSheetBehavior()
+        setAdapterData(homeCherryListAdapter)
+        initializeRecyclerView(homeCherryListAdapter)
     }
 
     private fun initializeBottomSheetBehavior() {
@@ -115,6 +122,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
             .asGif()
             .load(R.raw.mindle_flower_android)
             .into(binding.homePlantImage)
+
     }
 
     private fun initializeRecyclerView(
