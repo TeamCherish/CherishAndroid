@@ -39,6 +39,10 @@ class HomeFragment : Fragment(), OnItemClickListener {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var standardBottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
     private lateinit var homeCherryListAdapter: HomeCherryListAdapter
+
+    private val debug =
+        "https://sopt27.s3.ap-northeast-2.amazonaws.com/%E1%84%8B%E1%85%A7%E1%86%BC%E1%84%8B%E1%85%B3%E1%86%AB%E1%84%8B%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%80%E1%85%A5%E1%84%82%E1%85%B3%E1%86%AB+main_bg/main_img_min.png"
+
     companion object {
         private val TAG = "HomeFragment"
     }
@@ -123,6 +127,9 @@ class HomeFragment : Fragment(), OnItemClickListener {
             .load(R.raw.mindle_flower_android)
             .into(binding.homePlantImage)
 
+        viewModel.cherishUsers.observe(viewLifecycleOwner) {
+            binding.homeCherryNumber.text = it.userData.totalUser.toString()
+        }
     }
 
     private fun initializeRecyclerView(
@@ -186,10 +193,17 @@ class HomeFragment : Fragment(), OnItemClickListener {
                 binding.homeRemainDate.text = "D-Day"
             }
         }
-        Glide.with(requireContext())
-            .load(viewModel.cherishUser.value!!.homeMainBackgroundImageUrl)
-            .override(PixelUtil.screenWidth.pixel, PixelUtil.screenHeight.pixel)
-            .into(binding.homePlantImage)
+        if (viewModel.cherishUser.value!!.homeMainBackgroundImageUrl == debug) {
+            Glide.with(requireContext())
+                .load(viewModel.cherishUser.value!!.plantAnimationUrl)
+                .override(PixelUtil.screenWidth.pixel, PixelUtil.screenHeight.pixel)
+                .into(binding.homePlantImage)
+        } else {
+            Glide.with(requireContext())
+                .load(viewModel.cherishUser.value!!.homeMainBackgroundImageUrl)
+                .override(PixelUtil.screenWidth.pixel, PixelUtil.screenHeight.pixel)
+                .into(binding.homePlantImage)
+        }
     }
 
     // 바텀시트 뒤에 녀석 색상 변경
