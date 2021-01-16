@@ -37,7 +37,7 @@ class EnrollPlantFragment : Fragment() {
     lateinit var weektime: String
     var switchvalue: Boolean = false
 
-    lateinit var plant_explanation: String
+    var plant_explanation: String=""
     lateinit var plant_modify: String
 
     lateinit var plant_mean: String
