@@ -85,7 +85,7 @@ Android studio
 
 > 아래 사진은 package 분류 이미지
 
-<img width="265" alt="Sources" src="https://user-images.githubusercontent.com/57944153/104696447-a0ff8580-5751-11eb-904b-bfb2d971f4ff.png" align="left">
+<img width="265" alt="Sources" src="https://user-images.githubusercontent.com/57944153/104696447-a0ff8580-5751-11eb-904b-bfb2d971f4ff.png">
 
 ### ⚙️ 폴더링 규칙
 
