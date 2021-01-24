@@ -1,7 +1,5 @@
 <img style="border: 0px solid black" src="https://user-images.githubusercontent.com/57944153/104564241-05f1a780-568e-11eb-9659-8a578cb19db4.jpeg" width="200px" />|<img style="border: 0px solid black !important; border-radius:20px; " src="https://user-images.githubusercontent.com/57944153/104564396-32a5bf00-568e-11eb-83a9-9628a933dcc0.jpeg" width="200px" height = "200px" />|<img style="border: 0px solid black !important; border-radius:20px; " src="https://user-images.githubusercontent.com/57944153/104564499-523ce780-568e-11eb-92b0-a5c71229bc62.jpeg" width="200px" height = "200px" />
 
-![Android](C:\Users\thdgn\AndroidStudioProjects\Cherish\image\Android.png)
-
 ## 🍒 Project
 
 * <b> SOPT 27th APPJAM, Cherish </b>
@@ -323,7 +321,7 @@ git push origin develop
 
   <img style="border: 0px solid black" src="https://user-images.githubusercontent.com/57944153/104712080-820aee80-5765-11eb-876d-87085ba52fc4.png" align="left"/>
 
-  - ```kotlin
+```
     private fun initializeBottomSheetBehavior() {
             standardBottomSheetBehavior =
                 BottomSheetBehavior.from(binding.homeStandardBottomSheet)
@@ -351,11 +349,11 @@ git push origin develop
                 }
             })
         }
-    ```
+```
 
-  ```
+```
   - material design을 활용하여 persistent bottom sheet를 구현하였습니다. 슬라이드 될 때 배경 색이 모달 처리되도록 하였고, peekHeight와 expandedOffset 속성을 통해 기본으로 보이는 바텀시트의 높이와 확장된 높이를 지정하였습니다.
-  ```
+```
 
   
 
@@ -363,7 +361,7 @@ git push origin develop
 
   <img style="border: 0px solid black" src="https://user-images.githubusercontent.com/57944153/104712242-ab2b7f00-5765-11eb-9f0a-8b512bf2427e.png" align="left"/>
 
-  - ```kotlin
+```
     fun setSearchListener() {
            binding.editSearch.addTextChangedListener(
                object : TextWatcher {
@@ -389,9 +387,9 @@ git push origin develop
            this.madapter.notifyDataSetChanged()
       
        }
-    ```
+```
 
-
+```
         fun setList() {
             phonelist.distinct()
             phonelist.addAll(getPhoneNumbers(sortText, searchText))
@@ -479,20 +477,19 @@ git push origin develop
             return list.distinct()
         }
     
-    ```
-  - 사용자 폰에 있는 연락처에 퍼미션을 주어 전화번호부 목록을 전부 가져온다.  사용자의 이름과 번호만 불러와서 리사이클러뷰에 연결해 주고  또한 사용자가 친구의 이름 또는 번호 입력을 통해 연락처를 검색할 수 있도록  db 명령어를 이용해 데이터를 조회하였다.
-    
-    ```
-    
-    ```
+```
 
+```
+  - 사용자 폰에 있는 연락처에 퍼미션을 주어 전화번호부 목록을 전부 가져온다.  사용자의 이름과 번호만 불러와서 리사이클러뷰에 연결해 주고  또한 사용자가 친구의 이름 또는 번호 입력을 통해 연락처를 검색할 수 있도록  db 명령어를 이용해 데이터를 조회하였다.
+```
+    
 
 
 - 캘린더
 
   <img style="border: 0px solid black" src="https://user-images.githubusercontent.com/57944153/104710531-8afac080-5763-11eb-92f5-1cd5b8c4b41e.png" width="200px" align="left"/>
 
-  - ```kotlin
+```
     class CalendarFragment : Fragment() {
         private val viewModel: DetailPlantViewModel by activityViewModels()
     
@@ -656,9 +653,11 @@ class CherishMaterialCalendarView constructor(context: Context, attrs: Attribute
         }
     }
     
-    ```
+```
     
+```
     - 기존의 라이브러리인 MaterialCalendarView를 상속받은 CherishCalendarView를 만들어 주간으로 보이는 달력과 개월 간격으로 보이는 달력으로 변환될 수 있도록 함수를 만들어 사용했습니다.
+ ```
 
 
 ## ⚙️기타 등등
@@ -693,5 +692,7 @@ class CherishMaterialCalendarView constructor(context: Context, attrs: Attribute
 
 <img style="border: 0px solid black" src="https://user-images.githubusercontent.com/57944153/104564241-05f1a780-568e-11eb-9659-8a578cb19db4.jpeg" width="200px" /> | <img style="border: 0px solid black !important; border-radius:20px; " src="https://user-images.githubusercontent.com/57944153/104564396-32a5bf00-568e-11eb-83a9-9628a933dcc0.jpeg" width="200px" height = "200px" />| <img style="border: 0px solid black !important; border-radius:20px; " src="https://user-images.githubusercontent.com/57944153/104564499-523ce780-568e-11eb-92b0-a5c71229bc62.jpeg" width="200px" height = "200px" />
 
-​					[훈기](https://github.com/SSong-develop) 										[나영](https://github.com/ny2060) 											[예진](https://github.com/YEJIN-LILY)
+[훈기](https://github.com/SSong-develop) 										
+[나영](https://github.com/ny2060) 											
+[예진](https://github.com/YEJIN-LILY)
 
