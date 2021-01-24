@@ -319,7 +319,7 @@ git push origin develop
 
 - main view의  bottom_sheet
 
-  <img style="border: 0px solid black" src="https://user-images.githubusercontent.com/57944153/104712080-820aee80-5765-11eb-876d-87085ba52fc4.png" align="left"/>
+  <img style="border: 0px solid black" src="https://user-images.githubusercontent.com/57944153/104712080-820aee80-5765-11eb-876d-87085ba52fc4.png"/>
 
 ```
     private fun initializeBottomSheetBehavior() {
@@ -359,7 +359,7 @@ git push origin develop
 
 - 연락처 동기화
 
-  <img style="border: 0px solid black" src="https://user-images.githubusercontent.com/57944153/104712242-ab2b7f00-5765-11eb-9f0a-8b512bf2427e.png" align="left"/>
+  <img style="border: 0px solid black" src="https://user-images.githubusercontent.com/57944153/104712242-ab2b7f00-5765-11eb-9f0a-8b512bf2427e.png"/>
 
 ```
     fun setSearchListener() {
@@ -487,7 +487,7 @@ git push origin develop
 
 - 캘린더
 
-  <img style="border: 0px solid black" src="https://user-images.githubusercontent.com/57944153/104710531-8afac080-5763-11eb-92f5-1cd5b8c4b41e.png" width="200px" align="left"/>
+  <img style="border: 0px solid black" src="https://user-images.githubusercontent.com/57944153/104710531-8afac080-5763-11eb-92f5-1cd5b8c4b41e.png" width="200px"/>
 
 ```
     class CalendarFragment : Fragment() {
@@ -692,7 +692,7 @@ class CherishMaterialCalendarView constructor(context: Context, attrs: Attribute
 
 <img style="border: 0px solid black" src="https://user-images.githubusercontent.com/57944153/104564241-05f1a780-568e-11eb-9659-8a578cb19db4.jpeg" width="200px" /> | <img style="border: 0px solid black !important; border-radius:20px; " src="https://user-images.githubusercontent.com/57944153/104564396-32a5bf00-568e-11eb-83a9-9628a933dcc0.jpeg" width="200px" height = "200px" />| <img style="border: 0px solid black !important; border-radius:20px; " src="https://user-images.githubusercontent.com/57944153/104564499-523ce780-568e-11eb-92b0-a5c71229bc62.jpeg" width="200px" height = "200px" />
 
-[훈기](https://github.com/SSong-develop) 										
-[나영](https://github.com/ny2060) 											
+[훈기](https://github.com/SSong-develop)   						
+[나영](https://github.com/ny2060)   								
 [예진](https://github.com/YEJIN-LILY)
 
