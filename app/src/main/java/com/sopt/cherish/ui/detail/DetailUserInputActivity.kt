@@ -1,4 +1,4 @@
-package com.sopt.cherish.ui.datail
+package com.sopt.cherish.ui.detail
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

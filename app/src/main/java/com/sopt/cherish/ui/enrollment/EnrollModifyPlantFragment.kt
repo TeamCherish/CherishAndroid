@@ -5,7 +5,7 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentEnrollModifyPlantBinding
-import com.sopt.cherish.ui.datail.DetailPlantActivity
+import com.sopt.cherish.ui.detail.DetailPlantActivity
 import com.sopt.cherish.ui.dialog.DeletePlantDialogFragment
 
 

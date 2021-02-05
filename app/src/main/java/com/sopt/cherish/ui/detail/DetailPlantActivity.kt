@@ -1,4 +1,4 @@
-package com.sopt.cherish.ui.datail
+package com.sopt.cherish.ui.detail
 
 import android.graphics.Rect
 import android.os.Bundle
@@ -15,7 +15,7 @@ import com.jackandphantom.circularprogressbar.CircleProgressbar
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityDetailPlantBinding
 import com.sopt.cherish.di.Injection
-import com.sopt.cherish.ui.datail.calendar.CalendarFragment
+import com.sopt.cherish.ui.detail.calendar.CalendarFragment
 import com.sopt.cherish.ui.enrollment.EnrollModifyPlantFragment
 
 

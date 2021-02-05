@@ -1,4 +1,4 @@
-package com.sopt.cherish.ui.datail
+package com.sopt.cherish.ui.detail
 
 import android.graphics.Rect
 import android.os.Bundle
@@ -19,7 +19,7 @@ import com.sopt.cherish.databinding.FragmentDetailPlantBinding
 import com.sopt.cherish.remote.api.ResponsePlantCardDatas
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.adapter.DetailMemoAdapter
-import com.sopt.cherish.ui.datail.calendar.CalendarFragment
+import com.sopt.cherish.ui.detail.calendar.CalendarFragment
 import com.sopt.cherish.ui.dialog.AlertPlantDialogFragment
 import com.sopt.cherish.ui.dialog.DetailWateringDialogFragment
 import com.sopt.cherish.ui.domain.MemoListDataclass

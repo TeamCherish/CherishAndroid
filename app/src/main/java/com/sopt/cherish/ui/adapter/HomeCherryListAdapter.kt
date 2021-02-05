@@ -9,6 +9,7 @@ import com.sopt.cherish.remote.api.User
 class HomeCherryListAdapter(
     private val itemClickListener: OnItemClickListener
 ) : RecyclerView.Adapter<HomeCherryListAdapter.MainViewHolder>() {
+
     var data = mutableListOf<User>()
 
     class MainViewHolder(private val binding: MainCherryItemBinding) :

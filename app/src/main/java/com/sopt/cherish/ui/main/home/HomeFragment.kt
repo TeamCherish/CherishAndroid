@@ -22,7 +22,7 @@ import com.sopt.cherish.databinding.MainCherryItemBinding
 import com.sopt.cherish.remote.api.User
 import com.sopt.cherish.ui.adapter.HomeCherryListAdapter
 import com.sopt.cherish.ui.adapter.OnItemClickListener
-import com.sopt.cherish.ui.datail.DetailPlantActivity
+import com.sopt.cherish.ui.detail.DetailPlantActivity
 import com.sopt.cherish.ui.dialog.WateringDialogFragment
 import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
 import com.sopt.cherish.ui.main.MainViewModel

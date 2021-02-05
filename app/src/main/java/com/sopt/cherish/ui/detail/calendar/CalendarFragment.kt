@@ -1,4 +1,4 @@
-package com.sopt.cherish.ui.datail.calendar
+package com.sopt.cherish.ui.detail.calendar
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -10,11 +10,9 @@ import androidx.fragment.app.activityViewModels
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentCalendarBinding
-import com.sopt.cherish.ui.datail.DetailPlantActivity
-import com.sopt.cherish.ui.datail.DetailPlantViewModel
+import com.sopt.cherish.ui.detail.DetailPlantActivity
+import com.sopt.cherish.ui.detail.DetailPlantViewModel
 import com.sopt.cherish.util.DateUtil
-import com.sopt.cherish.util.extension.FlexBoxExtension.addChipCalendar
-import com.sopt.cherish.util.extension.FlexBoxExtension.clearChips
 import com.sopt.cherish.util.extension.shortToast
 import com.sopt.cherish.view.calendar.DotDecorator
 

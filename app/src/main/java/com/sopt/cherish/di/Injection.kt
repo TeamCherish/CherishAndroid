@@ -17,6 +17,13 @@ import com.sopt.cherish.ui.factory.MainViewModelFactory
  */
 object Injection {
 
+    fun provideMainViewModelFactory(): ViewModelProvider.Factory {
+        return MainViewModelFactory(
+            provideMainRepository(), provideWateringRepository(),
+            provideReviewRepository(), provideCalendarRepository()
+        )
+    }
+
     // User di
     private fun provideUserAPI(): UserAPI {
         return RetrofitBuilder.userAPI
@@ -28,13 +35,6 @@ object Injection {
         )
     }
 
-    fun provideMainViewModelFactory(): ViewModelProvider.Factory {
-        return MainViewModelFactory(
-            provideMainRepository(), provideWateringRepository(),
-            provideReviewRepository(), provideCalendarRepository()
-        )
-    }
-
     // Detail di
     private fun provideDetailPlantRepository(): DetailPlantRepository {
         return DetailPlantRepository(provideCalendarAPI(), provideReviewAPI())
@@ -42,11 +42,6 @@ object Injection {
 
     fun provideDetailViewModelFactory(): ViewModelProvider.Factory {
         return DetailViewModelFactory(provideDetailPlantRepository())
-    }
-
-    // enrollment di
-    fun provideEnrollmentViewModelFactory(): ViewModelProvider.Factory {
-        return EnrollmentViewModelFactory()
     }
 
     // watering di
@@ -74,6 +69,11 @@ object Injection {
 
     private fun provideCalendarAPI(): CalendarAPI {
         return RetrofitBuilder.calendarAPI
+    }
+
+    // enrollment di
+    fun provideEnrollmentViewModelFactory(): ViewModelProvider.Factory {
+        return EnrollmentViewModelFactory()
     }
 
 }
