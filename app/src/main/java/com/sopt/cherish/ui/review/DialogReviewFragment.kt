@@ -106,6 +106,7 @@ class DialogReviewFragment : DialogFragment() {
                     viewModel.cherishUser.value?.id!!.toString()
                 )
             )
+            viewModel.animationTrigger.value = true
             showLoadingDialog()
         }
     }

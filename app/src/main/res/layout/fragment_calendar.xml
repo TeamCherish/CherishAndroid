@@ -156,7 +156,7 @@
                     android:id="@+id/review_back"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/icn_allow"
+                    android:src="@drawable/icn_allow_top"
                     app:layout_constraintEnd_toEndOf="@id/review_all_text"
                     app:layout_constraintStart_toStartOf="@id/review_all_text"
                     app:layout_constraintTop_toBottomOf="@id/review_all_text" />

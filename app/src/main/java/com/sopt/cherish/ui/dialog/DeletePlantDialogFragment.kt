@@ -20,12 +20,12 @@ import retrofit2.Response
 
 class DeletePlantDialogFragment(
     @LayoutRes
-    private val layoutResId: Int,cherishid:Int
+    private val layoutResId: Int, cherishid: Int
 ) : DialogFragment() {
 
     private lateinit var binding: FragmentDeletePlantDialogBinding
     private val requestData = RetrofitBuilder
-    val deletecherish=cherishid
+    val deletecherish = cherishid
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,38 +42,35 @@ class DeletePlantDialogFragment(
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         binding.buttonDeletePlant.setOnClickListener {
 
-                requestData.deleteAPI.plantdelete(deletecherish)
-                    .enqueue(
-                        object : Callback<ResponseDeleteData> {
-                            override fun onFailure(call: Call<ResponseDeleteData>, t: Throwable) {
-                                Log.d("통신 실패", t.toString())
-                            }
-
-                            override fun onResponse(
-                                call: Call<ResponseDeleteData>,
-                                response: Response<ResponseDeleteData>
-                            ) {
-                                Log.d("success", response.body().toString())
-                                response.takeIf {
-                                    it.isSuccessful
-                                }?.body()
-                                    ?.let { it ->
-
-                                        Log.d("data success_delete", it.success.toString())
-
-                                        val intent = Intent(context, MainActivity::class.java)
-                                        startActivity(intent)
-
-                                    }
-                            }
+            requestData.deleteAPI.plantdelete(deletecherish)
+                .enqueue(
+                    object : Callback<ResponseDeleteData> {
+                        override fun onFailure(call: Call<ResponseDeleteData>, t: Throwable) {
+                            Log.d("통신 실패", t.toString())
                         }
-                    )
+
+                        override fun onResponse(
+                            call: Call<ResponseDeleteData>,
+                            response: Response<ResponseDeleteData>
+                        ) {
+                            Log.d("success", response.body().toString())
+                            response.takeIf {
+                                it.isSuccessful
+                            }?.body()
+                                ?.let { it ->
+
+                                    Log.d("data success_delete", it.success.toString())
+
+                                    val intent = Intent(context, MainActivity::class.java)
+                                    startActivity(intent)
+
+                                }
+                        }
+                    }
+                )
 
 
-            }
-
-
-
+        }
 
 
         // testDialogFragmentListener = activity as TestDialogFragmentListener

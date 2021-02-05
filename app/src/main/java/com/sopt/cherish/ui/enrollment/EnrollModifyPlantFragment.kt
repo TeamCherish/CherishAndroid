@@ -9,9 +9,9 @@ import com.sopt.cherish.ui.datail.DetailPlantActivity
 import com.sopt.cherish.ui.dialog.DeletePlantDialogFragment
 
 
-class EnrollModifyPlantFragment(cherish:Int) : Fragment() {
+class EnrollModifyPlantFragment(cherish: Int) : Fragment() {
 
-    var modifycherish=cherish
+    var modifycherish = cherish
     lateinit var binding: FragmentEnrollModifyPlantBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -22,7 +22,7 @@ class EnrollModifyPlantFragment(cherish:Int) : Fragment() {
 
 
         val view = inflater.inflate(R.layout.fragment_enroll_modify_plant, container, false)
-        binding= FragmentEnrollModifyPlantBinding.bind(view)
+        binding = FragmentEnrollModifyPlantBinding.bind(view)
 
         "cherishidgo_delete"
 
@@ -70,7 +70,10 @@ class EnrollModifyPlantFragment(cherish:Int) : Fragment() {
             }
             R.id.trash -> {
                 val deletedialog =
-                    DeletePlantDialogFragment(R.layout.fragment_delete_plant_dialog,modifycherish).show(
+                    DeletePlantDialogFragment(
+                        R.layout.fragment_delete_plant_dialog,
+                        modifycherish
+                    ).show(
                         parentFragmentManager, "asdf"
                     )
                 return true

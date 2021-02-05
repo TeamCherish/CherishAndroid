@@ -241,7 +241,7 @@ class ManagePlantFragment : Fragment() {
 
     private fun navigatePhoneBook() {
         val intent = Intent(context, EnrollmentPhoneActivity::class.java)
-        intent.putExtra("userId",viewModel.userId.value!!)
+        intent.putExtra("userId", viewModel.userId.value!!)
         startActivity(intent)
     }
 

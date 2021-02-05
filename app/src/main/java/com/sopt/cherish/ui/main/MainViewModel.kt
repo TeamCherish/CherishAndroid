@@ -3,11 +3,13 @@ package com.sopt.cherish.ui.main
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sopt.cherish.R
 import com.sopt.cherish.remote.api.*
+import com.sopt.cherish.repository.CalendarRepository
 import com.sopt.cherish.repository.MainRepository
+import com.sopt.cherish.repository.ReviewRepository
+import com.sopt.cherish.repository.WateringRepository
 import com.sopt.cherish.util.DateUtil
-import com.sopt.cherish.util.SimpleLogger
+import com.sopt.cherish.util.SingleLiveEvent
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -16,18 +18,16 @@ import java.util.*
  */
 
 class MainViewModel(
-    private val mainRepository: MainRepository
+    private val mainRepository: MainRepository,
+    private val wateringRepository: WateringRepository,
+    private val reviewRepository: ReviewRepository,
+    private val calendarRepository: CalendarRepository
 ) : ViewModel() {
     // [home] Server connection
     // userId는 값이 1개 , fetchUser 함수를 통해서 _users에 userId가 가지고 있는 cherish들이 보인다.
     // login 시 intent 에서 값을 받아서 옴
 
-    // Gif Uri
-    val normalFlowerAnimationUri = R.raw.mindle_flower_android
-    val wateringFlowerAnimationUri = R.raw.watering_min_android
-    val witherFlowerAnimationUri = R.raw.wither_min_android
-
-    val animationTrigger = MutableLiveData<Boolean>(true)
+    val animationTrigger = SingleLiveEvent<Boolean>()
 
     // 로그인 하는 cherish를 이용하는 유저
     val userId = MutableLiveData<Int>()
@@ -63,7 +63,7 @@ class MainViewModel(
 
     fun fetchCalendarData() = viewModelScope.launch {
         _calendarData.postValue(cherishUser.value?.id?.let {
-            mainRepository.getChipsData(
+            calendarRepository.getChipsData(
                 it
             )
         })
@@ -71,8 +71,7 @@ class MainViewModel(
 
     // [Review] Server Connection done!
     fun sendReviewToServer(reviewWateringReq: ReviewWateringReq) = viewModelScope.launch {
-        mainRepository.sendReviewData(reviewWateringReq)
-        SimpleLogger.logI(mainRepository.sendReviewData(reviewWateringReq).reviewScore.toString())
+        reviewRepository.sendReviewData(reviewWateringReq)
     }
 
     // [DelayWatering] Server Connection done!
@@ -87,15 +86,11 @@ class MainViewModel(
         get() = _postponeData
 
     fun getPostPoneWateringCount() = viewModelScope.launch {
-        _postponeData.postValue(mainRepository.getPostponeCount(cherishUser.value?.id!!))
+        _postponeData.postValue(wateringRepository.getPostponeCount(cherishUser.value?.id!!))
     }
 
     fun postponeWateringDate(postponeWateringDateReq: PostponeWateringDateReq) =
         viewModelScope.launch {
-            mainRepository.postponeWateringDate(postponeWateringDateReq)
+            wateringRepository.postponeWateringDate(postponeWateringDateReq)
         }
-
-    override fun onCleared() {
-        onCleared()
-    }
 }

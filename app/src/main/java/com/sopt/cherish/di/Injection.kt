@@ -1,10 +1,12 @@
 package com.sopt.cherish.di
 
 import androidx.lifecycle.ViewModelProvider
-import com.sopt.cherish.remote.api.*
+import com.sopt.cherish.remote.api.CalendarAPI
+import com.sopt.cherish.remote.api.ReviewAPI
+import com.sopt.cherish.remote.api.UserAPI
+import com.sopt.cherish.remote.api.WateringAPI
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
-import com.sopt.cherish.repository.DetailPlantRepository
-import com.sopt.cherish.repository.MainRepository
+import com.sopt.cherish.repository.*
 import com.sopt.cherish.ui.factory.DetailViewModelFactory
 import com.sopt.cherish.ui.factory.EnrollmentViewModelFactory
 import com.sopt.cherish.ui.factory.MainViewModelFactory
@@ -15,40 +17,25 @@ import com.sopt.cherish.ui.factory.MainViewModelFactory
  */
 object Injection {
 
-    // Main di
+    // User di
     private fun provideUserAPI(): UserAPI {
         return RetrofitBuilder.userAPI
     }
 
-    private fun provideMyPageAPI(): MyPageAPI {
-        return RetrofitBuilder.myPageAPI
-    }
-
-    private fun provideReviewAPI(): ReviewAPI {
-        return RetrofitBuilder.reviewAPI
-    }
-
-    private fun provideWateringAPI(): WateringAPI {
-        return RetrofitBuilder.wateringAPI
-    }
-
-
     private fun provideMainRepository(): MainRepository {
         return MainRepository(
-            provideUserAPI(), provideReviewAPI(),
-            provideWateringAPI(), provideCalendarAPI()
+            provideUserAPI()
         )
     }
 
     fun provideMainViewModelFactory(): ViewModelProvider.Factory {
-        return MainViewModelFactory(provideMainRepository())
+        return MainViewModelFactory(
+            provideMainRepository(), provideWateringRepository(),
+            provideReviewRepository(), provideCalendarRepository()
+        )
     }
 
     // Detail di
-    private fun provideCalendarAPI(): CalendarAPI {
-        return RetrofitBuilder.calendarAPI
-    }
-
     private fun provideDetailPlantRepository(): DetailPlantRepository {
         return DetailPlantRepository(provideCalendarAPI(), provideReviewAPI())
     }
@@ -61,4 +48,32 @@ object Injection {
     fun provideEnrollmentViewModelFactory(): ViewModelProvider.Factory {
         return EnrollmentViewModelFactory()
     }
+
+    // watering di
+    private fun provideWateringRepository(): WateringRepository {
+        return WateringRepository(provideWateringAPI())
+    }
+
+    private fun provideWateringAPI(): WateringAPI {
+        return RetrofitBuilder.wateringAPI
+    }
+
+    // review di
+    private fun provideReviewRepository(): ReviewRepository {
+        return ReviewRepository(provideReviewAPI())
+    }
+
+    private fun provideReviewAPI(): ReviewAPI {
+        return RetrofitBuilder.reviewAPI
+    }
+
+    // calendar di
+    private fun provideCalendarRepository(): CalendarRepository {
+        return CalendarRepository(provideCalendarAPI())
+    }
+
+    private fun provideCalendarAPI(): CalendarAPI {
+        return RetrofitBuilder.calendarAPI
+    }
+
 }

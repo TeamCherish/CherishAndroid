@@ -4,10 +4,11 @@ import android.animation.ArgbEvaluator
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -33,11 +34,13 @@ import com.sopt.cherish.util.PixelUtil.pixel
 /**
  * 메인 홈뷰
  * 초기상태와 중간에 있는 경우 2개 다 고려해야 합니다.
+ * todo : 다시해라 훈기야
  */
 class HomeFragment : Fragment(), OnItemClickListener {
+
     private val viewModel: MainViewModel by activityViewModels()
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var standardBottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
+    private lateinit var standardBottomSheetBehavior: BottomSheetBehavior<View>
     private lateinit var homeCherryListAdapter: HomeCherryListAdapter
 
     private val debug =
@@ -56,10 +59,17 @@ class HomeFragment : Fragment(), OnItemClickListener {
         viewModel.fetchUsers()
         homeCherryListAdapter = HomeCherryListAdapter(this)
 
+        // 뷰가 처음 보일 떄
         initializeView()
+        // 바텀시트 초기화
         initializeBottomSheetBehavior()
+
+        // 바텀시트 리사이클러뷰
         setAdapterData(homeCherryListAdapter)
         initializeRecyclerView(homeCherryListAdapter)
+
+        // 물주기 혹은 미루기를 했을 때 애니메이션의 변화
+        observeWateringOrDelayAnimation()
 
         // onClick
         binding.homeWateringBtn.setOnClickListener {
@@ -74,14 +84,60 @@ class HomeFragment : Fragment(), OnItemClickListener {
         binding.homeMovePlantDetail.setOnClickListener {
             navigateDetailPlant(viewModel.userId.value!!, viewModel.cherishUser.value?.id!!)
         }
+
         return binding.root
+    }
+
+    private fun observeWateringOrDelayAnimation() {
+        viewModel.animationTrigger.observe(viewLifecycleOwner) {
+            // 그 안에 클릭을 해야합니다.
+            if (it) {
+                Handler(Looper.getMainLooper()).postDelayed({ // Runnble 객체와 time을 파라미터로 받는다
+                    Glide.with(binding.homePlantImage)
+                        .asGif()
+                        .load(R.raw.watering_min_android)
+                        .into(binding.homePlantImage)
+                }, 2000)
+                initializeView()
+            } else {
+                Handler(Looper.getMainLooper()).postDelayed({ // Runnble 객체와 time을 파라미터로 받는다
+                    Glide.with(binding.homePlantImage)
+                        .asGif()
+                        .load(R.raw.wither_min_android)
+                        .into(binding.homePlantImage)
+                }, 2000)
+                initializeView()
+            }
+        }
     }
 
     override fun onResume() {
         super.onResume()
-        initializeBottomSheetBehavior()
-        setAdapterData(homeCherryListAdapter)
-        initializeRecyclerView(homeCherryListAdapter)
+        viewModel.fetchUsers()
+        homeCherryListAdapter.notifyDataSetChanged()
+    }
+
+    // navigate
+    private fun navigateWatering(id: Int) {
+        WateringDialogFragment(id).show(parentFragmentManager, TAG)
+    }
+
+    private fun navigatePhoneBook() {
+        // phoneBook
+        val intent = Intent(context, EnrollmentPhoneActivity::class.java)
+        intent.putExtra("userId", viewModel.userId.value)
+        startActivity(intent)
+    }
+
+    private fun navigateDetailPlant(userId: Int, cherishId: Int) {
+        val intent = Intent(activity, DetailPlantActivity::class.java)
+        intent.putExtra("userId", userId)
+        intent.putExtra("cherishId", viewModel.cherishUser.value?.id)
+        intent.putExtra("cherishUserPhoneNumber", viewModel.cherishUser.value?.phoneNumber)
+        intent.putExtra("cherishNickname", viewModel.cherishUser.value?.nickName)
+        intent.putExtra("userNickname", viewModel.userNickName.value)
+        intent.putExtra("userId", viewModel.userId.value)
+        startActivity(intent)
     }
 
     private fun initializeBottomSheetBehavior() {
@@ -122,15 +178,22 @@ class HomeFragment : Fragment(), OnItemClickListener {
                 initializeViewOnItemClick(this)
             }
         }*/
+        // 가라입니다 가라
         Glide.with(binding.homePlantImage)
-            .asGif()
-            .load(R.raw.mindle_flower_android)
+            .load(R.drawable.stuki_temp)
             .into(binding.homePlantImage)
 
         viewModel.cherishUsers.observe(viewLifecycleOwner) {
             binding.homeCherryNumber.text = it.userData.totalUser.toString()
         }
+
+        binding.homeRemainDate.text = "D+1"
+        binding.homeSelectedUserStatus.text = "반짝반짝 빛이나는"
+        binding.homeSelectedUserName.text = "영탁언니"
+        binding.homeAffectionProgressbar.progress = 58
+        binding.homeAffectionRating.text = "58%"
     }
+
 
     private fun initializeRecyclerView(
         homeCherryListAdapter: HomeCherryListAdapter
@@ -141,31 +204,11 @@ class HomeFragment : Fragment(), OnItemClickListener {
         }
     }
 
-    // navigate
-    private fun navigateWatering(id: Int) {
-        WateringDialogFragment(id).show(parentFragmentManager, TAG)
-    }
-
-    private fun navigatePhoneBook() {
-        // phoneBook
-        val intent = Intent(context, EnrollmentPhoneActivity::class.java)
-        intent.putExtra("userId", viewModel.userId.value)
-        startActivity(intent)
-    }
-
-    private fun navigateDetailPlant(userId: Int, cherishId: Int) {
-        val intent = Intent(activity, DetailPlantActivity::class.java)
-        intent.putExtra("userId", userId)
-        intent.putExtra("cherishId", viewModel.cherishUser.value?.id)
-        intent.putExtra("cherishUserPhoneNumber", viewModel.cherishUser.value?.phoneNumber)
-        intent.putExtra("cherishNickname", viewModel.cherishUser.value?.nickName)
-        intent.putExtra("userNickname", viewModel.userNickName.value)
-        intent.putExtra("userId", viewModel.userId.value)
-        startActivity(intent)
-    }
-
     // recyclerview Item click event
     override fun onItemClick(itemBinding: MainCherryItemBinding, position: Int) {
+        standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        standardBottomSheetBehavior.peekHeight = 60.dp
+        standardBottomSheetBehavior.expandedOffset = 100.dp
         viewModel.cherishUsers.observe(viewLifecycleOwner) {
             viewModel.cherishUser.value = it.userData.userList[position]
             it.userData.userList[position].apply {
@@ -206,13 +249,6 @@ class HomeFragment : Fragment(), OnItemClickListener {
         }
     }
 
-    // 바텀시트 뒤에 녀석 색상 변경
-    private fun transitionBottomSheetParentView(slideOffset: Float) {
-        val argbEvaluator =
-            ArgbEvaluator().evaluate(slideOffset, R.color.cherish_gray, R.color.black)
-        binding.homeFragment.setBackgroundColor(argbEvaluator as Int)
-    }
-
     // progressBar
     private fun updateProgressBar(rating: Int) {
         if (rating <= 30) {
@@ -229,5 +265,12 @@ class HomeFragment : Fragment(), OnItemClickListener {
             )
         }
         binding.homeAffectionProgressbar.progress = rating
+    }
+
+    // 바텀시트 뒤에 녀석 색상 변경
+    private fun transitionBottomSheetParentView(slideOffset: Float) {
+        val argbEvaluator =
+            ArgbEvaluator().evaluate(slideOffset, R.color.cherish_gray, R.color.black)
+        binding.homeFragment.setBackgroundColor(argbEvaluator as Int)
     }
 }

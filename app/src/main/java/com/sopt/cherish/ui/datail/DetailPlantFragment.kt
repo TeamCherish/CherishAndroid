@@ -36,10 +36,11 @@ class DetailPlantFragment : Fragment() {
     lateinit var memoList: ArrayList<MemoListDataclass>
     lateinit var binding: FragmentDetailPlantBinding
     val animationDuration = 2000
-     var plant_id=0
+    var plant_id = 0
+
     //lateinit var memoList:ArrayList<MemoListDataclass>
     var cherishid = 0
-    var plantId=1
+    var plantId = 1
     // private lateinit var memoList: ArrayList<MemoListDataclass>
 
     companion object {
@@ -57,8 +58,8 @@ class DetailPlantFragment : Fragment() {
 
         cherishid = arguments?.getInt("cherishidgo")!!
         Log.d("0cherishiddetailplant", cherishid.toString())
-        plantId=arguments?.getInt("plantId")!!
-        Log.d("final plantId: ",plantId.toString())
+        plantId = arguments?.getInt("plantId")!!
+        Log.d("final plantId: ", plantId.toString())
 
         reset()
 
@@ -74,7 +75,6 @@ class DetailPlantFragment : Fragment() {
         }
 
         Log.d("gogo", cherishid.toString())
-
 
 
         // 유저 원형 프로그레스바 보여주는 부분
@@ -98,7 +98,7 @@ class DetailPlantFragment : Fragment() {
         reset()
     }
 
-    fun reset(){
+    fun reset() {
         requestData.responsePlantCardData.Detailcherishcard(cherishid)
             .enqueue(
                 object : Callback<ResponsePlantCardDatas> {
@@ -284,6 +284,7 @@ class DetailPlantFragment : Fragment() {
                 })
 
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
         when (id) {

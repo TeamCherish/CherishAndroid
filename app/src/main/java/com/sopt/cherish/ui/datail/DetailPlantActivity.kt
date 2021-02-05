@@ -117,13 +117,15 @@ class DetailPlantActivity : AppCompatActivity() {
             }
             R.id.setting -> {
                 val transaction = supportFragmentManager.beginTransaction()
-                transaction.replace(R.id.fragment_detail, EnrollModifyPlantFragment(cherishid).apply {
-                    arguments = Bundle().apply {
+                transaction.replace(
+                    R.id.fragment_detail,
+                    EnrollModifyPlantFragment(cherishid).apply {
+                        arguments = Bundle().apply {
 
-                        putInt("cherishidgo_delete",cherishid)
+                            putInt("cherishidgo_delete", cherishid)
 
-                    }
-                })
+                        }
+                    })
                 // if (transaction == null) {
                 transaction.addToBackStack(null)
                 // }
@@ -141,7 +143,7 @@ class DetailPlantActivity : AppCompatActivity() {
             arguments = Bundle().apply {
 
                 putInt("cherishidgo", cherishid)
-                putInt("plantId",plantId)
+                putInt("plantId", plantId)
 
                 //Log.d("nanana", cherishid.toString())
             }

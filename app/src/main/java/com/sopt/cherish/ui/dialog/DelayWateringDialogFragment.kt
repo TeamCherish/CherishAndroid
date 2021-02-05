@@ -45,10 +45,12 @@ class DelayWateringDialogFragment : DialogFragment() {
     }
 
     private fun initializeNumberPicker(binding: DialogDelayWateringBinding) {
-        binding.delayWateringDayPicker.wrapSelectorWheel = false
-        binding.delayWateringDayPicker.maxValue = 7
-        binding.delayWateringDayPicker.minValue = 1
-        binding.delayWateringDayPicker.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
+        binding.delayWateringDayPicker.apply {
+            wrapSelectorWheel = false
+            maxValue = 7
+            minValue = 1
+            descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
+        }
     }
 
     private fun serverDataSetting(binding: DialogDelayWateringBinding) {
@@ -83,6 +85,7 @@ class DelayWateringDialogFragment : DialogFragment() {
                     )
                     viewModel.postponeWateringDate(postponeWateringDateReq)
                     viewModel.fetchUsers()
+                    viewModel.animationTrigger.value = false
                     shortToast(requireContext(), "미루기 성공!")
                     dismiss()
                 }
