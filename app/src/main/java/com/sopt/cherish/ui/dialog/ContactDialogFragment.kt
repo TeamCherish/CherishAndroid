@@ -15,6 +15,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.DialogContactBinding
+import com.sopt.cherish.ui.main.MainActivity
 import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.ui.review.DialogReviewFragment
 import com.sopt.cherish.util.DialogUtil
@@ -62,10 +63,12 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
     private fun initializeChip(binding: DialogContactBinding) {
         viewModel.calendarData.observe(viewLifecycleOwner) {
             if (it.waterData.calendarData.isEmpty()) {
+                // todo : 이거 어떻게 고쳐야 할까?
                 binding.contactUserStatusFirstChip.text = "채워줘ㅠ"
                 binding.contactUserStatusSecondChip.text = "채워줘ㅠ"
                 binding.contactUserStatusThridChip.text = "채워줘ㅠ"
             } else {
+                // todo : 이거 viewModel에서 list로 변경해서 할거임
                 viewModel.userStatus1.value = it.waterData.calendarData[0].userStatus1
                 viewModel.userStatus2.value = it.waterData.calendarData[0].userStatus2
                 viewModel.userStatus3.value = it.waterData.calendarData[0].userStatus3
@@ -84,23 +87,23 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
     }
 
     private fun setChip(binding: DialogContactBinding) {
-        viewModel.userStatus1.observe(viewLifecycleOwner) {
-            if (it == null) {
+        viewModel.userStatus1.observe(viewLifecycleOwner) { chipText ->
+            if (chipText == null) {
                 binding.contactUserStatusFirstChip.text = " "
             }
-            binding.contactUserStatusFirstChip.text = it
+            binding.contactUserStatusFirstChip.text = chipText
         }
-        viewModel.userStatus2.observe(viewLifecycleOwner) {
-            if (it == null) {
+        viewModel.userStatus2.observe(viewLifecycleOwner) { chipText ->
+            if (chipText == null) {
                 binding.contactUserStatusSecondChip.text = " "
             }
-            binding.contactUserStatusSecondChip.text = it
+            binding.contactUserStatusSecondChip.text = chipText
         }
-        viewModel.userStatus3.observe(viewLifecycleOwner) {
-            if (it == null) {
+        viewModel.userStatus3.observe(viewLifecycleOwner) { chipText ->
+            if (chipText == null) {
                 binding.contactUserStatusThridChip.text = " "
             }
-            binding.contactUserStatusThridChip.text = it
+            binding.contactUserStatusThridChip.text = chipText
         }
     }
 
@@ -133,7 +136,10 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
     private fun startPhoneCall() {
         // 함수화 해야합니다.
         val callIntent =
-            Intent(Intent.ACTION_CALL, Uri.parse("tel:${viewModel.cherishUser.value?.phoneNumber}"))
+            Intent(
+                Intent.ACTION_CALL,
+                Uri.parse("tel:${viewModel.selectedCherishUser.value?.phoneNumber}")
+            )
         startActivityForResult(
             callIntent,
             codeThatReviewPage
@@ -143,17 +149,12 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
     private fun startSendMessage() {
         val messageIntent = Intent(
             Intent.ACTION_SENDTO,
-            Uri.parse("smsto:${viewModel.cherishUser.value?.phoneNumber}")
+            Uri.parse("smsto:${viewModel.selectedCherishUser.value?.phoneNumber}")
         )
         startActivityForResult(
             messageIntent,
             codeThatReviewPage
         )
-    }
-
-    private fun startReviewAndDismiss() {
-        DialogReviewFragment().show(parentFragmentManager, tag)
-        dismiss()
     }
 
     @SuppressLint("QueryPermissionsNeeded")
@@ -182,5 +183,12 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
         if (requestCode == codeThatReviewPage) {
             startReviewAndDismiss()
         }
+    }
+
+    private fun startReviewAndDismiss() {
+        DialogReviewFragment().show(parentFragmentManager, tag)
+        // todo : 이렇게 처리를 한다면 어떨까? 될까???? 내일 테스트
+        (activity as MainActivity).showReviewFragment()
+        dismiss()
     }
 }

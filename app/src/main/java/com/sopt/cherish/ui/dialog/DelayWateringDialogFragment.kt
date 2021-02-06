@@ -68,7 +68,7 @@ class DelayWateringDialogFragment : DialogFragment() {
                 if (it.postponeData.isPostpone) {
                     // request Data
                     val postponeWateringDateReq = PostponeWateringDateReq(
-                        viewModel.cherishUser.value!!.id,
+                        viewModel.selectedCherishUser.value!!.id,
                         binding.delayWateringDayPicker.value,
                         it.postponeData.isPostpone
                     )
@@ -79,7 +79,7 @@ class DelayWateringDialogFragment : DialogFragment() {
                 } else {
                     // request Data
                     val postponeWateringDateReq = PostponeWateringDateReq(
-                        viewModel.cherishUser.value!!.id,
+                        viewModel.selectedCherishUser.value!!.id,
                         binding.delayWateringDayPicker.value,
                         it.postponeData.isPostpone
                     )

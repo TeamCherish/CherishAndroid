@@ -12,6 +12,7 @@ import kotlinx.coroutines.launch
 /**
  * Created on 01-06 by SSong-develop
  * default MaterialCalendarView height = 372dp
+ * todo : 캘린더 motionLayout으로 줄어드는거 확실하게 표현해주기
  */
 class CherishMaterialCalendarView constructor(context: Context, attrs: AttributeSet) :
     MaterialCalendarView(context, attrs) {

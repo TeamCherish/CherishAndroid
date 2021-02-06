@@ -27,7 +27,9 @@ class MainViewModel(
     // userId는 값이 1개 , fetchUser 함수를 통해서 _users에 userId가 가지고 있는 cherish들이 보인다.
     // login 시 intent 에서 값을 받아서 옴
 
+    // Utilities
     val animationTrigger = SingleLiveEvent<Boolean>()
+    val exceptionLiveData = MutableLiveData<String>()
 
     // 로그인 하는 cherish를 이용하는 유저
     val userId = MutableLiveData<Int>()
@@ -35,19 +37,19 @@ class MainViewModel(
     // 유저가 가지고 있는 cherish들
     val userNickName = MutableLiveData<String>()
 
-    // main Home에서 호출된 여러명
+    // Home에서 호출된 여러명
     private val _cherishUsers = MutableLiveData<UserResult>()
     val cherishUsers: MutableLiveData<UserResult>
         get() = _cherishUsers
 
     // recyclerview에 클릭된 유저 1명
-    val cherishUser = MutableLiveData<User>()
+    val selectedCherishUser = MutableLiveData<User>()
 
     fun fetchUsers() = viewModelScope.launch {
         try {
             _cherishUsers.postValue(mainRepository.fetchCherishUser(userId.value!!))
         } catch (exception: Exception) {
-            exception.printStackTrace()
+            exceptionLiveData.postValue(exception.message)
         }
     }
 
@@ -57,25 +59,34 @@ class MainViewModel(
         get() = _calendarData
 
     // userStatus Chip
+    // todo : list로 표현하기 , 그 전에 이걸 뷰모델에서 가져도 되는건지?
     val userStatus1 = MutableLiveData<String>()
     val userStatus2 = MutableLiveData<String>()
     val userStatus3 = MutableLiveData<String>()
 
     fun fetchCalendarData() = viewModelScope.launch {
-        _calendarData.postValue(cherishUser.value?.id?.let {
-            calendarRepository.getChipsData(
-                it
-            )
-        })
+        try {
+            _calendarData.postValue(selectedCherishUser.value?.id?.let {
+                calendarRepository.getChipsData(
+                    it
+                )
+            })
+        } catch (exception: Exception) {
+            exceptionLiveData.postValue(exception.message)
+        }
     }
 
     // [Review] Server Connection done!
-    fun sendReviewToServer(reviewWateringReq: ReviewWateringReq) = viewModelScope.launch {
-        reviewRepository.sendReviewData(reviewWateringReq)
+    fun sendReviewToServer(reviewWateringReq: ReviewWateringReq) = try {
+        viewModelScope.launch {
+            reviewRepository.sendReviewData(reviewWateringReq)
+        }
+    } catch (exception: Exception) {
+        exceptionLiveData.postValue(exception.message)
     }
 
     // [DelayWatering] Server Connection done!
-    val today = DateUtil.convertDateToString(Calendar.getInstance().time)
+    private val today = DateUtil.convertDateToString(Calendar.getInstance().time)
     private val todayMonth = DateUtil.getMonth(today).toString()
     private val todayDay = DateUtil.getDay(today).toString()
 
@@ -85,12 +96,21 @@ class MainViewModel(
     val postponeData: MutableLiveData<PostponeWateringRes>
         get() = _postponeData
 
-    fun getPostPoneWateringCount() = viewModelScope.launch {
-        _postponeData.postValue(wateringRepository.getPostponeCount(cherishUser.value?.id!!))
+    fun getPostPoneWateringCount() = try {
+        viewModelScope.launch {
+            _postponeData.postValue(wateringRepository.getPostponeCount(selectedCherishUser.value?.id!!))
+        }
+    } catch (exception: Exception) {
+        exceptionLiveData.postValue(exception.message)
     }
 
-    fun postponeWateringDate(postponeWateringDateReq: PostponeWateringDateReq) =
+
+    fun postponeWateringDate(postponeWateringDateReq: PostponeWateringDateReq) = try {
         viewModelScope.launch {
             wateringRepository.postponeWateringDate(postponeWateringDateReq)
         }
+    } catch (exception: Exception) {
+        exceptionLiveData.postValue(exception.message)
+    }
+
 }

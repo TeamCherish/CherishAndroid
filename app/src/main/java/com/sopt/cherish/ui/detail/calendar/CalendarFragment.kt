@@ -13,6 +13,8 @@ import com.sopt.cherish.databinding.FragmentCalendarBinding
 import com.sopt.cherish.ui.detail.DetailPlantActivity
 import com.sopt.cherish.ui.detail.DetailPlantViewModel
 import com.sopt.cherish.util.DateUtil
+import com.sopt.cherish.util.extension.FlexBoxExtension.addChipCalendar
+import com.sopt.cherish.util.extension.FlexBoxExtension.clearChips
 import com.sopt.cherish.util.extension.shortToast
 import com.sopt.cherish.view.calendar.DotDecorator
 
