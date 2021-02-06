@@ -49,14 +49,12 @@ class ManagePlantFragment : Fragment() {
         initializeServerRequest(binding)
         initializeTabLayoutView(binding)
         initializeBottomSheetBehavior(binding)
-
         binding.myPageAddPlantBtn.setOnClickListener {
             navigatePhoneBook()
         }
 
         return binding.root
     }
-
 
     private fun initializeBottomSheetBehavior(binding: FragmentManagePlantBinding) {
         val standardBottomSheetBehavior =
