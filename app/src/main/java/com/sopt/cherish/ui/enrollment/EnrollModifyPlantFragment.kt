@@ -1,6 +1,7 @@
 package com.sopt.cherish.ui.enrollment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import com.sopt.cherish.R
@@ -24,7 +25,11 @@ class EnrollModifyPlantFragment(cherish:Int) : Fragment() {
         val view = inflater.inflate(R.layout.fragment_enroll_modify_plant, container, false)
         binding= FragmentEnrollModifyPlantBinding.bind(view)
 
-        "cherishidgo_delete"
+        Log.d("modifycherishid",modifycherish.toString())
+
+        //보여지는 부분
+
+
 
 
 

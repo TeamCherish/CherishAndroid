@@ -4,6 +4,7 @@ import android.animation.ArgbEvaluator
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -157,6 +158,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
         val intent = Intent(activity, DetailPlantActivity::class.java)
         intent.putExtra("userId", userId)
         intent.putExtra("cherishId", viewModel.cherishUser.value?.id)
+        Log.d("homecheirushid",viewModel.cherishUser.value?.id.toString())
         intent.putExtra("cherishUserPhoneNumber", viewModel.cherishUser.value?.phoneNumber)
         intent.putExtra("cherishNickname", viewModel.cherishUser.value?.nickName)
         intent.putExtra("userNickname", viewModel.userNickName.value)

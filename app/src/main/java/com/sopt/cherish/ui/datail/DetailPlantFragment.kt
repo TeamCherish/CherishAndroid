@@ -55,12 +55,33 @@ class DetailPlantFragment : Fragment() {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_detail_plant, container, false)
 
+        // memolist 어댑터 연결 부분
+        binding.imageButton3detail.setOnClickListener {
+
+            AlertPlantDialogFragment(plant_id).show(parentFragmentManager, DetailPlantFragment.TAG)
+            //3단계 식물 뷰 들어가는 곳
+        }
+        return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        getcherishid()
+        val activity = activity
+        if (activity != null) {
+            (activity as DetailPlantActivity).setActionBarTitle("식물 카드")
+
+        }
+        reset()
+    }
+    fun getcherishid(){
         cherishid = arguments?.getInt("cherishidgo")!!
         Log.d("0cherishiddetailplant", cherishid.toString())
         plantId=arguments?.getInt("plantId")!!
         Log.d("final plantId: ",plantId.toString())
 
-        reset()
+        //reset()
 
         circleProgressbar = binding.test
 
@@ -75,27 +96,6 @@ class DetailPlantFragment : Fragment() {
 
         Log.d("gogo", cherishid.toString())
 
-
-
-        // 유저 원형 프로그레스바 보여주는 부분
-
-        // memolist 어댑터 연결 부분
-        binding.imageButton3detail.setOnClickListener {
-
-            AlertPlantDialogFragment(plant_id).show(parentFragmentManager, DetailPlantFragment.TAG)
-            //3단계 식물 뷰 들어가는 곳
-        }
-        return binding.root
-    }
-
-    override fun onResume() {
-        super.onResume()
-        val activity = activity
-        if (activity != null) {
-            (activity as DetailPlantActivity).setActionBarTitle("식물 카드")
-
-        }
-        reset()
     }
 
     fun reset(){

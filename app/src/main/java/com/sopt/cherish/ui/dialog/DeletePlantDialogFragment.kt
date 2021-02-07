@@ -34,7 +34,7 @@ class DeletePlantDialogFragment(
 
         val view = inflater.inflate(layoutResId, container, false)
         binding = FragmentDeletePlantDialogBinding.bind(view)
-
+        Log.d("deleteid",deletecherish.toString())
         binding.buttonCancel.setOnClickListener {
             dismiss()
         }

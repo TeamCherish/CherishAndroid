@@ -95,7 +95,8 @@ class DetailPlantDialogReviewFragment : DialogFragment() {
             CustomDialogFragment(R.layout.dialog_loading).show(parentFragmentManager, TAG)
             delay(2000)
             // 만약에 홈 프라그먼트에서 물 주는 애니0메이션을 해야한다 그러면 finishActivity로 변경해야할 수도 있음
-            dismiss()
+            activity?.finish()
+            //dismiss()
         }
     }
 

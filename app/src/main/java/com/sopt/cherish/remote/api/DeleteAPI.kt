@@ -15,7 +15,7 @@ data class ResponseDeleteData(
 
 interface DeleteAPI {
     @Headers("Content-Type:application/json")
-    @DELETE("cherish/:{id}")
+    @DELETE("cherish/{id}")
     fun plantdelete(
         @Path("id") cherishid: Int
     ): Call<ResponseDeleteData>
