@@ -61,9 +61,8 @@ class DeletePlantDialogFragment(
 
                                         Log.d("data success_delete", it.success.toString())
 
-                                        val intent = Intent(context, MainActivity::class.java)
-                                        startActivity(intent)
-
+                                        activity?.finish()
+                                        dismiss()
                                     }
                             }
                         }
