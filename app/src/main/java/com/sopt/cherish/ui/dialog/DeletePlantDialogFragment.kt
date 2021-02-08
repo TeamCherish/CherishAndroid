@@ -34,7 +34,7 @@ class DeletePlantDialogFragment(
 
         val view = inflater.inflate(layoutResId, container, false)
         binding = FragmentDeletePlantDialogBinding.bind(view)
-
+        Log.d("deleteid",deletecherish.toString())
         binding.buttonCancel.setOnClickListener {
             dismiss()
         }
@@ -61,9 +61,8 @@ class DeletePlantDialogFragment(
 
                                         Log.d("data success_delete", it.success.toString())
 
-                                        val intent = Intent(context, MainActivity::class.java)
-                                        startActivity(intent)
-
+                                        activity?.finish()
+                                        dismiss()
                                     }
                             }
                         }

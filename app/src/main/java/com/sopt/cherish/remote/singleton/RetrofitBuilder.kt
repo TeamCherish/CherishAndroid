@@ -9,7 +9,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitBuilder {
-    private const val BaseUrl = "http://3.35.117.232:8080/"
+    private const val BaseUrl = "http://cherishserver.com/"
 
     private fun provideOkHttpClient(): OkHttpClient {
         val loggingInterceptor = HttpLoggingInterceptor()
@@ -58,5 +58,5 @@ object RetrofitBuilder {
 
     val deleteAPI: DeleteAPI = getRetrofit().create(DeleteAPI::class.java)
 
-
+    val modifyAPI:ModifyAPI= getRetrofit().create(ModifyAPI::class.java)
 }
