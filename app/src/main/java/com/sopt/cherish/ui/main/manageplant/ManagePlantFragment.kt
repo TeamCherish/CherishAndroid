@@ -257,6 +257,7 @@ class ManagePlantFragment : Fragment() {
                                     it.myPageUserData.postponeCount.toString()
                                 binding.myPageFinishCnt.text =
                                     it.myPageUserData.completeCount.toString()
+                                binding.myPageUserName.text=it.myPageUserData.user_nickname
 
 
                                 val tabText = "식물 " + it.myPageUserData.totalCherish.toString()
