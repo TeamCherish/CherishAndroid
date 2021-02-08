@@ -22,15 +22,11 @@ class MyPageBottomSheetAdapter(private var context: Context, var data: List<MyPa
             binding.mypageCherryNickname.text = cherishData.nickName
             binding.mypageCherryName.text = cherishData.name
             binding.mypageCherryLevel.text = "Lv. " + cherishData.level
-            if (cherishData.dDay.toString()[0] != '-')
-                binding.myPageDDay.text = "D+" + cherishData.dDay.toString()
-            else if (cherishData.dDay == 0)
-                binding.myPageDDay.text = "D-day"
-            else if (cherishData.dDay == 1)
-                binding.myPageDDay.text = "D-" + cherishData.dDay.toString()
-            else {
+
+            //초록색
+            if(cherishData.dDay<0){
                 binding.myPageDDay.text = "D" + cherishData.dDay.toString()
-                binding.myPageDDay.setBackgroundResource(R.drawable.my_page_chip_green)
+                binding.myPageDDay.setBackgroundResource(R.drawable.my_page_chip_green) //초록색으로
                 binding.myPageDDay.setTextColor(
                     ContextCompat.getColor(
                         binding.root.context,
@@ -38,6 +34,32 @@ class MyPageBottomSheetAdapter(private var context: Context, var data: List<MyPa
                     )
                 )
             }
+            else if(cherishData.dDay==0){
+                binding.myPageDDay.text = "D-day"
+            }
+            else{ //양수(빨간색)
+                binding.myPageDDay.text = "D+" + cherishData.dDay.toString()
+            }
+            /*
+            if (cherishData.dDay.toString()[0] != '-'){//양수값일 때
+                binding.myPageDDay.text = "D+" + cherishData.dDay.toString()
+
+                if(cherishData.dDay == 0)
+                    binding.myPageDDay.text = "D-day"
+                else if (cherishData.dDay == 1)
+                    binding.myPageDDay.text = "D-" + cherishData.dDay.toString()
+            }
+
+            else { //음수값일 때
+                binding.myPageDDay.text = "D" + cherishData.dDay.toString()
+                binding.myPageDDay.setBackgroundResource(R.drawable.my_page_chip_green) //초록색으로
+                binding.myPageDDay.setTextColor(
+                    ContextCompat.getColor(
+                        binding.root.context,
+                        R.color.cherish_green_main
+                    )
+                )
+            } */
 
             Glide.with(binding.root.context).load(cherishData.thumbnailImageUrl)
                 .into(binding.mypageUserImg)
