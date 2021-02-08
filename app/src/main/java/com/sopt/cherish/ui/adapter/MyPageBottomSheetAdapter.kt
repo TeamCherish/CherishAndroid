@@ -12,9 +12,10 @@ import com.sopt.cherish.R
 import com.sopt.cherish.databinding.MyPageCherryItemBinding
 import com.sopt.cherish.remote.api.MyPageCherishData
 
-class MyPageBottomSheetAdapter(private var context: Context, var data: List<MyPageCherishData>) :
+class MyPageBottomSheetAdapter(private var context: Context,private var data:MutableList<MyPageCherishData>) :
     RecyclerView.Adapter<MyPageBottomSheetAdapter.MainViewHolder>() {
 
+    //var data= mutableListOf<MyPageCherishData>()
     class MainViewHolder(private var binding: MyPageCherryItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
