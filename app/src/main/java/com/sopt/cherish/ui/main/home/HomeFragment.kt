@@ -97,6 +97,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
             // todo : 이미지 관련은 딱 정확하게 정해서 그거대로 처리를 해야할 거 같다.
             // 식물 1,2단계는 사진, 3단계는 gif로 보낼 예정
             // 1,2단계 사진은 배경색이 없고 , 3단계만 배경색이 있다.
+            // todo : 데이터 바인딩 제대로 사용해라 훈기야.
             Glide.with(requireContext())
                 .load(initialUser.homeMainBackgroundImageUrl)
                 .into(homePlantImage)
@@ -129,9 +130,9 @@ class HomeFragment : Fragment(), OnItemClickListener {
         // todo : 비율로 변경해야함
         standardBottomSheetBehavior.apply {
             state = BottomSheetBehavior.STATE_COLLAPSED
-            peekHeight = 160.dp
+            peekHeight = 150.dp
             expandedOffset = 100.dp
-            halfExpandedRatio = 0.23f
+            halfExpandedRatio = 0.21f
             isHideable = false
         }.also { bottomSheetBehavior ->
             bottomSheetBehavior.addBottomSheetCallback(object :
@@ -191,6 +192,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
             adapter = homeCherryListAdapter
             layoutManager = GridLayoutManager(context, 5)
             isNestedScrollingEnabled = false
+            setHasFixedSize(true)
         }
     }
 
