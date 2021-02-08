@@ -54,9 +54,9 @@ class DialogReviewFragment : DialogFragment() {
     @SuppressLint("SetTextI18n")
     private fun initializeView(binding: ActivityReviewBinding) {
         binding.reviewUser.text =
-            "${viewModel.userNickName.value}님! ${viewModel.cherishUser.value?.nickName}님과의"
+            "${viewModel.userNickName.value}님! ${viewModel.selectedCherishUser.value?.nickName}님과의"
         binding.reviewDescription.text =
-            "${viewModel.cherishUser.value?.nickName}님과의 물주기를 기록해주세요"
+            "${viewModel.selectedCherishUser.value?.nickName}님과의 물주기를 기록해주세요"
     }
 
     private fun addLimitNumberOfMemoCharacters(binding: ActivityReviewBinding) {
@@ -103,9 +103,10 @@ class DialogReviewFragment : DialogFragment() {
                     binding.reviewFlexBox.getChip(0)?.text.toString(),
                     binding.reviewFlexBox.getChip(1)?.text.toString(),
                     binding.reviewFlexBox.getChip(2)?.text.toString(),
-                    viewModel.cherishUser.value?.id!!.toString()
+                    viewModel.selectedCherishUser.value?.id!!.toString()
                 )
             )
+            viewModel.animationTrigger.value = true
             showLoadingDialog()
         }
     }

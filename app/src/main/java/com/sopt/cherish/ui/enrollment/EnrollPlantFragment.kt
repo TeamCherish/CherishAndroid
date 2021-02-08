@@ -38,13 +38,14 @@ class EnrollPlantFragment : Fragment() {
     lateinit var weektime: String
     var switchvalue: Boolean = false
 
-    var plant_explanation: String=""
+    var plant_explanation: String = ""
     lateinit var plant_modify: String
 
     lateinit var plant_mean: String
     lateinit var plant_url: String
 
     var user_water = 0
+
     @SuppressLint("ResourceAsColor")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

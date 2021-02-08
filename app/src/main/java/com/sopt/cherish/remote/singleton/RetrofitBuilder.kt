@@ -58,5 +58,5 @@ object RetrofitBuilder {
 
     val deleteAPI: DeleteAPI = getRetrofit().create(DeleteAPI::class.java)
 
-    val modifyAPI:ModifyAPI= getRetrofit().create(ModifyAPI::class.java)
+    val modifyAPI: ModifyAPI = getRetrofit().create(ModifyAPI::class.java)
 }

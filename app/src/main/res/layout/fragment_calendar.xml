@@ -6,14 +6,14 @@
     <data>
         <variable
             name="detailPlantViewModel"
-            type="com.sopt.cherish.ui.datail.DetailPlantViewModel" />
+            type="com.sopt.cherish.ui.detail.DetailPlantViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/cherish_light_gray"
-        tools:context=".ui.datail.calendar.CalendarFragment">
+        tools:context=".ui.detail.calendar.CalendarFragment">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/calendar_card_view"
@@ -156,7 +156,7 @@
                     android:id="@+id/review_back"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/icn_allow"
+                    android:src="@drawable/icn_allow_top"
                     app:layout_constraintEnd_toEndOf="@id/review_all_text"
                     app:layout_constraintStart_toStartOf="@id/review_all_text"
                     app:layout_constraintTop_toBottomOf="@id/review_all_text" />

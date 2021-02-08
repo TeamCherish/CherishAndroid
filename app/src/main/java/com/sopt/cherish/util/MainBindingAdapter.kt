@@ -8,6 +8,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.sopt.cherish.R
 
 object MainBindingAdapter {
+    // todo : BindingAdapter로 네이밍 다시
     @JvmStatic
     @BindingAdapter("android:setProfile")
     fun setProfile(imageView: ImageView, imageUrl: String) {
@@ -21,7 +22,7 @@ object MainBindingAdapter {
     @JvmStatic
     @BindingAdapter("android:waterVisibility")
     fun waterVisibility(imageView: ImageView, dDay: Int) {
-        if (dDay < 21)
+        if (dDay < 7)
             imageView.visibility = View.INVISIBLE
         else
             imageView.visibility = View.VISIBLE

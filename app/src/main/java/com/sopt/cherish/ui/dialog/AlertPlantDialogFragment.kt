@@ -21,9 +21,6 @@ class AlertPlantDialogFragment(plantId: Int) : DialogFragment(), View.OnClickLis
     var plantId = plantId
 
 
-
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

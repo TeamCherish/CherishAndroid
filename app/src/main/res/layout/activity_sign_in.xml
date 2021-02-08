@@ -102,11 +102,10 @@
 
         android:text="로그인"
         android:layout_marginTop="@dimen/margin_12dp"
-        app:layout_constraintTop_toBottomOf="@id/constraintLayout6"
+        app:layout_constraintStart_toStartOf="@+id/constraintLayout6"
         style="@style/RoundButton.GreenMain"
         app:layout_constraintEnd_toEndOf="@+id/constraintLayout6"
-        app:layout_constraintStart_toStartOf="@+id/constraintLayout6"
-         />
+        app:layout_constraintTop_toBottomOf="@id/constraintLayout6" />
 
     <TextView
         android:id="@+id/textView4"
