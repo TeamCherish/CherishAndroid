@@ -30,18 +30,6 @@ class EnrollModifyPlantFragment(cherish: Int) : Fragment() {
         //보여지는 부분
 
 
-
-
-
-
-
-
-
-
-
-
-
-
         return binding.root
     }
 
