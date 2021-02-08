@@ -83,6 +83,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
         super.onResume()
         viewModel.fetchUsers()
         homeCherryListAdapter.notifyDataSetChanged()
+        // 이게 추가한 코드인데 이거 없이 되는 지 테스트 한번 해보자
         setAdapterData(homeCherryListAdapter)
         initializeRecyclerView(homeCherryListAdapter)
         // todo : 만약 클릭한다음에 온다면 기존에 클릭했던 사람을 보여주는게 맞다고 생각 함
@@ -94,6 +95,8 @@ class HomeFragment : Fragment(), OnItemClickListener {
         // 코드 수정 중
         binding.apply {
             // todo : 이미지 관련은 딱 정확하게 정해서 그거대로 처리를 해야할 거 같다.
+            // 식물 1,2단계는 사진, 3단계는 gif로 보낼 예정
+            // 1,2단계 사진은 배경색이 없고 , 3단계만 배경색이 있다.
             Glide.with(requireContext())
                 .load(initialUser.homeMainBackgroundImageUrl)
                 .into(homePlantImage)
@@ -103,6 +106,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
             homeAffectionProgressbar.progress = initialUser.growth
             homeAffectionRating.text = "${initialUser.growth}%"
         }
+        // todo : 함수화 합시다.
         when {
             initialUser.dDay < 0 -> {
                 binding.homeRemainDate.text = "D${initialUser.dDay}"
@@ -137,7 +141,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
                 }
 
                 override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                    if (standardBottomSheetBehavior.state == BottomSheetBehavior.STATE_DRAGGING) {
+                    if (standardBottomSheetBehavior.state == BottomSheetBehavior.STATE_DRAGGING && slideOffset < 0.2) {
                         bottomSheetBehavior.peekHeight = 60.dp
                     }
                 }
@@ -157,7 +161,6 @@ class HomeFragment : Fragment(), OnItemClickListener {
                 homeSelectedUserStatus.text = it.plantModifier
                 homeAffectionRating.text = "${it.growth}%"
                 homeAffectionProgressbar.progress = it.growth
-                // todo : 여기임
                 when {
                     it.dDay < 0 -> {
                         binding.homeRemainDate.text = "D${it.dDay}"
@@ -187,6 +190,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
         binding.homeUserList.apply {
             adapter = homeCherryListAdapter
             layoutManager = GridLayoutManager(context, 5)
+            isNestedScrollingEnabled = false
         }
     }
 

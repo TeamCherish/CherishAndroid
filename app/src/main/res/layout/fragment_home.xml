@@ -189,6 +189,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="11dp"
+                    android:scrollbars="vertical"
                     app:layout_constraintTop_toBottomOf="@id/home_user_add_text" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
