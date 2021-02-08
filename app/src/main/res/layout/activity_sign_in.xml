@@ -36,7 +36,6 @@
             android:background="@null"
             android:hint="이메일 주소"
             android:textColor="@color/cherish_text_gray"
-
             android:fontFamily="@font/notosanscjkkr_regular"
             android:includeFontPadding="false"
             android:textSize="13sp"
