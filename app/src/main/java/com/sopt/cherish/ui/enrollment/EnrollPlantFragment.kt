@@ -37,12 +37,12 @@ class EnrollPlantFragment : Fragment() {
     private val requestData = RetrofitBuilder
     lateinit var weektime: String
     var switchvalue: Boolean = false
-
+    lateinit var usernickname:String
     var plant_explanation: String=""
-    lateinit var plant_modify: String
+     var plant_modify: String=""
 
-    lateinit var plant_mean: String
-    lateinit var plant_url: String
+     var plant_mean: String=""
+     var plant_url: String=""
 
     var user_water = 0
     @SuppressLint("ResourceAsColor")
@@ -56,8 +56,9 @@ class EnrollPlantFragment : Fragment() {
         binding = FragmentEnrollPlantBinding.bind(view)
 
         //enrollToolbar.title="식물 상세 입력"
+        binding.editNick.hint=arguments?.getString("phonename")
 
-        binding.phoneName.text = arguments?.getString("phonename")
+       // binding.phoneName.text = arguments?.getString("phonename")
         binding.phoneNumber.text = arguments?.getString("phonenumber")
 
         binding.alarmSwitch.setOnCheckedChangeListener { button, isChecked ->
@@ -73,7 +74,14 @@ class EnrollPlantFragment : Fragment() {
             //  progressON()
 
             val username = arguments?.getString("phonename")
-            val usernickname = binding.editNickname.text.toString()
+
+            if(binding.editNick.text.equals("")){
+                 usernickname = binding.editNick.hint.toString()
+            }
+            else{
+                 usernickname = binding.editNick.text.toString()
+
+            }
             val userbirth = binding.editBirth.text.toString()
 
             val userphone = arguments?.getString("phonenumber")
