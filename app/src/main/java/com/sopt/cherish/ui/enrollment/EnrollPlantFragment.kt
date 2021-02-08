@@ -81,7 +81,7 @@ class EnrollPlantFragment : Fragment() {
             val username = arguments?.getString("phonename")
             Log.d("username",arguments?.getString("phonename").toString())
 //이름
-            if(binding.editNick.text!=null){
+            if(binding.editNick.text==null){
                  usernickname = binding.editNick.hint.toString()
             }
             else{
