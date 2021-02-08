@@ -32,7 +32,8 @@ class DetailPlantActivity : AppCompatActivity() {
     private lateinit var viewModel: DetailPlantViewModel
 
     // var plantid: Int =  intent.getIntExtra("plantId", 100)
-    var cherishid = 0
+    var cherishid_main = 0
+    var cherishid_plant=0
     var plantId = 1
     private lateinit var cherishPhoneNumber: String
     private lateinit var cherishNickname: String
@@ -49,10 +50,26 @@ class DetailPlantActivity : AppCompatActivity() {
         Log.d("plantId", intent.getIntExtra("plantId", 100).toString())
         plantId = intent.getIntExtra("plantId", 0)
 
-        cherishid = intent.getIntExtra("cherishId", 0)
-        Log.d("detailchrishid", cherishid.toString())
+        if(intent.getIntExtra("cherishId", 0)==0){
+            cherishid_main=intent.getIntExtra("Id", 0)
+        }
+        if(intent.getIntExtra("Id", 0)==0){
+            cherishid_main=intent.getIntExtra("cherishId", 0)
+        }
 
-        viewModel.cherishId.value = cherishid
+        //cherishid_main=intent.getIntExtra("cherishId", 0)
+
+
+
+
+        //cherishid_plant = intent.getIntExtra("Id", 0)
+        //cherishid_main = intent.getIntExtra("cherishId", 0)
+
+
+        Log.d("cherishid_main", cherishid_main.toString())
+        Log.d("cherishid_plant", cherishid_plant.toString())
+
+        viewModel.cherishId.value = cherishid_main
 
         cherishPhoneNumber = intent.getStringExtra("cherishUserPhoneNumber").toString()
         viewModel.cherishPhoneNumber.value = cherishPhoneNumber
@@ -121,10 +138,10 @@ class DetailPlantActivity : AppCompatActivity() {
                 val transaction = supportFragmentManager.beginTransaction()
                 transaction.replace(
                     R.id.fragment_detail,
-                    EnrollModifyPlantFragment(cherishid).apply {
+                    EnrollModifyPlantFragment(cherishid_main).apply {
                         arguments = Bundle().apply {
 
-                            putInt("cherishidgo_delete", cherishid)
+                            putInt("cherishidgo_delete", cherishid_main)
 
                         }
                     })
@@ -144,7 +161,7 @@ class DetailPlantActivity : AppCompatActivity() {
         transaction.replace(R.id.fragment_detail, fragment.apply {
             arguments = Bundle().apply {
 
-                putInt("cherishidgo", cherishid)
+                putInt("cherishidgo", cherishid_main)
                 putInt("plantId", plantId)
 
                 //Log.d("nanana", cherishid.toString())

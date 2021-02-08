@@ -73,7 +73,9 @@ class EnrollPlantFragment : Fragment() {
 
         }
 
+// 생일 빼고 사용자가 나머지 다 입력 시 버튼 활성화
 
+        //binding.detailOkBtn.setBackgroundColor(R.color.cherish_green_main)
 
         binding.detailOkBtn.setOnClickListener {
             //  progressON()
