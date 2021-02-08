@@ -23,9 +23,9 @@ object MainBindingAdapter {
     @BindingAdapter("android:waterVisibility")
     fun waterVisibility(imageView: ImageView, dDay: Int) {
         if (dDay < 7)
-            imageView.visibility = View.INVISIBLE
-        else
             imageView.visibility = View.VISIBLE
+        else
+            imageView.visibility = View.INVISIBLE
     }
 
     @JvmStatic

@@ -180,9 +180,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
     // recyclerview Item click event
     override fun onItemClick(itemBinding: MainCherryItemBinding, position: Int) {
         slideDownBottomSheet()
-        viewModel.cherishUsers.observe(viewLifecycleOwner) {
-            viewModel.selectedCherishUser.value = it.userData.userList[position]
-        }
+        viewModel.selectedCherishUser.value = homeCherryListAdapter.data[position]
     }
 
     private fun initializeRecyclerView(

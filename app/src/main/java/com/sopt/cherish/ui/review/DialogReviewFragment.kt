@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,7 +44,14 @@ class DialogReviewFragment : DialogFragment() {
         addLimitNumberOfMemoCharacters(binding)
         sendReviewToServer(binding)
         ignoreSendReviewToServer(binding)
+        observingErrorLiveData()
         return binding.root
+    }
+
+    private fun observingErrorLiveData() {
+        viewModel.exceptionLiveData.observe(viewLifecycleOwner) {
+            shortToast(requireContext(), it)
+        }
     }
 
     override fun onResume() {
@@ -79,8 +87,6 @@ class DialogReviewFragment : DialogFragment() {
     }
 
     private fun showLoadingDialog() {
-        // 이녀석을 호출하는게 맞는지 아닌지 확인해야함
-        /*viewModel.fetchUsers()*/
         CustomDialogFragment(R.layout.dialog_loading).show(parentFragmentManager, TAG)
         dismiss()
     }
@@ -97,6 +103,7 @@ class DialogReviewFragment : DialogFragment() {
         binding.reviewAdminAccept.setOnClickListener {
             // 물주는 모션이 뜨면서 다시 main으로 넘어가면 됨
             // 리뷰를 전부 적지 않으면 안된다는 것이라던지에 대한 로직만 넣으면 해결됨
+            Log.d("why?", viewModel.selectedCherishUser.value?.id.toString())
             viewModel.sendReviewToServer(
                 reviewWateringReq = ReviewWateringReq(
                     binding.reviewMemo.text.toString(),
