@@ -83,6 +83,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
         super.onResume()
         viewModel.fetchUsers()
         homeCherryListAdapter.notifyDataSetChanged()
+        // todo : 만약 클릭한다음에 온다면 기존에 클릭했던 사람을 보여주는게 맞다고 생각 함
     }
 
     // 최초 화면이 보여질때
@@ -108,10 +109,10 @@ class HomeFragment : Fragment(), OnItemClickListener {
 
     private fun initializeBottomSheetBehavior() {
         standardBottomSheetBehavior = BottomSheetBehavior.from(binding.homeStandardBottomSheet)
-        // bottom sheet state 지정
+        // todo : 비율로 변경해야함
         standardBottomSheetBehavior.apply {
             state = BottomSheetBehavior.STATE_COLLAPSED
-            peekHeight = 60.dp
+            peekHeight = 160.dp
             expandedOffset = 100.dp
             halfExpandedRatio = 0.23f
             isHideable = false
@@ -123,7 +124,9 @@ class HomeFragment : Fragment(), OnItemClickListener {
                 }
 
                 override fun onSlide(bottomSheet: View, slideOffset: Float) {
-
+                    if (standardBottomSheetBehavior.state == BottomSheetBehavior.STATE_DRAGGING) {
+                        bottomSheetBehavior.peekHeight = 60.dp
+                    }
                 }
             })
         }
@@ -141,6 +144,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
                 homeSelectedUserStatus.text = it.plantModifier
                 homeAffectionRating.text = "${it.growth}%"
                 homeAffectionProgressbar.progress = it.growth
+                // todo : 이거 작동 안함
                 homeRemainDate.text.apply {
                     when {
                         it.dDay < 0 -> "D${it.dDay}"
@@ -179,7 +183,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
 
     private fun observeWateringOrDelayAnimation() {
         viewModel.animationTrigger.observe(viewLifecycleOwner) { isWateringOrDelaying ->
-            // 그 안에 클릭을 해야합니다.
+            // todo : 이거 고쳐야함
             if (isWateringOrDelaying) {
                 Handler(Looper.getMainLooper()).postDelayed({ // Runnble 객체와 time을 파라미터로 받는다
                     Glide.with(binding.homePlantImage)
@@ -236,10 +240,10 @@ class HomeFragment : Fragment(), OnItemClickListener {
                 null
             )
         }
-        binding.homeAffectionProgressbar.progress = rating
     }
 
     private fun slideDownBottomSheet() {
+        // todo : 비율로 변경해야함
         standardBottomSheetBehavior.apply {
             state = BottomSheetBehavior.STATE_COLLAPSED
             peekHeight = 60.dp
