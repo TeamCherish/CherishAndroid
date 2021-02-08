@@ -44,12 +44,14 @@ class DetailPlantActivity : AppCompatActivity() {
 
         val userId: Int
 
+
         initializeViewModel()
-        Log.d("qwer", intent.getIntExtra("plantId", 100).toString())
+        Log.d("plantId", intent.getIntExtra("plantId", 100).toString())
         plantId = intent.getIntExtra("plantId", 0)
 
         cherishid = intent.getIntExtra("cherishId", 0)
-        Log.d("qwer", cherishid.toString())
+        Log.d("detailchrishid", cherishid.toString())
+
         viewModel.cherishId.value = cherishid
 
         cherishPhoneNumber = intent.getStringExtra("cherishUserPhoneNumber").toString()
@@ -184,4 +186,3 @@ class DetailPlantActivity : AppCompatActivity() {
     }
 
 }
-

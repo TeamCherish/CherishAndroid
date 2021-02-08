@@ -1,5 +1,6 @@
 package com.sopt.cherish.ui.enrollment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.provider.ContactsContract
 import android.text.Editable
@@ -32,6 +33,7 @@ class PhoneBookFragment : Fragment() {
     private lateinit var binding: FragmentPhoneBookBinding
 
 
+    @SuppressLint("ResourceAsColor")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,6 +44,23 @@ class PhoneBookFragment : Fragment() {
         binding = FragmentPhoneBookBinding.bind(view)
         countphonebook = arguments?.getInt("useridenroll")!!
         startProcess()
+
+        Log.d("checkedRadioButton", madapter.checkedRadioButton?.isClickable.toString())
+
+        madapter.setItemClickListener(object : PhoneBookAdapter.ItemClickListener {
+            override fun onchange(radio: Boolean) {
+                Log.d("radio", radio.toString())
+                if (radio == true) {
+                    binding.buttonnext.setBackgroundColor(R.color.cherish_green_main)
+
+                }
+            }
+
+        })
+
+
+
+
 
         binding.buttonnext.setOnClickListener {
             if (madapter.checkedRadioButton != null) {

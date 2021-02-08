@@ -1,5 +1,6 @@
 package com.sopt.cherish.ui.enrollment
 
+import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -44,6 +45,8 @@ class EnrollPlantFragment : Fragment() {
     lateinit var plant_url: String
 
     var user_water = 0
+
+    @SuppressLint("ResourceAsColor")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

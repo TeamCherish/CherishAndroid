@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -13,7 +14,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:background="#eff1f5"
         android:id="@+id/my_page_bg"
         tools:context=".ui.main.manageplant.ManagePlantFragment">
@@ -262,7 +262,7 @@
                 android:id="@+id/home_standardBottomSheet"
                 style="?attr/bottomSheetStyle"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="600dp"
                 app:behavior_fitToContents="false"
                 app:behavior_hideable="false"
                 app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
@@ -308,12 +308,12 @@
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/my_page_bottom_container"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     app:layout_constraintBottom_toBottomOf="@+id/home_standardBottomSheet"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    android:id="@+id/my_page_bottom_container"
                     app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tab_bar_line" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

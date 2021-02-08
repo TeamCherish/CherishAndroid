@@ -17,6 +17,7 @@ data class Phone(
 class PhoneBookAdapter(private val phoneBookList: List<Phone>) :
     RecyclerView.Adapter<PhoneBookAdapter.Holder>() {
 
+    var radiobutton: Boolean = true
     var checkedRadioButton: CompoundButton? = null
     lateinit var phonename: String
     lateinit var phonenumber: String
@@ -27,7 +28,11 @@ class PhoneBookAdapter(private val phoneBookList: List<Phone>) :
 
         val binding: ItemLayoutBinding = ItemLayoutBinding.inflate(layoutInflater, parent, false)
 
-        if (binding.radioButton.isChecked) checkedRadioButton = binding.radioButton
+        if (binding.radioButton.isChecked) {
+            checkedRadioButton = binding.radioButton
+
+            radiobutton = true
+        }
 
         return Holder(binding)
     }
@@ -35,11 +40,18 @@ class PhoneBookAdapter(private val phoneBookList: List<Phone>) :
     override fun onBindViewHolder(holder: Holder, position: Int) {
 
         // todo : 로직 설명 들어봐야 알거같음
+
         holder.radioButton.setOnCheckedChangeListener { compoundButton, isChecked ->
+
             checkedRadioButton?.apply { setChecked(!isChecked) }
-            checkedRadioButton = compoundButton.apply { setChecked(isChecked) }
+            checkedRadioButton = compoundButton.apply {
+                setChecked(isChecked)
+                itemClickListner.onchange(radiobutton)
+                radiobutton = true
+            }
 
             if (isChecked) {
+                radiobutton = true
                 Log.d("phonebook", "${phoneBookList[position].name}")
                 phonename = phoneBookList[position].name.toString()
                 phonenumber = phoneBookList[position].phone.toString()
@@ -65,5 +77,18 @@ class PhoneBookAdapter(private val phoneBookList: List<Phone>) :
             binding.textPhone.text = phone.phone
         }
     }
+
+    interface ItemClickListener {
+        fun onchange(radio: Boolean)
+    }
+
+    //클릭리스너 선언
+    private lateinit var itemClickListner: ItemClickListener
+
+    //클릭리스너 등록 매소드
+    fun setItemClickListener(itemClickListener: ItemClickListener) {
+        this.itemClickListner = itemClickListener
+    }
+
 
 }

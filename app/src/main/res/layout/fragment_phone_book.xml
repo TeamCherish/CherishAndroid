@@ -60,7 +60,7 @@
 
     <Button
         android:id="@+id/buttonnext"
-        style="@style/RoundButton.GreenMain"
+        style="@style/RoundButton.Gray"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="534dp"

@@ -1,6 +1,5 @@
 package com.sopt.cherish.ui.dialog
 
-import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -13,7 +12,6 @@ import androidx.fragment.app.DialogFragment
 import com.sopt.cherish.databinding.FragmentDeletePlantDialogBinding
 import com.sopt.cherish.remote.api.ResponseDeleteData
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
-import com.sopt.cherish.ui.main.MainActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -34,7 +32,7 @@ class DeletePlantDialogFragment(
 
         val view = inflater.inflate(layoutResId, container, false)
         binding = FragmentDeletePlantDialogBinding.bind(view)
-
+        Log.d("deleteid", deletecherish.toString())
         binding.buttonCancel.setOnClickListener {
             dismiss()
         }
@@ -61,9 +59,8 @@ class DeletePlantDialogFragment(
 
                                     Log.d("data success_delete", it.success.toString())
 
-                                    val intent = Intent(context, MainActivity::class.java)
-                                    startActivity(intent)
-
+                                    activity?.finish()
+                                    dismiss()
                                 }
                         }
                     }
