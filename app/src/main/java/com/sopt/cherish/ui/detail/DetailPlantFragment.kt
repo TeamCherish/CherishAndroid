@@ -120,7 +120,7 @@ class DetailPlantFragment : Fragment() {
                                 Log.d("textViewNick", it.data.nickname.toString())
                                 binding.textViewName.text = it.data.name.toString()
                                 binding.textViewPlantname.text = it.data.plant_name.toString()
-                                binding.textViewDday.text = "D-" + it.data.dDay.toString()
+                                binding.textViewDday.text = "D" + it.data.dDay.toString()
                                 binding.textViewDuration.text = it.data.duration.toString()
                                 if ((it.data.birth.toString()) == "Invalid Date") {
                                     binding.textViewBirth.text = "미입력"
