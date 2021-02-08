@@ -2,7 +2,6 @@ package com.sopt.cherish.ui.adapter
 
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
 import androidx.recyclerview.widget.RecyclerView
@@ -18,7 +17,7 @@ data class Phone(
 class PhoneBookAdapter(private val phoneBookList: List<Phone>) :
     RecyclerView.Adapter<PhoneBookAdapter.Holder>() {
 
-    var radiobutton:Boolean=true
+    var radiobutton: Boolean = true
     var checkedRadioButton: CompoundButton? = null
     lateinit var phonename: String
     lateinit var phonenumber: String
@@ -29,9 +28,11 @@ class PhoneBookAdapter(private val phoneBookList: List<Phone>) :
 
         val binding: ItemLayoutBinding = ItemLayoutBinding.inflate(layoutInflater, parent, false)
 
-        if (binding.radioButton.isChecked){ checkedRadioButton = binding.radioButton
+        if (binding.radioButton.isChecked) {
+            checkedRadioButton = binding.radioButton
 
-        radiobutton=true}
+            radiobutton = true
+        }
 
         return Holder(binding)
     }
@@ -43,13 +44,14 @@ class PhoneBookAdapter(private val phoneBookList: List<Phone>) :
         holder.radioButton.setOnCheckedChangeListener { compoundButton, isChecked ->
 
             checkedRadioButton?.apply { setChecked(!isChecked) }
-            checkedRadioButton = compoundButton.apply { setChecked(isChecked)
+            checkedRadioButton = compoundButton.apply {
+                setChecked(isChecked)
                 itemClickListner.onchange(radiobutton)
-                radiobutton=true
+                radiobutton = true
             }
 
             if (isChecked) {
-                radiobutton=true
+                radiobutton = true
                 Log.d("phonebook", "${phoneBookList[position].name}")
                 phonename = phoneBookList[position].name.toString()
                 phonenumber = phoneBookList[position].phone.toString()
@@ -75,8 +77,9 @@ class PhoneBookAdapter(private val phoneBookList: List<Phone>) :
             binding.textPhone.text = phone.phone
         }
     }
+
     interface ItemClickListener {
-        fun onchange(radio:Boolean)
+        fun onchange(radio: Boolean)
     }
 
     //클릭리스너 선언
@@ -86,7 +89,6 @@ class PhoneBookAdapter(private val phoneBookList: List<Phone>) :
     fun setItemClickListener(itemClickListener: ItemClickListener) {
         this.itemClickListner = itemClickListener
     }
-
 
 
 }

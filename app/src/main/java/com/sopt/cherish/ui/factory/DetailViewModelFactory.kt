@@ -3,7 +3,7 @@ package com.sopt.cherish.ui.factory
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.sopt.cherish.repository.DetailPlantRepository
-import com.sopt.cherish.ui.datail.DetailPlantViewModel
+import com.sopt.cherish.ui.detail.DetailPlantViewModel
 
 @Suppress("UNCHECKED_CAST")
 class DetailViewModelFactory(private val detailPlantRepository: DetailPlantRepository) :

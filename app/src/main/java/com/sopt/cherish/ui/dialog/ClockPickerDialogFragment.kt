@@ -64,7 +64,7 @@ class ClockPickerDialogFragment(
 
         }
         val list = resources.getStringArray(R.array.ampm)
-        val listm="00"
+        val listm = "00"
 
         clock_hour.removeDivider()
         clock_minute.removeDivider()
@@ -73,9 +73,9 @@ class ClockPickerDialogFragment(
         clock_hour.minValue = 1
         clock_hour.maxValue = 12
 
-       /* clock_minute.minValue = 00
-        clock_minute.maxValue = 00*/
-        clock_minute.displayedValues= arrayOf(listm)
+        /* clock_minute.minValue = 00
+         clock_minute.maxValue = 00*/
+        clock_minute.displayedValues = arrayOf(listm)
 
         clock_ampm.minValue = 0
         clock_ampm.maxValue = list.size - 1

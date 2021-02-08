@@ -37,14 +37,19 @@ class EnrollPlantFragment : Fragment() {
     private val requestData = RetrofitBuilder
     lateinit var weektime: String
     var switchvalue: Boolean = false
+
     lateinit var usernickname:String
+    lateinit var userbirth:String
     var plant_explanation: String=""
+
      var plant_modify: String=""
+
 
      var plant_mean: String=""
      var plant_url: String=""
 
     var user_water = 0
+
     @SuppressLint("ResourceAsColor")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -74,53 +79,68 @@ class EnrollPlantFragment : Fragment() {
             //  progressON()
 
             val username = arguments?.getString("phonename")
-
-            if(binding.editNick.text.equals("")){
+            Log.d("username",arguments?.getString("phonename").toString())
+//이름
+            if(binding.editNick.text!=null){
                  usernickname = binding.editNick.hint.toString()
             }
             else{
                  usernickname = binding.editNick.text.toString()
 
             }
-            val userbirth = binding.editBirth.text.toString()
+            Log.d("usernickname",binding.editNick.text.toString())
+//애칭
 
+            if(binding.editBirth.text!=null){
+                 userbirth = "0000"
+
+            }else {
+                userbirth = binding.editBirth.text.toString()
+            }
+            Log.d("userbirth",userbirth.toString())
+//생일
             val userphone = arguments?.getString("phonenumber")
+            Log.d("userphone",userphone.toString())
+//번호
             val userphonebook = userphone?.substring(0, 3) + "-" + userphone?.substring(
                 3,
                 7
             ) + "-" + userphone?.substring(7)
+            Log.d("userphonebook",userphonebook.toString())
+//번호나눈거
+
             val userwater = binding.waterAlarmWeek.text.toString()
-            user_water = userwater.substring(6, 7).toInt()
-
-
+            Log.d("userwater",binding.waterAlarmWeek.text.toString())
+            //알람 주기
+            //user_water = userwater.substring(6, 7).toInt()
             if (userwater.substring(8) == "month") {
                 user_water = userwater.substring(6, 7).toInt() * 30
-                Log.d("userwater", user_water.toString())
+                Log.d("userwater2", user_water.toString())
             } else if (userwater.substring(8) == "week") {
                 user_water = (userwater.substring(6, 7).toInt()) * 7
-                Log.d("userwater", user_water.toString())
+                Log.d("userwater2", user_water.toString())
             } else {
                 user_water = userwater.substring(6, 7).toInt()
-                Log.d("userwater", user_water.toString())
+                Log.d("userwater2", user_water.toString())
             }
 
             val usertime = binding.waterAlarmTime.text.toString()
+            val usertime_hour=usertime.substring(0,5).toString()
+            Log.d("usertime", usertime.toString())
 
-            val userid = arguments?.getInt("useridend")?.toInt()
+            val userid = arguments?.getInt("useridend").toString()
             Log.d("enrollplnatfrgment", userid.toString())
-            val body = userid?.let { it1 ->
+            val body =
                 RequestEnrollData(
                     name = username.toString(),
                     nickname = usernickname,
                     birth = userbirth,
                     phone = userphonebook,
                     cycle_date = user_water,
-                    notice_time = usertime,
+                    notice_time = usertime_hour,
                     water_notice = switchvalue,
-                    UserId = it1
+                    UserId = userid.toInt()
                 )
-            }
-
 
             if (body != null) {
                 requestData.enrollAPI.enrollCherish(body)
@@ -140,7 +160,7 @@ class EnrollPlantFragment : Fragment() {
                                 }?.body()
                                     ?.let { it ->
 
-                                        Log.d("data success!", it.data.plant.flower_meaning)
+                                        Log.d("data success!enroll", it.data.plant.flower_meaning)
 
 
                                         plant_explanation = it.data.plant.explanation
@@ -154,6 +174,7 @@ class EnrollPlantFragment : Fragment() {
                         }
                     )
             }
+
             progressON()
             Handler(Looper.getMainLooper()).postDelayed({
                 val transaction = parentFragmentManager.beginTransaction()

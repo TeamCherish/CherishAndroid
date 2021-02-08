@@ -14,7 +14,7 @@ import com.sopt.cherish.remote.api.MyPageCherishData
 import com.sopt.cherish.remote.api.MyPageUserRes
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.adapter.MyPageBottomSheetAdapter
-import com.sopt.cherish.ui.datail.DetailPlantActivity
+import com.sopt.cherish.ui.detail.DetailPlantActivity
 import com.sopt.cherish.ui.main.MainViewModel
 import retrofit2.Call
 import retrofit2.Callback

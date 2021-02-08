@@ -9,10 +9,6 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface RetrofitService {
-    @GET("sample/sample")
-    fun test() {
-
-    }
 
     @Headers("Content-Type:multipart/application-json")
     @POST("cherish")
