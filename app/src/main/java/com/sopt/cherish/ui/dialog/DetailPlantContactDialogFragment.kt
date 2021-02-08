@@ -15,7 +15,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.DialogDetailPlantContactBinding
-import com.sopt.cherish.ui.datail.DetailPlantViewModel
+import com.sopt.cherish.ui.detail.DetailPlantViewModel
 import com.sopt.cherish.ui.review.DetailPlantDialogReviewFragment
 import com.sopt.cherish.util.DialogUtil
 import com.sopt.cherish.util.PermissionUtil

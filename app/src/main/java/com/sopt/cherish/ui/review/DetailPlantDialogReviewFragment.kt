@@ -14,7 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.DialogDetailPlantReviewBinding
 import com.sopt.cherish.remote.api.ReviewWateringReq
-import com.sopt.cherish.ui.datail.DetailPlantViewModel
+import com.sopt.cherish.ui.detail.DetailPlantViewModel
 import com.sopt.cherish.ui.dialog.CustomDialogFragment
 import com.sopt.cherish.util.DialogUtil
 import com.sopt.cherish.util.SimpleLogger
@@ -71,8 +71,8 @@ class DetailPlantDialogReviewFragment : DialogFragment() {
 
     private fun addLimitNumberOfMemoCharacters(binding: DialogDetailPlantReviewBinding) {
         binding.detailPlantReviewMemo.countNumberOfCharacters { memo ->
-            binding.detailPlantReviewNumberOfMemo.text = memo?.length.toString()
-            if (memo?.length!! > 100) {
+            binding.detailPlantReviewNumberOfMemo.text = memo!!.length.toString()
+            if (memo.length > 100) {
                 shortToast(requireContext(), "100자를 초과했습니다.")
             }
         }
@@ -80,8 +80,8 @@ class DetailPlantDialogReviewFragment : DialogFragment() {
 
     private fun addLimitNumberOfKeywordCharacters(binding: DialogDetailPlantReviewBinding) {
         binding.detailPlantReviewEditKeyword.countNumberOfCharacters { keyword ->
-            binding.detailPlantReviewNumberOfCharacters.text = keyword?.length.toString()
-            if (keyword?.length!! > 5) {
+            binding.detailPlantReviewNumberOfCharacters.text = keyword!!.length.toString()
+            if (keyword.length > 5) {
                 CustomDialogFragment(R.layout.sample_wordcount_error).show(
                     parentFragmentManager,
                     TAG
@@ -120,9 +120,9 @@ class DetailPlantDialogReviewFragment : DialogFragment() {
             viewModel.sendReviewToServer(
                 reviewWateringReq = ReviewWateringReq(
                     binding.detailPlantReviewMemo.text.toString(),
-                    binding.detailPlantReviewFlexBox.getChip(0)?.text.toString(),
-                    binding.detailPlantReviewFlexBox.getChip(1)?.text.toString(),
-                    binding.detailPlantReviewFlexBox.getChip(2)?.text.toString(),
+                    binding.detailPlantReviewFlexBox.getChip(0)!!.text.toString(),
+                    binding.detailPlantReviewFlexBox.getChip(1)!!.text.toString(),
+                    binding.detailPlantReviewFlexBox.getChip(2)!!.text.toString(),
                     viewModel.cherishId.value.toString()
                 )
             )

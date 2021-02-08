@@ -50,6 +50,7 @@ class WateringDialogFragment(private val cherishId: Int) : DialogFragment(), Vie
     }
 
     override fun onClick(view: View?) {
+        // dialog 주변을 클릭하면 dismiss
         dismiss()
     }
 

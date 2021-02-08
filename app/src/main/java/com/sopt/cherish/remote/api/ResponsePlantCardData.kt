@@ -22,7 +22,7 @@ data class ResponsePlantCardDatas(
         val phone: String,
         val plant_name: String,
         val plant_thumbnail_image_url: String,
-        val plantId:Int,
+        val plantId: Int,
         val reviews: List<Review>,
         val status_message: String,
         val status: String

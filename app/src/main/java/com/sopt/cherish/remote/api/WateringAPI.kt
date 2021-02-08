@@ -7,7 +7,7 @@ import retrofit2.http.PUT
 import retrofit2.http.Query
 
 // 물주기 미루기가 3회 미만인지 check
-// req , res로 네이밍 다시하기
+// todo : req , res로 네이밍 다시하기
 data class PostponeWateringData(
     @SerializedName("cherish") val wateredDateAndPostponeCount: WateredDateAndPostponeCount,
     @SerializedName("is_limit_postpone_number") val isPostpone: Boolean
