@@ -83,6 +83,8 @@ class HomeFragment : Fragment(), OnItemClickListener {
         super.onResume()
         viewModel.fetchUsers()
         homeCherryListAdapter.notifyDataSetChanged()
+        setAdapterData(homeCherryListAdapter)
+        initializeRecyclerView(homeCherryListAdapter)
         // todo : 만약 클릭한다음에 온다면 기존에 클릭했던 사람을 보여주는게 맞다고 생각 함
     }
 
@@ -100,6 +102,17 @@ class HomeFragment : Fragment(), OnItemClickListener {
             homeSelectedUserName.text = initialUser.nickName
             homeAffectionProgressbar.progress = initialUser.growth
             homeAffectionRating.text = "${initialUser.growth}%"
+        }
+        when {
+            initialUser.dDay < 0 -> {
+                binding.homeRemainDate.text = "D${initialUser.dDay}"
+            }
+            initialUser.dDay > 0 -> {
+                binding.homeRemainDate.text = "D+${initialUser.dDay}"
+            }
+            else -> {
+                binding.homeRemainDate.text = "D-Day"
+            }
         }
         viewModel.cherishUsers.observe(viewLifecycleOwner) {
             viewModel.selectedCherishUser.value = it.userData.userList[0]
@@ -144,12 +157,16 @@ class HomeFragment : Fragment(), OnItemClickListener {
                 homeSelectedUserStatus.text = it.plantModifier
                 homeAffectionRating.text = "${it.growth}%"
                 homeAffectionProgressbar.progress = it.growth
-                // todo : 이거 작동 안함
-                homeRemainDate.text.apply {
-                    when {
-                        it.dDay < 0 -> "D${it.dDay}"
-                        it.dDay > 0 -> "D+${it.dDay}"
-                        it.dDay == 0 -> "D-Day"
+                // todo : 여기임
+                when {
+                    it.dDay < 0 -> {
+                        binding.homeRemainDate.text = "D${it.dDay}"
+                    }
+                    it.dDay > 0 -> {
+                        binding.homeRemainDate.text = "D+${it.dDay}"
+                    }
+                    else -> {
+                        binding.homeRemainDate.text = "D-Day"
                     }
                 }
             }

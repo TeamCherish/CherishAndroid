@@ -15,7 +15,6 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.DialogContactBinding
-import com.sopt.cherish.ui.main.MainActivity
 import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.ui.review.DialogReviewFragment
 import com.sopt.cherish.util.DialogUtil
@@ -185,10 +184,11 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
         }
     }
 
+
     private fun startReviewAndDismiss() {
         DialogReviewFragment().show(parentFragmentManager, tag)
         // todo : 이렇게 처리를 한다면 어떨까? 될까???? 내일 테스트
-        (activity as MainActivity).showReviewFragment()
+        /*(activity as MainActivity).showReviewFragment()*/
         dismiss()
     }
 }
