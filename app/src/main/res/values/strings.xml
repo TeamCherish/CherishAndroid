@@ -54,6 +54,8 @@
     <string name="myPage_watering_text">물주기 횟수</string>
     <string name="myPage_postpone_text">미룬 횟수</string>
     <string name="myPage_complete_text">성장완료</string>
+    <string name="myPage_search_box_text">친구검색</string>
+    <string name="myPage_cancel_text">취소</string>
 
     <string name="calendar_future_watering_text">물 주는 날</string>
     <string name="calendar_watered_text">물 준 날</string>
@@ -64,4 +66,6 @@
     <string name="home_blank_enroll_plant_text">식물을 추가해주세요!</string>
     <string name="home_blank_no_enroll_plant_text">아직 등록한 식물이 없어요</string>
     <string name="home_blank_start_btn_text">시작하기</string>
+
+
 </resources>

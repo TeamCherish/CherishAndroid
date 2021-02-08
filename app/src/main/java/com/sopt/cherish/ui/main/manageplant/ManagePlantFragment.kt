@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.view.marginTop
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -19,6 +20,7 @@ import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
 import com.sopt.cherish.ui.main.MainActivity
 import com.sopt.cherish.ui.main.MainViewModel
+import com.sopt.cherish.util.PixelUtil.dp
 import com.sopt.cherish.util.SimpleLogger
 import retrofit2.Call
 import retrofit2.Callback
@@ -56,63 +58,69 @@ class ManagePlantFragment : Fragment() {
         return binding.root
     }
 
+
     private fun initializeBottomSheetBehavior(binding: FragmentManagePlantBinding) {
         val standardBottomSheetBehavior =
             BottomSheetBehavior.from(binding.homeStandardBottomSheet)
         // bottom sheet state 지정
         standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-        standardBottomSheetBehavior.peekHeight = 1600
-        standardBottomSheetBehavior.expandedOffset = 280
+        standardBottomSheetBehavior.peekHeight = 350.dp
+        standardBottomSheetBehavior.expandedOffset = 68.dp
         standardBottomSheetBehavior.isHideable = false
+
+        //검색 버튼 눌렀을 때
+        binding.searchBox.setOnClickListener {
+            binding.searchBg.visibility = View.VISIBLE
+            binding.cancelText.visibility = View.VISIBLE
+
+            binding.myPageText.visibility = View.INVISIBLE
+            binding.searchBox.visibility = View.INVISIBLE
+        }
+        
+        //취소 눌렀을 때
+        binding.cancelText.setOnClickListener{
+            binding.searchBg.visibility = View.INVISIBLE
+            binding.cancelText.visibility = View.INVISIBLE
+
+            binding.myPageText.visibility = View.VISIBLE
+            binding.searchBox.visibility = View.VISIBLE
+        }
 
         standardBottomSheetBehavior.addBottomSheetCallback(object :
             BottomSheetBehavior.BottomSheetCallback() {
 
             override fun onStateChanged(bottomSheet: View, newState: Int) {
-                if (tabIndex == 0) {
-                    binding.myPageResetBtn.visibility = View.GONE
-                    if (newState == BottomSheetBehavior.STATE_EXPANDED) {
+                if (tabIndex == 0) { //식물 탭 클릭 시
+
+                    if (newState == BottomSheetBehavior.STATE_EXPANDED) { //바텀시트 확장됐을 경우
                         binding.myPageBg.setBackgroundColor(
                             ContextCompat.getColor(
                                 binding.root.context,
                                 R.color.white
                             )
                         )
-                        binding.constraint1.visibility = View.GONE
-                        binding.cancelText.visibility = View.GONE
 
-                        binding.myPageText.visibility = View.VISIBLE
-                        binding.searchBox.visibility = View.VISIBLE
-                        binding.myPageAddPlantBtn.visibility = View.VISIBLE
+                        binding.myPageAddPlantBtn.visibility = View.VISIBLE //식물 추가 visible
                         isCollapsed = false
                     }
 
-                    if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
+                    if (newState == BottomSheetBehavior.STATE_COLLAPSED) { //바텀시트 축소됐을 경우
                         binding.myPageBg.setBackgroundColor(
                             ContextCompat.getColor(
                                 binding.root.context,
                                 R.color.cherish_my_page_bg
                             )
                         )
-                        binding.constraint1.visibility = View.GONE
-                        binding.cancelText.visibility = View.GONE
 
-                        binding.myPageText.visibility = View.VISIBLE
-                        binding.searchBox.visibility = View.VISIBLE
-                        binding.myPageAddPlantBtn.visibility = View.GONE
+                        binding.myPageAddPlantBtn.visibility = View.INVISIBLE //식물 추가 invisible
                         isCollapsed = true
                     }
 
                 }
-                if (tabIndex == 1) {
-                    if (newState == BottomSheetBehavior.STATE_EXPANDED) {
-                        binding.myPageResetBtn.visibility = View.VISIBLE
-                        binding.constraint1.visibility = View.VISIBLE
-                        binding.cancelText.visibility = View.VISIBLE
+                if (tabIndex == 1) { //연락처 탭 클릭 시
+                    binding.myPageAddPlantBtn.visibility = View.INVISIBLE
 
-                        binding.myPageText.visibility = View.GONE
-                        binding.searchBox.visibility = View.GONE
-
+                    if (newState == BottomSheetBehavior.STATE_EXPANDED) { //바텀시트 확장됐을 경우
                         binding.myPageBg.setBackgroundColor(
                             ContextCompat.getColor(
                                 binding.root.context,
@@ -130,12 +138,6 @@ class ManagePlantFragment : Fragment() {
                                 R.color.cherish_my_page_bg
                             )
                         )
-                        binding.myPageResetBtn.visibility = View.GONE
-                        binding.constraint1.visibility = View.GONE
-                        binding.cancelText.visibility = View.GONE
-
-                        binding.myPageText.visibility = View.VISIBLE
-                        binding.searchBox.visibility = View.VISIBLE
 
                         isCollapsed = true
                     }
@@ -173,13 +175,7 @@ class ManagePlantFragment : Fragment() {
                 tabIndex = binding.myPageBottomTab.selectedTabPosition
 
                 if (tabIndex == 0) {
-                    binding.myPageResetBtn.visibility = View.GONE
-                    binding.myPageResetBtn.visibility = View.GONE
-                    binding.constraint1.visibility = View.GONE
-                    binding.cancelText.visibility = View.GONE
 
-                    binding.myPageText.visibility = View.VISIBLE
-                    binding.searchBox.visibility = View.VISIBLE
                     if (isCollapsed) {
                         binding.myPageBg.setBackgroundColor(
                             ContextCompat.getColor(
@@ -187,7 +183,7 @@ class ManagePlantFragment : Fragment() {
                                 R.color.cherish_my_page_bg
                             )
                         )
-                        binding.myPageAddPlantBtn.visibility = View.GONE
+                        binding.myPageAddPlantBtn.visibility = View.INVISIBLE
                     } else {
                         binding.myPageBg.setBackgroundColor(
                             ContextCompat.getColor(
@@ -200,20 +196,15 @@ class ManagePlantFragment : Fragment() {
 
                 }
                 if (tabIndex == 1) {
-
+                    binding.myPageAddPlantBtn.visibility = View.INVISIBLE
                     if (isCollapsed) {
-                        binding.constraint1.visibility = View.GONE
-                        binding.cancelText.visibility = View.GONE
-
-                        binding.myPageText.visibility = View.VISIBLE
-                        binding.searchBox.visibility = View.VISIBLE
                         binding.myPageBg.setBackgroundColor(
                             ContextCompat.getColor(
                                 binding.root.context,
                                 R.color.cherish_my_page_bg
                             )
                         )
-                        binding.myPageResetBtn.visibility = View.GONE
+
                     } else {
                         binding.myPageBg.setBackgroundColor(
                             ContextCompat.getColor(
@@ -222,12 +213,6 @@ class ManagePlantFragment : Fragment() {
                             )
                         )
 
-                        binding.myPageText.visibility = View.GONE
-                        binding.searchBox.visibility = View.GONE
-
-                        binding.myPageResetBtn.visibility = View.VISIBLE
-                        binding.constraint1.visibility = View.VISIBLE
-                        binding.cancelText.visibility = View.VISIBLE
                     }
                 }
 
