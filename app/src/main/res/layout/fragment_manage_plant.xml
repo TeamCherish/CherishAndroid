@@ -35,7 +35,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/original_bar"
             android:layout_width="match_parent"
-            android:layout_height="24dp"
+            android:layout_height="wrap_content"
             android:visibility="visible"
             android:layout_marginTop="@dimen/margin_12dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -46,9 +46,9 @@
                 android:id="@+id/my_page_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/original_bar"
+                app:layout_constraintTop_toTopOf="@+id/original_bar"
+                app:layout_constraintBottom_toBottomOf="@+id/original_bar"
                 android:textColor="@color/cherish_light_black"
                 android:font="@font/notosanscjkkr_medium"
                 android:textSize="16sp"
@@ -59,9 +59,9 @@
                 android:id="@+id/search_box"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/original_bar"
+                app:layout_constraintTop_toTopOf="@+id/original_bar"
+                app:layout_constraintBottom_toBottomOf="@+id/original_bar"
                 android:src="@drawable/icn_search_box"
                 android:layout_marginEnd="@dimen/margin_20dp"/>
 
@@ -69,7 +69,7 @@
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:visibility="gone"
+
             android:id="@+id/constraint1"
             android:layout_width="280dp"
             android:layout_height="44dp"
