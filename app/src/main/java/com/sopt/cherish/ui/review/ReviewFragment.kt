@@ -20,6 +20,7 @@ import com.sopt.cherish.util.extension.countNumberOfCharacters
 import com.sopt.cherish.util.extension.shortToast
 import com.sopt.cherish.util.extension.writeReview
 
+// fragment로 바꿀까 고민중임
 class ReviewFragment : Fragment() {
 
     private val TAG = "ReviewFragment"

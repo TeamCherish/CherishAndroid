@@ -93,5 +93,4 @@ class ClearEditText : AppCompatEditText {
             }
         }
     }
-
 }
