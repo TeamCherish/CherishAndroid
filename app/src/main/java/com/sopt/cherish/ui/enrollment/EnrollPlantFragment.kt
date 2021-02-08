@@ -73,7 +73,9 @@ class EnrollPlantFragment : Fragment() {
 
         }
 
+// 생일 빼고 사용자가 나머지 다 입력 시 버튼 활성화
 
+        //binding.detailOkBtn.setBackgroundColor(R.color.cherish_green_main)
 
         binding.detailOkBtn.setOnClickListener {
             //  progressON()
@@ -81,7 +83,7 @@ class EnrollPlantFragment : Fragment() {
             val username = arguments?.getString("phonename")
             Log.d("username",arguments?.getString("phonename").toString())
 //이름
-            if(binding.editNick.text!=null){
+            if(binding.editNick.text==null){
                  usernickname = binding.editNick.hint.toString()
             }
             else{

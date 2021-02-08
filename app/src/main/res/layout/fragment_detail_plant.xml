@@ -69,17 +69,59 @@
                     app:layout_constraintStart_toStartOf="@+id/imageView_detail_url"
                     app:layout_constraintTop_toBottomOf="@+id/imageView_detail_url" />
 
-                <ImageView
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/textView6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:src="@drawable/plantdetail_box_name"
                     android:text="TextView"
+                    android:background="@drawable/my_page_chip_green"
                     app:layout_constraintEnd_toEndOf="@+id/imageView_detail_url"
-                    app:layout_constraintHorizontal_bias="0.478"
                     app:layout_constraintStart_toStartOf="@+id/imageView_detail_url"
-                    app:layout_constraintTop_toBottomOf="@+id/textView_nick" />
+                    app:layout_constraintTop_toBottomOf="@+id/textView_nick" >
+
+                    <TextView
+                        android:id="@+id/textView_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/notosanscjkkr_regular"
+                        android:layout_marginRight="@dimen/margin_12dp"
+                        android:includeFontPadding="false"
+                        android:text="남궁선규"
+                        android:textColor="@color/cherish_green_main"
+                        android:textSize="12sp"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView6"
+                        app:layout_constraintEnd_toStartOf="@+id/view3" />
+
+
+                    <View
+                        android:id="@+id/view3"
+                        android:layout_width="2dp"
+                        android:layout_height="0dp"
+                        android:background="#1ad287"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView_name"
+                        app:layout_constraintEnd_toEndOf="@+id/textView6"
+                        app:layout_constraintStart_toStartOf="@+id/textView6"
+                        app:layout_constraintTop_toTopOf="@+id/textView_name"
+                        />
+
+                    <TextView
+                        android:id="@+id/textView_plantname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginEnd="10dp"
+                        android:fontFamily="@font/notosanscjkkr_regular"
+                        android:includeFontPadding="false"
+                        android:text="스투키"
+                        android:textSize="12sp"
+                        android:textColor="@color/cherish_green_main"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView6"
+                        app:layout_constraintEnd_toEndOf="@+id/textView6"
+                        app:layout_constraintStart_toEndOf="@+id/view3"
+                        app:layout_constraintTop_toTopOf="@+id/textView6" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/cons3"
@@ -190,51 +232,6 @@
                         app:layout_constraintTop_toBottomOf="@+id/textView_birth" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <TextView
-                    android:id="@+id/textView_name"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="12dp"
-                    android:layout_marginEnd="12dp"
-                    android:textColor="@color/cherish_green_main"
-
-                    android:fontFamily="@font/notosanscjkkr_regular"
-                    android:includeFontPadding="false"
-                    android:text="남궁선규"
-                    android:textSize="12sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView6"
-                    app:layout_constraintEnd_toStartOf="@+id/view3"
-                    app:layout_constraintStart_toStartOf="@+id/textView6"
-                    app:layout_constraintTop_toTopOf="@+id/textView6"
-                    app:layout_constraintVertical_bias="0.571" />
-
-                <View
-                    android:id="@+id/view3"
-                    android:layout_width="2dp"
-                    android:layout_height="0dp"
-                    android:background="#1ad287"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView_name"
-                    app:layout_constraintEnd_toEndOf="@+id/textView6"
-                    app:layout_constraintHorizontal_bias="0.6"
-                    app:layout_constraintStart_toStartOf="@+id/textView6"
-                    app:layout_constraintTop_toTopOf="@+id/textView_name"
-                    app:layout_constraintVertical_bias="1.0" />
-
-                <TextView
-                    android:id="@+id/textView_plantname"
-                    android:layout_width="32dp"
-                    android:layout_height="16dp"
-                    android:layout_marginStart="12dp"
-                    android:layout_marginEnd="10dp"
-                    android:fontFamily="@font/notosanscjkkr_regular"
-                    android:includeFontPadding="false"
-                    android:text="스투키"
-                    android:textSize="12sp"
-                    android:textColor="@color/cherish_green_main"
-                    app:layout_constraintBottom_toBottomOf="@+id/textView6"
-                    app:layout_constraintEnd_toEndOf="@+id/textView6"
-                    app:layout_constraintStart_toEndOf="@+id/view3"
-                    app:layout_constraintTop_toTopOf="@+id/textView6" />
 
                 <ImageButton
                     android:id="@+id/imageButton_3detail"

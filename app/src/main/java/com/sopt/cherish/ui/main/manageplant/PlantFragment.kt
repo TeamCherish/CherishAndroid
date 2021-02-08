@@ -53,6 +53,7 @@ class PlantFragment : Fragment() {
     }
 
     private fun setAdapterData() {
+        Log.d("viewmodeluserid",viewModel.userId.value.toString())
         requestData.myPageAPI.fetchUserPage(viewModel.userId.value!!)
             .enqueue(
                 object : Callback<MyPageUserRes> {
@@ -90,9 +91,13 @@ class PlantFragment : Fragment() {
                                                 "plantId",
                                                 it.myPageUserData.result[position].plantId
                                             )
+                                            intent.putExtra(
+                                                "Id",
+                                                it.myPageUserData.result[position].id
+                                            )
                                             Log.d(
-                                                "plantId",
-                                                it.myPageUserData.result[position].plantId.toString()
+                                                "Id",
+                                                it.myPageUserData.result[position].id.toString()
                                             )
                                             //startActivityForResult(intent, 100)
                                             startActivity(intent)

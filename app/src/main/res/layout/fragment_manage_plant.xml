@@ -19,6 +19,7 @@
         tools:context=".ui.main.manageplant.ManagePlantFragment">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:contentDescription="@null"
             android:id="@+id/my_page_add_plant_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -26,7 +27,7 @@
             android:layout_marginBottom="14dp"
             android:backgroundTint="@color/cherish_green_main"
             app:borderWidth="0dp"
-            android:visibility="gone"
+            android:visibility="invisible"
             android:src="@drawable/icon_plus"
             app:tint="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -35,7 +36,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/original_bar"
             android:layout_width="match_parent"
-            android:layout_height="24dp"
+            android:layout_height="wrap_content"
             android:visibility="visible"
             android:layout_marginTop="@dimen/margin_12dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -46,9 +47,9 @@
                 android:id="@+id/my_page_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/original_bar"
+                app:layout_constraintTop_toTopOf="@+id/original_bar"
+                app:layout_constraintBottom_toBottomOf="@+id/original_bar"
                 android:textColor="@color/cherish_light_black"
                 android:font="@font/notosanscjkkr_medium"
                 android:textSize="16sp"
@@ -56,20 +57,21 @@
                 android:text="@string/myPage_title_text" />
 
             <ImageView
+                android:contentDescription="@null"
                 android:id="@+id/search_box"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/original_bar"
+                app:layout_constraintTop_toTopOf="@+id/original_bar"
+                app:layout_constraintBottom_toBottomOf="@+id/original_bar"
                 android:src="@drawable/icn_search_box"
                 android:layout_marginEnd="@dimen/margin_20dp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:visibility="gone"
-            android:id="@+id/constraint1"
+            android:visibility="invisible"
+            android:id="@+id/search_bg"
             android:layout_width="280dp"
             android:layout_height="44dp"
             android:layout_marginStart="16dp"
@@ -79,12 +81,13 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <EditText
+                android:autofillHints="@null"
                 android:id="@+id/editSearch"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:background="@null"
-                android:hint="친구검색"
+                android:hint="@string/myPage_search_box_text"
                 android:inputType="textPersonName"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -92,6 +95,8 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
+                android:contentDescription="@null"
+                android:autofillHints="@null"
                 android:id="@+id/imageView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -104,21 +109,22 @@
 
         <TextView
             android:id="@+id/cancelText"
-            android:visibility="gone"
+            android:visibility="invisible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="28dp"
-            android:text="취소"
+            android:text="@string/myPage_cancel_text"
             android:textSize="16sp"
             android:font="@font/notosanscjkkr_regular"
             android:textColor="#aaaaaa"
             android:layout_marginEnd="23dp"
-            app:layout_constraintStart_toEndOf="@+id/constraint1"/>
+            app:layout_constraintStart_toEndOf="@+id/search_bg"/>
 
 
         <ImageView
+            android:contentDescription="@null"
             android:id="@+id/my_page_user_img"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -132,10 +138,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toEndOf="@+id/my_page_user_img"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="97dp"
+            app:layout_constraintTop_toBottomOf="@+id/original_bar"
+            android:layout_marginTop="61dp"
             android:layout_marginStart="14dp"
-            android:text="남궁선규"
+            android:text=""
             android:font="@font/notosanscjkkr_bold"
             android:textColor="@color/cherish_light_black"
             android:id="@+id/my_page_user_name"/>
@@ -150,6 +156,7 @@
             android:text="@string/myPage_user_description_text" />
 
         <ImageView
+            android:contentDescription="@null"
             android:layout_width="328dp"
             android:layout_height="80dp"
             app:layout_constraintTop_toBottomOf="@+id/my_page_user_img"
@@ -162,12 +169,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            app:layout_constraintHorizontal_chainStyle="spread"
             app:layout_constraintStart_toStartOf="@+id/my_page_box"
             app:layout_constraintTop_toTopOf="@+id/my_page_box"
+            app:layout_constraintEnd_toStartOf="@id/divide_bar_1"
             android:text=""
             android:font="@font/notosanscjkkr_bold"
             android:textColor="@color/cherish_light_black"
-            android:layout_marginStart="44dp"
             android:layout_marginTop="@dimen/margin_20dp"
             android:textSize="18sp"
             android:id="@+id/my_page_watering_cnt"/>
@@ -189,9 +197,9 @@
             android:layout_height="32dp"
             android:background="@color/cherish_divide_gray"
             app:layout_constraintStart_toEndOf="@+id/my_page_watering_cnt"
+            app:layout_constraintEnd_toStartOf="@id/my_page_postpone_cnt"
             app:layout_constraintTop_toTopOf="@+id/my_page_box"
-            android:layout_marginTop="24dp"
-            android:layout_marginStart="44dp"/>
+            android:layout_marginTop="24dp"/>
 
 
         <TextView
@@ -199,10 +207,10 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@+id/divide_bar_1"
             app:layout_constraintTop_toTopOf="@+id/my_page_box"
+            app:layout_constraintEnd_toStartOf="@id/divide_bar_2"
             android:text=""
             android:font="@font/notosanscjkkr_bold"
             android:textColor="@color/cherish_light_black"
-            android:layout_marginStart="49dp"
             android:layout_marginTop="@dimen/margin_20dp"
             android:textSize="18sp"
             android:id="@+id/my_page_postpone_cnt"/>
@@ -224,19 +232,19 @@
             android:layout_height="32dp"
             app:layout_constraintStart_toEndOf="@+id/my_page_postpone_cnt"
             app:layout_constraintTop_toTopOf="@+id/my_page_box"
+            app:layout_constraintEnd_toStartOf="@id/my_page_finish_cnt"
             android:layout_marginTop="24dp"
-            android:background="@color/cherish_divide_gray"
-            android:layout_marginStart="48dp" />
+            android:background="@color/cherish_divide_gray"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toEndOf="@+id/divide_bar_2"
             app:layout_constraintTop_toTopOf="@+id/my_page_box"
+            app:layout_constraintEnd_toEndOf="@+id/my_page_box"
             android:text=""
             android:font="@font/notosanscjkkr_bold"
             android:textColor="@color/cherish_light_black"
-            android:layout_marginStart="49dp"
             android:layout_marginTop="@dimen/margin_20dp"
             android:textSize="18sp"
             android:id="@+id/my_page_finish_cnt"/>
@@ -251,7 +259,6 @@
             android:font="@font/notosanscjkkr_regular"
             android:textColor="@color/cherish_light_black"
             android:textSize="12sp" />
-
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
@@ -283,7 +290,7 @@
                     app:tabTextColor="#aaaaaa" />
 
                 <ImageView
-                    android:contentDescription="null"
+                    android:contentDescription="@null"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/my_page_reset_btn"
