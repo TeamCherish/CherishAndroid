@@ -24,6 +24,7 @@ import com.sopt.cherish.ui.detail.calendar.CalendarFragment
 import com.sopt.cherish.ui.dialog.AlertPlantDialogFragment
 import com.sopt.cherish.ui.dialog.DetailWateringDialogFragment
 import com.sopt.cherish.ui.domain.MemoListDataclass
+import com.sopt.cherish.ui.enrollment.EnrollModifyPlantFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -316,8 +317,26 @@ class DetailPlantFragment : Fragment() {
                 activity?.finish()
                 return true
             }
+/*R.id.setting -> {
+                val transaction = supportFragmentManager.beginTransaction()
+                transaction.replace(
+                    R.id.fragment_detail,
+                    EnrollModifyPlantFragment().apply {
+                        arguments = Bundle().apply {
 
+                            putInt("cherishidgo_delete", cherishid_main)
+                            putInt("cherishidgo_userid",userId)
+                        }
+                    })
+                // if (transaction == null) {
+                transaction.addToBackStack(null)
+                // }
+                transaction.commit()
+
+                return true
+            }*/
         }
+
         /* when (item.itemId) {
              R.id.calendar -> {
                  val transaction = parentFragmentManager.beginTransaction()

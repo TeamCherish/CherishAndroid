@@ -31,7 +31,7 @@
             app:layout_constraintTop_toTopOf="@+id/cons0" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/editnick"
+            android:id="@+id/consnick"
             android:layout_width="0dp"
             android:layout_height="44dp"
 
@@ -53,8 +53,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="@+id/editnick"
-                app:layout_constraintTop_toTopOf="@+id/editnick" />
+                app:layout_constraintStart_toStartOf="@+id/consnick"
+                app:layout_constraintTop_toTopOf="@+id/consnick" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
@@ -90,7 +90,7 @@
             app:layout_constraintTop_toTopOf="@+id/cons1" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/editbirth"
+            android:id="@+id/consbirth"
             android:layout_width="0dp"
             android:layout_height="44dp"
 
@@ -112,8 +112,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="@+id/editbirth"
-                app:layout_constraintTop_toTopOf="@+id/editbirth" />
+                app:layout_constraintStart_toStartOf="@+id/consbirth"
+                app:layout_constraintTop_toTopOf="@+id/consbirth" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView

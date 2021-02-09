@@ -2,6 +2,8 @@ package com.sopt.cherish.ui.enrollment
 
 import android.os.Bundle
 import android.provider.ContactsContract
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,22 +11,26 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sopt.cherish.R
+import com.sopt.cherish.databinding.FragmentManagePlantBinding
 import com.sopt.cherish.databinding.FragmentMyPagePhoneBookBinding
+import com.sopt.cherish.ui.adapter.MypagePhoneBookAdapter
 import com.sopt.cherish.ui.adapter.Phone
 import com.sopt.cherish.ui.adapter.PhoneBookAdapter
+import com.sopt.cherish.ui.adapter.Phonemypage
 
 
 class MyPagePhoneBookFragment() : Fragment() {
 
     // val permissions = arrayOf(Manifest.permission.READ_CONTACTS, Manifest.permission.CALL_PHONE)
-    lateinit var madapter: PhoneBookAdapter
-    var phonelist = mutableListOf<Phone>()
+    lateinit var madapter: MypagePhoneBookAdapter
+    var phonelist = mutableListOf<Phonemypage>()
     var searchText = ""
     var sortText = "asc"
     var phonecount = 0
     private lateinit var enrollToolbar: Toolbar
 
     private lateinit var binding: FragmentMyPagePhoneBookBinding
+    private lateinit var binding_manage: FragmentManagePlantBinding
 
 
     override fun onCreateView(
@@ -33,6 +39,9 @@ class MyPagePhoneBookFragment() : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_my_page_phone_book, container, false)
+
+        val view2 = inflater.inflate(R.layout.fragment_manage_plant, container, false)
+        binding_manage = FragmentManagePlantBinding.bind(view2)
 
         binding = FragmentMyPagePhoneBookBinding.bind(view)
 
@@ -63,8 +72,26 @@ class MyPagePhoneBookFragment() : Fragment() {
 
     fun startProcess() {
         setList()
+        setSearchListener()
     }
+    fun setSearchListener() {
+        binding_manage.editSearch.addTextChangedListener(
+            object : TextWatcher {
+                override fun afterTextChanged(s: Editable?) {}
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                }
 
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    searchText =s.toString()
+                    changeList()
+                }
+            })
+    }
 
     fun changeList() {
         val newList = getPhoneNumbers(sortText, searchText)
@@ -76,14 +103,14 @@ class MyPagePhoneBookFragment() : Fragment() {
     fun setList() {
         phonelist.addAll(getPhoneNumbers(sortText, searchText))
 
-        madapter = PhoneBookAdapter(phonelist)
+        madapter = MypagePhoneBookAdapter(phonelist)
         binding.recyclerMypage.adapter = madapter
         binding.recyclerMypage.layoutManager = LinearLayoutManager(context)
     }
 
 
-    fun getPhoneNumbers(sort: String, name: String): List<Phone> {
-        val list = mutableListOf<Phone>()
+    fun getPhoneNumbers(sort: String, name: String): List<Phonemypage> {
+        val list = mutableListOf<Phonemypage>()
 
         val phonUri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI
         val phoneUri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI
@@ -112,7 +139,7 @@ class MyPagePhoneBookFragment() : Fragment() {
                 val name = cursor.getString(1)
                 val number = cursor.getString(2)
 
-                val phone = Phone(id, name, number)
+                val phone = Phonemypage(id, name, number)
 
                 list.add(phone)
             }

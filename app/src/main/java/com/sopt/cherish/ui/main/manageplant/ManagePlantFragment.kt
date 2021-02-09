@@ -76,7 +76,7 @@ class ManagePlantFragment : Fragment() {
             binding.myPageText.visibility = View.INVISIBLE
             binding.searchBox.visibility = View.INVISIBLE
         }
-        
+
         //취소 눌렀을 때
         binding.cancelText.setOnClickListener{
             binding.searchBg.visibility = View.INVISIBLE
