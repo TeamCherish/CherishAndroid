@@ -1,16 +1,19 @@
 package com.sopt.cherish.ui.main.manageplant
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
-import androidx.core.view.marginTop
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelStoreOwner
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayout
 import com.sopt.cherish.R
@@ -18,9 +21,12 @@ import com.sopt.cherish.databinding.FragmentManagePlantBinding
 import com.sopt.cherish.databinding.MyPageCustomTabBinding
 import com.sopt.cherish.remote.api.MyPageUserRes
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
-import com.sopt.cherish.ui.adapter.MyPageBottomSheetAdapter
 import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
+
 import com.sopt.cherish.ui.enrollment.MyPagePhoneBookFragment
+import com.sopt.cherish.ui.enrollment.EnrollmentViewModel
+import com.sopt.cherish.ui.enrollment.PhoneBookActivity
+
 import com.sopt.cherish.ui.main.MainActivity
 import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.util.PixelUtil.dp
@@ -28,6 +34,7 @@ import com.sopt.cherish.util.SimpleLogger
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+
 
 /**
  * 식물 보관함 뷰
@@ -38,29 +45,36 @@ class ManagePlantFragment : Fragment() {
     private var tabIndex: Int = 0
     private var isCollapsed: Boolean = true
     private val requestData = RetrofitBuilder
-    private lateinit var tabView:View
-    private lateinit var tabBinding:MyPageCustomTabBinding
+    private lateinit var tabBindingFirst:MyPageCustomTabBinding
+    private lateinit var tabBindingSecond:MyPageCustomTabBinding
+    private var phoneCount:Int=0
 
     //private lateinit var myPageBottomSheetAdapter:MyPageBottomSheetAdapter
 
     lateinit var binding: FragmentManagePlantBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_manage_plant, container, false)
-        tabBinding=MyPageCustomTabBinding.inflate(inflater,container,false)
+
+        tabBindingFirst=MyPageCustomTabBinding.inflate(inflater, container, false)
+        tabBindingSecond=MyPageCustomTabBinding.inflate(inflater, container, false)
 
         //binding.editSearch.textCh
         // 예진이 userId , viewModel.userId.value 라고하면 userId 찾을 수 있어요
         SimpleLogger.logI(viewModel.userId.value.toString())
         initializeServerRequest(binding)
-        initializeTabLayoutView(binding)
+        //initializeTabLayoutView(binding)
         initializeBottomSheetBehavior(binding)
         binding.myPageAddPlantBtn.setOnClickListener {
             navigatePhoneBook()
         }
+
+
+
 
         return binding.root
     }
@@ -76,7 +90,7 @@ class ManagePlantFragment : Fragment() {
             BottomSheetBehavior.from(binding.homeStandardBottomSheet)
         // bottom sheet state 지정
         standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-        standardBottomSheetBehavior.peekHeight = 350.dp
+        standardBottomSheetBehavior.peekHeight = 340.dp
         standardBottomSheetBehavior.expandedOffset = 68.dp
         standardBottomSheetBehavior.isHideable = false
 
@@ -130,7 +144,7 @@ class ManagePlantFragment : Fragment() {
 
                 }
                 if (tabIndex == 1) { //연락처 탭 클릭 시
-                    binding.myPageAddPlantBtn.visibility = View.INVISIBLE
+
 
                     if (newState == BottomSheetBehavior.STATE_EXPANDED) { //바텀시트 확장됐을 경우
                         binding.myPageBg.setBackgroundColor(
@@ -139,6 +153,7 @@ class ManagePlantFragment : Fragment() {
                                 R.color.white
                             )
                         )
+                        binding.myPageAddPlantBtn.visibility = View.VISIBLE
                         isCollapsed = false
                     }
 
@@ -150,7 +165,7 @@ class ManagePlantFragment : Fragment() {
                                 R.color.cherish_my_page_bg
                             )
                         )
-
+                        binding.myPageAddPlantBtn.visibility = View.INVISIBLE
                         isCollapsed = true
                     }
 
@@ -166,8 +181,10 @@ class ManagePlantFragment : Fragment() {
     private fun initializeTabLayoutView(binding: FragmentManagePlantBinding) {
 
 
+
         binding.myPageBottomTab.addTab(binding.myPageBottomTab.newTab().setText("식물"))
         binding.myPageBottomTab.addTab(binding.myPageBottomTab.newTab().setText("연락처"+arguments?.getString("phonecount")))
+
 
         for (i in 0 until binding.myPageBottomTab.tabCount) {
             val tab = (binding.myPageBottomTab.getChildAt(0) as ViewGroup).getChildAt(i)
@@ -208,7 +225,7 @@ class ManagePlantFragment : Fragment() {
 
                 }
                 if (tabIndex == 1) {
-                    binding.myPageAddPlantBtn.visibility = View.INVISIBLE
+
                     if (isCollapsed) {
                         binding.myPageBg.setBackgroundColor(
                             ContextCompat.getColor(
@@ -216,6 +233,7 @@ class ManagePlantFragment : Fragment() {
                                 R.color.cherish_my_page_bg
                             )
                         )
+                        binding.myPageAddPlantBtn.visibility = View.INVISIBLE
 
                     } else {
                         binding.myPageBg.setBackgroundColor(
@@ -224,13 +242,31 @@ class ManagePlantFragment : Fragment() {
                                 R.color.white
                             )
                         )
-
+                        binding.myPageAddPlantBtn.visibility = View.VISIBLE
                     }
                 }
 
                 (activity as MainActivity).replaceFragment(tabIndex)
             }
         })
+
+    }
+
+    private fun createTabView(name:String,count:Int): LinearLayout {
+        return when(name){
+            "식물 "->{
+                tabBindingFirst.tabName.text=name
+                tabBindingFirst.tabCount.text=count.toString()
+
+                tabBindingFirst.root
+            }
+            else->{
+                tabBindingSecond.tabName.text=name
+                tabBindingSecond.tabCount.text=count.toString()
+
+                tabBindingSecond.root
+            }
+        }
 
     }
 
@@ -242,8 +278,6 @@ class ManagePlantFragment : Fragment() {
 
 
     private fun initializeServerRequest(binding: FragmentManagePlantBinding) {
-
-
         requestData.myPageAPI.fetchUserPage(viewModel.userId.value!!)
             .enqueue(
                 object : Callback<MyPageUserRes> {
@@ -269,14 +303,30 @@ class ManagePlantFragment : Fragment() {
                                     it.myPageUserData.postponeCount.toString()
                                 binding.myPageFinishCnt.text =
                                     it.myPageUserData.completeCount.toString()
-                                binding.myPageUserName.text=it.myPageUserData.user_nickname
+                                binding.myPageUserName.text = it.myPageUserData.user_nickname
 
 
                                 //val tabText = "식물 " + it.myPageUserData.totalCherish.toString()
                                 //tabView= layoutInflater.inflate(R.layout.my_page_custom_tab, null);
-                                tabBinding.tabCount.text=" "+it.myPageUserData.totalCherish.toString()
 
-                                binding.myPageBottomTab.getTabAt(0)!!.customView=tabBinding.root
+                                //tabBinding.tabName.text = "식물 "
+                                //tabBinding.tabCount.text = it.myPageUserData.totalCherish.toString()
+
+                                //binding.myPageBottomTab.getTabAt(0)!!.customView = tabBinding.root
+
+                                binding.myPageBottomTab.addTab(binding.myPageBottomTab.newTab().
+                                    setCustomView(createTabView("식물 ",it.myPageUserData.totalCherish)))
+                                binding.myPageBottomTab.addTab(binding.myPageBottomTab.newTab().
+                                    setCustomView(createTabView("연락처 ",it.myPageUserData.totalCherish)))
+
+
+                                initializeTabLayoutView(binding)
+                                /*
+                                tabBinding.tabName.text="연락처 "
+                                tabBinding.tabCount.text= phoneCount.toString()
+                                Log.d("연락처 개수 받아옴! ",tabBinding.tabCount.text.toString())
+
+                                binding.myPageBottomTab.getTabAt(1)!!.customView=tabBinding.root */
 
 
                                 Log.d("list", it.myPageUserData.result.toString())
