@@ -30,17 +30,18 @@ import com.sopt.cherish.util.extension.shortToast
 class ContactDialogFragment(private val cherishId: Int) : DialogFragment(), View.OnClickListener {
     private val codeThatReviewPage = 1001
     private val viewModel: MainViewModel by activityViewModels()
+    private lateinit var binding: DialogContactBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding: DialogContactBinding =
+        binding =
             DataBindingUtil.inflate(inflater, R.layout.dialog_contact, container, false)
         viewModel.fetchCalendarData()
         binding.mainViewModel = viewModel
-        initializeChip(binding)
+
 
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
@@ -59,6 +60,11 @@ class ContactDialogFragment(private val cherishId: Int) : DialogFragment(), View
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        initializeChip(binding)
+        setChip(binding)
+    }
+
     private fun initializeChip(binding: DialogContactBinding) {
         viewModel.calendarData.observe(viewLifecycleOwner) {
             if (it.waterData.calendarData.isEmpty()) {
@@ -71,7 +77,6 @@ class ContactDialogFragment(private val cherishId: Int) : DialogFragment(), View
                 viewModel.userStatus1.value = it.waterData.calendarData[0].userStatus1
                 viewModel.userStatus2.value = it.waterData.calendarData[0].userStatus2
                 viewModel.userStatus3.value = it.waterData.calendarData[0].userStatus3
-                setChip(binding)
             }
         }
     }

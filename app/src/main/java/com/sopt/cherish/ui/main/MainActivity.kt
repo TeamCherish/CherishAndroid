@@ -14,7 +14,6 @@ import com.sopt.cherish.ui.main.home.HomeFragment
 import com.sopt.cherish.ui.main.manageplant.ManagePlantFragment
 import com.sopt.cherish.ui.main.manageplant.PlantFragment
 import com.sopt.cherish.ui.main.setting.SettingFragment
-import com.sopt.cherish.ui.review.ReviewFragment
 import com.sopt.cherish.util.PermissionUtil
 import com.sopt.cherish.util.SimpleLogger
 
@@ -28,7 +27,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding =
             DataBindingUtil.setContentView(this, R.layout.activity_main)
-
+/*        viewModel.fetchUsers()*/
         initializeViewModelData()
         showInitialFragment()
         getFirebaseDeviceToken()
@@ -110,10 +109,4 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
-    fun showReviewFragment() {
-        val transAction = supportFragmentManager.beginTransaction()
-        transAction.replace(R.id.home_parent_fragment_container, ReviewFragment()).commit()
-    }
-
 }
