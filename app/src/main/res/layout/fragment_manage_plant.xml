@@ -288,8 +288,7 @@
                     app:tabIndicatorColor="@color/cherish_light_black"
                     app:tabIndicatorHeight="3dp"
                     app:tabMode="scrollable"
-                    app:tabSelectedTextColor="@color/cherish_light_black"
-                    app:tabTextColor="#aaaaaa" />
+                     />
 
                 <ImageView
                     android:id="@+id/my_page_reset_btn"

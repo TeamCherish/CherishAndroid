@@ -43,13 +43,17 @@ class PlantFragment : Fragment() {
         _binding = FragmentPlantBinding.inflate(inflater, container, false)
 
         setAdapterData()
+        //initialRecyclerView(binding, cherishAdapter)
+        //cherishAdapter.notifyDataSetChanged()
 
         return binding.root
     }
 
     override fun onResume() {
         super.onResume()
+        //initialRecyclerView(binding, cherishAdapter)
         setAdapterData()
+        //cherishAdapter.notifyDataSetChanged()
     }
 
     private fun setAdapterData() {
@@ -75,10 +79,13 @@ class PlantFragment : Fragment() {
                                 cherishAdapter =
                                     MyPageBottomSheetAdapter(
                                         requireContext(),
-                                        it.myPageUserData.result
+                                        it.myPageUserData.result as MutableList<MyPageCherishData>
                                     )
 
                                 initialRecyclerView(binding, cherishAdapter)
+                                cherishAdapter.notifyDataSetChanged()
+
+
                                 cherishAdapter.setItemClickListener(
                                     object : MyPageBottomSheetAdapter.ItemClickListener {
                                         override fun onClick(view: View, position: Int) {
@@ -105,8 +112,11 @@ class PlantFragment : Fragment() {
                                     }
                                 )
                             }
+
+
                     }
                 })
+        //cherishAdapter.notifyDataSetChanged()
 
     }
 
