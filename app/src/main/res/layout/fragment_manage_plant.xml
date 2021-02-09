@@ -288,7 +288,6 @@
                     app:tabIndicatorColor="@color/cherish_light_black"
                     app:tabIndicatorHeight="3dp"
                     app:tabMode="scrollable"
-                    app:tabTextAppearance="@font/notosanscjkkr_bold"
                      />
 
                 <ImageView

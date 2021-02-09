@@ -1,7 +1,8 @@
 package com.sopt.cherish.ui.main.manageplant
 
-import android.content.Context
+
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,8 +13,6 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelStoreOwner
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayout
 import com.sopt.cherish.R
@@ -22,11 +21,6 @@ import com.sopt.cherish.databinding.MyPageCustomTabBinding
 import com.sopt.cherish.remote.api.MyPageUserRes
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
-
-import com.sopt.cherish.ui.enrollment.MyPagePhoneBookFragment
-import com.sopt.cherish.ui.enrollment.EnrollmentViewModel
-import com.sopt.cherish.ui.enrollment.PhoneBookActivity
-
 import com.sopt.cherish.ui.main.MainActivity
 import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.util.PixelUtil.dp
@@ -180,12 +174,6 @@ class ManagePlantFragment : Fragment() {
 
     private fun initializeTabLayoutView(binding: FragmentManagePlantBinding) {
 
-
-
-        binding.myPageBottomTab.addTab(binding.myPageBottomTab.newTab().setText("식물"))
-        binding.myPageBottomTab.addTab(binding.myPageBottomTab.newTab().setText("연락처"+arguments?.getString("phonecount")))
-
-
         for (i in 0 until binding.myPageBottomTab.tabCount) {
             val tab = (binding.myPageBottomTab.getChildAt(0) as ViewGroup).getChildAt(i)
             val p = tab.layoutParams as ViewGroup.MarginLayoutParams
@@ -196,6 +184,15 @@ class ManagePlantFragment : Fragment() {
         activity?.supportFragmentManager!!.beginTransaction()
             .add(R.id.my_page_bottom_container, PlantFragment()).commit()
 
+        tabBindingFirst.tabName.setTextAppearance(R.style.MyPageTabSelected)
+        tabBindingFirst.tabCount.setTextAppearance(R.style.MyPageTabSelected)
+
+        tabBindingSecond.tabName.setTextAppearance(R.style.MyPageTab)
+        tabBindingSecond.tabCount.setTextAppearance(R.style.MyPageTab)
+
+        tabBindingFirst.tabName.setTextColor(Color.parseColor("#454545"))
+        tabBindingFirst.tabCount.setTextColor(Color.parseColor("#1AD287"))
+
         binding.myPageBottomTab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
 
             override fun onTabReselected(tab: TabLayout.Tab?) {}
@@ -204,6 +201,14 @@ class ManagePlantFragment : Fragment() {
                 tabIndex = binding.myPageBottomTab.selectedTabPosition
 
                 if (tabIndex == 0) {
+                    tabBindingFirst.tabName.setTextAppearance(R.style.MyPageTabSelected)
+                    tabBindingFirst.tabCount.setTextAppearance(R.style.MyPageTabSelected)
+
+                    tabBindingSecond.tabName.setTextAppearance(R.style.MyPageTab)
+                    tabBindingSecond.tabCount.setTextAppearance(R.style.MyPageTab)
+
+                    tabBindingFirst.tabName.setTextColor(Color.parseColor("#454545"))
+                    tabBindingFirst.tabCount.setTextColor(Color.parseColor("#1AD287"))
 
                     if (isCollapsed) {
                         binding.myPageBg.setBackgroundColor(
@@ -225,6 +230,15 @@ class ManagePlantFragment : Fragment() {
 
                 }
                 if (tabIndex == 1) {
+
+                    tabBindingFirst.tabName.setTextAppearance(R.style.MyPageTab)
+                    tabBindingFirst.tabCount.setTextAppearance(R.style.MyPageTab)
+
+                    tabBindingSecond.tabName.setTextAppearance(R.style.MyPageTabSelected)
+                    tabBindingSecond.tabCount.setTextAppearance(R.style.MyPageTabSelected)
+
+                    tabBindingSecond.tabName.setTextColor(Color.parseColor("#454545"))
+                    tabBindingSecond.tabCount.setTextColor(Color.parseColor("#1AD287"))
 
                     if (isCollapsed) {
                         binding.myPageBg.setBackgroundColor(
@@ -252,17 +266,17 @@ class ManagePlantFragment : Fragment() {
 
     }
 
-    private fun createTabView(name:String,count:Int): LinearLayout {
+    private fun createTabView(name:String,count:String?): LinearLayout {
         return when(name){
             "식물 "->{
                 tabBindingFirst.tabName.text=name
-                tabBindingFirst.tabCount.text=count.toString()
+                tabBindingFirst.tabCount.text=count
 
                 tabBindingFirst.root
             }
             else->{
                 tabBindingSecond.tabName.text=name
-                tabBindingSecond.tabCount.text=count.toString()
+                tabBindingSecond.tabCount.text=count
 
                 tabBindingSecond.root
             }
@@ -305,28 +319,13 @@ class ManagePlantFragment : Fragment() {
                                     it.myPageUserData.completeCount.toString()
                                 binding.myPageUserName.text = it.myPageUserData.user_nickname
 
-
-                                //val tabText = "식물 " + it.myPageUserData.totalCherish.toString()
-                                //tabView= layoutInflater.inflate(R.layout.my_page_custom_tab, null);
-
-                                //tabBinding.tabName.text = "식물 "
-                                //tabBinding.tabCount.text = it.myPageUserData.totalCherish.toString()
-
-                                //binding.myPageBottomTab.getTabAt(0)!!.customView = tabBinding.root
-
                                 binding.myPageBottomTab.addTab(binding.myPageBottomTab.newTab().
-                                    setCustomView(createTabView("식물 ",it.myPageUserData.totalCherish)))
+                                    setCustomView(createTabView("식물 ",it.myPageUserData.totalCherish.toString())))
                                 binding.myPageBottomTab.addTab(binding.myPageBottomTab.newTab().
-                                    setCustomView(createTabView("연락처 ",it.myPageUserData.totalCherish)))
+                                    setCustomView(createTabView("연락처 ",arguments?.getString("phonecount"))))
 
 
                                 initializeTabLayoutView(binding)
-                                /*
-                                tabBinding.tabName.text="연락처 "
-                                tabBinding.tabCount.text= phoneCount.toString()
-                                Log.d("연락처 개수 받아옴! ",tabBinding.tabCount.text.toString())
-
-                                binding.myPageBottomTab.getTabAt(1)!!.customView=tabBinding.root */
 
 
                                 Log.d("list", it.myPageUserData.result.toString())

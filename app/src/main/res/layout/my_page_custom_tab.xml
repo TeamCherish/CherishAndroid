@@ -9,6 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=""
+        android:textSize="16sp"
         android:fontFamily="@font/roboto_regular"
         android:textColor="@drawable/selector_click_tab"/>
 
@@ -17,6 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text=""
+        android:textSize="16sp"
         android:fontFamily="@font/roboto_regular"
         android:textColor="@drawable/selector_click_cnt_tab"/>
 
