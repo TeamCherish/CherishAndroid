@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.NumberPicker
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.sopt.cherish.R
@@ -19,15 +20,15 @@ import com.sopt.cherish.util.extension.shortToast
 class DelayWateringDialogFragment : DialogFragment() {
 
     private val viewModel: MainViewModel by activityViewModels()
-
+    private lateinit var binding: DialogDelayWateringBinding
     // todo : 오늘 하루 만약에 버튼을 클릭했다면 , 그 다음에는 불가능 하도록 해야함
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view = inflater.inflate(R.layout.dialog_delay_watering, container, false)
-        val binding = DialogDelayWateringBinding.bind(view)
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.dialog_delay_watering, container, false)
         binding.mainViewModel = viewModel
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
@@ -66,25 +67,22 @@ class DelayWateringDialogFragment : DialogFragment() {
         binding.delayWateringAcceptBtn.setOnClickListener {
             viewModel.postponeData.observe(viewLifecycleOwner) {
                 if (it.postponeData.isPostpone) {
-                    // request Data
                     val postponeWateringDateReq = PostponeWateringDateReq(
                         viewModel.selectedCherishUser.value!!.id,
                         binding.delayWateringDayPicker.value,
                         it.postponeData.isPostpone
                     )
                     viewModel.postponeWateringDate(postponeWateringDateReq)
-                    viewModel.fetchUsers()
+                    viewModel.animationTrigger.value = false
                     shortToast(requireContext(), "[미루기 성공]3회 초과하였습니다 , 식물 애정도가 차감되었습니다.")
                     dismiss()
                 } else {
-                    // request Data
                     val postponeWateringDateReq = PostponeWateringDateReq(
                         viewModel.selectedCherishUser.value!!.id,
                         binding.delayWateringDayPicker.value,
                         it.postponeData.isPostpone
                     )
                     viewModel.postponeWateringDate(postponeWateringDateReq)
-                    viewModel.fetchUsers()
                     viewModel.animationTrigger.value = false
                     shortToast(requireContext(), "미루기 성공!")
                     dismiss()

@@ -36,7 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_8dp"
-                android:layout_marginStart="100dp"
+                android:layout_marginStart="70dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/delay_watering_date_text" />
 
@@ -47,9 +47,9 @@
                 android:fontFamily="@font/notosanscjkkr_medium"
                 android:includeFontPadding="false"
                 android:text="@string/dialog_delay_watering_text"
+                android:layout_marginEnd="70dp"
                 android:textColor="@color/cherish_light_black"
                 android:textSize="18sp"
-                android:layout_marginEnd="100dp"
                 app:layout_constraintBottom_toBottomOf="@id/delay_watering_day_picker"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/delay_watering_date_text" />
@@ -58,14 +58,14 @@
                 android:id="@+id/delay_watering_description_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="31dp"
+                android:layout_marginTop="300dp"
                 android:fontFamily="@font/notosanscjkkr_regular"
                 android:includeFontPadding="false"
                 android:text="@string/dialog_delay_watering_description"
                 android:textSize="13sp"
                 app:layout_constraintStart_toStartOf="@id/delay_watering_day_picker"
                 app:layout_constraintEnd_toEndOf="@id/delay_watering_day_text"
-                app:layout_constraintTop_toBottomOf="@id/delay_watering_day_picker" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/current_delay_watering_description_text"
@@ -74,7 +74,7 @@
                 android:fontFamily="@font/notosanscjkkr_regular"
                 android:includeFontPadding="false"
                 android:textSize="13sp"
-                app:layout_constraintEnd_toEndOf="@id/delay_watering_day_text"
+                app:layout_constraintEnd_toEndOf="@id/delay_watering_description_text"
                 app:layout_constraintStart_toStartOf="@id/delay_watering_description_text"
                 app:layout_constraintTop_toBottomOf="@id/delay_watering_description_text" />
 

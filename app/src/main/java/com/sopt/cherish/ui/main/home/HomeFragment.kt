@@ -26,6 +26,7 @@ import com.sopt.cherish.ui.dialog.WateringDialogFragment
 import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
 import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.util.PixelUtil.dp
+import com.sopt.cherish.util.extension.longToast
 
 
 /**
@@ -70,6 +71,17 @@ class HomeFragment : Fragment(), OnItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         observeCherishUsers()
         observeSelectCherishUser()
+        observeAnimationTrigger()
+    }
+
+    private fun observeAnimationTrigger() {
+        viewModel.animationTrigger.observe(viewLifecycleOwner) {
+            if (it) {
+                longToast(requireContext(), "식물 물주는 애니메이션 등장!")
+            } else {
+                longToast(requireContext(), "식물 시드는 애니메이션 등장!")
+            }
+        }
     }
 
     private fun observeCherishUsers() {
