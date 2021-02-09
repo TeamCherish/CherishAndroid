@@ -1,11 +1,13 @@
 package com.sopt.cherish.ui.main.manageplant
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -40,25 +42,29 @@ class ManagePlantFragment : Fragment() {
     private var tabIndex: Int = 0
     private var isCollapsed: Boolean = true
     private val requestData = RetrofitBuilder
-    private lateinit var tabBinding:MyPageCustomTabBinding
+    private lateinit var tabBindingFirst:MyPageCustomTabBinding
+    private lateinit var tabBindingSecond:MyPageCustomTabBinding
     private var phoneCount:Int=0
 
     //private lateinit var myPageBottomSheetAdapter:MyPageBottomSheetAdapter
 
     lateinit var binding: FragmentManagePlantBinding
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_manage_plant, container, false)
-        tabBinding=MyPageCustomTabBinding.inflate(inflater, container, false)
+
+        tabBindingFirst=MyPageCustomTabBinding.inflate(inflater, container, false)
+        tabBindingSecond=MyPageCustomTabBinding.inflate(inflater, container, false)
 
         //binding.editSearch.textCh
         // 예진이 userId , viewModel.userId.value 라고하면 userId 찾을 수 있어요
         SimpleLogger.logI(viewModel.userId.value.toString())
         initializeServerRequest(binding)
-        initializeTabLayoutView(binding)
+        //initializeTabLayoutView(binding)
         initializeBottomSheetBehavior(binding)
         binding.myPageAddPlantBtn.setOnClickListener {
             navigatePhoneBook()
@@ -170,18 +176,6 @@ class ManagePlantFragment : Fragment() {
     }
 
     private fun initializeTabLayoutView(binding: FragmentManagePlantBinding) {
-
-
-        binding.myPageBottomTab.addTab(binding.myPageBottomTab.newTab().setText("식물"))
-        binding.myPageBottomTab.addTab(binding.myPageBottomTab.newTab().setText("연락처"))
-
-
-        tabBinding.tabName.text="연락처 "
-        tabBinding.tabCount.text= phoneCount.toString()
-        Log.d("연락처 개수 받아옴! ",tabBinding.tabCount.text.toString())
-
-        binding.myPageBottomTab.getTabAt(1)!!.customView=tabBinding.root
-
         for (i in 0 until binding.myPageBottomTab.tabCount) {
             val tab = (binding.myPageBottomTab.getChildAt(0) as ViewGroup).getChildAt(i)
             val p = tab.layoutParams as ViewGroup.MarginLayoutParams
@@ -248,6 +242,24 @@ class ManagePlantFragment : Fragment() {
 
     }
 
+    private fun createTabView(name:String,count:Int): LinearLayout {
+        return when(name){
+            "식물 "->{
+                tabBindingFirst.tabName.text=name
+                tabBindingFirst.tabCount.text=count.toString()
+
+                tabBindingFirst.root
+            }
+            else->{
+                tabBindingSecond.tabName.text=name
+                tabBindingSecond.tabCount.text=count.toString()
+
+                tabBindingSecond.root
+            }
+        }
+
+    }
+
     private fun navigatePhoneBook() {
         val intent = Intent(context, EnrollmentPhoneActivity::class.java)
         intent.putExtra("userId", viewModel.userId.value!!)
@@ -256,8 +268,6 @@ class ManagePlantFragment : Fragment() {
 
 
     private fun initializeServerRequest(binding: FragmentManagePlantBinding) {
-
-
         requestData.myPageAPI.fetchUserPage(viewModel.userId.value!!)
             .enqueue(
                 object : Callback<MyPageUserRes> {
@@ -288,10 +298,25 @@ class ManagePlantFragment : Fragment() {
 
                                 //val tabText = "식물 " + it.myPageUserData.totalCherish.toString()
                                 //tabView= layoutInflater.inflate(R.layout.my_page_custom_tab, null);
-                                tabBinding.tabName.text = "식물 "
-                                tabBinding.tabCount.text = it.myPageUserData.totalCherish.toString()
 
-                                binding.myPageBottomTab.getTabAt(0)!!.customView = tabBinding.root
+                                //tabBinding.tabName.text = "식물 "
+                                //tabBinding.tabCount.text = it.myPageUserData.totalCherish.toString()
+
+                                //binding.myPageBottomTab.getTabAt(0)!!.customView = tabBinding.root
+
+                                binding.myPageBottomTab.addTab(binding.myPageBottomTab.newTab().
+                                    setCustomView(createTabView("식물 ",it.myPageUserData.totalCherish)))
+                                binding.myPageBottomTab.addTab(binding.myPageBottomTab.newTab().
+                                    setCustomView(createTabView("연락처 ",it.myPageUserData.totalCherish)))
+
+
+                                initializeTabLayoutView(binding)
+                                /*
+                                tabBinding.tabName.text="연락처 "
+                                tabBinding.tabCount.text= phoneCount.toString()
+                                Log.d("연락처 개수 받아옴! ",tabBinding.tabCount.text.toString())
+
+                                binding.myPageBottomTab.getTabAt(1)!!.customView=tabBinding.root */
 
 
                                 Log.d("list", it.myPageUserData.result.toString())
