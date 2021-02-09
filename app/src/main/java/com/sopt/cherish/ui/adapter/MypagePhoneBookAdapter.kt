@@ -33,7 +33,6 @@ class MypagePhoneBookAdapter(private val phoneBookList: List<Phonemypage>) :
         return Holder(binding)
     }
     override fun onBindViewHolder(holder: MypagePhoneBookAdapter.Holder, position: Int) {
-
         val phone = phoneBookList[position]
         holder.setPhone(phone)
     }
@@ -56,6 +55,7 @@ class MypagePhoneBookAdapter(private val phoneBookList: List<Phonemypage>) :
 
     interface ItemClickListener {
         fun onchange(radio: Boolean)
+        fun oncount(count:Int)
     }
 
     //클릭리스너 선언

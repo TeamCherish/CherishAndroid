@@ -20,6 +20,7 @@ import com.sopt.cherish.remote.api.MyPageUserRes
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.adapter.MyPageBottomSheetAdapter
 import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
+import com.sopt.cherish.ui.enrollment.MyPagePhoneBookFragment
 import com.sopt.cherish.ui.main.MainActivity
 import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.util.PixelUtil.dp
@@ -166,7 +167,7 @@ class ManagePlantFragment : Fragment() {
 
 
         binding.myPageBottomTab.addTab(binding.myPageBottomTab.newTab().setText("식물"))
-        binding.myPageBottomTab.addTab(binding.myPageBottomTab.newTab().setText("연락처"))
+        binding.myPageBottomTab.addTab(binding.myPageBottomTab.newTab().setText("연락처"+arguments?.getString("phonecount")))
 
         for (i in 0 until binding.myPageBottomTab.tabCount) {
             val tab = (binding.myPageBottomTab.getChildAt(0) as ViewGroup).getChildAt(i)
