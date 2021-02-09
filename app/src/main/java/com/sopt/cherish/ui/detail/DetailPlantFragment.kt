@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -23,6 +24,7 @@ import com.sopt.cherish.ui.detail.calendar.CalendarFragment
 import com.sopt.cherish.ui.dialog.AlertPlantDialogFragment
 import com.sopt.cherish.ui.dialog.DetailWateringDialogFragment
 import com.sopt.cherish.ui.domain.MemoListDataclass
+import com.sopt.cherish.ui.enrollment.EnrollModifyPlantFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -120,10 +122,19 @@ class DetailPlantFragment : Fragment() {
                                 Log.d("textViewNick", it.data.nickname.toString())
                                 binding.textViewName.text = it.data.name.toString()
                                 binding.textViewPlantname.text = it.data.plant_name.toString()
-                                binding.textViewDday.text = "D" + it.data.dDay.toString()
+                                if(it.data.dDay>0){
+                                    binding.textViewDday.text = "D+" + it.data.dDay.toString()
+
+                                }
+                                else if(it.data.dDay==0){
+                                    binding.textViewDday.text="D-day"
+                                }else{
+                                    binding.textViewDday.text = "D" + it.data.dDay.toString()
+
+                                }
                                 binding.textViewDuration.text = it.data.duration.toString()
                                 if ((it.data.birth.toString()) == "Invalid Date") {
-                                    binding.textViewBirth.text = "미입력"
+                                    binding.textViewBirth.text = "_ _"
 
                                 } else {
                                     binding.textViewBirth.text = it.data.birth.toString()
@@ -144,11 +155,24 @@ class DetailPlantFragment : Fragment() {
                                     it.data.gage.toFloat() * 100,
                                     animationDuration
                                 )
+                                binding.chip.isVisible=false
+                                binding.chip2.isVisible=false
+                                binding.chip3.isVisible=false
 
-                                binding.chip.text = it.data.keyword1
-                                binding.chip2.text = it.data.keyword2
-                                binding.chip3.text = it.data.keyword3
+                                if(it.data.keyword1.toString()!=null && it.data.keyword1!=""){
+                                    binding.chip.text = it.data.keyword1
+                                    binding.chip.isVisible=true
 
+                                }
+                                else if(it.data.keyword2.toString()!=null&& it.data.keyword2!=""){
+                                    binding.chip2.text = it.data.keyword2
+                                    binding.chip2.isVisible=true
+
+                                }else if(it.data.keyword3.toString() !=null&& it.data.keyword3!=""){
+                                    binding.chip3.text = it.data.keyword3
+                                    binding.chip3.isVisible=true
+
+                                }
 
 
 
@@ -293,8 +317,26 @@ class DetailPlantFragment : Fragment() {
                 activity?.finish()
                 return true
             }
+/*R.id.setting -> {
+                val transaction = supportFragmentManager.beginTransaction()
+                transaction.replace(
+                    R.id.fragment_detail,
+                    EnrollModifyPlantFragment().apply {
+                        arguments = Bundle().apply {
 
+                            putInt("cherishidgo_delete", cherishid_main)
+                            putInt("cherishidgo_userid",userId)
+                        }
+                    })
+                // if (transaction == null) {
+                transaction.addToBackStack(null)
+                // }
+                transaction.commit()
+
+                return true
+            }*/
         }
+
         /* when (item.itemId) {
              R.id.calendar -> {
                  val transaction = parentFragmentManager.beginTransaction()

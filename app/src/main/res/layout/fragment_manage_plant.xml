@@ -36,9 +36,9 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/original_bar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="44dp"
             android:visibility="visible"
-            android:layout_marginTop="@dimen/margin_12dp"
+            android:layout_marginTop="@dimen/margin_18dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -74,18 +74,18 @@
             android:id="@+id/search_bg"
             android:layout_width="280dp"
             android:layout_height="44dp"
+            android:layout_marginTop="@dimen/margin_18dp"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="18dp"
             android:background="@drawable/search_box"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <EditText
-                android:autofillHints="@null"
                 android:id="@+id/editSearch"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
+                android:autofillHints="@null"
                 android:background="@null"
                 android:hint="@string/myPage_search_box_text"
                 android:inputType="textPersonName"
@@ -109,18 +109,17 @@
 
         <TextView
             android:id="@+id/cancelText"
-            android:visibility="invisible"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="28dp"
-            android:text="@string/myPage_cancel_text"
-            android:textSize="16sp"
+            android:layout_marginStart="12dp"
             android:font="@font/notosanscjkkr_regular"
+            android:text="@string/myPage_cancel_text"
             android:textColor="#aaaaaa"
-            android:layout_marginEnd="23dp"
-            app:layout_constraintStart_toEndOf="@+id/search_bg"/>
+            android:textSize="16sp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/search_bg"
+            app:layout_constraintStart_toEndOf="@+id/search_bg"
+            app:layout_constraintTop_toTopOf="@+id/search_bg" />
 
 
         <ImageView
@@ -261,8 +260,11 @@
             android:textSize="12sp" />
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/coordinatorLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/home_standardBottomSheet"
@@ -286,21 +288,20 @@
                     app:tabIndicatorColor="@color/cherish_light_black"
                     app:tabIndicatorHeight="3dp"
                     app:tabMode="scrollable"
-                    app:tabSelectedTextColor="@color/cherish_light_black"
-                    app:tabTextColor="#aaaaaa" />
+                     />
 
                 <ImageView
-                    android:contentDescription="@null"
+                    android:id="@+id/my_page_reset_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/my_page_reset_btn"
+                    android:layout_marginTop="@dimen/margin_20dp"
+                    android:layout_marginEnd="22dp"
                     android:clickable="true"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
+                    android:contentDescription="@null"
                     android:src="@drawable/icn_reset"
                     android:visibility="invisible"
-                    android:layout_marginEnd="22dp"
-                    android:layout_marginTop="@dimen/margin_20dp"/>
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <!-- background color 추가해주세요!-->
                 <TextView
@@ -308,18 +309,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="#e9e9e9"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/my_page_bottom_tab" />
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/my_page_bottom_container"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     app:layout_constraintBottom_toBottomOf="@+id/home_standardBottomSheet"
-                    android:id="@+id/my_page_bottom_container"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tab_bar_line" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

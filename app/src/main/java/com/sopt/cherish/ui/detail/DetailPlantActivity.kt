@@ -29,12 +29,11 @@ class DetailPlantActivity : AppCompatActivity() {
     private lateinit var circleProgressbar: CircleProgressbar
     private lateinit var binding: ActivityDetailPlantBinding
 
-    private lateinit var viewModel: DetailPlantViewModel
 
-    // var plantid: Int =  intent.getIntExtra("plantId", 100)
     var cherishid_main = 0
     var cherishid_plant=0
     var plantId = 1
+    var userId=0
     private lateinit var cherishPhoneNumber: String
     private lateinit var cherishNickname: String
     private lateinit var userNickname: String
@@ -43,10 +42,7 @@ class DetailPlantActivity : AppCompatActivity() {
 
         binding = ActivityDetailPlantBinding.inflate(layoutInflater)
 
-        val userId: Int
 
-
-        initializeViewModel()
         Log.d("plantId", intent.getIntExtra("plantId", 100).toString())
         plantId = intent.getIntExtra("plantId", 0)
 
@@ -69,36 +65,11 @@ class DetailPlantActivity : AppCompatActivity() {
         Log.d("cherishid_main", cherishid_main.toString())
         Log.d("cherishid_plant", cherishid_plant.toString())
 
-        viewModel.cherishId.value = cherishid_main
 
-        cherishPhoneNumber = intent.getStringExtra("cherishUserPhoneNumber").toString()
-        viewModel.cherishPhoneNumber.value = cherishPhoneNumber
-
-        cherishNickname = intent.getStringExtra("cherishNickname").toString()
-        viewModel.cherishNickname.value = cherishNickname
-
-        userNickname = intent.getStringExtra("userNickname").toString()
-        viewModel.userNickname.value = userNickname
-
-        userId = intent.getIntExtra("userId", 0)
-        viewModel.userId.value = userId
-
-        viewModel.fetchCalendarData()
         setFragment(DetailPlantFragment())
         setActionBarTitle("식물 상세")
         setContentView(binding.root)
     }
-
-    private fun initializeViewModel() {
-        viewModel =
-            ViewModelProvider(
-                this@DetailPlantActivity,
-                Injection.provideDetailViewModelFactory()
-            ).get(
-                DetailPlantViewModel::class.java
-            )
-    }
-
     override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
         if (menu != null) {
             menu.getItem(2).isVisible = false
@@ -138,11 +109,11 @@ class DetailPlantActivity : AppCompatActivity() {
                 val transaction = supportFragmentManager.beginTransaction()
                 transaction.replace(
                     R.id.fragment_detail,
-                    EnrollModifyPlantFragment(cherishid_main).apply {
+                    EnrollModifyPlantFragment().apply {
                         arguments = Bundle().apply {
 
                             putInt("cherishidgo_delete", cherishid_main)
-
+                            putInt("cherishidgo_userid",userId)
                         }
                     })
                 // if (transaction == null) {

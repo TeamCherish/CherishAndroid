@@ -27,6 +27,7 @@
                 android:id="@+id/cons2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -74,24 +75,29 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:text="TextView"
                     android:background="@drawable/my_page_chip_green"
-                    app:layout_constraintEnd_toEndOf="@+id/imageView_detail_url"
-                    app:layout_constraintStart_toStartOf="@+id/imageView_detail_url"
-                    app:layout_constraintTop_toBottomOf="@+id/textView_nick" >
+                    android:text="TextView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView_nick">
 
                     <TextView
                         android:id="@+id/textView_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="12dp"
+                        android:layout_marginBottom="5dp"
                         android:fontFamily="@font/notosanscjkkr_regular"
-                        android:layout_marginRight="@dimen/margin_12dp"
                         android:includeFontPadding="false"
                         android:text="남궁선규"
                         android:textColor="@color/cherish_green_main"
                         android:textSize="12sp"
                         app:layout_constraintBottom_toBottomOf="@+id/textView6"
-                        app:layout_constraintEnd_toStartOf="@+id/view3" />
+                        app:layout_constraintEnd_toStartOf="@+id/view3"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
                     <View
@@ -102,22 +108,23 @@
                         app:layout_constraintBottom_toBottomOf="@+id/textView_name"
                         app:layout_constraintEnd_toEndOf="@+id/textView6"
                         app:layout_constraintStart_toStartOf="@+id/textView6"
-                        app:layout_constraintTop_toTopOf="@+id/textView_name"
-                        />
+                        app:layout_constraintTop_toTopOf="@+id/textView_name" />
 
                     <TextView
                         android:id="@+id/textView_plantname"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
-                        android:layout_marginEnd="10dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="12dp"
+                        android:layout_marginBottom="5dp"
                         android:fontFamily="@font/notosanscjkkr_regular"
                         android:includeFontPadding="false"
                         android:text="스투키"
-                        android:textSize="12sp"
                         android:textColor="@color/cherish_green_main"
+                        android:textSize="12sp"
                         app:layout_constraintBottom_toBottomOf="@+id/textView6"
-                        app:layout_constraintEnd_toEndOf="@+id/textView6"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/view3"
                         app:layout_constraintTop_toTopOf="@+id/textView6" />
 
@@ -192,9 +199,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="물주기"
                         android:fontFamily="@font/notosanscjkkr_regular"
                         android:includeFontPadding="false"
+                        android:text="물주기"
                         android:textColor="#6b6a6a"
                         android:textSize="@dimen/text_14sp"
                         app:layout_constraintEnd_toEndOf="@+id/textView_Dday"
@@ -206,10 +213,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="지속한날"
                         android:fontFamily="@font/notosanscjkkr_regular"
-
                         android:includeFontPadding="false"
+
+                        android:text="지속한날"
                         android:textColor="#6b6a6a"
                         android:textSize="@dimen/text_14sp"
                         app:layout_constraintEnd_toEndOf="@+id/textView_duration"
@@ -221,10 +228,10 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="생일"
                         android:fontFamily="@font/notosanscjkkr_regular"
-
                         android:includeFontPadding="false"
+
+                        android:text="생일"
                         android:textColor="#6b6a6a"
                         android:textSize="@dimen/text_14sp"
                         app:layout_constraintEnd_toEndOf="@+id/textView_birth"
@@ -249,11 +256,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="52dp"
-                    android:text="힘이 솟아요"
-                    android:textSize="@dimen/text_20sp"
                     android:fontFamily="@font/notosanscjkkr_bold"
                     android:includeFontPadding="false"
+                    android:text="힘이 솟아요"
                     android:textColor="@color/white"
+                    android:textSize="@dimen/text_20sp"
                     app:layout_constraintEnd_toEndOf="@+id/test"
                     app:layout_constraintStart_toStartOf="@+id/test"
                     app:layout_constraintTop_toTopOf="@+id/test" />
@@ -292,11 +299,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
 
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="64dp"
                 android:layout_marginEnd="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/chip" />
+                app:layout_constraintTop_toBottomOf="@+id/textView17" />
 
 
             <TextView
