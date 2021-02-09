@@ -26,6 +26,7 @@ import com.sopt.cherish.ui.dialog.WateringDialogFragment
 import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
 import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.util.PixelUtil.dp
+import com.sopt.cherish.util.SimpleLogger
 import com.sopt.cherish.util.extension.longToast
 
 
@@ -85,7 +86,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
     }
 
     private fun observeCherishUsers() {
-        // todo : 정확히 작동하는지 체크해야함
+        // todo : 정확히 작동하는지 , 갱신이 안됨 갱신을 어떻게 해야할 지 생각 , 막하지 말고 제발 잘 생각해서 해라 훈기야.
         // 체리쉬 유저의 값이 변함에 따라서 변해야할 것이 무엇인가를 잘 생각해보자.
         // 체리쉬 유저가 삭제될 경우 값이 변하기 떄문에 항상 observe 해야함
         // 선택된 체리쉬 또한 어댑터의 정렬이 바뀌거나 , 유저가 삭제될 경우 바뀌기 때문에 observe를 통해서 선택해야함
@@ -94,6 +95,11 @@ class HomeFragment : Fragment(), OnItemClickListener {
             setAllUsers(it.userData.totalUser)
             setSelectedUser(it.userData.userList[0])
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        SimpleLogger.logI("homeFragment onResume!")
     }
 
     private fun setSelectedUser(user: User) {
@@ -206,6 +212,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
         startActivity(intent)
     }
 
+    // 프로그레스바 색깔 갱신
     private fun updateProgressBar(rating: Int) {
         if (rating <= 30) {
             binding.homeAffectionProgressbar.progressDrawable = ResourcesCompat.getDrawable(
@@ -222,6 +229,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
         }
     }
 
+    // 리사이클러뷰 아이템 클릭 시 바텀 시트 내려감
     private fun slideDownBottomSheet() {
         // todo : 비율로 변경해야함
         standardBottomSheetBehavior.apply {
