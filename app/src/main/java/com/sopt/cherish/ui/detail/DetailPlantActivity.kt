@@ -31,6 +31,8 @@ class DetailPlantActivity : AppCompatActivity() {
     var cherishid_plant=0
     var plantId = 1
     var userId=0
+
+
     private lateinit var cherishPhoneNumber: String
     private lateinit var cherishNickname: String
     private lateinit var userNickname: String

@@ -31,7 +31,6 @@ class CalendarFragment : Fragment() {
         val binding: FragmentCalendarBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_calendar, container, false)
 
-        // viewModel 작업
         binding.detailPlantViewModel = viewModel
         initializeCalendar(binding)
 

@@ -17,7 +17,6 @@ import com.sopt.cherish.ui.main.setting.SettingFragment
 import com.sopt.cherish.ui.review.ReviewFragment
 import com.sopt.cherish.util.PermissionUtil
 import com.sopt.cherish.util.SimpleLogger
-import com.sopt.cherish.util.extension.longToast
 
 
 class MainActivity : AppCompatActivity() {
@@ -33,19 +32,13 @@ class MainActivity : AppCompatActivity() {
         initializeViewModelData()
         showInitialFragment()
         getFirebaseDeviceToken()
-        observeExceptions()
         setBottomNavigationListener(binding)
-    }
-
-    private fun observeExceptions() {
-        viewModel.exceptionLiveData.observe(this) {
-            longToast(this, it)
-        }
     }
 
     override fun onResume() {
         super.onResume()
-        showInitialFragment()
+        viewModel.fetchUsers()
+        /*showInitialFragment()*/
     }
 
     private fun getFirebaseDeviceToken() {

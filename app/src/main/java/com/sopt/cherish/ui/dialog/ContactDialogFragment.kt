@@ -16,7 +16,7 @@ import androidx.fragment.app.activityViewModels
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.DialogContactBinding
 import com.sopt.cherish.ui.main.MainViewModel
-import com.sopt.cherish.ui.review.DialogReviewFragment
+import com.sopt.cherish.ui.review.ReviewActivity
 import com.sopt.cherish.util.DialogUtil
 import com.sopt.cherish.util.PermissionUtil
 import com.sopt.cherish.util.extension.shortToast
@@ -27,7 +27,7 @@ import com.sopt.cherish.util.extension.shortToast
  * todo : Calendar CherishId 7번이 이상함? date 타입이 다른거 같은데
  */
 
-class ContactDialogFragment : DialogFragment(), View.OnClickListener {
+class ContactDialogFragment(private val cherishId: Int) : DialogFragment(), View.OnClickListener {
     private val codeThatReviewPage = 1001
     private val viewModel: MainViewModel by activityViewModels()
 
@@ -137,7 +137,7 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
         val callIntent =
             Intent(
                 Intent.ACTION_CALL,
-                Uri.parse("tel:${viewModel.selectedCherishUser.value?.phoneNumber}")
+                Uri.parse("tel:${viewModel.selectedCherishUser.value!!.phoneNumber}")
             )
         startActivityForResult(
             callIntent,
@@ -148,7 +148,7 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
     private fun startSendMessage() {
         val messageIntent = Intent(
             Intent.ACTION_SENDTO,
-            Uri.parse("smsto:${viewModel.selectedCherishUser.value?.phoneNumber}")
+            Uri.parse("smsto:${viewModel.selectedCherishUser.value!!.phoneNumber}")
         )
         startActivityForResult(
             messageIntent,
@@ -180,15 +180,19 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == codeThatReviewPage) {
-            startReviewAndDismiss()
+            startReviewAndDismiss(cherishId)
         }
     }
 
 
-    private fun startReviewAndDismiss() {
-        DialogReviewFragment().show(parentFragmentManager, tag)
-        // todo : 이렇게 처리를 한다면 어떨까? 될까???? 내일 테스트
+    private fun startReviewAndDismiss(cherishId: Int) {
+        /*DialogReviewFragment(cherishId).show(parentFragmentManager, tag)*/
         /*(activity as MainActivity).showReviewFragment()*/
+        val intent = Intent(requireContext(), ReviewActivity::class.java)
+        intent.putExtra("userNickname", viewModel.userNickName.value)
+        intent.putExtra("selectedCherishNickname", viewModel.selectedCherishUser.value!!.nickName)
+        intent.putExtra("selectedCherishId", viewModel.selectedCherishUser.value!!.id)
+        startActivity(intent)
         dismiss()
     }
 }

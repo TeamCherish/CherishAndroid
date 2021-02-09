@@ -22,7 +22,7 @@ import com.sopt.cherish.util.extension.countNumberOfCharacters
 import com.sopt.cherish.util.extension.shortToast
 import com.sopt.cherish.util.extension.writeReview
 
-class DialogReviewFragment : DialogFragment() {
+class DialogReviewFragment(private val cherishId: Int) : DialogFragment() {
 
     private val TAG = "ReviewFragment"
 
@@ -44,15 +44,9 @@ class DialogReviewFragment : DialogFragment() {
         addLimitNumberOfMemoCharacters(binding)
         sendReviewToServer(binding)
         ignoreSendReviewToServer(binding)
-        observingErrorLiveData()
         return binding.root
     }
 
-    private fun observingErrorLiveData() {
-        viewModel.exceptionLiveData.observe(viewLifecycleOwner) {
-            shortToast(requireContext(), it)
-        }
-    }
 
     override fun onResume() {
         super.onResume()
@@ -110,7 +104,7 @@ class DialogReviewFragment : DialogFragment() {
                     binding.reviewFlexBox.getChip(0)?.text.toString(),
                     binding.reviewFlexBox.getChip(1)?.text.toString(),
                     binding.reviewFlexBox.getChip(2)?.text.toString(),
-                    viewModel.selectedCherishUser.value?.id!!.toString()
+                    viewModel.selectedCherishUser.value?.id!!
                 )
             )
             viewModel.animationTrigger.value = true

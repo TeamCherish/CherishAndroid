@@ -11,7 +11,7 @@ data class ReviewWateringReq(
     @SerializedName("keyword1") val userStatus1: String?,
     @SerializedName("keyword2") val userStatus2: String?,
     @SerializedName("keyword3") val userStatus3: String?,
-    @SerializedName("CherishId") val userId: String,
+    @SerializedName("CherishId") val userId: Int
 )
 
 data class ReviewWateringData(

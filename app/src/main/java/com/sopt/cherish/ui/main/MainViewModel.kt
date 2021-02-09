@@ -1,5 +1,6 @@
 package com.sopt.cherish.ui.main
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -35,6 +36,7 @@ class MainViewModel(
     val userId = MutableLiveData<Int>()
 
     // 유저가 가지고 있는 cherish들
+    // todo : selectedCherishUser로 전부 커버 칠 수 있음 굳이 필요없음
     val userNickName = MutableLiveData<String>()
 
     // Home에서 호출된 여러명
@@ -48,6 +50,7 @@ class MainViewModel(
     fun fetchUsers() = viewModelScope.launch {
         try {
             _cherishUsers.postValue(mainRepository.fetchCherishUser(userId.value!!))
+            Log.d("mainViewModel", selectedCherishUser.value!!.homeMainBackgroundImageUrl)
         } catch (exception: Exception) {
             exceptionLiveData.postValue(exception.message)
         }

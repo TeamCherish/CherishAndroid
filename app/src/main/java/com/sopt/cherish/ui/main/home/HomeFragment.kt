@@ -4,8 +4,7 @@ import android.animation.ArgbEvaluator
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,7 +26,6 @@ import com.sopt.cherish.ui.dialog.WateringDialogFragment
 import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
 import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.util.PixelUtil.dp
-import com.sopt.cherish.util.SimpleLogger
 
 
 /**
@@ -48,20 +46,14 @@ class HomeFragment : Fragment(), OnItemClickListener {
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         binding.mainViewModel = viewModel
-        viewModel.fetchUsers()
-        homeCherryListAdapter = HomeCherryListAdapter(this)
-        observeSelectCherishUser()
-
+        homeCherryListAdapter = HomeCherryListAdapter(this) // homeCherryListAdapter 초기화
         // 뷰가 처음 보일 떄
         // 바텀시트 초기화
         initializeBottomSheetBehavior()
 
         // 바텀시트 리사이클러뷰
-        setAdapterData(homeCherryListAdapter)
+        /*setAdapterData(homeCherryListAdapter)*/
         initializeRecyclerView(homeCherryListAdapter)
-
-        // 물주기 혹은 미루기를 했을 때 애니메이션의 변화
-        observeWateringOrDelayAnimation()
 
         // onClick
         binding.homeWateringBtn.setOnClickListener {
@@ -74,21 +66,24 @@ class HomeFragment : Fragment(), OnItemClickListener {
         }
 
         binding.homeMovePlantDetail.setOnClickListener {
-            SimpleLogger.logI(viewModel.selectedCherishUser.value?.id!!.toString())
+            Log.d("homeFragment", viewModel.selectedCherishUser.value?.id!!.toString())
             navigateDetailPlant(viewModel.userId.value!!, viewModel.selectedCherishUser.value?.id!!)
         }
 
         return binding.root
     }
 
-    override fun onResume() {
-        super.onResume()
-        viewModel.fetchUsers()
-        homeCherryListAdapter.notifyDataSetChanged()
-        // 이게 추가한 코드인데 이거 없이 되는 지 테스트 한번 해보자
-        setAdapterData(homeCherryListAdapter)
-        initializeRecyclerView(homeCherryListAdapter)
-        // todo : 만약 클릭한다음에 온다면 기존에 클릭했던 사람을 보여주는게 맞다고 생각 함
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        observeCherishUsers()
+        observeSelectCherishUser()
+    }
+
+    private fun observeCherishUsers() {
+        viewModel.cherishUsers.observe(viewLifecycleOwner) {
+            homeCherryListAdapter.data = it.userData.userList as MutableList<User>
+            homeCherryListAdapter.notifyDataSetChanged()
+        }
     }
 
     // 최초 화면이 보여질때
@@ -121,10 +116,8 @@ class HomeFragment : Fragment(), OnItemClickListener {
                 binding.homeRemainDate.text = "D-Day"
             }
         }
-        viewModel.cherishUsers.observe(viewLifecycleOwner) {
-            viewModel.selectedCherishUser.value = it.userData.userList[0]
-            binding.homeCherryNumber.text = it.userData.totalUser.toString()
-        }
+        viewModel.selectedCherishUser.value = initialUser
+        Log.d("initialView", viewModel.selectedCherishUser.value!!.id.toString())
     }
 
     private fun initializeBottomSheetBehavior() {
@@ -183,6 +176,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
     override fun onItemClick(itemBinding: MainCherryItemBinding, position: Int) {
         slideDownBottomSheet()
         viewModel.selectedCherishUser.value = homeCherryListAdapter.data[position]
+        Log.d("homeFragment", viewModel.selectedCherishUser.value!!.id.toString())
     }
 
     private fun initializeRecyclerView(
@@ -196,34 +190,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
         }
     }
 
-    private fun setAdapterData(homeCherryListAdapter: HomeCherryListAdapter) {
-        viewModel.cherishUsers.observe(viewLifecycleOwner) {
-            homeCherryListAdapter.data = it.userData.userList as MutableList<User>
-            initializeView(it.userData.userList[0])
-            homeCherryListAdapter.notifyDataSetChanged()
-        }
-    }
 
-    private fun observeWateringOrDelayAnimation() {
-        viewModel.animationTrigger.observe(viewLifecycleOwner) { isWateringOrDelaying ->
-            // todo : 이거 고쳐야함
-            if (isWateringOrDelaying) {
-                Handler(Looper.getMainLooper()).postDelayed({ // Runnble 객체와 time을 파라미터로 받는다
-                    Glide.with(binding.homePlantImage)
-                        .asGif()
-                        .load(R.raw.watering_min_android)
-                        .into(binding.homePlantImage)
-                }, 2000)
-            } else {
-                Handler(Looper.getMainLooper()).postDelayed({ // Runnble 객체와 time을 파라미터로 받는다
-                    Glide.with(binding.homePlantImage)
-                        .asGif()
-                        .load(R.raw.wither_min_android)
-                        .into(binding.homePlantImage)
-                }, 2000)
-            }
-        }
-    }
 
     // navigate
     private fun navigateWatering(id: Int) {

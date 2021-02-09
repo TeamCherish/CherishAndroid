@@ -97,7 +97,7 @@ class ReviewFragment : Fragment() {
                     binding.reviewFlexBox.getChip(0)?.text.toString(),
                     binding.reviewFlexBox.getChip(1)?.text.toString(),
                     binding.reviewFlexBox.getChip(2)?.text.toString(),
-                    viewModel.selectedCherishUser.value?.id!!.toString()
+                    viewModel.selectedCherishUser.value?.id!!
                 )
             )
             viewModel.animationTrigger.value = true

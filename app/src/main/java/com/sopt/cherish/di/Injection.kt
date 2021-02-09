@@ -10,6 +10,7 @@ import com.sopt.cherish.repository.*
 import com.sopt.cherish.ui.factory.DetailViewModelFactory
 import com.sopt.cherish.ui.factory.EnrollmentViewModelFactory
 import com.sopt.cherish.ui.factory.MainViewModelFactory
+import com.sopt.cherish.ui.factory.ReviewViewModelFactory
 
 /**
  * Created on 01-03 by SSong-develop
@@ -74,6 +75,11 @@ object Injection {
     // enrollment di
     fun provideEnrollmentViewModelFactory(): ViewModelProvider.Factory {
         return EnrollmentViewModelFactory()
+    }
+
+    // review di
+    fun provideReviewViewModelFactory(): ViewModelProvider.Factory {
+        return ReviewViewModelFactory(provideReviewRepository())
     }
 
 }
