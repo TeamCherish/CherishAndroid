@@ -9,12 +9,10 @@ import android.view.View
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.jackandphantom.circularprogressbar.CircleProgressbar
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityDetailPlantBinding
-import com.sopt.cherish.di.Injection
 import com.sopt.cherish.ui.detail.calendar.CalendarFragment
 import com.sopt.cherish.ui.enrollment.EnrollModifyPlantFragment
 
@@ -28,7 +26,6 @@ class DetailPlantActivity : AppCompatActivity() {
 
     private lateinit var circleProgressbar: CircleProgressbar
     private lateinit var binding: ActivityDetailPlantBinding
-
 
     var cherishid_main = 0
     var cherishid_plant=0
@@ -64,7 +61,6 @@ class DetailPlantActivity : AppCompatActivity() {
 
         Log.d("cherishid_main", cherishid_main.toString())
         Log.d("cherishid_plant", cherishid_plant.toString())
-
 
         setFragment(DetailPlantFragment())
         setActionBarTitle("식물 상세")

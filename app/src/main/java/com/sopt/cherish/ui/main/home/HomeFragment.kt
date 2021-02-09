@@ -27,6 +27,7 @@ import com.sopt.cherish.ui.dialog.WateringDialogFragment
 import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
 import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.util.PixelUtil.dp
+import com.sopt.cherish.util.SimpleLogger
 
 
 /**
@@ -73,6 +74,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
         }
 
         binding.homeMovePlantDetail.setOnClickListener {
+            SimpleLogger.logI(viewModel.selectedCherishUser.value?.id!!.toString())
             navigateDetailPlant(viewModel.userId.value!!, viewModel.selectedCherishUser.value?.id!!)
         }
 
@@ -239,7 +241,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
         val intent = Intent(activity, DetailPlantActivity::class.java)
         // todo : Parcelable로 변경해서 보내주도록 하자
         intent.putExtra("userId", userId)
-        intent.putExtra("cherishId", viewModel.selectedCherishUser.value?.id)
+        intent.putExtra("cherishId", cherishId)
         intent.putExtra("cherishUserPhoneNumber", viewModel.selectedCherishUser.value?.phoneNumber)
         intent.putExtra("cherishNickname", viewModel.selectedCherishUser.value?.nickName)
         intent.putExtra("userNickname", viewModel.userNickName.value)

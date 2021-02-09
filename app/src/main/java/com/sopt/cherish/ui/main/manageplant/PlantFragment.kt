@@ -102,6 +102,7 @@ class PlantFragment : Fragment() {
                                                 "Id",
                                                 it.myPageUserData.result[position].id
                                             )
+
                                             Log.d(
                                                 "Id",
                                                 it.myPageUserData.result[position].id.toString()

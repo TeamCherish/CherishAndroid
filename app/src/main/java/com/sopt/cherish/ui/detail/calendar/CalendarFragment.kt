@@ -32,7 +32,6 @@ class CalendarFragment : Fragment() {
             DataBindingUtil.inflate(inflater, R.layout.fragment_calendar, container, false)
 
         // viewModel 작업
-        viewModel.fetchCalendarData()
         binding.detailPlantViewModel = viewModel
         initializeCalendar(binding)
 
