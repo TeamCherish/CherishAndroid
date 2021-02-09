@@ -6,14 +6,25 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentEnrollModifyPlantBinding
+import com.sopt.cherish.remote.api.RequestUserinfoData
+import com.sopt.cherish.remote.api.ResponseUserinfoData
+import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.detail.DetailPlantActivity
 import com.sopt.cherish.ui.dialog.DeletePlantDialogFragment
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
-class EnrollModifyPlantFragment(cherish: Int) : Fragment() {
+class EnrollModifyPlantFragment() : Fragment() {
+    private val requestData = RetrofitBuilder
 
-    var modifycherish = cherish
+    var modifycherish = 0
+    var userid=0
     lateinit var binding: FragmentEnrollModifyPlantBinding
+
+
+    lateinit var nick:String
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -24,11 +35,39 @@ class EnrollModifyPlantFragment(cherish: Int) : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_enroll_modify_plant, container, false)
         binding = FragmentEnrollModifyPlantBinding.bind(view)
+        userid= arguments?.getInt("cherishidgo_userid")!!
+        modifycherish= arguments?.getInt("cherishidgo_delete")!!
 
         Log.d("modifycherishid", modifycherish.toString())
+        Log.d("modifyuserid", userid.toString())
+
 
         //보여지는 부분
+        val body=RequestUserinfoData(CherishId = modifycherish)
+        requestData.userinfoAPI.getUserInfo(userid,body)
+            .enqueue(
+                object : Callback<ResponseUserinfoData> {
+                    override fun onFailure(call: Call<ResponseUserinfoData>, t: Throwable) {
+                        Log.d("통신 실패", t.toString())
+                    }
 
+                    override fun onResponse(
+                        call: Call<ResponseUserinfoData>,
+                        response: Response<ResponseUserinfoData>
+                    ) {
+                        Log.d("식물수정", response.body().toString())
+                        response.takeIf {
+                            it.isSuccessful
+                        }?.body()
+                            ?.let { it ->
+                                binding.editNick.hint=it.data.userDetail.nickname.toString()
+                                binding.editBirth.hint=it.data.userDetail.birth
+                                binding.waterAlarmWeek.text=it.data.cherishDetail.cycle_date.toString()
+                                binding.waterAlarmTime.text=it.data.cherishDetail.notice_time
+                                binding.phoneNumber.text=it.data.userDetail.phone
+
+
+                            }}})
 
         return binding.root
     }
@@ -42,6 +81,7 @@ class EnrollModifyPlantFragment(cherish: Int) : Fragment() {
 
         }
     }
+
 
     override fun onPrepareOptionsMenu(menu: Menu) {
         menu.getItem(0).isVisible = false //disable menuitem 5
