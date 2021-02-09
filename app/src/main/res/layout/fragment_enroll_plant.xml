@@ -13,7 +13,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginTop="@dimen/margin_14dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -48,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:background="@null"
-                android:hint="솝트디자인파트궁"
+                android:hint="아직도생각이안나영"
                 android:maxLength="8"
                 android:inputType="textPersonName"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -109,6 +108,7 @@
                 android:layout_marginStart="12dp"
                 android:background="@null"
                 android:hint="0000/00/00"
+
                 android:inputType="textPersonName"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -211,10 +211,21 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:text="00:00 AM"
+                android:hint="ex. 00:00 AM"
+               android:text=""
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/editclock"
                 app:layout_constraintTop_toTopOf="@+id/editclock" />
+
+            <!--<TextView
+                android:id="@+id/water_alarm_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="ex. 00:00 AM"
+                android:text="asdfasdf"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textviewclock"
+                app:layout_constraintTop_toTopOf="parent" />-->
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -259,7 +270,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:text="Every 1 week"
+                android:hint="ex. Every 1 week"
+                android:text=""
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/editweek" />
@@ -280,11 +292,12 @@
 
     <Button
         android:id="@+id/detail_ok_btn"
-        style="@style/RoundButton.GreenMain"
+        style="@style/RoundButton.Gray"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
         android:text="완료"
+        android:clickable="false"
         android:textSize="@dimen/text_16sp"
         app:layout_constraintEnd_toEndOf="@+id/cons4"
         app:layout_constraintStart_toStartOf="@+id/cons4"

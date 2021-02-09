@@ -44,7 +44,7 @@ class EnrollModifyPlantFragment() : Fragment() {
 
         //보여지는 부분
         val body=RequestUserinfoData(CherishId = modifycherish)
-        requestData.userinfoAPI.getUserInfo(userid,body)
+        requestData.userinfoAPI.getUserInfo(modifycherish)
             .enqueue(
                 object : Callback<ResponseUserinfoData> {
                     override fun onFailure(call: Call<ResponseUserinfoData>, t: Throwable) {
