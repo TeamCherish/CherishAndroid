@@ -44,7 +44,7 @@ class ReviewActivity : AppCompatActivity() {
         viewModel.selectedCherishNickname = intent.getStringExtra("selectedCherishNickname")!!
         viewModel.selectedCherishId = intent.getIntExtra("selectedCherishId", 0)
         viewModel.reviewText = "${viewModel.userNickname}님! ${viewModel.selectedCherishNickname}과의"
-        viewModel.reviewSubText = "${viewModel.selectedCherishNickname}과의 물주기를 기록하세요."
+        viewModel.reviewSubText = "${viewModel.selectedCherishNickname}과/와의 물주기를 기록하세요."
     }
 
     private fun addLimitNumberOfMemoCharacters(binding: ActivityReviewBinding) {
