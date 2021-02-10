@@ -49,7 +49,7 @@ class ReviewFragment : Fragment() {
         binding.reviewUser.text =
             "${viewModel.userNickName.value}님! ${viewModel.selectedCherishUser.value?.nickName}과/와의"
         binding.reviewDescription.text =
-            "${viewModel.selectedCherishUser.value?.nickName}님과의 물주기를 기록해주세요"
+            "${viewModel.selectedCherishUser.value?.nickName}과/와의 물주기를 기록해주세요"
     }
 
     private fun addLimitNumberOfMemoCharacters(binding: ActivityReviewBinding) {

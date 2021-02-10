@@ -66,7 +66,7 @@ class DetailPlantDialogReviewFragment : DialogFragment() {
         binding.detailPlantReviewUser.text =
             "${viewModel.userNickname.value}님! ${viewModel.cherishNickname.value}과/와의"
         binding.detailPlantReviewDescription.text =
-            "${viewModel.cherishNickname.value}님과의 물주기를 기록해주세요"
+            "${viewModel.cherishNickname.value}과/와의 물주기를 기록해주세요"
     }
 
     private fun addLimitNumberOfMemoCharacters(binding: DialogDetailPlantReviewBinding) {
