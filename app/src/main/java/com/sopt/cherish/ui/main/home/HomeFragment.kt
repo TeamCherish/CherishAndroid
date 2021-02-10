@@ -66,6 +66,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
         binding.homeMovePlantDetail.setOnClickListener {
             navigateDetailPlant(viewModel.userId.value, viewModel.selectedCherishUser.value?.id)
         }
+
         return binding.root
     }
 
@@ -76,6 +77,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
     }
 
     private fun observeAnimationTrigger() {
+        // todo : 물주는 애니메이션 이나 시드는 애니메이션에 따라 작업해야합니다.
         viewModel.animationTrigger.observe(viewLifecycleOwner) {
             if (it) {
                 longToast(requireContext(), "식물 물주는 애니메이션 등장!")

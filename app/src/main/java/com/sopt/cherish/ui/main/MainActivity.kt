@@ -2,7 +2,6 @@ package com.sopt.cherish.ui.main
 
 import android.os.Bundle
 import android.provider.ContactsContract
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -30,7 +29,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding =
             DataBindingUtil.setContentView(this, R.layout.activity_main)
-/*        viewModel.fetchUsers()*/
         initializeViewModelData()
         showInitialFragment()
         getFirebaseDeviceToken()
@@ -40,8 +38,6 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         viewModel.fetchUsers()
-        // todo : 지워도 되는건지 아닌지 예진이한테 물어봐야 함
-        /*showInitialFragment()*/
     }
 
     private fun getFirebaseDeviceToken() {
@@ -102,6 +98,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
     fun getPhoneNumbers(): Int{
         val list = mutableListOf<Phonemypage>()
 
@@ -133,6 +130,7 @@ class MainActivity : AppCompatActivity() {
         // 결과목록 반환
         return list.size
     }
+
     fun replaceFragment(index: Int) {
         val transAction = supportFragmentManager.beginTransaction()
         when (index) {
