@@ -112,7 +112,7 @@ class DetailPlantActivity : AppCompatActivity() {
                     EnrollModifyPlantFragment().apply {
                         arguments = Bundle().apply {
                             //수정과 삭제는 체리쉬 아이디만 필요함
-                            putInt("cherishid_modify", cherishid_main)
+                            putInt("cherishid_modify", intent.getIntExtra("cherishId",0))
 
                         }
                     })
