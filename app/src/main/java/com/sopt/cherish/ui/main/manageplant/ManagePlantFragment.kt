@@ -59,7 +59,7 @@ class ManagePlantFragment : Fragment() {
 
         //binding.editSearch.textCh
         // 예진이 userId , viewModel.userId.value 라고하면 userId 찾을 수 있어요
-        SimpleLogger.logI(viewModel.userId.value.toString())
+        SimpleLogger.logI(viewModel.cherishuserId.value.toString())
         initializeServerRequest(binding)
         //initializeTabLayoutView(binding)
         initializeBottomSheetBehavior(binding)
@@ -286,13 +286,13 @@ class ManagePlantFragment : Fragment() {
 
     private fun navigatePhoneBook() {
         val intent = Intent(context, EnrollmentPhoneActivity::class.java)
-        intent.putExtra("userId", viewModel.userId.value!!)
+        intent.putExtra("userId", viewModel.cherishuserId.value!!)
         startActivity(intent)
     }
 
 
     private fun initializeServerRequest(binding: FragmentManagePlantBinding) {
-        requestData.myPageAPI.fetchUserPage(viewModel.userId.value!!)
+        requestData.myPageAPI.fetchUserPage(viewModel.cherishuserId.value!!)
             .enqueue(
                 object : Callback<MyPageUserRes> {
                     override fun onFailure(call: Call<MyPageUserRes>, t: Throwable) {

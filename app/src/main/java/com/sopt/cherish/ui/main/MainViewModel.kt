@@ -32,7 +32,7 @@ class MainViewModel(
     val exceptionLiveData = MutableLiveData<String>()
 
     // 로그인 하는 cherish를 이용하는 유저
-    val userId = MutableLiveData<Int>()
+    val cherishuserId = MutableLiveData<Int>()
 
     // 유저가 가지고 있는 cherish들
     val userNickName = MutableLiveData<String>()
@@ -47,7 +47,7 @@ class MainViewModel(
 
     fun fetchUsers() = viewModelScope.launch {
         try {
-            _cherishUsers.postValue(mainRepository.fetchCherishUser(userId.value!!))
+            _cherishUsers.postValue(mainRepository.fetchCherishUser(cherishuserId.value!!))
         } catch (exception: Exception) {
             exceptionLiveData.postValue(exception.message)
         }

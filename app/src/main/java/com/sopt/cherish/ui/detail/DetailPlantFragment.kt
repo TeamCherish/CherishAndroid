@@ -58,34 +58,8 @@ class DetailPlantFragment : Fragment() {
     ): View {
 
 
-        binding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_detail_plant, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_detail_plant, container, false)
 
-        // memolist 어댑터 연결 부분
-        binding.imageButton3detail.setOnClickListener {
-
-            AlertPlantDialogFragment(plantId).show(parentFragmentManager, DetailPlantFragment.TAG)
-            //3단계 식물 뷰 들어가는 곳
-        }
-        return binding.root
-    }
-
-    override fun onResume() {
-        super.onResume()
-
-        getcherishid()
-        val activity = activity
-        if (activity != null) {
-            (activity as DetailPlantActivity).setActionBarTitle("식물 카드")
-
-        }
-        reset()
-    }
-
-    fun getcherishid() {
-        //detailactivity에서 받은 데이터
-
-        Log.d("0cherishiddetailplant", cherishid.toString())
         plantId = arguments?.getInt("plantId_detail")!!
 
         cherishid = arguments?.getInt("cherishidmain_detail")!!
@@ -107,6 +81,241 @@ class DetailPlantFragment : Fragment() {
         }
 
         Log.d("gogo", cherishid.toString())
+
+        requestData.responsePlantCardData.Detailcherishcard(cherishid)
+            .enqueue(
+                object : Callback<ResponsePlantCardDatas> {
+                    override fun onFailure(call: Call<ResponsePlantCardDatas>, t: Throwable) {
+                        Log.d("통신 실패", t.toString())
+                    }
+
+                    override fun onResponse(
+                        call: Call<ResponsePlantCardDatas>,
+                        response: Response<ResponsePlantCardDatas>
+                    ) {
+                        Log.d("식물카드 뷰", response.body().toString())
+                        response.takeIf {
+                            it.isSuccessful
+                        }?.body()
+                            ?.let { it ->
+                                binding.textViewNick.text = it.data.nickname
+                                Log.d("textViewNick", it.data.nickname.toString())
+                                binding.textViewName.text = it.data.name.toString()
+                                binding.textViewPlantname.text = it.data.plant_name.toString()
+                                //식물 아이디 받는 곳 이거를 이제 정보 아이콘 누를때 넘겨줘야함
+                                plantId=it.data.plantId
+                                if(it.data.dDay>0){
+                                    binding.textViewDday.text = "D+" + it.data.dDay.toString()
+
+                                }
+                                else if(it.data.dDay==0){
+                                    binding.textViewDday.text="D-day"
+                                }else{
+                                    binding.textViewDday.text = "D" + it.data.dDay.toString()
+
+                                }
+                                binding.textViewDuration.text = it.data.duration.toString()
+                                if ((it.data.birth.toString()) == "Invalid Date") {
+                                    binding.textViewBirth.text = "_ _"
+
+                                } else {
+                                    binding.textViewBirth.text = it.data.birth.toString()
+
+                                }
+                                binding.textView1WithName.text = it.data.name.toString()
+                                binding.textViewStatusMessage.text = it.data.status_message
+                                binding.textViewStatus.text = it.data.status.toString()
+                                Glide.with(this@DetailPlantFragment)
+                                    .load(it.data.plant_thumbnail_image_url)
+                                    .into(binding.imageViewDetailUrl)
+
+                                plant_id = it.data.plantId
+                                Log.d("fdfdfd", it.data.plantId.toString())
+
+
+                                circleProgressbar.setProgressWithAnimation(
+                                    it.data.gage.toFloat() * 100,
+                                    animationDuration
+                                )
+                                binding.chip.isVisible=false
+                                binding.chip2.isVisible=false
+                                binding.chip3.isVisible=false
+
+                                if(it.data.keyword1.toString()!=null && it.data.keyword1!=""){
+                                    binding.chip.text = it.data.keyword1
+                                    binding.chip.isVisible=true
+
+                                }
+                                else if(it.data.keyword2.toString()!=null&& it.data.keyword2!=""){
+                                    binding.chip2.text = it.data.keyword2
+                                    binding.chip2.isVisible=true
+
+                                }else if(it.data.keyword3.toString() !=null&& it.data.keyword3!=""){
+                                    binding.chip3.text = it.data.keyword3
+                                    binding.chip3.isVisible=true
+
+                                }
+
+
+
+                                if (it.data.reviews.isEmpty()) {
+
+
+                                    var memoList = arrayListOf<MemoListDataclass>(
+
+                                        MemoListDataclass(
+                                            "_ _",
+                                            "메모를 입력하지 않았어요!"
+                                        ),
+                                        MemoListDataclass(
+                                            "_ _",
+                                            "메모를 입력하지 않았어요!"
+                                        )
+                                    )
+
+                                    val mAdapter = DetailMemoAdapter(memoList)
+                                    binding.recyclerDetail.adapter = mAdapter
+
+                                    binding.recyclerDetail.addItemDecoration(
+                                        VerticalSpaceItemDecoration(
+                                            20
+                                        )
+                                    )
+                                    mAdapter.setItemClickListener(object :
+                                        DetailMemoAdapter.ItemClickListener {
+                                        override fun onClick(view: View, position: Int) {
+                                            val item = mAdapter.memolist[position]
+                                            val transaction =
+                                                parentFragmentManager.beginTransaction()
+                                            transaction.replace(
+                                                R.id.fragment_detail,
+                                                CalendarFragment()
+                                            )
+                                            transaction.addToBackStack(null)
+                                            transaction.commit()
+                                        }
+                                    })
+
+                                    binding.recyclerDetail.layoutManager =
+                                        LinearLayoutManager(context)
+                                    binding.recyclerDetail.setHasFixedSize(true)
+
+                                } else {
+
+
+                                    Log.d("asdfasdf", it.data.reviews.size.toString())
+                                    if (it.data.reviews.size == 1) {
+                                        var memoList = arrayListOf<MemoListDataclass>(
+
+                                            MemoListDataclass(
+                                                it.data.reviews[0].water_date,
+                                                it.data.reviews[0].review
+                                            ),
+                                        )
+                                        val mAdapter = DetailMemoAdapter(memoList)
+                                        binding.recyclerDetail.adapter = mAdapter
+
+                                        binding.recyclerDetail.addItemDecoration(
+                                            VerticalSpaceItemDecoration(
+                                                20
+                                            )
+                                        )
+                                        mAdapter.setItemClickListener(object :
+                                            DetailMemoAdapter.ItemClickListener {
+                                            override fun onClick(view: View, position: Int) {
+                                                val item = mAdapter.memolist[position]
+                                                val transaction =
+                                                    parentFragmentManager.beginTransaction()
+                                                transaction.replace(
+                                                    R.id.fragment_detail,
+                                                    CalendarFragment()
+                                                )
+                                                transaction.addToBackStack(null)
+                                                transaction.commit()
+                                            }
+                                        })
+
+                                        binding.recyclerDetail.layoutManager =
+                                            LinearLayoutManager(context)
+                                        binding.recyclerDetail.setHasFixedSize(true)
+                                    } else if (it.data.reviews.size >= 2) {
+                                        var memoList = arrayListOf<MemoListDataclass>(
+
+                                            MemoListDataclass(
+                                                it.data.reviews[0].water_date,
+                                                it.data.reviews[0].review
+                                            ),
+                                            MemoListDataclass(
+                                                it.data.reviews[1].water_date,
+                                                it.data.reviews[1].review
+                                            )
+                                        )
+                                        val mAdapter = DetailMemoAdapter(memoList)
+                                        binding.recyclerDetail.adapter = mAdapter
+
+                                        binding.recyclerDetail.addItemDecoration(
+                                            VerticalSpaceItemDecoration(
+                                                20
+                                            )
+                                        )
+                                        mAdapter.setItemClickListener(object :
+                                            DetailMemoAdapter.ItemClickListener {
+                                            override fun onClick(view: View, position: Int) {
+                                                val item = mAdapter.memolist[position]
+                                                val transaction =
+                                                    parentFragmentManager.beginTransaction()
+                                                transaction.replace(
+                                                    R.id.fragment_detail,
+                                                    CalendarFragment()
+                                                )
+                                                transaction.addToBackStack(null)
+                                                transaction.commit()
+                                            }
+                                        })
+
+                                        binding.recyclerDetail.layoutManager =
+                                            LinearLayoutManager(context)
+                                        binding.recyclerDetail.setHasFixedSize(true)
+                                    }
+
+
+                                }
+
+
+                                //memoList.add(MemoListDataclass(it.data.reviews[0].water_date, it.data.reviews[0].review))
+                                //memoList.add(MemoListDataclass(it.data.reviews[1].water_date, it.data.reviews[1].review))
+
+
+                            }
+                    }
+                })
+
+
+        // memolist 어댑터 연결 부분
+        binding.imageButton3detail.setOnClickListener {
+
+            AlertPlantDialogFragment(plantId).show(parentFragmentManager, DetailPlantFragment.TAG)
+            //3단계 식물 뷰 들어가는 곳
+        }
+        return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        val activity = activity
+        if (activity != null) {
+            (activity as DetailPlantActivity).setActionBarTitle("식물 카드")
+
+        }
+       // reset()
+    }
+
+    fun getcherishid() {
+        //detailactivity에서 받은 데이터
+
+        Log.d("0cherishiddetailplant", cherishid.toString())
+
     }
 
     fun reset() {
