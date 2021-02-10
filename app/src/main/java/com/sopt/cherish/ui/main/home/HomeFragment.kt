@@ -4,8 +4,6 @@ import android.animation.ArgbEvaluator
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +18,7 @@ import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentHomeBinding
 import com.sopt.cherish.databinding.MainCherryItemBinding
 import com.sopt.cherish.remote.api.User
+import com.sopt.cherish.remote.api.UserResult
 import com.sopt.cherish.ui.adapter.HomeCherryListAdapter
 import com.sopt.cherish.ui.adapter.OnItemClickListener
 import com.sopt.cherish.ui.detail.DetailPlantActivity
@@ -27,12 +26,15 @@ import com.sopt.cherish.ui.dialog.WateringDialogFragment
 import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
 import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.util.PixelUtil.dp
+import com.sopt.cherish.util.SimpleLogger
+import com.sopt.cherish.util.extension.longToast
 
 
 /**
  * 메인 홈뷰
  * 초기상태와 중간에 있는 경우 2개 다 고려해야 합니다.
- * todo : 다시해라 훈기야
+ * todo : 1. 아무것도 등록안됐을때 상태 , 2. 바텀시트 클릭 시 클릭된게 맨 앞에서 보여지게 하는거
+ * todo : 3. 물 준다음에 돌아오면 첫번째 유저가 클릭되어 있는걸로 보이는데 alpha값 또한 첫번쨰 유저로 되어있어야 하는데 그게 안됨
  */
 class HomeFragment : Fragment(), OnItemClickListener {
 
@@ -46,25 +48,14 @@ class HomeFragment : Fragment(), OnItemClickListener {
         savedInstanceState: Bundle?
     ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
         binding.mainViewModel = viewModel
-        viewModel.fetchUsers()
-        homeCherryListAdapter = HomeCherryListAdapter(this)
-        observeSelectCherishUser()
-
-        // 뷰가 처음 보일 떄
-        // 바텀시트 초기화
+        homeCherryListAdapter = HomeCherryListAdapter(this) // homeCherryListAdapter 초기화
+        // 바텀시트 초기화 및 바텀시트 리사이클러뷰 초기화
         initializeBottomSheetBehavior()
-
-        // 바텀시트 리사이클러뷰
-        setAdapterData(homeCherryListAdapter)
         initializeRecyclerView(homeCherryListAdapter)
 
-        // 물주기 혹은 미루기를 했을 때 애니메이션의 변화
-        observeWateringOrDelayAnimation()
-
-        // onClick
         binding.homeWateringBtn.setOnClickListener {
-            // 물주기 플로우 뭐가 필요한지 생각
             navigateWatering(viewModel.selectedCherishUser.value?.id!!)
         }
 
@@ -73,56 +64,86 @@ class HomeFragment : Fragment(), OnItemClickListener {
         }
 
         binding.homeMovePlantDetail.setOnClickListener {
-            navigateDetailPlant(viewModel.userId.value!!, viewModel.selectedCherishUser.value?.id!!)
+            navigateDetailPlant(viewModel.userId.value, viewModel.selectedCherishUser.value?.id)
         }
 
         return binding.root
     }
 
-    override fun onResume() {
-        super.onResume()
-        viewModel.fetchUsers()
-        homeCherryListAdapter.notifyDataSetChanged()
-        // 이게 추가한 코드인데 이거 없이 되는 지 테스트 한번 해보자
-        setAdapterData(homeCherryListAdapter)
-        initializeRecyclerView(homeCherryListAdapter)
-        // todo : 만약 클릭한다음에 온다면 기존에 클릭했던 사람을 보여주는게 맞다고 생각 함
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        observeCherishUsers()
+        observeSelectCherishUser()
+        observeAnimationTrigger()
     }
 
-    // 최초 화면이 보여질때
-    @SuppressLint("SetTextI18n")
-    private fun initializeView(initialUser: User) {
-        // 코드 수정 중
-        binding.apply {
-            // todo : 이미지 관련은 딱 정확하게 정해서 그거대로 처리를 해야할 거 같다.
-            // 식물 1,2단계는 사진, 3단계는 gif로 보낼 예정
-            // 1,2단계 사진은 배경색이 없고 , 3단계만 배경색이 있다.
-            // todo : 데이터 바인딩 제대로 사용해라 훈기야.
-            Glide.with(requireContext())
-                .load(initialUser.homeMainBackgroundImageUrl)
-                .into(homePlantImage)
-            homeRemainDate.text = "D${initialUser.dDay}"
-            homeSelectedUserStatus.text = initialUser.plantModifier
-            homeSelectedUserName.text = initialUser.nickName
-            homeAffectionProgressbar.progress = initialUser.growth
-            homeAffectionRating.text = "${initialUser.growth}%"
-        }
-        // todo : 함수화 합시다.
-        when {
-            initialUser.dDay < 0 -> {
-                binding.homeRemainDate.text = "D${initialUser.dDay}"
-            }
-            initialUser.dDay > 0 -> {
-                binding.homeRemainDate.text = "D+${initialUser.dDay}"
-            }
-            else -> {
-                binding.homeRemainDate.text = "D-Day"
+    private fun observeAnimationTrigger() {
+        // todo : 물주는 애니메이션 이나 시드는 애니메이션에 따라 작업해야합니다.
+        viewModel.animationTrigger.observe(viewLifecycleOwner) {
+            if (it) {
+                longToast(requireContext(), "식물 물주는 애니메이션 등장!")
+            } else {
+                longToast(requireContext(), "식물 시드는 애니메이션 등장!")
             }
         }
+    }
+
+    private fun observeCherishUsers() {
+        // 체리쉬 유저의 값이 변함에 따라서 변해야할 것이 무엇인가를 잘 생각해보자.
+        // 체리쉬 유저가 삭제될 경우 값이 변하기 떄문에 항상 observe 해야함
+        // 선택된 체리쉬 또한 어댑터의 정렬이 바뀌거나 , 유저가 삭제될 경우 바뀌기 때문에 observe를 통해서 선택해야함
         viewModel.cherishUsers.observe(viewLifecycleOwner) {
-            viewModel.selectedCherishUser.value = it.userData.userList[0]
-            binding.homeCherryNumber.text = it.userData.totalUser.toString()
+            setCherishUserListAdapter(it)
+            setAllUsers(it.userData.totalUser)
+            setSelectedUser(it.userData.userList[0])
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        SimpleLogger.logI("homeFragment onResume!")
+    }
+
+    private fun setSelectedUser(user: User) {
+        viewModel.selectedCherishUser.value = user
+    }
+
+    private fun setAllUsers(totalUserCount: Int) {
+        binding.apply {
+            homeCherryNumber.text = totalUserCount.toString()
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun observeSelectCherishUser() {
+        // todo : 값이 갱신이 되는지 제대로 확인해야함
+        viewModel.selectedCherishUser.observe(viewLifecycleOwner) {
+            updateProgressBar(it.growth)
+            binding.apply {
+                Glide.with(requireContext())
+                    .load(it.homeMainBackgroundImageUrl)
+                    .into(homePlantImage)
+                homeSelectedUserName.text = it.nickName
+                homeSelectedUserStatus.text = it.plantModifier
+                homeAffectionRating.text = "${it.growth}%"
+                homeAffectionProgressbar.progress = it.growth
+                when {
+                    it.dDay < 0 -> {
+                        binding.homeRemainDate.text = "D${it.dDay}"
+                    }
+                    it.dDay > 0 -> {
+                        binding.homeRemainDate.text = "D+${it.dDay}"
+                    }
+                    else -> {
+                        binding.homeRemainDate.text = "D-Day"
+                    }
+                }
+            }
+        }
+    }
+
+    private fun setCherishUserListAdapter(userResult: UserResult) {
+        homeCherryListAdapter.data = userResult.userData.userList as MutableList<User>
+        homeCherryListAdapter.notifyDataSetChanged()
     }
 
     private fun initializeBottomSheetBehavior() {
@@ -150,39 +171,10 @@ class HomeFragment : Fragment(), OnItemClickListener {
         }
     }
 
-    @SuppressLint("SetTextI18n")
-    private fun observeSelectCherishUser() {
-        viewModel.selectedCherishUser.observe(viewLifecycleOwner) {
-            updateProgressBar(it.growth)
-            binding.apply {
-                Glide.with(requireContext())
-                    .load(it.homeMainBackgroundImageUrl)
-                    .into(homePlantImage)
-                homeSelectedUserName.text = it.nickName
-                homeSelectedUserStatus.text = it.plantModifier
-                homeAffectionRating.text = "${it.growth}%"
-                homeAffectionProgressbar.progress = it.growth
-                when {
-                    it.dDay < 0 -> {
-                        binding.homeRemainDate.text = "D${it.dDay}"
-                    }
-                    it.dDay > 0 -> {
-                        binding.homeRemainDate.text = "D+${it.dDay}"
-                    }
-                    else -> {
-                        binding.homeRemainDate.text = "D-Day"
-                    }
-                }
-            }
-        }
-    }
-
-    // recyclerview Item click event
     override fun onItemClick(itemBinding: MainCherryItemBinding, position: Int) {
+        // 정확히 작동합니다.
         slideDownBottomSheet()
-        viewModel.cherishUsers.observe(viewLifecycleOwner) {
-            viewModel.selectedCherishUser.value = it.userData.userList[position]
-        }
+        viewModel.selectedCherishUser.value = homeCherryListAdapter.data[position]
     }
 
     private fun initializeRecyclerView(
@@ -196,36 +188,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
         }
     }
 
-    private fun setAdapterData(homeCherryListAdapter: HomeCherryListAdapter) {
-        viewModel.cherishUsers.observe(viewLifecycleOwner) {
-            homeCherryListAdapter.data = it.userData.userList as MutableList<User>
-            initializeView(it.userData.userList[0])
-            homeCherryListAdapter.notifyDataSetChanged()
-        }
-    }
-
-    private fun observeWateringOrDelayAnimation() {
-        viewModel.animationTrigger.observe(viewLifecycleOwner) { isWateringOrDelaying ->
-            // todo : 이거 고쳐야함
-            if (isWateringOrDelaying) {
-                Handler(Looper.getMainLooper()).postDelayed({ // Runnble 객체와 time을 파라미터로 받는다
-                    Glide.with(binding.homePlantImage)
-                        .asGif()
-                        .load(R.raw.watering_min_android)
-                        .into(binding.homePlantImage)
-                }, 2000)
-            } else {
-                Handler(Looper.getMainLooper()).postDelayed({ // Runnble 객체와 time을 파라미터로 받는다
-                    Glide.with(binding.homePlantImage)
-                        .asGif()
-                        .load(R.raw.wither_min_android)
-                        .into(binding.homePlantImage)
-                }, 2000)
-            }
-        }
-    }
-
-    // navigate
+    // 화면이동
     private fun navigateWatering(id: Int) {
         WateringDialogFragment(id).show(parentFragmentManager, TAG)
     }
@@ -237,11 +200,12 @@ class HomeFragment : Fragment(), OnItemClickListener {
         startActivity(intent)
     }
 
-    private fun navigateDetailPlant(userId: Int, cherishId: Int) {
+    private fun navigateDetailPlant(userId: Int?, cherishId: Int?) {
         val intent = Intent(activity, DetailPlantActivity::class.java)
         // todo : Parcelable로 변경해서 보내주도록 하자
-
-        intent.putExtra("cherishId", viewModel.selectedCherishUser.value?.id)
+        // todo : 내일 오프라인 회의에서 정확하게 값 명칭 구분해서 작동시키도록 한다.
+        intent.putExtra("userId", userId)
+        intent.putExtra("cherishId", cherishId)
         intent.putExtra("cherishUserPhoneNumber", viewModel.selectedCherishUser.value?.phoneNumber)
         intent.putExtra("cherishNickname", viewModel.selectedCherishUser.value?.nickName)
         intent.putExtra("userNickname", viewModel.userNickName.value)
@@ -249,6 +213,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
         startActivity(intent)
     }
 
+    // 프로그레스바 색깔 갱신
     private fun updateProgressBar(rating: Int) {
         if (rating <= 30) {
             binding.homeAffectionProgressbar.progressDrawable = ResourcesCompat.getDrawable(
@@ -265,6 +230,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
         }
     }
 
+    // 리사이클러뷰 아이템 클릭 시 바텀 시트 내려감
     private fun slideDownBottomSheet() {
         // todo : 비율로 변경해야함
         standardBottomSheetBehavior.apply {

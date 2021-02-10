@@ -123,7 +123,7 @@ class DetailPlantDialogReviewFragment : DialogFragment() {
                     binding.detailPlantReviewFlexBox.getChip(0)!!.text.toString(),
                     binding.detailPlantReviewFlexBox.getChip(1)!!.text.toString(),
                     binding.detailPlantReviewFlexBox.getChip(2)!!.text.toString(),
-                    viewModel.cherishId.value.toString()
+                    viewModel.cherishId.value!!.toInt()
                 )
             )
             showLoadingDialog()

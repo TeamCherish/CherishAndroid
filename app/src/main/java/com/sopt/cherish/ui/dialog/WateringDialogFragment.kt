@@ -30,7 +30,7 @@ class WateringDialogFragment(private val cherishId: Int) : DialogFragment(), Vie
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         binding.wateringAcceptBtn.setOnClickListener {
-            navigateContact()
+            navigateContact(cherishId)
         }
 
         binding.wateringNextTimeBtn.setOnClickListener {
@@ -39,8 +39,8 @@ class WateringDialogFragment(private val cherishId: Int) : DialogFragment(), Vie
         return binding.root
     }
 
-    private fun navigateContact() {
-        parentFragmentManager.let { fm -> ContactDialogFragment().show(fm, TAG) }
+    private fun navigateContact(cherishId: Int) {
+        parentFragmentManager.let { fm -> ContactDialogFragment(cherishId).show(fm, TAG) }
         dismiss()
     }
 

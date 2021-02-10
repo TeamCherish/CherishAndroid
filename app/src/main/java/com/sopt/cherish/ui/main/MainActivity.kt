@@ -2,7 +2,6 @@ package com.sopt.cherish.ui.main
 
 import android.os.Bundle
 import android.provider.ContactsContract
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -17,10 +16,8 @@ import com.sopt.cherish.ui.main.home.HomeFragment
 import com.sopt.cherish.ui.main.manageplant.ManagePlantFragment
 import com.sopt.cherish.ui.main.manageplant.PlantFragment
 import com.sopt.cherish.ui.main.setting.SettingFragment
-import com.sopt.cherish.ui.review.ReviewFragment
 import com.sopt.cherish.util.PermissionUtil
 import com.sopt.cherish.util.SimpleLogger
-import com.sopt.cherish.util.extension.longToast
 
 
 class MainActivity : AppCompatActivity() {
@@ -32,23 +29,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding =
             DataBindingUtil.setContentView(this, R.layout.activity_main)
-
         initializeViewModelData()
         showInitialFragment()
         getFirebaseDeviceToken()
-        observeExceptions()
         setBottomNavigationListener(binding)
-    }
-
-    private fun observeExceptions() {
-        viewModel.exceptionLiveData.observe(this) {
-            longToast(this, it)
-        }
     }
 
     override fun onResume() {
         super.onResume()
-        showInitialFragment()
+        viewModel.fetchUsers()
     }
 
     private fun getFirebaseDeviceToken() {
@@ -109,6 +98,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
     fun getPhoneNumbers(): Int{
         val list = mutableListOf<Phonemypage>()
 
@@ -140,6 +130,7 @@ class MainActivity : AppCompatActivity() {
         // 결과목록 반환
         return list.size
     }
+
     fun replaceFragment(index: Int) {
         val transAction = supportFragmentManager.beginTransaction()
         when (index) {
@@ -159,10 +150,4 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
-    fun showReviewFragment() {
-        val transAction = supportFragmentManager.beginTransaction()
-        transAction.replace(R.id.home_parent_fragment_container, ReviewFragment()).commit()
-    }
-
 }

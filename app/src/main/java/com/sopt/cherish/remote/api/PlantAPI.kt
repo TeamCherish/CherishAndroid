@@ -5,6 +5,7 @@ import java.util.*
 
 // Cherish 상세보기
 // Param으로 CherishId가 들어감
+// 나영이가 만들어놈 지워도 됨
 data class DetailCherishRes(
     @SerializedName("nickname") val nickName: String,
     @SerializedName("dDay") val remainWateringDay: Number,

@@ -24,7 +24,6 @@ import com.sopt.cherish.ui.detail.calendar.CalendarFragment
 import com.sopt.cherish.ui.dialog.AlertPlantDialogFragment
 import com.sopt.cherish.ui.dialog.DetailWateringDialogFragment
 import com.sopt.cherish.ui.domain.MemoListDataclass
-import com.sopt.cherish.ui.enrollment.EnrollModifyPlantFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -43,10 +42,10 @@ class DetailPlantFragment : Fragment() {
     //lateinit var memoList:ArrayList<MemoListDataclass>
     var plantId = 0
     var cherishid = 0
-    lateinit var cherishUserPhoneNumber:String
-    lateinit var cherishNickname:String
-    lateinit var userNickname:String
-     var userId=0
+    lateinit var cherishUserPhoneNumber: String
+    lateinit var cherishNickname: String
+    lateinit var userNickname: String
+    var userId = 0
 
     companion object {
         private val TAG = "DetailPlantFragment"
@@ -131,14 +130,13 @@ class DetailPlantFragment : Fragment() {
                                 binding.textViewName.text = it.data.name.toString()
                                 binding.textViewPlantname.text = it.data.plant_name.toString()
                                 //식물 아이디 받는 곳 이거를 이제 정보 아이콘 누를때 넘겨줘야함
-                                plantId=it.data.plantId
-                                if(it.data.dDay>0){
+                                plantId = it.data.plantId
+                                if (it.data.dDay > 0) {
                                     binding.textViewDday.text = "D+" + it.data.dDay.toString()
 
-                                }
-                                else if(it.data.dDay==0){
-                                    binding.textViewDday.text="D-day"
-                                }else{
+                                } else if (it.data.dDay == 0) {
+                                    binding.textViewDday.text = "D-day"
+                                } else {
                                     binding.textViewDday.text = "D" + it.data.dDay.toString()
 
                                 }
@@ -165,22 +163,21 @@ class DetailPlantFragment : Fragment() {
                                     it.data.gage.toFloat() * 100,
                                     animationDuration
                                 )
-                                binding.chip.isVisible=false
-                                binding.chip2.isVisible=false
-                                binding.chip3.isVisible=false
+                                binding.chip.isVisible = false
+                                binding.chip2.isVisible = false
+                                binding.chip3.isVisible = false
 
-                                if(it.data.keyword1.toString()!=null && it.data.keyword1!=""){
+                                if (it.data.keyword1.toString() != null && it.data.keyword1 != "") {
                                     binding.chip.text = it.data.keyword1
-                                    binding.chip.isVisible=true
+                                    binding.chip.isVisible = true
 
-                                }
-                                else if(it.data.keyword2.toString()!=null&& it.data.keyword2!=""){
+                                } else if (it.data.keyword2.toString() != null && it.data.keyword2 != "") {
                                     binding.chip2.text = it.data.keyword2
-                                    binding.chip2.isVisible=true
+                                    binding.chip2.isVisible = true
 
-                                }else if(it.data.keyword3.toString() !=null&& it.data.keyword3!=""){
+                                } else if (it.data.keyword3.toString() != null && it.data.keyword3 != "") {
                                     binding.chip3.text = it.data.keyword3
-                                    binding.chip3.isVisible=true
+                                    binding.chip3.isVisible = true
 
                                 }
 
