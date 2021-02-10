@@ -43,8 +43,7 @@ class PlantFragment : Fragment() {
         _binding = FragmentPlantBinding.inflate(inflater, container, false)
 
         setAdapterData()
-        //initialRecyclerView(binding, cherishAdapter)
-        //cherishAdapter.notifyDataSetChanged()
+
 
         return binding.root
     }
@@ -102,7 +101,6 @@ class PlantFragment : Fragment() {
                                                 "Id",
                                                 it.myPageUserData.result[position].id
                                             )
-
                                             Log.d(
                                                 "Id",
                                                 it.myPageUserData.result[position].id.toString()
@@ -117,8 +115,6 @@ class PlantFragment : Fragment() {
 
                     }
                 })
-        //cherishAdapter.notifyDataSetChanged()
-
     }
 
     private fun initialRecyclerView(

@@ -32,10 +32,10 @@ class DetailPlantActivity : AppCompatActivity() {
     var plantId = 1
     var userId=0
 
-
     private lateinit var cherishPhoneNumber: String
     private lateinit var cherishNickname: String
     private lateinit var userNickname: String
+    var userId = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -43,22 +43,25 @@ class DetailPlantActivity : AppCompatActivity() {
 
 
         Log.d("plantId", intent.getIntExtra("plantId", 100).toString())
+        //식물 아이디
         plantId = intent.getIntExtra("plantId", 0)
 
-        if(intent.getIntExtra("cherishId", 0)==0){
-            cherishid_main=intent.getIntExtra("Id", 0)
+        //체리쉬아이디 -메인에서오는지 마이페이지에서 오는지 분기처리해줌
+        if (intent.getIntExtra("cherishId", 0) == 0) {
+            cherishid_main = intent.getIntExtra("Id", 0)
         }
-        if(intent.getIntExtra("Id", 0)==0){
-            cherishid_main=intent.getIntExtra("cherishId", 0)
+        if (intent.getIntExtra("Id", 0) == 0) {
+            cherishid_main = intent.getIntExtra("cherishId", 0)
         }
+        //유저 폰넘버
+        cherishPhoneNumber = intent.getStringExtra("cherishUserPhoneNumber").toString()
+        //식물 애칭
+        cherishNickname = intent.getStringExtra("cherishNickname").toString()
+        //유저 이름
+        userNickname = intent.getStringExtra("userNickname").toString()
+        //유저 아이디
+        userId = intent.getIntExtra("userId", 0)
 
-        //cherishid_main=intent.getIntExtra("cherishId", 0)
-
-
-
-
-        //cherishid_plant = intent.getIntExtra("Id", 0)
-        //cherishid_main = intent.getIntExtra("cherishId", 0)
 
 
         Log.d("cherishid_main", cherishid_main.toString())
@@ -109,9 +112,9 @@ class DetailPlantActivity : AppCompatActivity() {
                     R.id.fragment_detail,
                     EnrollModifyPlantFragment().apply {
                         arguments = Bundle().apply {
+                            //수정과 삭제는 체리쉬 아이디만 필요함
+                            putInt("cherishid_modify", cherishid_main)
 
-                            putInt("cherishidgo_delete", cherishid_main)
-                            putInt("cherishidgo_userid",userId)
                         }
                     })
                 // if (transaction == null) {
@@ -129,9 +132,14 @@ class DetailPlantActivity : AppCompatActivity() {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_detail, fragment.apply {
             arguments = Bundle().apply {
+                putInt("plantId_detail", plantId)
 
-                putInt("cherishidgo", cherishid_main)
-                putInt("plantId", plantId)
+                putInt("cherishidmain_detail", cherishid_main)
+                putString("cherishUserPhoneNumber_detail", cherishPhoneNumber)
+                putString("cherishNickname_detail", cherishNickname)
+                putString("userNickname_detail", userNickname)
+                putInt("userId_detail", userId)
+
 
                 //Log.d("nanana", cherishid.toString())
             }
