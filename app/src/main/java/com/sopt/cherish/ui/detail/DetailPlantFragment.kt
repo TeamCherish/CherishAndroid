@@ -193,11 +193,11 @@ class DetailPlantFragment : Fragment() {
 
                                         MemoListDataclass(
                                             "_ _",
-                                            "이 날의 기록이 없어요!"
+                                            "메모를 입력하지 않았어요!"
                                         ),
                                         MemoListDataclass(
                                             "_ _",
-                                            "이 날의 기록이 없어요!"
+                                            "메모를 입력하지 않았어요!"
                                         )
                                     )
 
