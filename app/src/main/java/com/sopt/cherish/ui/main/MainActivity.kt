@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initializeViewModelData() {
-        viewModel.userId.value = intent.getIntExtra("userId", 0)
+        viewModel.cherishuserId.value = intent.getIntExtra("userId", 0)
         viewModel.userNickName.value = intent.getStringExtra("userNickname")
     }
 

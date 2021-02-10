@@ -278,7 +278,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button
-        android:id="@+id/detail_ok_btn"
+        android:id="@+id/detail_ok_btn_modify"
         style="@style/RoundButton.GreenMain"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

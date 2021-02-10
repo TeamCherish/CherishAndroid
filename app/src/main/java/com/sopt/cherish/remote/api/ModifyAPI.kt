@@ -15,10 +15,10 @@ data class ResponseModifyData(
 data class RequestModifyData(
     val nickname: String,
     val birth: String,
-    val cycle_date: Integer,
+    val cycle_date: Int,
     val notice_time: String,
     val water_notice: Boolean,
-    val id: Integer
+    val id: Int
 )
 
 interface ModifyAPI {

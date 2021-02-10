@@ -32,13 +32,15 @@ class DetailPlantActivity : AppCompatActivity() {
     private val viewModel: DetailPlantViewModel by viewModels { Injection.provideDetailViewModelFactory() }
 
     var cherishid_main = 0
-    var cherishid_plant=0
+    var cherishid_plant = 0
     var plantId = 1
 
     private lateinit var cherishPhoneNumber: String
     private lateinit var cherishNickname: String
     private lateinit var userNickname: String
-    var userId = 0
+
+    var cherishuserId = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -69,8 +71,8 @@ class DetailPlantActivity : AppCompatActivity() {
         userNickname = intent.getStringExtra("userNickname").toString()
         viewModel.userNickname.value = userNickname
         //유저 아이디
-        userId = intent.getIntExtra("userId", 0)
-        viewModel.userId.value = userId
+        cherishuserId = intent.getIntExtra("userId", 0)
+        viewModel.userId.value = cherishuserId
 
         Log.d("cherishid_main", cherishid_main.toString())
         Log.d("cherishid_plant", cherishid_plant.toString())
@@ -123,7 +125,7 @@ class DetailPlantActivity : AppCompatActivity() {
                     EnrollModifyPlantFragment().apply {
                         arguments = Bundle().apply {
                             //수정과 삭제는 체리쉬 아이디만 필요함
-                            putInt("cherishid_modify", intent.getIntExtra("cherishId",0))
+                            putInt("cherishid_modify", cherishid_main)
 
                         }
                     })
@@ -148,7 +150,7 @@ class DetailPlantActivity : AppCompatActivity() {
                 putString("cherishUserPhoneNumber_detail", cherishPhoneNumber)
                 putString("cherishNickname_detail", cherishNickname)
                 putString("userNickname_detail", userNickname)
-                putInt("userId_detail", userId)
+                putInt("userId_detail", cherishuserId)
 
 
                 //Log.d("nanana", cherishid.toString())
