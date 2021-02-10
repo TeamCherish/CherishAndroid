@@ -18,6 +18,7 @@ class CherishMaterialCalendarView constructor(context: Context, attrs: Attribute
     MaterialCalendarView(context, attrs) {
 
     // todo :애뮬 상에서는 캘린더 줄어드는게 괜찮은데 , 실 기기에서는 잘 안줄어들음
+    // 어떻게 해야할지 집에서 좀 고민해봐야겠다.
     fun changeCalendarModeWeeks() {
         CoroutineScope(Dispatchers.Main).launch {
             state().edit().setCalendarDisplayMode(CalendarMode.WEEKS).commit()
