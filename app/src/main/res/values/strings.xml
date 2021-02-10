@@ -27,13 +27,13 @@
     <string name="next_watering_description">시시콜콜한 이야기도 좋아요!</string>
     <string name="watering">물주기</string>
     <string name="next_time">다음에 할게요</string>
-    <string name="contact_common_text">무슨 대화를 해볼까요?</string>
+    <string name="contact_common_text">어떤 대화를 해볼까요?</string>
     <string name="review_common_text">오늘 연락은 어떠셨나요?</string>
-    <string name="review_keyword_text">키워드로 표현해주세요!</string>
-    <string name="review_memo_text">메모를 입력해주세요.</string>
+    <string name="review_keyword_text">키워드를 입력해주세요!</string>
+    <string name="review_memo_text">메모를 입력해주세요!</string>
     <string name="review_admin_button_text">등록완료</string>
     <string name="review_pass_button_text">건너뛰기</string>
-    <string name="review_limit_chips_number_text">키워드는 3개까지 쓸 수 있어요!</string>
+    <string name="review_limit_chips_number_text">키워드는 3개까지 입력할 수 있어요!</string>
     <string name="review_max_keyword">5</string>
     <string name="review_max_memo">100</string>
     <string name="review_word_count_divider">/</string>
@@ -44,7 +44,7 @@
     <string name="home_user_add_text">추가하기</string>
 
     <string name="dialog_delay_watering_text">일 후 물주기</string>
-    <string name="dialog_delay_watering_description">*미루기는 세번까지만 가능해요</string>
+    <string name="dialog_delay_watering_description">미루기가 3번을 넘어가면 애정도가 줄어요</string>
     <string name="dialog_delay_watering_sub_description">(현재까지 미룬 횟수</string>
     <string name="dialog_delay_watering_sub_description_next_word">회)</string>
     <string name="dialog_delay_watering_admin_text">확인</string>
@@ -61,11 +61,15 @@
     <string name="calendar_watered_text">물 준 날</string>
     <string name="calendar_day_bullet">●</string>
 
-    <string name="review_keyword_count_error">키워드는 3개까지 쓸 수 있어요!</string>
+    <string name="review_keyword_count_error">키워드는 3개까지 입력할 수 있어요!</string>
 
     <string name="home_blank_enroll_plant_text">식물을 추가해주세요!</string>
     <string name="home_blank_no_enroll_plant_text">아직 등록한 식물이 없어요</string>
     <string name="home_blank_start_btn_text">시작하기</string>
+
+    <string name="enroll_phone_text">식물 등록하기</string>
+
+    <string name="detail_plant_with">함께한 날</string>
 
 
 </resources>

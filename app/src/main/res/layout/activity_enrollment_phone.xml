@@ -30,7 +30,7 @@
         android:fontFamily="@font/notosanscjkkr_medium"
         android:gravity="center"
         android:includeFontPadding="false"
-        android:text="식물 등록 친구 선택"
+        android:text="@string/enroll_phone_text"
         android:textAlignment="center"
         android:textSize="@dimen/text_16sp"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar_enroll_phone"
