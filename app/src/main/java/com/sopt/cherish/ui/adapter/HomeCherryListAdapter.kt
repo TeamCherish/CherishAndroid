@@ -30,7 +30,7 @@ class HomeCherryListAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(userData: User, clickListener: OnItemClickListener) {
             val itemPosition = adapterPosition
-            // 이거 함수화 하고 알고리즘 좀 더 세련되게 하면 괜찮을거 같음
+            // 문제는 값이 갱신된 다음이 문제임
             if (lastSelectedPosition == itemPosition) {
                 binding.apply {
                     mainUserImg.alpha = 0.2f
@@ -54,11 +54,13 @@ class HomeCherryListAdapter(
                         notifyItemRangeChanged(0, data.size)
                         lastSelectedPosition = itemPosition
                     }
+                    // 방법 1. swap을 어댑터에서 진행하는 경우
                     clickListener.onItemClick(binding, itemPosition)
                 }
             }
         }
     }
+
 }
 
 interface OnItemClickListener {

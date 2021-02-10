@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         viewModel.fetchUsers()
+        // todo : 지워도 되는건지 아닌지 예진이한테 물어봐야 함
         /*showInitialFragment()*/
     }
 

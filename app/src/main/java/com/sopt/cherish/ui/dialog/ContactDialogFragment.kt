@@ -67,7 +67,7 @@ class ContactDialogFragment(private val cherishId: Int) : DialogFragment(), View
 
     private fun initializeChip(binding: DialogContactBinding) {
         viewModel.calendarData.observe(viewLifecycleOwner) {
-            if (it.waterData.calendarData.isEmpty()) {
+            if (it.waterData.calendarData.isNullOrEmpty()) {
                 // todo : 이거 어떻게 고쳐야 할까?
                 binding.contactUserStatusFirstChip.text = "채워줘ㅠ"
                 binding.contactUserStatusSecondChip.text = "채워줘ㅠ"

@@ -33,7 +33,8 @@ import com.sopt.cherish.util.extension.longToast
 /**
  * 메인 홈뷰
  * 초기상태와 중간에 있는 경우 2개 다 고려해야 합니다.
- * todo : 다시해라 훈기야 , null 처리 시발 진짜 제대로 한다.
+ * todo : 1. 아무것도 등록안됐을때 상태 , 2. 바텀시트 클릭 시 클릭된게 맨 앞에서 보여지게 하는거
+ * todo : 3. 물 준다음에 돌아오면 첫번째 유저가 클릭되어 있는걸로 보이는데 alpha값 또한 첫번쨰 유저로 되어있어야 하는데 그게 안됨
  */
 class HomeFragment : Fragment(), OnItemClickListener {
 
@@ -55,7 +56,6 @@ class HomeFragment : Fragment(), OnItemClickListener {
         initializeRecyclerView(homeCherryListAdapter)
 
         binding.homeWateringBtn.setOnClickListener {
-            // 물주기 플로우 뭐가 필요한지 생각
             navigateWatering(viewModel.selectedCherishUser.value?.id!!)
         }
 
@@ -86,7 +86,6 @@ class HomeFragment : Fragment(), OnItemClickListener {
     }
 
     private fun observeCherishUsers() {
-        // todo : 정확히 작동하는지 , 갱신이 안됨 갱신을 어떻게 해야할 지 생각 , 막하지 말고 제발 잘 생각해서 해라 훈기야.
         // 체리쉬 유저의 값이 변함에 따라서 변해야할 것이 무엇인가를 잘 생각해보자.
         // 체리쉬 유저가 삭제될 경우 값이 변하기 떄문에 항상 observe 해야함
         // 선택된 체리쉬 또한 어댑터의 정렬이 바뀌거나 , 유저가 삭제될 경우 바뀌기 때문에 observe를 통해서 선택해야함
