@@ -41,9 +41,12 @@ class DetailPlantFragment : Fragment() {
     var plant_id = 0
 
     //lateinit var memoList:ArrayList<MemoListDataclass>
+    var plantId = 0
     var cherishid = 0
-    var plantId = 1
-    // private lateinit var memoList: ArrayList<MemoListDataclass>
+    lateinit var cherishUserPhoneNumber:String
+    lateinit var cherishNickname:String
+    lateinit var userNickname:String
+     var userId=0
 
     companion object {
         private val TAG = "DetailPlantFragment"
@@ -61,7 +64,7 @@ class DetailPlantFragment : Fragment() {
         // memolist 어댑터 연결 부분
         binding.imageButton3detail.setOnClickListener {
 
-            AlertPlantDialogFragment(plant_id).show(parentFragmentManager, DetailPlantFragment.TAG)
+            AlertPlantDialogFragment(plantId).show(parentFragmentManager, DetailPlantFragment.TAG)
             //3단계 식물 뷰 들어가는 곳
         }
         return binding.root
@@ -80,11 +83,16 @@ class DetailPlantFragment : Fragment() {
     }
 
     fun getcherishid() {
-        cherishid = arguments?.getInt("cherishidgo")!!
-        Log.d("0cherishiddetailplant", cherishid.toString())
-        plantId = arguments?.getInt("plantId")!!
-        Log.d("final plantId: ", plantId.toString())
+        //detailactivity에서 받은 데이터
 
+        Log.d("0cherishiddetailplant", cherishid.toString())
+        plantId = arguments?.getInt("plantId_detail")!!
+
+        cherishid = arguments?.getInt("cherishidmain_detail")!!
+        cherishUserPhoneNumber = arguments?.getString("cherishUserPhoneNumber_detail")!!
+        cherishNickname = arguments?.getString("cherishNickname_detail")!!
+        userNickname = arguments?.getString("userNickname_detail")!!
+        userId = arguments?.getInt("userId_detail")!!
         //reset()
 
         circleProgressbar = binding.test
@@ -122,6 +130,8 @@ class DetailPlantFragment : Fragment() {
                                 Log.d("textViewNick", it.data.nickname.toString())
                                 binding.textViewName.text = it.data.name.toString()
                                 binding.textViewPlantname.text = it.data.plant_name.toString()
+                                //식물 아이디 받는 곳 이거를 이제 정보 아이콘 누를때 넘겨줘야함
+                                plantId=it.data.plantId
                                 if(it.data.dDay>0){
                                     binding.textViewDday.text = "D+" + it.data.dDay.toString()
 

@@ -240,7 +240,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
     private fun navigateDetailPlant(userId: Int, cherishId: Int) {
         val intent = Intent(activity, DetailPlantActivity::class.java)
         // todo : Parcelable로 변경해서 보내주도록 하자
-        intent.putExtra("userId", userId)
+
         intent.putExtra("cherishId", viewModel.selectedCherishUser.value?.id)
         intent.putExtra("cherishUserPhoneNumber", viewModel.selectedCherishUser.value?.phoneNumber)
         intent.putExtra("cherishNickname", viewModel.selectedCherishUser.value?.nickName)

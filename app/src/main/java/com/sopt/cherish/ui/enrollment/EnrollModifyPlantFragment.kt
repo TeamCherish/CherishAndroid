@@ -35,15 +35,17 @@ class EnrollModifyPlantFragment() : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_enroll_modify_plant, container, false)
         binding = FragmentEnrollModifyPlantBinding.bind(view)
-        userid= arguments?.getInt("cherishidgo_userid")!!
-        modifycherish= arguments?.getInt("cherishidgo_delete")!!
+       // userid= arguments?.getInt("cherishidgo_userid")!!
+
+
+        // 식물카드에서 체리쉬 아이디 가져오기
+        modifycherish= arguments?.getInt("cherishid_modify")!!
 
         Log.d("modifycherishid", modifycherish.toString())
         Log.d("modifyuserid", userid.toString())
 
 
         //보여지는 부분
-        val body=RequestUserinfoData(CherishId = modifycherish)
         requestData.userinfoAPI.getUserInfo(modifycherish)
             .enqueue(
                 object : Callback<ResponseUserinfoData> {
