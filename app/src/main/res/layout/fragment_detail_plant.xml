@@ -216,7 +216,7 @@
                         android:fontFamily="@font/notosanscjkkr_regular"
                         android:includeFontPadding="false"
 
-                        android:text="지속한날"
+                        android:text="@string/detail_plant_with"
                         android:textColor="#6b6a6a"
                         android:textSize="@dimen/text_14sp"
                         app:layout_constraintEnd_toEndOf="@+id/textView_duration"
