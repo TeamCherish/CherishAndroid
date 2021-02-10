@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.provider.ContactsContract
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,9 +29,10 @@ class MyPagePhoneBookFragment() : Fragment() {
     var sortText = "asc"
     var phonecount = 0
     private lateinit var enrollToolbar: Toolbar
-
+    lateinit var countphone:String
     private lateinit var binding: FragmentMyPagePhoneBookBinding
     private lateinit var binding_manage: FragmentManagePlantBinding
+
 
 
     override fun onCreateView(
@@ -48,8 +50,6 @@ class MyPagePhoneBookFragment() : Fragment() {
 
 
         startProcess()
-
-
 
         return view
     }

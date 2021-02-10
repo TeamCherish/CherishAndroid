@@ -31,10 +31,8 @@ data class RequestUserinfoData(
 )
 interface UserInfoAPI {
     @Headers("Content-Type:application/json")
-    @HTTP(method = "GET", path = "getUserDetail", hasBody = true)
-
+    @GET("getUserDetail/{CherishId}")
     fun getUserInfo(
-        @Query("id") id: Int,
-        @Body body: RequestUserinfoData
+        @Path("CherishId") CherishId: Int,
     ): Call<ResponseUserinfoData>
 }

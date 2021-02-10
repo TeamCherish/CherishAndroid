@@ -104,4 +104,15 @@
     <style name="ImageButton.White" parent="Widget.AppCompat.ImageButton">
         <item name="android:backgroundTint">@color/white</item>
     </style>
+
+    <style name="MyPageTab" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/notosanscjkkr_regular</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">#aaaaaa</item>
+    </style>
+
+    <style name="MyPageTabSelected" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/notosanscjkkr_bold</item>
+        <item name="android:textSize">16sp</item>
+    </style>
 </resources>
