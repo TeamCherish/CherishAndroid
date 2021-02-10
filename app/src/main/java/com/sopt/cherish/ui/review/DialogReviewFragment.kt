@@ -56,7 +56,7 @@ class DialogReviewFragment(private val cherishId: Int) : DialogFragment() {
     @SuppressLint("SetTextI18n")
     private fun initializeView(binding: ActivityReviewBinding) {
         binding.reviewUser.text =
-            "${viewModel.userNickName.value}님! ${viewModel.selectedCherishUser.value?.nickName}님과의"
+            "${viewModel.userNickName.value}님! ${viewModel.selectedCherishUser.value?.nickName}과/와의"
         binding.reviewDescription.text =
             "${viewModel.selectedCherishUser.value?.nickName}님과의 물주기를 기록해주세요"
     }
