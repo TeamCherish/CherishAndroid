@@ -327,6 +327,7 @@ class DetailPlantFragment : Fragment() {
                 activity?.finish()
                 return true
             }
+
 /*R.id.setting -> {
                 val transaction = supportFragmentManager.beginTransaction()
                 transaction.replace(

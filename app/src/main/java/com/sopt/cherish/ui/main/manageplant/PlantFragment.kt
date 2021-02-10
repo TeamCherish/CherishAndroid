@@ -43,7 +43,7 @@ class PlantFragment : Fragment() {
         _binding = FragmentPlantBinding.inflate(inflater, container, false)
 
         setAdapterData()
-  
+
 
         return binding.root
     }
