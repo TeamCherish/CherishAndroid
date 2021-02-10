@@ -20,6 +20,7 @@ import com.sopt.cherish.util.extension.countNumberOfCharacters
 import com.sopt.cherish.util.extension.shortToast
 import com.sopt.cherish.util.extension.writeReview
 
+// fragment로 바꿀까 고민중임
 class ReviewFragment : Fragment() {
 
     private val TAG = "ReviewFragment"
@@ -48,7 +49,7 @@ class ReviewFragment : Fragment() {
         binding.reviewUser.text =
             "${viewModel.userNickName.value}님! ${viewModel.selectedCherishUser.value?.nickName}과/와의"
         binding.reviewDescription.text =
-            "${viewModel.selectedCherishUser.value?.nickName}님과의 물주기를 기록해주세요"
+            "${viewModel.selectedCherishUser.value?.nickName}과/와의 물주기를 기록해주세요"
     }
 
     private fun addLimitNumberOfMemoCharacters(binding: ActivityReviewBinding) {
@@ -96,7 +97,7 @@ class ReviewFragment : Fragment() {
                     binding.reviewFlexBox.getChip(0)?.text.toString(),
                     binding.reviewFlexBox.getChip(1)?.text.toString(),
                     binding.reviewFlexBox.getChip(2)?.text.toString(),
-                    viewModel.selectedCherishUser.value?.id!!.toString()
+                    viewModel.selectedCherishUser.value?.id!!
                 )
             )
             viewModel.animationTrigger.value = true

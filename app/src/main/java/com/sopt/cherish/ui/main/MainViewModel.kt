@@ -1,5 +1,6 @@
 package com.sopt.cherish.ui.main
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -47,7 +48,11 @@ class MainViewModel(
 
     fun fetchUsers() = viewModelScope.launch {
         try {
+
             _cherishUsers.postValue(mainRepository.fetchCherishUser(cherishuserId.value!!))
+
+            Log.d("mainViewModel", selectedCherishUser.value!!.homeMainBackgroundImageUrl)
+
         } catch (exception: Exception) {
             exceptionLiveData.postValue(exception.message)
         }

@@ -9,12 +9,10 @@ import android.view.View
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.jackandphantom.circularprogressbar.CircleProgressbar
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityDetailPlantBinding
-import com.sopt.cherish.di.Injection
 import com.sopt.cherish.ui.detail.calendar.CalendarFragment
 import com.sopt.cherish.ui.enrollment.EnrollModifyPlantFragment
 
@@ -29,18 +27,16 @@ class DetailPlantActivity : AppCompatActivity() {
     private lateinit var circleProgressbar: CircleProgressbar
     private lateinit var binding: ActivityDetailPlantBinding
 
-
-
-    var plantId = 1
-
-
-
     var cherishid_main = 0
     var cherishid_plant=0
+    var plantId = 1
+
     private lateinit var cherishPhoneNumber: String
     private lateinit var cherishNickname: String
     private lateinit var userNickname: String
+
     var cherishuserId=0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -48,30 +44,31 @@ class DetailPlantActivity : AppCompatActivity() {
 
 
         Log.d("plantId", intent.getIntExtra("plantId", 100).toString())
-       //식물 아이디
+        //식물 아이디
         plantId = intent.getIntExtra("plantId", 0)
 
         //체리쉬아이디 -메인에서오는지 마이페이지에서 오는지 분기처리해줌
-        if(intent.getIntExtra("cherishId", 0)==0){
-            cherishid_main=intent.getIntExtra("Id", 0)
+        if (intent.getIntExtra("cherishId", 0) == 0) {
+            cherishid_main = intent.getIntExtra("Id", 0)
         }
-        if(intent.getIntExtra("Id", 0)==0){
-            cherishid_main=intent.getIntExtra("cherishId", 0)
+        if (intent.getIntExtra("Id", 0) == 0) {
+            cherishid_main = intent.getIntExtra("cherishId", 0)
         }
         //유저 폰넘버
-        cherishPhoneNumber= intent.getStringExtra("cherishUserPhoneNumber").toString()
+        cherishPhoneNumber = intent.getStringExtra("cherishUserPhoneNumber").toString()
         //식물 애칭
-        cherishNickname=intent.getStringExtra("cherishNickname").toString()
+        cherishNickname = intent.getStringExtra("cherishNickname").toString()
         //유저 이름
-        userNickname=intent.getStringExtra("userNickname").toString()
+        userNickname = intent.getStringExtra("userNickname").toString()
         //유저 아이디
+
         cherishuserId=intent.getIntExtra("cherishuserId",0)
+
 
 
 
         Log.d("cherishid_main", cherishid_main.toString())
         Log.d("cherishid_plant", cherishid_plant.toString())
-
 
         setFragment(DetailPlantFragment())
         setActionBarTitle("식물 상세")

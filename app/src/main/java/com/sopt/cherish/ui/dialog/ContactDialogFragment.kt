@@ -16,7 +16,7 @@ import androidx.fragment.app.activityViewModels
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.DialogContactBinding
 import com.sopt.cherish.ui.main.MainViewModel
-import com.sopt.cherish.ui.review.DialogReviewFragment
+import com.sopt.cherish.ui.review.ReviewActivity
 import com.sopt.cherish.util.DialogUtil
 import com.sopt.cherish.util.PermissionUtil
 import com.sopt.cherish.util.extension.shortToast
@@ -27,20 +27,21 @@ import com.sopt.cherish.util.extension.shortToast
  * todo : Calendar CherishId 7번이 이상함? date 타입이 다른거 같은데
  */
 
-class ContactDialogFragment : DialogFragment(), View.OnClickListener {
+class ContactDialogFragment(private val cherishId: Int) : DialogFragment(), View.OnClickListener {
     private val codeThatReviewPage = 1001
     private val viewModel: MainViewModel by activityViewModels()
+    private lateinit var binding: DialogContactBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding: DialogContactBinding =
+        binding =
             DataBindingUtil.inflate(inflater, R.layout.dialog_contact, container, false)
         viewModel.fetchCalendarData()
         binding.mainViewModel = viewModel
-        initializeChip(binding)
+
 
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
@@ -59,9 +60,14 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        initializeChip(binding)
+        setChip(binding)
+    }
+
     private fun initializeChip(binding: DialogContactBinding) {
         viewModel.calendarData.observe(viewLifecycleOwner) {
-            if (it.waterData.calendarData.isEmpty()) {
+            if (it.waterData.calendarData.isNullOrEmpty()) {
                 // todo : 이거 어떻게 고쳐야 할까?
                 binding.contactUserStatusFirstChip.text = "채워줘ㅠ"
                 binding.contactUserStatusSecondChip.text = "채워줘ㅠ"
@@ -71,7 +77,6 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
                 viewModel.userStatus1.value = it.waterData.calendarData[0].userStatus1
                 viewModel.userStatus2.value = it.waterData.calendarData[0].userStatus2
                 viewModel.userStatus3.value = it.waterData.calendarData[0].userStatus3
-                setChip(binding)
             }
         }
     }
@@ -137,7 +142,7 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
         val callIntent =
             Intent(
                 Intent.ACTION_CALL,
-                Uri.parse("tel:${viewModel.selectedCherishUser.value?.phoneNumber}")
+                Uri.parse("tel:${viewModel.selectedCherishUser.value!!.phoneNumber}")
             )
         startActivityForResult(
             callIntent,
@@ -148,7 +153,7 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
     private fun startSendMessage() {
         val messageIntent = Intent(
             Intent.ACTION_SENDTO,
-            Uri.parse("smsto:${viewModel.selectedCherishUser.value?.phoneNumber}")
+            Uri.parse("smsto:${viewModel.selectedCherishUser.value!!.phoneNumber}")
         )
         startActivityForResult(
             messageIntent,
@@ -180,15 +185,19 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == codeThatReviewPage) {
-            startReviewAndDismiss()
+            startReviewAndDismiss(cherishId)
         }
     }
 
 
-    private fun startReviewAndDismiss() {
-        DialogReviewFragment().show(parentFragmentManager, tag)
-        // todo : 이렇게 처리를 한다면 어떨까? 될까???? 내일 테스트
+    private fun startReviewAndDismiss(cherishId: Int) {
+        /*DialogReviewFragment(cherishId).show(parentFragmentManager, tag)*/
         /*(activity as MainActivity).showReviewFragment()*/
+        val intent = Intent(requireContext(), ReviewActivity::class.java)
+        intent.putExtra("userNickname", viewModel.userNickName.value)
+        intent.putExtra("selectedCherishNickname", viewModel.selectedCherishUser.value!!.nickName)
+        intent.putExtra("selectedCherishId", viewModel.selectedCherishUser.value!!.id)
+        startActivity(intent)
         dismiss()
     }
 }

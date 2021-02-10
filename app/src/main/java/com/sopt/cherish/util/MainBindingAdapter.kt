@@ -1,7 +1,9 @@
 package com.sopt.cherish.util
 
+import android.annotation.SuppressLint
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -23,9 +25,9 @@ object MainBindingAdapter {
     @BindingAdapter("android:waterVisibility")
     fun waterVisibility(imageView: ImageView, dDay: Int) {
         if (dDay < 7)
-            imageView.visibility = View.INVISIBLE
-        else
             imageView.visibility = View.VISIBLE
+        else
+            imageView.visibility = View.INVISIBLE
     }
 
     @JvmStatic
@@ -45,5 +47,22 @@ object MainBindingAdapter {
             .load(plantImageUrl)
             .apply(RequestOptions.centerCropTransform())
             .into(imageView)
+    }
+
+    @SuppressLint("SetTextI18n")
+    @JvmStatic
+    @BindingAdapter("android:setDeadLineDay")
+    fun setDeadLineDay(textView: TextView, dDay: Int) {
+        when {
+            dDay > 0 -> {
+                textView.text = "D + $dDay"
+            }
+            dDay < 0 -> {
+                textView.text = "D $dDay"
+            }
+            else -> {
+                textView.text = "D - DAY"
+            }
+        }
     }
 }
