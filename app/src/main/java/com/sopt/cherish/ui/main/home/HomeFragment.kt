@@ -207,7 +207,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
         // todo : Parcelable로 변경해서 보내주도록 하자
         // todo : 내일 오프라인 회의에서 정확하게 값 명칭 구분해서 작동시키도록 한다.
         intent.putExtra("userId", userId)
-        intent.putExtra("cherishId", cherishId)
+        intent.putExtra("cherishId",  viewModel.selectedCherishUser.value?.id)
         intent.putExtra("cherishUserPhoneNumber", viewModel.selectedCherishUser.value?.phoneNumber)
         intent.putExtra("cherishNickname", viewModel.selectedCherishUser.value?.nickName)
         intent.putExtra("userNickname", viewModel.userNickName.value)
