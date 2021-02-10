@@ -37,6 +37,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        SimpleLogger.logI("MainActivity onResume!!")
         viewModel.fetchUsers()
     }
 

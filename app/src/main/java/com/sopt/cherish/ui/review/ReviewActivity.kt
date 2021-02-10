@@ -16,7 +16,6 @@ import com.sopt.cherish.util.extension.FlexBoxExtension.addChip
 import com.sopt.cherish.util.extension.FlexBoxExtension.getChip
 import com.sopt.cherish.util.extension.FlexBoxExtension.getChipsCount
 import com.sopt.cherish.util.extension.countNumberOfCharacters
-import com.sopt.cherish.util.extension.longToast
 import com.sopt.cherish.util.extension.shortToast
 import java.util.*
 
@@ -112,10 +111,6 @@ class ReviewActivity : AppCompatActivity() {
             SimpleLogger.logI(binding.reviewFlexBox.getChip(id = 1)?.text.toString())
             SimpleLogger.logI(binding.reviewFlexBox.getChip(id = 2)?.text.toString())
             SimpleLogger.logI(binding.reviewMemo.text.toString())
-            longToast(
-                this,
-                "${viewModel.reviewWateringRes.message} + ${viewModel.reviewWateringRes.reviewScore} + ${viewModel.reviewWateringRes.success}"
-            )
             showLoadingDialog()
             finish()
         }
