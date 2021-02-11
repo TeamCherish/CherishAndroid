@@ -11,6 +11,7 @@ import com.google.firebase.messaging.FirebaseMessaging
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityMainBinding
 import com.sopt.cherish.di.Injection
+import com.sopt.cherish.remote.api.MyPageCherishData
 import com.sopt.cherish.ui.adapter.Phonemypage
 import com.sopt.cherish.ui.enrollment.MyPagePhoneBookFragment
 import com.sopt.cherish.ui.main.home.HomeFragment
@@ -134,11 +135,11 @@ class MainActivity : AppCompatActivity() {
         return list.size
     }
 
-    fun replaceFragment(index: Int) {
+    fun replaceFragment(index: Int,data:MutableList<MyPageCherishData>) {
         val transAction = supportFragmentManager.beginTransaction()
         when (index) {
             0 -> {
-                transAction.replace(R.id.my_page_bottom_container, PlantFragment()).commit()
+                transAction.replace(R.id.my_page_bottom_container, PlantFragment(data)).commit()
             }
             1 -> {
                 if (PermissionUtil.isCheckedReadContactsPermission(this)) {
