@@ -56,7 +56,7 @@ class PlantFragment : Fragment() {
     }
 
     private fun setAdapterData() {
-        Log.d("viewmodeluserid",viewModel.cherishuserId.value.toString())
+        Log.d("viewmodeluserid", viewModel.cherishuserId.value.toString())
         requestData.myPageAPI.fetchUserPage(viewModel.cherishuserId.value!!)
             .enqueue(
                 object : Callback<MyPageUserRes> {

@@ -1,5 +1,6 @@
 package com.sopt.cherish.ui.main
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.provider.ContactsContract
 import androidx.activity.viewModels
@@ -23,11 +24,10 @@ import com.sopt.cherish.util.SimpleLogger
 class MainActivity : AppCompatActivity() {
 
     private val viewModel: MainViewModel by viewModels { Injection.provideMainViewModelFactory() }
-    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding =
+        val binding: ActivityMainBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_main)
         initializeViewModelData()
         showInitialFragment()
@@ -37,6 +37,8 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        // todo : 지워도 됨
+        SimpleLogger.logI("MainActivity onResume!!")
         viewModel.fetchUsers()
     }
 
@@ -99,6 +101,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("Recycle")
     fun getPhoneNumbers(): Int{
         val list = mutableListOf<Phonemypage>()
 
