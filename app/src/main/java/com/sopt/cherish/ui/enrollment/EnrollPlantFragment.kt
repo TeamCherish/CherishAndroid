@@ -14,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatDialog
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentEnrollPlantBinding
@@ -66,26 +67,33 @@ class EnrollPlantFragment : Fragment() {
 
         //enrollToolbar.title="식물 상세 입력"
         binding.editNick.hint=arguments?.getString("phonename")
+/*
+        binding.editNick.setOnFocusChangeListener { v, hasFocus ->
+            binding.editNick.hint=""
+
+            if(hasFocus==false){
+                binding.editNick.hint=arguments?.getString("phonename")
+
+            }
+        }*/
 
         // binding.phoneName.text = arguments?.getString("phonename")
         binding.phoneNumber.text = arguments?.getString("phonenumber")
 
-        binding.alarmSwitch.setOnCheckedChangeListener { button, isChecked ->
-            if (isChecked) {
-                switchvalue = true
-            }
 
-        }
+
+
 
 // 생일 빼고 사용자가 나머지 다 입력 시 버튼 활성화
-        binding.detailOkBtn.isClickable=false
+        binding.detailOkBtn.isEnabled=false
+
         //binding.detailOkBtn.setBackgroundColor(R.color.cherish_green_main)
         binding.waterAlarmTime.addTextChangedListener(
             object : TextWatcher {
                 override fun afterTextChanged(s: Editable?) {
                     clockvalue=true
                     if(clockvalue==true&&weekvalue==true) {
-                        binding.detailOkBtn.isClickable=true
+                        binding.detailOkBtn.isEnabled=true
                         Log.d("clockvalue",binding.detailOkBtn.isClickable.toString())
 
                         binding.detailOkBtn.setBackgroundColor(R.color.cherish_green_main)
@@ -108,7 +116,7 @@ class EnrollPlantFragment : Fragment() {
                 override fun afterTextChanged(s: Editable?) {
                     weekvalue=true
                     if(clockvalue==true&&weekvalue==true) {
-                        binding.detailOkBtn.isClickable=true
+                        binding.detailOkBtn.isEnabled=true
 
                         binding.detailOkBtn.setBackgroundColor(R.color.cherish_green_main)
                         Log.d("weekvalue",binding.detailOkBtn.isClickable.toString())
@@ -131,7 +139,7 @@ class EnrollPlantFragment : Fragment() {
 
             binding.detailOkBtn.setOnClickListener {
                 //  progressON()
-                if(binding.detailOkBtn.isClickable.toString()=="true") {
+
                     val username = arguments?.getString("phonename")
                     Log.d("username", arguments?.getString("phonename").toString())
 //이름
@@ -266,7 +274,7 @@ class EnrollPlantFragment : Fragment() {
 
                     }, 4000)
                 }
-            }
+
 
         //timepicker 나오는 부분
         binding.editclock.setOnClickListener {
