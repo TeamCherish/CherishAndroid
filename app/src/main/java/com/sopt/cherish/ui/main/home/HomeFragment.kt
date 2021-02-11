@@ -26,6 +26,7 @@ import com.sopt.cherish.ui.detail.DetailPlantActivity
 import com.sopt.cherish.ui.dialog.WateringDialogFragment
 import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
 import com.sopt.cherish.ui.main.MainViewModel
+import com.sopt.cherish.util.GridItemDecorator
 import com.sopt.cherish.util.PixelUtil.dp
 import com.sopt.cherish.util.SimpleLogger
 import com.sopt.cherish.util.extension.longToast
@@ -35,6 +36,7 @@ import com.sopt.cherish.util.extension.longToast
  * 메인 홈뷰
  * 초기상태와 중간에 있는 경우 2개 다 고려해야 합니다.
  * todo : 1. 아무것도 등록안됐을때 상태 , 2. 바텀시트 클릭 시 클릭된게 맨 앞에서 보여지게 하는거
+ * todo : 3. 바텀시트 아이템 뷰 좀 위치 정렬 잘해서? 보이게끔 해야함. 기기 사이즈마다 다 달라서 이걸 어떻게 보여줘야 할 지 참....
  */
 
 class HomeFragment : Fragment(), OnItemClickListener {
@@ -81,6 +83,11 @@ class HomeFragment : Fragment(), OnItemClickListener {
         setImageViewSize()
     }
 
+    override fun onResume() {
+        super.onResume()
+        SimpleLogger.logI("homeFragment onResume!")
+    }
+
     private fun observeAnimationTrigger() {
         // 이걸 언제 값을 바꿔줘야 할지를 생각해야한다.
         // 만약 review를 주었을때 이값을 true로 바꿔줘야한다던지 라던가
@@ -103,11 +110,6 @@ class HomeFragment : Fragment(), OnItemClickListener {
             setSelectedUser(it.userData.userList[0])
             setAllUsers(it.userData.totalUser)
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        SimpleLogger.logI("homeFragment onResume!")
     }
 
     private fun setSelectedUser(user: User) {
@@ -214,6 +216,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
         binding.homeUserList.apply {
             adapter = homeCherryListAdapter
             layoutManager = GridLayoutManager(context, 5)
+            addItemDecoration(GridItemDecorator(5, 10.dp, true))
             isNestedScrollingEnabled = false
             setHasFixedSize(true)
         }
