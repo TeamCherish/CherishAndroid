@@ -11,7 +11,7 @@ class HomeCherryListAdapter(
 ) : RecyclerView.Adapter<HomeCherryListAdapter.MainViewHolder>() {
 
     var data = mutableListOf<User>()
-    private var lastSelectedPosition = 0
+    var lastSelectedPosition = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -65,7 +65,7 @@ class HomeCherryListAdapter(
         }
     }
 
-    private fun moveItemToFront() {
+    private fun moveItemToFront(position: Int) {
         // 클릭 된 녀석은 alpha값이 변해진 상태 그대로 있고
         // 리사이클러뷰 가장 첫번째에 동시에 보이게 된다.
         // 만약 , 2번 아이템을 클릭하면 2번자리의 아이템이 alpha값이 줄어 희미하게 보이게 되고
@@ -75,6 +75,8 @@ class HomeCherryListAdapter(
         // 1-1. 혹은 리스트의 맨 앞의 아이템을 복사해서 앞에다가 붙여놓는다.
         // 사실상 1-1 방법이 좀 더 맞는거 같음.
         // 방법을 생각해볼까? 훈기야???
+        val selectedData = data[position]
+        // 이 선택된 데이터가 0번째로 가야하고
     }
 }
 
