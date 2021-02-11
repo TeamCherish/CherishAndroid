@@ -38,7 +38,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        // todo : 지워도 됨
         SimpleLogger.logI("MainActivity onResume!!")
         viewModel.fetchUsers()
     }

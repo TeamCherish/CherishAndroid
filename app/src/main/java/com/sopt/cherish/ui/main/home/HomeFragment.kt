@@ -29,6 +29,7 @@ import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.util.GridItemDecorator
 import com.sopt.cherish.util.PixelUtil.dp
 import com.sopt.cherish.util.SimpleLogger
+import com.sopt.cherish.util.animation.ProgressbarAnimation
 import com.sopt.cherish.util.extension.longToast
 
 
@@ -36,7 +37,6 @@ import com.sopt.cherish.util.extension.longToast
  * 메인 홈뷰
  * 초기상태와 중간에 있는 경우 2개 다 고려해야 합니다.
  * todo : 1. 아무것도 등록안됐을때 상태 , 2. 바텀시트 클릭 시 클릭된게 맨 앞에서 보여지게 하는거
- * todo : 3. 바텀시트 아이템 뷰 좀 위치 정렬 잘해서? 보이게끔 해야함. 기기 사이즈마다 다 달라서 이걸 어떻게 보여줘야 할 지 참....
  */
 
 class HomeFragment : Fragment(), OnItemClickListener {
@@ -133,8 +133,15 @@ class HomeFragment : Fragment(), OnItemClickListener {
     @SuppressLint("SetTextI18n")
     private fun observeSelectCherishUser() {
         // todo : 값이 갱신이 되는지 제대로 확인해야함
+        // ProgressbarAnimation 사용해야함
         viewModel.selectedCherishUser.observe(viewLifecycleOwner) {
-            updateProgressBar(it.growth)
+            // 함수화 해야함
+            // 근데 좀 더 생각해봐야 함
+            // 바인딩 어댑터를 사용해봐야 함
+            val progressbarAnimation =
+                ProgressbarAnimation(binding.homeAffectionProgressbar, it.growth.toFloat())
+            progressbarAnimation.duration = 2000
+            updateProgressBarColor(it.growth)
             binding.apply {
                 Glide.with(requireContext())
                     .load(it.homeMainBackgroundImageUrl)
@@ -143,7 +150,8 @@ class HomeFragment : Fragment(), OnItemClickListener {
                 homeSelectedUserName.text = it.nickName
                 homeSelectedUserStatus.text = it.plantModifier
                 homeAffectionRating.text = "${it.growth}%"
-                homeAffectionProgressbar.progress = it.growth
+                /*homeAffectionProgressbar.progress = it.growth*/
+                homeAffectionProgressbar.startAnimation(progressbarAnimation)
                 when {
                     it.dDay < 0 -> {
                         binding.homeRemainDate.text = "D${it.dDay}"
@@ -216,7 +224,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
         binding.homeUserList.apply {
             adapter = homeCherryListAdapter
             layoutManager = GridLayoutManager(context, 5)
-            addItemDecoration(GridItemDecorator(5, 10.dp, true))
+            addItemDecoration(GridItemDecorator(spanCount = 5, spacing = 10.dp, includeEdge = true))
             isNestedScrollingEnabled = false
             setHasFixedSize(true)
         }
@@ -248,7 +256,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
     }
 
     // 프로그레스바 색깔 갱신
-    private fun updateProgressBar(rating: Int) {
+    private fun updateProgressBarColor(rating: Int) {
         if (rating <= 30) {
             binding.homeAffectionProgressbar.progressDrawable = ResourcesCompat.getDrawable(
                 resources,
@@ -262,6 +270,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
                 null
             )
         }
+
     }
 
     // 리사이클러뷰 아이템 클릭 시 바텀 시트 내려감

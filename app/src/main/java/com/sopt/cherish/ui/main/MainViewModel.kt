@@ -1,6 +1,5 @@
 package com.sopt.cherish.ui.main
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -24,6 +23,7 @@ class MainViewModel(
     private val reviewRepository: ReviewRepository,
     private val calendarRepository: CalendarRepository
 ) : ViewModel() {
+    // todo : reviewRepository 뗴어내야함 reviewViewModel로
     // [home] Server connection
     // userId는 값이 1개 , fetchUser 함수를 통해서 _users에 userId가 가지고 있는 cherish들이 보인다.
     // login 시 intent 에서 값을 받아서 옴
@@ -48,11 +48,7 @@ class MainViewModel(
 
     fun fetchUsers() = viewModelScope.launch {
         try {
-
             _cherishUsers.postValue(mainRepository.fetchCherishUser(cherishuserId.value!!))
-
-            Log.d("mainViewModel", selectedCherishUser.value!!.homeMainBackgroundImageUrl)
-
         } catch (exception: Exception) {
             exceptionLiveData.postValue(exception.message)
         }
