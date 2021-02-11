@@ -19,7 +19,6 @@ import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentEnrollPlantBinding
 import com.sopt.cherish.remote.model.RequestEnrollData
 import com.sopt.cherish.remote.model.ResponseEnrollData
-
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.dialog.ClockPickerDialogFragment
 import com.sopt.cherish.ui.dialog.WeekPickerDialogFragment
@@ -66,32 +65,37 @@ class EnrollPlantFragment : Fragment() {
 
         //enrollToolbar.title="식물 상세 입력"
         binding.editNick.hint=arguments?.getString("phonename")
+/*
+        binding.editNick.setOnFocusChangeListener { v, hasFocus ->
+            binding.editNick.hint=""
+
+            if(hasFocus==false){
+                binding.editNick.hint=arguments?.getString("phonename")
+
+            }
+        }*/
 
         // binding.phoneName.text = arguments?.getString("phonename")
         binding.phoneNumber.text = arguments?.getString("phonenumber")
 
-        binding.alarmSwitch.setOnCheckedChangeListener { button, isChecked ->
-            if (isChecked) {
-                switchvalue = true
-            }
-
-        }
 
 // 생일 빼고 사용자가 나머지 다 입력 시 버튼 활성화
-        binding.detailOkBtn.isClickable=false
+        binding.detailOkBtn.isEnabled = false
+
         //binding.detailOkBtn.setBackgroundColor(R.color.cherish_green_main)
         binding.waterAlarmTime.addTextChangedListener(
             object : TextWatcher {
                 override fun afterTextChanged(s: Editable?) {
-                    clockvalue=true
-                    if(clockvalue==true&&weekvalue==true) {
-                        binding.detailOkBtn.isClickable=true
-                        Log.d("clockvalue",binding.detailOkBtn.isClickable.toString())
+                    clockvalue = true
+                    if (clockvalue == true && weekvalue == true) {
+                        binding.detailOkBtn.isEnabled = true
+                        Log.d("clockvalue", binding.detailOkBtn.isClickable.toString())
 
                         binding.detailOkBtn.setBackgroundColor(R.color.cherish_green_main)
 
                     }
                 }
+
                 override fun beforeTextChanged(
                     s: CharSequence?,
                     start: Int,
@@ -99,6 +103,7 @@ class EnrollPlantFragment : Fragment() {
                     after: Int
                 ) {
                 }
+
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 }
 
@@ -106,12 +111,12 @@ class EnrollPlantFragment : Fragment() {
         binding.waterAlarmWeek.addTextChangedListener(
             object : TextWatcher {
                 override fun afterTextChanged(s: Editable?) {
-                    weekvalue=true
-                    if(clockvalue==true&&weekvalue==true) {
-                        binding.detailOkBtn.isClickable=true
+                    weekvalue = true
+                    if (clockvalue == true && weekvalue == true) {
+                        binding.detailOkBtn.isEnabled = true
 
                         binding.detailOkBtn.setBackgroundColor(R.color.cherish_green_main)
-                        Log.d("weekvalue",binding.detailOkBtn.isClickable.toString())
+                        Log.d("weekvalue", binding.detailOkBtn.isClickable.toString())
 
                     }
                 }
@@ -123,6 +128,7 @@ class EnrollPlantFragment : Fragment() {
                     after: Int
                 ) {
                 }
+
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 }
             })
@@ -131,8 +137,8 @@ class EnrollPlantFragment : Fragment() {
 
             binding.detailOkBtn.setOnClickListener {
                 //  progressON()
-                if(binding.detailOkBtn.isClickable.toString()=="true") {
-                    val username = arguments?.getString("phonename")
+
+                val username = arguments?.getString("phonename")
                     Log.d("username", arguments?.getString("phonename").toString())
 //이름
                     if (binding.editNick.hint == username) {
@@ -266,7 +272,7 @@ class EnrollPlantFragment : Fragment() {
 
                     }, 4000)
                 }
-            }
+
 
         //timepicker 나오는 부분
         binding.editclock.setOnClickListener {
