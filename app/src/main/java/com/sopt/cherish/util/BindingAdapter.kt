@@ -90,21 +90,8 @@ object BindingAdapter {
             state = BottomSheetBehavior.STATE_COLLAPSED
             peekHeight = 150.dp
             expandedOffset = 100.dp
-            halfExpandedRatio = 0.21f
+            halfExpandedRatio = 0.23f
             isHideable = false
-        }.also { bottomSheetBehavior ->
-            bottomSheetBehavior.addBottomSheetCallback(object :
-                BottomSheetBehavior.BottomSheetCallback() {
-                override fun onStateChanged(bottomSheet: View, newState: Int) {
-
-                }
-
-                override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                    if (standardBottomSheetBehavior.state == BottomSheetBehavior.STATE_DRAGGING && slideOffset < 0.2) {
-                        bottomSheetBehavior.peekHeight = 60.dp
-                    }
-                }
-            })
         }
     }
 

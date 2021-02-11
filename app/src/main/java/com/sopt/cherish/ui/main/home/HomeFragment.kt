@@ -52,6 +52,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
 
         standardBottomSheetBehavior =
             BottomSheetBehavior.from(binding.homeStandardBottomSheet)
+        addBottomSheetCallback()
         // 바텀시트 리사이클러뷰 초기화
         initializeRecyclerView(homeCherryListAdapter)
 
@@ -164,7 +165,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
         // todo : 비율로 변경해야함
         standardBottomSheetBehavior.apply {
             state = BottomSheetBehavior.STATE_COLLAPSED
-            peekHeight = 60.dp
+            peekHeight = 150.dp
             expandedOffset = 100.dp
         }
     }
@@ -172,8 +173,22 @@ class HomeFragment : Fragment(), OnItemClickListener {
     // 바텀시트 뒤에 녀석 색상 변경
     private fun transitionBottomSheetParentView(slideOffset: Float) {
         val argbEvaluator =
-            ArgbEvaluator().evaluate(slideOffset, R.color.cherish_gray, R.color.black)
-        binding.homeFragment.setBackgroundColor(argbEvaluator as Int)
+            ArgbEvaluator().evaluate(slideOffset, R.color.transparent, R.color.black)
+        binding.homeBottomSheetModal.setBackgroundColor(argbEvaluator as Int)
+    }
+
+    private fun addBottomSheetCallback() {
+        standardBottomSheetBehavior.addBottomSheetCallback(object :
+            BottomSheetBehavior.BottomSheetCallback() {
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+
+            }
+
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                if (standardBottomSheetBehavior.state == BottomSheetBehavior.STATE_DRAGGING)
+                    standardBottomSheetBehavior.peekHeight = 60.dp
+            }
+        })
     }
 
     companion object {
