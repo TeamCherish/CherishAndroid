@@ -27,7 +27,7 @@ data class MyPageCherishData(
     @SerializedName("nickname") val nickName: String,
     @SerializedName("name") val name: String,
     @SerializedName("thumbnail_image_url") val thumbnailImageUrl: String,
-    @SerializedName("level") val level: String,
+    @SerializedName("level") val level: Int,
     @SerializedName("PlantId") val plantId: Int
 )
 

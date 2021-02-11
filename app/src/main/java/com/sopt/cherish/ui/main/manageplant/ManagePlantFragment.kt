@@ -18,8 +18,10 @@ import com.google.android.material.tabs.TabLayout
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentManagePlantBinding
 import com.sopt.cherish.databinding.MyPageCustomTabBinding
+import com.sopt.cherish.remote.api.MyPageCherishData
 import com.sopt.cherish.remote.api.MyPageUserRes
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
+import com.sopt.cherish.ui.adapter.MyPageBottomSheetAdapter
 import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
 import com.sopt.cherish.ui.main.MainActivity
 import com.sopt.cherish.ui.main.MainViewModel
@@ -41,10 +43,6 @@ class ManagePlantFragment : Fragment() {
     private val requestData = RetrofitBuilder
     private lateinit var tabBindingFirst:MyPageCustomTabBinding
     private lateinit var tabBindingSecond:MyPageCustomTabBinding
-    private var phoneCount:Int=0
-
-    //private lateinit var myPageBottomSheetAdapter:MyPageBottomSheetAdapter
-
     lateinit var binding: FragmentManagePlantBinding
 
     override fun onCreateView(
@@ -72,12 +70,6 @@ class ManagePlantFragment : Fragment() {
 
         return binding.root
     }
-/*
-    override fun onResume() {
-        super.onResume()
-        myPageBottomSheetAdapter.notifyDataSetChanged()
-    } */
-
 
     private fun initializeBottomSheetBehavior(binding: FragmentManagePlantBinding) {
         val standardBottomSheetBehavior =
@@ -95,6 +87,8 @@ class ManagePlantFragment : Fragment() {
 
             binding.myPageText.visibility = View.INVISIBLE
             binding.searchBox.visibility = View.INVISIBLE
+
+            standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
         }
 
         //취소 눌렀을 때
@@ -172,7 +166,14 @@ class ManagePlantFragment : Fragment() {
         })
     }
 
-    private fun initializeTabLayoutView(binding: FragmentManagePlantBinding) {
+    private fun initializeTabLayoutView(binding: FragmentManagePlantBinding,data:MutableList<MyPageCherishData>) {
+
+        Log.d("before","before")
+
+        activity?.supportFragmentManager!!.beginTransaction()
+            .add(R.id.my_page_bottom_container, PlantFragment(data)).commit()
+
+        Log.d("after","after")
 
         for (i in 0 until binding.myPageBottomTab.tabCount) {
             val tab = (binding.myPageBottomTab.getChildAt(0) as ViewGroup).getChildAt(i)
@@ -180,9 +181,6 @@ class ManagePlantFragment : Fragment() {
             p.setMargins(24, 0, 0, 0)
             tab.requestLayout()
         }
-
-        activity?.supportFragmentManager!!.beginTransaction()
-            .add(R.id.my_page_bottom_container, PlantFragment()).commit()
 
         tabBindingFirst.tabName.setTextAppearance(R.style.MyPageTabSelected)
         tabBindingFirst.tabCount.setTextAppearance(R.style.MyPageTabSelected)
@@ -260,7 +258,7 @@ class ManagePlantFragment : Fragment() {
                     }
                 }
 
-                (activity as MainActivity).replaceFragment(tabIndex)
+                (activity as MainActivity).replaceFragment(tabIndex,data)
             }
         })
 
@@ -294,7 +292,7 @@ class ManagePlantFragment : Fragment() {
     private fun initializeServerRequest(binding: FragmentManagePlantBinding) {
         requestData.myPageAPI.fetchUserPage(viewModel.cherishuserId.value!!)
             .enqueue(
-                object : Callback<MyPageUserRes> {
+                object : Callback<MyPageUserRes>{
                     override fun onFailure(call: Call<MyPageUserRes>, t: Throwable) {
                         Log.d("통신 실패", t.toString())
                     }
@@ -325,15 +323,12 @@ class ManagePlantFragment : Fragment() {
                                     setCustomView(createTabView("연락처 ",arguments?.getString("phonecount"))))
 
 
-                                initializeTabLayoutView(binding)
-
-
+                                initializeTabLayoutView(binding,it.myPageUserData.result as MutableList<MyPageCherishData>)
                                 Log.d("list", it.myPageUserData.result.toString())
-
-
                             }
                     }
                 })
     }
+
 
 }

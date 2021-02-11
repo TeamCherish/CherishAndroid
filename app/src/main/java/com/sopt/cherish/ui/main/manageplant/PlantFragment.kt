@@ -25,7 +25,7 @@ import retrofit2.Response
  * bottom sheet에서 보여지는 recyclerview fragment
  */
 
-class PlantFragment : Fragment() {
+class PlantFragment(private var data:MutableList<MyPageCherishData>) : Fragment() {
 
     private var _binding: FragmentPlantBinding? = null
     private val binding get() = _binding!!
@@ -54,7 +54,7 @@ class PlantFragment : Fragment() {
         setAdapterData()
         //cherishAdapter.notifyDataSetChanged()
     }
-
+/*
     private fun setAdapterData() {
         Log.d("viewmodeluserid", viewModel.cherishuserId.value.toString())
         requestData.myPageAPI.fetchUserPage(viewModel.cherishuserId.value!!)
@@ -77,11 +77,13 @@ class PlantFragment : Fragment() {
 
                                 cherishAdapter =
                                     MyPageBottomSheetAdapter(
-                                        requireContext(),
                                         it.myPageUserData.result as MutableList<MyPageCherishData>
                                     )
 
-                                initialRecyclerView(binding, cherishAdapter)
+                                binding.mypageCherryList.adapter=cherishAdapter
+                                binding.mypageCherryList.layoutManager = LinearLayoutManager(context)
+
+                                //initialRecyclerView(binding, cherishAdapter)
                                 cherishAdapter.notifyDataSetChanged()
 
 
@@ -115,8 +117,45 @@ class PlantFragment : Fragment() {
 
                     }
                 })
-    }
+    } */
 
+    private fun setAdapterData(){
+        cherishAdapter= MyPageBottomSheetAdapter(data)
+
+        binding.mypageCherryList.adapter=cherishAdapter
+        binding.mypageCherryList.layoutManager = LinearLayoutManager(context)
+
+        //initialRecyclerView(binding, cherishAdapter)
+        cherishAdapter.notifyDataSetChanged()
+
+
+        cherishAdapter.setItemClickListener(
+            object : MyPageBottomSheetAdapter.ItemClickListener {
+                override fun onClick(view: View, position: Int) {
+                    Log.d("onclick", "success")
+
+                    val intent =
+                        Intent(context, DetailPlantActivity::class.java)
+
+                    intent.putExtra(
+                        "plantId",
+                        data[position].plantId
+                    )
+                    intent.putExtra(
+                        "Id",
+                        data[position].id
+                    )
+                    Log.d(
+                        "Id",
+                        data[position].id.toString()
+                    )
+                    //startActivityForResult(intent, 100)
+                    startActivity(intent)
+                }
+            }
+        )
+    }
+/*
     private fun initialRecyclerView(
         binding: FragmentPlantBinding,
         mainAdapter: MyPageBottomSheetAdapter
@@ -124,9 +163,7 @@ class PlantFragment : Fragment() {
 
         binding.mypageCherryList.apply {
             adapter = mainAdapter
-
             layoutManager = LinearLayoutManager(context)
         }
-    }
-
+    } */
 }
