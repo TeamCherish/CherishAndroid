@@ -83,15 +83,17 @@ class EnrollPlantFragment : Fragment() {
 
 
 
+
 // 생일 빼고 사용자가 나머지 다 입력 시 버튼 활성화
-        binding.detailOkBtn.isClickable=false
+        binding.detailOkBtn.isEnabled=false
+
         //binding.detailOkBtn.setBackgroundColor(R.color.cherish_green_main)
         binding.waterAlarmTime.addTextChangedListener(
             object : TextWatcher {
                 override fun afterTextChanged(s: Editable?) {
                     clockvalue=true
                     if(clockvalue==true&&weekvalue==true) {
-                        binding.detailOkBtn.isClickable=true
+                        binding.detailOkBtn.isEnabled=true
                         Log.d("clockvalue",binding.detailOkBtn.isClickable.toString())
 
                         binding.detailOkBtn.setBackgroundColor(R.color.cherish_green_main)
@@ -114,7 +116,7 @@ class EnrollPlantFragment : Fragment() {
                 override fun afterTextChanged(s: Editable?) {
                     weekvalue=true
                     if(clockvalue==true&&weekvalue==true) {
-                        binding.detailOkBtn.isClickable=true
+                        binding.detailOkBtn.isEnabled=true
 
                         binding.detailOkBtn.setBackgroundColor(R.color.cherish_green_main)
                         Log.d("weekvalue",binding.detailOkBtn.isClickable.toString())
@@ -137,7 +139,7 @@ class EnrollPlantFragment : Fragment() {
 
             binding.detailOkBtn.setOnClickListener {
                 //  progressON()
-                if(binding.detailOkBtn.isClickable.toString()=="true") {
+
                     val username = arguments?.getString("phonename")
                     Log.d("username", arguments?.getString("phonename").toString())
 //이름
@@ -272,7 +274,7 @@ class EnrollPlantFragment : Fragment() {
 
                     }, 4000)
                 }
-            }
+
 
         //timepicker 나오는 부분
         binding.editclock.setOnClickListener {
