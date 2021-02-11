@@ -6,14 +6,18 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 import com.jackandphantom.circularprogressbar.CircleProgressbar
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityDetailPlantBinding
 import com.sopt.cherish.ui.detail.calendar.CalendarFragment
+import com.sopt.cherish.ui.dialog.ClockPickerDialogFragment
+import com.sopt.cherish.ui.dialog.WeekPickerDialogFragment
 import com.sopt.cherish.ui.enrollment.EnrollModifyPlantFragment
 
 
@@ -22,7 +26,8 @@ import com.sopt.cherish.ui.enrollment.EnrollModifyPlantFragment
  */
 
 //created by nayoung : 사용자가 메모한 내용 보여주는 activity
-class DetailPlantActivity : AppCompatActivity() {
+class DetailPlantActivity : AppCompatActivity(), WeekPickerDialogFragment.TestDialogFragmentListener,
+ClockPickerDialogFragment.TestDialogFragmentListener {
 
     private lateinit var circleProgressbar: CircleProgressbar
     private lateinit var binding: ActivityDetailPlantBinding
@@ -170,7 +175,19 @@ class DetailPlantActivity : AppCompatActivity() {
             binding.toolbarDetailTitle.text = title
         }
     }
+    override fun onTestDialogweek(dialog: DialogFragment?, someData: String?) {
+        Log.d("nana", someData.toString())
+        var textweek: TextView = findViewById(R.id.water_alarm_week)
+        textweek.text = someData.toString()
 
+    }
+
+    override fun onTestDialogClock(dialog: DialogFragment?, someData: String?) {
+        Log.d("nana", someData.toString())
+        var textclock: TextView = findViewById(R.id.water_alarm_time)
+
+        textclock.text = someData.toString()
+    }
     inner class VerticalSpaceItemDecoration(private val verticalSpaceHeight: Int) :
         RecyclerView.ItemDecoration() {
 
