@@ -1,19 +1,15 @@
 package com.sopt.cherish.ui.main.home
 
 import android.animation.ArgbEvaluator
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentHomeBinding
@@ -29,7 +25,6 @@ import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.util.GridItemDecorator
 import com.sopt.cherish.util.PixelUtil.dp
 import com.sopt.cherish.util.SimpleLogger
-import com.sopt.cherish.util.animation.ProgressbarAnimation
 import com.sopt.cherish.util.extension.longToast
 
 
@@ -54,8 +49,10 @@ class HomeFragment : Fragment(), OnItemClickListener {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.mainViewModel = viewModel
         homeCherryListAdapter = HomeCherryListAdapter(this)
-        // 바텀시트 초기화 및 바텀시트 리사이클러뷰 초기화
-        initializeBottomSheetBehavior()
+
+        standardBottomSheetBehavior =
+            BottomSheetBehavior.from(binding.homeStandardBottomSheet)
+        // 바텀시트 리사이클러뷰 초기화
         initializeRecyclerView(homeCherryListAdapter)
 
         binding.homeWateringBtn.setOnClickListener {
@@ -78,9 +75,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         observeCherishUsers()
-        observeSelectCherishUser()
         observeAnimationTrigger()
-        setImageViewSize()
     }
 
     override fun onResume() {
@@ -108,7 +103,6 @@ class HomeFragment : Fragment(), OnItemClickListener {
         viewModel.cherishUsers.observe(viewLifecycleOwner) {
             setCherishUserListAdapter(it)
             setSelectedUser(it.userData.userList[0])
-            setAllUsers(it.userData.totalUser)
         }
     }
 
@@ -117,99 +111,9 @@ class HomeFragment : Fragment(), OnItemClickListener {
         homeCherryListAdapter.lastSelectedPosition = 0
     }
 
-    private fun setAllUsers(totalUserCount: Int) {
-        binding.apply {
-            homeCherryNumber.text = totalUserCount.toString()
-        }
-    }
-
-    private fun setImageViewSize() {
-        binding.homePlantImage.maxWidth = 207.dp
-        binding.homePlantImage.minimumWidth = 207.dp
-        binding.homePlantImage.maxHeight = 521.dp
-        binding.homePlantImage.minimumHeight = 521.dp
-    }
-
-    @SuppressLint("SetTextI18n")
-    private fun observeSelectCherishUser() {
-        // todo : 값이 갱신이 되는지 제대로 확인해야함
-        // ProgressbarAnimation 사용해야함
-        viewModel.selectedCherishUser.observe(viewLifecycleOwner) {
-            // 함수화 해야함
-            // 근데 좀 더 생각해봐야 함
-            // 바인딩 어댑터를 사용해봐야 함
-            val progressbarAnimation =
-                ProgressbarAnimation(binding.homeAffectionProgressbar, it.growth.toFloat())
-            progressbarAnimation.duration = 2000
-            updateProgressBarColor(it.growth)
-            binding.apply {
-                Glide.with(requireContext())
-                    .load(it.homeMainBackgroundImageUrl)
-                    .into(homePlantImage)
-                setPlantBackgroundColor(this, it.plantName)
-                homeSelectedUserName.text = it.nickName
-                homeSelectedUserStatus.text = it.plantModifier
-                homeAffectionRating.text = "${it.growth}%"
-                /*homeAffectionProgressbar.progress = it.growth*/
-                homeAffectionProgressbar.startAnimation(progressbarAnimation)
-                when {
-                    it.dDay < 0 -> {
-                        binding.homeRemainDate.text = "D${it.dDay}"
-                    }
-                    it.dDay > 0 -> {
-                        binding.homeRemainDate.text = "D+${it.dDay}"
-                    }
-                    else -> {
-                        binding.homeRemainDate.text = "D-Day"
-                    }
-                }
-            }
-        }
-    }
-
-    private fun setPlantBackgroundColor(binding: FragmentHomeBinding, plantName: String) {
-        binding.homePlantBackground.setBackgroundColor(
-            ContextCompat.getColor(
-                requireContext(), when (plantName) {
-                    dandelion -> R.color.cherish_dandelion_background_color
-                    roseMary -> R.color.cherish_rosemary_background_color
-                    americanBlue -> R.color.cherish_american_blue_background_color
-                    cactus -> R.color.cherish_sun_background_color
-                    stuki -> R.color.cherish_stuki_background_color
-                    else -> R.color.cherish_green_sub
-                }
-            )
-        )
-    }
-
     private fun setCherishUserListAdapter(userResult: UserResult) {
         homeCherryListAdapter.data = userResult.userData.userList as MutableList<User>
         homeCherryListAdapter.notifyDataSetChanged()
-    }
-
-    private fun initializeBottomSheetBehavior() {
-        standardBottomSheetBehavior = BottomSheetBehavior.from(binding.homeStandardBottomSheet)
-        // todo : 비율로 변경해야함
-        standardBottomSheetBehavior.apply {
-            state = BottomSheetBehavior.STATE_COLLAPSED
-            peekHeight = 150.dp
-            expandedOffset = 100.dp
-            halfExpandedRatio = 0.21f
-            isHideable = false
-        }.also { bottomSheetBehavior ->
-            bottomSheetBehavior.addBottomSheetCallback(object :
-                BottomSheetBehavior.BottomSheetCallback() {
-                override fun onStateChanged(bottomSheet: View, newState: Int) {
-
-                }
-
-                override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                    if (standardBottomSheetBehavior.state == BottomSheetBehavior.STATE_DRAGGING && slideOffset < 0.2) {
-                        bottomSheetBehavior.peekHeight = 60.dp
-                    }
-                }
-            })
-        }
     }
 
     override fun onItemClick(itemBinding: MainCherryItemBinding, position: Int) {
@@ -255,24 +159,6 @@ class HomeFragment : Fragment(), OnItemClickListener {
         startActivity(intent)
     }
 
-    // 프로그레스바 색깔 갱신
-    private fun updateProgressBarColor(rating: Int) {
-        if (rating <= 30) {
-            binding.homeAffectionProgressbar.progressDrawable = ResourcesCompat.getDrawable(
-                resources,
-                R.drawable.progress_drawable_verticle_red,
-                null
-            )
-        } else {
-            binding.homeAffectionProgressbar.progressDrawable = ResourcesCompat.getDrawable(
-                resources,
-                R.drawable.progress_drawable_vertical,
-                null
-            )
-        }
-
-    }
-
     // 리사이클러뷰 아이템 클릭 시 바텀 시트 내려감
     private fun slideDownBottomSheet() {
         // todo : 비율로 변경해야함
@@ -292,11 +178,6 @@ class HomeFragment : Fragment(), OnItemClickListener {
 
     companion object {
         private val TAG = "HomeFragment"
-        const val dandelion = "민들레"
-        const val roseMary = "로즈마리"
-        const val americanBlue = "아메리칸블루"
-        const val stuki = "스투키"
-        const val cactus = "단모환"
     }
 }
 
