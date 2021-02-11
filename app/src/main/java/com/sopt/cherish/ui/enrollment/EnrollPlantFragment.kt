@@ -14,13 +14,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatDialog
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentEnrollPlantBinding
 import com.sopt.cherish.remote.model.RequestEnrollData
 import com.sopt.cherish.remote.model.ResponseEnrollData
-
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.dialog.ClockPickerDialogFragment
 import com.sopt.cherish.ui.dialog.WeekPickerDialogFragment
@@ -81,25 +79,23 @@ class EnrollPlantFragment : Fragment() {
         binding.phoneNumber.text = arguments?.getString("phonenumber")
 
 
-
-
-
 // 생일 빼고 사용자가 나머지 다 입력 시 버튼 활성화
-        binding.detailOkBtn.isEnabled=false
+        binding.detailOkBtn.isEnabled = false
 
         //binding.detailOkBtn.setBackgroundColor(R.color.cherish_green_main)
         binding.waterAlarmTime.addTextChangedListener(
             object : TextWatcher {
                 override fun afterTextChanged(s: Editable?) {
-                    clockvalue=true
-                    if(clockvalue==true&&weekvalue==true) {
-                        binding.detailOkBtn.isEnabled=true
-                        Log.d("clockvalue",binding.detailOkBtn.isClickable.toString())
+                    clockvalue = true
+                    if (clockvalue == true && weekvalue == true) {
+                        binding.detailOkBtn.isEnabled = true
+                        Log.d("clockvalue", binding.detailOkBtn.isClickable.toString())
 
                         binding.detailOkBtn.setBackgroundColor(R.color.cherish_green_main)
 
                     }
                 }
+
                 override fun beforeTextChanged(
                     s: CharSequence?,
                     start: Int,
@@ -107,6 +103,7 @@ class EnrollPlantFragment : Fragment() {
                     after: Int
                 ) {
                 }
+
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 }
 
@@ -114,12 +111,12 @@ class EnrollPlantFragment : Fragment() {
         binding.waterAlarmWeek.addTextChangedListener(
             object : TextWatcher {
                 override fun afterTextChanged(s: Editable?) {
-                    weekvalue=true
-                    if(clockvalue==true&&weekvalue==true) {
-                        binding.detailOkBtn.isEnabled=true
+                    weekvalue = true
+                    if (clockvalue == true && weekvalue == true) {
+                        binding.detailOkBtn.isEnabled = true
 
                         binding.detailOkBtn.setBackgroundColor(R.color.cherish_green_main)
-                        Log.d("weekvalue",binding.detailOkBtn.isClickable.toString())
+                        Log.d("weekvalue", binding.detailOkBtn.isClickable.toString())
 
                     }
                 }
@@ -131,6 +128,7 @@ class EnrollPlantFragment : Fragment() {
                     after: Int
                 ) {
                 }
+
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 }
             })
@@ -140,7 +138,7 @@ class EnrollPlantFragment : Fragment() {
             binding.detailOkBtn.setOnClickListener {
                 //  progressON()
 
-                    val username = arguments?.getString("phonename")
+                val username = arguments?.getString("phonename")
                     Log.d("username", arguments?.getString("phonename").toString())
 //이름
                     if (binding.editNick.hint == username) {

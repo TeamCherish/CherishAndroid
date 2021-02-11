@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.viewpager.widget.ViewPager
-import androidx.viewpager2.widget.ViewPager2
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentAlertPlantDialogBinding
 import com.sopt.cherish.ui.adapter.DialogViewPagerAdapter
@@ -51,23 +50,23 @@ class AlertPlantDialogFragment(plantId: Int) : DialogFragment(), View.OnClickLis
         binding.dialogViewpager.adapter = viewpagerAdapter
 
 
-        binding.indicatorView.apply{
+        binding.indicatorView.apply {
             setSliderColor(Color.parseColor("#c4c4c4"), Color.parseColor("#31d693"))
             setSliderWidth(resources.getDimension(R.dimen.margin_10dp))
             setSliderHeight(resources.getDimension(R.dimen.margin_5dp))
             setSlideMode(IndicatorSlideMode.NORMAL)
             setIndicatorStyle(IndicatorStyle.CIRCLE)
-            setPageSize(binding.dialogViewpager!!.adapter!!.count)
+            setPageSize(binding.dialogViewpager.adapter!!.count)
             notifyDataChanged()
         }
 
-        binding.dialogViewpager.addOnPageChangeListener(object: ViewPager.OnPageChangeListener{
+        binding.dialogViewpager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrolled(
                 position: Int,
                 positionOffset: Float,
                 positionOffsetPixels: Int
             ) {
-                binding.indicatorView.onPageScrolled(position,positionOffset,positionOffsetPixels)
+                binding.indicatorView.onPageScrolled(position, positionOffset, positionOffsetPixels)
             }
 
             override fun onPageSelected(position: Int) {

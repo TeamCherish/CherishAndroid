@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -34,8 +35,8 @@ import com.sopt.cherish.util.extension.longToast
  * 메인 홈뷰
  * 초기상태와 중간에 있는 경우 2개 다 고려해야 합니다.
  * todo : 1. 아무것도 등록안됐을때 상태 , 2. 바텀시트 클릭 시 클릭된게 맨 앞에서 보여지게 하는거
- * todo : 3. 물 준다음에 돌아오면 첫번째 유저가 클릭되어 있는걸로 보이는데 alpha값 또한 첫번쨰 유저로 되어있어야 하는데 그게 안됨
  */
+
 class HomeFragment : Fragment(), OnItemClickListener {
 
     private val viewModel: MainViewModel by activityViewModels()
@@ -50,7 +51,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.mainViewModel = viewModel
-        homeCherryListAdapter = HomeCherryListAdapter(this) // homeCherryListAdapter 초기화
+        homeCherryListAdapter = HomeCherryListAdapter(this)
         // 바텀시트 초기화 및 바텀시트 리사이클러뷰 초기화
         initializeBottomSheetBehavior()
         initializeRecyclerView(homeCherryListAdapter)
@@ -64,9 +65,10 @@ class HomeFragment : Fragment(), OnItemClickListener {
         }
 
         binding.homeMovePlantDetail.setOnClickListener {
-
-            navigateDetailPlant(viewModel.cherishuserId.value!!, viewModel.selectedCherishUser.value?.id!!)
-
+            navigateDetailPlant(
+                viewModel.cherishuserId.value!!,
+                viewModel.selectedCherishUser.value?.id!!
+            )
         }
 
         return binding.root
@@ -76,9 +78,15 @@ class HomeFragment : Fragment(), OnItemClickListener {
         observeCherishUsers()
         observeSelectCherishUser()
         observeAnimationTrigger()
+        setImageViewSize()
     }
 
     private fun observeAnimationTrigger() {
+        // 이걸 언제 값을 바꿔줘야 할지를 생각해야한다.
+        // 만약 review를 주었을때 이값을 true로 바꿔줘야한다던지 라던가
+        // 그처럼 말이다.
+        // 근데 문제는 review를 액티비티로 변경하면서 생기는 문제점인데
+        // 값을 공유할 수 없기 때문에 이를 분리하기가 어렵다.
         // todo : 물주는 애니메이션 이나 시드는 애니메이션에 따라 작업해야합니다.
         viewModel.animationTrigger.observe(viewLifecycleOwner) {
             if (it) {
@@ -90,13 +98,10 @@ class HomeFragment : Fragment(), OnItemClickListener {
     }
 
     private fun observeCherishUsers() {
-        // 체리쉬 유저의 값이 변함에 따라서 변해야할 것이 무엇인가를 잘 생각해보자.
-        // 체리쉬 유저가 삭제될 경우 값이 변하기 떄문에 항상 observe 해야함
-        // 선택된 체리쉬 또한 어댑터의 정렬이 바뀌거나 , 유저가 삭제될 경우 바뀌기 때문에 observe를 통해서 선택해야함
         viewModel.cherishUsers.observe(viewLifecycleOwner) {
             setCherishUserListAdapter(it)
-            setAllUsers(it.userData.totalUser)
             setSelectedUser(it.userData.userList[0])
+            setAllUsers(it.userData.totalUser)
         }
     }
 
@@ -107,12 +112,20 @@ class HomeFragment : Fragment(), OnItemClickListener {
 
     private fun setSelectedUser(user: User) {
         viewModel.selectedCherishUser.value = user
+        homeCherryListAdapter.lastSelectedPosition = 0
     }
 
     private fun setAllUsers(totalUserCount: Int) {
         binding.apply {
             homeCherryNumber.text = totalUserCount.toString()
         }
+    }
+
+    private fun setImageViewSize() {
+        binding.homePlantImage.maxWidth = 207.dp
+        binding.homePlantImage.minimumWidth = 207.dp
+        binding.homePlantImage.maxHeight = 521.dp
+        binding.homePlantImage.minimumHeight = 521.dp
     }
 
     @SuppressLint("SetTextI18n")
@@ -124,6 +137,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
                 Glide.with(requireContext())
                     .load(it.homeMainBackgroundImageUrl)
                     .into(homePlantImage)
+                setPlantBackgroundColor(this, it.plantName)
                 homeSelectedUserName.text = it.nickName
                 homeSelectedUserStatus.text = it.plantModifier
                 homeAffectionRating.text = "${it.growth}%"
@@ -141,6 +155,21 @@ class HomeFragment : Fragment(), OnItemClickListener {
                 }
             }
         }
+    }
+
+    private fun setPlantBackgroundColor(binding: FragmentHomeBinding, plantName: String) {
+        binding.homePlantBackground.setBackgroundColor(
+            ContextCompat.getColor(
+                requireContext(), when (plantName) {
+                    dandelion -> R.color.cherish_dandelion_background_color
+                    roseMary -> R.color.cherish_rosemary_background_color
+                    americanBlue -> R.color.cherish_american_blue_background_color
+                    cactus -> R.color.cherish_sun_background_color
+                    stuki -> R.color.cherish_stuki_background_color
+                    else -> R.color.cherish_green_sub
+                }
+            )
+        )
     }
 
     private fun setCherishUserListAdapter(userResult: UserResult) {
@@ -207,7 +236,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
         // todo : Parcelable로 변경해서 보내주도록 하자
         // todo : 내일 오프라인 회의에서 정확하게 값 명칭 구분해서 작동시키도록 한다.
         intent.putExtra("userId", userId)
-        intent.putExtra("cherishId",  viewModel.selectedCherishUser.value?.id)
+        intent.putExtra("cherishId", viewModel.selectedCherishUser.value?.id)
         intent.putExtra("cherishUserPhoneNumber", viewModel.selectedCherishUser.value?.phoneNumber)
         intent.putExtra("cherishNickname", viewModel.selectedCherishUser.value?.nickName)
         intent.putExtra("userNickname", viewModel.userNickName.value)
@@ -251,6 +280,11 @@ class HomeFragment : Fragment(), OnItemClickListener {
 
     companion object {
         private val TAG = "HomeFragment"
+        const val dandelion = "민들레"
+        const val roseMary = "로즈마리"
+        const val americanBlue = "아메리칸블루"
+        const val stuki = "스투키"
+        const val cactus = "단모환"
     }
 }
 

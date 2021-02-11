@@ -80,6 +80,7 @@ class CalendarFragment : Fragment() {
             // 클릭 시 화살표의 모양이 왔다갔다 하면서 바뀌도록 하면 됨
             // review button 이 눌림에 따라
             // textview의 ellipsize 와 maxLine의 수를 바꿔주면 된다.
+            // 실 기기에서는 제대로 작동하지 않는다 효율을 좀 늘려야할거 같다.
             // SingleLiveData로 제어를 해야하는데 지금 귀찮음 나중에 하자
             if (viewModel.calendarAllowChange) {
                 viewModel.calendarAllowChange = false

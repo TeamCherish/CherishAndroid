@@ -6,13 +6,9 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentEnrollModifyPlantBinding
-
 import com.sopt.cherish.remote.api.RequestModifyData
-import com.sopt.cherish.remote.api.RequestUserinfoData
 import com.sopt.cherish.remote.api.ResponseModifyData
-
 import com.sopt.cherish.remote.api.ResponseUserinfoData
-import com.sopt.cherish.remote.model.ResponseEnrollData
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.detail.DetailPlantActivity
 import com.sopt.cherish.ui.dialog.ClockPickerDialogFragment
@@ -30,8 +26,8 @@ class EnrollModifyPlantFragment : Fragment() {
     var userid = 0
     lateinit var binding: FragmentEnrollModifyPlantBinding
 
-    var week_modify=0
-    lateinit var nick:String
+    var week_modify = 0
+    lateinit var nick: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -102,8 +98,8 @@ class EnrollModifyPlantFragment : Fragment() {
         }
         binding.detailOkBtnModify.setOnClickListener {
             //수정 버튼을 눌렀을 때
-            var nickname_modify=binding.editNick.text.toString()
-            var birth_modify=binding.editBirth.text.toString()
+            var nickname_modify = binding.editNick.text.toString()
+            var birth_modify = binding.editBirth.text.toString()
             val userwater = binding.waterAlarmWeek.text.toString()
             Log.d("userwater", binding.waterAlarmWeek.text.toString())
             //알람 주기
@@ -120,14 +116,20 @@ class EnrollModifyPlantFragment : Fragment() {
                 Log.d("userwater2", week_modify.toString())
             }
 
-            var week_switch_modify= binding.alarmSwitch.isChecked
+            var week_switch_modify = binding.alarmSwitch.isChecked
 
             val usertime = binding.waterAlarmTime.text.toString()
             val usertime_hour_modify = usertime.substring(0, 5).toString()
             Log.d("usertime", usertime_hour_modify.toString())
 
-            var body=RequestModifyData(nickname = nickname_modify,birth = birth_modify,
-            cycle_date = week_modify,notice_time =usertime_hour_modify,water_notice = week_switch_modify ,id = modifycherish)
+            var body = RequestModifyData(
+                nickname = nickname_modify,
+                birth = birth_modify,
+                cycle_date = week_modify,
+                notice_time = usertime_hour_modify,
+                water_notice = week_switch_modify,
+                id = modifycherish
+            )
             requestData.modifyAPI.plantmodify(body).enqueue(
                 object : Callback<ResponseModifyData> {
                     override fun onFailure(
@@ -151,11 +153,9 @@ class EnrollModifyPlantFragment : Fragment() {
                                 Log.d("수정완료", response.body().toString())
 
 
-
-
                             }
-                        }
                     }
+                }
             )
         }
 

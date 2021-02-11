@@ -16,12 +16,11 @@ import com.sopt.cherish.util.extension.FlexBoxExtension.addChip
 import com.sopt.cherish.util.extension.FlexBoxExtension.getChip
 import com.sopt.cherish.util.extension.FlexBoxExtension.getChipsCount
 import com.sopt.cherish.util.extension.countNumberOfCharacters
-import com.sopt.cherish.util.extension.longToast
 import com.sopt.cherish.util.extension.shortToast
 import java.util.*
 
-// todo : 이슈 리뷰 보낼 때 제대로 보내지는지 모르곘음. 식물카드에서는 확인이 가능한데 메인화면에 변경사항이 존재안함;;; 물주기 횟수는 증가함
 // todo : 식물카드에서 물 줄 경우 오는 데이터 값들을 확인하고 이를 뷰모델에 넣어놔야 함
+// todo : boolean값을 mainViewModel에다가 보내줘야합니다. 어떻게 하면 보낼 수 있을 지 생각을 해볼까요????
 class ReviewActivity : AppCompatActivity() {
     private val viewModel: ReviewViewModel by viewModels { Injection.provideReviewViewModelFactory() }
 
@@ -112,10 +111,6 @@ class ReviewActivity : AppCompatActivity() {
             SimpleLogger.logI(binding.reviewFlexBox.getChip(id = 1)?.text.toString())
             SimpleLogger.logI(binding.reviewFlexBox.getChip(id = 2)?.text.toString())
             SimpleLogger.logI(binding.reviewMemo.text.toString())
-            longToast(
-                this,
-                "${viewModel.reviewWateringRes.message} + ${viewModel.reviewWateringRes.reviewScore} + ${viewModel.reviewWateringRes.success}"
-            )
             showLoadingDialog()
             finish()
         }
@@ -123,6 +118,8 @@ class ReviewActivity : AppCompatActivity() {
 
     private fun ignoreSendReviewToServer(binding: ActivityReviewBinding) {
         binding.reviewIgnoreAccept.setOnClickListener {
+            // 일단 지금 당장은 그냥 finish만 시켜놨다
+            //
             finish()
         }
     }
