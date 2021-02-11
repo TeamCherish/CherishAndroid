@@ -174,7 +174,6 @@ class HomeFragment : Fragment(), OnItemClickListener {
     private fun transitionBottomSheetParentView(slideOffset: Float) {
         val argbEvaluator =
             ArgbEvaluator().evaluate(slideOffset, R.color.transparent, R.color.black)
-        binding.homeBottomSheetModal.setBackgroundColor(argbEvaluator as Int)
     }
 
     private fun addBottomSheetCallback() {
