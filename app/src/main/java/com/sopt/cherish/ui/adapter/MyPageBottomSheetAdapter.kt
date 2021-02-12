@@ -2,6 +2,7 @@ package com.sopt.cherish.ui.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +26,8 @@ class MyPageBottomSheetAdapter(private var data:MutableList<MyPageCherishData>) 
 
             //초록색
             if(cherishData.dDay<0){
+                Log.d("dday ",cherishData.dDay.toString())
+                Log.d("nickname",cherishData.nickName)
                 binding.myPageDDay.text = "D" + cherishData.dDay.toString()
                 binding.myPageDDay.setBackgroundResource(R.drawable.my_page_chip_green) //초록색으로
                 binding.myPageDDay.setTextColor(
@@ -36,9 +39,23 @@ class MyPageBottomSheetAdapter(private var data:MutableList<MyPageCherishData>) 
             }
             else if(cherishData.dDay==0){
                 binding.myPageDDay.text = "D-day"
+                binding.myPageDDay.setBackgroundResource(R.drawable.my_page_chip_red) //초록색으로
+                binding.myPageDDay.setTextColor(
+                    ContextCompat.getColor(
+                        binding.root.context,
+                        R.color.cherish_pink_sub
+                    )
+                )
             }
             else{ //양수(빨간색): 그대로
                 binding.myPageDDay.text = "D+" + cherishData.dDay.toString()
+                binding.myPageDDay.setBackgroundResource(R.drawable.my_page_chip_red) //초록색으로
+                binding.myPageDDay.setTextColor(
+                    ContextCompat.getColor(
+                        binding.root.context,
+                        R.color.cherish_pink_sub
+                    )
+                )
             }
 
             Glide.with(binding.root.context).load(cherishData.thumbnailImageUrl)
@@ -60,10 +77,6 @@ class MyPageBottomSheetAdapter(private var data:MutableList<MyPageCherishData>) 
         holder.itemView.setOnClickListener {
             itemClickListener.onClick(it, position)
         }
-    }
-
-    fun update() {
-        notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int = data.size
