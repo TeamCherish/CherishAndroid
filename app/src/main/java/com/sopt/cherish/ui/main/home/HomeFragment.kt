@@ -137,7 +137,11 @@ class HomeFragment : Fragment(), OnItemClickListener {
 
     // 화면이동
     private fun navigateWatering(id: Int) {
-        WateringDialogFragment(id).show(parentFragmentManager, TAG)
+        if (viewModel.selectedCherishUser.value?.dDay == 0) {
+            WateringDialogFragment(id).show(parentFragmentManager, TAG)
+        } else {
+            longToast(requireContext(), "물 줄수있는 날이 아니에요 ㅠ")
+        }
     }
 
     private fun navigatePhoneBook() {
@@ -150,7 +154,6 @@ class HomeFragment : Fragment(), OnItemClickListener {
     private fun navigateDetailPlant(userId: Int?, cherishId: Int?) {
         val intent = Intent(activity, DetailPlantActivity::class.java)
         // todo : Parcelable로 변경해서 보내주도록 하자
-        // todo : 내일 오프라인 회의에서 정확하게 값 명칭 구분해서 작동시키도록 한다.
         intent.putExtra("userId", userId)
         intent.putExtra("cherishId", viewModel.selectedCherishUser.value?.id)
         intent.putExtra("cherishUserPhoneNumber", viewModel.selectedCherishUser.value?.phoneNumber)

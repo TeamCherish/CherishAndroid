@@ -1,8 +1,6 @@
 package com.sopt.cherish.ui.review
 
 import android.os.Bundle
-import android.view.KeyEvent
-import android.widget.EditText
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -12,12 +10,10 @@ import com.sopt.cherish.di.Injection
 import com.sopt.cherish.remote.api.ReviewWateringReq
 import com.sopt.cherish.ui.dialog.CustomDialogFragment
 import com.sopt.cherish.util.SimpleLogger
-import com.sopt.cherish.util.extension.FlexBoxExtension.addChip
 import com.sopt.cherish.util.extension.FlexBoxExtension.getChip
-import com.sopt.cherish.util.extension.FlexBoxExtension.getChipsCount
 import com.sopt.cherish.util.extension.countNumberOfCharacters
 import com.sopt.cherish.util.extension.shortToast
-import java.util.*
+import com.sopt.cherish.util.extension.writeReview
 
 // todo : 식물카드에서 물 줄 경우 오는 데이터 값들을 확인하고 이를 뷰모델에 넣어놔야 함
 // todo : boolean값을 mainViewModel에다가 보내줘야합니다. 어떻게 하면 보낼 수 있을 지 생각을 해볼까요????
@@ -50,6 +46,7 @@ class ReviewActivity : AppCompatActivity() {
         binding.reviewMemo.countNumberOfCharacters { memo ->
             binding.reviewNumberOfMemo.text = memo?.length.toString()
             if (memo?.length!! > 100) {
+                // dialog로 보여줘야 함
                 shortToast(this, "100자를 초과했습니다.")
             }
         }
@@ -74,23 +71,7 @@ class ReviewActivity : AppCompatActivity() {
     }
 
     private fun addUserStatusWithChip(binding: ActivityReviewBinding) {
-        // todo : 한글 키보드는 ENTER를 치게 되면 줄바꿈이 된다. 이거 처리를 해줘야 한다.
-        // todo : 확장 함수로 처리를 해서 좀 더 코드가 더럽지 않게 작업하자
-        // 이거 처리만 해주면 끝이 납니다
-        // 글자수에 따라 엔터를 먹히지 않게 한다던지 하면 될거 같음
-        binding.reviewEditKeyword.setOnKeyListener { view, keyCode, keyEvent ->
-            if (keyEvent.action == KeyEvent.ACTION_DOWN || keyCode == KeyEvent.KEYCODE_ENTER) {
-                val et = view as EditText
-                val name = et.text.toString()
-                if (binding.reviewFlexBox.getChipsCount() < 3)
-                    binding.reviewFlexBox.addChip(name)
-                else {
-                    CustomDialogFragment(R.layout.sample_lottie2).show(supportFragmentManager, TAG)
-                }
-                et.text = null
-            }
-            return@setOnKeyListener false
-        }
+        binding.reviewEditKeyword.writeReview(binding.reviewFlexBox)
     }
 
     private fun sendReviewToServer(binding: ActivityReviewBinding) {

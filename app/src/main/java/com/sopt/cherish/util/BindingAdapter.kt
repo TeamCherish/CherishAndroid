@@ -90,7 +90,7 @@ object BindingAdapter {
             state = BottomSheetBehavior.STATE_COLLAPSED
             peekHeight = 150.dp
             expandedOffset = 100.dp
-            halfExpandedRatio = 0.23f
+            halfExpandedRatio = 0.2f
             isHideable = false
         }
     }
