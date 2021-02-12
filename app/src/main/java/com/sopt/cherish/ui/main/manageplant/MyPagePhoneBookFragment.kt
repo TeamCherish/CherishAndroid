@@ -31,8 +31,6 @@ class MyPagePhoneBookFragment() : Fragment() {
     private lateinit var enrollToolbar: Toolbar
     lateinit var countphone:String
     private lateinit var binding: FragmentMyPagePhoneBookBinding
-    private lateinit var binding_manage: FragmentManagePlantBinding
-
 
 
     override fun onCreateView(
@@ -42,8 +40,7 @@ class MyPagePhoneBookFragment() : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_my_page_phone_book, container, false)
 
-        val view2 = inflater.inflate(R.layout.fragment_manage_plant, container, false)
-        binding_manage = FragmentManagePlantBinding.bind(view2)
+
 
         binding = FragmentMyPagePhoneBookBinding.bind(view)
 
@@ -75,7 +72,7 @@ class MyPagePhoneBookFragment() : Fragment() {
         setSearchListener()
     }
     fun setSearchListener() {
-        binding_manage.editSearch.addTextChangedListener(
+        binding.editSearch.addTextChangedListener(
             object : TextWatcher {
                 override fun afterTextChanged(s: Editable?) {}
                 override fun beforeTextChanged(
@@ -122,31 +119,53 @@ class MyPagePhoneBookFragment() : Fragment() {
         )
         // 2.2 조건 정의
         var where: String? = null
+        var where2: String? = null
+
         var whereValues: Array<String>? = null
         // searchName에 값이 있을 때만 검색을 사용한다
         if (name.isNotEmpty()) {
             where = ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " like ?"
+            where2 = ContactsContract.CommonDataKinds.Phone.NUMBER + " like ?"
+
             whereValues = arrayOf("%$name%")
         }
 
         val optionSort = ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME + " $sort"
 
         context?.run {
-            val cursor = contentResolver.query(phonUri, projections, where, whereValues, optionSort)
 
+
+            val cursor = contentResolver.query(phonUri, projections, where, whereValues, optionSort)
             while (cursor?.moveToNext() == true) {
                 val id = cursor.getString(0)
                 val name = cursor.getString(1)
                 val number = cursor.getString(2)
 
-                val phone = Phonemypage(id, name, number)
+                val Phonemypage = Phonemypage(id, name, number)
 
-                list.add(phone)
+                list.add(Phonemypage)
+                //list.distinct()
+
             }
+
+            val cursor2 =
+                contentResolver.query(phonUri, projections, where2, whereValues, optionSort)
+            while (cursor2?.moveToNext() == true) {
+                val id = cursor2.getString(0)
+                val name = cursor2.getString(1)
+                val number = cursor2.getString(2)
+
+                val Phonemypage = Phonemypage(id, name, number)
+
+                list.add(Phonemypage)
+                // list.distinct()
+            }
+
         }
+
         // 결과목록 반환
-        phonecount = list.size
-        return list
+        Log.d("listsize", list.size.toString())
+        return list.distinct()
     }
 
 

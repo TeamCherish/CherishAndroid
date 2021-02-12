@@ -98,8 +98,23 @@ class EnrollModifyPlantFragment : Fragment() {
         }
         binding.detailOkBtnModify.setOnClickListener {
             //수정 버튼을 눌렀을 때
-            var nickname_modify = binding.editNick.text.toString()
-            var birth_modify = binding.editBirth.text.toString()
+
+            var nickname_modify=binding.editNick.text.toString()
+            Log.d("nickname_modify", nickname_modify.toString())
+
+           if(nickname_modify==""){
+               nickname_modify=binding.editNick.hint.toString()
+           }
+
+            var birth_modify=binding.editBirth.text.toString()
+            if(birth_modify==""){
+                birth_modify=binding.editBirth.hint.substring(0,4)+"-"+
+                        binding.editBirth.hint.substring(4,6)+"-"+binding.editBirth.hint.substring(6,).toString()
+            }else{
+                birth_modify= binding.editBirth.text.substring(0,4)+"-"+
+                        binding.editBirth.text.substring(4,6)+"-"+binding.editBirth.text.substring(6,).toString()
+            }
+
             val userwater = binding.waterAlarmWeek.text.toString()
             Log.d("userwater", binding.waterAlarmWeek.text.toString())
             //알람 주기
@@ -120,7 +135,8 @@ class EnrollModifyPlantFragment : Fragment() {
 
             val usertime = binding.waterAlarmTime.text.toString()
             val usertime_hour_modify = usertime.substring(0, 5).toString()
-            Log.d("usertime", usertime_hour_modify.toString())
+            Log.d("modifycherish", modifycherish.toString())
+            Log.d("birth_modify", birth_modify.toString())
 
             var body = RequestModifyData(
                 nickname = nickname_modify,
@@ -151,7 +167,7 @@ class EnrollModifyPlantFragment : Fragment() {
 
 
                                 Log.d("수정완료", response.body().toString())
-
+                                activity?.onBackPressed()
 
                             }
                     }

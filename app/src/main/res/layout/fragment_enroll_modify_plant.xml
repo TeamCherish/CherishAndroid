@@ -108,7 +108,6 @@
                 android:layout_marginStart="12dp"
                 android:background="@null"
                 android:hint="0000/00/00"
-                android:inputType="textPersonName"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
