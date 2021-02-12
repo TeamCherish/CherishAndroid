@@ -9,7 +9,6 @@ import com.sopt.cherish.databinding.ActivityReviewBinding
 import com.sopt.cherish.di.Injection
 import com.sopt.cherish.remote.api.ReviewWateringReq
 import com.sopt.cherish.ui.dialog.CustomDialogFragment
-import com.sopt.cherish.util.SimpleLogger
 import com.sopt.cherish.util.extension.FlexBoxExtension.getChip
 import com.sopt.cherish.util.extension.countNumberOfCharacters
 import com.sopt.cherish.util.extension.shortToast
@@ -46,7 +45,7 @@ class ReviewActivity : AppCompatActivity() {
         binding.reviewMemo.countNumberOfCharacters { memo ->
             binding.reviewNumberOfMemo.text = memo?.length.toString()
             if (memo?.length!! > 100) {
-                // dialog로 보여줘야 함
+                // todo : dialog로 보여줘야 함
                 shortToast(this, "100자를 초과했습니다.")
             }
         }
@@ -76,9 +75,6 @@ class ReviewActivity : AppCompatActivity() {
 
     private fun sendReviewToServer(binding: ActivityReviewBinding) {
         binding.reviewAdminAccept.setOnClickListener {
-            // 물주는 모션이 뜨면서 다시 main으로 넘어가면 됨
-            // 리뷰를 전부 적지 않으면 안된다는 것이라던지에 대한 로직만 넣으면 해결됨
-            // todo : chip 하나가 씹힘
             viewModel.sendReviewToServer(
                 reviewWateringReq = ReviewWateringReq(
                     binding.reviewMemo.text.toString(),
@@ -88,10 +84,6 @@ class ReviewActivity : AppCompatActivity() {
                     viewModel.selectedCherishId
                 )
             )
-            SimpleLogger.logI(binding.reviewFlexBox.getChip(id = 0)?.text.toString())
-            SimpleLogger.logI(binding.reviewFlexBox.getChip(id = 1)?.text.toString())
-            SimpleLogger.logI(binding.reviewFlexBox.getChip(id = 2)?.text.toString())
-            SimpleLogger.logI(binding.reviewMemo.text.toString())
             showLoadingDialog()
             finish()
         }
@@ -100,7 +92,7 @@ class ReviewActivity : AppCompatActivity() {
     private fun ignoreSendReviewToServer(binding: ActivityReviewBinding) {
         binding.reviewIgnoreAccept.setOnClickListener {
             // 일단 지금 당장은 그냥 finish만 시켜놨다
-            //
+            // 현재의 값을 그냥 보내버리는 경우도 있을거야
             finish()
         }
     }

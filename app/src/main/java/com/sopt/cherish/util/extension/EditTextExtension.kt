@@ -23,7 +23,6 @@ fun EditText.countNumberOfCharacters(observeTextChanged: (CharSequence?) -> Unit
 fun EditText.writeReview(reviewFlexBoxLayout: FlexboxLayout) {
     this.setOnKeyListener { view, keyCode, keyEvent ->
         // 이 문구를 뭔가 좀 코틀린스럽게 짤수 있으면 좋겠다. 훈기야
-        // todo : 안드로이드 소프트 키보드에는 ok버튼이 없다 백프레스 버튼밖에 없는데 어떻게 해야할지?
         when (keyEvent.action) {
             ACTION_DOWN -> {
                 if (keyCode == KEYCODE_ENTER && keyCode != KEYCODE_BACK) {
