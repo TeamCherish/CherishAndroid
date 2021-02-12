@@ -70,6 +70,17 @@ class EnrollModifyPlantFragment : Fragment() {
                                 binding.editBirth.hint = it.data.userDetail.birth
                                 binding.waterAlarmWeek.text =
                                     it.data.cherishDetail.cycle_date.toString()
+                                if(it.data.cherishDetail.cycle_date<=3){
+                                    binding.waterAlarmWeek.text ="Every "+it.data.cherishDetail.cycle_date.toString()+" day"
+
+                                }else if(it.data.cherishDetail.cycle_date>=7 && it.data.cherishDetail.cycle_date<=21){
+                                    binding.waterAlarmWeek.text ="Every "+(it.data.cherishDetail.cycle_date/7).toString()+" week"
+
+                                }else{
+                                    binding.waterAlarmWeek.text ="Every "+(it.data.cherishDetail.cycle_date/30).toString()+" month"
+
+                                }
+
                                 binding.waterAlarmTime.text = it.data.cherishDetail.notice_time
                                 binding.phoneNumber.text = it.data.userDetail.phone
 
