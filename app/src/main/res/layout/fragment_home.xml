@@ -24,6 +24,7 @@
             android:id="@+id/home_plant_background"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:setPlantBackground="@{mainViewModel.selectedCherishUser.plantName}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -35,6 +36,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_20dp"
             android:layout_marginEnd="@dimen/margin_16dp"
+            android:setPlantImage="@{mainViewModel.selectedCherishUser.homeMainBackgroundImageUrl}"
+            android:setPlantImageViewSize="@{mainViewModel.selectedCherishUser.growth}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -48,6 +51,7 @@
             android:font="@font/roboto_bold"
             android:textColor="@color/white"
             android:textSize="40sp"
+            android:setDeadLineDay="@{mainViewModel.selectedCherishUser.DDay}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -70,6 +74,7 @@
             android:font="@font/notosanscjkkr_bold"
             android:textColor="@color/white"
             android:textSize="28sp"
+            android:text="@{mainViewModel.selectedCherishUser.nickName}"
             app:layout_constraintStart_toStartOf="@+id/home_selected_user_status"
             app:layout_constraintTop_toBottomOf="@+id/home_selected_user_status" />
 
@@ -113,7 +118,8 @@
             android:layout_marginStart="@dimen/margin_29dp"
             android:layout_marginTop="105dp"
             android:max="100"
-            android:progressDrawable="@drawable/progress_drawable_vertical"
+            android:setProgressBarBackground="@{mainViewModel.selectedCherishUser.growth}"
+            android:setProgressbarAnimation="@{mainViewModel.selectedCherishUser.growth}"
             app:layout_constraintStart_toStartOf="@id/home_watering_btn"
             app:layout_constraintTop_toBottomOf="@+id/home_watering_btn" />
 
@@ -124,6 +130,7 @@
             android:font="@font/notosanscjkkr_regular"
             android:textColor="@color/white"
             android:textSize="12sp"
+            android:setProgressPercentText="@{mainViewModel.selectedCherishUser.growth}"
             app:layout_constraintEnd_toEndOf="@id/home_affection_progressbar"
             app:layout_constraintStart_toStartOf="@id/home_affection_progressbar"
             app:layout_constraintTop_toBottomOf="@+id/home_affection_progressbar" />
@@ -149,6 +156,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/dialog_round_corner"
+                android:setBottomSheet="@{mainViewModel.selectedCherishUser.growth}"
                 app:behavior_fitToContents="false"
                 app:behavior_hideable="false"
                 app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
@@ -182,6 +190,7 @@
                     android:layout_marginTop="19dp"
                     android:fontFamily="@font/notosanscjkkr_bold"
                     android:textColor="@color/cherish_green_main"
+                    android:setUserCount="@{mainViewModel.cherishUsers.userData.totalUser}"
                     app:layout_constraintStart_toEndOf="@+id/home_bottom_sheet_title"
                     app:layout_constraintTop_toTopOf="parent" />
 

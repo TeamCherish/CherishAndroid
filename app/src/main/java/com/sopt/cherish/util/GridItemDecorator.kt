@@ -26,6 +26,8 @@ class GridItemDecorator(
             /*if (position < spanCount) // top Edge
                 outRect.top = spacing*/
 
+            // 너무 먼느낌이라서 이건 디자인에게 물어봐서 값 수정하면 됨!!
+            // itemDecorator에 marginBottom값 줘서 그 값으로 해주면 됨
             outRect.bottom = spacing
         } else {
             outRect.left = column * spacing / spanCount

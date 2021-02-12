@@ -2,7 +2,6 @@ package com.sopt.cherish.ui.main.manageplant
 
 import android.content.Intent
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -17,8 +16,6 @@ import com.sopt.cherish.remote.api.MyPageCherishData
 import com.sopt.cherish.remote.api.MyPageUserRes
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.adapter.MyPageBottomSheetAdapter
-import com.sopt.cherish.ui.adapter.MypagePhoneBookAdapter
-import com.sopt.cherish.ui.adapter.Phonemypage
 import com.sopt.cherish.ui.detail.DetailPlantActivity
 import com.sopt.cherish.ui.main.MainViewModel
 import retrofit2.Call
@@ -30,14 +27,13 @@ import retrofit2.Response
  * bottom sheet에서 보여지는 recyclerview fragment
  */
 
-class PlantFragment : Fragment() {
+class PlantFragment(private var data:MutableList<MyPageCherishData>) : Fragment() {
 
     private var _binding: FragmentPlantBinding? = null
     private val binding get() = _binding!!
     private lateinit var cherishAdapter: MyPageBottomSheetAdapter
     private val requestData = RetrofitBuilder
     private val viewModel: MainViewModel by activityViewModels()
-
 
     lateinit var list: MutableList<MyPageCherishData>
     var searchText = ""
@@ -49,9 +45,9 @@ class PlantFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentPlantBinding.inflate(inflater, container, false)
 
-       // setAdapterData()
-
+        setAdapterData()
         startProcess()
+
         return binding.root
     }
 
@@ -61,7 +57,7 @@ class PlantFragment : Fragment() {
         setAdapterData()
         //cherishAdapter.notifyDataSetChanged()
     }
-
+/*
     private fun setAdapterData() {
         Log.d("viewmodeluserid", viewModel.cherishuserId.value.toString())
         requestData.myPageAPI.fetchUserPage(viewModel.cherishuserId.value!!)
@@ -70,7 +66,6 @@ class PlantFragment : Fragment() {
                     override fun onFailure(call: Call<MyPageUserRes>, t: Throwable) {
                         Log.d("통신 실패", t.toString())
                     }
-
                     override fun onResponse(
                         call: Call<MyPageUserRes>,
                         response: Response<MyPageUserRes>
@@ -81,29 +76,20 @@ class PlantFragment : Fragment() {
                         }?.body()
                             ?.let { it ->
                                 Log.d("list", it.myPageUserData.result.toString())
-
-
-                                         cherishAdapter =
-                                             MyPageBottomSheetAdapter(
-                                                 requireContext(),
-                                                 it.myPageUserData.result as MutableList<MyPageCherishData>
-                                             )
-
-
-
-                               // list.add(it.myPageUserData.result[0])
-                                initialRecyclerView(binding, cherishAdapter)
+                                cherishAdapter =
+                                    MyPageBottomSheetAdapter(
+                                        it.myPageUserData.result as MutableList<MyPageCherishData>
+                                    )
+                                binding.mypageCherryList.adapter=cherishAdapter
+                                binding.mypageCherryList.layoutManager = LinearLayoutManager(context)
+                                //initialRecyclerView(binding, cherishAdapter)
                                 cherishAdapter.notifyDataSetChanged()
-
-
                                 cherishAdapter.setItemClickListener(
                                     object : MyPageBottomSheetAdapter.ItemClickListener {
                                         override fun onClick(view: View, position: Int) {
                                             Log.d("onclick", "success")
-
                                             val intent =
                                                 Intent(context, DetailPlantActivity::class.java)
-
                                             intent.putExtra(
                                                 "plantId",
                                                 it.myPageUserData.result[position].plantId
@@ -122,22 +108,45 @@ class PlantFragment : Fragment() {
                                     }
                                 )
                             }
-
-
                     }
                 })
-    }
+    } */
 
-    private fun initialRecyclerView(
-        binding: FragmentPlantBinding,
-        mainAdapter: MyPageBottomSheetAdapter
-    ) {
+    private fun setAdapterData(){
+        cherishAdapter= MyPageBottomSheetAdapter(data)
 
-        binding.mypageCherryList.apply {
-            adapter = mainAdapter
+        binding.mypageCherryList.adapter=cherishAdapter
+        binding.mypageCherryList.layoutManager = LinearLayoutManager(context)
 
-            layoutManager = LinearLayoutManager(context)
-        }
+        //initialRecyclerView(binding, cherishAdapter)
+        cherishAdapter.notifyDataSetChanged()
+
+
+        cherishAdapter.setItemClickListener(
+            object : MyPageBottomSheetAdapter.ItemClickListener {
+                override fun onClick(view: View, position: Int) {
+                    Log.d("onclick", "success")
+
+                    val intent =
+                        Intent(context, DetailPlantActivity::class.java)
+
+                    intent.putExtra(
+                        "plantId",
+                        data[position].plantId
+                    )
+                    intent.putExtra(
+                        "Id",
+                        data[position].id
+                    )
+                    Log.d(
+                        "Id",
+                        data[position].id.toString()
+                    )
+                    //startActivityForResult(intent, 100)
+                    startActivity(intent)
+                }
+            }
+        )
     }
     fun startProcess() {
         setAdapterData()
@@ -161,7 +170,6 @@ class PlantFragment : Fragment() {
                 }
             })
     }
-
     fun changeList(searchText:String) {
         requestData.myPageAPI.fetchUserPage(viewModel.cherishuserId.value!!)
             .enqueue(
@@ -196,10 +204,11 @@ class PlantFragment : Fragment() {
                                 }
                                 cherishAdapter =
                                     MyPageBottomSheetAdapter(
-                                        requireContext(),
                                         mulist as MutableList<MyPageCherishData>
                                     )
-                                initialRecyclerView(binding, cherishAdapter)
+                                //initialRecyclerView(binding, cherishAdapter)
+                                binding.mypageCherryList.adapter=cherishAdapter
+                                binding.mypageCherryList.layoutManager = LinearLayoutManager(context)
                                 cherishAdapter.notifyDataSetChanged()
 
 
@@ -214,53 +223,14 @@ class PlantFragment : Fragment() {
 
     }
 
-  /*  fun setList() {
-        phonelist.addAll(getPhoneNumbers(sortText, searchText))
-
-        madapter = MypagePhoneBookAdapter(phonelist)
-        binding.recyclerMypage.adapter = madapter
-        binding.recyclerMypage.layoutManager = LinearLayoutManager(context)
-    }*/
-
-
-    fun getPhoneNumbers( name: String): List<MyPageCherishData> {
-
-        lateinit var listplant: MutableList<MyPageCherishData>
-
-
-        requestData.myPageAPI.fetchUserPage(viewModel.cherishuserId.value!!)
-            .enqueue(
-                object : Callback<MyPageUserRes> {
-                    override fun onFailure(call: Call<MyPageUserRes>, t: Throwable) {
-                        Log.d("통신 실패", t.toString())
-                    }
-
-                    override fun onResponse(
-                        call: Call<MyPageUserRes>,
-                        response: Response<MyPageUserRes>
-                    ) {
-                        Log.d("success", response.body().toString())
-                        response.takeIf {
-                            it.isSuccessful
-                        }?.body()
-                            ?.let { it ->
-                                Log.d("list", it.myPageUserData.result.toString())
-                                if(it.myPageUserData.user_nickname.contains(name)){
-                                    cherishAdapter =
-                                        MyPageBottomSheetAdapter(
-                                            requireContext(),
-                                            it.myPageUserData.result as MutableList<MyPageCherishData>
-                                        )
-
-                                    }
-
-                            }
-
-
-                    }
-                })
-
-        return listplant
-    }
-
+/*
+    private fun initialRecyclerView(
+        binding: FragmentPlantBinding,
+        mainAdapter: MyPageBottomSheetAdapter
+    ) {
+        binding.mypageCherryList.apply {
+            adapter = mainAdapter
+            layoutManager = LinearLayoutManager(context)
+        }
+    } */
 }

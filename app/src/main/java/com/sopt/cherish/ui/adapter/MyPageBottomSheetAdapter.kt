@@ -12,17 +12,16 @@ import com.sopt.cherish.R
 import com.sopt.cherish.databinding.MyPageCherryItemBinding
 import com.sopt.cherish.remote.api.MyPageCherishData
 
-class MyPageBottomSheetAdapter(private var context: Context,private var data:MutableList<MyPageCherishData>) :
-    RecyclerView.Adapter<MyPageBottomSheetAdapter.MainViewHolder>() {
+class MyPageBottomSheetAdapter(private var data:MutableList<MyPageCherishData>) :
+    RecyclerView.Adapter<MyPageBottomSheetAdapter.ViewHolder>() {
 
-    //var data= mutableListOf<MyPageCherishData>()
-    class MainViewHolder(private var binding: MyPageCherryItemBinding) :
+    inner class ViewHolder(private var binding: MyPageCherryItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         @SuppressLint("SetTextI18n")
         fun bind(cherishData: MyPageCherishData) {
             binding.mypageCherryNickname.text = cherishData.nickName
             binding.mypageCherryName.text = cherishData.name
-            binding.mypageCherryLevel.text = "Lv. " + cherishData.level
+            binding.mypageCherryLevel.text = "Lv. " + cherishData.level.toString()
 
             //초록색
             if(cherishData.dDay<0){
@@ -38,29 +37,9 @@ class MyPageBottomSheetAdapter(private var context: Context,private var data:Mut
             else if(cherishData.dDay==0){
                 binding.myPageDDay.text = "D-day"
             }
-            else{ //양수(빨간색)
+            else{ //양수(빨간색): 그대로
                 binding.myPageDDay.text = "D+" + cherishData.dDay.toString()
             }
-            /*
-            if (cherishData.dDay.toString()[0] != '-'){//양수값일 때
-                binding.myPageDDay.text = "D+" + cherishData.dDay.toString()
-
-                if(cherishData.dDay == 0)
-                    binding.myPageDDay.text = "D-day"
-                else if (cherishData.dDay == 1)
-                    binding.myPageDDay.text = "D-" + cherishData.dDay.toString()
-            }
-
-            else { //음수값일 때
-                binding.myPageDDay.text = "D" + cherishData.dDay.toString()
-                binding.myPageDDay.setBackgroundResource(R.drawable.my_page_chip_green) //초록색으로
-                binding.myPageDDay.setTextColor(
-                    ContextCompat.getColor(
-                        binding.root.context,
-                        R.color.cherish_green_main
-                    )
-                )
-            } */
 
             Glide.with(binding.root.context).load(cherishData.thumbnailImageUrl)
                 .into(binding.mypageUserImg)
@@ -68,14 +47,14 @@ class MyPageBottomSheetAdapter(private var context: Context,private var data:Mut
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding: MyPageCherryItemBinding =
             MyPageCherryItemBinding.inflate(layoutInflater, parent, false)
-        return MainViewHolder(binding)
+        return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(data[position])
 
         holder.itemView.setOnClickListener {
