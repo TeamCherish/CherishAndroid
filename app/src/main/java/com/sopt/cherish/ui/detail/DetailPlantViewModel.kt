@@ -3,9 +3,12 @@ package com.sopt.cherish.ui.detail
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sopt.cherish.remote.api.CalendarData
 import com.sopt.cherish.remote.api.CalendarRes
 import com.sopt.cherish.remote.api.ReviewWateringReq
+import com.sopt.cherish.remote.api.ReviseReviewReq
 import com.sopt.cherish.repository.DetailPlantRepository
+import com.sopt.cherish.util.SingleLiveEvent
 import kotlinx.coroutines.launch
 
 class DetailPlantViewModel(
@@ -27,6 +30,10 @@ class DetailPlantViewModel(
 
     val userId = MutableLiveData<Int>()
 
+    // ReviseReview를 위한 변수들
+    // calendarData 는 물준날 , 리뷰 , 리뷰 1,2,3 총 5개로 이루어져있습니다.
+    val selectedCalendarData = MutableLiveData<CalendarData>()
+
     private val _calendarData = MutableLiveData<CalendarRes>()
     val calendarData: MutableLiveData<CalendarRes>
         get() = _calendarData
@@ -35,10 +42,15 @@ class DetailPlantViewModel(
         _calendarData.postValue(detailPlantRepository.fetchCalendarData(cherishId.value!!))
     }
 
-    var calendarAllowChange = true
+    var calendarModeChangeEvent = SingleLiveEvent<Boolean>()
 
     fun sendReviewToServer(reviewWateringReq: ReviewWateringReq) = viewModelScope.launch {
         detailPlantRepository.sendReviewData(reviewWateringReq)
+    }
+
+    // [Revise Review]
+    fun sendReviseReviewToServer(reviseReviewReq: ReviseReviewReq) = viewModelScope.launch {
+        detailPlantRepository.sendReviseReviewData(reviseReviewReq)
     }
 
 }

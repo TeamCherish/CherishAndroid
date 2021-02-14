@@ -24,7 +24,6 @@ import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
 import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.util.GridItemDecorator
 import com.sopt.cherish.util.PixelUtil.dp
-import com.sopt.cherish.util.SimpleLogger
 import com.sopt.cherish.util.extension.longToast
 
 
@@ -52,6 +51,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
 
         standardBottomSheetBehavior =
             BottomSheetBehavior.from(binding.homeStandardBottomSheet)
+        addBottomSheetCallback()
         // 바텀시트 리사이클러뷰 초기화
         initializeRecyclerView(homeCherryListAdapter)
 
@@ -76,11 +76,6 @@ class HomeFragment : Fragment(), OnItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         observeCherishUsers()
         observeAnimationTrigger()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        SimpleLogger.logI("homeFragment onResume!")
     }
 
     private fun observeAnimationTrigger() {
@@ -136,7 +131,11 @@ class HomeFragment : Fragment(), OnItemClickListener {
 
     // 화면이동
     private fun navigateWatering(id: Int) {
-        WateringDialogFragment(id).show(parentFragmentManager, TAG)
+        if (viewModel.selectedCherishUser.value?.dDay!! <= 0) {
+            WateringDialogFragment(id).show(parentFragmentManager, TAG)
+        } else {
+            longToast(requireContext(), "물 줄수있는 날이 아니에요 ㅠ")
+        }
     }
 
     private fun navigatePhoneBook() {
@@ -149,7 +148,6 @@ class HomeFragment : Fragment(), OnItemClickListener {
     private fun navigateDetailPlant(userId: Int?, cherishId: Int?) {
         val intent = Intent(activity, DetailPlantActivity::class.java)
         // todo : Parcelable로 변경해서 보내주도록 하자
-        // todo : 내일 오프라인 회의에서 정확하게 값 명칭 구분해서 작동시키도록 한다.
         intent.putExtra("userId", userId)
         intent.putExtra("cherishId", viewModel.selectedCherishUser.value?.id)
         intent.putExtra("cherishUserPhoneNumber", viewModel.selectedCherishUser.value?.phoneNumber)
@@ -164,7 +162,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
         // todo : 비율로 변경해야함
         standardBottomSheetBehavior.apply {
             state = BottomSheetBehavior.STATE_COLLAPSED
-            peekHeight = 60.dp
+            peekHeight = 150.dp
             expandedOffset = 100.dp
         }
     }
@@ -172,8 +170,21 @@ class HomeFragment : Fragment(), OnItemClickListener {
     // 바텀시트 뒤에 녀석 색상 변경
     private fun transitionBottomSheetParentView(slideOffset: Float) {
         val argbEvaluator =
-            ArgbEvaluator().evaluate(slideOffset, R.color.cherish_gray, R.color.black)
-        binding.homeFragment.setBackgroundColor(argbEvaluator as Int)
+            ArgbEvaluator().evaluate(slideOffset, R.color.transparent, R.color.black)
+    }
+
+    private fun addBottomSheetCallback() {
+        standardBottomSheetBehavior.addBottomSheetCallback(object :
+            BottomSheetBehavior.BottomSheetCallback() {
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+
+            }
+
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                if (standardBottomSheetBehavior.state == BottomSheetBehavior.STATE_DRAGGING)
+                    standardBottomSheetBehavior.peekHeight = 60.dp
+            }
+        })
     }
 
     companion object {

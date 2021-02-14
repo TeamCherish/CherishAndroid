@@ -48,7 +48,8 @@ object FlexBoxExtension {
         }
     }
 
-    fun FlexboxLayout.getChipsCount(): Int = childCount
+    // todo : 이렇게 처리를 해도 되는건지 의문이긴 함 로직에 문제가 있는지 다시한번 생각
+    fun FlexboxLayout.getChipsCount(): Int = childCount + 1
 
     fun FlexboxLayout.clearChips() {
         val chipViews = (0 until childCount).mapNotNull { index ->
