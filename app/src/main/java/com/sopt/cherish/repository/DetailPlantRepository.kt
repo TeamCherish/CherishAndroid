@@ -1,9 +1,6 @@
 package com.sopt.cherish.repository
 
-import com.sopt.cherish.remote.api.CalendarAPI
-import com.sopt.cherish.remote.api.CalendarRes
-import com.sopt.cherish.remote.api.ReviewAPI
-import com.sopt.cherish.remote.api.ReviewWateringReq
+import com.sopt.cherish.remote.api.*
 
 /**
  * Created on 01-07 by SSong-develop
@@ -19,4 +16,7 @@ class DetailPlantRepository(
 
     suspend fun sendReviewData(reviewWateringReq: ReviewWateringReq) =
         reviewAPI.reviewWatering(reviewWateringReq)
+
+    suspend fun sendReviseReviewData(reviseReviewReq: ReviseReviewReq) =
+        reviewAPI.reviseReview(reviseReviewReq)
 }

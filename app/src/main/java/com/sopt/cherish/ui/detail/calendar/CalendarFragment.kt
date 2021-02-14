@@ -10,6 +10,7 @@ import androidx.fragment.app.activityViewModels
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentCalendarBinding
+import com.sopt.cherish.remote.api.CalendarData
 import com.sopt.cherish.ui.detail.DetailPlantActivity
 import com.sopt.cherish.ui.detail.DetailPlantViewModel
 import com.sopt.cherish.ui.review.ReviseReviewFragment
@@ -17,6 +18,7 @@ import com.sopt.cherish.util.DateUtil
 import com.sopt.cherish.util.extension.FlexBoxExtension.addChipCalendar
 import com.sopt.cherish.util.extension.FlexBoxExtension.clearChips
 import com.sopt.cherish.view.calendar.DotDecorator
+import java.util.*
 
 class CalendarFragment : Fragment() {
 
@@ -36,7 +38,16 @@ class CalendarFragment : Fragment() {
         initializeCalendar(binding)
         observeCalendarModeChangeEvent(binding)
 
+        binding.calendarViewMemoReviseBtn.setOnClickListener {
+            navigateReviseReview()
+        }
+
         return binding.root
+    }
+
+    private fun navigateReviseReview() {
+        parentFragmentManager.beginTransaction().addToBackStack(TAG)
+            .replace(R.id.fragment_detail, ReviseReviewFragment()).commit()
     }
 
     override fun onResume() {
@@ -45,6 +56,9 @@ class CalendarFragment : Fragment() {
         if (activity != null) {
             (activity as DetailPlantActivity).setActionBarTitle("식물 캘린더")
         }
+        // binding 객체를 전역으로 만들어줘야하네....?
+        // todo : bindingAdapdater를 어떻게 써야할 지는 다시한번 고민을 좀 해보는게 맞는거 같다.
+        viewModel.fetchCalendarData()
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
@@ -86,7 +100,6 @@ class CalendarFragment : Fragment() {
 
     private fun initializeCalendar(binding: FragmentCalendarBinding) {
         allowCalendarCache(binding)
-        reviseNotes(binding)
         changeCalendarMode(binding)
         addDecorator(binding)
         addDateClickListener(binding)
@@ -123,44 +136,56 @@ class CalendarFragment : Fragment() {
         }
     }
 
-    // 메모 수정
-    private fun reviseNotes(binding: FragmentCalendarBinding) {
-        binding.calendarViewMemoReviseBtn.setOnClickListener { view ->
-            parentFragmentManager.beginTransaction().replace(
-                R.id.fragment_detail, ReviseReviewFragment()
-            )
-        }
-    }
-
     private fun addDateClickListener(binding: FragmentCalendarBinding) {
         binding.calendarView.setOnDateChangedListener { widget, date, selected ->
             showDate(binding, date)
             binding.calendarViewChipLayout.clearChips()
-            viewModel.calendarData.observe(viewLifecycleOwner) { calendarRes ->
-                val wateredDayList = mutableListOf<CalendarDay?>()
-                val waterDayMemoList = mutableListOf<String?>()
-                val waterDayChipList = mutableListOf<List<String?>>()
+            // 처음 캘린더 화면에 보여주기 위한 방법
+            observeCalendarData(binding, selectedDate = date)
 
-                calendarRes.waterData.calendarData.forEach { calendarData ->
-                    wateredDayList.add(DateUtil.convertDateToCalendarDay(calendarData.wateredDate))
-                    waterDayMemoList.add(calendarData.review)
-                    waterDayChipList.add(
-                        listOf(
-                            calendarData.userStatus1,
-                            calendarData.userStatus2,
-                            calendarData.userStatus3
-                        )
+        }
+    }
+
+    private fun observeCalendarData(binding: FragmentCalendarBinding, selectedDate: CalendarDay) {
+        viewModel.calendarData.observe(viewLifecycleOwner) { calendarRes ->
+            // 내가 굉장히 어썸하게 알고리즘을 못짠거 같은 기분입니다.
+            val waterDayListInDate = mutableListOf<Date>()
+            val wateredDayList = mutableListOf<CalendarDay?>() // 물 준날의 리스트
+            val waterDayMemoList = mutableListOf<String?>() // 물 준것에 대한 메모들이 있는 리스트
+            val waterDayChipList = mutableListOf<List<String?>>() // 물 준것에 대한 키워드 들이 있는 리스트
+
+            // 데이터 넣어주는 과정
+            calendarRes.waterData.calendarData.forEach { calendarData ->
+                waterDayListInDate.add(calendarData.wateredDate)
+                wateredDayList.add(DateUtil.convertDateToCalendarDay(calendarData.wateredDate))
+                waterDayMemoList.add(calendarData.review)
+                waterDayChipList.add(
+                    listOf(
+                        calendarData.userStatus1,
+                        calendarData.userStatus2,
+                        calendarData.userStatus3
                     )
-                }
-                // 함수화 해야합니다.
-                for (i in 0 until wateredDayList.size) {
-                    if (wateredDayList[i] == date) {
-                        waterDayMemoList[i]?.let { it1 -> showMemo(binding, it1) }
-                        showChips(binding, waterDayChipList[i])
-                        break
-                    } else {
-                        binding.reviewAllText.text = " "
+                )
+            }
+            // 여기가 날짜를 선택했을 때 작동되는 작업들임
+            // 함수화 해야합니다.
+            for (i in 0 until wateredDayList.size) {
+                if (wateredDayList[i] == selectedDate) {
+                    waterDayMemoList[i]?.let { it1 ->
+                        showMemo(binding, it1)
                     }
+                    showChips(binding, waterDayChipList[i])
+                    val selectedCalendarData = CalendarData(
+                        waterDayListInDate[i],
+                        waterDayMemoList[i]!!,
+                        waterDayChipList[i][0].toString(),
+                        waterDayChipList[i][1].toString(),
+                        waterDayChipList[i][2].toString()
+                    )
+                    viewModel.selectedCalendarData.value = selectedCalendarData
+                    break
+                } else {
+                    binding.reviewAllText.text = " "
                 }
             }
         }
@@ -182,5 +207,9 @@ class CalendarFragment : Fragment() {
     private fun showMemo(binding: FragmentCalendarBinding, waterMemo: String) {
         binding.reviewAllText.text = " "
         binding.reviewAllText.text = waterMemo
+    }
+
+    companion object {
+        const val TAG = "CalendarFragment"
     }
 }

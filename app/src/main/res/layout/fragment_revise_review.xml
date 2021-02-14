@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="detailPlantViewModel"
             type="com.sopt.cherish.ui.detail.DetailPlantViewModel" />
@@ -22,7 +21,6 @@
             android:layout_marginStart="24dp"
             android:layout_marginTop="@dimen/margin_16dp"
             android:fontFamily="@font/roboto_bold"
-            android:text="testText"
             android:textColor="@color/cherish_light_black"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -100,7 +98,7 @@
             app:layout_constraintTop_toBottomOf="@id/revise_review_memo" />
 
         <Button
-            android:id="@+id/review_admin_accept"
+            android:id="@+id/revise_review_admin_accept"
             style="@style/RoundButton.GreenMain"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -111,6 +109,5 @@
             app:layout_constraintEnd_toEndOf="@id/revise_review_memo"
             app:layout_constraintStart_toStartOf="@id/revise_review_memo"
             app:layout_constraintTop_toBottomOf="@id/revise_review_memo" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

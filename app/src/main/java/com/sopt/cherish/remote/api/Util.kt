@@ -7,3 +7,8 @@ data class UtilResponse(
     @SerializedName("success") val success: Boolean,
     @SerializedName("message") val message: String
 )
+
+data class UtilResponseWithOutStatus(
+    @SerializedName("success") val success: Boolean,
+    @SerializedName("message") val message: String
+)

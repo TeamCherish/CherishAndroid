@@ -24,7 +24,6 @@ import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
 import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.util.GridItemDecorator
 import com.sopt.cherish.util.PixelUtil.dp
-import com.sopt.cherish.util.SimpleLogger
 import com.sopt.cherish.util.extension.longToast
 
 
@@ -77,11 +76,6 @@ class HomeFragment : Fragment(), OnItemClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         observeCherishUsers()
         observeAnimationTrigger()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        SimpleLogger.logI("homeFragment onResume!")
     }
 
     private fun observeAnimationTrigger() {
@@ -137,7 +131,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
 
     // 화면이동
     private fun navigateWatering(id: Int) {
-        if (viewModel.selectedCherishUser.value?.dDay == 0) {
+        if (viewModel.selectedCherishUser.value?.dDay!! <= 0) {
             WateringDialogFragment(id).show(parentFragmentManager, TAG)
         } else {
             longToast(requireContext(), "물 줄수있는 날이 아니에요 ㅠ")

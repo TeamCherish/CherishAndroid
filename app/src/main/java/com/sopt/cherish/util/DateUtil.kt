@@ -13,7 +13,6 @@ object DateUtil {
     private fun convertStringToDate(stringDate: String): Date? =
         simpleDateFormatKorean.parse(stringDate)
 
-    // CalendarDay로 변환되는 녀석이 하나 필요
     fun getYear(stringDate: String) = Integer.parseInt(stringDate.substring(0, 4))
 
     fun getMonth(stringDate: String) = Integer.parseInt(stringDate.substring(5, 7))
@@ -25,4 +24,5 @@ object DateUtil {
         val stringDate = convertDateToString(date)
         return CalendarDay.from(getYear(stringDate), getMonth(stringDate), getDay(stringDate))
     }
+
 }
