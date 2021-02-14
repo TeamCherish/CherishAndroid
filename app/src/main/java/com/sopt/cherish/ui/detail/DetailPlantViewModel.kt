@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.sopt.cherish.remote.api.CalendarRes
 import com.sopt.cherish.remote.api.ReviewWateringReq
 import com.sopt.cherish.repository.DetailPlantRepository
+import com.sopt.cherish.util.SingleLiveEvent
 import kotlinx.coroutines.launch
 
 class DetailPlantViewModel(
@@ -35,7 +36,7 @@ class DetailPlantViewModel(
         _calendarData.postValue(detailPlantRepository.fetchCalendarData(cherishId.value!!))
     }
 
-    var calendarAllowChange = true
+    var calendarModeChangeEvent = SingleLiveEvent<Boolean>()
 
     fun sendReviewToServer(reviewWateringReq: ReviewWateringReq) = viewModelScope.launch {
         detailPlantRepository.sendReviewData(reviewWateringReq)

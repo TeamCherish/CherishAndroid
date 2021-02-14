@@ -12,10 +12,10 @@ import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentCalendarBinding
 import com.sopt.cherish.ui.detail.DetailPlantActivity
 import com.sopt.cherish.ui.detail.DetailPlantViewModel
+import com.sopt.cherish.ui.review.ReviseReviewFragment
 import com.sopt.cherish.util.DateUtil
 import com.sopt.cherish.util.extension.FlexBoxExtension.addChipCalendar
 import com.sopt.cherish.util.extension.FlexBoxExtension.clearChips
-import com.sopt.cherish.util.extension.shortToast
 import com.sopt.cherish.view.calendar.DotDecorator
 
 class CalendarFragment : Fragment() {
@@ -30,9 +30,11 @@ class CalendarFragment : Fragment() {
         setHasOptionsMenu(true)
         val binding: FragmentCalendarBinding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_calendar, container, false)
-
+        binding.lifecycleOwner = viewLifecycleOwner
         binding.detailPlantViewModel = viewModel
+        initializeViewModelData()
         initializeCalendar(binding)
+        observeCalendarModeChangeEvent(binding)
 
         return binding.root
     }
@@ -42,7 +44,6 @@ class CalendarFragment : Fragment() {
         val activity = activity
         if (activity != null) {
             (activity as DetailPlantActivity).setActionBarTitle("식물 캘린더")
-
         }
     }
 
@@ -67,6 +68,22 @@ class CalendarFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
 
+    private fun initializeViewModelData() {
+        viewModel.calendarModeChangeEvent.value = false
+    }
+
+    private fun observeCalendarModeChangeEvent(binding: FragmentCalendarBinding) {
+        viewModel.calendarModeChangeEvent.observe(viewLifecycleOwner) {
+            if (it) {
+                binding.reviewBack.setImageResource(R.drawable.icn_allow)
+                binding.calendarView.changeCalendarModeWeeks()
+            } else {
+                binding.reviewBack.setImageResource(R.drawable.icn_allow_top)
+                binding.calendarView.changeCalendarModeMonths()
+            }
+        }
+    }
+
     private fun initializeCalendar(binding: FragmentCalendarBinding) {
         allowCalendarCache(binding)
         reviseNotes(binding)
@@ -77,20 +94,7 @@ class CalendarFragment : Fragment() {
 
     private fun changeCalendarMode(binding: FragmentCalendarBinding) {
         binding.reviewBack.setOnClickListener { view ->
-            // 클릭 시 화살표의 모양이 왔다갔다 하면서 바뀌도록 하면 됨
-            // review button 이 눌림에 따라
-            // textview의 ellipsize 와 maxLine의 수를 바꿔주면 된다.
-            // 실 기기에서는 제대로 작동하지 않는다 효율을 좀 늘려야할거 같다.
-            // SingleLiveData로 제어를 해야하는데 지금 귀찮음 나중에 하자
-            if (viewModel.calendarAllowChange) {
-                viewModel.calendarAllowChange = false
-                binding.reviewBack.setImageResource(R.drawable.icn_allow)
-                binding.calendarView.changeCalendarModeWeeks()
-            } else {
-                viewModel.calendarAllowChange = true
-                binding.reviewBack.setImageResource(R.drawable.icn_allow_top)
-                binding.calendarView.changeCalendarModeMonths()
-            }
+            viewModel.calendarModeChangeEvent.value = !viewModel.calendarModeChangeEvent.value!!
         }
     }
 
@@ -122,8 +126,9 @@ class CalendarFragment : Fragment() {
     // 메모 수정
     private fun reviseNotes(binding: FragmentCalendarBinding) {
         binding.calendarViewMemoReviseBtn.setOnClickListener { view ->
-            // 2순위라서 구현 안해~
-            shortToast(requireContext(), "아직 미구현")
+            parentFragmentManager.beginTransaction().replace(
+                R.id.fragment_detail, ReviseReviewFragment()
+            )
         }
     }
 
@@ -161,6 +166,7 @@ class CalendarFragment : Fragment() {
         }
     }
 
+    // todo : 전부 바인딩 어댑터로 넘겨버리면 됨
     @SuppressLint("SetTextI18n")
     private fun showDate(binding: FragmentCalendarBinding, date: CalendarDay) {
         binding.calendarViewSelectedDate.text = "${date.year}년 ${date.month}월 ${date.day}일"

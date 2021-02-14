@@ -104,7 +104,7 @@ object BindingAdapter {
                 textView.text = "D+$dDay"
             }
             dDay < 0 -> {
-                textView.text = "D-$dDay"
+                textView.text = "D$dDay"
             }
             else -> {
                 textView.text = "D-DAY"

@@ -22,6 +22,7 @@ import kotlinx.coroutines.launch
 /**
  * Created on 2021-1-1 by SSong-develop
  * dialog에 비즈니스 로직이 들어가지는 않는 간단한 dialog는 이 클래스를 사용해 제어
+ * todo : 생성자로 가로와 세로의 비율을 float형태로 받아서 이를 처리해준다면?! 정말 좋을거 같음
  */
 
 class CustomDialogFragment(
