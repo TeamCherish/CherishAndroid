@@ -52,7 +52,6 @@ class HomeFragment : Fragment(), OnItemClickListener {
         standardBottomSheetBehavior =
             BottomSheetBehavior.from(binding.homeStandardBottomSheet)
         addBottomSheetCallback()
-        // 바텀시트 리사이클러뷰 초기화
         initializeRecyclerView(homeCherryListAdapter)
 
         binding.homeWateringBtn.setOnClickListener {
@@ -112,9 +111,8 @@ class HomeFragment : Fragment(), OnItemClickListener {
     }
 
     override fun onItemClick(itemBinding: MainCherryItemBinding, position: Int) {
-        // 정확히 작동합니다.
-        slideDownBottomSheet()
         viewModel.selectedCherishUser.value = homeCherryListAdapter.data[position]
+        slideDownBottomSheet()
     }
 
     private fun initializeRecyclerView(

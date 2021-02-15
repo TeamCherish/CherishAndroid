@@ -36,9 +36,9 @@ class MainActivity : AppCompatActivity() {
         setBottomNavigationListener(binding)
     }
 
+
     override fun onResume() {
         super.onResume()
-        SimpleLogger.logI("MainActivity onResume!!")
         viewModel.fetchUsers()
     }
 
