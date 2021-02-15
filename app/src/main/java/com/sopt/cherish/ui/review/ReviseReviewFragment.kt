@@ -99,8 +99,8 @@ class ReviseReviewFragment : Fragment() {
                         DateUtil.convertDateToString(viewModel.selectedCalendarData.value!!.wateredDate)
                     )
                 )
-                longToast(requireContext(), "메모 삭제에 성공했습니다.") z
-                        parentFragmentManager.popBackStack()
+                longToast(requireContext(), "메모 삭제에 성공했습니다.")
+                parentFragmentManager.popBackStack()
             }
         }
         return super.onOptionsItemSelected(item)
