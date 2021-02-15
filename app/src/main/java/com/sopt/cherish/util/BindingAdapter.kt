@@ -17,6 +17,7 @@ import com.sopt.cherish.util.PixelUtil.dp
 import com.sopt.cherish.util.animation.ProgressbarAnimation
 
 object BindingAdapter {
+
     @JvmStatic
     @BindingAdapter("android:setProfile")
     fun setProfile(imageView: ImageView, imageUrl: String) {
@@ -26,7 +27,6 @@ object BindingAdapter {
             .into(imageView)
     }
 
-    // dDay 조건은 변경을 좀 해줘야 함 현재 서버에도 더미데이터만 있어서
     @JvmStatic
     @BindingAdapter("android:waterVisibility")
     fun waterVisibility(imageView: ImageView, dDay: Int) {

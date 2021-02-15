@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.cherish.remote.api.*
 import com.sopt.cherish.repository.DetailPlantRepository
+import com.sopt.cherish.util.DateUtil
 import com.sopt.cherish.util.SingleLiveEvent
 import kotlinx.coroutines.launch
 
@@ -31,6 +32,14 @@ class DetailPlantViewModel(
     // calendarData 는 물준날 , 리뷰 , 리뷰 1,2,3 총 5개로 이루어져있습니다.
     val selectedCalendarData = MutableLiveData<CalendarData>()
 
+    val selectedCalendarDate = selectedCalendarData.value?.wateredDate?.let {
+        DateUtil.convertDateToCalendarDay(
+            it
+        )
+    }
+
+    val selectedDate = selectedCalendarDate
+
     private val _calendarData = MutableLiveData<CalendarRes>()
     val calendarData: MutableLiveData<CalendarRes>
         get() = _calendarData
@@ -41,6 +50,7 @@ class DetailPlantViewModel(
 
     var calendarModeChangeEvent = SingleLiveEvent<Boolean>()
 
+    // [Review]
     fun sendReviewToServer(reviewWateringReq: ReviewWateringReq) = viewModelScope.launch {
         detailPlantRepository.sendReviewData(reviewWateringReq)
     }
