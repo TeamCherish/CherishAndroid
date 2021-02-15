@@ -32,13 +32,14 @@ class DetailPlantViewModel(
     // calendarData 는 물준날 , 리뷰 , 리뷰 1,2,3 총 5개로 이루어져있습니다.
     val selectedCalendarData = MutableLiveData<CalendarData>()
 
-    val selectedCalendarDate = selectedCalendarData.value?.wateredDate?.let {
+    private val convertedSelectCalendarDate = selectedCalendarData.value?.wateredDate?.let {
         DateUtil.convertDateToCalendarDay(
             it
         )
     }
 
-    val selectedDate = selectedCalendarDate
+    val selectedDate =
+        "${convertedSelectCalendarDate?.year}년 ${convertedSelectCalendarDate?.month}월 ${convertedSelectCalendarDate?.day}일"
 
     private val _calendarData = MutableLiveData<CalendarRes>()
     val calendarData: MutableLiveData<CalendarRes>

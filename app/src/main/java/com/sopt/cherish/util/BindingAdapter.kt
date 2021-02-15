@@ -37,16 +37,6 @@ object BindingAdapter {
     }
 
     @JvmStatic
-    @BindingAdapter("android:allowChange")
-    fun allowChange(imageView: ImageView, focus: Boolean) {
-        if (focus) {
-            imageView.setImageResource(R.drawable.icn_allow_top)
-        } else {
-            imageView.setImageResource(R.drawable.icn_allow)
-        }
-    }
-
-    @JvmStatic
     @BindingAdapter("android:setPlantImage")
     fun setPlantImage(imageView: ImageView, plantImageUrl: String?) {
         // todo : 만약에 growth가 300이상을 넘어갔을 경우, image가 아닌 그래픽 url을 사용해서 작동시킨다면???

@@ -34,7 +34,6 @@ class CalendarFragment : Fragment() {
         binding.detailPlantViewModel = viewModel
         initializeViewModelData()
         initializeCalendar(binding)
-        observeCalendarModeChangeEvent(binding)
         observeCalendarData(binding)
 
         binding.calendarViewMemoReviseBtn.setOnClickListener {
@@ -42,6 +41,10 @@ class CalendarFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        /*observeCalendarModeChangeEvent(binding)*/
     }
 
     private fun navigateReviseReview() {
@@ -87,57 +90,17 @@ class CalendarFragment : Fragment() {
         viewModel.calendarModeChangeEvent.value = false
     }
 
-    private fun observeCalendarModeChangeEvent(binding: FragmentCalendarBinding) {
-        viewModel.calendarModeChangeEvent.observe(viewLifecycleOwner) {
-            if (it) {
-                binding.reviewBack.setImageResource(R.drawable.icn_allow)
-                binding.calendarView.changeCalendarModeWeeks()
-            } else {
-                binding.reviewBack.setImageResource(R.drawable.icn_allow_top)
-                binding.calendarView.changeCalendarModeMonths()
-            }
-        }
-    }
-
-    // todo : 여기 있는 모든 것들을 바인딩 어댑터로 만든다. today's work 02.15
-    private fun initializeCalendar(binding: FragmentCalendarBinding) {
-        allowCalendarCache(binding)
-        changeCalendarMode(binding)
-        addDateClickListener(binding)
-    }
-
-    private fun changeCalendarMode(binding: FragmentCalendarBinding) {
-        binding.reviewBack.setOnClickListener { view ->
-            viewModel.calendarModeChangeEvent.value = !viewModel.calendarModeChangeEvent.value!!
-        }
-    }
-
-    private fun allowCalendarCache(binding: FragmentCalendarBinding) {
-        binding.calendarView.state().edit().isCacheCalendarPositionEnabled(true)
-    }
-
-    private fun addDateClickListener(binding: FragmentCalendarBinding) {
-        binding.calendarView.setOnDateChangedListener { widget, date, selected ->
-            binding.calendarViewChipLayout.clearChips()
-            showDate(binding, date) // 바인딩 어댑터로 바꿀거야
-            // 처음 캘린더 화면에 보여주기 위한 방법
-            showContent(binding, selectedDate = date)
-        }
-    }
-
-    private fun showContent(binding: FragmentCalendarBinding, selectedDate: CalendarDay) {
-        viewModel.calendarData.value.let { calendarRes ->
-            binding.reviewAllText.text = " "
-            calendarRes?.waterData?.calendarData?.filter {
-                DateUtil.convertDateToCalendarDay(it.wateredDate) == selectedDate
-            }?.map {
-                showChips(binding, listOf(it.userStatus1, it.userStatus2, it.userStatus3))
-                showMemo(binding, it.review)
-                viewModel.selectedCalendarData.value = it
-            }
-
-        }
-    }
+    /* private fun observeCalendarModeChangeEvent(binding: FragmentCalendarBinding) {
+         viewModel.calendarModeChangeEvent.observe(viewLifecycleOwner) {
+             if (it) {
+                 binding.reviewBack.setImageResource(R.drawable.icn_allow)
+                 binding.calendarView.changeCalendarModeWeeks()
+             } else {
+                 binding.reviewBack.setImageResource(R.drawable.icn_allow_top)
+                 binding.calendarView.changeCalendarModeMonths()
+             }
+         }
+     }*/
 
     private fun observeCalendarData(binding: FragmentCalendarBinding) {
         viewModel.calendarData.observe(viewLifecycleOwner) { calendarRes ->
@@ -160,8 +123,43 @@ class CalendarFragment : Fragment() {
         }
     }
 
-    // todo : 전부 바인딩 어댑터로 넘겨버리면 됨
-    // todo : 바인딩 어댑터로 넘기게 되면 이제 캘린더 프래그먼트로 다시 돌아올 떄 데이터들이 다시금 세팅되어 있을 수 있음.
+    private fun initializeCalendar(binding: FragmentCalendarBinding) {
+        allowCalendarCache(binding)
+        changeCalendarMode(binding)
+        addDateClickListener(binding)
+    }
+
+    private fun changeCalendarMode(binding: FragmentCalendarBinding) {
+        binding.reviewBack.setOnClickListener { view ->
+            viewModel.calendarModeChangeEvent.value = !viewModel.calendarModeChangeEvent.value!!
+        }
+    }
+
+    private fun allowCalendarCache(binding: FragmentCalendarBinding) {
+        binding.calendarView.state().edit().isCacheCalendarPositionEnabled(true)
+    }
+
+    private fun addDateClickListener(binding: FragmentCalendarBinding) {
+        binding.calendarView.setOnDateChangedListener { widget, date, selected ->
+            binding.calendarViewChipLayout.clearChips()
+            showDate(binding, date)
+            showContent(binding, selectedDate = date)
+        }
+    }
+
+    private fun showContent(binding: FragmentCalendarBinding, selectedDate: CalendarDay) {
+        viewModel.calendarData.value.let { calendarRes ->
+            binding.reviewAllText.text = " "
+            calendarRes?.waterData?.calendarData?.filter {
+                DateUtil.convertDateToCalendarDay(it.wateredDate) == selectedDate
+            }?.map {
+                showChips(binding, listOf(it.userStatus1, it.userStatus2, it.userStatus3))
+                showMemo(binding, it.review)
+                viewModel.selectedCalendarData.value = it
+            }
+        }
+    }
+
     @SuppressLint("SetTextI18n")
     private fun showDate(binding: FragmentCalendarBinding, date: CalendarDay) {
         binding.calendarViewSelectedDate.text = "${date.year}년 ${date.month}월 ${date.day}일"
