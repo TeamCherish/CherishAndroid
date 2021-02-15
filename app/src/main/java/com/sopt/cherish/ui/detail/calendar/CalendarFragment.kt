@@ -24,7 +24,6 @@ class CalendarFragment : Fragment() {
 
     private val viewModel: DetailPlantViewModel by activityViewModels()
 
-    // todo : SingleLiveEvent 공부하기
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -58,6 +57,7 @@ class CalendarFragment : Fragment() {
         }
         // binding 객체를 전역으로 만들어줘야하네....?
         // todo : bindingAdapdater를 어떻게 써야할 지는 다시한번 고민을 좀 해보는게 맞는거 같다.
+        // todo : 바인딩 객체를 클래스필드 변수로 뺴는것이 아니라 바인딩 어댑터를 사용해서 좀 더 뷰 코드가 깔끔해 질 수 있도록 해보자.
         viewModel.fetchCalendarData()
     }
 
@@ -192,6 +192,7 @@ class CalendarFragment : Fragment() {
     }
 
     // todo : 전부 바인딩 어댑터로 넘겨버리면 됨
+    // todo : 바인딩 어댑터로 넘기게 되면 이제 캘린더 프래그먼트로 다시 돌아올 떄 데이터들이 다시금 세팅되어 있을 수 있음.
     @SuppressLint("SetTextI18n")
     private fun showDate(binding: FragmentCalendarBinding, date: CalendarDay) {
         binding.calendarViewSelectedDate.text = "${date.year}년 ${date.month}월 ${date.day}일"
