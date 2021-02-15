@@ -1,10 +1,7 @@
 package com.sopt.cherish.remote.api
 
 import com.google.gson.annotations.SerializedName
-import retrofit2.http.Body
-import retrofit2.http.Headers
-import retrofit2.http.POST
-import retrofit2.http.PUT
+import retrofit2.http.*
 
 // request param 필요 , 리뷰 물주기
 // data class 이름 바꿔라 userId가 아니라 CherishId 잖아 훈기야
@@ -38,6 +35,12 @@ data class ReviseReviewReq(
     @SerializedName("keyword3") val userStatus3: String?,
 )
 
+// Delete Review Data
+data class DeleteReviewReq(
+    @SerializedName("CherishId") val cherishId: Int,
+    @SerializedName("water_date") val waterDate: String
+)
+
 interface ReviewAPI {
     @Headers("Content-Type:application/json")
     @POST("water")
@@ -48,5 +51,10 @@ interface ReviewAPI {
     @PUT("calendar")
     suspend fun reviseReview(
         @Body reviseReviewReq: ReviseReviewReq
+    ): UtilResponseWithOutStatus
+
+    @HTTP(method = "DELETE", path = "calendar", hasBody = true)
+    suspend fun deleteReview(
+        @Body deleteReviewReq: DeleteReviewReq
     ): UtilResponseWithOutStatus
 }

@@ -97,7 +97,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
     private fun observeCherishUsers() {
         viewModel.cherishUsers.observe(viewLifecycleOwner) {
             setCherishUserListAdapter(it)
-            setSelectedUser(it.userData.userList[0])
+            setSelectedUser(it.userData.userList.reversed()[0])
         }
     }
 
@@ -107,7 +107,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
     }
 
     private fun setCherishUserListAdapter(userResult: UserResult) {
-        homeCherryListAdapter.data = userResult.userData.userList as MutableList<User>
+        homeCherryListAdapter.data = userResult.userData.userList.reversed() as MutableList<User>
         homeCherryListAdapter.notifyDataSetChanged()
     }
 

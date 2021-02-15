@@ -1,5 +1,6 @@
 package com.sopt.cherish.ui.review
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -85,6 +86,9 @@ class ReviewActivity : AppCompatActivity() {
                 )
             )
             showLoadingDialog()
+            val intent = Intent()
+            intent.putExtra("reviewCode", true)
+            setResult(RESULT_OK, intent)
             finish()
         }
     }

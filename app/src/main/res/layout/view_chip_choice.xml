@@ -10,5 +10,6 @@
     android:includeFontPadding="false"
     android:textColor="@color/cherish_calendar_chip_text_color"
     android:textSize="@dimen/text_12sp"
+    android:textAlignment="center"
     android:theme="@style/Widget.MaterialComponents.Chip.Choice"
     app:chipStrokeColor="@color/cherish_calendar_chip_background_color" />

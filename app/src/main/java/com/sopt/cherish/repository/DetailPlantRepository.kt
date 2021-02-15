@@ -19,4 +19,7 @@ class DetailPlantRepository(
 
     suspend fun sendReviseReviewData(reviseReviewReq: ReviseReviewReq) =
         reviewAPI.reviseReview(reviseReviewReq)
+
+    suspend fun deleteReviewData(deleteReviewReq: DeleteReviewReq) =
+        reviewAPI.deleteReview(deleteReviewReq)
 }
