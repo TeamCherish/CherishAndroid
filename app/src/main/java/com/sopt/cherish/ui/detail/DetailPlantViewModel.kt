@@ -3,10 +3,7 @@ package com.sopt.cherish.ui.detail
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sopt.cherish.remote.api.CalendarData
-import com.sopt.cherish.remote.api.CalendarRes
-import com.sopt.cherish.remote.api.ReviewWateringReq
-import com.sopt.cherish.remote.api.ReviseReviewReq
+import com.sopt.cherish.remote.api.*
 import com.sopt.cherish.repository.DetailPlantRepository
 import com.sopt.cherish.util.SingleLiveEvent
 import kotlinx.coroutines.launch
@@ -51,6 +48,11 @@ class DetailPlantViewModel(
     // [Revise Review]
     fun sendReviseReviewToServer(reviseReviewReq: ReviseReviewReq) = viewModelScope.launch {
         detailPlantRepository.sendReviseReviewData(reviseReviewReq)
+    }
+
+    // [Delete Review]
+    fun deleteReview(deleteReviewReq: DeleteReviewReq) = viewModelScope.launch {
+        detailPlantRepository.deleteReviewData(deleteReviewReq)
     }
 
 }

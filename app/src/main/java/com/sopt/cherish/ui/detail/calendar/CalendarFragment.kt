@@ -148,6 +148,7 @@ class CalendarFragment : Fragment() {
 
     private fun observeCalendarData(binding: FragmentCalendarBinding, selectedDate: CalendarDay) {
         viewModel.calendarData.observe(viewLifecycleOwner) { calendarRes ->
+            // todo : 클릭하지 않거나 메모가 없는대도 불구하고 메모 수정으로 가게 되는거 막아야함.
             // 내가 굉장히 어썸하게 알고리즘을 못짠거 같은 기분입니다.
             val waterDayListInDate = mutableListOf<Date>()
             val wateredDayList = mutableListOf<CalendarDay?>() // 물 준날의 리스트
