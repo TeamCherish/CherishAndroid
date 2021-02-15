@@ -8,6 +8,7 @@ class DotDecorator(
     private val color: Int,
     private val dates: CalendarDay
 ) : DayViewDecorator {
+
     override fun shouldDecorate(day: CalendarDay?): Boolean = dates == day
 
     override fun decorate(view: DayViewFacade) {

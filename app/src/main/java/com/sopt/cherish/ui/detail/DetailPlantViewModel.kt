@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.cherish.remote.api.*
 import com.sopt.cherish.repository.DetailPlantRepository
-import com.sopt.cherish.util.DateUtil
 import com.sopt.cherish.util.SingleLiveEvent
 import kotlinx.coroutines.launch
 
@@ -31,15 +30,6 @@ class DetailPlantViewModel(
     // ReviseReview를 위한 변수들
     // calendarData 는 물준날 , 리뷰 , 리뷰 1,2,3 총 5개로 이루어져있습니다.
     val selectedCalendarData = MutableLiveData<CalendarData>()
-
-    private val convertedSelectCalendarDate = selectedCalendarData.value?.wateredDate?.let {
-        DateUtil.convertDateToCalendarDay(
-            it
-        )
-    }
-
-    val selectedDate =
-        "${convertedSelectCalendarDate?.year}년 ${convertedSelectCalendarDate?.month}월 ${convertedSelectCalendarDate?.day}일"
 
     private val _calendarData = MutableLiveData<CalendarRes>()
     val calendarData: MutableLiveData<CalendarRes>

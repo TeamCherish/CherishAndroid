@@ -3,7 +3,6 @@ package com.sopt.cherish.ui.detail.calendar
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.*
-import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -14,11 +13,11 @@ import com.sopt.cherish.ui.detail.DetailPlantActivity
 import com.sopt.cherish.ui.detail.DetailPlantViewModel
 import com.sopt.cherish.ui.review.ReviseReviewFragment
 import com.sopt.cherish.util.DateUtil
-import com.sopt.cherish.util.SimpleLogger
 import com.sopt.cherish.util.extension.FlexBoxExtension.addChipCalendar
 import com.sopt.cherish.util.extension.FlexBoxExtension.clearChips
-import com.sopt.cherish.view.calendar.DotDecorator
 
+// todo : 삭제하고 왔을 때 갱신은 되는데 dot가 안지워짐
+// todo : 삭제 혹은 수정했을 떄 날짜가 클릭은 되어 있는데 밑에 내용물들이 보이지 않음.
 class CalendarFragment : Fragment() {
 
     private val viewModel: DetailPlantViewModel by activityViewModels()
@@ -34,17 +33,13 @@ class CalendarFragment : Fragment() {
         binding.detailPlantViewModel = viewModel
         initializeViewModelData()
         initializeCalendar(binding)
-        observeCalendarData(binding)
+        addDateClickListener(binding)
 
         binding.calendarViewMemoReviseBtn.setOnClickListener {
             navigateReviseReview()
         }
 
         return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        /*observeCalendarModeChangeEvent(binding)*/
     }
 
     private fun navigateReviseReview() {
@@ -58,10 +53,6 @@ class CalendarFragment : Fragment() {
         if (activity != null) {
             (activity as DetailPlantActivity).setActionBarTitle("식물 캘린더")
         }
-        // binding 객체를 전역으로 만들어줘야하네....?
-        // todo : bindingAdapdater를 어떻게 써야할 지는 다시한번 고민을 좀 해보는게 맞는거 같다.
-        // todo : 바인딩 객체를 클래스필드 변수로 뺴는것이 아니라 바인딩 어댑터를 사용해서 좀 더 뷰 코드가 깔끔해 질 수 있도록 해보자.
-        SimpleLogger.logI("CalendarFragment Resuming!")
         viewModel.fetchCalendarData()
     }
 
@@ -81,7 +72,6 @@ class CalendarFragment : Fragment() {
                 activity?.onBackPressed()
                 return true
             }
-
         }
         return super.onOptionsItemSelected(item)
     }
@@ -90,43 +80,9 @@ class CalendarFragment : Fragment() {
         viewModel.calendarModeChangeEvent.value = false
     }
 
-    /* private fun observeCalendarModeChangeEvent(binding: FragmentCalendarBinding) {
-         viewModel.calendarModeChangeEvent.observe(viewLifecycleOwner) {
-             if (it) {
-                 binding.reviewBack.setImageResource(R.drawable.icn_allow)
-                 binding.calendarView.changeCalendarModeWeeks()
-             } else {
-                 binding.reviewBack.setImageResource(R.drawable.icn_allow_top)
-                 binding.calendarView.changeCalendarModeMonths()
-             }
-         }
-     }*/
-
-    private fun observeCalendarData(binding: FragmentCalendarBinding) {
-        viewModel.calendarData.observe(viewLifecycleOwner) { calendarRes ->
-            // 물줘야 하는 날
-            calendarRes.waterData.calendarData.forEach { calendarData ->
-                binding.calendarView.addDecorator(
-                    DotDecorator(
-                        color = ContextCompat.getColor(requireContext(), R.color.cherish_green_sub),
-                        dates = DateUtil.convertDateToCalendarDay(calendarData.wateredDate)
-                    )
-                )
-            }
-            // 물 준 날
-            binding.calendarView.addDecorator(
-                DotDecorator(
-                    color = ContextCompat.getColor(requireContext(), R.color.cherish_pink_sub),
-                    dates = DateUtil.convertDateToCalendarDay(calendarRes.waterData.futureWaterDate)
-                )
-            )
-        }
-    }
-
     private fun initializeCalendar(binding: FragmentCalendarBinding) {
         allowCalendarCache(binding)
         changeCalendarMode(binding)
-        addDateClickListener(binding)
     }
 
     private fun changeCalendarMode(binding: FragmentCalendarBinding) {

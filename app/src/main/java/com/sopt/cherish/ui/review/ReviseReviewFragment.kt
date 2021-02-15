@@ -92,7 +92,7 @@ class ReviseReviewFragment : Fragment() {
                 return true
             }
             R.id.trash -> {
-                // 메모 삭제하기를 실행한다.
+                // todo : 메모 삭제하기 이전에 정말로 삭제를 할것인지를 물어보면 될 거 같음.
                 viewModel.deleteReview(
                     DeleteReviewReq(
                         viewModel.cherishId.value!!,
