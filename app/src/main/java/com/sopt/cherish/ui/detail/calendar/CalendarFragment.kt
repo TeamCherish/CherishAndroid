@@ -17,17 +17,17 @@ import com.sopt.cherish.util.extension.FlexBoxExtension.addChipCalendar
 import com.sopt.cherish.util.extension.FlexBoxExtension.clearChips
 
 // todo : 삭제하고 왔을 때 갱신은 되는데 dot가 안지워짐
-// todo : 삭제 혹은 수정했을 떄 날짜가 클릭은 되어 있는데 밑에 내용물들이 보이지 않음.
 class CalendarFragment : Fragment() {
 
     private val viewModel: DetailPlantViewModel by activityViewModels()
 
+    private lateinit var binding: FragmentCalendarBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         setHasOptionsMenu(true)
-        val binding: FragmentCalendarBinding =
+        binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_calendar, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.detailPlantViewModel = viewModel
@@ -54,6 +54,9 @@ class CalendarFragment : Fragment() {
             (activity as DetailPlantActivity).setActionBarTitle("식물 캘린더")
         }
         viewModel.fetchCalendarData()
+        binding.calendarViewChipLayout.clearChips()
+        binding.calendarView.selectedDate?.let { showDate(binding, it) }
+        binding.calendarView.selectedDate?.let { showContent(binding, it) }
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
@@ -96,6 +99,7 @@ class CalendarFragment : Fragment() {
     }
 
     private fun addDateClickListener(binding: FragmentCalendarBinding) {
+
         binding.calendarView.setOnDateChangedListener { widget, date, selected ->
             binding.calendarViewChipLayout.clearChips()
             showDate(binding, date)

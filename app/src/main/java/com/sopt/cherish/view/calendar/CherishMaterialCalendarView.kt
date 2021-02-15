@@ -25,7 +25,4 @@ class CherishMaterialCalendarView constructor(context: Context, attrs: Attribute
         layoutParams.height = 388.dp
     }
 
-    fun removeDecorator() {
-        invalidateDecorators()
-    }
 }
