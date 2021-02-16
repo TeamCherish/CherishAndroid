@@ -52,7 +52,6 @@ class HomeFragment : Fragment(), OnItemClickListener {
         standardBottomSheetBehavior =
             BottomSheetBehavior.from(binding.homeStandardBottomSheet)
         addBottomSheetCallback()
-        // 바텀시트 리사이클러뷰 초기화
         initializeRecyclerView(homeCherryListAdapter)
 
         binding.homeWateringBtn.setOnClickListener {
@@ -112,9 +111,8 @@ class HomeFragment : Fragment(), OnItemClickListener {
     }
 
     override fun onItemClick(itemBinding: MainCherryItemBinding, position: Int) {
-        // 정확히 작동합니다.
-        slideDownBottomSheet()
         viewModel.selectedCherishUser.value = homeCherryListAdapter.data[position]
+        slideDownBottomSheet()
     }
 
     private fun initializeRecyclerView(
@@ -131,7 +129,8 @@ class HomeFragment : Fragment(), OnItemClickListener {
 
     // 화면이동
     private fun navigateWatering(id: Int) {
-        if (viewModel.selectedCherishUser.value?.dDay!! <= 0) {
+        // +로 가는 녀석들이 가장 물주기가 시급한 친구들이라고해서 일단 알고리즘을 이렇게 작성함.
+        if (viewModel.selectedCherishUser.value?.dDay!! >= 0) {
             WateringDialogFragment(id).show(parentFragmentManager, TAG)
         } else {
             longToast(requireContext(), "물 줄수있는 날이 아니에요 ㅠ")
