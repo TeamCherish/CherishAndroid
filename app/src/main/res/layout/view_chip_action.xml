@@ -7,6 +7,7 @@
     android:fontFamily="@font/notosanscjkkr_regular"
     android:includeFontPadding="false"
     android:textSize="13sp"
+    android:textAlignment="center"
     android:theme="@style/Widget.MaterialComponents.Chip.Action"
     app:chipStrokeColor="@color/cherish_light_black"
     app:chipStrokeWidth="1dp"

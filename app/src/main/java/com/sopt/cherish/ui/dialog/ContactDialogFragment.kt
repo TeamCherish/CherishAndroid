@@ -1,6 +1,7 @@
 package com.sopt.cherish.ui.dialog
 
 import android.annotation.SuppressLint
+import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.content.pm.ResolveInfo
 import android.graphics.Color
@@ -187,12 +188,13 @@ class ContactDialogFragment(private val cherishId: Int) : DialogFragment(), View
         if (requestCode == codeThatReviewPage) {
             startReviewAndDismiss(cherishId)
         }
+        if (resultCode == RESULT_OK) {
+            viewModel.animationTrigger.value = data?.getBooleanExtra("reviewCode", true)
+        }
     }
 
 
     private fun startReviewAndDismiss(cherishId: Int) {
-        /*DialogReviewFragment(cherishId).show(parentFragmentManager, tag)*/
-        /*(activity as MainActivity).showReviewFragment()*/
         val intent = Intent(requireContext(), ReviewActivity::class.java)
         intent.putExtra("userNickname", viewModel.userNickName.value)
         intent.putExtra("selectedCherishNickname", viewModel.selectedCherishUser.value!!.nickName)

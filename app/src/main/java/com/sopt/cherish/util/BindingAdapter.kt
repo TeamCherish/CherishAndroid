@@ -17,6 +17,7 @@ import com.sopt.cherish.util.PixelUtil.dp
 import com.sopt.cherish.util.animation.ProgressbarAnimation
 
 object BindingAdapter {
+
     @JvmStatic
     @BindingAdapter("android:setProfile")
     fun setProfile(imageView: ImageView, imageUrl: String) {
@@ -26,29 +27,19 @@ object BindingAdapter {
             .into(imageView)
     }
 
-    // dDay 조건은 변경을 좀 해줘야 함 현재 서버에도 더미데이터만 있어서
     @JvmStatic
     @BindingAdapter("android:waterVisibility")
     fun waterVisibility(imageView: ImageView, dDay: Int) {
-        if (dDay < 7)
+        if (dDay > 7)
             imageView.visibility = View.VISIBLE
         else
             imageView.visibility = View.INVISIBLE
     }
 
     @JvmStatic
-    @BindingAdapter("android:allowChange")
-    fun allowChange(imageView: ImageView, focus: Boolean) {
-        if (focus) {
-            imageView.setImageResource(R.drawable.icn_allow_top)
-        } else {
-            imageView.setImageResource(R.drawable.icn_allow)
-        }
-    }
-
-    @JvmStatic
     @BindingAdapter("android:setPlantImage")
     fun setPlantImage(imageView: ImageView, plantImageUrl: String?) {
+        // todo : 만약에 growth가 300이상을 넘어갔을 경우, image가 아닌 그래픽 url을 사용해서 작동시킨다면???
         Glide.with(imageView.context)
             .load(plantImageUrl)
             .into(imageView)
@@ -90,21 +81,8 @@ object BindingAdapter {
             state = BottomSheetBehavior.STATE_COLLAPSED
             peekHeight = 150.dp
             expandedOffset = 100.dp
-            halfExpandedRatio = 0.21f
+            halfExpandedRatio = 0.2f
             isHideable = false
-        }.also { bottomSheetBehavior ->
-            bottomSheetBehavior.addBottomSheetCallback(object :
-                BottomSheetBehavior.BottomSheetCallback() {
-                override fun onStateChanged(bottomSheet: View, newState: Int) {
-
-                }
-
-                override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                    if (standardBottomSheetBehavior.state == BottomSheetBehavior.STATE_DRAGGING && slideOffset < 0.2) {
-                        bottomSheetBehavior.peekHeight = 60.dp
-                    }
-                }
-            })
         }
     }
 
@@ -117,7 +95,7 @@ object BindingAdapter {
                 textView.text = "D+$dDay"
             }
             dDay < 0 -> {
-                textView.text = "D-$dDay"
+                textView.text = "D$dDay"
             }
             else -> {
                 textView.text = "D-DAY"
