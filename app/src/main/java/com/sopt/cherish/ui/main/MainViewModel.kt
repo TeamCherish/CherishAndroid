@@ -25,8 +25,6 @@ class MainViewModel(
 ) : ViewModel() {
     // todo : reviewRepository 뗴어내야함 reviewViewModel로
     // [home] Server connection
-    // userId는 값이 1개 , fetchUser 함수를 통해서 _users에 userId가 가지고 있는 cherish들이 보인다.
-    // login 시 intent 에서 값을 받아서 옴
 
     // Utilities
     val animationTrigger = SingleLiveEvent<Boolean>()
@@ -44,6 +42,7 @@ class MainViewModel(
         get() = _cherishUsers
 
     // recyclerview에 클릭된 유저 1명
+    // 다른 곳에서 observing을 통해서 값을 변경시켜줘야 하기 때문에 라이브데이터를 사용해야 한다.
     val selectedCherishUser = MutableLiveData<User>()
 
     fun fetchUsers() = viewModelScope.launch {
@@ -104,7 +103,6 @@ class MainViewModel(
     } catch (exception: Exception) {
         exceptionLiveData.postValue(exception.message)
     }
-
 
     fun postponeWateringDate(postponeWateringDateReq: PostponeWateringDateReq) = try {
         viewModelScope.launch {
