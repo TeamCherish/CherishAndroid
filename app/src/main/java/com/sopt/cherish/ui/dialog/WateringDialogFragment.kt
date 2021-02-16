@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.DialogWateringBinding
@@ -14,41 +15,34 @@ import com.sopt.cherish.util.DialogUtil
 /**
  * Created on 01-03 by SSong-develop
  * popUp_Watering
+ * todo : sizing 하는 것만 다시 한번 좀 생각해보면 좋을거 같음 이건 끝!
  */
 
-class WateringDialogFragment(private val cherishId: Int) : DialogFragment(), View.OnClickListener {
-    private val TAG = "WateringDialog"
+class WateringDialogFragment : DialogFragment(), View.OnClickListener {
+
+    companion object {
+        const val TAG = "WateringDialog"
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view = inflater.inflate(R.layout.dialog_watering, container, false)
-        val binding = DialogWateringBinding.bind(view)
-
+        val binding: DialogWateringBinding =
+            DataBindingUtil.inflate(inflater, R.layout.dialog_watering, container, false)
+        binding.dialogWatering = this
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        binding.wateringAcceptBtn.setOnClickListener {
-            navigateContact(cherishId)
-        }
-
-        binding.wateringNextTimeBtn.setOnClickListener {
-            navigateNextTimeContact()
-        }
-
-        binding.wateringDismissButton.setOnClickListener {
-            dismiss()
-        }
         return binding.root
     }
 
-    private fun navigateContact(cherishId: Int) {
-        parentFragmentManager.let { fm -> ContactDialogFragment(cherishId).show(fm, TAG) }
+    fun navigateContact() {
+        parentFragmentManager.let { fm -> ContactDialogFragment().show(fm, TAG) }
         dismiss()
     }
 
-    private fun navigateNextTimeContact() {
+    fun navigateNextTimeContact() {
         DelayWateringDialogFragment().show(parentFragmentManager, TAG)
         dismiss()
     }
@@ -62,4 +56,5 @@ class WateringDialogFragment(private val cherishId: Int) : DialogFragment(), Vie
         super.onResume()
         DialogUtil.adjustDialogSize(this, 0.875f, 0.57f)
     }
+
 }

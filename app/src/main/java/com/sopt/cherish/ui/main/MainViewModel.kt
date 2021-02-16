@@ -58,12 +58,6 @@ class MainViewModel(
     val calendarData: MutableLiveData<CalendarRes>
         get() = _calendarData
 
-    // userStatus Chip
-    // todo : list로 표현하기 , 그 전에 이걸 뷰모델에서 가져도 되는건지?
-    val userStatus1 = MutableLiveData<String>()
-    val userStatus2 = MutableLiveData<String>()
-    val userStatus3 = MutableLiveData<String>()
-
     fun fetchCalendarData() = viewModelScope.launch {
         try {
             _calendarData.postValue(selectedCherishUser.value?.id?.let {
