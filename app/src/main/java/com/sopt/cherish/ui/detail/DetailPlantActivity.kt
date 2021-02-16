@@ -25,7 +25,6 @@ import com.sopt.cherish.ui.enrollment.EnrollModifyPlantFragment
 
 /**
  * 식물 상세보기
- * todo : 1. 물을 준 다음에 그 날의 상태로 chip들이 변경이 안됨. 2. 캘린더 성능. 3. 캘린더에서 메모를 수정한다던지 그런 작업들
  */
 
 //created by nayoung : 사용자가 메모한 내용 보여주는 activity

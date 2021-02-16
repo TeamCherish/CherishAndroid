@@ -28,6 +28,7 @@ import com.sopt.cherish.util.extension.shortToast
 /**
  * Created on 2020-01-03 by SSong-develop
  * popUp_Contact
+ * 끝!
  */
 
 class ContactDialogFragment : DialogFragment(), View.OnClickListener {

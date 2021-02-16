@@ -32,6 +32,7 @@ import com.sopt.cherish.util.extension.longToast
  * 메인 홈뷰
  * 초기상태와 중간에 있는 경우 2개 다 고려해야 합니다.
  * todo : 1. 아무것도 등록안됐을때 상태 , 2. 바텀시트 클릭 시 클릭된게 맨 앞에서 보여지게 하는거
+ * todo : fetchUser() 할때마다 selectedUser가 갱신되는게 좀 마음이 아프긴 해요;;; 이거 어떻게 해결할 방법만 좀 찾으면...
  */
 
 class HomeFragment : Fragment(), OnItemClickListener {
