@@ -36,6 +36,10 @@ class WateringDialogFragment(private val cherishId: Int) : DialogFragment(), Vie
         binding.wateringNextTimeBtn.setOnClickListener {
             navigateNextTimeContact()
         }
+
+        binding.wateringDismissButton.setOnClickListener {
+            dismiss()
+        }
         return binding.root
     }
 

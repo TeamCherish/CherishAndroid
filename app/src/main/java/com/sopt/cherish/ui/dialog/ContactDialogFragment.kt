@@ -30,6 +30,7 @@ import com.sopt.cherish.util.extension.shortToast
 
 class ContactDialogFragment(private val cherishId: Int) : DialogFragment(), View.OnClickListener {
     private val codeThatReviewPage = 1001
+
     private val viewModel: MainViewModel by activityViewModels()
     private lateinit var binding: DialogContactBinding
 
@@ -42,7 +43,6 @@ class ContactDialogFragment(private val cherishId: Int) : DialogFragment(), View
             DataBindingUtil.inflate(inflater, R.layout.dialog_contact, container, false)
         viewModel.fetchCalendarData()
         binding.mainViewModel = viewModel
-
 
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
