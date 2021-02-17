@@ -13,7 +13,7 @@ import com.sopt.cherish.R
 import com.sopt.cherish.databinding.MyPageCherryItemBinding
 import com.sopt.cherish.remote.api.MyPageCherishData
 
-class MyPageBottomSheetAdapter(private var data:MutableList<MyPageCherishData>) :
+class MyPageBottomSheetAdapter(private var data:MutableList<MyPageCherishData>?) :
     RecyclerView.Adapter<MyPageBottomSheetAdapter.ViewHolder>() {
 
     inner class ViewHolder(private var binding: MyPageCherryItemBinding) :
@@ -72,14 +72,14 @@ class MyPageBottomSheetAdapter(private var data:MutableList<MyPageCherishData>) 
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(data[position])
+        holder.bind(data!![position])
 
         holder.itemView.setOnClickListener {
             itemClickListener.onClick(it, position)
         }
     }
 
-    override fun getItemCount(): Int = data.size
+    override fun getItemCount(): Int = data!!.size
 
     interface ItemClickListener {
         fun onClick(view: View, position: Int)
