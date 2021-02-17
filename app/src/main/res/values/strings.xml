@@ -56,6 +56,8 @@
     <string name="myPage_complete_text">성장완료</string>
     <string name="myPage_search_box_text">친구검색</string>
     <string name="myPage_cancel_text">취소</string>
+    <string name="myPage_add_phone_text">식물 등록하러 가기</string>
+    <string name="myPage_search_text">식물검색</string>
 
     <string name="calendar_future_watering_text">물 주는 날</string>
     <string name="calendar_watered_text">물 준 날</string>

@@ -13,10 +13,8 @@ import com.sopt.cherish.databinding.ActivityMainBinding
 import com.sopt.cherish.di.Injection
 import com.sopt.cherish.remote.api.MyPageCherishData
 import com.sopt.cherish.ui.adapter.Phonemypage
-import com.sopt.cherish.ui.enrollment.MyPagePhoneBookFragment
 import com.sopt.cherish.ui.main.home.HomeFragment
-import com.sopt.cherish.ui.main.manageplant.ManagePlantFragment
-import com.sopt.cherish.ui.main.manageplant.PlantFragment
+import com.sopt.cherish.ui.main.manageplant.*
 import com.sopt.cherish.ui.main.setting.SettingFragment
 import com.sopt.cherish.util.PermissionUtil
 import com.sopt.cherish.util.SimpleLogger
@@ -25,6 +23,7 @@ import com.sopt.cherish.util.SimpleLogger
 class MainActivity : AppCompatActivity() {
 
     private val viewModel: MainViewModel by viewModels { Injection.provideMainViewModelFactory() }
+    var search:Boolean=false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -134,23 +133,39 @@ class MainActivity : AppCompatActivity() {
         return list.size
     }
 
-    fun replaceFragment(index: Int,data:MutableList<MyPageCherishData>) {
+    fun replaceFragment(index: Int, data: MutableList<MyPageCherishData>?, isSearched:Boolean) {
+        search=isSearched
         val transAction = supportFragmentManager.beginTransaction()
         when (index) {
             0 -> {
-                transAction.replace(R.id.my_page_bottom_container, PlantFragment(data)).commit()
+                if(isSearched) //검색창 있는 뷰
+                    transAction.replace(R.id.my_page_bottom_container, PlantSearchFragment(data)).commit()
+                else //검색창 없는 뷰
+                    transAction.replace(R.id.my_page_bottom_container, PlantFragment(data)).commit()
             }
             1 -> {
                 if (PermissionUtil.isCheckedReadContactsPermission(this)) {
-                    transAction.replace(
-                        R.id.my_page_bottom_container, MyPagePhoneBookFragment()
-                    )
-                        .commit()
+                    if(isSearched)
+                        transAction.replace(
+                            R.id.my_page_bottom_container, MyPagePhoneBookSearchFragment()
+                        ).commit()
+                    else
+                        transAction.replace(
+                            R.id.my_page_bottom_container, MyPagePhoneBookFragment()
+                        ).commit()
                 } else {
                     PermissionUtil.openPermissionSettings(this)
                 }
                 //true
             }
         }
+    }
+
+    fun getIsSearched():Boolean{
+        return search
+    }
+
+    fun setIsSearched(isSearched:Boolean){
+        search=isSearched
     }
 }
