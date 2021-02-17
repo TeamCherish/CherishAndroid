@@ -61,4 +61,6 @@ object RetrofitBuilder {
     val modifyAPI: ModifyAPI = getRetrofit().create(ModifyAPI::class.java)
 
     val userinfoAPI:UserInfoAPI= getRetrofit().create(UserInfoAPI::class.java)
+
+    val checkphoneAPI: CheckPhoneAPI= getRetrofit().create(CheckPhoneAPI::class.java)
 }

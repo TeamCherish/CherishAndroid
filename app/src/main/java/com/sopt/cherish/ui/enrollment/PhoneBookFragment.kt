@@ -15,8 +15,16 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentPhoneBookBinding
+import com.sopt.cherish.remote.api.RequestCheckPhoneData
+import com.sopt.cherish.remote.api.ResponseCheckPhoneData
+import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.adapter.Phone
 import com.sopt.cherish.ui.adapter.PhoneBookAdapter
+import com.sopt.cherish.ui.dialog.CheckPhoneDialogFragment
+import com.sopt.cherish.ui.dialog.DeletePlantDialogFragment
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class PhoneBookFragment : Fragment() {
@@ -29,6 +37,7 @@ class PhoneBookFragment : Fragment() {
     var sortText = "asc"
     var countphonebook = 0
     private lateinit var enrollToolbar: Toolbar
+    private val requestData = RetrofitBuilder
 
     private lateinit var binding: FragmentPhoneBookBinding
 
@@ -66,10 +75,54 @@ class PhoneBookFragment : Fragment() {
             if (madapter.checkedRadioButton != null) {
 
                 Log.d("vvvv", madapter.phonename.toString())
-                setFragment(EnrollPlantFragment())
+                val phonenumber=madapter.phonenumber.substring(0,3)+"-"+madapter.phonenumber.substring(3,7)+"-"+
+                        madapter.phonenumber.substring(7,)
+                Log.d("phonenumbervvvv", phonenumber)
+
+                val body=RequestCheckPhoneData(phone = phonenumber.toString(),UserId =countphonebook )
+                requestData.checkphoneAPI.checkphone(body)
+                            .enqueue(
+                                object : Callback<ResponseCheckPhoneData> {
+                                    override fun onFailure(
+                                        call: Call<ResponseCheckPhoneData>,
+                                        t: Throwable
+                                    ) {
+                                        Log.d("통신 실패", t.toString())
+                                    }
+
+                                    override fun onResponse(
+                                        call: Call<ResponseCheckPhoneData>,
+                                        response: Response<ResponseCheckPhoneData>
+                                    ) {
+                                        Log.d("success", response.body().toString())
+                                        if(response.body()==null){
+                                            val deletedialog =
+                                                CheckPhoneDialogFragment(
+                                                    R.layout.fragment_check_phone_dialog,
+
+                                                ).show(
+                                                    parentFragmentManager, "asdf"
+                                                )
+
+                                        }
+                                        response.takeIf {
+                                            it.isSuccessful
+                                        }?.body()
+                                            ?.let { it ->
+                                                Log.d("중복", "중복")
+
+                                                    setFragment(EnrollPlantFragment())
+
+
+
+                                            }
+                                    }
+                                }
+                            )
+                    }
 
             }
-        }
+
 
         return view
     }
