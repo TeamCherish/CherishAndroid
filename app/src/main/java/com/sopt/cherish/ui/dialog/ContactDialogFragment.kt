@@ -1,9 +1,7 @@
 package com.sopt.cherish.ui.dialog
 
-import android.annotation.SuppressLint
 import android.app.Activity.RESULT_CANCELED
 import android.content.Intent
-import android.content.pm.ResolveInfo
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
@@ -21,9 +19,10 @@ import com.sopt.cherish.ui.review.ReviewActivity
 import com.sopt.cherish.util.DialogUtil
 import com.sopt.cherish.util.PermissionUtil
 import com.sopt.cherish.util.SimpleLogger
+import com.sopt.cherish.util.extension.ContextExtension.isInstalledApp
+import com.sopt.cherish.util.extension.ContextExtension.moveMarket
 import com.sopt.cherish.util.extension.FlexBoxExtension.addBlackChipModeChoice
 import com.sopt.cherish.util.extension.FlexBoxExtension.clearChips
-import com.sopt.cherish.util.extension.shortToast
 
 /**
  * Created on 2020-01-03 by SSong-develop
@@ -59,7 +58,6 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
 
     override fun onResume() {
         super.onResume()
-        SimpleLogger.logI("ContactDialog onResume")
         DialogUtil.adjustDialogSize(this, 0.875f, 0.542f)
     }
 
@@ -72,9 +70,14 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
             binding.contactChipLayout.apply {
                 clearChips()
                 if (it.waterData.calendarData.isNotEmpty()) {
-                    addBlackChipModeChoice(it.waterData.calendarData.last().userStatus1)
-                    addBlackChipModeChoice(it.waterData.calendarData.last().userStatus2)
-                    addBlackChipModeChoice(it.waterData.calendarData.last().userStatus3)
+                    it.waterData.calendarData.let { calendarData ->
+                        if (calendarData.last().userStatus1 != "" && calendarData.last().userStatus1 != "null")
+                            addBlackChipModeChoice(it.waterData.calendarData.last().userStatus1)
+                        if (calendarData.last().userStatus2 != "" && calendarData.last().userStatus2 != "null")
+                            addBlackChipModeChoice(it.waterData.calendarData.last().userStatus2)
+                        if (calendarData.last().userStatus3 != "" && calendarData.last().userStatus3 != "null")
+                            addBlackChipModeChoice(it.waterData.calendarData.last().userStatus3)
+                    }
                 }
             }
         }
@@ -96,13 +99,15 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
         }
     }
 
+    // todo : 얘가 지금 문제임 startActivityForResult로 하면 카카오톡이 안켜짐;;;
     fun navigateKakao() {
-        if (findKakaoTalk()) {
-            val kakaoIntent = context?.packageManager?.getLaunchIntentForPackage("com.kakao.talk")
-            kakaoIntent?.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivityForResult(kakaoIntent, codeThatReviewPage)
+        if (requireContext().isInstalledApp(KAKAO_PACKAGE_NAME)) {
+            val kakaoIntent = requireContext().packageManager.getLaunchIntentForPackage(
+                KAKAO_PACKAGE_NAME
+            )
+            startActivity(kakaoIntent)
         } else {
-            shortToast(requireContext(), "카카오톡이 없어요 ㅠ")
+            requireContext().moveMarket(KAKAO_PACKAGE_NAME)
         }
     }
 
@@ -129,28 +134,6 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
         )
     }
 
-    // todo : 여기 고쳐야함 카카오톡 작동안됨.
-    @SuppressLint("QueryPermissionsNeeded")
-    private fun findKakaoTalk(): Boolean {
-        var isExist = false
-        val phoneApps: List<ResolveInfo>
-        val intent = Intent(Intent.ACTION_MAIN, null)
-        intent.addCategory(Intent.CATEGORY_LAUNCHER)
-        phoneApps = context?.packageManager!!.queryIntentActivities(intent, 0)
-
-        try {
-            for (i in 0..phoneApps.size) {
-                if (phoneApps[i].activityInfo.packageName.startsWith("com.kakao.talk")) {
-                    isExist = true
-                    break
-                }
-            }
-        } catch (e: Exception) {
-            isExist = false
-        }
-        return isExist
-    }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == codeThatReviewPage) {
@@ -168,5 +151,9 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
         intent.putExtra("selectedCherishId", viewModel.selectedCherishUser.value!!.id)
         startActivity(intent)
         dismiss()
+    }
+
+    companion object {
+        private const val KAKAO_PACKAGE_NAME = "com.kakao.talk"
     }
 }
