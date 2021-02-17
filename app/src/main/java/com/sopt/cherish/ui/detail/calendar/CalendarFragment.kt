@@ -17,6 +17,7 @@ import com.sopt.cherish.util.extension.FlexBoxExtension.addChipCalendar
 import com.sopt.cherish.util.extension.FlexBoxExtension.clearChips
 
 // todo : 삭제하고 왔을 때 갱신은 되는데 dot가 안지워짐
+// todo : binding 객체 메모리 해제 꼭 시켜줘야 함
 class CalendarFragment : Fragment() {
 
     private val viewModel: DetailPlantViewModel by activityViewModels()
@@ -31,18 +32,16 @@ class CalendarFragment : Fragment() {
             DataBindingUtil.inflate(inflater, R.layout.fragment_calendar, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.detailPlantViewModel = viewModel
+        binding.calendarFragment = this
+
         initializeViewModelData()
         initializeCalendar(binding)
         addDateClickListener(binding)
 
-        binding.calendarViewMemoReviseBtn.setOnClickListener {
-            navigateReviseReview()
-        }
-
         return binding.root
     }
 
-    private fun navigateReviseReview() {
+    fun navigateReviseReview() {
         parentFragmentManager.beginTransaction().addToBackStack(TAG)
             .replace(R.id.fragment_detail, ReviseReviewFragment()).commit()
     }

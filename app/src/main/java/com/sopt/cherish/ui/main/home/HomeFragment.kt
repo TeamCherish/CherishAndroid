@@ -24,6 +24,7 @@ import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
 import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.util.GridItemDecorator
 import com.sopt.cherish.util.PixelUtil.dp
+import com.sopt.cherish.util.SimpleLogger
 import com.sopt.cherish.util.extension.longToast
 
 
@@ -31,6 +32,7 @@ import com.sopt.cherish.util.extension.longToast
  * 메인 홈뷰
  * 초기상태와 중간에 있는 경우 2개 다 고려해야 합니다.
  * todo : 1. 아무것도 등록안됐을때 상태 , 2. 바텀시트 클릭 시 클릭된게 맨 앞에서 보여지게 하는거
+ * todo : fetchUser() 할때마다 selectedUser가 갱신되는게 좀 마음이 아프긴 해요;;; 이거 어떻게 해결할 방법만 좀 찾으면...
  */
 
 class HomeFragment : Fragment(), OnItemClickListener {
@@ -55,7 +57,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
         initializeRecyclerView(homeCherryListAdapter)
 
         binding.homeWateringBtn.setOnClickListener {
-            navigateWatering(viewModel.selectedCherishUser.value?.id!!)
+            navigateWatering()
         }
 
         binding.homeUserAddText.setOnClickListener {
@@ -113,6 +115,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
     override fun onItemClick(itemBinding: MainCherryItemBinding, position: Int) {
         viewModel.selectedCherishUser.value = homeCherryListAdapter.data[position]
         slideDownBottomSheet()
+        SimpleLogger.logI(viewModel.selectedCherishUser.value!!.id.toString())
     }
 
     private fun initializeRecyclerView(
@@ -128,10 +131,10 @@ class HomeFragment : Fragment(), OnItemClickListener {
     }
 
     // 화면이동
-    private fun navigateWatering(id: Int) {
+    private fun navigateWatering() {
         // +로 가는 녀석들이 가장 물주기가 시급한 친구들이라고해서 일단 알고리즘을 이렇게 작성함.
         if (viewModel.selectedCherishUser.value?.dDay!! >= 0) {
-            WateringDialogFragment(id).show(parentFragmentManager, TAG)
+            WateringDialogFragment().show(parentFragmentManager, TAG)
         } else {
             longToast(requireContext(), "물 줄수있는 날이 아니에요 ㅠ")
         }

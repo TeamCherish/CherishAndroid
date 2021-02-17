@@ -4,9 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="detailPlantViewModel"
             type="com.sopt.cherish.ui.detail.DetailPlantViewModel" />
+
+        <variable
+            name="calendarFragment"
+            type="com.sopt.cherish.ui.detail.calendar.CalendarFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -135,6 +140,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_pencil"
+                    android:onClick="@{() -> calendarFragment.navigateReviseReview()}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 

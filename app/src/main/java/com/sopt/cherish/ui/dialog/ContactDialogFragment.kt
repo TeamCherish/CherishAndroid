@@ -1,7 +1,7 @@
 package com.sopt.cherish.ui.dialog
 
 import android.annotation.SuppressLint
-import android.app.Activity.RESULT_OK
+import android.app.Activity.RESULT_CANCELED
 import android.content.Intent
 import android.content.pm.ResolveInfo
 import android.graphics.Color
@@ -20,70 +20,46 @@ import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.ui.review.ReviewActivity
 import com.sopt.cherish.util.DialogUtil
 import com.sopt.cherish.util.PermissionUtil
+import com.sopt.cherish.util.SimpleLogger
+import com.sopt.cherish.util.extension.FlexBoxExtension.addBlackChipModeChoice
+import com.sopt.cherish.util.extension.FlexBoxExtension.clearChips
 import com.sopt.cherish.util.extension.shortToast
 
 /**
  * Created on 2020-01-03 by SSong-develop
  * popUp_Contact
- * todo : Calendar CherishId 7번이 이상함? date 타입이 다른거 같은데
+ * 끝!
  */
 
-class ContactDialogFragment(private val cherishId: Int) : DialogFragment(), View.OnClickListener {
+class ContactDialogFragment : DialogFragment(), View.OnClickListener {
     private val codeThatReviewPage = 1001
+
     private val viewModel: MainViewModel by activityViewModels()
-    private lateinit var binding: DialogContactBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding =
+        val binding: DialogContactBinding =
             DataBindingUtil.inflate(inflater, R.layout.dialog_contact, container, false)
+        SimpleLogger.logI("ContactDialog onCreated")
         viewModel.fetchCalendarData()
+        binding.lifecycleOwner = viewLifecycleOwner
         binding.mainViewModel = viewModel
-
+        binding.dialogContact = this
 
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        binding.contactCall.setOnClickListener {
-            navigateCall()
-        }
-
-        binding.contactKakaoTalk.setOnClickListener {
-            navigateKakao()
-        }
-
-        binding.contactMessage.setOnClickListener {
-            navigateToSendMessage()
-        }
+        setChip(binding)
 
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        initializeChip(binding)
-        setChip(binding)
-    }
-
-    private fun initializeChip(binding: DialogContactBinding) {
-        viewModel.calendarData.observe(viewLifecycleOwner) {
-            if (it.waterData.calendarData.isNullOrEmpty()) {
-                // todo : 이거 어떻게 고쳐야 할까?
-                binding.contactUserStatusFirstChip.text = "채워줘ㅠ"
-                binding.contactUserStatusSecondChip.text = "채워줘ㅠ"
-                binding.contactUserStatusThridChip.text = "채워줘ㅠ"
-            } else {
-                // todo : 이거 viewModel에서 list로 변경해서 할거임
-                viewModel.userStatus1.value = it.waterData.calendarData[0].userStatus1
-                viewModel.userStatus2.value = it.waterData.calendarData[0].userStatus2
-                viewModel.userStatus3.value = it.waterData.calendarData[0].userStatus3
-            }
-        }
-    }
 
     override fun onResume() {
         super.onResume()
+        SimpleLogger.logI("ContactDialog onResume")
         DialogUtil.adjustDialogSize(this, 0.875f, 0.542f)
     }
 
@@ -92,27 +68,19 @@ class ContactDialogFragment(private val cherishId: Int) : DialogFragment(), View
     }
 
     private fun setChip(binding: DialogContactBinding) {
-        viewModel.userStatus1.observe(viewLifecycleOwner) { chipText ->
-            if (chipText == null) {
-                binding.contactUserStatusFirstChip.text = " "
+        viewModel.calendarData.observe(viewLifecycleOwner) {
+            binding.contactChipLayout.apply {
+                clearChips()
+                if (it.waterData.calendarData.isNotEmpty()) {
+                    addBlackChipModeChoice(it.waterData.calendarData.last().userStatus1)
+                    addBlackChipModeChoice(it.waterData.calendarData.last().userStatus2)
+                    addBlackChipModeChoice(it.waterData.calendarData.last().userStatus3)
+                }
             }
-            binding.contactUserStatusFirstChip.text = chipText
-        }
-        viewModel.userStatus2.observe(viewLifecycleOwner) { chipText ->
-            if (chipText == null) {
-                binding.contactUserStatusSecondChip.text = " "
-            }
-            binding.contactUserStatusSecondChip.text = chipText
-        }
-        viewModel.userStatus3.observe(viewLifecycleOwner) { chipText ->
-            if (chipText == null) {
-                binding.contactUserStatusThridChip.text = " "
-            }
-            binding.contactUserStatusThridChip.text = chipText
         }
     }
 
-    private fun navigateCall() {
+    fun navigateCall() {
         if (PermissionUtil.isCheckedCallPermission(requireContext())) {
             startPhoneCall()
         } else {
@@ -120,7 +88,7 @@ class ContactDialogFragment(private val cherishId: Int) : DialogFragment(), View
         }
     }
 
-    private fun navigateToSendMessage() {
+    fun navigateToSendMessage() {
         if (PermissionUtil.isCheckedSendMessagePermission(requireContext())) {
             startSendMessage()
         } else {
@@ -128,7 +96,7 @@ class ContactDialogFragment(private val cherishId: Int) : DialogFragment(), View
         }
     }
 
-    private fun navigateKakao() {
+    fun navigateKakao() {
         if (findKakaoTalk()) {
             val kakaoIntent = context?.packageManager?.getLaunchIntentForPackage("com.kakao.talk")
             kakaoIntent?.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -139,7 +107,6 @@ class ContactDialogFragment(private val cherishId: Int) : DialogFragment(), View
     }
 
     private fun startPhoneCall() {
-        // 함수화 해야합니다.
         val callIntent =
             Intent(
                 Intent.ACTION_CALL,
@@ -162,6 +129,7 @@ class ContactDialogFragment(private val cherishId: Int) : DialogFragment(), View
         )
     }
 
+    // todo : 여기 고쳐야함 카카오톡 작동안됨.
     @SuppressLint("QueryPermissionsNeeded")
     private fun findKakaoTalk(): Boolean {
         var isExist = false
@@ -186,15 +154,14 @@ class ContactDialogFragment(private val cherishId: Int) : DialogFragment(), View
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == codeThatReviewPage) {
-            startReviewAndDismiss(cherishId)
-        }
-        if (resultCode == RESULT_OK) {
-            viewModel.animationTrigger.value = data?.getBooleanExtra("reviewCode", true)
+            if (resultCode == RESULT_CANCELED) {
+                startReviewAndDismiss()
+            }
         }
     }
 
 
-    private fun startReviewAndDismiss(cherishId: Int) {
+    private fun startReviewAndDismiss() {
         val intent = Intent(requireContext(), ReviewActivity::class.java)
         intent.putExtra("userNickname", viewModel.userNickName.value)
         intent.putExtra("selectedCherishNickname", viewModel.selectedCherishUser.value!!.nickName)
