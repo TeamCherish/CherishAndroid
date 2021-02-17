@@ -10,20 +10,16 @@ data class ResponseUserinfoData(
 ) {
     data class Data(
         val cherishDetail: CherishDetail,
-        val userDetail: UserDetail
     ) {
         data class CherishDetail(
-            val UserId: Int,
+            val nickname: String,
+            val birth: String,
+            val phone: String,
             val cycle_date: Int,
-            val notice_time: String
+            val notice_time: String,
+            val water_notice: Boolean
         )
 
-        data class UserDetail(
-            val birth: String,
-            val name: String,
-            val nickname: String,
-            val phone: String
-        )
     }
 }
 data class RequestUserinfoData(
@@ -31,7 +27,7 @@ data class RequestUserinfoData(
 )
 interface UserInfoAPI {
     @Headers("Content-Type:application/json")
-    @GET("getUserDetail/{CherishId}")
+    @GET("getCherishDetail/{CherishId}")
     fun getUserInfo(
         @Path("CherishId") CherishId: Int,
     ): Call<ResponseUserinfoData>

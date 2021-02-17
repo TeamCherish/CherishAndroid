@@ -144,11 +144,13 @@ class DetailPlantFragment : Fragment() {
                                     binding.chip.text = it.data.keyword1
                                     binding.chip.isVisible = true
 
-                                } else if (it.data.keyword2.toString() != "null" && it.data.keyword2 != "") {
+                                }
+                                if (it.data.keyword2.toString() != "null" && it.data.keyword2 != "") {
                                     binding.chip2.text = it.data.keyword2
                                     binding.chip2.isVisible = true
 
-                                } else if (it.data.keyword3.toString() != "null" && it.data.keyword3 != "") {
+                                }
+                                if (it.data.keyword3.toString() != "null" && it.data.keyword3 != "") {
                                     binding.chip3.text = it.data.keyword3
                                     binding.chip3.isVisible = true
 

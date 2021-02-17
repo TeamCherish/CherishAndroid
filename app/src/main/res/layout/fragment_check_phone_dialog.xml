@@ -42,9 +42,10 @@
         android:layout_width="0dp"
         android:layout_height="2dp"
         android:background="#dbdbdb"
-        app:layout_constraintBottom_toTopOf="@+id/button_cancel"
+        app:layout_constraintBottom_toTopOf="@+id/button_close"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

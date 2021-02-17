@@ -7,12 +7,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentReviseReviewBinding
+import com.sopt.cherish.remote.api.DeleteReviewReq
 import com.sopt.cherish.remote.api.ReviseReviewReq
 import com.sopt.cherish.ui.detail.DetailPlantActivity
 import com.sopt.cherish.ui.detail.DetailPlantViewModel
 import com.sopt.cherish.ui.dialog.CustomDialogFragment
 import com.sopt.cherish.util.DateUtil
-import com.sopt.cherish.util.SimpleLogger
 import com.sopt.cherish.util.extension.FlexBoxExtension.addChip
 import com.sopt.cherish.util.extension.FlexBoxExtension.getChip
 import com.sopt.cherish.util.extension.countNumberOfCharacters
@@ -47,7 +47,6 @@ class ReviseReviewFragment : Fragment() {
     }
 
     private fun reviseReview(binding: FragmentReviseReviewBinding) {
-        SimpleLogger.logI("${binding.reviseReviewMemo}")
         viewModel.sendReviseReviewToServer(
             ReviseReviewReq(
                 viewModel.cherishId.value!!,
@@ -82,7 +81,7 @@ class ReviseReviewFragment : Fragment() {
     override fun onPrepareOptionsMenu(menu: Menu) {
         menu.getItem(0).isVisible = false
         menu.getItem(1).isVisible = false // invisible menuitem 2
-        menu.getItem(2).isVisible = false // invisible menuitem 2
+        menu.getItem(2).isVisible = true // invisible menuitem 2
 
         (activity as DetailPlantActivity).invalidateOptionsMenu()
     }
@@ -90,8 +89,18 @@ class ReviseReviewFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
-
                 return true
+            }
+            R.id.trash -> {
+                // todo : 메모 삭제하기 이전에 정말로 삭제를 할것인지를 물어보면 될 거 같음.
+                viewModel.deleteReview(
+                    DeleteReviewReq(
+                        viewModel.cherishId.value!!,
+                        DateUtil.convertDateToString(viewModel.selectedCalendarData.value!!.wateredDate)
+                    )
+                )
+                longToast(requireContext(), "메모 삭제에 성공했습니다.")
+                parentFragmentManager.popBackStack()
             }
         }
         return super.onOptionsItemSelected(item)

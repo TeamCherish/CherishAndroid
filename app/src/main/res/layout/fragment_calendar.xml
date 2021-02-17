@@ -4,9 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="detailPlantViewModel"
             type="com.sopt.cherish.ui.detail.DetailPlantViewModel" />
+
+        <variable
+            name="calendarFragment"
+            type="com.sopt.cherish.ui.detail.calendar.CalendarFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -35,6 +40,8 @@
                     android:id="@+id/calendar_view"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:calendarModeChange="@{detailPlantViewModel.calendarModeChangeEvent}"
+                    android:addDecorator="@{detailPlantViewModel.calendarData}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -133,6 +140,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_pencil"
+                    android:onClick="@{() -> calendarFragment.navigateReviseReview()}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -156,7 +164,7 @@
                     android:id="@+id/review_back"
                     android:layout_width="match_parent"
                     android:layout_height="16dp"
-                    android:src="@drawable/icn_allow_top"
+                    android:calendarAllowChange="@{detailPlantViewModel.calendarModeChangeEvent}"
                     android:background="@color/white"
                     app:layout_constraintEnd_toEndOf="@id/review_all_text"
                     app:layout_constraintStart_toStartOf="@id/review_all_text"

@@ -32,7 +32,7 @@ class EnrollmentPhoneActivity : AppCompatActivity(),
 
         setContentView(binding.root)
 
-        val userid = intent.getStringExtra("userId").toString()
+       // val userid = intent.getIntExtra("userId")
 
         //setToolbar()
         //phoneBookFragment=findViewById(R.layout.fragment_phone_book)
