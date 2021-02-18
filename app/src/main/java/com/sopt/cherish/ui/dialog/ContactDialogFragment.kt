@@ -2,6 +2,7 @@ package com.sopt.cherish.ui.dialog
 
 import android.app.Activity.RESULT_CANCELED
 import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
@@ -27,11 +28,10 @@ import com.sopt.cherish.util.extension.FlexBoxExtension.clearChips
 /**
  * Created on 2020-01-03 by SSong-develop
  * popUp_Contact
- * 끝!
+ * 끝! 진짜 끝!
  */
 
 class ContactDialogFragment : DialogFragment(), View.OnClickListener {
-    private val codeThatReviewPage = 1001
 
     private val viewModel: MainViewModel by activityViewModels()
 
@@ -51,10 +51,8 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         setChip(binding)
-
         return binding.root
     }
-
 
     override fun onResume() {
         super.onResume()
@@ -99,12 +97,13 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
         }
     }
 
-    // todo : 얘가 지금 문제임 startActivityForResult로 하면 카카오톡이 안켜짐;;;
     fun navigateKakao() {
         if (requireContext().isInstalledApp(KAKAO_PACKAGE_NAME)) {
             val kakaoIntent = requireContext().packageManager.getLaunchIntentForPackage(
                 KAKAO_PACKAGE_NAME
             )
+            kakaoIntent?.flags = FLAG_ACTIVITY_REORDER_TO_FRONT
+            startReviewAndDismiss()
             startActivity(kakaoIntent)
         } else {
             requireContext().moveMarket(KAKAO_PACKAGE_NAME)
@@ -134,16 +133,6 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
         )
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == codeThatReviewPage) {
-            if (resultCode == RESULT_CANCELED) {
-                startReviewAndDismiss()
-            }
-        }
-    }
-
-
     private fun startReviewAndDismiss() {
         val intent = Intent(requireContext(), ReviewActivity::class.java)
         intent.putExtra("userNickname", viewModel.userNickName.value)
@@ -153,7 +142,17 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
         dismiss()
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == codeThatReviewPage) {
+            if (resultCode == RESULT_CANCELED) {
+                startReviewAndDismiss()
+            }
+        }
+    }
+
     companion object {
         private const val KAKAO_PACKAGE_NAME = "com.kakao.talk"
+        private const val codeThatReviewPage = 1001
     }
 }
