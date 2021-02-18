@@ -132,7 +132,34 @@ class PlantSearchFragment(private var data:MutableList<MyPageCherishData>?) : Fr
                 binding.mypageCherryList.layoutManager = LinearLayoutManager(context)
                 cherishAdapter.notifyDataSetChanged()
             }
+
         }
+    // STOPSHIP: 2021-02-18
+        cherishAdapter.setItemClickListener(
+            object : MyPageBottomSheetAdapter.ItemClickListener {
+                override fun onClick(view: View, position: Int) {
+                    Log.d("onclick", "success")
+
+                    val intent =
+                        Intent(context, DetailPlantActivity::class.java)
+
+                    intent.putExtra(
+                        "plantId",
+                        mulist[position].plantId
+                    )
+                    intent.putExtra(
+                        "Id",
+                        mulist[position].id
+                    )
+                    Log.d(
+                        "Id",
+                        mulist[position].id.toString()
+                    )
+
+                    startActivity(intent)
+                }
+            }
+        )
     }
 
 }
