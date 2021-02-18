@@ -1,7 +1,8 @@
 package com.sopt.cherish.ui.review
 
-import android.content.Intent
 import android.os.Bundle
+import android.view.KeyEvent
+import android.widget.EditText
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -9,11 +10,15 @@ import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityReviewBinding
 import com.sopt.cherish.di.Injection
 import com.sopt.cherish.remote.api.ReviewWateringReq
-import com.sopt.cherish.ui.dialog.CustomDialogFragment
+import com.sopt.cherish.util.MultiViewDialog
+import com.sopt.cherish.util.extension.*
+import com.sopt.cherish.util.extension.FlexBoxExtension.addChip
 import com.sopt.cherish.util.extension.FlexBoxExtension.getChip
-import com.sopt.cherish.util.extension.countNumberOfCharacters
-import com.sopt.cherish.util.extension.shortToast
-import com.sopt.cherish.util.extension.writeReview
+import com.sopt.cherish.util.extension.FlexBoxExtension.getChipsCount
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 // todo : 식물카드에서 물 줄 경우 오는 데이터 값들을 확인하고 이를 뷰모델에 넣어놔야 함
 // todo : boolean값을 mainViewModel에다가 보내줘야합니다. 어떻게 하면 보낼 수 있을 지 생각을 해볼까요????
@@ -45,9 +50,9 @@ class ReviewActivity : AppCompatActivity() {
     private fun addLimitNumberOfMemoCharacters(binding: ActivityReviewBinding) {
         binding.reviewMemo.countNumberOfCharacters { memo ->
             binding.reviewNumberOfMemo.text = memo?.length.toString()
-            if (memo?.length!! > 100) {
-                // todo : dialog로 보여줘야 함
-                shortToast(this, "100자를 초과했습니다.")
+            if (memo?.length!! >= 100) {
+                MultiViewDialog(R.layout.dialog_review_limit_error, 0.6f, 0.5f)
+                binding.reviewMemo.hideKeyboard()
             }
         }
     }
@@ -55,23 +60,49 @@ class ReviewActivity : AppCompatActivity() {
     private fun addLimitNumberOfKeywordCharacters(binding: ActivityReviewBinding) {
         binding.reviewEditKeyword.countNumberOfCharacters { keyword ->
             binding.reviewNumberOfCharacters.text = keyword?.length.toString()
-            if (keyword?.length!! > 5) {
-                CustomDialogFragment(R.layout.sample_wordcount_error).show(
-                    supportFragmentManager,
-                    TAG
-                )
+            if (keyword?.length!! >= 5) {
+                binding.reviewEditKeyword.hideKeyboard()
             }
         }
     }
 
+    // todo : extension 함수로 만들어주면 굉장히 좋을거 같음
     private fun showLoadingDialog() {
-        // todo : 로딩 다이얼로그가 제대로 보여지질 않음...
-        CustomDialogFragment(R.layout.dialog_loading).show(supportFragmentManager, TAG)
-        finish()
+        CoroutineScope(Main).launch {
+            // 다이얼로그 사이즈만 하면 됨
+            val dialog = MultiViewDialog(R.layout.dialog_loading, 0.6f, 0.3f)
+            dialog.show(supportFragmentManager, TAG)
+            delay(2000)
+            dialog.dismiss()
+            finish()
+        }
     }
 
     private fun addUserStatusWithChip(binding: ActivityReviewBinding) {
-        binding.reviewEditKeyword.writeReview(binding.reviewFlexBox)
+        binding.reviewEditKeyword.setOnKeyListener { view, keyCode, keyEvent ->
+            when (keyEvent.action) {
+                KeyEvent.ACTION_DOWN -> {
+                    if (keyCode == KeyEvent.KEYCODE_ENTER && keyCode != KeyEvent.KEYCODE_BACK) {
+                        val et = view as EditText
+                        val keyword = et.text.toString()
+                        if (binding.reviewFlexBox.getChipsCount() < 4) {
+                            binding.reviewFlexBox.addChip(keyword)
+                        } else {
+                            MultiViewDialog(R.layout.dialog_keyword_limit_error, 0.6f, 0.5f).show(
+                                supportFragmentManager,
+                                TAG
+                            )
+                            binding.reviewEditKeyword.hideKeyboard()
+                        }
+                        et.text = null
+                    }
+                    return@setOnKeyListener false
+                }
+                else -> {
+                    return@setOnKeyListener false
+                }
+            }
+        }
     }
 
     private fun sendReviewToServer(binding: ActivityReviewBinding) {
@@ -86,17 +117,11 @@ class ReviewActivity : AppCompatActivity() {
                 )
             )
             showLoadingDialog()
-            val intent = Intent()
-            intent.putExtra("reviewCode", true)
-            setResult(RESULT_OK, intent)
-            finish()
         }
     }
 
     private fun ignoreSendReviewToServer(binding: ActivityReviewBinding) {
         binding.reviewIgnoreAccept.setOnClickListener {
-            // 일단 지금 당장은 그냥 finish만 시켜놨다
-            // 현재의 값을 그냥 보내버리는 경우도 있을거야
             finish()
         }
     }

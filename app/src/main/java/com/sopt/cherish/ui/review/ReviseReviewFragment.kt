@@ -18,7 +18,7 @@ import com.sopt.cherish.util.extension.FlexBoxExtension.getChip
 import com.sopt.cherish.util.extension.countNumberOfCharacters
 import com.sopt.cherish.util.extension.longToast
 import com.sopt.cherish.util.extension.shortToast
-import com.sopt.cherish.util.extension.writeReview
+import com.sopt.cherish.util.extension.writeKeyword
 
 /**
  * Created by SSong-develop on 2021-02-12
@@ -120,7 +120,7 @@ class ReviseReviewFragment : Fragment() {
         binding.reviseReviewEditKeyword.countNumberOfCharacters { keyword ->
             binding.reviseReviewNumberOfCharacters.text = keyword?.length.toString()
             if (keyword?.length!! > 5) {
-                CustomDialogFragment(R.layout.sample_wordcount_error).show(
+                CustomDialogFragment(R.layout.dialog_keyword_limit_error).show(
                     parentFragmentManager,
                     ReviewActivity.TAG
                 )
@@ -129,7 +129,7 @@ class ReviseReviewFragment : Fragment() {
     }
 
     private fun addUserStatusWithChip(binding: FragmentReviseReviewBinding) {
-        binding.reviseReviewEditKeyword.writeReview(binding.reviseReviewFlexBox)
+        binding.reviseReviewEditKeyword.writeKeyword(binding.reviseReviewFlexBox)
     }
 
 }

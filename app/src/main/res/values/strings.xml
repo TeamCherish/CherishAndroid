@@ -34,6 +34,7 @@
     <string name="review_admin_button_text">등록완료</string>
     <string name="review_pass_button_text">건너뛰기</string>
     <string name="review_limit_chips_number_text">키워드는 3개까지 입력할 수 있어요!</string>
+    <string name="review_limit_memo_number_text">리뷰는 100자 까지 작성할 수 있어요!</string>
     <string name="review_max_keyword">5</string>
     <string name="review_max_memo">100</string>
     <string name="review_word_count_divider">/</string>

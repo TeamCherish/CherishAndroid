@@ -1,11 +1,9 @@
 package com.sopt.cherish.ui.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.CompoundButton
 import androidx.recyclerview.widget.RecyclerView
-import com.sopt.cherish.databinding.ItemLayoutBinding
 import com.sopt.cherish.databinding.ItemLayoutPlantBinding
 
 // todo : Data class 뺴놔야 함

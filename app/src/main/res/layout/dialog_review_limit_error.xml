@@ -3,15 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:cardCornerRadius="@dimen/radius_16dp">
+    android:backgroundTint="@color/white"
+    app:cardCornerRadius="@dimen/radius_20dp">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:fontFamily="@font/notosanscjkkr_regular"
-        android:text="@string/review_limit_chips_number_text"
-        android:textColor="@color/cherish_text_gray"
-        android:textSize="13sp" />
+        android:text="@string/review_limit_memo_number_text"
+        android:textSize="@dimen/text_16sp" />
 
 </androidx.cardview.widget.CardView>

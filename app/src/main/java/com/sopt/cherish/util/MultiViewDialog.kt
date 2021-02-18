@@ -1,4 +1,4 @@
-package com.sopt.cherish.ui.dialog
+package com.sopt.cherish.util
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -10,18 +10,14 @@ import androidx.annotation.LayoutRes
 import androidx.fragment.app.DialogFragment
 import com.bumptech.glide.Glide
 import com.sopt.cherish.R
+import com.sopt.cherish.databinding.DialogKeywordLimitErrorBinding
 import com.sopt.cherish.databinding.DialogLoadingBinding
-import com.sopt.cherish.util.DialogUtil
+import com.sopt.cherish.databinding.DialogReviewLimitErrorBinding
 
-/**
- * Created on 2021-1-1 by SSong-develop
- * dialog에 비즈니스 로직이 들어가지는 않는 간단한 dialog는 이 클래스를 사용해 제어
- * todo : 생성자로 가로와 세로의 비율을 float형태로 받아서 이를 처리해준다면?! 정말 좋을거 같음
- * todo : resume에서 다시 다이얼로그 사이즈를 리 사이징하는 과정이 너무 별로임 이 클래스 고쳐야함
- */
-
-class CustomDialogFragment(
-    @LayoutRes private val layoutResId: Int
+class MultiViewDialog(
+    @LayoutRes private val layoutResId: Int,
+    private val widthRatio: Float,
+    private val heightRatio: Float
 ) : DialogFragment(), View.OnClickListener {
 
     override fun onCreateView(
@@ -33,18 +29,20 @@ class CustomDialogFragment(
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         return when (layoutResId) {
+            R.layout.dialog_review_limit_error -> {
+                val binding = DialogReviewLimitErrorBinding.bind(view)
+                binding.root
+            }
+            R.layout.dialog_keyword_limit_error -> {
+                val binding = DialogKeywordLimitErrorBinding.bind(view)
+                binding.root
+            }
             R.layout.dialog_loading -> {
-                // 등록 후에 보낼 loading 화면
                 val binding = DialogLoadingBinding.bind(view)
                 Glide.with(requireContext())
                     .asGif()
                     .load(R.drawable.cherish_loading)
                     .into(binding.dialogLoadingImage)
-                binding.root
-            }
-            R.layout.dialog_keyword_limit_error -> {
-                val binding = DialogLoadingBinding.bind(view)
-                DialogUtil.adjustDialogSize(this, 0.694f, 0.169f)
                 binding.root
             }
             else -> {
@@ -53,12 +51,12 @@ class CustomDialogFragment(
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        DialogUtil.adjustDialogSize(this, 0.35f, 0.15f)
+    override fun onClick(p0: View?) {
+        dismiss()
     }
 
-    override fun onClick(view: View?) {
-        dismiss()
+    override fun onResume() {
+        super.onResume()
+        DialogUtil.adjustDialogSize(this, widthRatio = widthRatio, heightRatio = heightRatio)
     }
 }
