@@ -24,7 +24,6 @@ import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
 import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.util.GridItemDecorator
 import com.sopt.cherish.util.PixelUtil.dp
-import com.sopt.cherish.util.SimpleLogger
 import com.sopt.cherish.util.extension.longToast
 
 
@@ -66,8 +65,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
 
         binding.homeMovePlantDetail.setOnClickListener {
             navigateDetailPlant(
-                viewModel.cherishuserId.value!!,
-                viewModel.selectedCherishUser.value?.id!!
+                viewModel.cherishuserId.value!!
             )
         }
 
@@ -80,11 +78,6 @@ class HomeFragment : Fragment(), OnItemClickListener {
     }
 
     private fun observeAnimationTrigger() {
-        // 이걸 언제 값을 바꿔줘야 할지를 생각해야한다.
-        // 만약 review를 주었을때 이값을 true로 바꿔줘야한다던지 라던가
-        // 그처럼 말이다.
-        // 근데 문제는 review를 액티비티로 변경하면서 생기는 문제점인데
-        // 값을 공유할 수 없기 때문에 이를 분리하기가 어렵다.
         // todo : 물주는 애니메이션 이나 시드는 애니메이션에 따라 작업해야합니다.
         viewModel.animationTrigger.observe(viewLifecycleOwner) {
             if (it) {
@@ -115,7 +108,6 @@ class HomeFragment : Fragment(), OnItemClickListener {
     override fun onItemClick(itemBinding: MainCherryItemBinding, position: Int) {
         viewModel.selectedCherishUser.value = homeCherryListAdapter.data[position]
         slideDownBottomSheet()
-        SimpleLogger.logI(viewModel.selectedCherishUser.value!!.id.toString())
     }
 
     private fun initializeRecyclerView(
@@ -141,15 +133,13 @@ class HomeFragment : Fragment(), OnItemClickListener {
     }
 
     private fun navigatePhoneBook() {
-        // phoneBook
         val intent = Intent(context, EnrollmentPhoneActivity::class.java)
         intent.putExtra("userId", viewModel.cherishuserId.value)
         startActivity(intent)
     }
 
-    private fun navigateDetailPlant(userId: Int?, cherishId: Int?) {
+    private fun navigateDetailPlant(userId: Int?) {
         val intent = Intent(activity, DetailPlantActivity::class.java)
-        // todo : Parcelable로 변경해서 보내주도록 하자
         intent.putExtra("userId", userId)
         intent.putExtra("cherishId", viewModel.selectedCherishUser.value?.id)
         intent.putExtra("cherishUserPhoneNumber", viewModel.selectedCherishUser.value?.phoneNumber)
@@ -190,7 +180,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
     }
 
     companion object {
-        private val TAG = "HomeFragment"
+        private const val TAG = "HomeFragment"
     }
 }
 

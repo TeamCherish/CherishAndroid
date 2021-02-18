@@ -1,5 +1,6 @@
 package com.sopt.cherish.ui.review
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.KeyEvent
 import android.widget.EditText
@@ -20,8 +21,6 @@ import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-// todo : 식물카드에서 물 줄 경우 오는 데이터 값들을 확인하고 이를 뷰모델에 넣어놔야 함
-// todo : boolean값을 mainViewModel에다가 보내줘야합니다. 어떻게 하면 보낼 수 있을 지 생각을 해볼까요????
 class ReviewActivity : AppCompatActivity() {
     private val viewModel: ReviewViewModel by viewModels { Injection.provideReviewViewModelFactory() }
 
@@ -66,7 +65,7 @@ class ReviewActivity : AppCompatActivity() {
         }
     }
 
-    // todo : extension 함수로 만들어주면 굉장히 좋을거 같음
+    // todo : dialog 사이즈 값만 측정
     private fun showLoadingDialog() {
         CoroutineScope(Main).launch {
             // 다이얼로그 사이즈만 하면 됨
@@ -74,6 +73,9 @@ class ReviewActivity : AppCompatActivity() {
             dialog.show(supportFragmentManager, TAG)
             delay(2000)
             dialog.dismiss()
+            val intent = Intent()
+            intent.putExtra("wateringTrigger", true)
+            setResult(RESULT_OK, intent)
             finish()
         }
     }
@@ -127,6 +129,6 @@ class ReviewActivity : AppCompatActivity() {
     }
 
     companion object {
-        val TAG = "ReviewActivity"
+        const val TAG = "ReviewActivity"
     }
 }

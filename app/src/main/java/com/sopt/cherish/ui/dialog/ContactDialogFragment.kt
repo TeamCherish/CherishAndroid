@@ -1,6 +1,7 @@
 package com.sopt.cherish.ui.dialog
 
 import android.app.Activity.RESULT_CANCELED
+import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
 import android.graphics.Color
@@ -103,7 +104,7 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
                 KAKAO_PACKAGE_NAME
             )
             kakaoIntent?.flags = FLAG_ACTIVITY_REORDER_TO_FRONT
-            startReviewAndDismiss()
+            startReview()
             startActivity(kakaoIntent)
         } else {
             requireContext().moveMarket(KAKAO_PACKAGE_NAME)
@@ -133,20 +134,26 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
         )
     }
 
-    private fun startReviewAndDismiss() {
+    private fun startReview() {
         val intent = Intent(requireContext(), ReviewActivity::class.java)
         intent.putExtra("userNickname", viewModel.userNickName.value)
         intent.putExtra("selectedCherishNickname", viewModel.selectedCherishUser.value!!.nickName)
         intent.putExtra("selectedCherishId", viewModel.selectedCherishUser.value!!.id)
-        startActivity(intent)
-        dismiss()
+        startActivityForResult(intent, codeThatGetWatering)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == codeThatReviewPage) {
             if (resultCode == RESULT_CANCELED) {
-                startReviewAndDismiss()
+                startReview()
+            }
+        }
+        if (requestCode == codeThatGetWatering) {
+            if (resultCode == RESULT_OK) {
+                SimpleLogger.logI("${data?.getBooleanExtra("wateringTrigger", false)}")
+                viewModel.animationTrigger.value = data?.getBooleanExtra("wateringTrigger", false)
+                dismiss()
             }
         }
     }
@@ -154,5 +161,6 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
     companion object {
         private const val KAKAO_PACKAGE_NAME = "com.kakao.talk"
         private const val codeThatReviewPage = 1001
+        private const val codeThatGetWatering = 1002
     }
 }
