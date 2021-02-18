@@ -57,15 +57,15 @@
                 android:text="@string/myPage_title_text" />
 
             <ImageView
-                android:contentDescription="@null"
                 android:id="@+id/search_box"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="@+id/original_bar"
-                app:layout_constraintTop_toTopOf="@+id/original_bar"
-                app:layout_constraintBottom_toBottomOf="@+id/original_bar"
+                android:layout_width="15dp"
+                android:layout_height="10dp"
+                android:layout_marginEnd="@dimen/margin_20dp"
+                android:contentDescription="@null"
                 android:src="@drawable/icn_search_box"
-                android:layout_marginEnd="@dimen/margin_20dp"/>
+                app:layout_constraintBottom_toBottomOf="@+id/original_bar"
+                app:layout_constraintEnd_toEndOf="@+id/original_bar"
+                app:layout_constraintTop_toTopOf="@+id/original_bar" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
