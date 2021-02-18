@@ -28,7 +28,7 @@ import com.sopt.cherish.util.extension.FlexBoxExtension.clearChips
 /**
  * Created on 2020-01-03 by SSong-develop
  * popUp_Contact
- * 끝! 진짜 끝!
+ * 끝! 진짜 끝! 멘트만 수정하면 됨!!!
  */
 
 class ContactDialogFragment : DialogFragment(), View.OnClickListener {
