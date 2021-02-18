@@ -107,8 +107,8 @@
             android:inputType="textMultiLine"
             android:hint="@string/review_memo_text"
             android:includeFontPadding="false"
-            android:scrollHorizontally="false"
             android:singleLine="false"
+            android:scrollHorizontally="false"
             app:layout_constraintEnd_toEndOf="@id/review_edit_keyword"
             app:layout_constraintStart_toStartOf="@id/review_edit_keyword"
             app:layout_constraintTop_toBottomOf="@id/review_flex_box" />

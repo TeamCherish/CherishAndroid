@@ -63,13 +63,17 @@ class ReviseReviewFragment : Fragment() {
 
     private fun observeSelectedDate(binding: FragmentReviseReviewBinding) {
         viewModel.selectedCalendarData.observe(viewLifecycleOwner) {
-            binding.reviseReviewDateText.text = DateUtil.convertDateToString(it.wateredDate)
-            binding.reviseReviewFlexBox.apply {
-                addChip(it.userStatus1)
-                addChip(it.userStatus2)
-                addChip(it.userStatus3)
+            binding.reviseReviewDateText.text = it?.wateredDate?.let { it1 ->
+                DateUtil.convertDateToString(
+                    it1
+                )
             }
-            binding.reviseReviewMemo.setText(it.review)
+            binding.reviseReviewFlexBox.apply {
+                it?.userStatus1?.let { it1 -> addChip(it1) }
+                it?.userStatus2?.let { it1 -> addChip(it1) }
+                it?.userStatus3?.let { it1 -> addChip(it1) }
+            }
+            binding.reviseReviewMemo.setText(it?.review)
         }
     }
 
@@ -99,6 +103,7 @@ class ReviseReviewFragment : Fragment() {
                         DateUtil.convertDateToString(viewModel.selectedCalendarData.value!!.wateredDate)
                     )
                 )
+                viewModel.selectedCalendarData.value = null
                 longToast(requireContext(), "메모 삭제에 성공했습니다.")
                 parentFragmentManager.popBackStack()
             }

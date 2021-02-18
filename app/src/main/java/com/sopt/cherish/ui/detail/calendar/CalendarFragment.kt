@@ -53,6 +53,7 @@ class CalendarFragment : Fragment() {
             (activity as DetailPlantActivity).setActionBarTitle("식물 캘린더")
         }
         viewModel.fetchCalendarData()
+        binding.calendarView.removeDecorators()
         binding.calendarViewChipLayout.clearChips()
         binding.calendarView.selectedDate?.let { showDate(binding, it) }
         binding.calendarView.selectedDate?.let { showContent(binding, it) }
@@ -83,7 +84,6 @@ class CalendarFragment : Fragment() {
     }
 
     private fun initializeCalendar(binding: FragmentCalendarBinding) {
-        allowCalendarCache(binding)
         changeCalendarMode(binding)
     }
 
@@ -91,10 +91,6 @@ class CalendarFragment : Fragment() {
         binding.reviewBack.setOnClickListener { view ->
             viewModel.calendarModeChangeEvent.value = !viewModel.calendarModeChangeEvent.value!!
         }
-    }
-
-    private fun allowCalendarCache(binding: FragmentCalendarBinding) {
-        binding.calendarView.state().edit().isCacheCalendarPositionEnabled(true)
     }
 
     private fun addDateClickListener(binding: FragmentCalendarBinding) {

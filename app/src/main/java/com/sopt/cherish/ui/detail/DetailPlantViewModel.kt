@@ -29,7 +29,7 @@ class DetailPlantViewModel(
 
     // ReviseReview를 위한 변수들
     // calendarData 는 물준날 , 리뷰 , 리뷰 1,2,3 총 5개로 이루어져있습니다.
-    val selectedCalendarData = MutableLiveData<CalendarData>()
+    val selectedCalendarData = MutableLiveData<CalendarData?>()
 
     private val _calendarData = MutableLiveData<CalendarRes>()
     val calendarData: MutableLiveData<CalendarRes>
