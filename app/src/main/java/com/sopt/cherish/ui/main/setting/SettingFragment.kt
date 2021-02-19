@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentSettingBinding
+import com.sopt.cherish.ui.detail.DetailPlantActivity
 import com.sopt.cherish.ui.main.MainViewModel
 
 /**

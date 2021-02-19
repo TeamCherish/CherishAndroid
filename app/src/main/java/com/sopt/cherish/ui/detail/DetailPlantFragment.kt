@@ -27,6 +27,7 @@ import com.sopt.cherish.ui.domain.MemoListDataclass
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.Math.abs
 
 
 class DetailPlantFragment : Fragment() {
@@ -105,12 +106,12 @@ class DetailPlantFragment : Fragment() {
                                 //식물 아이디 받는 곳 이거를 이제 정보 아이콘 누를때 넘겨줘야함
                                 plantId = it.data.plantId
                                 if (it.data.dDay > 0) {
-                                    binding.textViewDday.text = "D+" + it.data.dDay.toString()
+                                    binding.textViewDday.text = "D-" + it.data.dDay.toString()
 
                                 } else if (it.data.dDay == 0) {
                                     binding.textViewDday.text = "D-day"
                                 } else {
-                                    binding.textViewDday.text = "D" + it.data.dDay.toString()
+                                    binding.textViewDday.text = "D-" + abs(it.data.dDay).toString()
 
                                 }
                                 binding.textViewDuration.text = it.data.duration.toString()

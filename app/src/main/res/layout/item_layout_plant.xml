@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
 
     android:layout_height="80dp">
@@ -22,22 +23,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="5dp"
         android:fontFamily="@font/notosanscjkkr_regular"
         android:includeFontPadding="false"
         android:text="홍길동"
         android:textSize="@dimen/text_16sp"
         app:layout_constraintStart_toEndOf="@+id/imageView5"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/imageView5" />
 
     <TextView
         android:id="@+id/textPhone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="010-1234-5678"
         android:fontFamily="@font/roboto_regular"
-        android:textSize="@dimen/text_12sp"
         android:includeFontPadding="false"
+        android:text="010-1234-5678"
+        android:textSize="@dimen/text_12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView5"
         app:layout_constraintStart_toStartOf="@+id/textName"
         app:layout_constraintTop_toBottomOf="@+id/textName" />
 
@@ -49,7 +50,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
         app:srcCompat="@drawable/user_bg" />
 
     <ImageView
