@@ -44,10 +44,6 @@ class MyPagePhoneBookSearchFragment() : Fragment() {
 
         startProcess()
 
-        binding.cancelBtn.setOnClickListener{
-            (activity as MainActivity).setIsSearched(false)
-            (activity as MainActivity).replaceFragment(1,null,false)
-        }
 
         return view
     }

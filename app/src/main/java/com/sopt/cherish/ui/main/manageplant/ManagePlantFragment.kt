@@ -67,6 +67,12 @@ class ManagePlantFragment : Fragment() {
         binding.myPageAddPhoneBtn.setOnClickListener{
             navigatePhoneBook()
         }
+        binding.cancelBtn.setOnClickListener{
+            binding.searchBox.visibility = View.VISIBLE
+            isSearched=false
+            binding.cancelBtn.visibility=View.INVISIBLE
+            (activity as MainActivity).replaceFragment(tabIndex,data,isSearched)
+        }
         initializeSearchBtn()
         return binding.root
     }
@@ -98,9 +104,11 @@ class ManagePlantFragment : Fragment() {
         binding.searchBox.setOnClickListener {
             binding.searchBox.visibility = View.INVISIBLE
             isSearched=true
+            binding.cancelBtn.visibility=View.VISIBLE
             standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
             (activity as MainActivity).replaceFragment(tabIndex,data,isSearched)
         }
+
 
         standardBottomSheetBehavior.addBottomSheetCallback(object :
             BottomSheetBehavior.BottomSheetCallback() {

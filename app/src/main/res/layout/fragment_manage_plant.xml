@@ -67,6 +67,18 @@
                 android:src="@drawable/icn_search_box"
                 android:layout_marginEnd="@dimen/margin_20dp"/>
 
+            <TextView
+                android:visibility="invisible"
+                android:id="@+id/cancel_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosanscjkkr_regular"
+                app:layout_constraintEnd_toEndOf="@+id/original_bar"
+                app:layout_constraintTop_toTopOf="@+id/original_bar"
+                app:layout_constraintBottom_toBottomOf="@+id/original_bar"
+                android:layout_marginEnd="@dimen/margin_20dp"
+                android:text="@string/myPage_cancel_text"/>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
