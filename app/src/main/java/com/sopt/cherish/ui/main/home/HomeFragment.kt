@@ -78,7 +78,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
     }
 
     private fun observeAnimationTrigger() {
-        // todo : 물주는 애니메이션 이나 시드는 애니메이션에 따라 작업해야합니다.
+        // 값 보내주는건 끝났구 이제 애니메이션 보여주기만 하면 끝!
         viewModel.animationTrigger.observe(viewLifecycleOwner) {
             if (it) {
                 longToast(requireContext(), "식물 물주는 애니메이션 등장!")
@@ -123,7 +123,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
     }
 
     // 화면이동
-    private fun navigateWatering() {
+    fun navigateWatering() {
         // +로 가는 녀석들이 가장 물주기가 시급한 친구들이라고해서 일단 알고리즘을 이렇게 작성함.
         if (viewModel.selectedCherishUser.value?.dDay!! >= 0) {
             WateringDialogFragment().show(parentFragmentManager, TAG)
@@ -132,13 +132,13 @@ class HomeFragment : Fragment(), OnItemClickListener {
         }
     }
 
-    private fun navigatePhoneBook() {
+    fun navigatePhoneBook() {
         val intent = Intent(context, EnrollmentPhoneActivity::class.java)
         intent.putExtra("userId", viewModel.cherishuserId.value)
         startActivity(intent)
     }
 
-    private fun navigateDetailPlant(userId: Int?) {
+    fun navigateDetailPlant(userId: Int?) {
         val intent = Intent(activity, DetailPlantActivity::class.java)
         intent.putExtra("userId", userId)
         intent.putExtra("cherishId", viewModel.selectedCherishUser.value?.id)

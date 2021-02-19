@@ -43,7 +43,6 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
     ): View {
         val binding: DialogContactBinding =
             DataBindingUtil.inflate(inflater, R.layout.dialog_contact, container, false)
-        SimpleLogger.logI("ContactDialog onCreated")
         viewModel.fetchCalendarData()
         binding.lifecycleOwner = viewLifecycleOwner
         binding.mainViewModel = viewModel

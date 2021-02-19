@@ -16,7 +16,6 @@ import com.sopt.cherish.util.DateUtil
 import com.sopt.cherish.util.extension.FlexBoxExtension.addChipCalendar
 import com.sopt.cherish.util.extension.FlexBoxExtension.clearChips
 
-// todo : 삭제하고 왔을 때 갱신은 되는데 dot가 안지워짐
 // todo : binding 객체 메모리 해제 꼭 시켜줘야 함
 class CalendarFragment : Fragment() {
 
@@ -110,6 +109,7 @@ class CalendarFragment : Fragment() {
             }?.map {
                 showChips(binding, listOf(it.userStatus1, it.userStatus2, it.userStatus3))
                 showMemo(binding, it.review)
+                // todo : selected된게 물론 dot가 있는 날도 있겠지만 없는 경우 도 있잖아 그경우를 생각안했어 훈기야.
                 viewModel.selectedCalendarData.value = it
             }
         }
