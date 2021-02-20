@@ -113,4 +113,11 @@
     <style name="MyPageTabSelected" parent="TextAppearance.AppCompat">
         <item name="android:fontFamily">@font/notosanscjkkr_bold</item>
     </style>
+
+    <style name="RoundButtonResult" parent="Widget.MaterialComponents.Button">
+        <item name="cornerRadius">30dp</item>
+        <item name="android:textSize">@dimen/text_16sp</item>
+    </style>
+
+
 </resources>
