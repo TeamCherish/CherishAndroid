@@ -1,4 +1,4 @@
-package com.sopt.cherish.ui.dialog
+package com.sopt.cherish.ui.dialog.wateringdialog
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -10,8 +10,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.DialogWateringBinding
-import com.sopt.cherish.ui.detail.DetailPlantFragment
-import com.sopt.cherish.ui.main.home.HomeFragment
+import com.sopt.cherish.ui.dialog.DelayWateringDialogFragment
 import com.sopt.cherish.util.DialogUtil
 
 /**
@@ -21,10 +20,6 @@ import com.sopt.cherish.util.DialogUtil
  */
 
 class WateringDialogFragment : DialogFragment(), View.OnClickListener {
-
-    companion object {
-        const val TAG = "WateringDialog"
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,15 +39,6 @@ class WateringDialogFragment : DialogFragment(), View.OnClickListener {
         dismiss()
     }
 
-    fun navigateContactTemp() {
-        if (parentFragment == HomeFragment()) {
-            parentFragmentManager.let { fm -> ContactDialogFragment().show(fm, TAG) }
-        }
-        if (parentFragment == DetailPlantFragment()) {
-            parentFragmentManager.let { fm -> DetailPlantContactDialogFragment().show(fm, TAG) }
-        }
-    }
-
     fun navigateNextTimeContact() {
         DelayWateringDialogFragment().show(parentFragmentManager, TAG)
         dismiss()
@@ -66,6 +52,10 @@ class WateringDialogFragment : DialogFragment(), View.OnClickListener {
     override fun onResume() {
         super.onResume()
         DialogUtil.adjustDialogSize(this, 0.875f, 0.57f)
+    }
+
+    companion object {
+        const val TAG = "WateringDialog"
     }
 
 }

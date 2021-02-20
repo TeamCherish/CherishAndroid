@@ -1,4 +1,4 @@
-package com.sopt.cherish.ui.dialog
+package com.sopt.cherish.ui.dialog.wateringdialog
 
 import android.app.Activity.RESULT_CANCELED
 import android.app.Activity.RESULT_OK
