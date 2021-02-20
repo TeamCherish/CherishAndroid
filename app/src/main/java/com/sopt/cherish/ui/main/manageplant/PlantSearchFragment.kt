@@ -40,11 +40,6 @@ class PlantSearchFragment(private var data:MutableList<MyPageCherishData>?) : Fr
 
         startProcess()
 
-        binding.cancelBtn.setOnClickListener{
-            (activity as MainActivity).setIsSearched(false)
-            (activity as MainActivity).replaceFragment(0,data,false)
-        }
-
         return binding.root
     }
 

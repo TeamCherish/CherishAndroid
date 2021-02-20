@@ -43,16 +43,6 @@
             app:srcCompat="@drawable/icn_search_box" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
-        android:id="@+id/cancel_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:fontFamily="@font/notosanscjkkr_regular"
-        android:text="@string/myPage_cancel_text"
-        app:layout_constraintBottom_toBottomOf="@+id/search_bg"
-        app:layout_constraintStart_toEndOf="@+id/search_bg"
-        app:layout_constraintTop_toTopOf="@+id/search_bg" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_mypage"

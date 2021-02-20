@@ -263,17 +263,7 @@
                 app:layout_constraintTop_toTopOf="@+id/editweek" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <Switch
-            android:id="@+id/alarm_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
-            android:thumb="@drawable/switch_thumb_selector"
-            android:track="@drawable/switch_selector"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/editweek"
-            tools:ignore="UseSwitchCompatOrMaterialXml" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button

@@ -335,7 +335,7 @@
                 android:fontFamily="@font/notosanscjkkr_regular"
                 android:includeFontPadding="false"
                 android:textColor="#454545"
-                android:text="생각이 안나영"
+                android:text="키워드를 입력하지 않았어요!"
                 android:textSize="@dimen/text_12sp"
 
                 app:chipStrokeColor="@color/cherish_light_black"
@@ -356,7 +356,7 @@
                 android:textColor="#454545"
                 android:textSize="@dimen/text_12sp"
 
-                android:text="기억이 안나영"
+                android:text=""
                 app:chipStrokeColor="@color/cherish_light_black"
                 app:chipStrokeWidth="1dp"
                 app:layout_constraintHorizontal_chainStyle="packed"
@@ -374,7 +374,7 @@
                 android:includeFontPadding="false"
                 android:textColor="#454545"
                 android:textSize="@dimen/text_12sp"
-                android:text="안구라"
+                android:text=""
                 app:chipStrokeColor="@color/cherish_light_black"
                 app:chipStrokeWidth="1dp"
                 app:layout_constraintHorizontal_chainStyle="packed"

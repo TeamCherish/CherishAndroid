@@ -46,7 +46,6 @@
                     android:id="@+id/cons_page"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
                     android:background="@color/white"
 
                     app:layout_constraintEnd_toEndOf="parent"
@@ -57,26 +56,26 @@
                         android:id="@+id/imageView8"
                         android:layout_width="64dp"
                         android:layout_height="64dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="50dp"
-                        android:layout_marginBottom="50dp"
+                        android:layout_marginTop="80dp"
+                        android:layout_marginBottom="80dp"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/cons_page"
                         app:layout_constraintTop_toTopOf="@id/cons_page"
+                        app:layout_constraintVertical_bias="0.0"
                         app:srcCompat="@drawable/cherry" />
 
                     <TextView
                         android:id="@+id/textView16"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
-                        android:text="안나영"
                         android:fontFamily="@font/notosanscjkkr_bold"
                         android:includeFontPadding="false"
+                        android:text="안나영"
                         android:textSize="@dimen/text_14sp"
-                        app:layout_constraintBottom_toBottomOf="@+id/imageView8"
-                        app:layout_constraintStart_toEndOf="@+id/imageView8"
-                        app:layout_constraintTop_toTopOf="@+id/imageView8" />
+                        app:layout_constraintEnd_toEndOf="@+id/imageView8"
+                        app:layout_constraintStart_toStartOf="@+id/imageView8"
+                        app:layout_constraintTop_toBottomOf="@+id/imageView8" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -93,7 +92,6 @@
                         android:id="@+id/constraintLayout3"
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
-
                         app:layout_constraintBottom_toTopOf="@+id/constraintLayout4"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -114,7 +112,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="12dp"
-                            android:text="공지사항"
+                            android:text="aboutcherish"
                             android:fontFamily="@font/notosanscjkkr_medium"
                             android:includeFontPadding="false"
                             android:textSize="15sp"
@@ -143,11 +141,11 @@
                             app:srcCompat="@drawable/icn_info" />
 
                         <TextView
-                            android:id="@+id/textView26"
+                            android:id="@+id/setting_nickname"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="12dp"
-                            android:text="이용안내"
+                            android:text="닉네임변경"
                             android:fontFamily="@font/notosanscjkkr_medium"
                             android:includeFontPadding="false"
                             android:textSize="15sp"
@@ -176,11 +174,11 @@
                             app:srcCompat="@drawable/icn_message" />
 
                         <TextView
-                            android:id="@+id/textView27"
+                            android:id="@+id/setting_one"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="12dp"
-                            android:text="문의하기"
+                            android:text="1대1 문의하기"
                             android:fontFamily="@font/notosanscjkkr_medium"
                             android:includeFontPadding="false"
                             android:textSize="15sp"

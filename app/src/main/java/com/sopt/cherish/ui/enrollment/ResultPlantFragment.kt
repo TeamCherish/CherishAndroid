@@ -29,7 +29,6 @@ class ResultPlantFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_result_plant, container, false)
         binding = FragmentResultPlantBinding.bind(view)
-
         binding.plantExplanation.text = arguments?.getString("plant_explanation")
         Log.d("plantExplanation",  arguments?.getString("plant_explanation").toString())
 
