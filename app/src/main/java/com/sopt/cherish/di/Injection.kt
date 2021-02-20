@@ -7,10 +7,7 @@ import com.sopt.cherish.remote.api.UserAPI
 import com.sopt.cherish.remote.api.WateringAPI
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.repository.*
-import com.sopt.cherish.ui.factory.DetailViewModelFactory
-import com.sopt.cherish.ui.factory.EnrollmentViewModelFactory
-import com.sopt.cherish.ui.factory.MainViewModelFactory
-import com.sopt.cherish.ui.factory.ReviewViewModelFactory
+import com.sopt.cherish.ui.factory.*
 
 /**
  * Created on 01-03 by SSong-develop
@@ -23,6 +20,10 @@ object Injection {
             provideMainRepository(), provideWateringRepository(),
             provideReviewRepository(), provideCalendarRepository()
         )
+    }
+
+    fun provideHomeBlankViewModelFactory(): ViewModelProvider.Factory {
+        return HomeBlankViewModelFactory()
     }
 
     // User di

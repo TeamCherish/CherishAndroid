@@ -39,7 +39,7 @@ class DetailWateringDialogFragment(private val cherishId: Int) : DialogFragment(
 
     private fun navigateContact() {
         parentFragmentManager.let { fm ->
-            DetailPlantContactDialogFragment(cherishId).show(
+            DetailPlantContactDialogFragment().show(
                 fm,
                 TAG
             )

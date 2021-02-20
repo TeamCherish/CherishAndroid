@@ -10,6 +10,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.DialogWateringBinding
+import com.sopt.cherish.ui.detail.DetailPlantFragment
+import com.sopt.cherish.ui.main.home.HomeFragment
 import com.sopt.cherish.util.DialogUtil
 
 /**
@@ -40,6 +42,15 @@ class WateringDialogFragment : DialogFragment(), View.OnClickListener {
     fun navigateContact() {
         parentFragmentManager.let { fm -> ContactDialogFragment().show(fm, TAG) }
         dismiss()
+    }
+
+    fun navigateContactTemp() {
+        if (parentFragment == HomeFragment()) {
+            parentFragmentManager.let { fm -> ContactDialogFragment().show(fm, TAG) }
+        }
+        if (parentFragment == DetailPlantFragment()) {
+            parentFragmentManager.let { fm -> DetailPlantContactDialogFragment().show(fm, TAG) }
+        }
     }
 
     fun navigateNextTimeContact() {

@@ -21,7 +21,8 @@ import com.sopt.cherish.util.DialogUtil
 import com.sopt.cherish.util.PermissionUtil
 import com.sopt.cherish.util.extension.shortToast
 
-class DetailPlantContactDialogFragment(private val cherishId: Int) : DialogFragment(),
+// ContactDialog와 동일하게 작성하면 될겁니다.
+class DetailPlantContactDialogFragment : DialogFragment(),
     View.OnClickListener {
     private val codeThatReviewPage = 1002
     private val viewModel: DetailPlantViewModel by activityViewModels()
@@ -40,7 +41,6 @@ class DetailPlantContactDialogFragment(private val cherishId: Int) : DialogFragm
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         binding.detailPlantViewModel = viewModel
-        viewModel.cherishId.value = cherishId
         viewModel.fetchCalendarData()
         viewModel.calendarData.observe(viewLifecycleOwner) {
             if (it.waterData.calendarData.isEmpty()) {

@@ -5,6 +5,13 @@
 
     <data>
 
+        <variable
+            name="homeBlankViewModel"
+            type="com.sopt.cherish.ui.main.HomeBlankViewModel" />
+
+        <variable
+            name="homeBlankActivity"
+            type="com.sopt.cherish.ui.main.home.HomeBlankActivity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -50,10 +57,13 @@
         <Button
             android:id="@+id/startBtn"
             style="@style/RoundButton.GreenMain"
-            android:layout_width="328dp"
+            android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_marginBottom="30dp"
+            android:layout_marginStart="@dimen/margin_16dp"
+            android:layout_marginEnd="@dimen/margin_16dp"
             android:text="@string/home_blank_start_btn_text"
+            android:onClick="@{() -> homeBlankActivity.navigatePhone()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
