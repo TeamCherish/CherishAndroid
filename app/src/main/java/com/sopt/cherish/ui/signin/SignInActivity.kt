@@ -67,6 +67,8 @@ class SignInActivity : AppCompatActivity() {
                     if (response.body()?.userData?.totalUser == 0) {
                         val blankHomeIntent =
                             Intent(this@SignInActivity, HomeBlankActivity::class.java)
+                        blankHomeIntent.putExtra("userId", userId)
+                        blankHomeIntent.putExtra("userNickname", userNickName)
                         startActivity(blankHomeIntent)
                         finish()
                     } else {

@@ -18,7 +18,7 @@ import com.sopt.cherish.util.extension.FlexBoxExtension.getChip
 import com.sopt.cherish.util.extension.countNumberOfCharacters
 import com.sopt.cherish.util.extension.longToast
 import com.sopt.cherish.util.extension.shortToast
-import com.sopt.cherish.util.extension.writeReview
+import com.sopt.cherish.util.extension.writeKeyword
 
 /**
  * Created by SSong-develop on 2021-02-12
@@ -63,13 +63,17 @@ class ReviseReviewFragment : Fragment() {
 
     private fun observeSelectedDate(binding: FragmentReviseReviewBinding) {
         viewModel.selectedCalendarData.observe(viewLifecycleOwner) {
-            binding.reviseReviewDateText.text = DateUtil.convertDateToString(it.wateredDate)
-            binding.reviseReviewFlexBox.apply {
-                addChip(it.userStatus1)
-                addChip(it.userStatus2)
-                addChip(it.userStatus3)
+            binding.reviseReviewDateText.text = it?.wateredDate?.let { it1 ->
+                DateUtil.convertDateToString(
+                    it1
+                )
             }
-            binding.reviseReviewMemo.setText(it.review)
+            binding.reviseReviewFlexBox.apply {
+                it?.userStatus1?.let { it1 -> addChip(it1) }
+                it?.userStatus2?.let { it1 -> addChip(it1) }
+                it?.userStatus3?.let { it1 -> addChip(it1) }
+            }
+            binding.reviseReviewMemo.setText(it?.review)
         }
     }
 
@@ -99,6 +103,7 @@ class ReviseReviewFragment : Fragment() {
                         DateUtil.convertDateToString(viewModel.selectedCalendarData.value!!.wateredDate)
                     )
                 )
+                viewModel.selectedCalendarData.value = null
                 longToast(requireContext(), "메모 삭제에 성공했습니다.")
                 parentFragmentManager.popBackStack()
             }
@@ -120,7 +125,7 @@ class ReviseReviewFragment : Fragment() {
         binding.reviseReviewEditKeyword.countNumberOfCharacters { keyword ->
             binding.reviseReviewNumberOfCharacters.text = keyword?.length.toString()
             if (keyword?.length!! > 5) {
-                CustomDialogFragment(R.layout.sample_wordcount_error).show(
+                CustomDialogFragment(R.layout.dialog_keyword_limit_error).show(
                     parentFragmentManager,
                     ReviewActivity.TAG
                 )
@@ -129,7 +134,7 @@ class ReviseReviewFragment : Fragment() {
     }
 
     private fun addUserStatusWithChip(binding: FragmentReviseReviewBinding) {
-        binding.reviseReviewEditKeyword.writeReview(binding.reviseReviewFlexBox)
+        binding.reviseReviewEditKeyword.writeKeyword(binding.reviseReviewFlexBox)
     }
 
 }

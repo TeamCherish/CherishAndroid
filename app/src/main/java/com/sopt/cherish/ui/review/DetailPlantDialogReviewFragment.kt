@@ -21,7 +21,7 @@ import com.sopt.cherish.util.SimpleLogger
 import com.sopt.cherish.util.extension.FlexBoxExtension.getChip
 import com.sopt.cherish.util.extension.countNumberOfCharacters
 import com.sopt.cherish.util.extension.shortToast
-import com.sopt.cherish.util.extension.writeReview
+import com.sopt.cherish.util.extension.writeKeyword
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -82,7 +82,7 @@ class DetailPlantDialogReviewFragment : DialogFragment() {
         binding.detailPlantReviewEditKeyword.countNumberOfCharacters { keyword ->
             binding.detailPlantReviewNumberOfCharacters.text = keyword!!.length.toString()
             if (keyword.length > 5) {
-                CustomDialogFragment(R.layout.sample_wordcount_error).show(
+                CustomDialogFragment(R.layout.dialog_keyword_limit_error).show(
                     parentFragmentManager,
                     TAG
                 )
@@ -105,7 +105,7 @@ class DetailPlantDialogReviewFragment : DialogFragment() {
         // 이거 처리만 해주면 끝이 납니다
         // 글자수에 따라 엔터를 먹히지 않게 한다던지 하면 될거 같음
         // 다이얼로그가 왜 뜨는 지 모르겠는데 일단 뜸 ㅋㅋ
-        binding.detailPlantReviewEditKeyword.writeReview(binding.detailPlantReviewFlexBox)
+        binding.detailPlantReviewEditKeyword.writeKeyword(binding.detailPlantReviewFlexBox)
     }
 
     private fun sendReviewToServer(binding: DialogDetailPlantReviewBinding) {

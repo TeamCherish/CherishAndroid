@@ -6,7 +6,7 @@
 
         <variable
             name="dialogWatering"
-            type="com.sopt.cherish.ui.dialog.WateringDialogFragment" />
+            type="com.sopt.cherish.ui.dialog.wateringdialog.WateringDialogFragment" />
     </data>
 
     <androidx.cardview.widget.CardView

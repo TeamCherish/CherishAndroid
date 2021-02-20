@@ -21,7 +21,6 @@ import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.adapter.Phone
 import com.sopt.cherish.ui.adapter.PhoneBookAdapter
 import com.sopt.cherish.ui.dialog.CheckPhoneDialogFragment
-import com.sopt.cherish.ui.dialog.DeletePlantDialogFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

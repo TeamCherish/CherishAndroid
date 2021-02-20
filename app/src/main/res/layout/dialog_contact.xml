@@ -10,7 +10,7 @@
 
         <variable
             name="dialogContact"
-            type="com.sopt.cherish.ui.dialog.ContactDialogFragment" />
+            type="com.sopt.cherish.ui.dialog.wateringdialog.ContactDialogFragment" />
     </data>
 
     <androidx.cardview.widget.CardView
