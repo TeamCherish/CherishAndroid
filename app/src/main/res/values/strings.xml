@@ -73,5 +73,11 @@
 
     <string name="detail_plant_with">함께한 날</string>
 
-
+    <string name="sign_up_title">회원가입</string>
+    <string name="sign_up_email">이메일을 입력해주세요</string>
+    <string name="sign_up_email_hint">Ex) cherish@naver.com</string>
+    <string name="sign_up_email_ok">사용가능한 이메일입니다.</string>
+    <string name="sign_up_pw">비밀번호를 입력해주세요</string>
+    <string name="sign_up_pw_hint">영문, 숫자 포함 8자이상</string>
+    <string name="sign_up_pw_again">비밀번호를 다시 입력해주세요</string>
 </resources>
