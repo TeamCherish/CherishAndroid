@@ -1,5 +1,6 @@
 package com.sopt.cherish.ui.enrollment
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,6 +13,7 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentResultPlantBinding
+import com.sopt.cherish.ui.main.MainActivity
 
 
 class ResultPlantFragment : Fragment() {
@@ -30,12 +32,15 @@ class ResultPlantFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_result_plant, container, false)
         binding = FragmentResultPlantBinding.bind(view)
         binding.plantExplanation.text = arguments?.getString("plant_explanation")
-        Log.d("plantExplanation",  arguments?.getString("plant_explanation").toString())
+        Log.d("plantExplanation", arguments?.getString("plant_explanation").toString())
 
 
-        if(arguments?.getString("plant_modify")?.contains("\n") == true){
+        if(arguments?.getString("plant_modify")?.contains("\n") == true) {
             binding.textViewModify.text = arguments?.getString("plant_modify")?.split("\n")?.get(0)
-            binding.textViewModifyUnder.text=arguments?.getString("plant_modify")?.split("\n")?.get(1)?.toString()
+            binding.textViewModifyUnder.text =
+                arguments?.getString("plant_modify")?.split("\n")?.get(
+                    1
+                )?.toString()
 
         }
 
@@ -47,7 +52,14 @@ class ResultPlantFragment : Fragment() {
 
         binding.startbtn.setOnClickListener {
             // LoadingDialog를 보여주면 됨
-            activity?.finish()
+            if (activity?.intent?.getIntExtra("codeFirstStart", -1) == 1) {
+                val intent = Intent(requireContext(), MainActivity::class.java)
+                intent.flags =
+                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                startActivity(intent)
+            } else {
+                activity?.finish()
+            }
         }
         return view
     }

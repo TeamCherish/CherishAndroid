@@ -28,6 +28,11 @@ class HomeBlankActivity : AppCompatActivity() {
     fun navigatePhone() {
         val intent = Intent(this@HomeBlankActivity, EnrollmentPhoneActivity::class.java)
         intent.putExtra("userId", viewModel.userId)
+        intent.putExtra("codeFirstStart", CODE_FIRST_START)
         startActivity(intent)
+    }
+
+    companion object {
+        private const val CODE_FIRST_START = 1
     }
 }
