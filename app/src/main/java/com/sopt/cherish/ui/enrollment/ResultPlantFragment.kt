@@ -54,6 +54,8 @@ class ResultPlantFragment : Fragment() {
             // LoadingDialog를 보여주면 됨
             if (activity?.intent?.getIntExtra("codeFirstStart", -1) == 1) {
                 val intent = Intent(requireContext(), MainActivity::class.java)
+                // userId , userNickname이 없어서 안되는거네 시발 찾았다.
+                // todo : userId랑 userNickname 받으면된다.
                 intent.flags =
                     Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
                 startActivity(intent)

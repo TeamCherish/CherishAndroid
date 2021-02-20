@@ -49,7 +49,6 @@ class HomeFragment : Fragment(), OnItemClickListener {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.mainViewModel = viewModel
         homeCherryListAdapter = HomeCherryListAdapter(this)
-
         standardBottomSheetBehavior =
             BottomSheetBehavior.from(binding.homeStandardBottomSheet)
         addBottomSheetCallback()
@@ -101,7 +100,10 @@ class HomeFragment : Fragment(), OnItemClickListener {
     }
 
     private fun setCherishUserListAdapter(userResult: UserResult) {
-        homeCherryListAdapter.data = userResult.userData.userList.reversed() as MutableList<User>
+        // null이 오는데 null일 리가 없는데 왜 null이라고 나오는지를 모르겠어...
+        // 왜 null이라고 하는거지....분명 연결을 했는데...
+        homeCherryListAdapter.data = (userResult.userData.userList.reversed() as? MutableList<User>)
+            ?: throw IllegalArgumentException("list is Empty")
         homeCherryListAdapter.notifyDataSetChanged()
     }
 

@@ -23,11 +23,13 @@ class HomeBlankActivity : AppCompatActivity() {
         binding.homeBlankViewModel = viewModel
 
         viewModel.userId = intent.getIntExtra("userId", -1)
+        viewModel.userNickname = intent.getStringExtra("userNickname")!!
     }
 
     fun navigatePhone() {
         val intent = Intent(this@HomeBlankActivity, EnrollmentPhoneActivity::class.java)
         intent.putExtra("userId", viewModel.userId)
+        intent.putExtra("userNickname", viewModel.userNickname)
         intent.putExtra("codeFirstStart", CODE_FIRST_START)
         startActivity(intent)
     }
