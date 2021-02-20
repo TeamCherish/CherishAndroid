@@ -4,5 +4,5 @@ import androidx.lifecycle.ViewModel
 
 class HomeBlankViewModel : ViewModel() {
 
-    var userId: Int = 0
+    var userId: Int = -1
 }
