@@ -197,7 +197,7 @@ class EnrollPlantFragment : Fragment() {
                             phone = userphonebook,
                             cycle_date = user_water,
                             notice_time = usertime_hour,
-                            water_notice = switchvalue,
+                            water_notice = true,
                             UserId = userid.toInt()
 
                         )

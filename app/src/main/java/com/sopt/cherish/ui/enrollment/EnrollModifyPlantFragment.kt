@@ -149,7 +149,7 @@ class EnrollModifyPlantFragment : Fragment() {
                 Log.d("userwater2", week_modify.toString())
             }
 
-            var week_switch_modify = binding.alarmSwitch.isChecked
+            //var week_switch_modify = binding.alarmSwitch.isChecked
 
             val usertime = binding.waterAlarmTime.text.toString()
             val usertime_hour_modify = usertime.substring(0, 5).toString()
@@ -161,7 +161,7 @@ class EnrollModifyPlantFragment : Fragment() {
                 birth = birth_modify,
                 cycle_date = week_modify,
                 notice_time = usertime_hour_modify,
-                water_notice = week_switch_modify,
+                water_notice = true,
                 id = modifycherish
             )
             requestData.modifyAPI.plantmodify(body).enqueue(
