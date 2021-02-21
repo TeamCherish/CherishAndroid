@@ -3,6 +3,165 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.signup.SignUpActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/sign_up_tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        tools:ignore="MissingConstraints"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/sign_up_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_up_title"
+        android:textColor="#2a2a2a"
+        android:includeFontPadding="false"
+        android:fontFamily="@font/notosanscjkkr_medium"
+        android:textSize="@dimen/text_16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/sign_up_tool_bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/sign_up_tool_bar"/>
+
+    <ImageView
+        android:contentDescription="@null"
+        android:id="@+id/indicator_first"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/sign_up_indicator_on"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sign_up_tool_bar"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="24dp"/>
+
+    <ImageView
+        android:contentDescription="@null"
+        android:id="@+id/indicator_second"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/sign_up_indicator_off"
+        app:layout_constraintStart_toEndOf="@+id/indicator_first"
+        app:layout_constraintTop_toBottomOf="@+id/sign_up_tool_bar"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="9dp"/>
+
+    <ImageView
+        android:contentDescription="@null"
+        android:id="@+id/indicator_third"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/sign_up_indicator_off"
+        app:layout_constraintStart_toEndOf="@+id/indicator_second"
+        app:layout_constraintTop_toBottomOf="@+id/sign_up_tool_bar"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="9dp"/>
+
+    <ImageView
+        android:contentDescription="@null"
+        android:id="@+id/indicator_fourth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/sign_up_indicator_off"
+        app:layout_constraintStart_toEndOf="@+id/indicator_third"
+        app:layout_constraintTop_toBottomOf="@+id/sign_up_tool_bar"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="9dp"/>
+
+    <TextView
+        android:id="@+id/email_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_up_email"
+        android:fontFamily="@font/notosanscjkkr_medium"
+        android:textSize="@dimen/text_20sp"
+        android:textColor="#2a2a2a"
+        android:layout_marginTop="45dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/indicator_first"/>
+    
+    <EditText
+        android:autofillHints="@string/sign_up_email_hint"
+        android:inputType="textEmailAddress"
+        android:id="@+id/user_email"
+        android:layout_width="328dp"
+        android:layout_height="44dp"
+        app:layout_constraintStart_toStartOf="@+id/email_text"
+        app:layout_constraintTop_toBottomOf="@+id/email_text"
+        android:background="@drawable/search_background"
+        android:layout_marginTop="4dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="0dp"
+        android:hint="@string/sign_up_email_hint"/>
+
+    <TextView
+        android:id="@+id/is_usable_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_up_email_ok"
+        app:layout_constraintTop_toBottomOf="@+id/user_email"
+        app:layout_constraintEnd_toEndOf="@+id/user_email"
+        android:textColor="@color/cherish_green_main"
+        android:fontFamily="@font/notosanscjkkr_regular"/>
+
+    <TextView
+        android:id="@+id/pw_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_up_pw"
+        android:fontFamily="@font/notosanscjkkr_medium"
+        android:textSize="@dimen/text_20sp"
+        android:textColor="#2a2a2a"
+        android:layout_marginTop="14dp"
+        app:layout_constraintStart_toStartOf="@+id/user_email"
+        app:layout_constraintTop_toBottomOf="@+id/is_usable_email"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/user_pw"
+        app:hintAnimationEnabled="false"
+        android:layout_width="328dip"
+        android:layout_height="44dip"
+        android:background="@drawable/search_background"
+        android:textColorHint="#aaaaaa"
+        android:hint="@string/sign_up_pw_hint"
+        android:layout_marginTop="5dp"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        app:layout_constraintStart_toStartOf="@+id/pw_text"
+        app:layout_constraintTop_toBottomOf="@+id/pw_text">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:background="@drawable/search_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textPassword"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/pw_again"
+        android:layout_width="328dip"
+        app:hintAnimationEnabled="false"
+        android:layout_height="44dip"
+        android:background="@drawable/search_background"
+        android:textColorHint="#aaaaaa"
+        android:hint="@string/sign_up_pw_again"
+        android:layout_marginTop="@dimen/margin_12dp"
+        app:boxStrokeWidth="0dp"
+        app:boxStrokeWidthFocused="0dp"
+        app:layout_constraintStart_toStartOf="@+id/user_pw"
+        app:layout_constraintTop_toBottomOf="@+id/user_pw">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:background="@drawable/search_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textPassword"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

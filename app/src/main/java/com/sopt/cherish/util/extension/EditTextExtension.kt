@@ -20,7 +20,7 @@ fun EditText.countNumberOfCharacters(observeTextChanged: (CharSequence?) -> Unit
     })
 }
 
-fun EditText.writeReview(reviewFlexBoxLayout: FlexboxLayout) {
+fun EditText.writeKeyword(reviewFlexBoxLayout: FlexboxLayout) {
     this.setOnKeyListener { view, keyCode, keyEvent ->
         // 이 문구를 뭔가 좀 코틀린스럽게 짤수 있으면 좋겠다. 훈기야
         when (keyEvent.action) {
@@ -31,7 +31,7 @@ fun EditText.writeReview(reviewFlexBoxLayout: FlexboxLayout) {
                     if (reviewFlexBoxLayout.getChipsCount() < 4)
                         reviewFlexBoxLayout.addChip(keyword)
                     else {
-                        shortToast(view.context, "키워드는 최대 3개까지만 가능합니다.")
+                        // todo : 다이얼로그가 나와야 함
                         this.hideKeyboard()
                     }
                     et.text = null

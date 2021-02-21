@@ -1,4 +1,4 @@
-package com.sopt.cherish.ui.dialog
+package com.sopt.cherish.ui.dialog.wateringdialog
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -21,9 +21,9 @@ import com.sopt.cherish.util.DialogUtil
 import com.sopt.cherish.util.PermissionUtil
 import com.sopt.cherish.util.extension.shortToast
 
-class DetailPlantContactDialogFragment(private val cherishId: Int) : DialogFragment(),
+// ContactDialog와 동일하게 작성하면 됩니다. 개 귀찮아 진짜ㅠㅠㅠ
+class DetailPlantContactDialogFragment : DialogFragment(),
     View.OnClickListener {
-    private val codeThatReviewPage = 1002
     private val viewModel: DetailPlantViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -37,10 +37,12 @@ class DetailPlantContactDialogFragment(private val cherishId: Int) : DialogFragm
             container,
             false
         )
+        binding.dialogDetailPlantContact = this
+        binding.detailPlantViewModel = viewModel
+
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         binding.detailPlantViewModel = viewModel
-        viewModel.cherishId.value = cherishId
         viewModel.fetchCalendarData()
         viewModel.calendarData.observe(viewLifecycleOwner) {
             if (it.waterData.calendarData.isEmpty()) {
@@ -121,7 +123,7 @@ class DetailPlantContactDialogFragment(private val cherishId: Int) : DialogFragm
         if (findKakaoTalk()) {
             val kakaoIntent = context?.packageManager?.getLaunchIntentForPackage("com.kakao.talk")
             kakaoIntent?.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivityForResult(kakaoIntent, codeThatReviewPage)
+            startActivityForResult(kakaoIntent, CODE_THAT_REVIEW_PAGE)
         } else {
             shortToast(requireContext(), "카카오톡이 없어요 ㅠ")
         }
@@ -133,7 +135,7 @@ class DetailPlantContactDialogFragment(private val cherishId: Int) : DialogFragm
             Intent(Intent.ACTION_CALL, Uri.parse("tel:${viewModel.cherishPhoneNumber.value}"))
         startActivityForResult(
             callIntent,
-            codeThatReviewPage
+            CODE_THAT_REVIEW_PAGE
         )
     }
 
@@ -144,7 +146,7 @@ class DetailPlantContactDialogFragment(private val cherishId: Int) : DialogFragm
         )
         startActivityForResult(
             messageIntent,
-            codeThatReviewPage
+            CODE_THAT_REVIEW_PAGE
         )
     }
 
@@ -176,8 +178,12 @@ class DetailPlantContactDialogFragment(private val cherishId: Int) : DialogFragm
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == codeThatReviewPage) {
+        if (requestCode == CODE_THAT_REVIEW_PAGE) {
             startReviewAndDismiss()
         }
+    }
+
+    companion object {
+        private const val CODE_THAT_REVIEW_PAGE = 1002
     }
 }

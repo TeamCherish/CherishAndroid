@@ -1,4 +1,4 @@
-package com.sopt.cherish.ui.dialog
+package com.sopt.cherish.ui.dialog.wateringdialog
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -9,36 +9,44 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
 import com.sopt.cherish.R
-import com.sopt.cherish.databinding.DialogWateringBinding
+import com.sopt.cherish.databinding.DialogDetailPlantWateringBinding
+import com.sopt.cherish.ui.dialog.DelayWateringDialogFragment
 import com.sopt.cherish.util.DialogUtil
 
 /**
  * Created on 01-03 by SSong-develop
  * popUp_Watering
- * todo : sizing 하는 것만 다시 한번 좀 생각해보면 좋을거 같음 이건 끝!
  */
 
-class WateringDialogFragment : DialogFragment(), View.OnClickListener {
+class DetailWateringDialogFragment : DialogFragment(),
+    View.OnClickListener {
 
-    companion object {
-        const val TAG = "WateringDialog"
-    }
-
+    // todo : DelayDialog도 하나 만들어야 합니다.
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding: DialogWateringBinding =
-            DataBindingUtil.inflate(inflater, R.layout.dialog_watering, container, false)
-        binding.dialogWatering = this
+        val binding: DialogDetailPlantWateringBinding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.dialog_detail_plant_watering,
+            container,
+            false
+        )
+        binding.dialogDetailWatering = this
+
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         return binding.root
     }
 
     fun navigateContact() {
-        parentFragmentManager.let { fm -> ContactDialogFragment().show(fm, TAG) }
+        parentFragmentManager.let { fm ->
+            DetailPlantContactDialogFragment().show(
+                fm,
+                TAG
+            )
+        }
         dismiss()
     }
 
@@ -48,7 +56,6 @@ class WateringDialogFragment : DialogFragment(), View.OnClickListener {
     }
 
     override fun onClick(view: View?) {
-        // dialog 주변을 클릭하면 dismiss
         dismiss()
     }
 
@@ -57,4 +64,7 @@ class WateringDialogFragment : DialogFragment(), View.OnClickListener {
         DialogUtil.adjustDialogSize(this, 0.875f, 0.57f)
     }
 
+    companion object {
+        private const val TAG = "WateringDialog"
+    }
 }

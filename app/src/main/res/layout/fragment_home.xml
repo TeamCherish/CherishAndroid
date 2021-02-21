@@ -8,10 +8,6 @@
         <variable
             name="mainViewModel"
             type="com.sopt.cherish.ui.main.MainViewModel" />
-
-        <variable
-            name="homeFragment"
-            type="com.sopt.cherish.ui.main.home.HomeFragment" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

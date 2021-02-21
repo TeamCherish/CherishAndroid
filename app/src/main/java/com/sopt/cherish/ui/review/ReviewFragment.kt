@@ -18,7 +18,7 @@ import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.util.extension.FlexBoxExtension.getChip
 import com.sopt.cherish.util.extension.countNumberOfCharacters
 import com.sopt.cherish.util.extension.shortToast
-import com.sopt.cherish.util.extension.writeReview
+import com.sopt.cherish.util.extension.writeKeyword
 
 // fragment로 바꿀까 고민중임
 class ReviewFragment : Fragment() {
@@ -65,7 +65,7 @@ class ReviewFragment : Fragment() {
         binding.reviewEditKeyword.countNumberOfCharacters { keyword ->
             binding.reviewNumberOfCharacters.text = keyword?.length.toString()
             if (keyword?.length!! > 5) {
-                val warningDialog = CustomDialogFragment(R.layout.sample_wordcount_error)
+                val warningDialog = CustomDialogFragment(R.layout.dialog_keyword_limit_error)
                 warningDialog.show(parentFragmentManager, TAG)
             }
         }
@@ -84,7 +84,7 @@ class ReviewFragment : Fragment() {
         // 이거 처리만 해주면 끝이 납니다
         // 글자수에 따라 엔터를 먹히지 않게 한다던지 하면 될거 같음
         // 다이얼로그가 왜 뜨는 지 모르겠는데 일단 뜸 ㅋㅋ
-        binding.reviewEditKeyword.writeReview(binding.reviewFlexBox)
+        binding.reviewEditKeyword.writeKeyword(binding.reviewFlexBox)
     }
 
     private fun sendReviewToServer(binding: ActivityReviewBinding) {

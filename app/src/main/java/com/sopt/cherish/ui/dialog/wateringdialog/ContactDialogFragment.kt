@@ -1,9 +1,9 @@
-package com.sopt.cherish.ui.dialog
+package com.sopt.cherish.ui.dialog.wateringdialog
 
-import android.annotation.SuppressLint
 import android.app.Activity.RESULT_CANCELED
+import android.app.Activity.RESULT_OK
 import android.content.Intent
-import android.content.pm.ResolveInfo
+import android.content.Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
@@ -21,18 +21,18 @@ import com.sopt.cherish.ui.review.ReviewActivity
 import com.sopt.cherish.util.DialogUtil
 import com.sopt.cherish.util.PermissionUtil
 import com.sopt.cherish.util.SimpleLogger
+import com.sopt.cherish.util.extension.ContextExtension.isInstalledApp
+import com.sopt.cherish.util.extension.ContextExtension.moveMarket
 import com.sopt.cherish.util.extension.FlexBoxExtension.addBlackChipModeChoice
 import com.sopt.cherish.util.extension.FlexBoxExtension.clearChips
-import com.sopt.cherish.util.extension.shortToast
 
 /**
  * Created on 2020-01-03 by SSong-develop
  * popUp_Contact
- * 끝!
+ * 끝! 진짜 끝! 멘트만 수정하면 됨!!!
  */
 
 class ContactDialogFragment : DialogFragment(), View.OnClickListener {
-    private val codeThatReviewPage = 1001
 
     private val viewModel: MainViewModel by activityViewModels()
 
@@ -43,7 +43,6 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
     ): View {
         val binding: DialogContactBinding =
             DataBindingUtil.inflate(inflater, R.layout.dialog_contact, container, false)
-        SimpleLogger.logI("ContactDialog onCreated")
         viewModel.fetchCalendarData()
         binding.lifecycleOwner = viewLifecycleOwner
         binding.mainViewModel = viewModel
@@ -52,14 +51,11 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         setChip(binding)
-
         return binding.root
     }
 
-
     override fun onResume() {
         super.onResume()
-        SimpleLogger.logI("ContactDialog onResume")
         DialogUtil.adjustDialogSize(this, 0.875f, 0.542f)
     }
 
@@ -72,9 +68,14 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
             binding.contactChipLayout.apply {
                 clearChips()
                 if (it.waterData.calendarData.isNotEmpty()) {
-                    addBlackChipModeChoice(it.waterData.calendarData.last().userStatus1)
-                    addBlackChipModeChoice(it.waterData.calendarData.last().userStatus2)
-                    addBlackChipModeChoice(it.waterData.calendarData.last().userStatus3)
+                    it.waterData.calendarData.let { calendarData ->
+                        if (calendarData.last().userStatus1 != "" && calendarData.last().userStatus1 != "null")
+                            addBlackChipModeChoice(it.waterData.calendarData.last().userStatus1)
+                        if (calendarData.last().userStatus2 != "" && calendarData.last().userStatus2 != "null")
+                            addBlackChipModeChoice(it.waterData.calendarData.last().userStatus2)
+                        if (calendarData.last().userStatus3 != "" && calendarData.last().userStatus3 != "null")
+                            addBlackChipModeChoice(it.waterData.calendarData.last().userStatus3)
+                    }
                 }
             }
         }
@@ -97,12 +98,15 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
     }
 
     fun navigateKakao() {
-        if (findKakaoTalk()) {
-            val kakaoIntent = context?.packageManager?.getLaunchIntentForPackage("com.kakao.talk")
-            kakaoIntent?.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivityForResult(kakaoIntent, codeThatReviewPage)
+        if (requireContext().isInstalledApp(KAKAO_PACKAGE_NAME)) {
+            val kakaoIntent = requireContext().packageManager.getLaunchIntentForPackage(
+                KAKAO_PACKAGE_NAME
+            )
+            kakaoIntent?.flags = FLAG_ACTIVITY_REORDER_TO_FRONT
+            startReview()
+            startActivity(kakaoIntent)
         } else {
-            shortToast(requireContext(), "카카오톡이 없어요 ㅠ")
+            requireContext().moveMarket(KAKAO_PACKAGE_NAME)
         }
     }
 
@@ -129,44 +133,33 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
         )
     }
 
-    // todo : 여기 고쳐야함 카카오톡 작동안됨.
-    @SuppressLint("QueryPermissionsNeeded")
-    private fun findKakaoTalk(): Boolean {
-        var isExist = false
-        val phoneApps: List<ResolveInfo>
-        val intent = Intent(Intent.ACTION_MAIN, null)
-        intent.addCategory(Intent.CATEGORY_LAUNCHER)
-        phoneApps = context?.packageManager!!.queryIntentActivities(intent, 0)
-
-        try {
-            for (i in 0..phoneApps.size) {
-                if (phoneApps[i].activityInfo.packageName.startsWith("com.kakao.talk")) {
-                    isExist = true
-                    break
-                }
-            }
-        } catch (e: Exception) {
-            isExist = false
-        }
-        return isExist
+    private fun startReview() {
+        val intent = Intent(requireContext(), ReviewActivity::class.java)
+        intent.putExtra("userNickname", viewModel.userNickName.value)
+        intent.putExtra("selectedCherishNickname", viewModel.selectedCherishUser.value!!.nickName)
+        intent.putExtra("selectedCherishId", viewModel.selectedCherishUser.value!!.id)
+        startActivityForResult(intent, codeThatGetWatering)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == codeThatReviewPage) {
             if (resultCode == RESULT_CANCELED) {
-                startReviewAndDismiss()
+                startReview()
+            }
+        }
+        if (requestCode == codeThatGetWatering) {
+            if (resultCode == RESULT_OK) {
+                SimpleLogger.logI("${data?.getBooleanExtra("wateringTrigger", false)}")
+                viewModel.animationTrigger.value = data?.getBooleanExtra("wateringTrigger", false)
+                dismiss()
             }
         }
     }
 
-
-    private fun startReviewAndDismiss() {
-        val intent = Intent(requireContext(), ReviewActivity::class.java)
-        intent.putExtra("userNickname", viewModel.userNickName.value)
-        intent.putExtra("selectedCherishNickname", viewModel.selectedCherishUser.value!!.nickName)
-        intent.putExtra("selectedCherishId", viewModel.selectedCherishUser.value!!.id)
-        startActivity(intent)
-        dismiss()
+    companion object {
+        private const val KAKAO_PACKAGE_NAME = "com.kakao.talk"
+        private const val codeThatReviewPage = 1001
+        private const val codeThatGetWatering = 1002
     }
 }
