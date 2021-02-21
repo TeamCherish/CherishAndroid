@@ -46,7 +46,7 @@ class ManagePlantFragment : Fragment() {
     private val requestData = RetrofitBuilder
     private lateinit var tabBindingFirst:MyPageCustomTabBinding
     private lateinit var tabBindingSecond:MyPageCustomTabBinding
-    lateinit var data: MutableList<MyPageCherishData>
+    lateinit var data: List<MyPageCherishData>
     lateinit var binding: FragmentManagePlantBinding
 
     lateinit var madapter:MypagePhoneBookSearchAdapter
@@ -213,7 +213,7 @@ class ManagePlantFragment : Fragment() {
         })
     }
 
-    private fun initializeTabLayoutView(binding: FragmentManagePlantBinding,data:MutableList<MyPageCherishData>) {
+    private fun initializeTabLayoutView(binding: FragmentManagePlantBinding,data:List<MyPageCherishData>) {
 
         activity?.supportFragmentManager!!.beginTransaction()
             .add(R.id.my_page_bottom_container, PlantFragment(data)).commit()
@@ -383,8 +383,8 @@ class ManagePlantFragment : Fragment() {
                                 setCustomView(createTabView("연락처 ",arguments?.getString("phonecount"))))
 
 
-                                initializeTabLayoutView(binding,it.myPageUserData.result as MutableList<MyPageCherishData>)
-                                data=it.myPageUserData.result
+                                initializeTabLayoutView(binding,it.myPageUserData.result.reversed())
+                                data=it.myPageUserData.result.reversed()
                                 Log.d("list", it.myPageUserData.result.toString())
                             }
                     }

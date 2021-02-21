@@ -12,7 +12,7 @@ import com.sopt.cherish.R
 import com.sopt.cherish.databinding.MyPageCherryItemBinding
 import com.sopt.cherish.remote.api.MyPageCherishData
 
-class MyPageBottomSheetAdapter(private var data:MutableList<MyPageCherishData>?) :
+class MyPageBottomSheetAdapter(private var data:List<MyPageCherishData>?) :
     RecyclerView.Adapter<MyPageBottomSheetAdapter.ViewHolder>() {
 
     inner class ViewHolder(private var binding: MyPageCherryItemBinding) :

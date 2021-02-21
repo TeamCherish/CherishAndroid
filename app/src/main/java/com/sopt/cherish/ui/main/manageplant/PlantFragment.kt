@@ -18,14 +18,14 @@ import com.sopt.cherish.ui.detail.DetailPlantActivity
  * bottom sheet에서 보여지는 recyclerview fragment
  */
 
-class PlantFragment(private var data:MutableList<MyPageCherishData>?) : Fragment() {
+class PlantFragment(private var data:List<MyPageCherishData>?) : Fragment() {
 
     private var _binding: FragmentPlantBinding? = null
     private val binding get() = _binding!!
     private lateinit var cherishAdapter: MyPageBottomSheetAdapter
 
 
-    lateinit var list: MutableList<MyPageCherishData>
+    lateinit var list: List<MyPageCherishData>
     var searchText = ""
 
     override fun onCreateView(

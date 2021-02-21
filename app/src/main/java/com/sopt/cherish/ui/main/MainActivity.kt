@@ -137,7 +137,7 @@ class MainActivity : AppCompatActivity() {
         return list.size
     }
 
-    fun replaceFragment(index: Int, data: MutableList<MyPageCherishData>?, isSearched:Boolean) {
+    fun replaceFragment(index: Int, data: List<MyPageCherishData>?, isSearched:Boolean) {
         search=isSearched
         val transAction = supportFragmentManager.beginTransaction()
         when (index) {
