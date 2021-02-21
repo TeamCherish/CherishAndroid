@@ -55,5 +55,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/search_bg"
         tools:listitem="@layout/item_layout" />
-
+    <Button
+        android:contentDescription="@null"
+        android:id="@+id/my_page_add_phone_btn"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="16dp"
+        style="@style/RoundButton.GreenMain"
+        android:fontFamily="@font/notosanscjkkr_medium"
+        android:includeFontPadding="false"
+        android:text="@string/myPage_add_phone_text"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -145,6 +146,7 @@ class DetailPlantFragment : Fragment() {
                                 binding.chip3.text = it.data.keyword3*/
                                 if(it.data.keyword1==""&& it.data.keyword2=="" && it.data.keyword3==""){
                                     binding.chip.text = "키워드를 입력하지 않았어요!"
+                                    binding.chip.isVisible=true
                                     binding.chip2.isVisible=false
                                     binding.chip3.isVisible=false
 
