@@ -1,5 +1,6 @@
 package com.sopt.cherish.ui.main.manageplant
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.provider.ContactsContract
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentMyPagePhoneBookSearchBinding
 import com.sopt.cherish.ui.adapter.MypagePhoneBookSearchAdapter
+import com.sopt.cherish.ui.adapter.PhoneBookAdapter
 import com.sopt.cherish.ui.adapter.Phonemypage
 import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
 
@@ -54,30 +56,19 @@ class MyPagePhoneBookSearchFragment() : Fragment() {
             Log.d("number",madapter.phonenumber)
             //setFragment(EnrollPlantFragment())
         }
-        /*madapter.setItemClickListener(object : MypagePhoneBookSearchAdapter.ItemClickListener {
+        madapter.setItemClickListener(object : MypagePhoneBookSearchAdapter.ItemClickListener {
+            @SuppressLint("ResourceAsColor")
             override fun onchange(radio: Boolean) {
-                TODO("Not yet implemented")
+                Log.d("radio", radio.toString())
+                if (radio == true) {
+                    binding.myPageAddPhoneBtn.setBackgroundColor(R.color.cherish_green_main)
+
+                }
             }
 
-            override fun ongetinfo(name: String, number: String) {
-                arguments = Bundle().apply {
-                    putString("phonename1",name)
-                    putString("phonenumber1", number)
-                }
-                }
-            override fun oncount(count: Int) {
-                TODO("Not yet implemented")
-            }
-
-        })*/
+        })
         return view
     }
-
-    fun getinfo():String{
-        return namename+namephone
-
-    }
-
 
     fun setFragment(fragment: Fragment) {
         val transaction = parentFragmentManager.beginTransaction()
