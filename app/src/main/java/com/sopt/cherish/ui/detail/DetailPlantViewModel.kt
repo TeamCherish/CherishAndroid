@@ -11,13 +11,8 @@ import kotlinx.coroutines.launch
 class DetailPlantViewModel(
     private val detailPlantRepository: DetailPlantRepository
 ) : ViewModel() {
-
     // Keyword , Review 조회하기
     val cherishId = MutableLiveData<Int>()
-
-    val userStatus1 = MutableLiveData<String>()
-    val userStatus2 = MutableLiveData<String>()
-    val userStatus3 = MutableLiveData<String>()
 
     val cherishPhoneNumber = MutableLiveData<String>()
 
@@ -27,19 +22,19 @@ class DetailPlantViewModel(
 
     val userId = MutableLiveData<Int>()
 
-    // ReviseReview를 위한 변수들
-    // calendarData 는 물준날 , 리뷰 , 리뷰 1,2,3 총 5개로 이루어져있습니다.
     val selectedCalendarData = MutableLiveData<CalendarData?>()
 
     private val _calendarData = MutableLiveData<CalendarRes>()
     val calendarData: MutableLiveData<CalendarRes>
         get() = _calendarData
 
+    var calendarModeChangeEvent = SingleLiveEvent<Boolean>()
+
+    val animationTrigger = SingleLiveEvent<Boolean>()
+
     fun fetchCalendarData() = viewModelScope.launch {
         _calendarData.postValue(detailPlantRepository.fetchCalendarData(cherishId.value!!))
     }
-
-    var calendarModeChangeEvent = SingleLiveEvent<Boolean>()
 
     // [Review]
     fun sendReviewToServer(reviewWateringReq: ReviewWateringReq) = viewModelScope.launch {

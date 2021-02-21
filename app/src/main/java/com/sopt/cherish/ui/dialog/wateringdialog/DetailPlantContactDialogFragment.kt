@@ -1,8 +1,8 @@
 package com.sopt.cherish.ui.dialog.wateringdialog
 
-import android.annotation.SuppressLint
+import android.app.Activity
+import android.app.Activity.RESULT_OK
 import android.content.Intent
-import android.content.pm.ResolveInfo
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
@@ -16,10 +16,13 @@ import androidx.fragment.app.activityViewModels
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.DialogDetailPlantContactBinding
 import com.sopt.cherish.ui.detail.DetailPlantViewModel
-import com.sopt.cherish.ui.review.DetailPlantDialogReviewFragment
+import com.sopt.cherish.ui.review.ReviewActivity
 import com.sopt.cherish.util.DialogUtil
 import com.sopt.cherish.util.PermissionUtil
-import com.sopt.cherish.util.extension.shortToast
+import com.sopt.cherish.util.extension.ContextExtension.isInstalledApp
+import com.sopt.cherish.util.extension.ContextExtension.moveMarket
+import com.sopt.cherish.util.extension.FlexBoxExtension.addBlackChipModeChoice
+import com.sopt.cherish.util.extension.FlexBoxExtension.clearChips
 
 // ContactDialog와 동일하게 작성하면 됩니다. 개 귀찮아 진짜ㅠㅠㅠ
 class DetailPlantContactDialogFragment : DialogFragment(),
@@ -37,39 +40,13 @@ class DetailPlantContactDialogFragment : DialogFragment(),
             container,
             false
         )
+        viewModel.fetchCalendarData()
         binding.dialogDetailPlantContact = this
         binding.detailPlantViewModel = viewModel
 
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        binding.detailPlantViewModel = viewModel
-        viewModel.fetchCalendarData()
-        viewModel.calendarData.observe(viewLifecycleOwner) {
-            if (it.waterData.calendarData.isEmpty()) {
-                binding.detailPlantContactUserStatusFirstChip.text = "채워줘ㅠ"
-                binding.detailPlantContactUserStatusSecondChip.text = "채워줘ㅠ"
-                binding.detailPlantContactUserStatusThridChip.text = "채워줘ㅠ"
-            } else {
-                viewModel.userStatus1.value = it.waterData.calendarData[0].userStatus1
-                viewModel.userStatus2.value = it.waterData.calendarData[0].userStatus2
-                viewModel.userStatus3.value = it.waterData.calendarData[0].userStatus3
-                setChip(binding)
-            }
-        }
-
-        binding.detailPlantContactCall.setOnClickListener {
-            navigateCall()
-        }
-
-        binding.detailPlantContactKakaoTalk.setOnClickListener {
-            navigateKakao()
-        }
-
-        binding.detailPlantContactMessage.setOnClickListener {
-            navigateToSendMessage()
-        }
-
-
+        setChip(binding)
         return binding.root
     }
 
@@ -83,27 +60,24 @@ class DetailPlantContactDialogFragment : DialogFragment(),
     }
 
     private fun setChip(binding: DialogDetailPlantContactBinding) {
-        viewModel.userStatus1.observe(viewLifecycleOwner) {
-            if (it == null) {
-                binding.detailPlantContactUserStatusFirstChip.text = " "
+        viewModel.calendarData.observe(viewLifecycleOwner) {
+            binding.detailPlantContactChipLayout.apply {
+                clearChips()
+                if (it.waterData.calendarData.isNotEmpty()) {
+                    it.waterData.calendarData.let { calendarData ->
+                        if (calendarData.last().userStatus1 != "" && calendarData.last().userStatus1 != "null")
+                            addBlackChipModeChoice(it.waterData.calendarData.last().userStatus1)
+                        if (calendarData.last().userStatus2 != "" && calendarData.last().userStatus2 != "null")
+                            addBlackChipModeChoice(it.waterData.calendarData.last().userStatus2)
+                        if (calendarData.last().userStatus3 != "" && calendarData.last().userStatus3 != "null")
+                            addBlackChipModeChoice(it.waterData.calendarData.last().userStatus3)
+                    }
+                }
             }
-            binding.detailPlantContactUserStatusFirstChip.text = it
-        }
-        viewModel.userStatus2.observe(viewLifecycleOwner) {
-            if (it == null) {
-                binding.detailPlantContactUserStatusSecondChip.text = " "
-            }
-            binding.detailPlantContactUserStatusSecondChip.text = it
-        }
-        viewModel.userStatus3.observe(viewLifecycleOwner) {
-            if (it == null) {
-                binding.detailPlantContactUserStatusThridChip.text = " "
-            }
-            binding.detailPlantContactUserStatusThridChip.text = it
         }
     }
 
-    private fun navigateCall() {
+    fun navigateCall() {
         if (PermissionUtil.isCheckedCallPermission(requireContext())) {
             startPhoneCall()
         } else {
@@ -111,7 +85,7 @@ class DetailPlantContactDialogFragment : DialogFragment(),
         }
     }
 
-    private fun navigateToSendMessage() {
+    fun navigateToSendMessage() {
         if (PermissionUtil.isCheckedSendMessagePermission(requireContext())) {
             startSendMessage()
         } else {
@@ -119,23 +93,25 @@ class DetailPlantContactDialogFragment : DialogFragment(),
         }
     }
 
-    private fun navigateKakao() {
-        if (findKakaoTalk()) {
-            val kakaoIntent = context?.packageManager?.getLaunchIntentForPackage("com.kakao.talk")
-            kakaoIntent?.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivityForResult(kakaoIntent, CODE_THAT_REVIEW_PAGE)
+    fun navigateKakao() {
+        if (requireContext().isInstalledApp(KAKAO_PACKAGE_NAME)) {
+            val kakaoIntent = requireContext().packageManager.getLaunchIntentForPackage(
+                KAKAO_PACKAGE_NAME
+            )
+            kakaoIntent?.flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
+            startReview()
+            startActivity(kakaoIntent)
         } else {
-            shortToast(requireContext(), "카카오톡이 없어요 ㅠ")
+            requireContext().moveMarket(KAKAO_PACKAGE_NAME)
         }
     }
 
     private fun startPhoneCall() {
-        // 함수화 해야합니다.
         val callIntent =
             Intent(Intent.ACTION_CALL, Uri.parse("tel:${viewModel.cherishPhoneNumber.value}"))
         startActivityForResult(
             callIntent,
-            CODE_THAT_REVIEW_PAGE
+            codeThatReviewPage
         )
     }
 
@@ -146,44 +122,41 @@ class DetailPlantContactDialogFragment : DialogFragment(),
         )
         startActivityForResult(
             messageIntent,
-            CODE_THAT_REVIEW_PAGE
+            codeThatReviewPage
         )
     }
 
-    @SuppressLint("QueryPermissionsNeeded")
-    private fun findKakaoTalk(): Boolean {
-        var isExist = false
-        val phoneApps: List<ResolveInfo>
-        val intent = Intent(Intent.ACTION_MAIN, null)
-        intent.addCategory(Intent.CATEGORY_LAUNCHER)
-        phoneApps = context?.packageManager!!.queryIntentActivities(intent, 0)
-
-        try {
-            for (i in 0..phoneApps.size) {
-                if (phoneApps[i].activityInfo.packageName.startsWith("com.kakao.talk")) {
-                    isExist = true
-                    break
-                }
-            }
-        } catch (e: Exception) {
-            isExist = false
-        }
-        return isExist
-    }
-
-    private fun startReviewAndDismiss() {
-        DetailPlantDialogReviewFragment().show(parentFragmentManager, tag)
-        dismiss()
+    private fun startReview() {
+        val intent = Intent(requireContext(), ReviewActivity::class.java)
+        intent.putExtra("userNickname", viewModel.userNickname.value)
+        intent.putExtra("selectedCherishNickname", viewModel.cherishNickname.value)
+        intent.putExtra("selectedCherishId", viewModel.cherishId.value)
+        startActivityForResult(intent, codeThatGetWatering)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == CODE_THAT_REVIEW_PAGE) {
-            startReviewAndDismiss()
+        if (requestCode == codeThatReviewPage) {
+            startReview()
+        }
+        if (requestCode == codeThatGetWatering) {
+            if (resultCode == Activity.RESULT_OK) {
+                // root Activity는 DetailPlantActivity죠? 그렇죠???
+                viewModel.animationTrigger.value = data?.getBooleanExtra("wateringTrigger", false)
+                // 1. intent로 기존의 스택들을 싹다 지워버린 다음에 새 MainActivity를 띄워버리는 방법
+                // 2. 이 dialog가 dismiss가 됨과 동시에 이 Root Activity인 DetailPlantActivity를 같이 지워버리는
+                dismiss()
+                val intent = Intent()
+                intent.putExtra("animationTrigger", viewModel.animationTrigger.value)
+                requireActivity().setResult(RESULT_OK, intent)
+                requireActivity().finish()
+            }
         }
     }
 
     companion object {
-        private const val CODE_THAT_REVIEW_PAGE = 1002
+        private const val KAKAO_PACKAGE_NAME = "com.kakao.talk"
+        private const val codeThatReviewPage = 1001
+        private const val codeThatGetWatering = 1002
     }
 }

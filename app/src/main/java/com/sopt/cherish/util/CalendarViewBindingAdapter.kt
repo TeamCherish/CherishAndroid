@@ -18,9 +18,9 @@ object CalendarViewBindingAdapter {
     @BindingAdapter("android:calendarAllowChange")
     fun calendarAllowChange(imageButton: ImageButton, focus: Boolean) {
         if (focus) {
-            imageButton.setImageResource(R.drawable.icn_allow_top)
-        } else {
             imageButton.setImageResource(R.drawable.icn_allow)
+        } else {
+            imageButton.setImageResource(R.drawable.icn_allow_top)
         }
     }
 

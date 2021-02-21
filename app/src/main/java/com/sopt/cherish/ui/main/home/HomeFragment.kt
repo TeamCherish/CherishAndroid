@@ -1,6 +1,7 @@
 package com.sopt.cherish.ui.main.home
 
 import android.animation.ArgbEvaluator
+import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -125,7 +126,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
     }
 
     // 화면이동
-    fun navigateWatering() {
+    private fun navigateWatering() {
         // +로 가는 녀석들이 가장 물주기가 시급한 친구들이라고해서 일단 알고리즘을 이렇게 작성함.
         if (viewModel.selectedCherishUser.value?.dDay!! >= 0) {
             WateringDialogFragment().show(parentFragmentManager, TAG)
@@ -134,13 +135,13 @@ class HomeFragment : Fragment(), OnItemClickListener {
         }
     }
 
-    fun navigatePhoneBook() {
+    private fun navigatePhoneBook() {
         val intent = Intent(context, EnrollmentPhoneActivity::class.java)
         intent.putExtra("userId", viewModel.cherishuserId.value)
         startActivity(intent)
     }
 
-    fun navigateDetailPlant(userId: Int?) {
+    private fun navigateDetailPlant(userId: Int?) {
         val intent = Intent(activity, DetailPlantActivity::class.java)
         intent.putExtra("userId", userId)
         intent.putExtra("cherishId", viewModel.selectedCherishUser.value?.id)
@@ -148,7 +149,8 @@ class HomeFragment : Fragment(), OnItemClickListener {
         intent.putExtra("cherishNickname", viewModel.selectedCherishUser.value?.nickName)
         intent.putExtra("userNickname", viewModel.userNickName.value)
         intent.putExtra("cherishuserId", viewModel.cherishuserId.value)
-        startActivity(intent)
+        // todo : 이걸 startActivityForResult로 고친다음에 detailPlantActivity가 finish 될때의 값을 가져와 이를 animationTrigger에 담아준다
+        startActivityForResult(intent, CODE_MOVE_DETAIL_PLANT)
     }
 
     // 리사이클러뷰 아이템 클릭 시 바텀 시트 내려감
@@ -181,8 +183,17 @@ class HomeFragment : Fragment(), OnItemClickListener {
         })
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == CODE_MOVE_DETAIL_PLANT) {
+            if (resultCode == RESULT_OK) {
+                viewModel.animationTrigger.value = data?.getBooleanExtra("animationTrigger", false)
+            }
+        }
+    }
+
     companion object {
         private const val TAG = "HomeFragment"
+        private const val CODE_MOVE_DETAIL_PLANT = 1005
     }
 }
 

@@ -20,7 +20,6 @@ import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.ui.review.ReviewActivity
 import com.sopt.cherish.util.DialogUtil
 import com.sopt.cherish.util.PermissionUtil
-import com.sopt.cherish.util.SimpleLogger
 import com.sopt.cherish.util.extension.ContextExtension.isInstalledApp
 import com.sopt.cherish.util.extension.ContextExtension.moveMarket
 import com.sopt.cherish.util.extension.FlexBoxExtension.addBlackChipModeChoice
@@ -150,7 +149,6 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
         }
         if (requestCode == codeThatGetWatering) {
             if (resultCode == RESULT_OK) {
-                SimpleLogger.logI("${data?.getBooleanExtra("wateringTrigger", false)}")
                 viewModel.animationTrigger.value = data?.getBooleanExtra("wateringTrigger", false)
                 dismiss()
             }

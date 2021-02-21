@@ -16,6 +16,7 @@ import com.sopt.cherish.util.DialogUtil
 /**
  * Created on 01-03 by SSong-develop
  * popUp_Watering
+ * 요것은 끝!
  */
 
 class DetailWateringDialogFragment : DialogFragment(),
