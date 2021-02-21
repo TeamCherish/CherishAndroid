@@ -1,5 +1,6 @@
 package com.sopt.cherish.ui.main.manageplant
 
+import android.content.Intent
 import android.os.Bundle
 import android.provider.ContactsContract
 import android.text.Editable
@@ -13,15 +14,15 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentMyPagePhoneBookSearchBinding
-import com.sopt.cherish.ui.adapter.MypagePhoneBookAdapter
+import com.sopt.cherish.ui.adapter.MypagePhoneBookSearchAdapter
 import com.sopt.cherish.ui.adapter.Phonemypage
-import com.sopt.cherish.ui.main.MainActivity
+import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
 
 
 class MyPagePhoneBookSearchFragment() : Fragment() {
 
     // val permissions = arrayOf(Manifest.permission.READ_CONTACTS, Manifest.permission.CALL_PHONE)
-    lateinit var madapter: MypagePhoneBookAdapter
+    lateinit var madapter: MypagePhoneBookSearchAdapter
     var phonelist = mutableListOf<Phonemypage>()
     var searchText = ""
     var sortText = "asc"
@@ -29,8 +30,8 @@ class MyPagePhoneBookSearchFragment() : Fragment() {
     private lateinit var enrollToolbar: Toolbar
     lateinit var countphone:String
     private lateinit var binding: FragmentMyPagePhoneBookSearchBinding
-
-
+    var namename:String=""
+    var namephone:String=""
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,11 +42,40 @@ class MyPagePhoneBookSearchFragment() : Fragment() {
 
 
         binding = FragmentMyPagePhoneBookSearchBinding.bind(view)
-
         startProcess()
+        binding.myPageAddPhoneBtn.setOnClickListener {
+            var intent=Intent(context, EnrollmentPhoneActivity::class.java)
+            intent.putExtra("name",madapter.phonename)
+            intent.putExtra("phone",madapter.phonenumber)
+            intent.putExtra("check",0)
 
+            startActivity(intent,)
+            Log.d("name",madapter.phonename)
+            Log.d("number",madapter.phonenumber)
+            //setFragment(EnrollPlantFragment())
+        }
+        /*madapter.setItemClickListener(object : MypagePhoneBookSearchAdapter.ItemClickListener {
+            override fun onchange(radio: Boolean) {
+                TODO("Not yet implemented")
+            }
 
+            override fun ongetinfo(name: String, number: String) {
+                arguments = Bundle().apply {
+                    putString("phonename1",name)
+                    putString("phonenumber1", number)
+                }
+                }
+            override fun oncount(count: Int) {
+                TODO("Not yet implemented")
+            }
+
+        })*/
         return view
+    }
+
+    fun getinfo():String{
+        return namename+namephone
+
     }
 
 
@@ -53,10 +83,11 @@ class MyPagePhoneBookSearchFragment() : Fragment() {
         val transaction = parentFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_enroll, fragment.apply {
             arguments = Bundle().apply {
-                putString("phonename", madapter.phonename)
-                putString("phonenumber", madapter.phonenumber)
-
+                putString("phonename_",madapter.phonename)
+                putString("phonenumber_",madapter.phonenumber)
             }
+
+
         })
         transaction.addToBackStack(null)
 
@@ -97,7 +128,7 @@ class MyPagePhoneBookSearchFragment() : Fragment() {
     fun setList() {
         phonelist.addAll(getPhoneNumbers(sortText, searchText))
 
-        madapter = MypagePhoneBookAdapter(phonelist)
+        madapter = MypagePhoneBookSearchAdapter(phonelist)
         binding.recyclerMypage.adapter = madapter
         binding.recyclerMypage.layoutManager = LinearLayoutManager(context)
     }

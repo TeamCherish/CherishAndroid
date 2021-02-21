@@ -287,7 +287,7 @@
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-        <Button
+       <!-- <Button
             android:visibility="invisible"
             android:contentDescription="@null"
             android:id="@+id/my_page_add_phone_btn"
@@ -304,7 +304,7 @@
             android:textSize="@dimen/text_16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

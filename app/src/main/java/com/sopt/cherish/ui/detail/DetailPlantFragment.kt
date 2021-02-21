@@ -145,6 +145,7 @@ class DetailPlantFragment : Fragment() {
                                 binding.chip3.text = it.data.keyword3*/
                                 if(it.data.keyword1==""&& it.data.keyword2=="" && it.data.keyword3==""){
                                     binding.chip.text = "키워드를 입력하지 않았어요!"
+                                    binding.chip.isVisible=true
                                     binding.chip2.isVisible=false
                                     binding.chip3.isVisible=false
 
