@@ -1,6 +1,5 @@
 package com.sopt.cherish.ui.dialog.wateringdialog
 
-import android.app.Activity
 import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.graphics.Color
@@ -140,11 +139,8 @@ class DetailPlantContactDialogFragment : DialogFragment(),
             startReview()
         }
         if (requestCode == codeThatGetWatering) {
-            if (resultCode == Activity.RESULT_OK) {
-                // root Activity는 DetailPlantActivity죠? 그렇죠???
+            if (resultCode == RESULT_OK) {
                 viewModel.animationTrigger.value = data?.getBooleanExtra("wateringTrigger", false)
-                // 1. intent로 기존의 스택들을 싹다 지워버린 다음에 새 MainActivity를 띄워버리는 방법
-                // 2. 이 dialog가 dismiss가 됨과 동시에 이 Root Activity인 DetailPlantActivity를 같이 지워버리는
                 dismiss()
                 val intent = Intent()
                 intent.putExtra("animationTrigger", viewModel.animationTrigger.value)
