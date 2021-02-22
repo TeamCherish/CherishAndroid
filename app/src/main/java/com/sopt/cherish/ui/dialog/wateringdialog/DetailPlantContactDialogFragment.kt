@@ -23,7 +23,6 @@ import com.sopt.cherish.util.extension.ContextExtension.moveMarket
 import com.sopt.cherish.util.extension.FlexBoxExtension.addBlackChipModeChoice
 import com.sopt.cherish.util.extension.FlexBoxExtension.clearChips
 
-// ContactDialog와 동일하게 작성하면 됩니다. 개 귀찮아 진짜ㅠㅠㅠ
 class DetailPlantContactDialogFragment : DialogFragment(),
     View.OnClickListener {
     private val viewModel: DetailPlantViewModel by activityViewModels()
