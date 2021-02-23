@@ -233,6 +233,7 @@
                 style="?attr/bottomSheetStyle"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                app:behavior_fitToContents="false"
                 app:behavior_hideable="false"
                 app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
@@ -278,7 +279,7 @@
                     android:id="@+id/my_page_bottom_container"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/home_standardBottomSheet"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
