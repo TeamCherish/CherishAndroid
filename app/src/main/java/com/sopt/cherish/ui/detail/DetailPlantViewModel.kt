@@ -3,6 +3,7 @@ package com.sopt.cherish.ui.detail
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.sopt.cherish.remote.api.*
 import com.sopt.cherish.repository.DetailPlantRepository
 import com.sopt.cherish.util.SingleLiveEvent
@@ -23,6 +24,8 @@ class DetailPlantViewModel(
     val userId = MutableLiveData<Int>()
 
     val selectedCalendarData = MutableLiveData<CalendarData?>()
+
+    val selectedCalendarDay = MutableLiveData<CalendarDay?>()
 
     private val _calendarData = MutableLiveData<CalendarRes>()
     val calendarData: MutableLiveData<CalendarRes>

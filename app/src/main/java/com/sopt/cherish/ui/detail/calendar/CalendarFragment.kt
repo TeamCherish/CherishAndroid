@@ -13,10 +13,13 @@ import com.sopt.cherish.ui.detail.DetailPlantActivity
 import com.sopt.cherish.ui.detail.DetailPlantViewModel
 import com.sopt.cherish.ui.review.ReviseReviewFragment
 import com.sopt.cherish.util.DateUtil
+import com.sopt.cherish.util.SimpleLogger
 import com.sopt.cherish.util.extension.FlexBoxExtension.addChipCalendar
 import com.sopt.cherish.util.extension.FlexBoxExtension.clearChips
+import com.sopt.cherish.util.extension.longToast
 
 // todo : binding 객체 메모리 해제 꼭 시켜줘야 함
+// todo : 삭제 하고 나서 다시 캘린더로 돌아왔을 때 텍스트가 refresh가 되지가 않는다 어떻게 해야하지
 class CalendarFragment : Fragment() {
 
     private val viewModel: DetailPlantViewModel by activityViewModels()
@@ -36,13 +39,19 @@ class CalendarFragment : Fragment() {
         initializeViewModelData()
         initializeCalendar(binding)
         addDateClickListener(binding)
+        observeSelectedDay(binding)
+        observeSelectedCalendarDay(binding)
 
         return binding.root
     }
 
     fun navigateReviseReview() {
-        parentFragmentManager.beginTransaction().addToBackStack(TAG)
-            .replace(R.id.fragment_detail, ReviseReviewFragment()).commit()
+        if (viewModel.selectedCalendarData.value != null) {
+            parentFragmentManager.beginTransaction().addToBackStack(TAG)
+                .replace(R.id.fragment_detail, ReviseReviewFragment()).commit()
+        } else {
+            longToast(requireContext(), "등록된 리뷰가 없어요 ㅠ")
+        }
     }
 
     override fun onResume() {
@@ -51,11 +60,10 @@ class CalendarFragment : Fragment() {
         if (activity != null) {
             (activity as DetailPlantActivity).setActionBarTitle("식물 캘린더")
         }
+        // 이 2개는 맞음 해야하지 그치? 훈기야??
         viewModel.fetchCalendarData()
         binding.calendarView.removeDecorators()
-        binding.calendarViewChipLayout.clearChips()
-        binding.calendarView.selectedDate?.let { showDate(binding, it) }
-        binding.calendarView.selectedDate?.let { showContent(binding, it) }
+        SimpleLogger.logI("onResume Start!!!")
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
@@ -92,26 +100,42 @@ class CalendarFragment : Fragment() {
         }
     }
 
-    private fun addDateClickListener(binding: FragmentCalendarBinding) {
-
-        binding.calendarView.setOnDateChangedListener { widget, date, selected ->
+    private fun observeSelectedDay(binding: FragmentCalendarBinding) {
+        viewModel.selectedCalendarDay.observe(viewLifecycleOwner) { selectedDay ->
+            // 선택된 날짜를 보여준다.
+            selectedDay?.let { showDate(binding, it) }
             binding.calendarViewChipLayout.clearChips()
-            showDate(binding, date)
-            showContent(binding, selectedDate = date)
+            removeMemo(binding)
+            removeSelectedCalendarData()
+            // calendarData의 value에서 filter와 map을 해 선택된 날짜의 calendarData가 있는지를 확인한다.
+            viewModel.calendarData.value.let { calendarRes ->
+                calendarRes?.waterData?.calendarData?.filter {
+                    SimpleLogger.logI("$selectedDay ${it.wateredDate}")
+                    selectedDay == DateUtil.convertDateToCalendarDay(it.wateredDate)
+                }?.map {
+                    viewModel.selectedCalendarData.value = it
+                }
+            }
         }
     }
 
-    private fun showContent(binding: FragmentCalendarBinding, selectedDate: CalendarDay) {
-        viewModel.calendarData.value.let { calendarRes ->
-            binding.reviewAllText.text = " "
-            calendarRes?.waterData?.calendarData?.filter {
-                DateUtil.convertDateToCalendarDay(it.wateredDate) == selectedDate
-            }?.map {
-                showChips(binding, listOf(it.userStatus1, it.userStatus2, it.userStatus3))
-                showMemo(binding, it.review)
-                // todo : selected된게 물론 dot가 있는 날도 있겠지만 없는 경우 도 있잖아 그경우를 생각안했어 훈기야.
-                viewModel.selectedCalendarData.value = it
-            }
+    private fun observeSelectedCalendarDay(binding: FragmentCalendarBinding) {
+        viewModel.selectedCalendarData.observe(viewLifecycleOwner) {
+            showContent(binding)
+        }
+    }
+
+    private fun addDateClickListener(binding: FragmentCalendarBinding) {
+        binding.calendarView.setOnDateChangedListener { widget, date, selected ->
+            SimpleLogger.logI("$date")
+            viewModel.selectedCalendarDay.value = date
+        }
+    }
+
+    private fun showContent(binding: FragmentCalendarBinding) {
+        viewModel.selectedCalendarData.value?.let {
+            showChips(binding, listOf(it.userStatus1, it.userStatus2, it.userStatus3))
+            showMemo(binding, it.review)
         }
     }
 
@@ -122,14 +146,35 @@ class CalendarFragment : Fragment() {
 
     private fun showChips(binding: FragmentCalendarBinding, wateredChip: List<String?>) {
         binding.calendarViewChipLayout.clearChips()
+        // todo : null일경우랑 아닌경우 혹은 그냥 공백으로 둔 경우를 모두 판단해야해서 보여줘야 하는 알고리즘을 작성해야합니다.
         wateredChip.forEach {
             it?.let { it1 -> binding.calendarViewChipLayout.addChipCalendar(it1) }
         }
     }
 
     private fun showMemo(binding: FragmentCalendarBinding, waterMemo: String) {
-        binding.reviewAllText.text = " "
         binding.reviewAllText.text = waterMemo
+    }
+
+    private fun removeMemo(binding: FragmentCalendarBinding) {
+        binding.reviewAllText.text = " "
+    }
+
+    private fun removeSelectedCalendarData() {
+        viewModel.selectedCalendarData.value = null
+    }
+
+    private fun removeSelectedDate(binding: FragmentCalendarBinding) {
+        binding.calendarViewSelectedDate.text = " "
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        removeSelectedCalendarData()
+        removeMemo(binding)
+        removeSelectedDate(binding)
+        viewModel.selectedCalendarDay.value = null
+        binding.calendarViewChipLayout.clearChips()
     }
 
     companion object {

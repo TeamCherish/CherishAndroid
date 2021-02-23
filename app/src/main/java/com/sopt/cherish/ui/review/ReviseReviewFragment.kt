@@ -13,6 +13,7 @@ import com.sopt.cherish.ui.detail.DetailPlantActivity
 import com.sopt.cherish.ui.detail.DetailPlantViewModel
 import com.sopt.cherish.ui.dialog.CustomDialogFragment
 import com.sopt.cherish.util.DateUtil
+import com.sopt.cherish.util.SimpleLogger
 import com.sopt.cherish.util.extension.FlexBoxExtension.addChip
 import com.sopt.cherish.util.extension.FlexBoxExtension.getChip
 import com.sopt.cherish.util.extension.countNumberOfCharacters
@@ -104,6 +105,7 @@ class ReviseReviewFragment : Fragment() {
                     )
                 )
                 viewModel.selectedCalendarData.value = null
+                SimpleLogger.logI("${viewModel.selectedCalendarData.value}")
                 longToast(requireContext(), "메모 삭제에 성공했습니다.")
                 parentFragmentManager.popBackStack()
             }

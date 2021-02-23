@@ -30,7 +30,6 @@ import com.sopt.cherish.util.extension.longToast
 
 /**
  * 메인 홈뷰
- * 초기상태와 중간에 있는 경우 2개 다 고려해야 합니다.
  * todo : 1. 바텀시트 클릭 시 클릭된게 맨 앞에서 보여지게 하는거
  * todo : fetchUser() 할때마다 selectedUser가 갱신되는게 좀 마음이 아프긴 해요;;; 이거 어떻게 해결할 방법만 좀 찾으면...
  */
@@ -101,8 +100,6 @@ class HomeFragment : Fragment(), OnItemClickListener {
     }
 
     private fun setCherishUserListAdapter(userResult: UserResult) {
-        // null이 오는데 null일 리가 없는데 왜 null이라고 나오는지를 모르겠어...
-        // 왜 null이라고 하는거지....분명 연결을 했는데...
         homeCherryListAdapter.data = (userResult.userData.userList.reversed() as? MutableList<User>)
             ?: throw IllegalArgumentException("list is Empty")
         homeCherryListAdapter.notifyDataSetChanged()
@@ -149,7 +146,6 @@ class HomeFragment : Fragment(), OnItemClickListener {
         intent.putExtra("cherishNickname", viewModel.selectedCherishUser.value?.nickName)
         intent.putExtra("userNickname", viewModel.userNickName.value)
         intent.putExtra("cherishuserId", viewModel.cherishuserId.value)
-        // todo : 이걸 startActivityForResult로 고친다음에 detailPlantActivity가 finish 될때의 값을 가져와 이를 animationTrigger에 담아준다
         startActivityForResult(intent, CODE_MOVE_DETAIL_PLANT)
     }
 
