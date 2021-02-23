@@ -37,7 +37,14 @@ class EnrollmentPhoneActivity : AppCompatActivity(),
         //setToolbar()
         //phoneBookFragment=findViewById(R.layout.fragment_phone_book)
         count = intent.getIntExtra("userId", 0)
+        //count=intent.getIntExtra("user_id", 0)
+
+        if(intent.getIntExtra("check",1)==0){
+            setFragmentsearch(EnrollPlantFragment())
+
+        }else {
         setFragment(PhoneBookFragment())
+         }
     }
 
     private fun setToolbar() {
@@ -81,7 +88,20 @@ class EnrollmentPhoneActivity : AppCompatActivity(),
         })
         transaction.commit()
     }
+    fun setFragmentsearch(fragment: Fragment) {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragment_enroll, fragment.apply {
+            arguments = Bundle().apply {
+                // putInt("useridenroll", count)
+                // Log.d("Enrollmentphoneactiviy", count.toString())
+                putString("phonename",intent.getStringExtra("name"))
+                putString("phonenumber",intent.getStringExtra("phone"))
+                putInt("useridend", count)
 
+            }
+        })
+        transaction.commit()
+    }
     override fun onTestDialogweek(dialog: DialogFragment?, someData: String?) {
         Log.d("nana", someData.toString())
         var textweek: TextView = findViewById(R.id.water_alarm_week)

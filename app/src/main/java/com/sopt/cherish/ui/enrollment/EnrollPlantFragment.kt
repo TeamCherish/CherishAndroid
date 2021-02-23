@@ -1,6 +1,8 @@
 package com.sopt.cherish.ui.enrollment
 
 import android.annotation.SuppressLint
+import android.app.ActivityManager
+import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -13,7 +15,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toolbar
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatDialog
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.content.getSystemService
 import androidx.fragment.app.Fragment
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentEnrollPlantBinding
@@ -42,7 +47,7 @@ class EnrollPlantFragment : Fragment() {
     lateinit var usernickname:String
     lateinit var userbirth:String
     var plant_explanation: String=""
-
+    var username:String=""
     var plant_modify: String=""
     var clockvalue: Boolean = false
     var weekvalue: Boolean = false
@@ -65,16 +70,21 @@ class EnrollPlantFragment : Fragment() {
 
         //enrollToolbar.title="식물 상세 입력"
         binding.editNick.hint=arguments?.getString("phonename")
+        binding.phoneNumber.text = arguments?.getString("phonenumber")
+
+
+
 /*
         binding.editNick.setOnFocusChangeListener { v, hasFocus ->
             binding.editNick.hint=""
+
             if(hasFocus==false){
                 binding.editNick.hint=arguments?.getString("phonename")
+
             }
         }*/
 
         // binding.phoneName.text = arguments?.getString("phonename")
-        binding.phoneNumber.text = arguments?.getString("phonenumber")
 
 
 // 생일 빼고 사용자가 나머지 다 입력 시 버튼 활성화
@@ -136,23 +146,25 @@ class EnrollPlantFragment : Fragment() {
         binding.detailOkBtn.setOnClickListener {
             //  progressON()
 
-            val username = arguments?.getString("phonename")
+
             Log.d("username", arguments?.getString("phonename").toString())
 //이름
-            if (binding.editNick.hint == username) {
+            if (binding.editNick.text.isEmpty()) {
                 usernickname = binding.editNick.hint.toString()
+                username=binding.editBirth.hint.toString()
             } else {
                 usernickname = binding.editNick.text.toString()
-
+                username = arguments?.getString("phonename").toString()
             }
             Log.d("usernickname", binding.editNick.text.toString())
 //애칭
 
-            if (binding.editBirth.hint == "0000/00/00") {
+            if (binding.editBirth.text.isNotEmpty()) {
+                //userbirth = binding.editBirth.text.substring(0,4)+"-"+binding.editBirth.text.substring(4,6)+"-"+binding.editBirth.text.substring(6,)
+                userbirth=binding.editBirth.text.toString()
+            } else {
                 userbirth = "0000/00/00"
 
-            } else {
-                userbirth = binding.editBirth.text.toString()
             }
             Log.d("userbirth", userbirth.toString())
 //생일
@@ -226,7 +238,7 @@ class EnrollPlantFragment : Fragment() {
                                             it.data.plant.flower_meaning
                                         )
 
-
+                                        it.data.plant.id
                                         plant_explanation = it.data.plant.explanation
                                         plant_modify = it.data.plant.modifier
                                         plant_mean = it.data.plant.flower_meaning
@@ -300,6 +312,8 @@ class EnrollPlantFragment : Fragment() {
         super.onResume()
         val activity = activity
         if (activity != null) {
+
+
             (activity as EnrollmentPhoneActivity).setActionBarTitle("식물 상세 입력")
 
         }
