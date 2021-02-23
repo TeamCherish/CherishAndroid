@@ -223,15 +223,16 @@
             android:id="@+id/coordinatorLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="0dp">
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/home_standardBottomSheet"
                 style="?attr/bottomSheetStyle"
                 android:layout_width="match_parent"
-                android:layout_height="600dp"
-                app:behavior_fitToContents="false"
+                android:layout_height="match_parent"
                 app:behavior_hideable="false"
                 app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
@@ -247,8 +248,7 @@
                     app:tabGravity="start"
                     app:tabIndicatorColor="@color/cherish_light_black"
                     app:tabIndicatorHeight="3dp"
-                    app:tabMode="scrollable"
-                     />
+                    app:tabMode="scrollable" />
 
                 <ImageView
                     android:id="@+id/my_page_reset_btn"
@@ -280,8 +280,10 @@
                     android:layout_height="0dp"
                     app:layout_constraintBottom_toBottomOf="@+id/home_standardBottomSheet"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tab_bar_line" />
+                    app:layout_constraintTop_toBottomOf="@+id/tab_bar_line"
+                    app:layout_constraintVertical_bias="0.0" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
