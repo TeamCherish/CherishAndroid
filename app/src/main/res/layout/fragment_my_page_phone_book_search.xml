@@ -63,7 +63,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="16dp"
-        style="@style/RoundButton.GreenMain"
+        style="@style/RoundButton.Gray"
         android:fontFamily="@font/notosanscjkkr_medium"
         android:includeFontPadding="false"
         android:text="@string/myPage_add_phone_text"

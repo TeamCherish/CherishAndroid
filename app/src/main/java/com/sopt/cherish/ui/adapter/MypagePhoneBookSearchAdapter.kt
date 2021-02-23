@@ -45,7 +45,7 @@ class MypagePhoneBookSearchAdapter(private val phoneBookList: List<Phonemypage>)
             checkedRadioButton?.apply { setChecked(!isChecked) }
             checkedRadioButton = compoundButton.apply {
                 setChecked(isChecked)
-                //itemClickListner.onchange(radiobutton)
+                itemClickListner.onchange(radiobutton)
                 radiobutton = true
             }
 
@@ -80,11 +80,10 @@ class MypagePhoneBookSearchAdapter(private val phoneBookList: List<Phonemypage>)
     }
 
 
-/*
+
     interface ItemClickListener {
         fun onchange(radio: Boolean)
-        fun ongetinfo(name:String, number:String)
-        fun oncount(count:Int)
+
     }
 
     //클릭리스너 선언
@@ -94,7 +93,7 @@ class MypagePhoneBookSearchAdapter(private val phoneBookList: List<Phonemypage>)
     fun setItemClickListener(itemClickListener: ItemClickListener) {
         this.itemClickListner = itemClickListener
     }
-*/
+
 
 
 

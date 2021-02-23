@@ -32,18 +32,19 @@ class EnrollmentPhoneActivity : AppCompatActivity(),
 
         setContentView(binding.root)
 
-       // val userid = intent.getIntExtra("userId")
+        // val userid = intent.getIntExtra("userId")
 
         //setToolbar()
         //phoneBookFragment=findViewById(R.layout.fragment_phone_book)
         count = intent.getIntExtra("userId", 0)
+        //count=intent.getIntExtra("user_id", 0)
 
         if(intent.getIntExtra("check",1)==0){
             setFragmentsearch(EnrollPlantFragment())
 
-        }else{
+        }else {
         setFragment(PhoneBookFragment())
-        }
+         }
     }
 
     private fun setToolbar() {
@@ -95,6 +96,7 @@ class EnrollmentPhoneActivity : AppCompatActivity(),
                 // Log.d("Enrollmentphoneactiviy", count.toString())
                 putString("phonename",intent.getStringExtra("name"))
                 putString("phonenumber",intent.getStringExtra("phone"))
+                putInt("useridend", count)
 
             }
         })

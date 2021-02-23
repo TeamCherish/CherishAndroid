@@ -1,5 +1,6 @@
 package com.sopt.cherish.ui.main.manageplant
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.provider.ContactsContract
@@ -11,15 +12,28 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentMyPagePhoneBookSearchBinding
+import com.sopt.cherish.remote.api.RequestCheckPhoneData
+import com.sopt.cherish.remote.api.ResponseCheckPhoneData
+import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.adapter.MypagePhoneBookSearchAdapter
+import com.sopt.cherish.ui.adapter.PhoneBookAdapter
 import com.sopt.cherish.ui.adapter.Phonemypage
+import com.sopt.cherish.ui.dialog.CheckPhoneDialogFragment
+import com.sopt.cherish.ui.enrollment.EnrollPlantFragment
 import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
+import com.sopt.cherish.ui.main.MainViewModel
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class MyPagePhoneBookSearchFragment() : Fragment() {
+    private val viewModel: MainViewModel by activityViewModels()
+    private val requestData = RetrofitBuilder
 
     // val permissions = arrayOf(Manifest.permission.READ_CONTACTS, Manifest.permission.CALL_PHONE)
     lateinit var madapter: MypagePhoneBookSearchAdapter
@@ -32,6 +46,7 @@ class MyPagePhoneBookSearchFragment() : Fragment() {
     private lateinit var binding: FragmentMyPagePhoneBookSearchBinding
     var namename:String=""
     var namephone:String=""
+    var user_id:Int=0
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,44 +55,85 @@ class MyPagePhoneBookSearchFragment() : Fragment() {
         val view = inflater.inflate(R.layout.fragment_my_page_phone_book_search, container, false)
 
 
-
         binding = FragmentMyPagePhoneBookSearchBinding.bind(view)
         startProcess()
         binding.myPageAddPhoneBtn.setOnClickListener {
-            var intent=Intent(context, EnrollmentPhoneActivity::class.java)
-            intent.putExtra("name",madapter.phonename)
-            intent.putExtra("phone",madapter.phonenumber)
-            intent.putExtra("check",0)
+            val phonenumber =
+                madapter.phonenumber.substring(0, 3) + "-" + madapter.phonenumber.substring(
+                    3,
+                    7
+                ) + "-" +
+                        madapter.phonenumber.substring(7,)
+            Log.d("phonenumbervvvv", phonenumber)
+            var user_id = viewModel.cherishuserId.value
+            val body = RequestCheckPhoneData(phone = phonenumber.toString(), UserId = user_id!!)
+            requestData.checkphoneAPI.checkphone(body)
+                .enqueue(
+                    object : Callback<ResponseCheckPhoneData> {
+                        override fun onFailure(
+                            call: Call<ResponseCheckPhoneData>,
+                            t: Throwable
+                        ) {
+                            Log.d("통신 실패", t.toString())
+                        }
 
-            startActivity(intent,)
-            Log.d("name",madapter.phonename)
-            Log.d("number",madapter.phonenumber)
+                        override fun onResponse(
+                            call: Call<ResponseCheckPhoneData>,
+                            response: Response<ResponseCheckPhoneData>
+                        ) {
+                            Log.d("success", response.body().toString())
+                            if (response.body() == null) {
+                                val deletedialog =
+                                    CheckPhoneDialogFragment(
+                                        R.layout.fragment_check_phone_dialog,
+
+                                        ).show(
+                                        parentFragmentManager, "asdf"
+                                    )
+
+                            }
+                            response.takeIf {
+                                it.isSuccessful
+                            }?.body()
+                                ?.let { it ->
+                                    Log.d("중복", "중복")
+
+
+
+                                    var intent=Intent(context, EnrollmentPhoneActivity::class.java)
+                                    intent.putExtra("name",madapter.phonename)
+                                    intent.putExtra("phone",madapter.phonenumber)
+                                    intent.putExtra("check",0)
+                                    intent.putExtra("userId", viewModel.cherishuserId.value)
+                                    startActivity(intent,)
+                                    Log.d("name",madapter.phonename)
+                                    Log.d("number",madapter.phonenumber)
+                                    Log.d("userId",viewModel.cherishuserId.value.toString())
+
+
+                                }
+                        }
+                    }
+                )
+
+
+
+
             //setFragment(EnrollPlantFragment())
         }
-        /*madapter.setItemClickListener(object : MypagePhoneBookSearchAdapter.ItemClickListener {
+        madapter.setItemClickListener(object : MypagePhoneBookSearchAdapter.ItemClickListener {
+            @SuppressLint("ResourceAsColor")
             override fun onchange(radio: Boolean) {
-                TODO("Not yet implemented")
+                Log.d("radio", radio.toString())
+                if (radio == true) {
+                    binding.myPageAddPhoneBtn.setBackgroundColor(R.color.cherish_green_main)
+
+                }
             }
 
-            override fun ongetinfo(name: String, number: String) {
-                arguments = Bundle().apply {
-                    putString("phonename1",name)
-                    putString("phonenumber1", number)
-                }
-                }
-            override fun oncount(count: Int) {
-                TODO("Not yet implemented")
-            }
-
-        })*/
+        })
         return view
     }
-
-    fun getinfo():String{
-        return namename+namephone
-
-    }
-
 
     fun setFragment(fragment: Fragment) {
         val transaction = parentFragmentManager.beginTransaction()
