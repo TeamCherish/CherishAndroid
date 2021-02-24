@@ -44,6 +44,12 @@
 
     <style name="RoundButton.Gray">
         <item name="android:layout_height">48dp</item>
+        <item name="android:backgroundTint">@color/cherish_text_box_gray</item>
+        <item name="android:textColor">@color/cherish_text_gray</item>
+    </style>
+
+    <style name="RoundButton.SignUp">
+        <item name="android:layout_height">48dp</item>
         <item name="android:backgroundTint">@color/cherish_light_gray</item>
         <item name="android:textColor">@color/cherish_pass_text_gray</item>
     </style>
@@ -119,5 +125,8 @@
         <item name="android:textSize">@dimen/text_16sp</item>
     </style>
 
+    <style name="SignUpTextAppearance">
+        <item name="android:fontFamily">@font/notosanscjkkr_regular</item>
+    </style>
 
 </resources>

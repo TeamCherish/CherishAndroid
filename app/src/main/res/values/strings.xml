@@ -84,4 +84,5 @@
     <string name="sign_up_pw_hint">영문, 숫자 포함 8자이상</string>
     <string name="sign_up_pw_again">비밀번호를 다시 입력해주세요</string>
     <string name="sign_up_pw_again_ok">비밀번호가 일치합니다.</string>
+    <string name="sign_up_button_finish">완료</string>
 </resources>

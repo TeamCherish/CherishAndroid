@@ -12,6 +12,7 @@
         android:id="@+id/indicator_first"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:src="@drawable/sign_up_indicator_on"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -22,6 +23,7 @@
         android:id="@+id/indicator_second"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:src="@drawable/sign_up_indicator_off"
         app:layout_constraintStart_toEndOf="@+id/indicator_first"
         app:layout_constraintTop_toTopOf="parent"
@@ -32,6 +34,7 @@
         android:id="@+id/indicator_third"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:src="@drawable/sign_up_indicator_off"
         app:layout_constraintStart_toEndOf="@+id/indicator_second"
         app:layout_constraintTop_toTopOf="parent"
@@ -42,6 +45,7 @@
         android:id="@+id/indicator_fourth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:src="@drawable/sign_up_indicator_off"
         app:layout_constraintStart_toEndOf="@+id/indicator_third"
         app:layout_constraintTop_toTopOf="parent"
@@ -80,13 +84,14 @@
         android:id="@+id/is_usable_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/sign_up_email_ok"
+        android:text=""
         app:layout_constraintTop_toBottomOf="@+id/user_email"
         app:layout_constraintEnd_toEndOf="@+id/user_email"
         android:textColor="@color/cherish_green_main"
         android:fontFamily="@font/notosanscjkkr_regular"/>
 
     <TextView
+        android:visibility="invisible"
         android:id="@+id/pw_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -99,6 +104,7 @@
         app:layout_constraintTop_toBottomOf="@+id/is_usable_email"/>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:visibility="invisible"
         android:id="@+id/user_pw_layout"
         app:hintAnimationEnabled="false"
         app:hintEnabled="false"
@@ -126,6 +132,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        android:visibility="invisible"
         android:id="@+id/pw_again_layout"
         app:hintAnimationEnabled="false"
         app:hintEnabled="false"
@@ -153,6 +160,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
+        android:visibility="invisible"
         android:id="@+id/is_usable_pw"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -161,5 +169,20 @@
         app:layout_constraintEnd_toEndOf="@+id/pw_again_layout"
         android:textColor="@color/cherish_green_main"
         android:fontFamily="@font/notosanscjkkr_regular"/>
+
+    <Button
+        android:id="@+id/sign_up_button"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        style="@style/RoundButton.SignUp"
+        android:text="@string/sign_up_button_finish"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:layout_marginStart="@dimen/margin_16dp"
+        android:layout_marginEnd="@dimen/margin_16dp"
+        android:layout_marginBottom="@dimen/margin_21dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
