@@ -33,7 +33,7 @@ data class User(
 )
 
 data class UserData(
-    @SerializedName("result") val userList: List<User>,
+    @SerializedName("result") val userList: MutableList<User>,
     @SerializedName("totalCherish") val totalUser: Int
 )
 

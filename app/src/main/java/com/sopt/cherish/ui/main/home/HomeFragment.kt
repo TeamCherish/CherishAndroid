@@ -89,6 +89,8 @@ class HomeFragment : Fragment(), OnItemClickListener {
 
     private fun observeCherishUsers() {
         viewModel.cherishUsers.observe(viewLifecycleOwner) {
+            // todo : 이거 실마리 인거 같음 될거 같아 클릭시 가장 첫번째거에서 보여주는거
+            it.userData.userList.add(0, it.userData.userList[0])
             setCherishUserListAdapter(it)
             setSelectedUser(it.userData.userList.reversed()[0])
         }

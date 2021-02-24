@@ -12,7 +12,10 @@ import kotlinx.coroutines.launch
 class DetailPlantViewModel(
     private val detailPlantRepository: DetailPlantRepository
 ) : ViewModel() {
-    // Keyword , Review 조회하기
+    var calendarModeChangeEvent = SingleLiveEvent<Boolean>()
+
+    val animationTrigger = SingleLiveEvent<Boolean>()
+
     val cherishId = MutableLiveData<Int>()
 
     val cherishPhoneNumber = MutableLiveData<String>()
@@ -31,27 +34,47 @@ class DetailPlantViewModel(
     val calendarData: MutableLiveData<CalendarRes>
         get() = _calendarData
 
-    var calendarModeChangeEvent = SingleLiveEvent<Boolean>()
-
-    val animationTrigger = SingleLiveEvent<Boolean>()
-
     fun fetchCalendarData() = viewModelScope.launch {
-        _calendarData.postValue(detailPlantRepository.fetchCalendarData(cherishId.value!!))
+        runCatching {
+            detailPlantRepository.fetchCalendarData(cherishId.value!!)
+        }.onSuccess {
+            _calendarData.value = it
+        }.onFailure { error ->
+            throw error
+        }
     }
 
     // [Review]
     fun sendReviewToServer(reviewWateringReq: ReviewWateringReq) = viewModelScope.launch {
-        detailPlantRepository.sendReviewData(reviewWateringReq)
+        runCatching {
+            detailPlantRepository.sendReviewData(reviewWateringReq)
+        }.onSuccess {
+            // Toast를 띄우든 뭐든 해보는게?
+        }.onFailure { error ->
+            throw error
+        }
     }
 
     // [Revise Review]
     fun sendReviseReviewToServer(reviseReviewReq: ReviseReviewReq) = viewModelScope.launch {
-        detailPlantRepository.sendReviseReviewData(reviseReviewReq)
+        runCatching {
+            detailPlantRepository.sendReviseReviewData(reviseReviewReq)
+        }.onSuccess {
+            // Toast를 띄우는건?
+        }.onFailure { error ->
+            throw error
+        }
     }
 
     // [Delete Review]
     fun deleteReview(deleteReviewReq: DeleteReviewReq) = viewModelScope.launch {
-        detailPlantRepository.deleteReviewData(deleteReviewReq)
+        runCatching {
+            detailPlantRepository.deleteReviewData(deleteReviewReq)
+        }.onSuccess {
+            // Toast
+        }.onFailure { error ->
+            throw error
+        }
     }
 
 }

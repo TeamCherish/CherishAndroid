@@ -60,10 +60,8 @@ class CalendarFragment : Fragment() {
         if (activity != null) {
             (activity as DetailPlantActivity).setActionBarTitle("식물 캘린더")
         }
-        // 이 2개는 맞음 해야하지 그치? 훈기야??
         viewModel.fetchCalendarData()
         binding.calendarView.removeDecorators()
-        SimpleLogger.logI("onResume Start!!!")
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
@@ -102,12 +100,10 @@ class CalendarFragment : Fragment() {
 
     private fun observeSelectedDay(binding: FragmentCalendarBinding) {
         viewModel.selectedCalendarDay.observe(viewLifecycleOwner) { selectedDay ->
-            // 선택된 날짜를 보여준다.
             selectedDay?.let { showDate(binding, it) }
             binding.calendarViewChipLayout.clearChips()
             removeMemo(binding)
             removeSelectedCalendarData()
-            // calendarData의 value에서 filter와 map을 해 선택된 날짜의 calendarData가 있는지를 확인한다.
             viewModel.calendarData.value.let { calendarRes ->
                 calendarRes?.waterData?.calendarData?.filter {
                     SimpleLogger.logI("$selectedDay ${it.wateredDate}")

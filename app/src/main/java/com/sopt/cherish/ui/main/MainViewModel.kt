@@ -46,10 +46,12 @@ class MainViewModel(
     val selectedCherishUser = MutableLiveData<User>()
 
     fun fetchUsers() = viewModelScope.launch {
-        try {
-            _cherishUsers.postValue(mainRepository.fetchCherishUser(cherishuserId.value!!))
-        } catch (exception: Exception) {
-            exceptionLiveData.postValue(exception.message)
+        runCatching {
+            mainRepository.fetchCherishUser(cherishuserId.value!!)
+        }.onSuccess {
+            _cherishUsers.value = it
+        }.onFailure { error ->
+            throw error
         }
     }
 

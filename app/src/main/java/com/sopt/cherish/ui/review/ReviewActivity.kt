@@ -7,6 +7,7 @@ import android.widget.EditText
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.lifecycleScope
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityReviewBinding
 import com.sopt.cherish.di.Injection
@@ -16,8 +17,6 @@ import com.sopt.cherish.util.extension.*
 import com.sopt.cherish.util.extension.FlexBoxExtension.addChip
 import com.sopt.cherish.util.extension.FlexBoxExtension.getChip
 import com.sopt.cherish.util.extension.FlexBoxExtension.getChipsCount
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -67,7 +66,7 @@ class ReviewActivity : AppCompatActivity() {
 
     // todo : dialog 사이즈 값만 측정
     private fun showLoadingDialog() {
-        CoroutineScope(Main).launch {
+        lifecycleScope.launch {
             // 다이얼로그 사이즈만 하면 됨
             val dialog = MultiViewDialog(R.layout.dialog_loading, 0.6f, 0.3f)
             dialog.show(supportFragmentManager, TAG)
