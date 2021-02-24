@@ -30,8 +30,6 @@ import com.sopt.cherish.util.extension.longToast
 
 /**
  * 메인 홈뷰
- * todo : 1. 바텀시트 클릭 시 클릭된게 맨 앞에서 보여지게 하는거
- * todo : fetchUser() 할때마다 selectedUser가 갱신되는게 좀 마음이 아프긴 해요;;; 이거 어떻게 해결할 방법만 좀 찾으면...
  */
 
 class HomeFragment : Fragment(), OnItemClickListener {
@@ -89,8 +87,6 @@ class HomeFragment : Fragment(), OnItemClickListener {
 
     private fun observeCherishUsers() {
         viewModel.cherishUsers.observe(viewLifecycleOwner) {
-            // todo : 이거 실마리 인거 같음 될거 같아 클릭시 가장 첫번째거에서 보여주는거
-            it.userData.userList.add(it.userData.userList.reversed()[0])
             setCherishUserListAdapter(it)
             setSelectedUser(it.userData.userList.reversed()[1])
         }

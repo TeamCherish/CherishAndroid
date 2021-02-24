@@ -28,6 +28,7 @@ class MainViewModel(
 
     // Utilities
     val animationTrigger = SingleLiveEvent<Boolean>()
+    var userSelctorTrigger = true
     val exceptionLiveData = MutableLiveData<String>()
 
     // 로그인 하는 cherish를 이용하는 유저
@@ -49,6 +50,7 @@ class MainViewModel(
         runCatching {
             mainRepository.fetchCherishUser(cherishuserId.value!!)
         }.onSuccess {
+            it.userData.userList.add(it.userData.userList.reversed()[0])
             _cherishUsers.value = it
         }.onFailure { error ->
             throw error
