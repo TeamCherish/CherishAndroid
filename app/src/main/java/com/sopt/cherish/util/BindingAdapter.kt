@@ -96,9 +96,9 @@ object BindingAdapter {
         val standardBottomSheetBehavior = BottomSheetBehavior.from(view)
         standardBottomSheetBehavior.apply {
             state = BottomSheetBehavior.STATE_COLLAPSED
-            peekHeight = 150.dp
+            peekHeight = 160.dp
             expandedOffset = 100.dp
-            halfExpandedRatio = 0.2f
+            halfExpandedRatio = 0.24f
             isHideable = false
         }
     }
