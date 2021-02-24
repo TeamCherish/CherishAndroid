@@ -136,7 +136,7 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/constraintLayout4"
+                        android:id="@+id/constraintLayout_info"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -168,12 +168,12 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/constraintLayout5"
+                        android:id="@+id/constraintLayout_service"
                         android:layout_width="match_parent"
                         android:layout_height="60dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
+                        app:layout_constraintTop_toBottomOf="@+id/constraintLayout_info">
 
                         <ImageView
                             android:id="@+id/imageView12"
@@ -205,7 +205,7 @@
                     android:layout_height="60dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout5">
+                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout_service">
 
                     <ImageView
                         android:id="@+id/btn_question"
