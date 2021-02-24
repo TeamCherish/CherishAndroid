@@ -5,10 +5,10 @@
     <solid android:color="@color/white" />
 
     <size
-        android:width="72dp"
-        android:height="72dp" />
+        android:width="100dp"
+        android:height="100dp" />
     <stroke
         android:width="2dp"
-        android:color="#ffd8b5" />
+        android:color="@color/cherish_rosemary_background_color" />
 
 </shape>

@@ -63,6 +63,23 @@ object BindingAdapter {
     }
 
     @JvmStatic
+    @BindingAdapter("android:setSelectedPlantStrokeColor")
+    fun setSelectedPlantStrokeColor(imageView: ImageView, plantName: String?) {
+        imageView.setImageDrawable(
+            ContextCompat.getDrawable(
+                imageView.context, when (plantName) {
+                    "민들레" -> R.drawable.home_selected_plant_indicator_dandelion
+                    "로즈마리" -> R.drawable.home_selected_plant_indicator_rosemary
+                    "아메리칸블루" -> R.drawable.home_selected_plant_indicator_american_blue
+                    "스투키" -> R.drawable.home_selected_plant_indicator_stuki
+                    "단모환" -> R.drawable.home_selected_plant_indicator_cactus
+                    else -> R.drawable.home_selected_plant_indicator_rosemary
+                }
+            )
+        )
+    }
+
+    @JvmStatic
     @BindingAdapter("android:setPlantImageViewSize")
     fun setPlantImageViewSize(imageView: ImageView, temp: Int) {
         imageView.apply {

@@ -109,6 +109,8 @@ class HomeFragment : Fragment(), OnItemClickListener {
 
     override fun onItemClick(itemBinding: MainCherryItemBinding, position: Int) {
         viewModel.selectedCherishUser.value = homeCherryListAdapter.data[position]
+        homeCherryListAdapter.data[0] = homeCherryListAdapter.data[position]
+        homeCherryListAdapter.notifyItemChanged(0)
         slideDownBottomSheet()
     }
 

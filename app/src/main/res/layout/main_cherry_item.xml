@@ -15,6 +15,18 @@
         android:background="@drawable/selector_home_bottom_sheet_list_item">
 
         <ImageView
+            android:id="@+id/home_item_first_selector"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:setSelectedPlantStrokeColor="@{homeUserData.plantName}"
+            android:src="@drawable/home_selected_plant_indicator_american_blue"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@id/main_user_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
             android:id="@+id/main_user_img"
             android:layout_width="56dp"
             android:layout_height="56dp"
@@ -22,6 +34,8 @@
             android:background="@drawable/home_bottom_sheet_item_selector"
             android:setProfile="@{homeUserData.thumbnailImageUrl}"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/main_user_name"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView

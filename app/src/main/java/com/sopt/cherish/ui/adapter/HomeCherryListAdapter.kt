@@ -1,6 +1,7 @@
 package com.sopt.cherish.ui.adapter
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sopt.cherish.databinding.MainCherryItemBinding
@@ -29,6 +30,8 @@ class HomeCherryListAdapter(
     inner class MainViewHolder(private val binding: MainCherryItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(userData: User, clickListener: OnItemClickListener) {
+            if (adapterPosition == 0) binding.homeItemFirstSelector.visibility = View.VISIBLE
+
             setAlphaItemClicked(binding, adapterPosition)
 
             binding.apply {
