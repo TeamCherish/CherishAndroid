@@ -116,7 +116,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
         binding.homeUserList.apply {
             adapter = homeCherryListAdapter
             layoutManager = GridLayoutManager(context, 5)
-            addItemDecoration(GridItemDecorator(spanCount = 5, spacing = 12.dp, includeEdge = true))
+            addItemDecoration(GridItemDecorator(spanCount = 5, spacing = 6.dp, includeEdge = true))
             isNestedScrollingEnabled = false
             setHasFixedSize(true)
         }

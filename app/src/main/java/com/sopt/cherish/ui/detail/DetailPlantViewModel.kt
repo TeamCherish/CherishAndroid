@@ -30,6 +30,8 @@ class DetailPlantViewModel(
 
     val selectedCalendarDay = MutableLiveData<CalendarDay?>()
 
+    var wateringText = " "
+
     private val _calendarData = MutableLiveData<CalendarRes>()
     val calendarData: MutableLiveData<CalendarRes>
         get() = _calendarData

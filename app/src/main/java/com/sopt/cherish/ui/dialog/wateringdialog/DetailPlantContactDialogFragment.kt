@@ -39,6 +39,7 @@ class DetailPlantContactDialogFragment : DialogFragment(),
             false
         )
         viewModel.fetchCalendarData()
+        viewModel.wateringText = "${viewModel.cherishNickname}님과"
         binding.dialogDetailPlantContact = this
         binding.detailPlantViewModel = viewModel
 

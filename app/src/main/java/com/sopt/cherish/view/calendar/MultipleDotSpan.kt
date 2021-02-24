@@ -3,6 +3,7 @@ package com.sopt.cherish.view.calendar
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.text.style.LineBackgroundSpan
+import com.sopt.cherish.util.PixelUtil.pixel
 
 /**
  * Created on 01-06 by SSong-develop
@@ -28,7 +29,7 @@ class MultipleDotSpan(
         // todo : 기기 비율에 맞춘 값으로 표시를 해줘야 함
         var leftMost = 0
         val circleX = ((left + right) / 2 - leftMost).toFloat()
-        val circleY = bottom + radius + 30
+        val circleY = bottom + radius + 30.pixel
         val circleRadius = 10f
         paint.color = color
         canvas.drawCircle(circleX, circleY, circleRadius, paint)
