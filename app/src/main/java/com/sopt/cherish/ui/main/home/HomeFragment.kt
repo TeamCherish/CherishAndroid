@@ -90,15 +90,15 @@ class HomeFragment : Fragment(), OnItemClickListener {
     private fun observeCherishUsers() {
         viewModel.cherishUsers.observe(viewLifecycleOwner) {
             // todo : 이거 실마리 인거 같음 될거 같아 클릭시 가장 첫번째거에서 보여주는거
-            it.userData.userList.add(0, it.userData.userList[0])
+            it.userData.userList.add(it.userData.userList.reversed()[0])
             setCherishUserListAdapter(it)
-            setSelectedUser(it.userData.userList.reversed()[0])
+            setSelectedUser(it.userData.userList.reversed()[1])
         }
     }
 
     private fun setSelectedUser(user: User) {
         viewModel.selectedCherishUser.value = user
-        homeCherryListAdapter.lastSelectedPosition = 0
+        homeCherryListAdapter.lastSelectedPosition = 1
     }
 
     private fun setCherishUserListAdapter(userResult: UserResult) {
@@ -118,7 +118,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
         binding.homeUserList.apply {
             adapter = homeCherryListAdapter
             layoutManager = GridLayoutManager(context, 5)
-            addItemDecoration(GridItemDecorator(spanCount = 5, spacing = 10.dp, includeEdge = true))
+            addItemDecoration(GridItemDecorator(spanCount = 5, spacing = 12.dp, includeEdge = true))
             isNestedScrollingEnabled = false
             setHasFixedSize(true)
         }

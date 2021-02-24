@@ -11,7 +11,7 @@ class HomeCherryListAdapter(
 ) : RecyclerView.Adapter<HomeCherryListAdapter.MainViewHolder>() {
 
     var data = mutableListOf<User>()
-    var lastSelectedPosition = 0
+    var lastSelectedPosition = 1
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)

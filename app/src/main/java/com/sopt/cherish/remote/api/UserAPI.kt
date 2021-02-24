@@ -30,7 +30,12 @@ data class User(
     @SerializedName("gif") val plantAnimationUrl: String,
     @SerializedName("main_bg") val homeMainBackgroundImageUrl: String,
     @SerializedName("modifier") val plantModifier: String
-)
+) {
+    companion object {
+        const val FIRST_TYPE = 0
+        const val OTHER_TYPE = 1
+    }
+}
 
 data class UserData(
     @SerializedName("result") val userList: MutableList<User>,
