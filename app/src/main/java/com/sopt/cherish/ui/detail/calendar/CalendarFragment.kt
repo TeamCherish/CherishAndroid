@@ -142,9 +142,10 @@ class CalendarFragment : Fragment() {
 
     private fun showChips(binding: FragmentCalendarBinding, wateredChip: List<String?>) {
         binding.calendarViewChipLayout.clearChips()
-        // todo : null일경우랑 아닌경우 혹은 그냥 공백으로 둔 경우를 모두 판단해야해서 보여줘야 하는 알고리즘을 작성해야합니다.
         wateredChip.forEach {
-            it?.let { it1 -> binding.calendarViewChipLayout.addChipCalendar(it1) }
+            if (it != "" && it != null) {
+                binding.calendarViewChipLayout.addChipCalendar(it)
+            }
         }
     }
 

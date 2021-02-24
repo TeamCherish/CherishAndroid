@@ -25,8 +25,6 @@ class MultipleDotSpan(
         end: Int,
         lineNum: Int
     ) {
-        // 그리 좋은 코드 아님 수정해야함
-        // todo : 기기 비율에 맞춘 값으로 표시를 해줘야 함
         var leftMost = 0
         val circleX = ((left + right) / 2 - leftMost).toFloat()
         val circleY = bottom + radius + 30.pixel
