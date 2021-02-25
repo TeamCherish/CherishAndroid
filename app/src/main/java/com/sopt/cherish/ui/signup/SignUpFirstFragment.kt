@@ -27,7 +27,8 @@ class SignUpFirstFragment: Fragment() {
     lateinit var pw:String
     lateinit var pwAgain:String
     private val requestData = RetrofitBuilder
-    var isValid:Boolean=false
+    var checkEmail:Boolean=false //이메일 형식확인
+    var isValid:Boolean=false //이메일 중복확인
     var isFinish:Boolean=false
 
     override fun onCreateView(
@@ -40,6 +41,7 @@ class SignUpFirstFragment: Fragment() {
         binding=FragmentSignUpFirstBinding.bind(view)
 
         checkEmail()
+
         return view
     }
 
@@ -72,8 +74,19 @@ class SignUpFirstFragment: Fragment() {
 
                 binding.isUsableEmail.setTextAppearance(R.style.SignUpTextAppearance)
 
-                if(isEmailValid(email)){ //이메일 형식 올바르면
+                checkEmail=isEmailValid(email) //이메일 형식 확인
+
+                if(checkEmail){ //이메일 형식 올바르면
                     Log.d("email","is usable ok!")
+                    checkSameEmail(email) //이메일 중복 확인
+
+                    binding.isUsableEmail.text="사용가능한 이메일입니다."
+                    binding.isUsableEmail.setTextColor(
+                        ContextCompat.getColor(
+                            binding.root.context,
+                            R.color.cherish_green_main
+                        )
+                    )
 
                     //버튼 초록색 활성화
                     binding.signUpButton.setBackgroundColor(
@@ -89,30 +102,35 @@ class SignUpFirstFragment: Fragment() {
                         )
                     )
 
-                    //버튼 누르면 이메일 중복 확인
-                    binding.signUpButton.setOnClickListener {
-                        if(checkSameEmail(email)){ //중복 없으면
-                            //Log.d("email","색깔아 바뀌어라")
-                            binding.isUsableEmail.text="사용가능한 이메일입니다."
-                            binding.isUsableEmail.setTextColor(
-                                ContextCompat.getColor(
-                                    binding.root.context,
-                                    R.color.cherish_green_main
-                                )
-                            )
+                    if(!isFinish){
+                        binding.signUpButton.setOnClickListener {
 
-                            showPw()
-                        }
-                        else{ //중복 있으면
-                            binding.isUsableEmail.text="사용하실 수 없는 이메일입니다."
-                            binding.isUsableEmail.setTextColor(
-                                ContextCompat.getColor(
-                                    binding.root.context,
-                                    R.color.cherish_pink_sub
+                            if(isValid){ //중복 없으면
+                                //Log.d("email","색깔아 바뀌어라")
+                                binding.isUsableEmail.text="사용가능한 이메일입니다."
+                                binding.isUsableEmail.setTextColor(
+                                    ContextCompat.getColor(
+                                        binding.root.context,
+                                        R.color.cherish_green_main
+                                    )
                                 )
-                            )
+
+                                showPw()
+                            }
+                            else{ //중복 있으면
+                                binding.isUsableEmail.text="사용하실 수 없는 이메일입니다."
+                                binding.isUsableEmail.setTextColor(
+                                    ContextCompat.getColor(
+                                        binding.root.context,
+                                        R.color.cherish_pink_sub
+                                    )
+                                )
+                            }
                         }
                     }
+
+
+
                 }else{ //이메일 형식 올바르지 않으면
                     binding.signUpButton.setBackgroundColor(
                         ContextCompat.getColor(
@@ -158,7 +176,7 @@ class SignUpFirstFragment: Fragment() {
         return true
     }
 
-    private fun checkSameEmail(userEmail:String):Boolean{
+    private fun checkSameEmail(userEmail:String){
         isFinish=false
 
         if(!isFinish){
@@ -182,14 +200,15 @@ class SignUpFirstFragment: Fragment() {
                                 Log.d("email message",it.message)
 
                                 isValid=it.success
+                                Log.d("isValid",isValid.toString())
+
                             }
                     }
                 }
             )
-            Log.d("isValid",isValid.toString())
+
         }
 
-        return isValid
     }
 
     private fun showPw(){
@@ -224,7 +243,7 @@ class SignUpFirstFragment: Fragment() {
                     )
 
                     checkPwAgain(pw)
-                    goToNextStep()
+
                 }
             }
 
@@ -253,6 +272,10 @@ class SignUpFirstFragment: Fragment() {
                         )
                     )
                     isFinish=true
+                    binding.signUpButton.setOnClickListener {
+                        (activity as SignUpActivity).replaceFragment(1)
+                    }
+
                 }else{
                     binding.isUsablePw.text="비밀번호가 일치하지 않습니다."
                     binding.isUsablePw.setTextColor(
