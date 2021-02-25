@@ -49,6 +49,7 @@ class MainActivity : AppCompatActivity() {
             }
             val token = task.result
             SimpleLogger.logI(token.toString())
+
         })
     }
 

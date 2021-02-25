@@ -35,7 +35,7 @@ class FirebaseNotificationService : FirebaseMessagingService() {
     }
 
     private fun sendRegistrationToServer(token: String) {
-        // 서버에게 값을 보내줄 수 있도록 해주면 됨
+
     }
 
     override fun onMessageReceived(message: RemoteMessage) {
