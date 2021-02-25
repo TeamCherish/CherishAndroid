@@ -178,6 +178,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
                 if (standardBottomSheetBehavior.state == BottomSheetBehavior.STATE_DRAGGING)
                     standardBottomSheetBehavior.peekHeight = 60.dp
+
             }
         })
     }
