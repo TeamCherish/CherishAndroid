@@ -149,9 +149,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
         startActivityForResult(intent, CODE_MOVE_DETAIL_PLANT)
     }
 
-    // 리사이클러뷰 아이템 클릭 시 바텀 시트 내려감
     private fun slideDownBottomSheet() {
-        // todo : 비율로 변경해야함
         standardBottomSheetBehavior.apply {
             state = BottomSheetBehavior.STATE_COLLAPSED
             peekHeight = 160.dp
