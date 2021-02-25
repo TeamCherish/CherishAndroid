@@ -154,7 +154,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
         // todo : 비율로 변경해야함
         standardBottomSheetBehavior.apply {
             state = BottomSheetBehavior.STATE_COLLAPSED
-            peekHeight = 150.dp
+            peekHeight = 160.dp
             expandedOffset = 100.dp
         }
     }
