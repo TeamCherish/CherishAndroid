@@ -80,4 +80,59 @@
         android:paddingEnd="0dp"
         android:hint="@string/sign_up_sex_text"/>
 
+    <TextView
+        android:id="@+id/age_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_up_age_text"
+        android:fontFamily="@font/notosanscjkkr_medium"
+        android:textSize="@dimen/text_20sp"
+        android:textColor="#2a2a2a"
+        android:layout_marginTop="38dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/user_phone"/>
+
+    <EditText
+        android:autofillHints="@string/sign_up_email_hint"
+        android:inputType="phone"
+        android:id="@+id/user_age"
+        android:layout_width="0dp"
+        android:layout_height="44dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="@dimen/margin_16dp"
+        android:layout_marginEnd="@dimen/margin_16dp"
+        app:layout_constraintTop_toBottomOf="@+id/age_text"
+        android:background="@drawable/search_background"
+        android:layout_marginTop="4dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="0dp"
+        android:hint="@string/sign_up_sex_text"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_up_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="92dp"
+        android:textColor="@color/cherish_light_black"
+        android:fontFamily="@font/notosanscjkkr_regular"/>
+
+    <Button
+        android:id="@+id/sign_up_button"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        style="@style/RoundButton.SignUp"
+        android:text="@string/sign_up_button_next"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:layout_marginStart="@dimen/margin_16dp"
+        android:layout_marginEnd="@dimen/margin_16dp"
+        android:layout_marginBottom="@dimen/margin_21dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
