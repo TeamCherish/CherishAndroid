@@ -63,4 +63,6 @@ object RetrofitBuilder {
     val userinfoAPI:UserInfoAPI= getRetrofit().create(UserInfoAPI::class.java)
 
     val checkphoneAPI: CheckPhoneAPI= getRetrofit().create(CheckPhoneAPI::class.java)
+
+    val signUpEmailAPI:SignUpEmailAPI= getRetrofit().create(SignUpEmailAPI::class.java)
 }

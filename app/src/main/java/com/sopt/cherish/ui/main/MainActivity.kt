@@ -1,6 +1,7 @@
 package com.sopt.cherish.ui.main
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.provider.ContactsContract
 import androidx.activity.viewModels
@@ -13,6 +14,7 @@ import com.sopt.cherish.databinding.ActivityMainBinding
 import com.sopt.cherish.di.Injection
 import com.sopt.cherish.remote.api.MyPageCherishData
 import com.sopt.cherish.ui.adapter.Phonemypage
+import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
 import com.sopt.cherish.ui.main.home.HomeFragment
 import com.sopt.cherish.ui.main.manageplant.*
 import com.sopt.cherish.ui.main.setting.SettingFragment
@@ -136,7 +138,7 @@ class MainActivity : AppCompatActivity() {
         return list.size
     }
 
-    fun replaceFragment(index: Int, data: MutableList<MyPageCherishData>?, isSearched:Boolean) {
+    fun replaceFragment(index: Int, data: List<MyPageCherishData>?, isSearched:Boolean) {
         search=isSearched
         val transAction = supportFragmentManager.beginTransaction()
         when (index) {

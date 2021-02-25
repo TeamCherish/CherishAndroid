@@ -69,6 +69,11 @@ class HomeFragment : Fragment(), OnItemClickListener {
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        observeCherishUsers()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         observeCherishUsers()
         observeAnimationTrigger()

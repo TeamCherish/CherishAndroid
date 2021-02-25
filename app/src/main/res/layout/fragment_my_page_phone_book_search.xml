@@ -3,17 +3,19 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/conssearch"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.main.MainActivity">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/search_bg"
-        android:layout_width="280dp"
+        android:layout_width="0dp"
         android:layout_height="44dp"
         android:layout_marginTop="@dimen/margin_18dp"
-        android:layout_marginStart="16dp"
-        android:background="@drawable/search_box"
-        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/search_background"
+        app:layout_constraintEnd_toEndOf="@+id/recycler_mypage"
+        app:layout_constraintStart_toStartOf="@+id/recycler_mypage"
         app:layout_constraintTop_toTopOf="parent">
 
         <EditText
@@ -31,12 +33,12 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:contentDescription="@null"
-            android:autofillHints="@null"
             android:id="@+id/imageView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
+            android:autofillHints="@null"
+            android:contentDescription="@null"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -47,13 +49,29 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_mypage"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_height="0dp"
         android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/search_bg"
         tools:listitem="@layout/item_layout" />
 
+    <Button
+        android:id="@+id/my_page_add_phone_btn"
+        style="@style/RoundButton.Gray"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginBottom="16dp"
+        android:contentDescription="@null"
+        android:fontFamily="@font/notosanscjkkr_medium"
+        android:includeFontPadding="false"
+        android:text="@string/myPage_add_phone_text"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_16sp"
+        app:layout_constraintBottom_toBottomOf="@id/conssearch"
+        app:layout_constraintEnd_toEndOf="@+id/recycler_mypage"
+        app:layout_constraintStart_toStartOf="@+id/recycler_mypage" />
 </androidx.constraintlayout.widget.ConstraintLayout>

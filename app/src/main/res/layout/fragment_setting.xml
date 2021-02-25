@@ -11,7 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/cherish_light_gray">
+        >
 
         <ScrollView
             android:layout_width="match_parent"
@@ -21,25 +21,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar_setting"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    tools:ignore="MissingConstraints" />
-
-                <TextView
-                    android:id="@+id/textView15"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/margin_16dp"
-                    android:text="더보기"
-                    android:fontFamily="@font/notosanscjkkr_medium"
-                    android:includeFontPadding="false"
-                    android:textSize="@dimen/text_16sp"
-                    app:layout_constraintBottom_toBottomOf="@+id/toolbar_setting"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/toolbar_setting" />
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -47,15 +28,27 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
-
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/toolbar_setting">
 
+                    <TextView
+                        android:id="@+id/textView15"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="@dimen/margin_14dp"
+                        android:fontFamily="@font/notosanscjkkr_medium"
+                        android:includeFontPadding="false"
+                        android:text="더보기"
+                        android:textSize="@dimen/text_16sp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
                     <ImageView
                         android:id="@+id/imageView8"
-                        android:layout_width="64dp"
-                        android:layout_height="64dp"
+                        android:layout_width="88dp"
+                        android:layout_height="88dp"
                         android:layout_marginTop="80dp"
                         android:layout_marginBottom="80dp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -63,7 +56,7 @@
                         app:layout_constraintStart_toStartOf="@+id/cons_page"
                         app:layout_constraintTop_toTopOf="@id/cons_page"
                         app:layout_constraintVertical_bias="0.0"
-                        app:srcCompat="@drawable/cherry" />
+                        app:srcCompat="@drawable/user_img" />
 
                     <TextView
                         android:id="@+id/textView16"
@@ -72,60 +65,80 @@
                         android:fontFamily="@font/notosanscjkkr_bold"
                         android:includeFontPadding="false"
                         android:text="안나영"
-                        android:textSize="@dimen/text_14sp"
+                        android:layout_marginTop="@dimen/margin_12dp"
+                        android:textSize="18sp"
                         app:layout_constraintEnd_toEndOf="@+id/imageView8"
                         app:layout_constraintStart_toStartOf="@+id/imageView8"
                         app:layout_constraintTop_toBottomOf="@+id/imageView8" />
 
+                    <TextView
+                        android:id="@+id/textView10"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_4dp"
+                        android:text="dpswpfskdud@naver.com"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/textView16" />
+
+                    <ImageView
+                        android:id="@+id/imageView18"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/textView16"
+                        app:layout_constraintStart_toEndOf="@+id/textView16"
+                        app:layout_constraintTop_toTopOf="@+id/textView16"
+                        app:srcCompat="@drawable/ic_btn_more" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/cons_middle"
+                <View
+                    android:id="@+id/view"
                     android:layout_width="match_parent"
-                    android:layout_height="184dp"
-                    android:layout_marginTop="20dp"
-                    android:background="@color/white"
-
-                    app:layout_constraintTop_toBottomOf="@+id/cons_page">
+                    android:layout_height="2dp"
+                    android:background="#f5f5f5"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cons_page" />
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/constraintLayout3"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        app:layout_constraintBottom_toTopOf="@+id/constraintLayout4"
+                        android:layout_height="60dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="@+id/cons_middle">
+                        app:layout_constraintTop_toBottomOf="@+id/view">
 
                         <ImageView
                             android:id="@+id/imageView9"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="24dp"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/icon_microphone" />
+                            app:srcCompat="@drawable/ic_btn_more" />
 
                         <TextView
                             android:id="@+id/textView25"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="12dp"
-                            android:text="aboutcherish"
+                            android:layout_marginStart="16dp"
                             android:fontFamily="@font/notosanscjkkr_medium"
                             android:includeFontPadding="false"
+                            android:text="About Cherish"
                             android:textSize="15sp"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/imageView9"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintVertical_bias="0.589" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/constraintLayout4"
+                        android:id="@+id/constraintLayout_info"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        app:layout_constraintBottom_toTopOf="@+id/constraintLayout5"
+                        android:layout_height="60dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
@@ -134,112 +147,103 @@
                             android:id="@+id/imageView11"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="24dp"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/icn_info" />
+                            app:srcCompat="@drawable/ic_btn_more" />
 
                         <TextView
                             android:id="@+id/setting_nickname"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="12dp"
-                            android:text="닉네임변경"
+                            android:layout_marginStart="16dp"
                             android:fontFamily="@font/notosanscjkkr_medium"
                             android:includeFontPadding="false"
+                            android:text="개인정보처리방침"
                             android:textSize="15sp"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/imageView11"
+                            app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
                     <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/constraintLayout5"
+                        android:id="@+id/constraintLayout_service"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_height="60dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
+                        app:layout_constraintTop_toBottomOf="@+id/constraintLayout_info">
 
                         <ImageView
                             android:id="@+id/imageView12"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="24dp"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:srcCompat="@drawable/icn_message" />
+                            app:srcCompat="@drawable/ic_btn_more" />
 
                         <TextView
                             android:id="@+id/setting_one"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="12dp"
-                            android:text="1대1 문의하기"
+                            android:layout_marginStart="16dp"
                             android:fontFamily="@font/notosanscjkkr_medium"
                             android:includeFontPadding="false"
+                            android:text="서비스이용약관"
                             android:textSize="15sp"
                             app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/imageView12"
+                            app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraintLayout_alarm"
+                    android:id="@+id/constraintLayout_question"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/margin_60dp"
-                    android:layout_marginTop="20dp"
-                    android:background="@color/white"
-                    app:layout_constraintTop_toBottomOf="@+id/cons_middle">
+                    android:layout_height="60dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout_service">
 
                     <ImageView
-                        android:id="@+id/imageView13"
+                        android:id="@+id/btn_question"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="16dp"
+
+                        android:layout_marginEnd="24dp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/icn_setting" />
+                        app:srcCompat="@drawable/ic_btn_more" />
 
                     <TextView
                         android:id="@+id/textView28"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:text="알림설정"
+                        android:layout_marginStart="16dp"
                         android:fontFamily="@font/notosanscjkkr_medium"
                         android:includeFontPadding="false"
+                        android:text="1대1 문의하기"
                         android:textSize="15sp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/imageView13"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <TextView
-                    android:id="@+id/textView22"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="14dp"
-                    android:text="잠금 설정"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout_alarm" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/lock_setting"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="43dp"
-                    android:background="@color/white"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout_alarm">
+
+
+
+              <View
+                  android:id="@+id/view2"
+                  android:layout_width="match_parent"
+                  android:layout_height="6dp"
+                  android:background="#f5f5f5"
+                  app:layout_constraintTop_toBottomOf="@+id/constraintLayout_question"
+                  />
+
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/lock_cons"
@@ -247,62 +251,55 @@
                         android:layout_height="@dimen/margin_60dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
+                        app:layout_constraintTop_toBottomOf="@+id/view2">
+
+                        <Switch
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:ignore="UseSwitchCompatOrMaterialXml" />
 
                         <TextView
                             android:id="@+id/textView23"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
-                            android:text="지문인식 사용"
                             android:fontFamily="@font/notosanscjkkr_medium"
                             android:includeFontPadding="false"
+                            android:text="물주기 알림"
                             android:textSize="15sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
+                <View
+                    android:id="@+id/view3"
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp"
+                    android:background="#f5f5f5"
+                    app:layout_constraintTop_toBottomOf="@+id/lock_cons"
+                    />
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/margin_60dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
 
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/lock_cons">
-
-                        <TextView
-                            android:id="@+id/textView24"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:text="비밀번호 변경"
-                            android:fontFamily="@font/notosanscjkkr_medium"
-                            android:includeFontPadding="false"
-                            android:textSize="15sp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/margin_60dp"
-                    android:layout_marginTop="@dimen/margin_12dp"
                     android:background="@color/white"
                     android:id="@+id/friends_cons"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/lock_setting">
+                    app:layout_constraintTop_toBottomOf="@+id/view3">
 
                     <TextView
                         android:id="@+id/friends"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
-                        android:text="친구동기화"
+                        android:text="로그아웃"
+                        android:textColor="#f7596c"
+
                         android:fontFamily="@font/notosanscjkkr_medium"
                         android:includeFontPadding="false"
                         android:textSize="15sp"
@@ -310,29 +307,9 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <TextView
-                        android:id="@+id/textView36"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:text="최근 동기화 2020.03.02.19:36"
-                        android:fontFamily="@font/notosanscjkkr_regular"
-                        android:textSize="@dimen/text_12sp"
-                        android:includeFontPadding="false"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/imageView16"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.512" />
 
-                    <ImageView
-                        android:id="@+id/imageView16"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="22dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:srcCompat="@drawable/ic_reset" />
+
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -348,7 +325,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
-                        android:text="로그아웃"
+                        android:text="회원탈퇴"
                         android:fontFamily="@font/notosanscjkkr_medium"
                         android:includeFontPadding="false"
                         android:textSize="15sp"
