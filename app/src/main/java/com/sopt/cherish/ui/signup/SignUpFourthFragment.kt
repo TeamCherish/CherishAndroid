@@ -1,8 +1,11 @@
 package com.sopt.cherish.ui.signup
 
+import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
 import android.text.SpannableString
 import android.text.TextPaint
+import android.text.TextWatcher
 import android.text.style.URLSpan
 import android.text.util.Linkify
 import androidx.fragment.app.Fragment
@@ -10,14 +13,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentSignUpFourthBinding
+import com.sopt.cherish.ui.main.MainActivity
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
 
 class SignUpFourthFragment : Fragment() {
     lateinit var binding: FragmentSignUpFourthBinding
+    var nickName:String=""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,6 +35,7 @@ class SignUpFourthFragment : Fragment() {
         binding= FragmentSignUpFourthBinding.bind(view)
 
         initializeLink()
+        initializeNickName()
 
         return view
     }
@@ -63,6 +70,73 @@ class SignUpFourthFragment : Fragment() {
             }, spannable.getSpanStart(u), spannable.getSpanEnd(u), 0)
         }
         text = spannable
+    }
+
+    private fun initializeNickName(){
+        binding.userNickname.addTextChangedListener(object:TextWatcher{
+            override fun afterTextChanged(s: Editable?) {
+                nickName=binding.userNickname.text.toString()
+
+                if(nickName.length<=8){
+                    binding.isUsableNickname.text="사용하실 수 있는 닉네임입니다."
+                    binding.isUsableNickname.setTextColor(
+                        ContextCompat.getColor(
+                            binding.root.context,
+                            R.color.cherish_green_main
+                        )
+                    )
+
+                    //버튼 초록색 활성화
+                    binding.signUpButton.setBackgroundColor(
+                        ContextCompat.getColor(
+                            binding.root.context,
+                            R.color.cherish_green_main
+                        )
+                    )
+                    binding.signUpButton.setTextColor(
+                        ContextCompat.getColor(
+                            binding.root.context,
+                            R.color.white
+                        )
+                    )
+
+                    binding.signUpButton.setOnClickListener {
+                        //val intent = Intent(context, MainActivity::class.java)
+                        //startActivity(intent)
+                    }
+                }else{
+                    binding.isUsableNickname.text="사용하실 수 없는 닉네임입니다."
+                    binding.isUsableNickname.setTextColor(
+                        ContextCompat.getColor(
+                            binding.root.context,
+                            R.color.cherish_pink_sub
+                        )
+                    )
+
+                    //버튼 비활성화
+                    binding.signUpButton.setBackgroundColor(
+                        ContextCompat.getColor(
+                            binding.root.context,
+                            R.color.cherish_text_box_gray
+                        )
+                    )
+                    binding.signUpButton.setTextColor(
+                        ContextCompat.getColor(
+                            binding.root.context,
+                            R.color.cherish_text_gray
+                        )
+                    )
+                }
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+            }
+        })
     }
 
 }

@@ -2,6 +2,8 @@ package com.sopt.cherish.ui.signup
 
 import android.os.Bundle
 import android.telephony.PhoneNumberFormattingTextWatcher
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -16,6 +18,7 @@ import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.regex.Pattern
 
 
 class SignUpSecondFragment : Fragment() {
@@ -40,23 +43,53 @@ class SignUpSecondFragment : Fragment() {
     }
 
     private fun getCertificationNumber(){
-        binding.certificationBtn.setOnClickListener {
-            phoneNumber=binding.userPhone.text.toString()
-            Log.d("phoneNumber",phoneNumber)
-            requestServer(phoneNumber)
+        binding.userPhone.addTextChangedListener(object:TextWatcher{
+            override fun afterTextChanged(s: Editable?) {
+                phoneNumber=binding.userPhone.text.toString()
+                Log.d("phoneNumber",phoneNumber)
 
-            binding.certificationBtn.visibility=View.GONE
-            binding.certificationText.visibility=View.VISIBLE
-            binding.userCertificationNumber.visibility=View.VISIBLE
-            binding.certificationAgain.visibility=View.VISIBLE
-            binding.certificationOk.visibility=View.VISIBLE
+                //휴대폰번호 유효성 검사
+                if(isPhoneNumberValid(phoneNumber)){
+                    binding.certificationBtn.setOnClickListener {
+                        Log.d("phoneNumber",phoneNumber)
+                        requestServer(phoneNumber)
 
-            checkCertificationNumber(authData)
+                        binding.certificationBtn.visibility=View.GONE
+                        binding.certificationText.visibility=View.VISIBLE
+                        binding.userCertificationNumber.visibility=View.VISIBLE
+                        binding.certificationAgain.visibility=View.VISIBLE
+                        binding.certificationOk.visibility=View.VISIBLE
+
+                        checkCertificationNumber(authData)
+                    }
+
+                    binding.certificationAgain.setOnClickListener{
+                        requestServer(phoneNumber)
+                    }
+                }
+
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+            }
+        })
+
+    }
+
+    private fun isPhoneNumberValid(phone: String):Boolean{
+        if(!Pattern.matches("^\\s*(010|011|016|017|018|019)(-|\\)|\\s)*(\\d{3,4})(-|\\s)*(\\d{4})\\s*$", phone))
+        {
+            Log.d("validation","false")
+            return false
         }
 
-        binding.certificationAgain.setOnClickListener{
-            requestServer(phoneNumber)
-        }
+        Log.d("validation","true")
+        return true
     }
 
     private fun requestServer(phoneNumber:String){
@@ -114,6 +147,20 @@ class SignUpSecondFragment : Fragment() {
             binding.signUpButton.setOnClickListener {
                 (activity as SignUpActivity).replaceFragment(2)
             }
+        }else{
+            //버튼 비활성화
+            binding.signUpButton.setBackgroundColor(
+                ContextCompat.getColor(
+                    binding.root.context,
+                    R.color.cherish_text_box_gray
+                )
+            )
+            binding.signUpButton.setTextColor(
+                ContextCompat.getColor(
+                    binding.root.context,
+                    R.color.cherish_text_gray
+                )
+            )
         }
     }
 
