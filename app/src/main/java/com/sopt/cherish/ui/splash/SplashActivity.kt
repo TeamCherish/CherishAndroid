@@ -7,8 +7,6 @@ import android.os.Looper
 import androidx.appcompat.app.AppCompatActivity
 import com.sopt.cherish.R
 import com.sopt.cherish.ui.signin.SignInActivity
-import com.sopt.cherish.util.PermissionUtil
-import com.sopt.cherish.util.extension.shortToast
 
 /**
  * Created on 2020-01-03 by SSong-develop
@@ -31,33 +29,7 @@ class SplashActivity : AppCompatActivity() {
 
     }
 
-    private fun requestCherishPermissions() {
-        PermissionUtil.requestCherishPermission(this, object : PermissionUtil.PermissionListener {
-            override fun onPermissionGranted() {
-                startTutorialActivityAndFinish()
-            }
 
-            override fun onPermissionShouldBeGranted(deniedPermissions: List<String>) {
-                shortToast(this@SplashActivity, "권한 허용이 안되어있습니다. $deniedPermissions")
-                openSettings()
-            }
 
-            override fun onAnyPermissionPermanentlyDenied(
-                deniedPermissions: List<String>,
-                permanentDeniedPermissions: List<String>
-            ) {
-                shortToast(this@SplashActivity, "권한 허용이 영구적으로 거부되었습니다. $permanentDeniedPermissions")
-                openSettings()
-            }
-        })
-    }
 
-    private fun openSettings() {
-        PermissionUtil.openPermissionSettings(this)
-    }
-
-    private fun startTutorialActivityAndFinish() {
-        startActivity(Intent(this, SignInActivity::class.java))
-        finish()
-    }
 }

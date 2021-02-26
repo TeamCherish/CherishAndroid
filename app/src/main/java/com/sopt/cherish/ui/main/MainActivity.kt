@@ -19,6 +19,7 @@ import com.sopt.cherish.ui.main.manageplant.*
 import com.sopt.cherish.ui.main.setting.SettingFragment
 import com.sopt.cherish.util.PermissionUtil
 import com.sopt.cherish.util.SimpleLogger
+import com.sopt.cherish.util.extension.shortToast
 
 
 class MainActivity : AppCompatActivity() {
@@ -31,6 +32,7 @@ class MainActivity : AppCompatActivity() {
         val binding: ActivityMainBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_main)
         initializeViewModelData()
+        requestCherishPermissions()
         showInitialFragment()
         getFirebaseDeviceToken()
         observeFirebaseDeviceToken()
@@ -70,6 +72,31 @@ class MainActivity : AppCompatActivity() {
     private fun showInitialFragment() {
         supportFragmentManager.beginTransaction()
             .add(R.id.main_fragment_container, HomeFragment()).commit()
+    }
+
+    private fun requestCherishPermissions() {
+        PermissionUtil.requestCherishPermission(this, object : PermissionUtil.PermissionListener {
+            override fun onPermissionGranted() {
+
+            }
+
+            override fun onPermissionShouldBeGranted(deniedPermissions: List<String>) {
+                shortToast(this@MainActivity, "권한 허용이 안되어있습니다. $deniedPermissions")
+                openSettings()
+            }
+
+            override fun onAnyPermissionPermanentlyDenied(
+                deniedPermissions: List<String>,
+                permanentDeniedPermissions: List<String>
+            ) {
+                shortToast(this@MainActivity, "권한 허용이 영구적으로 거부되었습니다. $permanentDeniedPermissions")
+                openSettings()
+            }
+        })
+    }
+
+    private fun openSettings() {
+        PermissionUtil.openPermissionSettings(this)
     }
 
     private fun setBottomNavigationListener(binding: ActivityMainBinding) {
