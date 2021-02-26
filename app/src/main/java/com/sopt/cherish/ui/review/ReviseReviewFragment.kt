@@ -2,6 +2,7 @@ package com.sopt.cherish.ui.review
 
 import android.os.Bundle
 import android.view.*
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -94,17 +95,27 @@ class ReviseReviewFragment : Fragment() {
                 return true
             }
             R.id.trash -> {
-                // todo : 메모 삭제하기 이전에 정말로 삭제를 할것인지를 물어보면 될 거 같음.
-                viewModel.deleteReview(
-                    DeleteReviewReq(
-                        viewModel.cherishId.value!!,
-                        DateUtil.convertDateToString(viewModel.selectedCalendarData.value!!.wateredDate)
-                    )
-                )
-                viewModel.selectedCalendarData.value = null
-                SimpleLogger.logI("${viewModel.selectedCalendarData.value}")
-                longToast(requireContext(), "메모 삭제에 성공했습니다.")
-                parentFragmentManager.popBackStack()
+                val builder = AlertDialog.Builder(requireContext())
+                builder.setTitle("삭제 하시겠습니까?").setMessage("삭제 시 리뷰를 찾을 수 없습니다")
+                    .setPositiveButton(
+                        "확인"
+                    ) { dialog, which ->
+                        viewModel.deleteReview(
+                            DeleteReviewReq(
+                                viewModel.cherishId.value!!,
+                                DateUtil.convertDateToString(viewModel.selectedCalendarData.value!!.wateredDate)
+                            )
+                        )
+                        viewModel.selectedCalendarData.value = null
+                        SimpleLogger.logI("${viewModel.selectedCalendarData.value}")
+                        longToast(requireContext(), "메모 삭제에 성공했습니다.")
+                        parentFragmentManager.popBackStack()
+                    }
+                    .setNegativeButton("취소") { dialog, which ->
+                        shortToast(requireContext(), "메모 삭제를 취소했습니다.")
+                        dialog.dismiss()
+                    }
+                builder.create().show()
             }
         }
         return super.onOptionsItemSelected(item)
@@ -134,7 +145,10 @@ class ReviseReviewFragment : Fragment() {
     }
 
     private fun addUserStatusWithChip(binding: FragmentReviseReviewBinding) {
-        binding.reviseReviewEditKeyword.writeKeyword(binding.reviseReviewFlexBox)
+        binding.reviseReviewEditKeyword.writeKeyword(
+            binding.reviseReviewFlexBox,
+            parentFragmentManager
+        )
     }
 
 }

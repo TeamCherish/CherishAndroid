@@ -2,8 +2,6 @@ package com.sopt.cherish.ui.review
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.KeyEvent
-import android.widget.EditText
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -13,10 +11,10 @@ import com.sopt.cherish.databinding.ActivityReviewBinding
 import com.sopt.cherish.di.Injection
 import com.sopt.cherish.remote.api.ReviewWateringReq
 import com.sopt.cherish.util.MultiViewDialog
-import com.sopt.cherish.util.extension.*
-import com.sopt.cherish.util.extension.FlexBoxExtension.addChip
 import com.sopt.cherish.util.extension.FlexBoxExtension.getChip
-import com.sopt.cherish.util.extension.FlexBoxExtension.getChipsCount
+import com.sopt.cherish.util.extension.countNumberOfCharacters
+import com.sopt.cherish.util.extension.hideKeyboard
+import com.sopt.cherish.util.extension.writeKeyword
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -68,7 +66,7 @@ class ReviewActivity : AppCompatActivity() {
     private fun showLoadingDialog() {
         lifecycleScope.launch {
             // 다이얼로그 사이즈만 하면 됨
-            val dialog = MultiViewDialog(R.layout.dialog_loading, 0.6f, 0.3f)
+            val dialog = MultiViewDialog(R.layout.dialog_loading, 0.35f, 0.169f)
             dialog.show(supportFragmentManager, TAG)
             delay(2000)
             dialog.dismiss()
@@ -80,30 +78,7 @@ class ReviewActivity : AppCompatActivity() {
     }
 
     private fun addUserStatusWithChip(binding: ActivityReviewBinding) {
-        binding.reviewEditKeyword.setOnKeyListener { view, keyCode, keyEvent ->
-            when (keyEvent.action) {
-                KeyEvent.ACTION_DOWN -> {
-                    if (keyCode == KeyEvent.KEYCODE_ENTER && keyCode != KeyEvent.KEYCODE_BACK) {
-                        val et = view as EditText
-                        val keyword = et.text.toString()
-                        if (binding.reviewFlexBox.getChipsCount() < 4) {
-                            binding.reviewFlexBox.addChip(keyword)
-                        } else {
-                            MultiViewDialog(R.layout.dialog_keyword_limit_error, 0.6f, 0.5f).show(
-                                supportFragmentManager,
-                                TAG
-                            )
-                            binding.reviewEditKeyword.hideKeyboard()
-                        }
-                        et.text = null
-                    }
-                    return@setOnKeyListener false
-                }
-                else -> {
-                    return@setOnKeyListener false
-                }
-            }
-        }
+        binding.reviewEditKeyword.writeKeyword(binding.reviewFlexBox, supportFragmentManager)
     }
 
     private fun sendReviewToServer(binding: ActivityReviewBinding) {
@@ -123,7 +98,8 @@ class ReviewActivity : AppCompatActivity() {
 
     private fun ignoreSendReviewToServer(binding: ActivityReviewBinding) {
         binding.reviewIgnoreAccept.setOnClickListener {
-            finish()
+            // 이거 다시 한번 물어봐야 함
+            showLoadingDialog()
         }
     }
 

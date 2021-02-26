@@ -4,7 +4,10 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.KeyEvent.*
 import android.widget.EditText
+import androidx.fragment.app.FragmentManager
 import com.google.android.flexbox.FlexboxLayout
+import com.sopt.cherish.R
+import com.sopt.cherish.util.MultiViewDialog
 import com.sopt.cherish.util.extension.FlexBoxExtension.addChip
 import com.sopt.cherish.util.extension.FlexBoxExtension.getChipsCount
 
@@ -20,9 +23,8 @@ fun EditText.countNumberOfCharacters(observeTextChanged: (CharSequence?) -> Unit
     })
 }
 
-fun EditText.writeKeyword(reviewFlexBoxLayout: FlexboxLayout) {
+fun EditText.writeKeyword(reviewFlexBoxLayout: FlexboxLayout, fragmentManager: FragmentManager) {
     this.setOnKeyListener { view, keyCode, keyEvent ->
-        // 이 문구를 뭔가 좀 코틀린스럽게 짤수 있으면 좋겠다. 훈기야
         when (keyEvent.action) {
             ACTION_DOWN -> {
                 if (keyCode == KEYCODE_ENTER && keyCode != KEYCODE_BACK) {
@@ -31,7 +33,10 @@ fun EditText.writeKeyword(reviewFlexBoxLayout: FlexboxLayout) {
                     if (reviewFlexBoxLayout.getChipsCount() < 4)
                         reviewFlexBoxLayout.addChip(keyword)
                     else {
-                        // todo : 다이얼로그가 나와야 함
+                        MultiViewDialog(R.layout.dialog_keyword_limit_error, 0.7f, 0.169f).show(
+                            fragmentManager,
+                            "editTextExtension"
+                        )
                         this.hideKeyboard()
                     }
                     et.text = null
