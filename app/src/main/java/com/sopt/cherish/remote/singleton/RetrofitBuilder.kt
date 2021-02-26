@@ -37,7 +37,6 @@ object RetrofitBuilder {
 
     val notificationAPI: NotificationAPI = getRetrofit().create(NotificationAPI::class.java)
 
-
     val signinAPI: AuthAPI = getRetrofit().create(AuthAPI::class.java)
 
     val enrollAPI: EnrollmentAPI = getRetrofit().create(EnrollmentAPI::class.java)
@@ -65,4 +64,5 @@ object RetrofitBuilder {
     val checkphoneAPI: CheckPhoneAPI= getRetrofit().create(CheckPhoneAPI::class.java)
 
     val signUpEmailAPI:SignUpEmailAPI= getRetrofit().create(SignUpEmailAPI::class.java)
+
 }

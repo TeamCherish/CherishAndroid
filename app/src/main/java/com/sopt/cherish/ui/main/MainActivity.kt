@@ -12,6 +12,7 @@ import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityMainBinding
 import com.sopt.cherish.di.Injection
 import com.sopt.cherish.remote.api.MyPageCherishData
+import com.sopt.cherish.remote.api.NotificationReq
 import com.sopt.cherish.ui.adapter.Phonemypage
 import com.sopt.cherish.ui.main.home.HomeFragment
 import com.sopt.cherish.ui.main.manageplant.*
@@ -32,9 +33,9 @@ class MainActivity : AppCompatActivity() {
         initializeViewModelData()
         showInitialFragment()
         getFirebaseDeviceToken()
+        observeFirebaseDeviceToken()
         setBottomNavigationListener(binding)
     }
-
 
     override fun onResume() {
         super.onResume()
@@ -48,13 +49,19 @@ class MainActivity : AppCompatActivity() {
                 return@OnCompleteListener
             }
             val token = task.result
+            viewModel.fcmToken.value = token
             SimpleLogger.logI(token.toString())
-
         })
     }
 
+    private fun observeFirebaseDeviceToken() {
+        viewModel.fcmToken.observe(this) {
+            viewModel.sendFcmToken(NotificationReq(viewModel.cherishuserId.value!!, it))
+        }
+    }
+
     private fun initializeViewModelData() {
-        viewModel.cherishuserId.value = intent.getIntExtra("userId", 0)
+        viewModel.cherishuserId.value = intent.getIntExtra("userId", -1)
         viewModel.userNickName.value = intent.getStringExtra("userNickname")
         viewModel.fetchUsers()
         SimpleLogger.logI(viewModel.cherishUsers.value.toString())

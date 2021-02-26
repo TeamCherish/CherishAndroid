@@ -2,10 +2,7 @@ package com.sopt.cherish.ui.factory
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.sopt.cherish.repository.CalendarRepository
-import com.sopt.cherish.repository.MainRepository
-import com.sopt.cherish.repository.ReviewRepository
-import com.sopt.cherish.repository.WateringRepository
+import com.sopt.cherish.repository.*
 import com.sopt.cherish.ui.main.MainViewModel
 
 @Suppress("UNCHECKED_CAST")
@@ -13,7 +10,8 @@ class MainViewModelFactory(
     private val mainRepository: MainRepository,
     private val wateringRepository: WateringRepository,
     private val reviewRepository: ReviewRepository,
-    private val calendarRepository: CalendarRepository
+    private val calendarRepository: CalendarRepository,
+    private val notificationRepository: NotificationRepository
 ) :
     ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
@@ -22,7 +20,8 @@ class MainViewModelFactory(
             mainRepository,
             wateringRepository,
             reviewRepository,
-            calendarRepository
+            calendarRepository,
+            notificationRepository
         ) as T
     }
 }

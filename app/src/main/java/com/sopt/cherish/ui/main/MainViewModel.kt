@@ -4,11 +4,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.cherish.remote.api.*
-import com.sopt.cherish.repository.CalendarRepository
-import com.sopt.cherish.repository.MainRepository
-import com.sopt.cherish.repository.ReviewRepository
-import com.sopt.cherish.repository.WateringRepository
+import com.sopt.cherish.repository.*
 import com.sopt.cherish.util.DateUtil
+import com.sopt.cherish.util.SimpleLogger
 import com.sopt.cherish.util.SingleLiveEvent
 import kotlinx.coroutines.launch
 import java.util.*
@@ -21,14 +19,14 @@ class MainViewModel(
     private val mainRepository: MainRepository,
     private val wateringRepository: WateringRepository,
     private val reviewRepository: ReviewRepository,
-    private val calendarRepository: CalendarRepository
+    private val calendarRepository: CalendarRepository,
+    private val notificationRepository: NotificationRepository
 ) : ViewModel() {
     // todo : reviewRepository 뗴어내야함 reviewViewModel로
     // [home] Server connection
 
     // Utilities
     val animationTrigger = SingleLiveEvent<Boolean>()
-    var userSelctorTrigger = true
     val exceptionLiveData = MutableLiveData<String>()
 
     // 로그인 하는 cherish를 이용하는 유저
@@ -36,6 +34,9 @@ class MainViewModel(
 
     // 유저가 가지고 있는 cherish들
     val userNickName = MutableLiveData<String>()
+
+    // FCM Token
+    val fcmToken = MutableLiveData<String>()
 
     // Home에서 호출된 여러명
     private val _cherishUsers = MutableLiveData<UserResult>()
@@ -54,6 +55,17 @@ class MainViewModel(
             _cherishUsers.value = it
         }.onFailure { error ->
             throw error
+        }
+    }
+
+    // notification
+    fun sendFcmToken(notificationReq: NotificationReq) = viewModelScope.launch {
+        runCatching {
+            notificationRepository.sendFcmToken(notificationReq)
+        }.onSuccess {
+            SimpleLogger.logI("send token successful")
+        }.onFailure {
+            throw it
         }
     }
 

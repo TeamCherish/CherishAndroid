@@ -1,10 +1,7 @@
 package com.sopt.cherish.di
 
 import androidx.lifecycle.ViewModelProvider
-import com.sopt.cherish.remote.api.CalendarAPI
-import com.sopt.cherish.remote.api.ReviewAPI
-import com.sopt.cherish.remote.api.UserAPI
-import com.sopt.cherish.remote.api.WateringAPI
+import com.sopt.cherish.remote.api.*
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.repository.*
 import com.sopt.cherish.ui.factory.*
@@ -18,7 +15,8 @@ object Injection {
     fun provideMainViewModelFactory(): ViewModelProvider.Factory {
         return MainViewModelFactory(
             provideMainRepository(), provideWateringRepository(),
-            provideReviewRepository(), provideCalendarRepository()
+            provideReviewRepository(), provideCalendarRepository(),
+            provideNotificationRepository()
         )
     }
 
@@ -81,6 +79,15 @@ object Injection {
     // review di
     fun provideReviewViewModelFactory(): ViewModelProvider.Factory {
         return ReviewViewModelFactory(provideReviewRepository())
+    }
+
+    // notification di
+    fun provideNotificationAPI(): NotificationAPI {
+        return RetrofitBuilder.notificationAPI
+    }
+
+    fun provideNotificationRepository(): NotificationRepository {
+        return NotificationRepository(provideNotificationAPI())
     }
 
 }
