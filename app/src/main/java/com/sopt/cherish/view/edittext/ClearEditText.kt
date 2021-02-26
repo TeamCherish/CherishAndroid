@@ -9,6 +9,7 @@ import android.view.View
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.res.ResourcesCompat
 import com.sopt.cherish.R
+import com.sopt.cherish.util.PixelUtil.dp
 
 class ClearEditText : AppCompatEditText {
 
@@ -30,6 +31,7 @@ class ClearEditText : AppCompatEditText {
     private var clearButtonImage: Drawable = opaqueClearDrawable
 
     private fun showClearButton() {
+        compoundDrawablePadding = 16.dp
         setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, clearButtonImage, null)
     }
 
