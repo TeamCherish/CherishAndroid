@@ -132,6 +132,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_bold"
                     android:textColor="@color/cherish_light_black"
+                    android:showDate="@{detailPlantViewModel.selectedCalendarDay}"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -149,6 +150,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:foregroundGravity="center"
+                    android:userStatus1="@{detailPlantViewModel.selectedCalendarData.userStatus1}"
+                    android:userStatus2="@{detailPlantViewModel.selectedCalendarData.userStatus2}"
+                    android:userStatus3="@{detailPlantViewModel.selectedCalendarData.userStatus3}"
                     app:layout_constraintTop_toBottomOf="@id/calendarView_memo_revise_btn" />
 
                 <TextView
@@ -158,6 +162,7 @@
                     android:ellipsize="end"
                     android:maxLines="2"
                     android:layout_marginTop="16dp"
+                    android:showMemo="@{detailPlantViewModel.selectedCalendarData.review}"
                     app:layout_constraintTop_toBottomOf="@id/calendarView_chip_layout" />
 
                 <ImageButton

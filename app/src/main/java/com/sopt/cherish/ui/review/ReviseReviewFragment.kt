@@ -14,12 +14,9 @@ import com.sopt.cherish.ui.detail.DetailPlantViewModel
 import com.sopt.cherish.ui.dialog.CustomDialogFragment
 import com.sopt.cherish.util.DateUtil
 import com.sopt.cherish.util.SimpleLogger
+import com.sopt.cherish.util.extension.*
 import com.sopt.cherish.util.extension.FlexBoxExtension.addChip
 import com.sopt.cherish.util.extension.FlexBoxExtension.getChip
-import com.sopt.cherish.util.extension.countNumberOfCharacters
-import com.sopt.cherish.util.extension.longToast
-import com.sopt.cherish.util.extension.shortToast
-import com.sopt.cherish.util.extension.writeKeyword
 
 /**
  * Created by SSong-develop on 2021-02-12
@@ -119,6 +116,7 @@ class ReviseReviewFragment : Fragment() {
             if (memo?.length!! > 100) {
                 // todo : dialog로 보여줘야 함
                 shortToast(requireContext(), "100자를 초과했습니다.")
+                binding.reviseReviewMemo.hideKeyboard()
             }
         }
     }

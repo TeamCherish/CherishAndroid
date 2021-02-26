@@ -9,7 +9,8 @@ import com.google.android.flexbox.FlexboxLayout
 import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.sopt.cherish.R
 import com.sopt.cherish.remote.api.CalendarRes
-import com.sopt.cherish.util.extension.FlexBoxExtension.addChip
+import com.sopt.cherish.util.extension.FlexBoxExtension.addChipCalendar
+import com.sopt.cherish.util.extension.FlexBoxExtension.clearChips
 import com.sopt.cherish.view.calendar.CherishMaterialCalendarView
 import com.sopt.cherish.view.calendar.DotDecorator
 
@@ -68,14 +69,33 @@ object CalendarViewBindingAdapter {
     @JvmStatic
     @BindingAdapter("android:showDate")
     fun showDate(textView: TextView, date: CalendarDay?) {
-        textView.text = "${date?.year}년 ${date?.month}월 ${date?.day}일"
+        date?.let {
+            textView.text = "${it.year}년 ${it.month}월 ${it.day}일"
+        }
     }
 
     @JvmStatic
-    @BindingAdapter("android:showChips")
-    fun showChips(flexboxLayout: FlexboxLayout, chipsText: List<String>?) {
-        chipsText?.forEach {
-            flexboxLayout.addChip(it)
+    @BindingAdapter(
+        value = ["android:userStatus1", "android:userStatus2", "android:userStatus3"],
+        requireAll = false
+    )
+    fun showChips(
+        flexboxLayout: FlexboxLayout,
+        userStatus1: String?,
+        userStatus2: String?,
+        userStatus3: String?
+    ) {
+        flexboxLayout.clearChips()
+        flexboxLayout.apply {
+            if (userStatus1 != "null" && userStatus1 != " ") {
+                userStatus1?.let { addChipCalendar(it) }
+            }
+            if (userStatus2 != "null" && userStatus2 != " ") {
+                userStatus2?.let { addChipCalendar(it) }
+            }
+            if (userStatus3 != "null" && userStatus3 != " ") {
+                userStatus3?.let { addChipCalendar(it) }
+            }
         }
     }
 
