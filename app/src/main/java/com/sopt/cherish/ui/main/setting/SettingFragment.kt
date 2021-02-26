@@ -3,31 +3,46 @@ package com.sopt.cherish.ui.main.setting
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentSettingBinding
+import com.sopt.cherish.databinding.FragmentUserModifyBinding
+import com.sopt.cherish.remote.api.MyPageUserRes
+import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.detail.DetailPlantActivity
 import com.sopt.cherish.ui.main.MainViewModel
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 /**
  * 환경 설정 뷰
  */
 class SettingFragment : Fragment() {
 
+    private val requestData = RetrofitBuilder
+    private var usernickname:String=""
+    private var useremail:String=""
     private val viewModel: MainViewModel by activityViewModels()
-
+    private lateinit var binding: FragmentSettingBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding: FragmentSettingBinding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_setting, container, false)
 
+
+
+        val view = inflater.inflate(R.layout.fragment_setting, container,false)
+
+        binding = FragmentSettingBinding.bind(view)
+        setView()
         binding.constraintLayoutQuestion.setOnClickListener {
             //setFragment(SettingAlarmFragment())
             val intent = Intent(Intent.ACTION_SEND)
@@ -52,14 +67,65 @@ class SettingFragment : Fragment() {
             startActivity(intent)
         }
 
+        binding.settingNextNickname.setOnClickListener {
+            setFragment(UserModifyFragment())
+        }
+
+
         return binding.root
     }
 
+    /*override fun onResume() {
+        super.onResume()
+        setView()
+    }*/
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setView()
+    }
     fun setFragment(fragment: Fragment) {
         val transaction = parentFragmentManager.beginTransaction()
-        transaction.replace(R.id.main_fragment_container, fragment)
+        transaction.replace(R.id.main_fragment_container, fragment.apply {
+            arguments = Bundle().apply {
+                putString("settingusernickname", usernickname)
+                putString("settinguseremail", useremail)
+
+            }
+        })
         transaction.addToBackStack(null)
         transaction.commit()
+    }
+
+    fun setView(){
+        requestData.myPageAPI.fetchUserPage(viewModel.cherishuserId.value!!)
+            .enqueue(
+                object : Callback<MyPageUserRes> {
+                    override fun onFailure(call: Call<MyPageUserRes>, t: Throwable) {
+                        Log.d("통신 실패", t.toString())
+                    }
+
+                    override fun onResponse(
+                        call: Call<MyPageUserRes>,
+                        response: Response<MyPageUserRes>
+                    ) {
+                        Log.d("success", response.body().toString())
+                        response.takeIf {
+                            it.isSuccessful
+                        }?.body()
+                            ?.let { it ->
+
+                                Log.d("data success!", it.myPageUserData.waterCount.toString())
+                                usernickname=it.myPageUserData.user_nickname
+                                useremail=it.myPageUserData.email
+                                Log.d("이메일",it.myPageUserData.email)
+                                binding.settingUsernickname.text=it.myPageUserData.user_nickname.toString()
+                                binding.settingUseremail.text=it.myPageUserData.email
+                                Log.d("list", it.myPageUserData.result.toString())
+                            }
+                    }
+                })
     }
 
 }

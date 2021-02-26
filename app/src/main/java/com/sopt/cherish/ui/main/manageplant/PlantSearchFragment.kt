@@ -40,6 +40,9 @@ class PlantSearchFragment(private var data:List<MyPageCherishData>?) : Fragment(
 
         startProcess()
 
+        binding.plantsearchcancel.setOnClickListener {
+            binding.editSearch.setText("")
+        }
         return binding.root
     }
 
