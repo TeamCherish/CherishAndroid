@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.FragmentManager
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivitySignUpBinding
 
@@ -53,6 +52,10 @@ class SignUpActivity : AppCompatActivity() {
                 transAction.replace(R.id.sign_up_fragment_container,SignUpFirstFragment()).commit()
             1->
                 transAction.replace(R.id.sign_up_fragment_container,SignUpSecondFragment()).commit()
+            2->
+                transAction.replace(R.id.sign_up_fragment_container,SignUpThirdFragment()).commit()
+            3->
+                transAction.replace(R.id.sign_up_fragment_container,SignUpFourthFragment()).commit()
         }
     }
 }
