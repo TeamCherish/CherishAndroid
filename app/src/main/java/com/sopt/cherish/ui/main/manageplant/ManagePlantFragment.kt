@@ -22,8 +22,6 @@ import com.sopt.cherish.remote.api.MyPageCherishData
 import com.sopt.cherish.remote.api.MyPageUserRes
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.adapter.MypagePhoneBookSearchAdapter
-import com.sopt.cherish.ui.adapter.PhoneBookAdapter
-import com.sopt.cherish.ui.enrollment.EnrollPlantFragment
 import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
 import com.sopt.cherish.ui.main.MainActivity
 import com.sopt.cherish.ui.main.MainViewModel
@@ -69,21 +67,21 @@ class ManagePlantFragment : Fragment() {
         binding.myPageAddPlantBtn.setOnClickListener {
             navigatePhoneBook()
         }
-       /* binding.myPageAddPhoneBtn.setOnClickListener{
-            setFragment(EnrollPlantFragment())
-        }*/
+        /* binding.myPageAddPhoneBtn.setOnClickListener{
+             setFragment(EnrollPlantFragment())
+         }*/
         binding.cancelBtn.setOnClickListener{
             binding.searchBox.visibility = View.VISIBLE
             isSearched=false
             binding.cancelBtn.visibility=View.INVISIBLE
             if(!isCollapsed&&tabIndex==1)
-                    binding.myPageAddPlantBtn.visibility=View.VISIBLE
+                binding.myPageAddPlantBtn.visibility=View.VISIBLE
             (activity as MainActivity).replaceFragment(tabIndex,data,isSearched)
         }
         initializeSearchBtn()
         return binding.root
     }
-   fun setFragment(fragment: Fragment) {
+    fun setFragment(fragment: Fragment) {
         val transaction = parentFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_enroll, fragment.apply {
             arguments = Bundle().apply {
@@ -139,7 +137,7 @@ class ManagePlantFragment : Fragment() {
 
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 if (tabIndex == 0) { //식물 탭 클릭 시
-                   // binding.myPageAddPhoneBtn.visibility=View.INVISIBLE
+                    // binding.myPageAddPhoneBtn.visibility=View.INVISIBLE
                     if (newState == BottomSheetBehavior.STATE_EXPANDED) { //바텀시트 확장됐을 경우
                         binding.myPageBg.setBackgroundColor(
                             ContextCompat.getColor(
@@ -242,7 +240,7 @@ class ManagePlantFragment : Fragment() {
                 tabIndex = binding.myPageBottomTab.selectedTabPosition
 
                 if (tabIndex == 0) {
-                  //  binding.myPageAddPhoneBtn.visibility=View.INVISIBLE
+                    //  binding.myPageAddPhoneBtn.visibility=View.INVISIBLE
 
                     tabBindingFirst.tabName.setTextAppearance(R.style.MyPageTabSelected)
                     tabBindingFirst.tabCount.setTextAppearance(R.style.MyPageTabSelected)

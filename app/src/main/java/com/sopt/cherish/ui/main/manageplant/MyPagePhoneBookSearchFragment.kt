@@ -57,6 +57,10 @@ class MyPagePhoneBookSearchFragment() : Fragment() {
 
         binding = FragmentMyPagePhoneBookSearchBinding.bind(view)
         startProcess()
+
+        binding.phonebookcancel.setOnClickListener {
+            binding.editSearch.setText("")
+        }
         binding.myPageAddPhoneBtn.setOnClickListener {
             val phonenumber =
                 madapter.phonenumber.substring(0, 3) + "-" + madapter.phonenumber.substring(

@@ -90,29 +90,32 @@
             android:layout_marginStart="@dimen/margin_16dp"
             app:layout_constraintStart_toStartOf="@+id/original_bar"
             app:layout_constraintTop_toBottomOf="@+id/original_bar"
-            android:src="@drawable/img_mypage_user"
+            android:src="@drawable/user_img"
             android:layout_marginTop="38dp" />
 
         <TextView
+            android:id="@+id/my_page_user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@+id/my_page_user_img"
-            app:layout_constraintTop_toBottomOf="@+id/original_bar"
-            android:layout_marginTop="61dp"
             android:layout_marginStart="14dp"
-            android:text=""
             android:font="@font/notosanscjkkr_bold"
+            android:text=""
             android:textColor="@color/cherish_light_black"
-            android:id="@+id/my_page_user_name"/>
+            app:layout_constraintBottom_toBottomOf="@+id/my_page_user_img"
+            app:layout_constraintStart_toEndOf="@+id/my_page_user_img"
+            app:layout_constraintTop_toTopOf="@+id/my_page_user_img" />
 
         <TextView
+            android:id="@+id/cherishgarden"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toEndOf="@+id/my_page_user_name"
-            app:layout_constraintTop_toTopOf="@+id/my_page_user_name"
             android:font="@font/notosanscjkkr_bold"
+            android:text="@string/myPage_user_description_text"
             android:textColor="@color/cherish_light_black"
-            android:text="@string/myPage_user_description_text" />
+            app:layout_constraintBottom_toBottomOf="@+id/my_page_user_name"
+            app:layout_constraintStart_toEndOf="@+id/my_page_user_name"
+            app:layout_constraintTop_toTopOf="@+id/my_page_user_name" />
+
 
         <ImageView
             android:contentDescription="@null"
@@ -225,8 +228,10 @@
             android:layout_height="match_parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/home_standardBottomSheet"
@@ -288,7 +293,6 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

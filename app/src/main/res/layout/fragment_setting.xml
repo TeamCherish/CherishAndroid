@@ -6,6 +6,7 @@
 
     <data>
 
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -59,36 +60,34 @@
                         app:srcCompat="@drawable/user_img" />
 
                     <TextView
-                        android:id="@+id/textView16"
+                        android:id="@+id/setting_usernickname"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_12dp"
                         android:fontFamily="@font/notosanscjkkr_bold"
                         android:includeFontPadding="false"
-                        android:text="안나영"
-                        android:layout_marginTop="@dimen/margin_12dp"
                         android:textSize="18sp"
                         app:layout_constraintEnd_toEndOf="@+id/imageView8"
                         app:layout_constraintStart_toStartOf="@+id/imageView8"
                         app:layout_constraintTop_toBottomOf="@+id/imageView8" />
 
                     <TextView
-                        android:id="@+id/textView10"
+                        android:id="@+id/setting_useremail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/margin_4dp"
-                        android:text="dpswpfskdud@naver.com"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/textView16" />
+                        app:layout_constraintEnd_toEndOf="@+id/imageView8"
+                        app:layout_constraintStart_toStartOf="@+id/imageView8"
+                        app:layout_constraintTop_toBottomOf="@+id/setting_usernickname" />
 
                     <ImageView
-                        android:id="@+id/imageView18"
+                        android:id="@+id/setting_next_nickname"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="4dp"
-                        app:layout_constraintBottom_toBottomOf="@+id/textView16"
-                        app:layout_constraintStart_toEndOf="@+id/textView16"
-                        app:layout_constraintTop_toTopOf="@+id/textView16"
+                        app:layout_constraintBottom_toBottomOf="@+id/setting_usernickname"
+                        app:layout_constraintStart_toEndOf="@+id/setting_usernickname"
+                        app:layout_constraintTop_toTopOf="@+id/setting_usernickname"
                         app:srcCompat="@drawable/ic_btn_more" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
