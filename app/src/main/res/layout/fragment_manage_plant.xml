@@ -110,12 +110,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:font="@font/notosanscjkkr_bold"
+            android:textSize="18sp"
             android:text="@string/myPage_user_description_text"
             android:textColor="@color/cherish_light_black"
             app:layout_constraintBottom_toBottomOf="@+id/my_page_user_name"
             app:layout_constraintStart_toEndOf="@+id/my_page_user_name"
             app:layout_constraintTop_toTopOf="@+id/my_page_user_name" />
 
+        <ImageView
+            android:contentDescription="@null"
+            android:id="@+id/go_to_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@+id/cherishgarden"
+            app:layout_constraintTop_toTopOf="@+id/cherishgarden"
+            app:layout_constraintBottom_toBottomOf="@+id/cherishgarden"
+            android:layout_marginStart="@dimen/margin_6dp"
+            android:src="@drawable/ic_btn_more"/>
 
         <ImageView
             android:contentDescription="@null"
