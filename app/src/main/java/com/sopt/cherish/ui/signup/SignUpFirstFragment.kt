@@ -298,11 +298,4 @@ class SignUpFirstFragment: Fragment() {
         })
     }
 
-    fun goToNextStep(){
-        if(isFinish){
-            binding.signUpButton.setOnClickListener {
-                (activity as SignUpActivity).replaceFragment(1)
-            }
-        }
-    }
 }

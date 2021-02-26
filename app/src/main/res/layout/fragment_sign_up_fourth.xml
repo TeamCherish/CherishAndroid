@@ -63,6 +63,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/indicator_first"/>
 
+
     <EditText
         android:autofillHints="@string/sign_up_nickname_hint"
         android:inputType="phone"
@@ -85,22 +86,26 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="@+id/user_nickname"
         app:layout_constraintTop_toBottomOf="@+id/user_nickname"
-        android:textColor="@color/cherish_green_main"
         android:fontFamily="@font/notosanscjkkr_regular"
         android:text="@string/sign_up_nickname_ok"/>
 
 
-
     <TextView
+        android:id="@+id/service_text"
+        android:textColorLink="@color/cherish_green_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/sign_up_text"
+        android:text="@string/sign_up_service1"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="92dp"
+        app:layout_constraintBottom_toTopOf="@+id/sign_up_button"
+        android:layout_marginBottom="26dp"
+        android:gravity="center"
+        android:textSize="@dimen/text_12sp"
         android:textColor="@color/cherish_light_black"
         android:fontFamily="@font/notosanscjkkr_regular"/>
+
 
     <Button
         android:id="@+id/sign_up_button"
