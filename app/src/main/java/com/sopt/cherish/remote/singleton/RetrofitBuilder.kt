@@ -1,6 +1,5 @@
 package com.sopt.cherish.remote.singleton
 
-import com.sopt.cherish.remote.RetrofitService
 import com.sopt.cherish.remote.api.*
 import com.sopt.cherish.remote.model.EnrollmentAPI
 import okhttp3.OkHttpClient
@@ -27,9 +26,6 @@ object RetrofitBuilder {
             .client(provideOkHttpClient())
             .build()
     }
-
-    // Sample Code
-    val retrofitService: RetrofitService = getRetrofit().create(RetrofitService::class.java)
 
     val userAPI: UserAPI = getRetrofit().create(UserAPI::class.java)
 

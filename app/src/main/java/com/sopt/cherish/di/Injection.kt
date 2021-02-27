@@ -57,7 +57,7 @@ object Injection {
 
     // review di
     private fun provideReviewRepository(): ReviewRepository {
-        return ReviewRepository(provideReviewAPI())
+        return ReviewRepository(provideReviewAPI(), provideNotificationAPI())
     }
 
     private fun provideReviewAPI(): ReviewAPI {
