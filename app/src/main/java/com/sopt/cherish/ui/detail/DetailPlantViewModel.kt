@@ -9,8 +9,10 @@ import com.sopt.cherish.remote.api.CalendarRes
 import com.sopt.cherish.remote.api.DeleteReviewReq
 import com.sopt.cherish.remote.api.ReviseReviewReq
 import com.sopt.cherish.repository.DetailPlantRepository
+import com.sopt.cherish.util.DateUtil
 import com.sopt.cherish.util.SingleLiveEvent
 import kotlinx.coroutines.launch
+import java.util.*
 
 class DetailPlantViewModel(
     private val detailPlantRepository: DetailPlantRepository
@@ -36,6 +38,12 @@ class DetailPlantViewModel(
     var selectedUserDday = 0
 
     var wateringText = " "
+
+    private val today = DateUtil.convertDateToString(Calendar.getInstance().time)
+    private val todayMonth = DateUtil.getMonth(today).toString()
+    private val todayDay = DateUtil.getDay(today).toString()
+
+    val delayWateringDateText = "${todayMonth}월${todayDay}일에 물주기"
 
     private val _calendarData = MutableLiveData<CalendarRes>()
     val calendarData: MutableLiveData<CalendarRes>

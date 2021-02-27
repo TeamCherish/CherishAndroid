@@ -46,7 +46,7 @@ object CalendarViewBindingAdapter {
 
         calendarRes.waterData.calendarData.forEach {
 
-        cherishMaterialCalendarView.addDecorator(
+            cherishMaterialCalendarView.addDecorator(
                 DotDecorator(
                     ContextCompat.getColor(
                         cherishMaterialCalendarView.context,

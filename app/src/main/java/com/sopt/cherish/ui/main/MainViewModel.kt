@@ -4,7 +4,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.cherish.remote.api.*
-import com.sopt.cherish.repository.*
+import com.sopt.cherish.repository.CalendarRepository
+import com.sopt.cherish.repository.MainRepository
+import com.sopt.cherish.repository.NotificationRepository
+import com.sopt.cherish.repository.WateringRepository
 import com.sopt.cherish.util.DateUtil
 import com.sopt.cherish.util.SimpleLogger
 import com.sopt.cherish.util.SingleLiveEvent
@@ -18,7 +21,6 @@ import java.util.*
 class MainViewModel(
     private val mainRepository: MainRepository,
     private val wateringRepository: WateringRepository,
-    private val reviewRepository: ReviewRepository,
     private val calendarRepository: CalendarRepository,
     private val notificationRepository: NotificationRepository
 ) : ViewModel() {
@@ -75,24 +77,13 @@ class MainViewModel(
         get() = _calendarData
 
     fun fetchCalendarData() = viewModelScope.launch {
-        try {
-            _calendarData.postValue(selectedCherishUser.value?.id?.let {
-                calendarRepository.getChipsData(
-                    it
-                )
-            })
-        } catch (exception: Exception) {
-            exceptionLiveData.postValue(exception.message)
+        runCatching {
+            selectedCherishUser.value?.let { calendarRepository.getChipsData(it.id) }
+        }.onSuccess {
+            _calendarData.value = it
+        }.onFailure {
+            throw it
         }
-    }
-
-    // [Review] Server Connection done!
-    fun sendReviewToServer(reviewWateringReq: ReviewWateringReq) = try {
-        viewModelScope.launch {
-            reviewRepository.sendReviewData(reviewWateringReq)
-        }
-    } catch (exception: Exception) {
-        exceptionLiveData.postValue(exception.message)
     }
 
     // [DelayWatering] Server Connection done!
@@ -106,6 +97,7 @@ class MainViewModel(
     val postponeData: MutableLiveData<PostponeWateringRes>
         get() = _postponeData
 
+    // 이녀석을 받을 필요가 사라짐
     fun getPostPoneWateringCount() = try {
         viewModelScope.launch {
             _postponeData.postValue(wateringRepository.getPostponeCount(selectedCherishUser.value?.id!!))
@@ -114,12 +106,15 @@ class MainViewModel(
         exceptionLiveData.postValue(exception.message)
     }
 
-    fun postponeWateringDate(postponeWateringDateReq: PostponeWateringDateReq) = try {
+    fun postponeWateringDate(postponeWateringDateReq: PostponeWateringDateReq) =
         viewModelScope.launch {
-            wateringRepository.postponeWateringDate(postponeWateringDateReq)
+            runCatching {
+                wateringRepository.postponeWateringDate(postponeWateringDateReq)
+            }.onSuccess {
+                SimpleLogger.logI(it.message)
+            }.onFailure {
+                throw it
+            }
         }
-    } catch (exception: Exception) {
-        exceptionLiveData.postValue(exception.message)
-    }
 
 }

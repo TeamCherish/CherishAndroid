@@ -40,11 +40,11 @@ class MyPagePhoneBookSearchFragment : Fragment() {
     var sortText = "asc"
     var phonecount = 0
     private lateinit var enrollToolbar: Toolbar
-    lateinit var countphone:String
+    lateinit var countphone: String
     private lateinit var binding: FragmentMyPagePhoneBookSearchBinding
-    var namename:String=""
-    var namephone:String=""
-    var user_id:Int=0
+    var namename: String = ""
+    var namephone: String = ""
+    var user_id: Int = 0
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -101,24 +101,22 @@ class MyPagePhoneBookSearchFragment : Fragment() {
                                     Log.d("중복", "중복")
 
 
-
-                                    var intent=Intent(context, EnrollmentPhoneActivity::class.java)
-                                    intent.putExtra("name",madapter.phonename)
-                                    intent.putExtra("phone",madapter.phonenumber)
-                                    intent.putExtra("check",0)
+                                    var intent =
+                                        Intent(context, EnrollmentPhoneActivity::class.java)
+                                    intent.putExtra("name", madapter.phonename)
+                                    intent.putExtra("phone", madapter.phonenumber)
+                                    intent.putExtra("check", 0)
                                     intent.putExtra("userId", viewModel.cherishuserId.value)
-                                    startActivity(intent,)
-                                    Log.d("name",madapter.phonename)
-                                    Log.d("number",madapter.phonenumber)
-                                    Log.d("userId",viewModel.cherishuserId.value.toString())
+                                    startActivity(intent)
+                                    Log.d("name", madapter.phonename)
+                                    Log.d("number", madapter.phonenumber)
+                                    Log.d("userId", viewModel.cherishuserId.value.toString())
 
 
                                 }
                         }
                     }
                 )
-
-
 
 
             //setFragment(EnrollPlantFragment())
@@ -141,8 +139,8 @@ class MyPagePhoneBookSearchFragment : Fragment() {
         val transaction = parentFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_enroll, fragment.apply {
             arguments = Bundle().apply {
-                putString("phonename_",madapter.phonename)
-                putString("phonenumber_",madapter.phonenumber)
+                putString("phonename_", madapter.phonename)
+                putString("phonenumber_", madapter.phonenumber)
             }
 
 
@@ -157,6 +155,7 @@ class MyPagePhoneBookSearchFragment : Fragment() {
         setList()
         setSearchListener()
     }
+
     fun setSearchListener() {
         binding.editSearch.addTextChangedListener(
             object : TextWatcher {
@@ -170,7 +169,7 @@ class MyPagePhoneBookSearchFragment : Fragment() {
                 }
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    searchText =s.toString()
+                    searchText = s.toString()
                     changeList()
                 }
             })

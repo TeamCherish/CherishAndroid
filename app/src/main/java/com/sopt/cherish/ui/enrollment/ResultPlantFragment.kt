@@ -35,7 +35,7 @@ class ResultPlantFragment : Fragment() {
         Log.d("plantExplanation", arguments?.getString("plant_explanation").toString())
 
 
-        if(arguments?.getString("plant_modify")?.contains("\n") == true) {
+        if (arguments?.getString("plant_modify")?.contains("\n") == true) {
             binding.textViewModify.text = arguments?.getString("plant_modify")?.split("\n")?.get(0)
             binding.textViewModifyUnder.text =
                 arguments?.getString("plant_modify")?.split("\n")?.get(
@@ -62,7 +62,7 @@ class ResultPlantFragment : Fragment() {
                 startActivity(intent)
             } else {
                 activity?.finish()
-              //  startActivity(intent)
+                //  startActivity(intent)
 
             }
         }

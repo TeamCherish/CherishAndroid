@@ -20,7 +20,7 @@ import com.sopt.cherish.ui.detail.DetailPlantActivity
  * bottom sheet에서 보여지는 recyclerview fragment
  */
 
-class PlantSearchFragment(private var data:List<MyPageCherishData>?) : Fragment() {
+class PlantSearchFragment(private var data: List<MyPageCherishData>?) : Fragment() {
 
     private var _binding: FragmentPlantSearchBinding? = null
     private val binding get() = _binding!!
@@ -52,10 +52,10 @@ class PlantSearchFragment(private var data:List<MyPageCherishData>?) : Fragment(
     }
 
 
-    private fun setAdapterData(){
-        cherishAdapter= MyPageBottomSheetAdapter(data!!)
+    private fun setAdapterData() {
+        cherishAdapter = MyPageBottomSheetAdapter(data!!)
 
-        binding.mypageCherryList.adapter=cherishAdapter
+        binding.mypageCherryList.adapter = cherishAdapter
         binding.mypageCherryList.layoutManager = LinearLayoutManager(context)
 
         cherishAdapter.notifyDataSetChanged()
@@ -87,10 +87,12 @@ class PlantSearchFragment(private var data:List<MyPageCherishData>?) : Fragment(
             }
         )
     }
+
     fun startProcess() {
         setAdapterData()
         setSearchListener()
     }
+
     fun setSearchListener() {
         binding.editSearch.addTextChangedListener(
             object : TextWatcher {
@@ -104,17 +106,17 @@ class PlantSearchFragment(private var data:List<MyPageCherishData>?) : Fragment(
                 }
 
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    searchText =s.toString()
+                    searchText = s.toString()
                     changeList(searchText)
                 }
             })
     }
 
-    fun changeList(searchText:String) {
+    fun changeList(searchText: String) {
 
         val mulist: MutableList<MyPageCherishData> =
             mutableListOf<MyPageCherishData>()
-        for(i in 0 until data!!.size-1) {
+        for (i in 0 until data!!.size - 1) {
 
             if (data!![i].nickName.contains(searchText)) {
 
@@ -125,13 +127,13 @@ class PlantSearchFragment(private var data:List<MyPageCherishData>?) : Fragment(
                         mulist
                     )
 
-                binding.mypageCherryList.adapter=cherishAdapter
+                binding.mypageCherryList.adapter = cherishAdapter
                 binding.mypageCherryList.layoutManager = LinearLayoutManager(context)
                 cherishAdapter.notifyDataSetChanged()
             }
 
         }
-    // STOPSHIP: 2021-02-18
+        // STOPSHIP: 2021-02-18
         cherishAdapter.setItemClickListener(
             object : MyPageBottomSheetAdapter.ItemClickListener {
                 override fun onClick(view: View, position: Int) {

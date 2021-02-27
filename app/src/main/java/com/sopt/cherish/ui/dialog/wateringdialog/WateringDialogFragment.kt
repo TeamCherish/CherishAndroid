@@ -11,7 +11,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.DialogWateringBinding
-import com.sopt.cherish.ui.dialog.DelayWateringDialogFragment
+import com.sopt.cherish.ui.dialog.delaywatering.DelayWateringDialogFragment
 import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.util.DialogUtil
 

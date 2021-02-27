@@ -12,7 +12,7 @@ import com.sopt.cherish.R
 import com.sopt.cherish.databinding.MyPageCherryItemBinding
 import com.sopt.cherish.remote.api.MyPageCherishData
 
-class MyPageBottomSheetAdapter(private var data:List<MyPageCherishData>?) :
+class MyPageBottomSheetAdapter(private var data: List<MyPageCherishData>?) :
     RecyclerView.Adapter<MyPageBottomSheetAdapter.ViewHolder>() {
 
     inner class ViewHolder(private var binding: MyPageCherryItemBinding) :
@@ -24,9 +24,9 @@ class MyPageBottomSheetAdapter(private var data:List<MyPageCherishData>?) :
             binding.mypageCherryLevel.text = "Lv. " + cherishData.level.toString()
 
             //초록색
-            if(cherishData.dDay<0){
-                Log.d("dday ",cherishData.dDay.toString())
-                Log.d("nickname",cherishData.nickName)
+            if (cherishData.dDay < 0) {
+                Log.d("dday ", cherishData.dDay.toString())
+                Log.d("nickname", cherishData.nickName)
                 binding.myPageDDay.text = "D" + cherishData.dDay.toString()
                 binding.myPageDDay.setBackgroundResource(R.drawable.my_page_chip_green) //초록색으로
                 binding.myPageDDay.setTextColor(
@@ -35,8 +35,7 @@ class MyPageBottomSheetAdapter(private var data:List<MyPageCherishData>?) :
                         R.color.cherish_green_main
                     )
                 )
-            }
-            else if(cherishData.dDay==0){
+            } else if (cherishData.dDay == 0) {
                 binding.myPageDDay.text = "D-day"
                 binding.myPageDDay.setBackgroundResource(R.drawable.my_page_chip_red) //초록색으로
                 binding.myPageDDay.setTextColor(
@@ -45,8 +44,7 @@ class MyPageBottomSheetAdapter(private var data:List<MyPageCherishData>?) :
                         R.color.cherish_pink_sub
                     )
                 )
-            }
-            else{ //양수(빨간색): 그대로
+            } else { //양수(빨간색): 그대로
                 binding.myPageDDay.text = "D+" + cherishData.dDay.toString()
                 binding.myPageDDay.setBackgroundResource(R.drawable.my_page_chip_red) //초록색으로
                 binding.myPageDDay.setTextColor(

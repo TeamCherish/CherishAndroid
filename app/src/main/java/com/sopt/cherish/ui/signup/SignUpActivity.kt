@@ -9,20 +9,21 @@ import com.sopt.cherish.databinding.ActivitySignUpBinding
 
 class SignUpActivity : AppCompatActivity() {
 
-    private lateinit var binding:ActivitySignUpBinding
+    private lateinit var binding: ActivitySignUpBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding=ActivitySignUpBinding.inflate(layoutInflater)
+        binding = ActivitySignUpBinding.inflate(layoutInflater)
 
         initializeFragment()
 
         setContentView(R.layout.activity_sign_up)
     }
 
-    private fun initializeFragment(){
-        supportFragmentManager.beginTransaction().add(R.id.sign_up_fragment_container,SignUpFirstFragment()).commit()
+    private fun initializeFragment() {
+        supportFragmentManager.beginTransaction()
+            .add(R.id.sign_up_fragment_container, SignUpFirstFragment()).commit()
     }
 
     fun setActionBarTitle(title: String?) {
@@ -44,7 +45,7 @@ class SignUpActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    fun replaceFragment(index:Int){
+    fun replaceFragment(index: Int) {
         val transAction = supportFragmentManager.beginTransaction()
 
         when (index) {

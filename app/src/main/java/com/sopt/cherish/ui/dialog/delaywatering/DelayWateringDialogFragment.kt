@@ -1,4 +1,4 @@
-package com.sopt.cherish.ui.dialog
+package com.sopt.cherish.ui.dialog.delaywatering
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -21,6 +21,7 @@ class DelayWateringDialogFragment : DialogFragment() {
 
     private val viewModel: MainViewModel by activityViewModels()
     private lateinit var binding: DialogDelayWateringBinding
+
     // todo : 오늘 하루 만약에 버튼을 클릭했다면 , 그 다음에는 불가능 하도록 해야함
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,7 +37,6 @@ class DelayWateringDialogFragment : DialogFragment() {
 
         initializeNumberPicker(binding)
         sendDelayDayToServer(binding)
-        serverDataSetting(binding)
         return binding.root
     }
 
@@ -51,14 +51,6 @@ class DelayWateringDialogFragment : DialogFragment() {
             maxValue = 7
             minValue = 1
             descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
-        }
-    }
-
-    private fun serverDataSetting(binding: DialogDelayWateringBinding) {
-        viewModel.postponeData.observe(viewLifecycleOwner) {
-            val postponeCount = it.postponeData.wateredDateAndPostponeCount.postponeCount
-            val currentDelayWateringDescription = "(현재까지 미룬 횟수 ${postponeCount}회)"
-            binding.currentDelayWateringDescriptionText.text = currentDelayWateringDescription
         }
     }
 

@@ -25,7 +25,7 @@ import com.sopt.cherish.util.extension.shortToast
 class MainActivity : AppCompatActivity() {
 
     private val viewModel: MainViewModel by viewModels { Injection.provideMainViewModelFactory() }
-    var search:Boolean=false
+    var search: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -155,7 +155,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     @SuppressLint("Recycle")
-    fun getPhoneNumbers(): Int{
+    fun getPhoneNumbers(): Int {
         val list = mutableListOf<Phonemypage>()
 
         val phonUri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI
@@ -187,19 +187,20 @@ class MainActivity : AppCompatActivity() {
         return list.size
     }
 
-    fun replaceFragment(index: Int, data: List<MyPageCherishData>?, isSearched:Boolean) {
-        search=isSearched
+    fun replaceFragment(index: Int, data: List<MyPageCherishData>?, isSearched: Boolean) {
+        search = isSearched
         val transAction = supportFragmentManager.beginTransaction()
         when (index) {
             0 -> {
-                if(isSearched) //검색창 있는 뷰
-                    transAction.replace(R.id.my_page_bottom_container, PlantSearchFragment(data)).commit()
+                if (isSearched) //검색창 있는 뷰
+                    transAction.replace(R.id.my_page_bottom_container, PlantSearchFragment(data))
+                        .commit()
                 else //검색창 없는 뷰
                     transAction.replace(R.id.my_page_bottom_container, PlantFragment(data)).commit()
             }
             1 -> {
                 if (PermissionUtil.isCheckedReadContactsPermission(this)) {
-                    if(isSearched)
+                    if (isSearched)
                         transAction.replace(
                             R.id.my_page_bottom_container, MyPagePhoneBookSearchFragment()
                         ).commit()
@@ -215,11 +216,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun getIsSearched():Boolean{
+    fun getIsSearched(): Boolean {
         return search
     }
 
-    fun setIsSearched(isSearched:Boolean){
-        search=isSearched
+    fun setIsSearched(isSearched: Boolean) {
+        search = isSearched
     }
 }

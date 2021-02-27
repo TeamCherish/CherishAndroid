@@ -12,7 +12,7 @@ import androidx.fragment.app.activityViewModels
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.DialogDetailPlantWateringBinding
 import com.sopt.cherish.ui.detail.DetailPlantViewModel
-import com.sopt.cherish.ui.dialog.DelayWateringDialogFragment
+import com.sopt.cherish.ui.dialog.delaywatering.DetailPlantDelayWateringDialogFragment
 import com.sopt.cherish.util.DialogUtil
 
 /**
@@ -39,7 +39,7 @@ class DetailWateringDialogFragment : DialogFragment(),
             false
         )
         binding.dialogDetailWatering = this
-
+        binding.detailPlantViewModel = viewModel
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         return binding.root
@@ -56,7 +56,7 @@ class DetailWateringDialogFragment : DialogFragment(),
     }
 
     fun navigateNextTimeContact() {
-        DelayWateringDialogFragment().show(parentFragmentManager, TAG)
+        DetailPlantDelayWateringDialogFragment().show(parentFragmentManager, TAG)
         dismiss()
     }
 
