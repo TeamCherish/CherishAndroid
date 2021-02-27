@@ -15,6 +15,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.sopt.cherish.R
 import com.sopt.cherish.util.PixelUtil.dp
 import com.sopt.cherish.util.animation.ProgressbarAnimation
+import kotlin.math.abs
 
 object BindingAdapter {
 
@@ -30,7 +31,7 @@ object BindingAdapter {
     @JvmStatic
     @BindingAdapter("android:waterVisibility")
     fun waterVisibility(imageView: ImageView, dDay: Int) {
-        if (dDay > 7)
+        if (dDay <= 0)
             imageView.visibility = View.VISIBLE
         else
             imageView.visibility = View.INVISIBLE
@@ -109,10 +110,10 @@ object BindingAdapter {
     fun setDeadLineDay(textView: TextView, dDay: Int) {
         when {
             dDay > 0 -> {
-                textView.text = "D+$dDay"
+                textView.text = "D-$dDay"
             }
             dDay < 0 -> {
-                textView.text = "D$dDay"
+                textView.text = "D+${abs(dDay)}"
             }
             else -> {
                 textView.text = "D-DAY"

@@ -8,9 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.activityViewModels
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.DialogWateringBinding
 import com.sopt.cherish.ui.dialog.DelayWateringDialogFragment
+import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.util.DialogUtil
 
 /**
@@ -21,6 +23,8 @@ import com.sopt.cherish.util.DialogUtil
 
 class WateringDialogFragment : DialogFragment(), View.OnClickListener {
 
+    private val viewModel: MainViewModel by activityViewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -29,6 +33,7 @@ class WateringDialogFragment : DialogFragment(), View.OnClickListener {
         val binding: DialogWateringBinding =
             DataBindingUtil.inflate(inflater, R.layout.dialog_watering, container, false)
         binding.dialogWatering = this
+        binding.mainViewModel = viewModel
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         return binding.root

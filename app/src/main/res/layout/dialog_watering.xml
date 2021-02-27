@@ -5,6 +5,10 @@
     <data>
 
         <variable
+            name="mainViewModel"
+            type="com.sopt.cherish.ui.main.MainViewModel" />
+
+        <variable
             name="dialogWatering"
             type="com.sopt.cherish.ui.dialog.wateringdialog.WateringDialogFragment" />
     </data>
@@ -75,6 +79,7 @@
                 android:fontFamily="@font/notosanscjkkr_regular"
                 android:onClick="@{() -> dialogWatering.navigateNextTimeContact()}"
                 android:text="@string/next_time"
+                android:delayVisiblity="@{mainViewModel.selectedCherishUser.DDay}"
                 android:textColor="#404040"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"

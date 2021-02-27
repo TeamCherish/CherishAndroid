@@ -93,7 +93,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
     private fun observeCherishUsers() {
         viewModel.cherishUsers.observe(viewLifecycleOwner) {
             setCherishUserListAdapter(it)
-            setSelectedUser(it.userData.userList.reversed()[1])
+            setSelectedUser(it.userData.userList[1])
         }
     }
 
@@ -103,7 +103,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
     }
 
     private fun setCherishUserListAdapter(userResult: UserResult) {
-        homeCherryListAdapter.data = (userResult.userData.userList.reversed() as? MutableList<User>)
+        homeCherryListAdapter.data = (userResult.userData.userList as? MutableList<User>)
             ?: throw IllegalArgumentException("list is Empty")
         homeCherryListAdapter.notifyDataSetChanged()
     }
@@ -129,8 +129,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
 
     // 화면이동
     private fun navigateWatering() {
-        // +로 가는 녀석들이 가장 물주기가 시급한 친구들이라고해서 일단 알고리즘을 이렇게 작성함.
-        if (viewModel.selectedCherishUser.value?.dDay!! >= 0) {
+        if (viewModel.selectedCherishUser.value?.dDay!! <= 0) {
             WateringDialogFragment().show(parentFragmentManager, TAG)
         } else {
             longToast(requireContext(), "물 줄수있는 날이 아니에요 ㅠ")
@@ -151,6 +150,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
         intent.putExtra("cherishNickname", viewModel.selectedCherishUser.value?.nickName)
         intent.putExtra("userNickname", viewModel.userNickName.value)
         intent.putExtra("cherishuserId", viewModel.cherishuserId.value)
+        intent.putExtra("selectedUserDday", viewModel.selectedCherishUser.value!!.dDay)
         startActivityForResult(intent, CODE_MOVE_DETAIL_PLANT)
     }
 

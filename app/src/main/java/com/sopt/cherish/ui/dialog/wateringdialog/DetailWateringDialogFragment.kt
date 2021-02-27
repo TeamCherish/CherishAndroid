@@ -8,8 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.activityViewModels
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.DialogDetailPlantWateringBinding
+import com.sopt.cherish.ui.detail.DetailPlantViewModel
 import com.sopt.cherish.ui.dialog.DelayWateringDialogFragment
 import com.sopt.cherish.util.DialogUtil
 
@@ -21,6 +23,8 @@ import com.sopt.cherish.util.DialogUtil
 
 class DetailWateringDialogFragment : DialogFragment(),
     View.OnClickListener {
+
+    private val viewModel: DetailPlantViewModel by activityViewModels()
 
     // todo : DelayDialog도 하나 만들어야 합니다.
     override fun onCreateView(

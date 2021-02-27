@@ -4,7 +4,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.prolificinteractive.materialcalendarview.CalendarDay
-import com.sopt.cherish.remote.api.*
+import com.sopt.cherish.remote.api.CalendarData
+import com.sopt.cherish.remote.api.CalendarRes
+import com.sopt.cherish.remote.api.DeleteReviewReq
+import com.sopt.cherish.remote.api.ReviseReviewReq
 import com.sopt.cherish.repository.DetailPlantRepository
 import com.sopt.cherish.util.SingleLiveEvent
 import kotlinx.coroutines.launch
@@ -30,7 +33,7 @@ class DetailPlantViewModel(
 
     val selectedCalendarDay = MutableLiveData<CalendarDay?>()
 
-    val selectedCalendarDataChipList = MutableList<String>(3) { _ -> "" }
+    var selectedUserDday = 0
 
     var wateringText = " "
 
@@ -43,17 +46,6 @@ class DetailPlantViewModel(
             detailPlantRepository.fetchCalendarData(cherishId.value!!)
         }.onSuccess {
             _calendarData.value = it
-        }.onFailure { error ->
-            throw error
-        }
-    }
-
-    // [Review]
-    fun sendReviewToServer(reviewWateringReq: ReviewWateringReq) = viewModelScope.launch {
-        runCatching {
-            detailPlantRepository.sendReviewData(reviewWateringReq)
-        }.onSuccess {
-            // Toast를 띄우든 뭐든 해보는게?
         }.onFailure { error ->
             throw error
         }
