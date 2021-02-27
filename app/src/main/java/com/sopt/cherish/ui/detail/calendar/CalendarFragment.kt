@@ -57,6 +57,7 @@ class CalendarFragment : Fragment() {
             (activity as DetailPlantActivity).setActionBarTitle("식물 캘린더")
         }
         viewModel.fetchCalendarData()
+        viewModel.selectedCalendarDay.value = viewModel.selectedCalendarDay.value
         binding.calendarView.removeDecorators()
     }
 

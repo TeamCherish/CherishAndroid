@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
             name="mainViewModel"
             type="com.sopt.cherish.ui.main.MainViewModel" />
@@ -73,6 +72,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/notosanscjkkr_regular"
                 android:includeFontPadding="false"
+                android:text="@string/dialog_delay_watering_sub_description"
                 android:textSize="13sp"
                 app:layout_constraintEnd_toEndOf="@id/delay_watering_description_text"
                 app:layout_constraintStart_toStartOf="@id/delay_watering_description_text"

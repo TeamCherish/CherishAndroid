@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="reviewViewModel"
             type="com.sopt.cherish.ui.review.ReviewViewModel" />
@@ -104,9 +103,9 @@
             android:layout_marginTop="18dp"
             android:fontFamily="@font/notosanscjkkr_regular"
             android:gravity="top"
-            android:inputType="textMultiLine"
             android:hint="@string/review_memo_text"
             android:includeFontPadding="false"
+            android:inputType="textMultiLine"
             android:singleLine="false"
             android:scrollHorizontally="false"
             app:layout_constraintEnd_toEndOf="@id/review_edit_keyword"
