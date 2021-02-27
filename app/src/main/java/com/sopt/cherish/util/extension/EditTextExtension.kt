@@ -30,20 +30,24 @@ fun EditText.writeKeyword(reviewFlexBoxLayout: FlexboxLayout, fragmentManager: F
                 if (keyCode == KEYCODE_ENTER && keyCode != KEYCODE_BACK) {
                     val et = view as EditText
                     val keyword = et.text.toString()
-                    if (reviewFlexBoxLayout.getChipsCount() < 4)
-                        reviewFlexBoxLayout.addChip(keyword)
-                    else {
-                        MultiViewDialog(
-                            R.layout.dialog_warning_keyword_limit_error,
-                            0.7f,
-                            0.169f
-                        ).show(
-                            fragmentManager,
-                            "editTextExtension"
-                        )
-                        this.hideKeyboard()
+                    if (keyword.length > 5) {
+                        this.text = null
+                    } else {
+                        if (reviewFlexBoxLayout.getChipsCount() < 4)
+                            reviewFlexBoxLayout.addChip(keyword)
+                        else {
+                            MultiViewDialog(
+                                R.layout.dialog_warning_keyword_limit_error,
+                                0.7f,
+                                0.169f
+                            ).show(
+                                fragmentManager,
+                                "editTextExtension"
+                            )
+                            this.hideKeyboard()
+                        }
+                        et.text = null
                     }
-                    et.text = null
                 }
                 return@setOnKeyListener false
             }

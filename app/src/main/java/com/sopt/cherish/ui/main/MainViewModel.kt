@@ -53,7 +53,7 @@ class MainViewModel(
         runCatching {
             mainRepository.fetchCherishUser(cherishuserId.value!!)
         }.onSuccess {
-            it.userData.userList.add(it.userData.userList[0])
+            it.userData.userList.add(0, it.userData.userList[0])
             _cherishUsers.value = it
         }.onFailure { error ->
             throw error

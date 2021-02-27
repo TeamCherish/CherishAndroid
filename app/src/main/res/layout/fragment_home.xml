@@ -93,24 +93,13 @@
             app:layout_constraintTop_toBottomOf="@+id/home_selected_user_name" />
 
         <ImageView
-            android:id="@+id/home_show_all_alarm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="@dimen/margin_21dp"
-            android:src="@drawable/ic_alarm"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
             android:id="@+id/home_move_plant_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="400dp"
-            android:layout_marginEnd="19dp"
+            android:layout_marginEnd="40dp"
             android:src="@drawable/main_icn_move_detailview"
-            app:layout_constraintEnd_toEndOf="@id/home_show_all_alarm"
-            app:layout_constraintTop_toBottomOf="@id/home_show_all_alarm" />
+            app:layout_constraintBottom_toTopOf="@id/home_affection_rating"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <ProgressBar
             android:id="@+id/home_affection_progressbar"
@@ -154,7 +143,9 @@
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="0dp">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/home_standardBottomSheet"
@@ -182,9 +173,9 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="19dp"
                     android:fontFamily="@font/notosanscjkkr_bold"
+                    android:text="@string/home_bottom_sheet_title_text"
                     android:textColor="@color/black"
                     android:textStyle="bold"
-                    android:text="@string/home_bottom_sheet_title_text"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -195,9 +186,9 @@
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="19dp"
                     android:fontFamily="@font/notosanscjkkr_bold"
-                    android:textStyle="bold"
-                    android:textColor="@color/cherish_green_main"
                     android:setUserCount="@{mainViewModel.cherishUsers.userData.totalUser}"
+                    android:textColor="@color/cherish_green_main"
+                    android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@+id/home_bottom_sheet_title"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -217,11 +208,11 @@
                     android:id="@+id/home_user_list"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:scrollbars="vertical"
                     android:layout_marginStart="@dimen/margin_8dp"
                     android:layout_marginEnd="@dimen/margin_8dp"
                     android:layout_marginBottom="?attr/actionBarSize"
                     android:paddingBottom="?attr/actionBarSize"
+                    android:scrollbars="vertical"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
