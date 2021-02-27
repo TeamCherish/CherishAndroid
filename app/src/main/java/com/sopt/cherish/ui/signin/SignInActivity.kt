@@ -9,6 +9,7 @@ import com.sopt.cherish.remote.api.*
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.main.MainActivity
 import com.sopt.cherish.ui.main.home.HomeBlankActivity
+import com.sopt.cherish.util.extension.hideKeyboard
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -33,6 +34,7 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun signIn(email: String, password: String) {
+        binding.editTextTextPassword.hideKeyboard()
         requestData.authAPI.postLogin(EditUserReq(email, password))
             .enqueue(
                 object : Callback<EditUserRes> {
