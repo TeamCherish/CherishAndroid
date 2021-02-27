@@ -21,7 +21,6 @@ import com.sopt.cherish.util.extension.FlexBoxExtension.getChip
 
 /**
  * Created by SSong-develop on 2021-02-12
- * todo : binding을 전역으로 만든 다음에 resume으로 돌아왔을 떄
  */
 class ReviseReviewFragment : Fragment() {
     private val viewModel: DetailPlantViewModel by activityViewModels()

@@ -1,10 +1,13 @@
 package com.sopt.cherish.di
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.lifecycle.ViewModelProvider
 import com.sopt.cherish.remote.api.*
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.repository.*
 import com.sopt.cherish.ui.factory.*
+import com.sopt.cherish.util.MyKeyStore
 
 /**
  * Created on 01-03 by SSong-develop
@@ -88,6 +91,14 @@ object Injection {
 
     fun provideNotificationRepository(): NotificationRepository {
         return NotificationRepository(provideNotificationAPI())
+    }
+
+    // alarm di
+    fun provideAlarmDataStore(context: Context): SharedPreferences {
+        return context.getSharedPreferences(
+            MyKeyStore.provideAlarmDataStoreName(),
+            Context.MODE_PRIVATE
+        )
     }
 
 }

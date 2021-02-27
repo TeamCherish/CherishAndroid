@@ -7,10 +7,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentSettingBinding
+import com.sopt.cherish.di.Injection
+import com.sopt.cherish.local.AlarmController
 import com.sopt.cherish.remote.api.MyPageUserRes
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.main.MainViewModel
@@ -27,16 +30,19 @@ class SettingFragment : Fragment() {
     private var usernickname: String = ""
     private var useremail: String = ""
     private val viewModel: MainViewModel by activityViewModels()
+    private lateinit var alarmController: AlarmController
     private lateinit var binding: FragmentSettingBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
-
         val view = inflater.inflate(R.layout.fragment_setting, container, false)
 
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_setting, container, false)
+        binding.mainViewModel = viewModel
+        alarmController = AlarmController(Injection.provideAlarmDataStore(requireContext()))
         binding = FragmentSettingBinding.bind(view)
+
         setView()
         binding.constraintLayoutQuestion.setOnClickListener {
             //setFragment(SettingAlarmFragment())
@@ -74,18 +80,16 @@ class SettingFragment : Fragment() {
             setFragment(UserModifyFragment())
         }
 
+        binding.settingAlarmSetting.setOnCheckedChangeListener { buttonView, isChecked ->
+            alarmController.setAlarmKey(isChecked)
+        }
 
         return binding.root
     }
 
-    /*override fun onResume() {
-        super.onResume()
-        setView()
-    }*/
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        binding.settingAlarmSetting.isChecked = alarmController.getAlarmKey()
         setView()
     }
 
