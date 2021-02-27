@@ -8,7 +8,8 @@ import retrofit2.http.Path
 // Request param id
 // MyPage 조회
 data class MyPageUserData(
-    @SerializedName("user_nickname")val user_nickname:String,
+    @SerializedName("user_nickname") val user_nickname: String,
+    val email: String,
     @SerializedName("postponeCount") val postponeCount: Int,
     @SerializedName("waterCount") val waterCount: Int,
     @SerializedName("completeCount") val completeCount: Int,

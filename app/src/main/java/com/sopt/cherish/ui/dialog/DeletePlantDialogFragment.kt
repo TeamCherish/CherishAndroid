@@ -9,9 +9,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.viewModels
 import com.sopt.cherish.databinding.FragmentDeletePlantDialogBinding
+import com.sopt.cherish.di.Injection
 import com.sopt.cherish.remote.api.ResponseDeleteData
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
+import com.sopt.cherish.ui.main.MainViewModel
+import com.sopt.cherish.ui.main.manageplant.ManagePlantFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -20,6 +24,7 @@ class DeletePlantDialogFragment(
     @LayoutRes
     private val layoutResId: Int, cherishid: Int
 ) : DialogFragment() {
+    private val viewModel: MainViewModel by viewModels { Injection.provideMainViewModelFactory() }
 
     private lateinit var binding: FragmentDeletePlantDialogBinding
     private val requestData = RetrofitBuilder
@@ -58,7 +63,10 @@ class DeletePlantDialogFragment(
                                 ?.let { it ->
 
                                     Log.d("data success_delete", it.success.toString())
-
+                                    viewModel.fetchUsers()
+                                    parentFragmentManager.beginTransaction()
+                                        .detach(ManagePlantFragment()).attach(ManagePlantFragment())
+                                        .commit()
                                     activity?.finish()
                                     dismiss()
                                 }

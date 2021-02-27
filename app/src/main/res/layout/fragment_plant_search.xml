@@ -21,12 +21,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
+            android:layout_marginEnd="16dp"
             android:autofillHints="@null"
             android:background="@null"
             android:hint="@string/myPage_search_text"
             android:inputType="textPersonName"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/plantsearchcancel"
             app:layout_constraintStart_toEndOf="@+id/imageView4"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,6 +42,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/icn_search_box" />
+
+        <ImageView
+            android:id="@+id/plantsearchcancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/icn_cancel"
+            app:layout_constraintBottom_toBottomOf="@+id/editSearch"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/editSearch" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

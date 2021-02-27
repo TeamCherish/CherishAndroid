@@ -20,10 +20,8 @@ import com.sopt.cherish.remote.api.RequestCheckPhoneData
 import com.sopt.cherish.remote.api.ResponseCheckPhoneData
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.adapter.MypagePhoneBookSearchAdapter
-import com.sopt.cherish.ui.adapter.PhoneBookAdapter
 import com.sopt.cherish.ui.adapter.Phonemypage
 import com.sopt.cherish.ui.dialog.CheckPhoneDialogFragment
-import com.sopt.cherish.ui.enrollment.EnrollPlantFragment
 import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
 import com.sopt.cherish.ui.main.MainViewModel
 import retrofit2.Call
@@ -31,7 +29,7 @@ import retrofit2.Callback
 import retrofit2.Response
 
 
-class MyPagePhoneBookSearchFragment() : Fragment() {
+class MyPagePhoneBookSearchFragment : Fragment() {
     private val viewModel: MainViewModel by activityViewModels()
     private val requestData = RetrofitBuilder
 
@@ -57,13 +55,17 @@ class MyPagePhoneBookSearchFragment() : Fragment() {
 
         binding = FragmentMyPagePhoneBookSearchBinding.bind(view)
         startProcess()
+
+        binding.phonebookcancel.setOnClickListener {
+            binding.editSearch.setText("")
+        }
         binding.myPageAddPhoneBtn.setOnClickListener {
             val phonenumber =
                 madapter.phonenumber.substring(0, 3) + "-" + madapter.phonenumber.substring(
                     3,
                     7
                 ) + "-" +
-                        madapter.phonenumber.substring(7,)
+                        madapter.phonenumber.substring(7)
             Log.d("phonenumbervvvv", phonenumber)
             var user_id = viewModel.cherishuserId.value
             val body = RequestCheckPhoneData(phone = phonenumber.toString(), UserId = user_id!!)

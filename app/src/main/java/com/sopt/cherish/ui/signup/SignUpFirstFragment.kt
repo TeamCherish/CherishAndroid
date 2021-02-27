@@ -15,7 +15,6 @@ import com.sopt.cherish.databinding.FragmentSignUpFirstBinding
 import com.sopt.cherish.remote.api.RequestSignUpEmailData
 import com.sopt.cherish.remote.api.ResponseEmailData
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
-import org.w3c.dom.Text
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -298,11 +297,4 @@ class SignUpFirstFragment: Fragment() {
         })
     }
 
-    fun goToNextStep(){
-        if(isFinish){
-            binding.signUpButton.setOnClickListener {
-                (activity as SignUpActivity).replaceFragment(1)
-            }
-        }
-    }
 }

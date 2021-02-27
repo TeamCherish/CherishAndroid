@@ -14,7 +14,6 @@ import com.sopt.cherish.databinding.FragmentPlantSearchBinding
 import com.sopt.cherish.remote.api.MyPageCherishData
 import com.sopt.cherish.ui.adapter.MyPageBottomSheetAdapter
 import com.sopt.cherish.ui.detail.DetailPlantActivity
-import com.sopt.cherish.ui.main.MainActivity
 
 /**
  * Create on 01-08 by Yejin
@@ -40,6 +39,9 @@ class PlantSearchFragment(private var data:List<MyPageCherishData>?) : Fragment(
 
         startProcess()
 
+        binding.plantsearchcancel.setOnClickListener {
+            binding.editSearch.setText("")
+        }
         return binding.root
     }
 
