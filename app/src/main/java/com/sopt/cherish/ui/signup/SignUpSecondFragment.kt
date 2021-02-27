@@ -5,11 +5,11 @@ import android.telephony.PhoneNumberFormattingTextWatcher
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentSignUpSecondBinding
 import com.sopt.cherish.remote.api.RequestPhoneAuthData
@@ -26,6 +26,9 @@ class SignUpSecondFragment : Fragment() {
     lateinit var phoneNumber:String
     private val requestData = RetrofitBuilder
     var authData:String=""
+    var email:String=""
+    var password:String=""
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,33 +40,39 @@ class SignUpSecondFragment : Fragment() {
         binding= FragmentSignUpSecondBinding.bind(view)
         binding.userPhone.addTextChangedListener(PhoneNumberFormattingTextWatcher())
 
+
+        val bundle = (activity as SignUpActivity).mBundle
+        email=bundle.getString("email").toString()
+        password=bundle.getString("password").toString()
+
+        //Log.d("email received", email)
         getCertificationNumber()
 
         return view
     }
 
     private fun getCertificationNumber(){
-        binding.userPhone.addTextChangedListener(object:TextWatcher{
+        binding.userPhone.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                phoneNumber=binding.userPhone.text.toString()
-                Log.d("phoneNumber",phoneNumber)
+                phoneNumber = binding.userPhone.text.toString()
+                Log.d("phoneNumber", phoneNumber)
 
                 //휴대폰번호 유효성 검사
-                if(isPhoneNumberValid(phoneNumber)){
+                if (isPhoneNumberValid(phoneNumber)) {
                     binding.certificationBtn.setOnClickListener {
-                        Log.d("phoneNumber",phoneNumber)
+                        Log.d("phoneNumber", phoneNumber)
                         requestServer(phoneNumber)
 
-                        binding.certificationBtn.visibility=View.GONE
-                        binding.certificationText.visibility=View.VISIBLE
-                        binding.userCertificationNumber.visibility=View.VISIBLE
-                        binding.certificationAgain.visibility=View.VISIBLE
-                        binding.certificationOk.visibility=View.VISIBLE
+                        binding.certificationBtn.visibility = View.GONE
+                        binding.certificationText.visibility = View.VISIBLE
+                        binding.userCertificationNumber.visibility = View.VISIBLE
+                        binding.certificationAgain.visibility = View.VISIBLE
+                        binding.certificationOk.visibility = View.VISIBLE
 
                         checkCertificationNumber(authData)
                     }
 
-                    binding.certificationAgain.setOnClickListener{
+                    binding.certificationAgain.setOnClickListener {
                         requestServer(phoneNumber)
                     }
                 }
@@ -82,21 +91,24 @@ class SignUpSecondFragment : Fragment() {
     }
 
     private fun isPhoneNumberValid(phone: String):Boolean{
-        if(!Pattern.matches("^\\s*(010|011|016|017|018|019)(-|\\)|\\s)*(\\d{3,4})(-|\\s)*(\\d{4})\\s*$", phone))
+        if(!Pattern.matches(
+                "^\\s*(010|011|016|017|018|019)(-|\\)|\\s)*(\\d{3,4})(-|\\s)*(\\d{4})\\s*$",
+                phone
+            ))
         {
-            Log.d("validation","false")
+            Log.d("validation", "false")
             return false
         }
 
-        Log.d("validation","true")
+        Log.d("validation", "true")
         return true
     }
 
-    private fun requestServer(phoneNumber:String){
+    private fun requestServer(phoneNumber: String){
         requestData.phoneAuthAPI.postAuth(
-            RequestPhoneAuthData(phone=phoneNumber)
+            RequestPhoneAuthData(phone = phoneNumber)
         ).enqueue(
-            object: Callback<ResponsePhoneAuthData> {
+            object : Callback<ResponsePhoneAuthData> {
                 override fun onFailure(call: Call<ResponsePhoneAuthData>, t: Throwable) {
                     Log.d("통신 실패", t.toString())
                 }
@@ -108,19 +120,19 @@ class SignUpSecondFragment : Fragment() {
                     response.takeIf {
                         it.isSuccessful
                     }?.body()
-                        ?.let{  it->
-                            Log.d("phone success",it.success.toString())
-                            Log.d("phone message",it.message)
-                            Log.d("phone data",it.data.toString())
+                        ?.let { it ->
+                            Log.d("phone success", it.success.toString())
+                            Log.d("phone message", it.message)
+                            Log.d("phone data", it.data.toString())
 
-                            authData=it.data.toString()
+                            authData = it.data.toString()
                         }
                 }
             }
         )
     }
 
-    private fun checkCertificationNumber(authData:String){
+    private fun checkCertificationNumber(authData: String){
         if(authData==binding.userCertificationNumber.text.toString()){ //인증번호 일치하면
             binding.certificationOk.text="인증번호가 일치합니다."
             binding.certificationOk.setTextColor(
@@ -145,6 +157,12 @@ class SignUpSecondFragment : Fragment() {
             )
 
             binding.signUpButton.setOnClickListener {
+                val myBundle=Bundle()
+                myBundle.putString("email",email)
+                myBundle.putString("password",password)
+                myBundle.putString("phone",phoneNumber)
+
+                (activity as SignUpActivity).postData(myBundle)
                 (activity as SignUpActivity).replaceFragment(2)
             }
         }else{

@@ -8,6 +8,7 @@ import android.text.TextPaint
 import android.text.TextWatcher
 import android.text.style.URLSpan
 import android.text.util.Linkify
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -24,6 +25,10 @@ import java.util.regex.Pattern
 class SignUpFourthFragment : Fragment() {
     lateinit var binding: FragmentSignUpFourthBinding
     var nickName:String=""
+    var email:String=""
+    var password:String=""
+    var phone:String=""
+    var sex:Boolean=true
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +38,15 @@ class SignUpFourthFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_sign_up_fourth, container, false)
 
         binding= FragmentSignUpFourthBinding.bind(view)
+
+        val bundle = (activity as SignUpActivity).mBundle
+
+        email=bundle.getString("email").toString()
+        password=bundle.getString("password").toString()
+        phone=bundle.getString("phone").toString()
+        sex=bundle.getBoolean("sex")
+
+        Log.d("final",sex.toString())
 
         initializeLink()
         initializeNickName()
