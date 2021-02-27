@@ -42,7 +42,7 @@ class CustomDialogFragment(
                     .into(binding.dialogLoadingImage)
                 binding.root
             }
-            R.layout.dialog_keyword_limit_error -> {
+            R.layout.dialog_warning_keyword_limit_error -> {
                 val binding = DialogLoadingBinding.bind(view)
                 DialogUtil.adjustDialogSize(this, 0.694f, 0.169f)
                 binding.root

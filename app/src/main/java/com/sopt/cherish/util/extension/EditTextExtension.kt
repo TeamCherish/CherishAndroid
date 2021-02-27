@@ -33,7 +33,11 @@ fun EditText.writeKeyword(reviewFlexBoxLayout: FlexboxLayout, fragmentManager: F
                     if (reviewFlexBoxLayout.getChipsCount() < 4)
                         reviewFlexBoxLayout.addChip(keyword)
                     else {
-                        MultiViewDialog(R.layout.dialog_keyword_limit_error, 0.7f, 0.169f).show(
+                        MultiViewDialog(
+                            R.layout.dialog_warning_keyword_limit_error,
+                            0.7f,
+                            0.169f
+                        ).show(
                             fragmentManager,
                             "editTextExtension"
                         )

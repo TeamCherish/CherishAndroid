@@ -14,6 +14,7 @@ import com.sopt.cherish.ui.detail.DetailPlantActivity
 import com.sopt.cherish.ui.detail.DetailPlantViewModel
 import com.sopt.cherish.ui.dialog.CustomDialogFragment
 import com.sopt.cherish.util.DateUtil
+import com.sopt.cherish.util.MultiViewDialog
 import com.sopt.cherish.util.SimpleLogger
 import com.sopt.cherish.util.extension.*
 import com.sopt.cherish.util.extension.FlexBoxExtension.addChip
@@ -124,8 +125,10 @@ class ReviseReviewFragment : Fragment() {
         binding.reviseReviewMemo.countNumberOfCharacters { memo ->
             binding.reviseReviewNumberOfMemo.text = memo?.length.toString()
             if (memo?.length!! > 100) {
-                // todo : dialog로 보여줘야 함
-                shortToast(requireContext(), "100자를 초과했습니다.")
+                MultiViewDialog(R.layout.dialog_warning_review_limit_error, 0.6f, 0.2f).show(
+                    parentFragmentManager,
+                    TAG
+                )
                 binding.reviseReviewMemo.hideKeyboard()
             }
         }
@@ -135,7 +138,7 @@ class ReviseReviewFragment : Fragment() {
         binding.reviseReviewEditKeyword.countNumberOfCharacters { keyword ->
             binding.reviseReviewNumberOfCharacters.text = keyword?.length.toString()
             if (keyword?.length!! > 5) {
-                CustomDialogFragment(R.layout.dialog_keyword_limit_error).show(
+                CustomDialogFragment(R.layout.dialog_warning_keyword_limit_error).show(
                     parentFragmentManager,
                     ReviewActivity.TAG
                 )
@@ -148,6 +151,10 @@ class ReviseReviewFragment : Fragment() {
             binding.reviseReviewFlexBox,
             parentFragmentManager
         )
+    }
+
+    companion object {
+        const val TAG = "reviseReviewFragment"
     }
 
 }

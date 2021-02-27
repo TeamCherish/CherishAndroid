@@ -47,7 +47,10 @@ class ReviewActivity : AppCompatActivity() {
         binding.reviewMemo.countNumberOfCharacters { memo ->
             binding.reviewNumberOfMemo.text = memo?.length.toString()
             if (memo?.length!! >= 100) {
-                MultiViewDialog(R.layout.dialog_review_limit_error, 0.6f, 0.5f)
+                MultiViewDialog(R.layout.dialog_warning_review_limit_error, 0.6f, 0.2f).show(
+                    supportFragmentManager,
+                    TAG
+                )
                 binding.reviewMemo.hideKeyboard()
             }
         }
@@ -57,6 +60,14 @@ class ReviewActivity : AppCompatActivity() {
         binding.reviewEditKeyword.countNumberOfCharacters { keyword ->
             binding.reviewNumberOfCharacters.text = keyword?.length.toString()
             if (keyword?.length!! >= 5) {
+                MultiViewDialog(
+                    R.layout.dialog_warning_keyword_wordcount_limit_error,
+                    0.6f,
+                    0.2f
+                ).show(
+                    supportFragmentManager,
+                    TAG
+                )
                 binding.reviewEditKeyword.hideKeyboard()
             }
         }
