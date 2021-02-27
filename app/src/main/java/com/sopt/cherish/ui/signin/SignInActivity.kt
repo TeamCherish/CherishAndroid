@@ -70,6 +70,7 @@ class SignInActivity : AppCompatActivity() {
                         blankHomeIntent.putExtra("userId", userId)
                         blankHomeIntent.putExtra("userNickname", userNickName)
                         startActivity(blankHomeIntent)
+
                         finish()
                     } else {
                         val mainActivityIntent =

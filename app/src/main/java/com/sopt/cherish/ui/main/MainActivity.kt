@@ -70,8 +70,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showInitialFragment() {
-        supportFragmentManager.beginTransaction()
-            .add(R.id.main_fragment_container, HomeFragment()).commit()
+        if (PermissionUtil.isCheckedCallPermission(this) && PermissionUtil.isCheckedSendMessagePermission(
+                this
+            )
+        ) {
+            supportFragmentManager.beginTransaction()
+                .add(R.id.main_fragment_container, HomeFragment()).commit()
+        } else {
+            shortToast(this, "권한이 설정되어 있지 않아 앱을 실행할 수 없어요 ㅠ")
+            openSettings()
+        }
     }
 
     private fun requestCherishPermissions() {
@@ -105,19 +113,34 @@ class MainActivity : AppCompatActivity() {
 
             when (it.itemId) {
                 R.id.main_home -> {
-                    transAction.replace(R.id.main_fragment_container, HomeFragment().apply {
-                        arguments = Bundle().apply {
-                            putInt("userid", intent.getIntExtra("userId", 0))
-                        }
-                    }).commit()
+                    if (PermissionUtil.isCheckedSendMessagePermission(this) && PermissionUtil.isCheckedCallPermission(
+                            this
+                        )
+                    ) {
+                        transAction.replace(R.id.main_fragment_container, HomeFragment().apply {
+                            arguments = Bundle().apply {
+                                putInt("userid", intent.getIntExtra("userId", 0))
+                            }
+                        }).commit()
+                    } else {
+                        shortToast(this, "권한이 설정되어 있지 않아 앱을 사용할 수 없어요 ㅠ")
+                        openSettings()
+                    }
                     true
                 }
                 R.id.main_manage_plant -> {
-                    transAction.replace(R.id.main_fragment_container, ManagePlantFragment().apply {
-                        arguments = Bundle().apply {
-                            putString("phonecount", getPhoneNumbers().toString())
-                        }
-                    }).commit()
+                    if (PermissionUtil.isCheckedReadContactsPermission(this)) {
+                        transAction.replace(
+                            R.id.main_fragment_container,
+                            ManagePlantFragment().apply {
+                                arguments = Bundle().apply {
+                                    putString("phonecount", getPhoneNumbers().toString())
+                                }
+                            }).commit()
+                    } else {
+                        shortToast(this, "전화번호부 권한을 주지 않아 갈 수 없어요 ㅠ")
+                        openSettings()
+                    }
                     true
                 }
                 R.id.main_setting -> {

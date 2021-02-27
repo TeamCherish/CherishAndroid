@@ -74,6 +74,7 @@ object PermissionUtil {
     }
 
     fun openPermissionSettings(context: Context) {
+        // 권한이 설정되어 있지 않습니다. 권한 설정 칸으로 이동합니다.
         context.startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
             data = Uri.fromParts("package", context.packageName, null)
         })
