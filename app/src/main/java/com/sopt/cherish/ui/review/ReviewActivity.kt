@@ -49,7 +49,7 @@ class ReviewActivity : AppCompatActivity() {
         binding.reviewMemo.countNumberOfCharacters { memo ->
             binding.reviewNumberOfMemo.text = memo?.length.toString()
             if (memo?.length!! >= 100) {
-                MultiViewDialog(R.layout.dialog_warning_review_limit_error, 0.6f, 0.2f).show(
+                MultiViewDialog(R.layout.dialog_warning_review_limit_error, 0.6944f, 0.16875f).show(
                     supportFragmentManager,
                     TAG
                 )
@@ -64,8 +64,8 @@ class ReviewActivity : AppCompatActivity() {
             if (keyword?.length!! > 5) {
                 MultiViewDialog(
                     R.layout.dialog_warning_keyword_wordcount_limit_error,
-                    0.6f,
-                    0.2f
+                    0.6944f,
+                    0.16875f
                 ).show(
                     supportFragmentManager,
                     TAG

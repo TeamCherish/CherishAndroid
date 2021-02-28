@@ -125,7 +125,7 @@ class ReviseReviewFragment : Fragment() {
         binding.reviseReviewMemo.countNumberOfCharacters { memo ->
             binding.reviseReviewNumberOfMemo.text = memo?.length.toString()
             if (memo?.length!! > 100) {
-                MultiViewDialog(R.layout.dialog_warning_review_limit_error, 0.6f, 0.2f).show(
+                MultiViewDialog(R.layout.dialog_warning_review_limit_error, 0.6944f, 0.16875f).show(
                     parentFragmentManager,
                     TAG
                 )
