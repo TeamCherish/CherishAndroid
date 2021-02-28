@@ -84,11 +84,11 @@ object Injection {
     }
 
     // notification di
-    fun provideNotificationAPI(): NotificationAPI {
+    private fun provideNotificationAPI(): NotificationAPI {
         return RetrofitBuilder.notificationAPI
     }
 
-    fun provideNotificationRepository(): NotificationRepository {
+    private fun provideNotificationRepository(): NotificationRepository {
         return NotificationRepository(provideNotificationAPI())
     }
 
