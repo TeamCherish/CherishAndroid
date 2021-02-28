@@ -65,8 +65,8 @@
 
 
     <EditText
+        android:inputType="text"
         android:autofillHints="@string/sign_up_nickname_hint"
-        android:inputType="phone"
         android:id="@+id/user_nickname"
         android:layout_width="0dp"
         android:layout_height="44dp"
