@@ -72,8 +72,8 @@ class MainViewModel(
     }
 
     // Contact Dialog
-    private val _calendarData = MutableLiveData<CalendarRes>()
-    val calendarData: MutableLiveData<CalendarRes>
+    private val _calendarData = MutableLiveData<CalendarRes?>()
+    val calendarData: MutableLiveData<CalendarRes?>
         get() = _calendarData
 
     fun fetchCalendarData() = viewModelScope.launch {

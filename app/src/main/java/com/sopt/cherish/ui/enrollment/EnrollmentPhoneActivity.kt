@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityEnrollmentPhoneBinding
+import com.sopt.cherish.di.Injection
 import com.sopt.cherish.ui.dialog.ClockPickerDialogFragment
 import com.sopt.cherish.ui.dialog.WeekPickerDialogFragment
 
@@ -23,6 +25,7 @@ class EnrollmentPhoneActivity : AppCompatActivity(),
 
 
     private lateinit var binding: ActivityEnrollmentPhoneBinding
+    private val viewModel: EnrollmentViewModel by viewModels { Injection.provideEnrollmentViewModelFactory() }
 
     var count = 0
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +40,8 @@ class EnrollmentPhoneActivity : AppCompatActivity(),
         //setToolbar()
         //phoneBookFragment=findViewById(R.layout.fragment_phone_book)
         count = intent.getIntExtra("userId", 0)
+        viewModel.userId = intent.getIntExtra("userId", -1)
+        viewModel.userNickname = intent.getStringExtra("userNickname").toString()
         //count=intent.getIntExtra("user_id", 0)
 
         if (intent.getIntExtra("check", 1) == 0) {

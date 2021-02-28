@@ -66,7 +66,7 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
         viewModel.calendarData.observe(viewLifecycleOwner) {
             binding.contactChipLayout.apply {
                 clearChips()
-                if (it.waterData.calendarData.isNotEmpty()) {
+                if (it?.waterData?.calendarData?.isNotEmpty()!!) {
                     it.waterData.calendarData.let { calendarData ->
                         if (calendarData.last().userStatus1 != "" && calendarData.last().userStatus1 != "null")
                             addBlackChipModeChoice(it.waterData.calendarData.last().userStatus1)
