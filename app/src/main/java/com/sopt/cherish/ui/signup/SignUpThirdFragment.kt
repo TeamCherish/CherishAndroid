@@ -32,9 +32,9 @@ class SignUpThirdFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_sign_up_third, container, false)
 
-        binding.userAge.addTextChangedListener(PhoneNumberFormattingTextWatcher())
-
         binding= FragmentSignUpThirdBinding.bind(view)
+
+        binding.userAge.addTextChangedListener(PhoneNumberFormattingTextWatcher())
 
         val bundle = (activity as SignUpActivity).mBundle
 
