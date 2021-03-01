@@ -24,7 +24,6 @@ class MainViewModel(
     private val calendarRepository: CalendarRepository,
     private val notificationRepository: NotificationRepository
 ) : ViewModel() {
-    // todo : reviewRepository 뗴어내야함 reviewViewModel로
     // [home] Server connection
 
     // Utilities
@@ -96,15 +95,6 @@ class MainViewModel(
     private val _postponeData = MutableLiveData<PostponeWateringRes>()
     val postponeData: MutableLiveData<PostponeWateringRes>
         get() = _postponeData
-
-    // 이녀석을 받을 필요가 사라짐
-    fun getPostPoneWateringCount() = try {
-        viewModelScope.launch {
-            _postponeData.postValue(wateringRepository.getPostponeCount(selectedCherishUser.value?.id!!))
-        }
-    } catch (exception: Exception) {
-        exceptionLiveData.postValue(exception.message)
-    }
 
     fun postponeWateringDate(postponeWateringDateReq: PostponeWateringDateReq) =
         viewModelScope.launch {

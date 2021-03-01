@@ -4,18 +4,18 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.prolificinteractive.materialcalendarview.CalendarDay
-import com.sopt.cherish.remote.api.CalendarData
-import com.sopt.cherish.remote.api.CalendarRes
-import com.sopt.cherish.remote.api.DeleteReviewReq
-import com.sopt.cherish.remote.api.ReviseReviewReq
+import com.sopt.cherish.remote.api.*
 import com.sopt.cherish.repository.DetailPlantRepository
+import com.sopt.cherish.repository.WateringRepository
 import com.sopt.cherish.util.DateUtil
+import com.sopt.cherish.util.SimpleLogger
 import com.sopt.cherish.util.SingleLiveEvent
 import kotlinx.coroutines.launch
 import java.util.*
 
 class DetailPlantViewModel(
-    private val detailPlantRepository: DetailPlantRepository
+    private val detailPlantRepository: DetailPlantRepository,
+    private val wateringRepository: WateringRepository
 ) : ViewModel() {
     var calendarModeChangeEvent = SingleLiveEvent<Boolean>()
 
@@ -80,5 +80,17 @@ class DetailPlantViewModel(
             throw error
         }
     }
+
+    // [Delay Watering]
+    fun postponeWateringDate(postponeWateringDateReq: PostponeWateringDateReq) =
+        viewModelScope.launch {
+            runCatching {
+                wateringRepository.postponeWateringDate(postponeWateringDateReq)
+            }.onSuccess {
+                SimpleLogger.logI(it.message)
+            }.onFailure {
+                throw it
+            }
+        }
 
 }

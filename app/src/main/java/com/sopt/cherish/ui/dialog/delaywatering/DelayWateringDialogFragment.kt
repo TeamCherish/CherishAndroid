@@ -22,7 +22,6 @@ class DelayWateringDialogFragment : DialogFragment() {
     private val viewModel: MainViewModel by activityViewModels()
     private lateinit var binding: DialogDelayWateringBinding
 
-    // todo : 오늘 하루 만약에 버튼을 클릭했다면 , 그 다음에는 불가능 하도록 해야함
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -32,8 +31,6 @@ class DelayWateringDialogFragment : DialogFragment() {
             DataBindingUtil.inflate(inflater, R.layout.dialog_delay_watering, container, false)
         binding.mainViewModel = viewModel
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-
-        viewModel.getPostPoneWateringCount()
 
         initializeNumberPicker(binding)
         sendDelayDayToServer(binding)
@@ -57,29 +54,16 @@ class DelayWateringDialogFragment : DialogFragment() {
     private fun sendDelayDayToServer(binding: DialogDelayWateringBinding) {
         // 함수화 해야합니다 진짜.
         binding.delayWateringAcceptBtn.setOnClickListener {
-            viewModel.postponeData.observe(viewLifecycleOwner) {
-                if (it.postponeData.isPostpone) {
-                    val postponeWateringDateReq = PostponeWateringDateReq(
-                        viewModel.selectedCherishUser.value!!.id,
-                        binding.delayWateringDayPicker.value,
-                        it.postponeData.isPostpone
-                    )
-                    viewModel.postponeWateringDate(postponeWateringDateReq)
-                    viewModel.animationTrigger.value = false
-                    shortToast(requireContext(), "[미루기 성공]3회 초과하였습니다 , 식물 애정도가 차감되었습니다.")
-                    dismiss()
-                } else {
-                    val postponeWateringDateReq = PostponeWateringDateReq(
-                        viewModel.selectedCherishUser.value!!.id,
-                        binding.delayWateringDayPicker.value,
-                        it.postponeData.isPostpone
-                    )
-                    viewModel.postponeWateringDate(postponeWateringDateReq)
-                    viewModel.animationTrigger.value = false
-                    shortToast(requireContext(), "미루기 성공!")
-                    dismiss()
-                }
-            }
+            viewModel.postponeWateringDate(
+                PostponeWateringDateReq(
+                    viewModel.selectedCherishUser.value!!.id,
+                    binding.delayWateringDayPicker.value,
+                    true
+                )
+            )
+            viewModel.animationTrigger.value = false
+            shortToast(requireContext(), "미루기 성공!")
+            dismiss()
         }
     }
 }

@@ -43,7 +43,7 @@ object Injection {
     }
 
     fun provideDetailViewModelFactory(): ViewModelProvider.Factory {
-        return DetailViewModelFactory(provideDetailPlantRepository())
+        return DetailViewModelFactory(provideDetailPlantRepository(), provideWateringRepository())
     }
 
     // watering di

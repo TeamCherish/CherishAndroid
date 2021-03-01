@@ -71,7 +71,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
 
     override fun onResume() {
         super.onResume()
-        observeCherishUsers()
+        viewModel.fetchUsers()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
