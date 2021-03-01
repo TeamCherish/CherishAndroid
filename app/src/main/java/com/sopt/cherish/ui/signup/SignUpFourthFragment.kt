@@ -208,6 +208,7 @@ class SignUpFourthFragment : Fragment() {
                             Log.d("success", it.success.toString())
                             val intent = Intent(context, SignInActivity::class.java)
                             startActivity(intent)
+                            requireActivity().finish()
                         }
                 }
             }

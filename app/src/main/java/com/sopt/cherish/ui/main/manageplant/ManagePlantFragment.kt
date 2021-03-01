@@ -399,9 +399,9 @@ class ManagePlantFragment : Fragment() {
 
                                 initializeTabLayoutView(
                                     binding,
-                                    it.myPageUserData.result.reversed()
+                                    it.myPageUserData.result
                                 )
-                                data = it.myPageUserData.result.reversed()
+                                data = it.myPageUserData.result
                                 Log.d("list", it.myPageUserData.result.toString())
                             }
                     }

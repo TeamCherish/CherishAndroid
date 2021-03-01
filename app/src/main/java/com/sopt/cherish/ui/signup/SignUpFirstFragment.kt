@@ -188,6 +188,8 @@ class SignUpFirstFragment : Fragment() {
                         call: Call<ResponseEmailData>,
                         response: Response<ResponseEmailData>
                     ) {
+                        Log.d("error","이메일 중복")
+
                         response.takeIf {
                             it.isSuccessful
                         }?.body()
