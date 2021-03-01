@@ -9,7 +9,6 @@ import androidx.lifecycle.lifecycleScope
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityReviewBinding
 import com.sopt.cherish.di.Injection
-import com.sopt.cherish.remote.api.NotificationWateringReq
 import com.sopt.cherish.remote.api.ReviewWateringReq
 import com.sopt.cherish.util.MultiViewDialog
 import com.sopt.cherish.util.extension.FlexBoxExtension.getChip
@@ -28,7 +27,6 @@ class ReviewActivity : AppCompatActivity() {
             DataBindingUtil.setContentView(this, R.layout.activity_review)
         initializeViewModelData()
         binding.reviewViewModel = viewModel
-        viewModel.sendWateringNotification(NotificationWateringReq(viewModel.selectedCherishId))
 
         addUserStatusWithChip(binding)
         addLimitNumberOfKeywordCharacters(binding)

@@ -21,7 +21,9 @@ interface NotificationAPI {
     ): UtilResponseWithOutStatus
 
     @POST("push")
-    suspend fun sendWateringNotification(
+    suspend fun sendRefreshedWateringTimeNotification(
         @Body notificationWateringReq: NotificationWateringReq
     ): UtilResponseWithOutStatus
+
+
 }
