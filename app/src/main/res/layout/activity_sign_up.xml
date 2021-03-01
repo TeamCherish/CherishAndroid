@@ -1,43 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.signup.SignUpActivity">
 
+
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/sign_up_tool_bar"
+        android:id="@+id/toolbar_signup"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        tools:ignore="MissingConstraints"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+
+
+    </androidx.appcompat.widget.Toolbar>
 
     <TextView
-        android:id="@+id/sign_up_text"
+        android:id="@+id/toolbar_title_signup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/sign_up_title"
-        android:textColor="#2a2a2a"
-        android:includeFontPadding="false"
         android:fontFamily="@font/notosanscjkkr_medium"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:text=""
+        android:textAlignment="center"
         android:textSize="@dimen/text_16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/sign_up_tool_bar"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar_signup"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/sign_up_tool_bar"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/sign_up_fragment_container"
+    <FrameLayout
+        android:id="@+id/fragment_signup"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sign_up_tool_bar"
-        app:layout_constraintBottom_toBottomOf="parent"/>
-
-
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_signup" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

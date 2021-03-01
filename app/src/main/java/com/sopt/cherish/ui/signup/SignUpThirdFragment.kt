@@ -45,7 +45,7 @@ class SignUpThirdFragment : Fragment() {
         initializePicker()
         getUserAge()
 
-        return view
+        return binding.root
     }
 
     private fun getUserAge() {

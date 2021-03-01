@@ -41,25 +41,19 @@ class SignUpFirstFragment : Fragment() {
 
         checkEmail()
 
-        return view
+        return binding.root
     }
 
     override fun onResume() {
         super.onResume()
-
         val activity = activity
         if (activity != null) {
-            (activity as SignUpActivity).setActionBarTitle("회원가입")
+            (activity as SignUpActivity).setActionBarTitlesignup("회원가입")
         }
     }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val id = item.itemId
-        when (id) {
-            android.R.id.home -> {
-                activity?.finish()
-                return true
-            }
+        when (item.itemId) {
+            android.R.id.home -> activity?.onBackPressed()
         }
         return super.onOptionsItemSelected(item)
     }

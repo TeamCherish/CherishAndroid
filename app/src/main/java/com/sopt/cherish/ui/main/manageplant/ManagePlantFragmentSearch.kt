@@ -13,10 +13,9 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayout
 import com.sopt.cherish.R
-import com.sopt.cherish.databinding.FragmentManagePlantBinding
+import com.sopt.cherish.databinding.FragmentManagePlantSearchBinding
 import com.sopt.cherish.databinding.MyPageCustomTabBinding
 import com.sopt.cherish.remote.api.MyPageCherishData
 import com.sopt.cherish.remote.api.MyPageUserRes
@@ -25,7 +24,6 @@ import com.sopt.cherish.ui.adapter.MypagePhoneBookSearchAdapter
 import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
 import com.sopt.cherish.ui.main.MainActivity
 import com.sopt.cherish.ui.main.MainViewModel
-import com.sopt.cherish.util.PixelUtil.dp
 import com.sopt.cherish.util.SimpleLogger
 import retrofit2.Call
 import retrofit2.Callback
@@ -35,7 +33,7 @@ import retrofit2.Response
 /**
  * 식물 보관함 뷰
  */
-class ManagePlantFragment : Fragment() {
+class ManagePlantFragmentSearch : Fragment() {
 
     private val viewModel: MainViewModel by activityViewModels()
     private var tabIndex: Int = 0
@@ -45,7 +43,7 @@ class ManagePlantFragment : Fragment() {
     private lateinit var tabBindingFirst: MyPageCustomTabBinding
     private lateinit var tabBindingSecond: MyPageCustomTabBinding
     lateinit var data: List<MyPageCherishData>
-    lateinit var binding: FragmentManagePlantBinding
+    lateinit var binding: FragmentManagePlantSearchBinding
 
     lateinit var madapter: MypagePhoneBookSearchAdapter
 
@@ -54,14 +52,13 @@ class ManagePlantFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_manage_plant, container, false)
+            DataBindingUtil.inflate(inflater, R.layout.fragment_manage_plant_search, container, false)
 
         tabBindingFirst = MyPageCustomTabBinding.inflate(inflater, container, false)
         tabBindingSecond = MyPageCustomTabBinding.inflate(inflater, container, false)
 
 
         // 예진이 userId , viewModel.userId.value 라고하면 userId 찾을 수 있어요
-        SimpleLogger.logI(viewModel.cherishuserId.value.toString())
         initializeServerRequest(binding)
 
         binding.myPageAddPlantBtn.setOnClickListener {
@@ -78,7 +75,6 @@ class ManagePlantFragment : Fragment() {
                 binding.myPageAddPlantBtn.visibility = View.VISIBLE
             (activity as MainActivity).replaceFragment(tabIndex, data, isSearched)
         }
-        initializeSearchBtn()
         return binding.root
     }
 
@@ -97,20 +93,12 @@ class ManagePlantFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        initializeSearchBtn()
-        initializeBottomSheetBehavior(binding)
+
+        //initializeBottomSheetBehavior(binding)
     }
 
-    private fun initializeSearchBtn() {
-        isSearched = (activity as MainActivity).getIsSearched()
 
-        if (isSearched)
-            binding.searchBox.visibility = View.INVISIBLE
-        else
-            binding.searchBox.visibility = View.VISIBLE
-    }
-
-    private fun initializeBottomSheetBehavior(binding: FragmentManagePlantBinding) {
+    /*private fun initializeBottomSheetBehavior(binding: FragmentManagePlantSearchBinding) {
         val standardBottomSheetBehavior =
             BottomSheetBehavior.from(binding.homeStandardBottomSheetMypage)
         // bottom sheet state 지정
@@ -130,9 +118,6 @@ class ManagePlantFragment : Fragment() {
 
             }
             (activity as MainActivity).replaceFragment(tabIndex, data, isSearched)
-        /*    val intent=Intent(context,ManagePlantActivity::class.java)
-            intent.putExtra("searchuserid",viewModel.cherishuserId.value)
-            startActivity(intent)*/
         }
 
 
@@ -214,9 +199,9 @@ class ManagePlantFragment : Fragment() {
             }
         })
     }
-
+*/
     private fun initializeTabLayoutView(
-        binding: FragmentManagePlantBinding,
+        binding: FragmentManagePlantSearchBinding,
         data: List<MyPageCherishData>
     ) {
 
@@ -322,7 +307,7 @@ class ManagePlantFragment : Fragment() {
                             binding.myPageAddPlantBtn.visibility = View.VISIBLE
                         }
                     }
-                    (activity as MainActivity).replaceFragment(tabIndex, data, isSearched)
+                    (activity as ManagePlantActivity).replaceFragment(tabIndex, data, isSearched)
                 }
             }
         })
@@ -354,8 +339,8 @@ class ManagePlantFragment : Fragment() {
     }
 
 
-    private fun initializeServerRequest(binding: FragmentManagePlantBinding) {
-        requestData.myPageAPI.fetchUserPage(viewModel.cherishuserId.value!!)
+    private fun initializeServerRequest(binding: FragmentManagePlantSearchBinding) {
+        requestData.myPageAPI.fetchUserPage(arguments?.getInt("searchmanageid")!!)
             .enqueue(
                 object : Callback<MyPageUserRes> {
                     override fun onFailure(call: Call<MyPageUserRes>, t: Throwable) {
@@ -374,13 +359,6 @@ class ManagePlantFragment : Fragment() {
 
                                 Log.d("data success!", it.myPageUserData.waterCount.toString())
 
-                                binding.myPageWateringCnt.text =
-                                    it.myPageUserData.waterCount.toString()
-                                binding.myPagePostponeCnt.text =
-                                    it.myPageUserData.postponeCount.toString()
-                                binding.myPageFinishCnt.text =
-                                    it.myPageUserData.completeCount.toString()
-                                binding.myPageUserName.text = it.myPageUserData.user_nickname
 
                                 binding.myPageBottomTab.addTab(
                                     binding.myPageBottomTab.newTab().setCustomView(
