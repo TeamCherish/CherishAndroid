@@ -29,8 +29,11 @@ class SignUpActivity : AppCompatActivity() {
         setContentView(binding.root)
         initializeFragment()
         //setFragment(SignUpFirstFragment())
+    }
 
-
+    override fun onBackPressed() {
+        super.onBackPressed()
+        finish()
     }
 
     fun setFragment(fragment: Fragment) {

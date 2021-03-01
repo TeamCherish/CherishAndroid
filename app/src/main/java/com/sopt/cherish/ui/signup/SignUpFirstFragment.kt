@@ -34,7 +34,7 @@ class SignUpFirstFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val view = inflater.inflate(R.layout.fragment_sign_up_first, container, false)
 
         binding = FragmentSignUpFirstBinding.bind(view)
@@ -183,14 +183,7 @@ class SignUpFirstFragment : Fragment() {
                         call: Call<ResponseEmailData>,
                         response: Response<ResponseEmailData>
                     ) {
-                        Log.d("error", "이메일 중복")
-                        binding.isUsableEmail.text = "이미 존재하는 이메일입니다."
-                        binding.isUsableEmail.setTextColor(
-                            ContextCompat.getColor(
-                                binding.root.context,
-                                R.color.cherish_pink_sub
-                            )
-                        )
+
                         response.takeIf {
                             it.isSuccessful
                         }?.body()

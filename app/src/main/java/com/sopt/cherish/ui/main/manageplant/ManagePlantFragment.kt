@@ -64,6 +64,7 @@ class ManagePlantFragment : Fragment() {
 
         // 예진이 userId , viewModel.userId.value 라고하면 userId 찾을 수 있어요
         SimpleLogger.logI(viewModel.cherishuserId.value.toString())
+        setTabLayout()
         initializeServerRequest(binding)
 
         binding.myPageAddPlantBtn.setOnClickListener {
@@ -99,6 +100,8 @@ class ManagePlantFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        setTabLayout()
+        initializeServerRequest(binding)
         initializeSearchBtn()
         initializeBottomSheetBehavior(binding)
     }
@@ -227,6 +230,27 @@ class ManagePlantFragment : Fragment() {
 
             }
         })
+    }
+
+    private fun setTabLayout(){
+
+        binding.myPageBottomTab.addTab(
+            binding.myPageBottomTab.newTab().setCustomView(
+                createTabView(
+                    "식물 ",
+                    "0"
+                )
+            )
+        )
+
+        binding.myPageBottomTab.addTab(
+            binding.myPageBottomTab.newTab().setCustomView(
+                createTabView(
+                    "연락처 ",
+                    "0"
+                )
+            )
+        )
     }
 
     private fun initializeTabLayoutView(
@@ -397,22 +421,19 @@ class ManagePlantFragment : Fragment() {
                                 binding.myPageUserName.text = it.myPageUserData.user_nickname
                                 mypageusername=it.myPageUserData.user_nickname
                                 mypageuseremail=it.myPageUserData.email
-                                binding.myPageBottomTab.addTab(
-                                    binding.myPageBottomTab.newTab().setCustomView(
+                                binding.myPageBottomTab.getTabAt(0)!!.setCustomView(
                                         createTabView(
                                             "식물 ",
                                             it.myPageUserData.totalCherish.toString()
                                         )
                                     )
-                                )
-                                binding.myPageBottomTab.addTab(
-                                    binding.myPageBottomTab.newTab().setCustomView(
+                                binding.myPageBottomTab.getTabAt(1)!!.setCustomView(
                                         createTabView(
                                             "연락처 ",
                                             arguments?.getString("phonecount")
                                         )
-                                    )
                                 )
+
 
 
                                 initializeTabLayoutView(
