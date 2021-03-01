@@ -269,6 +269,11 @@ class SignUpFirstFragment : Fragment() {
                     )
                     isFinish = true
                     binding.signUpButton.setOnClickListener {
+                        val bundle = Bundle()
+                        bundle.putString("email", email)
+                        bundle.putString("password", pw)
+
+                        (activity as SignUpActivity).postData(bundle)
                         (activity as SignUpActivity).replaceFragment(1)
                     }
 

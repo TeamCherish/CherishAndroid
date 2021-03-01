@@ -26,6 +26,9 @@ class SignUpSecondFragment : Fragment() {
     lateinit var phoneNumber: String
     private val requestData = RetrofitBuilder
     var authData: String = ""
+    var email: String = ""
+    var password: String = ""
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,6 +40,12 @@ class SignUpSecondFragment : Fragment() {
         binding = FragmentSignUpSecondBinding.bind(view)
         binding.userPhone.addTextChangedListener(PhoneNumberFormattingTextWatcher())
 
+
+        val bundle = (activity as SignUpActivity).mBundle
+        email = bundle.getString("email").toString()
+        password = bundle.getString("password").toString()
+
+        //Log.d("email received", email)
         getCertificationNumber()
 
         return view
@@ -148,6 +157,12 @@ class SignUpSecondFragment : Fragment() {
             )
 
             binding.signUpButton.setOnClickListener {
+                val myBundle = Bundle()
+                myBundle.putString("email", email)
+                myBundle.putString("password", password)
+                myBundle.putString("phone", phoneNumber)
+
+                (activity as SignUpActivity).postData(myBundle)
                 (activity as SignUpActivity).replaceFragment(2)
             }
         } else {

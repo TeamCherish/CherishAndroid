@@ -10,6 +10,14 @@ import com.sopt.cherish.databinding.ActivitySignUpBinding
 class SignUpActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignUpBinding
+    lateinit var email: String
+    lateinit var password: String
+    lateinit var phone: String
+    var sex: Boolean = true
+    lateinit var birth: String
+    lateinit var nickname: String
+    lateinit var mBundle: Bundle
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,5 +68,35 @@ class SignUpActivity : AppCompatActivity() {
                 transAction.replace(R.id.sign_up_fragment_container, SignUpFourthFragment())
                     .commit()
         }
+    }
+/*
+    fun setData(fragment:Fragment,email:String,password:String,phone:String,sex:Boolean,birth:String,nickname:String){
+        this.email=email
+        this.password=password
+        this.phone=phone
+        this.sex=sex
+        this.birth=birth
+        this.nickname=nickname
+
+        Log.d("activity",email)
+
+        postData(fragment)
+    }
+
+    fun postData(fragment: Fragment){
+        var bundle=Bundle()
+        bundle.putString("email",email)
+        bundle.putString("password",password)
+        bundle.putString("phone",phone)
+        bundle.putBoolean("sex",sex)
+        bundle.putString("birth",birth)
+        bundle.putString("nickname",nickname)
+
+        Log.d("postdata",email)
+        fragment.arguments=bundle
+    }  */
+
+    fun postData(bundle: Bundle) {
+        this.mBundle = bundle
     }
 }

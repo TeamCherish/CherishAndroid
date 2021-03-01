@@ -1,5 +1,6 @@
 package com.sopt.cherish.ui.signup
 
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.SpannableString
@@ -7,6 +8,7 @@ import android.text.TextPaint
 import android.text.TextWatcher
 import android.text.style.URLSpan
 import android.text.util.Linkify
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,6 +17,13 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentSignUpFourthBinding
+import com.sopt.cherish.remote.api.RequestSignUpData
+import com.sopt.cherish.remote.api.ResponseSignUpData
+import com.sopt.cherish.remote.singleton.RetrofitBuilder
+import com.sopt.cherish.ui.signin.SignInActivity
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 import java.util.regex.Matcher
 import java.util.regex.Pattern
 
@@ -22,6 +31,12 @@ import java.util.regex.Pattern
 class SignUpFourthFragment : Fragment() {
     lateinit var binding: FragmentSignUpFourthBinding
     var nickName: String = ""
+    var email: String = ""
+    var password: String = ""
+    var phone: String = ""
+    var sex: Boolean = true
+    var birth: String = ""
+    private val requestData = RetrofitBuilder
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,6 +46,16 @@ class SignUpFourthFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_sign_up_fourth, container, false)
 
         binding = FragmentSignUpFourthBinding.bind(view)
+
+        val bundle = (activity as SignUpActivity).mBundle
+
+        email = bundle.getString("email").toString()
+        password = bundle.getString("password").toString()
+        phone = bundle.getString("phone").toString()
+        sex = bundle.getBoolean("sex")
+        birth = bundle.getString("birth").toString()
+
+        Log.d("final", sex.toString())
 
         initializeLink()
         initializeNickName()
@@ -112,8 +137,7 @@ class SignUpFourthFragment : Fragment() {
                     )
 
                     binding.signUpButton.setOnClickListener {
-                        //val intent = Intent(context, MainActivity::class.java)
-                        //startActivity(intent)
+                        requestServer()
                     }
                 } else {
                     binding.isUsableNickname.text = "사용하실 수 없는 닉네임입니다."
@@ -148,6 +172,46 @@ class SignUpFourthFragment : Fragment() {
 
             }
         })
+    }
+
+    private fun requestServer() {
+        Log.d("final email", email)
+        Log.d("final password", password)
+        Log.d("nickname", nickName)
+        Log.d("phpone", phone)
+        Log.d("sex", sex.toString())
+        Log.d("birth", birth)
+
+        requestData.signUpAPI.postSignUp(
+            RequestSignUpData(
+                email = email,
+                password = password,
+                nickname = nickName,
+                phone = phone,
+                sex = sex.toString(),
+                birth = birth
+            )
+        ).enqueue(
+            object : Callback<ResponseSignUpData> {
+                override fun onFailure(call: Call<ResponseSignUpData>, t: Throwable) {
+                    Log.d("통신 실패", t.toString())
+                }
+
+                override fun onResponse(
+                    call: Call<ResponseSignUpData>,
+                    response: Response<ResponseSignUpData>
+                ) {
+                    response.takeIf {
+                        it.isSuccessful
+                    }?.body()
+                        ?.let { it ->
+                            Log.d("success", it.success.toString())
+                            val intent = Intent(context, SignInActivity::class.java)
+                            startActivity(intent)
+                        }
+                }
+            }
+        )
     }
 
 }
