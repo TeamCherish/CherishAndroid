@@ -66,7 +66,6 @@ class MainActivity : AppCompatActivity() {
         viewModel.cherishuserId.value = intent.getIntExtra("userId", -1)
         viewModel.userNickName.value = intent.getStringExtra("userNickname")
         viewModel.fetchUsers()
-        SimpleLogger.logI(viewModel.cherishUsers.value.toString())
     }
 
     private fun showInitialFragment() {
