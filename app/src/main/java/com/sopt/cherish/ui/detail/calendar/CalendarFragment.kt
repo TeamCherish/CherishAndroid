@@ -15,8 +15,6 @@ import com.sopt.cherish.util.extension.FlexBoxExtension.clearChips
 import com.sopt.cherish.util.extension.longToast
 
 // todo : binding 객체 메모리 해제 꼭 시켜줘야 함
-// todo : 삭제 하고 나서 다시 캘린더로 돌아왔을 때 텍스트가 refresh가 되지가 않는다 어떻게 해야하지
-// todo : 삭제 혹은 수정을 했을 때 내용들이 갱신이 되려면 observing이 되어있어야 한다 그러므로 liveData로 되어 있어야 한다.
 class CalendarFragment : Fragment() {
 
     private val viewModel: DetailPlantViewModel by activityViewModels()

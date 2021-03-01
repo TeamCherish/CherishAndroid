@@ -26,7 +26,6 @@ class DetailWateringDialogFragment : DialogFragment(),
 
     private val viewModel: DetailPlantViewModel by activityViewModels()
 
-    // todo : DelayDialog도 하나 만들어야 합니다.
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

@@ -58,8 +58,6 @@ class ResultPlantFragment : Fragment() {
             val intent = Intent(requireContext(), MainActivity::class.java)
 
             if (activity?.intent?.getIntExtra("codeFirstStart", -1) == 1) {
-                // userId , userNickname이 없어서 안되는거네 시발 찾았다.
-                // todo : userId랑 userNickname 받으면된다.
                 intent.flags =
                     Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
                 intent.putExtra("userId", viewModel.userId)

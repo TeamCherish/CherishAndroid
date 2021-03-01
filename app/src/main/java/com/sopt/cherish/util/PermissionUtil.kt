@@ -20,7 +20,6 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener
  */
 
 object PermissionUtil {
-    // todo : 잘 사용될 수 있게 내가 만들어야 겠음
     fun requestCherishPermission(activity: Activity, listener: PermissionListener) {
         requestPermissions(
             activity,

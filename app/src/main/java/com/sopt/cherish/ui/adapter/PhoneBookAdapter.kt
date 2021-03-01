@@ -7,7 +7,6 @@ import android.widget.CompoundButton
 import androidx.recyclerview.widget.RecyclerView
 import com.sopt.cherish.databinding.ItemLayoutBinding
 
-// todo : Data class 뺴놔야 함
 data class Phone(
     val id: String?, val name: String?, val phone: String?
 
@@ -38,8 +37,6 @@ class PhoneBookAdapter(private val phoneBookList: List<Phone>) :
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-
-        // todo : 로직 설명 들어봐야 알거같음
 
         holder.radioButton.setOnCheckedChangeListener { compoundButton, isChecked ->
 

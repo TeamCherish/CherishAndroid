@@ -18,7 +18,6 @@ import com.sopt.cherish.util.DialogUtil
 /**
  * Created on 01-03 by SSong-develop
  * popUp_Watering
- * todo : sizing 하는 것만 다시 한번 좀 생각해보면 좋을거 같음 이건 끝!
  */
 
 class WateringDialogFragment : DialogFragment(), View.OnClickListener {

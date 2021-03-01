@@ -19,7 +19,6 @@ class SignInActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignInBinding
     private val requestData = RetrofitBuilder
 
-    // todo : 1. Login이 실패할 경우 , 2. 네트워킹이 제대로 되어 있지 않은 경우 여기서 판단
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

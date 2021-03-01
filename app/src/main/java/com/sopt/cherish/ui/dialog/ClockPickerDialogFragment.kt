@@ -129,7 +129,7 @@ class ClockPickerDialogFragment(
     }
 
     override fun onClick(p0: View?) {
-        TODO("Not yet implemented")
+
     }
 
     private fun NumberPicker.removeDivider() {

@@ -75,10 +75,8 @@ class ReviewActivity : AppCompatActivity() {
         }
     }
 
-    // todo : dialog 사이즈 값만 측정
     private fun showLoadingDialog() {
         lifecycleScope.launch {
-            // 다이얼로그 사이즈만 하면 됨
             val dialog = MultiViewDialog(R.layout.dialog_loading, 0.35f, 0.169f)
             dialog.show(supportFragmentManager, TAG)
             delay(2000)

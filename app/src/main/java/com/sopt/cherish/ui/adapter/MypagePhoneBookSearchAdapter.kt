@@ -7,7 +7,6 @@ import android.widget.CompoundButton
 import androidx.recyclerview.widget.RecyclerView
 import com.sopt.cherish.databinding.ItemLayoutBinding
 
-// todo : Data class 뺴놔야 함
 data class Phonemypagesearch(
     val id: String?, val name: String?, val phone: String?
 
