@@ -421,14 +421,12 @@ class ManagePlantFragment : Fragment() {
                                 binding.myPageUserName.text = it.myPageUserData.user_nickname
                                 mypageusername=it.myPageUserData.user_nickname
                                 mypageuseremail=it.myPageUserData.email
-                                binding.myPageBottomTab.addTab(
-                                    binding.myPageBottomTab.newTab().setCustomView(
+                                binding.myPageBottomTab.getTabAt(0)!!.setCustomView(
                                         createTabView(
                                             "식물 ",
                                             it.myPageUserData.totalCherish.toString()
                                         )
                                     )
-                                )
                                 binding.myPageBottomTab.getTabAt(1)!!.setCustomView(
                                         createTabView(
                                             "연락처 ",
