@@ -33,12 +33,7 @@
             </intent-filter>
         </service>
 
-        <activity
-            android:name=".ui.detail.DetailUserInputActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.enrollment.EnrollmentUserActivity"
-            android:screenOrientation="portrait" />
+
         <activity
             android:name=".ui.enrollment.EnrollmentPhoneActivity"
             android:screenOrientation="portrait" />
@@ -60,15 +55,7 @@
         <activity
             android:name=".ui.signin.SignInActivity"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.enrollment.PhoneBookActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.enrollment.EnrollPlantActicity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".ui.enrollment.ResultPlantActivity"
-            android:screenOrientation="portrait" />
+
         <activity
             android:name=".ui.review.ReviewActivity"
             android:screenOrientation="portrait" />
