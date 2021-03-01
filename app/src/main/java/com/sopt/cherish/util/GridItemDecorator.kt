@@ -19,8 +19,8 @@ class GridItemDecorator(
         val column = position % spanCount // item column
 
         if (includeEdge) {
-            outRect.left = spacing - column * spacing / spanCount
-            outRect.right = (column + 1) * spacing / spanCount
+            outRect.left = (column * spacing / spanCount)
+            outRect.right = spacing - (column + 1) * (spacing / spanCount)
 
             // 만약 디자인 팀에서 위에 간격을 좀 줬으면 좋겠다 하면 사용
             /*if (position < spanCount) // top Edge

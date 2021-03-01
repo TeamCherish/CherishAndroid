@@ -16,8 +16,6 @@ import com.sopt.cherish.util.DialogUtil
 /**
  * Created on 2021-1-1 by SSong-develop
  * dialog에 비즈니스 로직이 들어가지는 않는 간단한 dialog는 이 클래스를 사용해 제어
- * todo : 생성자로 가로와 세로의 비율을 float형태로 받아서 이를 처리해준다면?! 정말 좋을거 같음
- * todo : resume에서 다시 다이얼로그 사이즈를 리 사이징하는 과정이 너무 별로임 이 클래스 고쳐야함
  */
 
 class CustomDialogFragment(
@@ -42,7 +40,7 @@ class CustomDialogFragment(
                     .into(binding.dialogLoadingImage)
                 binding.root
             }
-            R.layout.dialog_keyword_limit_error -> {
+            R.layout.dialog_warning_keyword_limit_error -> {
                 val binding = DialogLoadingBinding.bind(view)
                 DialogUtil.adjustDialogSize(this, 0.694f, 0.169f)
                 binding.root

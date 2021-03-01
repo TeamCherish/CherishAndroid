@@ -13,4 +13,5 @@
     app:chipStrokeWidth="1dp"
     app:chipBackgroundColor="@color/white"
     app:closeIconEnabled="true"
-    app:closeIconTint="@color/black" />
+    app:closeIcon="@drawable/ic_chip_close"
+    app:closeIconVisible="true" />

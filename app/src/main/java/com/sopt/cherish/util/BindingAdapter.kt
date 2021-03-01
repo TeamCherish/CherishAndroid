@@ -15,6 +15,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.sopt.cherish.R
 import com.sopt.cherish.util.PixelUtil.dp
 import com.sopt.cherish.util.animation.ProgressbarAnimation
+import kotlin.math.abs
 
 object BindingAdapter {
 
@@ -30,7 +31,7 @@ object BindingAdapter {
     @JvmStatic
     @BindingAdapter("android:waterVisibility")
     fun waterVisibility(imageView: ImageView, dDay: Int) {
-        if (dDay > 7)
+        if (dDay <= 0)
             imageView.visibility = View.VISIBLE
         else
             imageView.visibility = View.INVISIBLE
@@ -39,7 +40,6 @@ object BindingAdapter {
     @JvmStatic
     @BindingAdapter("android:setPlantImage")
     fun setPlantImage(imageView: ImageView, plantImageUrl: String?) {
-        // todo : 만약에 growth가 300이상을 넘어갔을 경우, image가 아닌 그래픽 url을 사용해서 작동시킨다면???
         Glide.with(imageView.context)
             .load(plantImageUrl)
             .into(imageView)
@@ -63,6 +63,23 @@ object BindingAdapter {
     }
 
     @JvmStatic
+    @BindingAdapter("android:setSelectedPlantStrokeColor")
+    fun setSelectedPlantStrokeColor(imageView: ImageView, plantName: String?) {
+        imageView.setImageDrawable(
+            ContextCompat.getDrawable(
+                imageView.context, when (plantName) {
+                    "민들레" -> R.drawable.home_selected_plant_indicator_dandelion
+                    "로즈마리" -> R.drawable.home_selected_plant_indicator_rosemary
+                    "아메리칸블루" -> R.drawable.home_selected_plant_indicator_american_blue
+                    "스투키" -> R.drawable.home_selected_plant_indicator_stuki
+                    "단모환" -> R.drawable.home_selected_plant_indicator_cactus
+                    else -> R.drawable.home_selected_plant_indicator_rosemary
+                }
+            )
+        )
+    }
+
+    @JvmStatic
     @BindingAdapter("android:setPlantImageViewSize")
     fun setPlantImageViewSize(imageView: ImageView, temp: Int) {
         imageView.apply {
@@ -79,9 +96,9 @@ object BindingAdapter {
         val standardBottomSheetBehavior = BottomSheetBehavior.from(view)
         standardBottomSheetBehavior.apply {
             state = BottomSheetBehavior.STATE_COLLAPSED
-            peekHeight = 150.dp
+            peekHeight = 160.dp
             expandedOffset = 100.dp
-            halfExpandedRatio = 0.2f
+            halfExpandedRatio = 0.24f
             isHideable = false
         }
     }
@@ -92,10 +109,10 @@ object BindingAdapter {
     fun setDeadLineDay(textView: TextView, dDay: Int) {
         when {
             dDay > 0 -> {
-                textView.text = "D+$dDay"
+                textView.text = "D-$dDay"
             }
             dDay < 0 -> {
-                textView.text = "D$dDay"
+                textView.text = "D+${abs(dDay)}"
             }
             else -> {
                 textView.text = "D-DAY"

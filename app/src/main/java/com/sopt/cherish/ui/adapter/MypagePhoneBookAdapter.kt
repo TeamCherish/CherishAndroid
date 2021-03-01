@@ -6,7 +6,6 @@ import android.widget.CompoundButton
 import androidx.recyclerview.widget.RecyclerView
 import com.sopt.cherish.databinding.ItemLayoutPlantBinding
 
-// todo : Data class 뺴놔야 함
 data class Phonemypage(
     val id: String?, val name: String?, val phone: String?
 
@@ -25,11 +24,13 @@ class MypagePhoneBookAdapter(private val phoneBookList: List<Phonemypage>) :
 
         val layoutInflater = LayoutInflater.from(parent.context)
 
-        val binding: ItemLayoutPlantBinding = ItemLayoutPlantBinding.inflate(layoutInflater, parent, false)
+        val binding: ItemLayoutPlantBinding =
+            ItemLayoutPlantBinding.inflate(layoutInflater, parent, false)
 
 
         return Holder(binding)
     }
+
     override fun onBindViewHolder(holder: MypagePhoneBookAdapter.Holder, position: Int) {
         val phone = phoneBookList[position]
         holder.setPhone(phone)
@@ -53,7 +54,7 @@ class MypagePhoneBookAdapter(private val phoneBookList: List<Phonemypage>) :
 
     interface ItemClickListener {
         fun onchange(radio: Boolean)
-        fun oncount(count:Int)
+        fun oncount(count: Int)
     }
 
     //클릭리스너 선언

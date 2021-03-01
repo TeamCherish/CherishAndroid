@@ -4,12 +4,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.CompoundButton
-import androidx.databinding.adapters.CompoundButtonBindingAdapter.setChecked
 import androidx.recyclerview.widget.RecyclerView
 import com.sopt.cherish.databinding.ItemLayoutBinding
-import com.sopt.cherish.databinding.ItemLayoutPlantBinding
 
-// todo : Data class 뺴놔야 함
 data class Phonemypagesearch(
     val id: String?, val name: String?, val phone: String?
 
@@ -24,7 +21,10 @@ class MypagePhoneBookSearchAdapter(private val phoneBookList: List<Phonemypage>)
     lateinit var phonename: String
     lateinit var phonenumber: String
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MypagePhoneBookSearchAdapter.Holder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): MypagePhoneBookSearchAdapter.Holder {
 
         val layoutInflater = LayoutInflater.from(parent.context)
 
@@ -37,6 +37,7 @@ class MypagePhoneBookSearchAdapter(private val phoneBookList: List<Phonemypage>)
 
         return Holder(binding)
     }
+
     override fun onBindViewHolder(holder: MypagePhoneBookSearchAdapter.Holder, position: Int) {
         /*val phone = phoneBookList[position]
         holder.setPhone(phone)*/
@@ -54,7 +55,7 @@ class MypagePhoneBookSearchAdapter(private val phoneBookList: List<Phonemypage>)
                 Log.d("phonebook", "${phoneBookList[position].name}")
                 phonename = phoneBookList[position].name.toString()
                 phonenumber = phoneBookList[position].phone.toString()
-              // itemClickListner.ongetinfo(phonename,phonenumber)
+                // itemClickListner.ongetinfo(phonename,phonenumber)
             }
         }
         val phone = phoneBookList[position]
@@ -68,7 +69,7 @@ class MypagePhoneBookSearchAdapter(private val phoneBookList: List<Phonemypage>)
     inner class Holder(private val binding: ItemLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-            val radioButton = binding.radioButton
+        val radioButton = binding.radioButton
 
         var mPhone: Phonemypage? = null
 
@@ -78,7 +79,6 @@ class MypagePhoneBookSearchAdapter(private val phoneBookList: List<Phonemypage>)
             binding.textPhone.text = phone.phone
         }
     }
-
 
 
     interface ItemClickListener {
@@ -93,8 +93,6 @@ class MypagePhoneBookSearchAdapter(private val phoneBookList: List<Phonemypage>)
     fun setItemClickListener(itemClickListener: ItemClickListener) {
         this.itemClickListner = itemClickListener
     }
-
-
 
 
 }

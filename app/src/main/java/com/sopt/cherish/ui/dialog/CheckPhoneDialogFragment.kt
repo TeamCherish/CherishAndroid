@@ -20,7 +20,6 @@ class CheckPhoneDialogFragment(
     private val requestData = RetrofitBuilder
 
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

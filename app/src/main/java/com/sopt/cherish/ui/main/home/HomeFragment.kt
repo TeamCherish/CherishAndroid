@@ -1,6 +1,7 @@
 package com.sopt.cherish.ui.main.home
 
 import android.animation.ArgbEvaluator
+import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -29,9 +30,6 @@ import com.sopt.cherish.util.extension.longToast
 
 /**
  * 메인 홈뷰
- * 초기상태와 중간에 있는 경우 2개 다 고려해야 합니다.
- * todo : 1. 바텀시트 클릭 시 클릭된게 맨 앞에서 보여지게 하는거
- * todo : fetchUser() 할때마다 selectedUser가 갱신되는게 좀 마음이 아프긴 해요;;; 이거 어떻게 해결할 방법만 좀 찾으면...
  */
 
 class HomeFragment : Fragment(), OnItemClickListener {
@@ -73,7 +71,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
 
     override fun onResume() {
         super.onResume()
-        observeCherishUsers()
+        viewModel.fetchUsers()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -95,25 +93,25 @@ class HomeFragment : Fragment(), OnItemClickListener {
     private fun observeCherishUsers() {
         viewModel.cherishUsers.observe(viewLifecycleOwner) {
             setCherishUserListAdapter(it)
-            setSelectedUser(it.userData.userList.reversed()[0])
+            setSelectedUser(it.userData.userList[1])
         }
     }
 
     private fun setSelectedUser(user: User) {
         viewModel.selectedCherishUser.value = user
-        homeCherryListAdapter.lastSelectedPosition = 0
+        homeCherryListAdapter.lastSelectedPosition = 1
     }
 
     private fun setCherishUserListAdapter(userResult: UserResult) {
-        // null이 오는데 null일 리가 없는데 왜 null이라고 나오는지를 모르겠어...
-        // 왜 null이라고 하는거지....분명 연결을 했는데...
-        homeCherryListAdapter.data = (userResult.userData.userList.reversed() as? MutableList<User>)
+        homeCherryListAdapter.data = (userResult.userData.userList as? MutableList<User>)
             ?: throw IllegalArgumentException("list is Empty")
         homeCherryListAdapter.notifyDataSetChanged()
     }
 
     override fun onItemClick(itemBinding: MainCherryItemBinding, position: Int) {
         viewModel.selectedCherishUser.value = homeCherryListAdapter.data[position]
+        homeCherryListAdapter.data[0] = homeCherryListAdapter.data[position]
+        homeCherryListAdapter.notifyItemChanged(0)
         slideDownBottomSheet()
     }
 
@@ -123,29 +121,28 @@ class HomeFragment : Fragment(), OnItemClickListener {
         binding.homeUserList.apply {
             adapter = homeCherryListAdapter
             layoutManager = GridLayoutManager(context, 5)
-            addItemDecoration(GridItemDecorator(spanCount = 5, spacing = 10.dp, includeEdge = true))
+            addItemDecoration(GridItemDecorator(spanCount = 5, spacing = 6.dp, includeEdge = true))
             isNestedScrollingEnabled = false
             setHasFixedSize(true)
         }
     }
 
     // 화면이동
-    fun navigateWatering() {
-        // +로 가는 녀석들이 가장 물주기가 시급한 친구들이라고해서 일단 알고리즘을 이렇게 작성함.
-        if (viewModel.selectedCherishUser.value?.dDay!! >= 0) {
+    private fun navigateWatering() {
+        if (viewModel.selectedCherishUser.value?.dDay!! <= 0) {
             WateringDialogFragment().show(parentFragmentManager, TAG)
         } else {
             longToast(requireContext(), "물 줄수있는 날이 아니에요 ㅠ")
         }
     }
 
-    fun navigatePhoneBook() {
+    private fun navigatePhoneBook() {
         val intent = Intent(context, EnrollmentPhoneActivity::class.java)
         intent.putExtra("userId", viewModel.cherishuserId.value)
         startActivity(intent)
     }
 
-    fun navigateDetailPlant(userId: Int?) {
+    private fun navigateDetailPlant(userId: Int?) {
         val intent = Intent(activity, DetailPlantActivity::class.java)
         intent.putExtra("userId", userId)
         intent.putExtra("cherishId", viewModel.selectedCherishUser.value?.id)
@@ -153,15 +150,14 @@ class HomeFragment : Fragment(), OnItemClickListener {
         intent.putExtra("cherishNickname", viewModel.selectedCherishUser.value?.nickName)
         intent.putExtra("userNickname", viewModel.userNickName.value)
         intent.putExtra("cherishuserId", viewModel.cherishuserId.value)
-        startActivity(intent)
+        intent.putExtra("selectedUserDday", viewModel.selectedCherishUser.value!!.dDay)
+        startActivityForResult(intent, CODE_MOVE_DETAIL_PLANT)
     }
 
-    // 리사이클러뷰 아이템 클릭 시 바텀 시트 내려감
     private fun slideDownBottomSheet() {
-        // todo : 비율로 변경해야함
         standardBottomSheetBehavior.apply {
             state = BottomSheetBehavior.STATE_COLLAPSED
-            peekHeight = 150.dp
+            peekHeight = 160.dp
             expandedOffset = 100.dp
         }
     }
@@ -182,12 +178,22 @@ class HomeFragment : Fragment(), OnItemClickListener {
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
                 if (standardBottomSheetBehavior.state == BottomSheetBehavior.STATE_DRAGGING)
                     standardBottomSheetBehavior.peekHeight = 60.dp
+
             }
         })
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == CODE_MOVE_DETAIL_PLANT) {
+            if (resultCode == RESULT_OK) {
+                viewModel.animationTrigger.value = data?.getBooleanExtra("animationTrigger", false)
+            }
+        }
+    }
+
     companion object {
         private const val TAG = "HomeFragment"
+        private const val CODE_MOVE_DETAIL_PLANT = 1005
     }
 }
 

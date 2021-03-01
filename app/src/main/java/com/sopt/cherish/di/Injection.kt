@@ -1,13 +1,13 @@
 package com.sopt.cherish.di
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.lifecycle.ViewModelProvider
-import com.sopt.cherish.remote.api.CalendarAPI
-import com.sopt.cherish.remote.api.ReviewAPI
-import com.sopt.cherish.remote.api.UserAPI
-import com.sopt.cherish.remote.api.WateringAPI
+import com.sopt.cherish.remote.api.*
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.repository.*
 import com.sopt.cherish.ui.factory.*
+import com.sopt.cherish.util.MyKeyStore
 
 /**
  * Created on 01-03 by SSong-develop
@@ -17,8 +17,8 @@ object Injection {
 
     fun provideMainViewModelFactory(): ViewModelProvider.Factory {
         return MainViewModelFactory(
-            provideMainRepository(), provideWateringRepository(),
-            provideReviewRepository(), provideCalendarRepository()
+            provideMainRepository(), provideWateringRepository(), provideCalendarRepository(),
+            provideNotificationRepository()
         )
     }
 
@@ -43,7 +43,7 @@ object Injection {
     }
 
     fun provideDetailViewModelFactory(): ViewModelProvider.Factory {
-        return DetailViewModelFactory(provideDetailPlantRepository())
+        return DetailViewModelFactory(provideDetailPlantRepository(), provideWateringRepository())
     }
 
     // watering di
@@ -57,7 +57,7 @@ object Injection {
 
     // review di
     private fun provideReviewRepository(): ReviewRepository {
-        return ReviewRepository(provideReviewAPI())
+        return ReviewRepository(provideReviewAPI(), provideNotificationAPI())
     }
 
     private fun provideReviewAPI(): ReviewAPI {
@@ -81,6 +81,23 @@ object Injection {
     // review di
     fun provideReviewViewModelFactory(): ViewModelProvider.Factory {
         return ReviewViewModelFactory(provideReviewRepository())
+    }
+
+    // notification di
+    private fun provideNotificationAPI(): NotificationAPI {
+        return RetrofitBuilder.notificationAPI
+    }
+
+    private fun provideNotificationRepository(): NotificationRepository {
+        return NotificationRepository(provideNotificationAPI())
+    }
+
+    // alarm di
+    fun provideAlarmDataStore(context: Context): SharedPreferences {
+        return context.getSharedPreferences(
+            MyKeyStore.provideAlarmDataStoreName(),
+            Context.MODE_PRIVATE
+        )
     }
 
 }

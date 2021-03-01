@@ -28,13 +28,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imageView10">
 
-        <EditText
+        <com.sopt.cherish.view.edittext.ClearEditText
             android:id="@+id/editTextTextPersonName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:background="@null"
             android:hint="이메일 주소"
+            android:paddingRight="@dimen/margin_8dp"
             android:textColor="@color/cherish_text_gray"
             android:fontFamily="@font/notosanscjkkr_regular"
             android:includeFontPadding="false"
@@ -65,7 +66,7 @@
         app:layout_constraintStart_toStartOf="@+id/cons_email"
         app:layout_constraintTop_toBottomOf="@id/cons_email">
 
-        <EditText
+        <com.sopt.cherish.view.edittext.ClearEditText
             android:id="@+id/editTextTextPassword"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -74,6 +75,7 @@
             android:background="@null"
             android:textColor="@color/cherish_text_gray"
             android:hint="비밀번호"
+            android:paddingRight="@dimen/margin_8dp"
             android:fontFamily="@font/notosanscjkkr_regular"
             android:includeFontPadding="false"
             android:textSize="13sp"

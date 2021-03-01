@@ -93,19 +93,19 @@
 
     <TextView
         android:id="@+id/service_text"
-        android:textColorLink="@color/cherish_green_main"
+        android:layout_marginBottom="26dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="@string/sign_up_service1"
-        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/sign_up_button"
-        android:layout_marginBottom="26dp"
-        android:gravity="center"
+        android:textColorLink="@color/cherish_green_main"
         android:textSize="@dimen/text_12sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/sign_up_button"
         android:textColor="@color/cherish_light_black"
-        android:fontFamily="@font/notosanscjkkr_regular"/>
+        android:fontFamily="@font/notosanscjkkr_regular" />
 
 
     <Button

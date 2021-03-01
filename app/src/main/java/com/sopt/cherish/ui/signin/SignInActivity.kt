@@ -9,6 +9,7 @@ import com.sopt.cherish.remote.api.*
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.main.MainActivity
 import com.sopt.cherish.ui.main.home.HomeBlankActivity
+import com.sopt.cherish.util.extension.hideKeyboard
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -18,7 +19,6 @@ class SignInActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignInBinding
     private val requestData = RetrofitBuilder
 
-    // todo : 1. Login이 실패할 경우 , 2. 네트워킹이 제대로 되어 있지 않은 경우 여기서 판단
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -33,6 +33,7 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun signIn(email: String, password: String) {
+        binding.editTextTextPassword.hideKeyboard()
         requestData.authAPI.postLogin(EditUserReq(email, password))
             .enqueue(
                 object : Callback<EditUserRes> {
@@ -70,6 +71,7 @@ class SignInActivity : AppCompatActivity() {
                         blankHomeIntent.putExtra("userId", userId)
                         blankHomeIntent.putExtra("userNickname", userNickName)
                         startActivity(blankHomeIntent)
+
                         finish()
                     } else {
                         val mainActivityIntent =

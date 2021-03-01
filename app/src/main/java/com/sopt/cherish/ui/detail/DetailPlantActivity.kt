@@ -78,6 +78,8 @@ class DetailPlantActivity : AppCompatActivity(),
         //유저 아이디
         cherishuserId = intent.getIntExtra("userId", 0)
         viewModel.userId.value = cherishuserId
+        //유저 dDay
+        viewModel.selectedUserDday = intent.getIntExtra("selectedUserDday", 0)
 
         Log.d("cherishid_main", cherishid_main.toString())
         Log.d("cherishid_plant", cherishid_plant.toString())

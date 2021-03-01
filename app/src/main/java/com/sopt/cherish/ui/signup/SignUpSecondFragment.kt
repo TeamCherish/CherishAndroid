@@ -22,12 +22,12 @@ import java.util.regex.Pattern
 
 
 class SignUpSecondFragment : Fragment() {
-    lateinit var binding:FragmentSignUpSecondBinding
-    lateinit var phoneNumber:String
+    lateinit var binding: FragmentSignUpSecondBinding
+    lateinit var phoneNumber: String
     private val requestData = RetrofitBuilder
-    var authData:String=""
-    var email:String=""
-    var password:String=""
+    var authData: String = ""
+    var email: String = ""
+    var password: String = ""
 
 
     override fun onCreateView(
@@ -37,13 +37,13 @@ class SignUpSecondFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_sign_up_second, container, false)
 
-        binding= FragmentSignUpSecondBinding.bind(view)
+        binding = FragmentSignUpSecondBinding.bind(view)
         binding.userPhone.addTextChangedListener(PhoneNumberFormattingTextWatcher())
 
 
         val bundle = (activity as SignUpActivity).mBundle
-        email=bundle.getString("email").toString()
-        password=bundle.getString("password").toString()
+        email = bundle.getString("email").toString()
+        password = bundle.getString("password").toString()
 
         //Log.d("email received", email)
         getCertificationNumber()
@@ -51,7 +51,7 @@ class SignUpSecondFragment : Fragment() {
         return view
     }
 
-    private fun getCertificationNumber(){
+    private fun getCertificationNumber() {
         binding.userPhone.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 phoneNumber = binding.userPhone.text.toString()
@@ -90,12 +90,12 @@ class SignUpSecondFragment : Fragment() {
 
     }
 
-    private fun isPhoneNumberValid(phone: String):Boolean{
-        if(!Pattern.matches(
+    private fun isPhoneNumberValid(phone: String): Boolean {
+        if (!Pattern.matches(
                 "^\\s*(010|011|016|017|018|019)(-|\\)|\\s)*(\\d{3,4})(-|\\s)*(\\d{4})\\s*$",
                 phone
-            ))
-        {
+            )
+        ) {
             Log.d("validation", "false")
             return false
         }
@@ -104,7 +104,7 @@ class SignUpSecondFragment : Fragment() {
         return true
     }
 
-    private fun requestServer(phoneNumber: String){
+    private fun requestServer(phoneNumber: String) {
         requestData.phoneAuthAPI.postAuth(
             RequestPhoneAuthData(phone = phoneNumber)
         ).enqueue(
@@ -132,9 +132,9 @@ class SignUpSecondFragment : Fragment() {
         )
     }
 
-    private fun checkCertificationNumber(authData: String){
-        if(authData==binding.userCertificationNumber.text.toString()){ //인증번호 일치하면
-            binding.certificationOk.text="인증번호가 일치합니다."
+    private fun checkCertificationNumber(authData: String) {
+        if (authData == binding.userCertificationNumber.text.toString()) { //인증번호 일치하면
+            binding.certificationOk.text = "인증번호가 일치합니다."
             binding.certificationOk.setTextColor(
                 ContextCompat.getColor(
                     binding.root.context,
@@ -157,15 +157,15 @@ class SignUpSecondFragment : Fragment() {
             )
 
             binding.signUpButton.setOnClickListener {
-                val myBundle=Bundle()
-                myBundle.putString("email",email)
-                myBundle.putString("password",password)
-                myBundle.putString("phone",phoneNumber)
+                val myBundle = Bundle()
+                myBundle.putString("email", email)
+                myBundle.putString("password", password)
+                myBundle.putString("phone", phoneNumber)
 
                 (activity as SignUpActivity).postData(myBundle)
                 (activity as SignUpActivity).replaceFragment(2)
             }
-        }else{
+        } else {
             //버튼 비활성화
             binding.signUpButton.setBackgroundColor(
                 ContextCompat.getColor(

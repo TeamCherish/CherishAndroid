@@ -15,7 +15,7 @@ import com.sopt.cherish.ui.adapter.MypagePhoneBookAdapter
 import com.sopt.cherish.ui.adapter.Phonemypage
 
 
-class MyPagePhoneBookFragment() : Fragment() {
+class MyPagePhoneBookFragment : Fragment() {
 
     // val permissions = arrayOf(Manifest.permission.READ_CONTACTS, Manifest.permission.CALL_PHONE)
     lateinit var madapter: MypagePhoneBookAdapter
@@ -24,7 +24,7 @@ class MyPagePhoneBookFragment() : Fragment() {
     var sortText = "asc"
     var phonecount = 0
     private lateinit var enrollToolbar: Toolbar
-    lateinit var countphone:String
+    lateinit var countphone: String
     private lateinit var binding: FragmentMyPagePhoneBookBinding
 
 

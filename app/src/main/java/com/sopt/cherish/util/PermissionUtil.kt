@@ -20,7 +20,6 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener
  */
 
 object PermissionUtil {
-    // todo : 잘 사용될 수 있게 내가 만들어야 겠음
     fun requestCherishPermission(activity: Activity, listener: PermissionListener) {
         requestPermissions(
             activity,
@@ -74,6 +73,7 @@ object PermissionUtil {
     }
 
     fun openPermissionSettings(context: Context) {
+        // 권한이 설정되어 있지 않습니다. 권한 설정 칸으로 이동합니다.
         context.startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
             data = Uri.fromParts("package", context.packageName, null)
         })

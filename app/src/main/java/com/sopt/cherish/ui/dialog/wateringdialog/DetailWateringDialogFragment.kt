@@ -8,20 +8,24 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.activityViewModels
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.DialogDetailPlantWateringBinding
-import com.sopt.cherish.ui.dialog.DelayWateringDialogFragment
+import com.sopt.cherish.ui.detail.DetailPlantViewModel
+import com.sopt.cherish.ui.dialog.delaywatering.DetailPlantDelayWateringDialogFragment
 import com.sopt.cherish.util.DialogUtil
 
 /**
  * Created on 01-03 by SSong-develop
  * popUp_Watering
+ * 요것은 끝!
  */
 
 class DetailWateringDialogFragment : DialogFragment(),
     View.OnClickListener {
 
-    // todo : DelayDialog도 하나 만들어야 합니다.
+    private val viewModel: DetailPlantViewModel by activityViewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -34,7 +38,7 @@ class DetailWateringDialogFragment : DialogFragment(),
             false
         )
         binding.dialogDetailWatering = this
-
+        binding.detailPlantViewModel = viewModel
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         return binding.root
@@ -51,7 +55,7 @@ class DetailWateringDialogFragment : DialogFragment(),
     }
 
     fun navigateNextTimeContact() {
-        DelayWateringDialogFragment().show(parentFragmentManager, TAG)
+        DetailPlantDelayWateringDialogFragment().show(parentFragmentManager, TAG)
         dismiss()
     }
 

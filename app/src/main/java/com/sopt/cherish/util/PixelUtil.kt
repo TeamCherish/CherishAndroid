@@ -22,4 +22,7 @@ object PixelUtil {
 
     val screenHeight: Int
         get() = MainApplication.pixelRatio.screenHeight
+
+    val displayDensity: Float
+        get() = MainApplication.pixelRatio.displayMetrics.density
 }

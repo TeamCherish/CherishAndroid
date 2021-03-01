@@ -1,20 +1,18 @@
 package com.sopt.cherish.ui.detail.calendar
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import com.prolificinteractive.materialcalendarview.CalendarDay
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentCalendarBinding
 import com.sopt.cherish.ui.detail.DetailPlantActivity
 import com.sopt.cherish.ui.detail.DetailPlantViewModel
 import com.sopt.cherish.ui.review.ReviseReviewFragment
 import com.sopt.cherish.util.DateUtil
-import com.sopt.cherish.util.extension.FlexBoxExtension.addChipCalendar
 import com.sopt.cherish.util.extension.FlexBoxExtension.clearChips
+import com.sopt.cherish.util.extension.longToast
 
 // todo : binding 객체 메모리 해제 꼭 시켜줘야 함
 class CalendarFragment : Fragment() {
@@ -36,13 +34,18 @@ class CalendarFragment : Fragment() {
         initializeViewModelData()
         initializeCalendar(binding)
         addDateClickListener(binding)
+        observeSelectedDay()
 
         return binding.root
     }
 
     fun navigateReviseReview() {
-        parentFragmentManager.beginTransaction().addToBackStack(TAG)
-            .replace(R.id.fragment_detail, ReviseReviewFragment()).commit()
+        if (viewModel.selectedCalendarData.value != null) {
+            parentFragmentManager.beginTransaction().addToBackStack(TAG)
+                .replace(R.id.fragment_detail, ReviseReviewFragment()).commit()
+        } else {
+            longToast(requireContext(), "등록된 리뷰가 없어요 ㅠ")
+        }
     }
 
     override fun onResume() {
@@ -52,10 +55,8 @@ class CalendarFragment : Fragment() {
             (activity as DetailPlantActivity).setActionBarTitle("식물 캘린더")
         }
         viewModel.fetchCalendarData()
+        viewModel.selectedCalendarDay.value = viewModel.selectedCalendarDay.value
         binding.calendarView.removeDecorators()
-        binding.calendarViewChipLayout.clearChips()
-        binding.calendarView.selectedDate?.let { showDate(binding, it) }
-        binding.calendarView.selectedDate?.let { showContent(binding, it) }
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
@@ -89,47 +90,52 @@ class CalendarFragment : Fragment() {
     private fun changeCalendarMode(binding: FragmentCalendarBinding) {
         binding.reviewBack.setOnClickListener { view ->
             viewModel.calendarModeChangeEvent.value = !viewModel.calendarModeChangeEvent.value!!
-        }
-    }
-
-    private fun addDateClickListener(binding: FragmentCalendarBinding) {
-
-        binding.calendarView.setOnDateChangedListener { widget, date, selected ->
-            binding.calendarViewChipLayout.clearChips()
-            showDate(binding, date)
-            showContent(binding, selectedDate = date)
-        }
-    }
-
-    private fun showContent(binding: FragmentCalendarBinding, selectedDate: CalendarDay) {
-        viewModel.calendarData.value.let { calendarRes ->
-            binding.reviewAllText.text = " "
-            calendarRes?.waterData?.calendarData?.filter {
-                DateUtil.convertDateToCalendarDay(it.wateredDate) == selectedDate
-            }?.map {
-                showChips(binding, listOf(it.userStatus1, it.userStatus2, it.userStatus3))
-                showMemo(binding, it.review)
-                // todo : selected된게 물론 dot가 있는 날도 있겠지만 없는 경우 도 있잖아 그경우를 생각안했어 훈기야.
-                viewModel.selectedCalendarData.value = it
+            if (viewModel.calendarModeChangeEvent.value!!) {
+                binding.reviewAllText.maxLines = 5
+            } else {
+                binding.reviewAllText.maxLines = 2
             }
         }
     }
 
-    @SuppressLint("SetTextI18n")
-    private fun showDate(binding: FragmentCalendarBinding, date: CalendarDay) {
-        binding.calendarViewSelectedDate.text = "${date.year}년 ${date.month}월 ${date.day}일"
-    }
-
-    private fun showChips(binding: FragmentCalendarBinding, wateredChip: List<String?>) {
-        binding.calendarViewChipLayout.clearChips()
-        wateredChip.forEach {
-            it?.let { it1 -> binding.calendarViewChipLayout.addChipCalendar(it1) }
+    private fun observeSelectedDay() {
+        viewModel.selectedCalendarDay.observe(viewLifecycleOwner) { selectedDay ->
+            viewModel.selectedCalendarData.value = null
+            viewModel.calendarData.value.let { calendarRes ->
+                calendarRes?.waterData?.calendarData?.filter {
+                    selectedDay == DateUtil.convertDateToCalendarDay(it.wateredDate)
+                }?.map {
+                    viewModel.selectedCalendarData.value = it
+                }
+            }
         }
     }
 
-    private fun showMemo(binding: FragmentCalendarBinding, waterMemo: String) {
+    private fun addDateClickListener(binding: FragmentCalendarBinding) {
+        binding.calendarView.setOnDateChangedListener { widget, date, selected ->
+            viewModel.selectedCalendarDay.value = date
+        }
+    }
+
+    private fun removeMemo(binding: FragmentCalendarBinding) {
         binding.reviewAllText.text = " "
-        binding.reviewAllText.text = waterMemo
+    }
+
+    private fun removeSelectedCalendarData() {
+        viewModel.selectedCalendarData.value = null
+    }
+
+    private fun removeSelectedDate(binding: FragmentCalendarBinding) {
+        binding.calendarViewSelectedDate.text = " "
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        removeSelectedCalendarData()
+        removeMemo(binding)
+        removeSelectedDate(binding)
+        viewModel.selectedCalendarDay.value = null
+        binding.calendarViewChipLayout.clearChips()
     }
 
     companion object {

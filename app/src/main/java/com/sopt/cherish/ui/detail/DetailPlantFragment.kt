@@ -22,7 +22,7 @@ import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.adapter.DetailMemoAdapter
 import com.sopt.cherish.ui.detail.calendar.CalendarFragment
 import com.sopt.cherish.ui.dialog.AlertPlantDialogFragment
-import com.sopt.cherish.ui.dialog.wateringdialog.WateringDialogFragment
+import com.sopt.cherish.ui.dialog.wateringdialog.DetailWateringDialogFragment
 import com.sopt.cherish.ui.domain.MemoListDataclass
 import retrofit2.Call
 import retrofit2.Callback
@@ -79,7 +79,7 @@ class DetailPlantFragment : Fragment() {
                 parentFragmentManager,
                 "DetailPlantFragment"
             )*/
-            WateringDialogFragment().show(parentFragmentManager, "DetailPlantFragment")
+            DetailWateringDialogFragment().show(parentFragmentManager, "DetailPlantFragment")
         }
 
         Log.d("gogo", cherishid.toString())
@@ -103,6 +103,7 @@ class DetailPlantFragment : Fragment() {
                                 binding.textViewNick.text = it.data.nickname
                                 Log.d("textViewNick", it.data.nickname.toString())
                                 binding.textViewName.text = it.data.name.toString()
+
                                 binding.textViewPlantname.text = it.data.plant_name.toString()
                                 //식물 아이디 받는 곳 이거를 이제 정보 아이콘 누를때 넘겨줘야함
                                 plantId = it.data.plantId
@@ -138,17 +139,17 @@ class DetailPlantFragment : Fragment() {
                                     it.data.gage.toFloat() * 100,
                                     animationDuration
                                 )
-                                binding.chip.isVisible= false
+                                binding.chip.isVisible = false
                                 binding.chip2.isVisible = false
                                 binding.chip3.isVisible = false
-                               /* binding.chip.text = it.data.keyword1
-                                binding.chip2.text = it.data.keyword2
-                                binding.chip3.text = it.data.keyword3*/
-                                if(it.data.keyword1==""&& it.data.keyword2=="" && it.data.keyword3==""){
+                                /* binding.chip.text = it.data.keyword1
+                                 binding.chip2.text = it.data.keyword2
+                                 binding.chip3.text = it.data.keyword3*/
+                                if (it.data.keyword1 == "" && it.data.keyword2 == "" && it.data.keyword3 == "") {
                                     binding.chip.text = "키워드를 입력하지 않았어요!"
-                                    binding.chip.isVisible=true
-                                    binding.chip2.isVisible=false
-                                    binding.chip3.isVisible=false
+                                    binding.chip.isVisible = true
+                                    binding.chip2.isVisible = false
+                                    binding.chip3.isVisible = false
 
                                 }
                                 if (it.data.keyword1.toString() != "null" && it.data.keyword1 != "") {

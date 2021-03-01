@@ -7,7 +7,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
@@ -64,8 +63,9 @@ class DeletePlantDialogFragment(
                                 ?.let { it ->
 
                                     Log.d("data success_delete", it.success.toString())
-                                    viewModel.fetchUsers()
-                                    parentFragmentManager?.beginTransaction().detach(ManagePlantFragment()).attach(ManagePlantFragment()).commit();
+                                    parentFragmentManager.beginTransaction()
+                                        .detach(ManagePlantFragment()).attach(ManagePlantFragment())
+                                        .commit()
                                     activity?.finish()
                                     dismiss()
                                 }

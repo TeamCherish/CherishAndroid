@@ -2,6 +2,7 @@ package com.sopt.cherish.ui.review
 
 import android.os.Bundle
 import android.view.*
+import androidx.appcompat.app.AlertDialog
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -13,16 +14,14 @@ import com.sopt.cherish.ui.detail.DetailPlantActivity
 import com.sopt.cherish.ui.detail.DetailPlantViewModel
 import com.sopt.cherish.ui.dialog.CustomDialogFragment
 import com.sopt.cherish.util.DateUtil
+import com.sopt.cherish.util.MultiViewDialog
+import com.sopt.cherish.util.SimpleLogger
+import com.sopt.cherish.util.extension.*
 import com.sopt.cherish.util.extension.FlexBoxExtension.addChip
 import com.sopt.cherish.util.extension.FlexBoxExtension.getChip
-import com.sopt.cherish.util.extension.countNumberOfCharacters
-import com.sopt.cherish.util.extension.longToast
-import com.sopt.cherish.util.extension.shortToast
-import com.sopt.cherish.util.extension.writeKeyword
 
 /**
  * Created by SSong-develop on 2021-02-12
- * todo : binding을 전역으로 만든 다음에 resume으로 돌아왔을 떄
  */
 class ReviseReviewFragment : Fragment() {
     private val viewModel: DetailPlantViewModel by activityViewModels()
@@ -96,16 +95,27 @@ class ReviseReviewFragment : Fragment() {
                 return true
             }
             R.id.trash -> {
-                // todo : 메모 삭제하기 이전에 정말로 삭제를 할것인지를 물어보면 될 거 같음.
-                viewModel.deleteReview(
-                    DeleteReviewReq(
-                        viewModel.cherishId.value!!,
-                        DateUtil.convertDateToString(viewModel.selectedCalendarData.value!!.wateredDate)
-                    )
-                )
-                viewModel.selectedCalendarData.value = null
-                longToast(requireContext(), "메모 삭제에 성공했습니다.")
-                parentFragmentManager.popBackStack()
+                val builder = AlertDialog.Builder(requireContext())
+                builder.setTitle("삭제 하시겠습니까?").setMessage("삭제 시 리뷰를 찾을 수 없습니다")
+                    .setPositiveButton(
+                        "확인"
+                    ) { dialog, which ->
+                        viewModel.deleteReview(
+                            DeleteReviewReq(
+                                viewModel.cherishId.value!!,
+                                DateUtil.convertDateToString(viewModel.selectedCalendarData.value!!.wateredDate)
+                            )
+                        )
+                        viewModel.selectedCalendarData.value = null
+                        SimpleLogger.logI("${viewModel.selectedCalendarData.value}")
+                        longToast(requireContext(), "메모 삭제에 성공했습니다.")
+                        parentFragmentManager.popBackStack()
+                    }
+                    .setNegativeButton("취소") { dialog, which ->
+                        shortToast(requireContext(), "메모 삭제를 취소했습니다.")
+                        dialog.dismiss()
+                    }
+                builder.create().show()
             }
         }
         return super.onOptionsItemSelected(item)
@@ -115,8 +125,11 @@ class ReviseReviewFragment : Fragment() {
         binding.reviseReviewMemo.countNumberOfCharacters { memo ->
             binding.reviseReviewNumberOfMemo.text = memo?.length.toString()
             if (memo?.length!! > 100) {
-                // todo : dialog로 보여줘야 함
-                shortToast(requireContext(), "100자를 초과했습니다.")
+                MultiViewDialog(R.layout.dialog_warning_review_limit_error, 0.6944f, 0.16875f).show(
+                    parentFragmentManager,
+                    TAG
+                )
+                binding.reviseReviewMemo.hideKeyboard()
             }
         }
     }
@@ -125,7 +138,7 @@ class ReviseReviewFragment : Fragment() {
         binding.reviseReviewEditKeyword.countNumberOfCharacters { keyword ->
             binding.reviseReviewNumberOfCharacters.text = keyword?.length.toString()
             if (keyword?.length!! > 5) {
-                CustomDialogFragment(R.layout.dialog_keyword_limit_error).show(
+                CustomDialogFragment(R.layout.dialog_warning_keyword_limit_error).show(
                     parentFragmentManager,
                     ReviewActivity.TAG
                 )
@@ -134,7 +147,14 @@ class ReviseReviewFragment : Fragment() {
     }
 
     private fun addUserStatusWithChip(binding: FragmentReviseReviewBinding) {
-        binding.reviseReviewEditKeyword.writeKeyword(binding.reviseReviewFlexBox)
+        binding.reviseReviewEditKeyword.writeKeyword(
+            binding.reviseReviewFlexBox,
+            parentFragmentManager
+        )
+    }
+
+    companion object {
+        const val TAG = "reviseReviewFragment"
     }
 
 }

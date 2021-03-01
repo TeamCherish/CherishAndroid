@@ -40,14 +40,14 @@ class ManagePlantFragment : Fragment() {
     private val viewModel: MainViewModel by activityViewModels()
     private var tabIndex: Int = 0
     private var isCollapsed: Boolean = true
-    var isSearched:Boolean=false
+    var isSearched: Boolean = false
     private val requestData = RetrofitBuilder
-    private lateinit var tabBindingFirst:MyPageCustomTabBinding
-    private lateinit var tabBindingSecond:MyPageCustomTabBinding
+    private lateinit var tabBindingFirst: MyPageCustomTabBinding
+    private lateinit var tabBindingSecond: MyPageCustomTabBinding
     lateinit var data: List<MyPageCherishData>
     lateinit var binding: FragmentManagePlantBinding
 
-    lateinit var madapter:MypagePhoneBookSearchAdapter
+    lateinit var madapter: MypagePhoneBookSearchAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,31 +56,32 @@ class ManagePlantFragment : Fragment() {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_manage_plant, container, false)
 
-        tabBindingFirst=MyPageCustomTabBinding.inflate(inflater, container, false)
-        tabBindingSecond=MyPageCustomTabBinding.inflate(inflater, container, false)
+        tabBindingFirst = MyPageCustomTabBinding.inflate(inflater, container, false)
+        tabBindingSecond = MyPageCustomTabBinding.inflate(inflater, container, false)
 
 
         // 예진이 userId , viewModel.userId.value 라고하면 userId 찾을 수 있어요
         SimpleLogger.logI(viewModel.cherishuserId.value.toString())
         initializeServerRequest(binding)
-        initializeBottomSheetBehavior(binding)
+
         binding.myPageAddPlantBtn.setOnClickListener {
             navigatePhoneBook()
         }
         /* binding.myPageAddPhoneBtn.setOnClickListener{
              setFragment(EnrollPlantFragment())
          }*/
-        binding.cancelBtn.setOnClickListener{
+        binding.cancelBtn.setOnClickListener {
             binding.searchBox.visibility = View.VISIBLE
-            isSearched=false
-            binding.cancelBtn.visibility=View.INVISIBLE
-            if(!isCollapsed&&tabIndex==1)
-                binding.myPageAddPlantBtn.visibility=View.VISIBLE
-            (activity as MainActivity).replaceFragment(tabIndex,data,isSearched)
+            isSearched = false
+            binding.cancelBtn.visibility = View.INVISIBLE
+            if (!isCollapsed && tabIndex == 1)
+                binding.myPageAddPlantBtn.visibility = View.VISIBLE
+            (activity as MainActivity).replaceFragment(tabIndex, data, isSearched)
         }
         initializeSearchBtn()
         return binding.root
     }
+
     fun setFragment(fragment: Fragment) {
         val transaction = parentFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_enroll, fragment.apply {
@@ -97,21 +98,21 @@ class ManagePlantFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         initializeSearchBtn()
-
+        initializeBottomSheetBehavior(binding)
     }
 
-    private fun initializeSearchBtn(){
-        isSearched=(activity as MainActivity).getIsSearched()
+    private fun initializeSearchBtn() {
+        isSearched = (activity as MainActivity).getIsSearched()
 
-        if(isSearched)
-            binding.searchBox.visibility=View.INVISIBLE
+        if (isSearched)
+            binding.searchBox.visibility = View.INVISIBLE
         else
-            binding.searchBox.visibility=View.VISIBLE
+            binding.searchBox.visibility = View.VISIBLE
     }
 
     private fun initializeBottomSheetBehavior(binding: FragmentManagePlantBinding) {
         val standardBottomSheetBehavior =
-            BottomSheetBehavior.from(binding.homeStandardBottomSheet)
+            BottomSheetBehavior.from(binding.homeStandardBottomSheetMypage)
         // bottom sheet state 지정
         standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
         standardBottomSheetBehavior.peekHeight = 340.dp
@@ -121,14 +122,14 @@ class ManagePlantFragment : Fragment() {
         //검색 버튼 눌렀을 때
         binding.searchBox.setOnClickListener {
             binding.searchBox.visibility = View.INVISIBLE
-            isSearched=true
-            binding.cancelBtn.visibility=View.VISIBLE
+            isSearched = true
+            binding.cancelBtn.visibility = View.VISIBLE
             standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-            if(tabIndex==1){
-                binding.myPageAddPlantBtn.visibility=View.INVISIBLE
+            if (tabIndex == 1) {
+                binding.myPageAddPlantBtn.visibility = View.INVISIBLE
 
             }
-            (activity as MainActivity).replaceFragment(tabIndex,data,isSearched)
+            (activity as MainActivity).replaceFragment(tabIndex, data, isSearched)
         }
 
 
@@ -145,7 +146,7 @@ class ManagePlantFragment : Fragment() {
                                 R.color.white
                             )
                         )
-                        isSearched=(activity as MainActivity).getIsSearched()
+                        isSearched = (activity as MainActivity).getIsSearched()
                         binding.myPageAddPlantBtn.visibility = View.VISIBLE //식물 추가 visible
                         isCollapsed = false
                     }
@@ -158,10 +159,10 @@ class ManagePlantFragment : Fragment() {
                             )
                         )
                         binding.searchBox.visibility = View.VISIBLE
-                        binding.cancelBtn.visibility=View.INVISIBLE
+                        binding.cancelBtn.visibility = View.INVISIBLE
                         binding.myPageAddPlantBtn.visibility = View.INVISIBLE //식물 추가 invisible
                         isCollapsed = true
-                        isSearched=false
+                        isSearched = false
 
                     }
 
@@ -175,10 +176,10 @@ class ManagePlantFragment : Fragment() {
                             )
                         )
 
-                        isSearched=(activity as MainActivity).getIsSearched()
-                        if(isSearched){
+                        isSearched = (activity as MainActivity).getIsSearched()
+                        if (isSearched) {
                             binding.myPageAddPlantBtn.visibility = View.INVISIBLE
-                        }else{
+                        } else {
                             binding.myPageAddPlantBtn.visibility = View.VISIBLE
                         }
                         isCollapsed = false
@@ -194,15 +195,15 @@ class ManagePlantFragment : Fragment() {
                         )
                         binding.searchBox.visibility = View.VISIBLE
 
-                        binding.cancelBtn.visibility=View.INVISIBLE
+                        binding.cancelBtn.visibility = View.INVISIBLE
 
                         binding.myPageAddPlantBtn.visibility = View.INVISIBLE
                         isCollapsed = true
-                        isSearched=false
+                        isSearched = false
                     }
 
                 }
-                (activity as MainActivity).replaceFragment(tabIndex,data,isSearched)
+                (activity as MainActivity).replaceFragment(tabIndex, data, isSearched)
             }
 
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
@@ -211,7 +212,10 @@ class ManagePlantFragment : Fragment() {
         })
     }
 
-    private fun initializeTabLayoutView(binding: FragmentManagePlantBinding,data:List<MyPageCherishData>) {
+    private fun initializeTabLayoutView(
+        binding: FragmentManagePlantBinding,
+        data: List<MyPageCherishData>
+    ) {
 
         activity?.supportFragmentManager!!.beginTransaction()
             .add(R.id.my_page_bottom_container, PlantFragment(data)).commit()
@@ -258,9 +262,9 @@ class ManagePlantFragment : Fragment() {
                                 R.color.cherish_my_page_bg
                             )
                         )
-                        binding.cancelBtn.visibility=View.INVISIBLE
+                        binding.cancelBtn.visibility = View.INVISIBLE
                         binding.myPageAddPlantBtn.visibility = View.INVISIBLE
-                        isSearched=false
+                        isSearched = false
 
                     } else {
                         binding.myPageBg.setBackgroundColor(
@@ -269,11 +273,11 @@ class ManagePlantFragment : Fragment() {
                                 R.color.white
                             )
                         )
-                        isSearched=(activity as MainActivity).getIsSearched()
+                        isSearched = (activity as MainActivity).getIsSearched()
 
                         binding.myPageAddPlantBtn.visibility = View.VISIBLE
                     }
-                    (activity as MainActivity).replaceFragment(tabIndex,data,isSearched)
+                    (activity as MainActivity).replaceFragment(tabIndex, data, isSearched)
                 }
                 if (tabIndex == 1) {
 
@@ -296,9 +300,9 @@ class ManagePlantFragment : Fragment() {
                             )
                         )
 
-                        binding.cancelBtn.visibility=View.INVISIBLE
+                        binding.cancelBtn.visibility = View.INVISIBLE
 
-                        isSearched=false
+                        isSearched = false
 
                     } else {
                         binding.myPageBg.setBackgroundColor(
@@ -308,31 +312,31 @@ class ManagePlantFragment : Fragment() {
                             )
                         )
 
-                        isSearched=(activity as MainActivity).getIsSearched()
-                        if(isSearched){
+                        isSearched = (activity as MainActivity).getIsSearched()
+                        if (isSearched) {
                             binding.myPageAddPlantBtn.visibility = View.INVISIBLE
-                        }else{
+                        } else {
                             binding.myPageAddPlantBtn.visibility = View.VISIBLE
                         }
                     }
-                    (activity as MainActivity).replaceFragment(tabIndex,data,isSearched)
+                    (activity as MainActivity).replaceFragment(tabIndex, data, isSearched)
                 }
             }
         })
 
     }
 
-    private fun createTabView(name:String,count:String?): LinearLayout {
-        return when(name){
-            "식물 "->{
-                tabBindingFirst.tabName.text=name
-                tabBindingFirst.tabCount.text=count
+    private fun createTabView(name: String, count: String?): LinearLayout {
+        return when (name) {
+            "식물 " -> {
+                tabBindingFirst.tabName.text = name
+                tabBindingFirst.tabCount.text = count
 
                 tabBindingFirst.root
             }
-            else->{
-                tabBindingSecond.tabName.text=name
-                tabBindingSecond.tabCount.text=count
+            else -> {
+                tabBindingSecond.tabName.text = name
+                tabBindingSecond.tabCount.text = count
 
                 tabBindingSecond.root
             }
@@ -350,7 +354,7 @@ class ManagePlantFragment : Fragment() {
     private fun initializeServerRequest(binding: FragmentManagePlantBinding) {
         requestData.myPageAPI.fetchUserPage(viewModel.cherishuserId.value!!)
             .enqueue(
-                object : Callback<MyPageUserRes>{
+                object : Callback<MyPageUserRes> {
                     override fun onFailure(call: Call<MyPageUserRes>, t: Throwable) {
                         Log.d("통신 실패", t.toString())
                     }
@@ -375,14 +379,29 @@ class ManagePlantFragment : Fragment() {
                                     it.myPageUserData.completeCount.toString()
                                 binding.myPageUserName.text = it.myPageUserData.user_nickname
 
-                                binding.myPageBottomTab.addTab(binding.myPageBottomTab.newTab().
-                                setCustomView(createTabView("식물 ",it.myPageUserData.totalCherish.toString())))
-                                binding.myPageBottomTab.addTab(binding.myPageBottomTab.newTab().
-                                setCustomView(createTabView("연락처 ",arguments?.getString("phonecount"))))
+                                binding.myPageBottomTab.addTab(
+                                    binding.myPageBottomTab.newTab().setCustomView(
+                                        createTabView(
+                                            "식물 ",
+                                            it.myPageUserData.totalCherish.toString()
+                                        )
+                                    )
+                                )
+                                binding.myPageBottomTab.addTab(
+                                    binding.myPageBottomTab.newTab().setCustomView(
+                                        createTabView(
+                                            "연락처 ",
+                                            arguments?.getString("phonecount")
+                                        )
+                                    )
+                                )
 
 
-                                initializeTabLayoutView(binding,it.myPageUserData.result.reversed())
-                                data=it.myPageUserData.result.reversed()
+                                initializeTabLayoutView(
+                                    binding,
+                                    it.myPageUserData.result.reversed()
+                                )
+                                data = it.myPageUserData.result.reversed()
                                 Log.d("list", it.myPageUserData.result.toString())
                             }
                     }

@@ -10,9 +10,10 @@ import androidx.annotation.LayoutRes
 import androidx.fragment.app.DialogFragment
 import com.bumptech.glide.Glide
 import com.sopt.cherish.R
-import com.sopt.cherish.databinding.DialogKeywordLimitErrorBinding
 import com.sopt.cherish.databinding.DialogLoadingBinding
-import com.sopt.cherish.databinding.DialogReviewLimitErrorBinding
+import com.sopt.cherish.databinding.DialogWarningKeywordLimitErrorBinding
+import com.sopt.cherish.databinding.DialogWarningKeywordWordcountLimitErrorBinding
+import com.sopt.cherish.databinding.DialogWarningReviewLimitErrorBinding
 
 class MultiViewDialog(
     @LayoutRes private val layoutResId: Int,
@@ -29,12 +30,16 @@ class MultiViewDialog(
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
         return when (layoutResId) {
-            R.layout.dialog_review_limit_error -> {
-                val binding = DialogReviewLimitErrorBinding.bind(view)
+            R.layout.dialog_warning_review_limit_error -> {
+                val binding = DialogWarningReviewLimitErrorBinding.bind(view)
                 binding.root
             }
-            R.layout.dialog_keyword_limit_error -> {
-                val binding = DialogKeywordLimitErrorBinding.bind(view)
+            R.layout.dialog_warning_keyword_limit_error -> {
+                val binding = DialogWarningKeywordLimitErrorBinding.bind(view)
+                binding.root
+            }
+            R.layout.dialog_warning_keyword_wordcount_limit_error -> {
+                val binding = DialogWarningKeywordWordcountLimitErrorBinding.bind(view)
                 binding.root
             }
             R.layout.dialog_loading -> {

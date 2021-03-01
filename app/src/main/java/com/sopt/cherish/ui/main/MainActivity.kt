@@ -1,7 +1,6 @@
 package com.sopt.cherish.ui.main
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
 import android.provider.ContactsContract
 import androidx.activity.viewModels
@@ -13,30 +12,32 @@ import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityMainBinding
 import com.sopt.cherish.di.Injection
 import com.sopt.cherish.remote.api.MyPageCherishData
+import com.sopt.cherish.remote.api.NotificationReq
 import com.sopt.cherish.ui.adapter.Phonemypage
-import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
 import com.sopt.cherish.ui.main.home.HomeFragment
 import com.sopt.cherish.ui.main.manageplant.*
 import com.sopt.cherish.ui.main.setting.SettingFragment
 import com.sopt.cherish.util.PermissionUtil
 import com.sopt.cherish.util.SimpleLogger
+import com.sopt.cherish.util.extension.shortToast
 
 
 class MainActivity : AppCompatActivity() {
 
     private val viewModel: MainViewModel by viewModels { Injection.provideMainViewModelFactory() }
-    var search:Boolean=false
+    var search: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding: ActivityMainBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_main)
         initializeViewModelData()
+        requestCherishPermissions()
         showInitialFragment()
         getFirebaseDeviceToken()
+        observeFirebaseDeviceToken()
         setBottomNavigationListener(binding)
     }
-
 
     override fun onResume() {
         super.onResume()
@@ -50,20 +51,60 @@ class MainActivity : AppCompatActivity() {
                 return@OnCompleteListener
             }
             val token = task.result
+            viewModel.fcmToken.value = token
             SimpleLogger.logI(token.toString())
         })
     }
 
+    private fun observeFirebaseDeviceToken() {
+        viewModel.fcmToken.observe(this) {
+            viewModel.sendFcmToken(NotificationReq(viewModel.cherishuserId.value!!, it))
+        }
+    }
+
     private fun initializeViewModelData() {
-        viewModel.cherishuserId.value = intent.getIntExtra("userId", 0)
+        viewModel.cherishuserId.value = intent.getIntExtra("userId", -1)
         viewModel.userNickName.value = intent.getStringExtra("userNickname")
         viewModel.fetchUsers()
         SimpleLogger.logI(viewModel.cherishUsers.value.toString())
     }
 
     private fun showInitialFragment() {
-        supportFragmentManager.beginTransaction()
-            .add(R.id.main_fragment_container, HomeFragment()).commit()
+        if (PermissionUtil.isCheckedCallPermission(this) && PermissionUtil.isCheckedSendMessagePermission(
+                this
+            )
+        ) {
+            supportFragmentManager.beginTransaction()
+                .add(R.id.main_fragment_container, HomeFragment()).commit()
+        } else {
+            shortToast(this, "권한이 설정되어 있지 않아 앱을 실행할 수 없어요 ㅠ")
+            openSettings()
+        }
+    }
+
+    private fun requestCherishPermissions() {
+        PermissionUtil.requestCherishPermission(this, object : PermissionUtil.PermissionListener {
+            override fun onPermissionGranted() {
+
+            }
+
+            override fun onPermissionShouldBeGranted(deniedPermissions: List<String>) {
+                shortToast(this@MainActivity, "권한 허용이 안되어있습니다. $deniedPermissions")
+                openSettings()
+            }
+
+            override fun onAnyPermissionPermanentlyDenied(
+                deniedPermissions: List<String>,
+                permanentDeniedPermissions: List<String>
+            ) {
+                shortToast(this@MainActivity, "권한 허용이 영구적으로 거부되었습니다. $permanentDeniedPermissions")
+                openSettings()
+            }
+        })
+    }
+
+    private fun openSettings() {
+        PermissionUtil.openPermissionSettings(this)
     }
 
     private fun setBottomNavigationListener(binding: ActivityMainBinding) {
@@ -72,27 +113,36 @@ class MainActivity : AppCompatActivity() {
 
             when (it.itemId) {
                 R.id.main_home -> {
-                    transAction.replace(R.id.main_fragment_container, HomeFragment().apply {
-                        arguments = Bundle().apply {
-                            putInt("userid", intent.getIntExtra("userId", 0))
-                        }
-                    }).commit()
+                    if (PermissionUtil.isCheckedSendMessagePermission(this) && PermissionUtil.isCheckedCallPermission(
+                            this
+                        )
+                    ) {
+                        transAction.replace(R.id.main_fragment_container, HomeFragment().apply {
+                            arguments = Bundle().apply {
+                                putInt("userid", intent.getIntExtra("userId", 0))
+                            }
+                        }).commit()
+                    } else {
+                        shortToast(this, "권한이 설정되어 있지 않아 앱을 사용할 수 없어요 ㅠ")
+                        openSettings()
+                    }
                     true
                 }
                 R.id.main_manage_plant -> {
-                    transAction.replace(R.id.main_fragment_container, ManagePlantFragment().apply {
-
-                        arguments = Bundle().apply {
-
-                            putString( "phonecount",getPhoneNumbers().toString())
-
-                        }
-                    })
-                        .commit()
+                    if (PermissionUtil.isCheckedReadContactsPermission(this)) {
+                        transAction.replace(
+                            R.id.main_fragment_container,
+                            ManagePlantFragment().apply {
+                                arguments = Bundle().apply {
+                                    putString("phonecount", getPhoneNumbers().toString())
+                                }
+                            }).commit()
+                    } else {
+                        shortToast(this, "전화번호부 권한을 주지 않아 갈 수 없어요 ㅠ")
+                        openSettings()
+                    }
                     true
-
                 }
-
                 R.id.main_setting -> {
                     transAction.replace(R.id.main_fragment_container, SettingFragment()).commit()
                     true
@@ -105,7 +155,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     @SuppressLint("Recycle")
-    fun getPhoneNumbers(): Int{
+    fun getPhoneNumbers(): Int {
         val list = mutableListOf<Phonemypage>()
 
         val phonUri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI
@@ -137,19 +187,20 @@ class MainActivity : AppCompatActivity() {
         return list.size
     }
 
-    fun replaceFragment(index: Int, data: List<MyPageCherishData>?, isSearched:Boolean) {
-        search=isSearched
+    fun replaceFragment(index: Int, data: List<MyPageCherishData>?, isSearched: Boolean) {
+        search = isSearched
         val transAction = supportFragmentManager.beginTransaction()
         when (index) {
             0 -> {
-                if(isSearched) //검색창 있는 뷰
-                    transAction.replace(R.id.my_page_bottom_container, PlantSearchFragment(data)).commit()
+                if (isSearched) //검색창 있는 뷰
+                    transAction.replace(R.id.my_page_bottom_container, PlantSearchFragment(data))
+                        .commit()
                 else //검색창 없는 뷰
                     transAction.replace(R.id.my_page_bottom_container, PlantFragment(data)).commit()
             }
             1 -> {
                 if (PermissionUtil.isCheckedReadContactsPermission(this)) {
-                    if(isSearched)
+                    if (isSearched)
                         transAction.replace(
                             R.id.my_page_bottom_container, MyPagePhoneBookSearchFragment()
                         ).commit()
@@ -165,11 +216,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun getIsSearched():Boolean{
+    fun getIsSearched(): Boolean {
         return search
     }
 
-    fun setIsSearched(isSearched:Boolean){
-        search=isSearched
+    fun setIsSearched(isSearched: Boolean) {
+        search = isSearched
     }
 }

@@ -1,8 +1,6 @@
 package com.sopt.cherish.ui.enrollment
 
 import android.annotation.SuppressLint
-import android.app.ActivityManager
-import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -15,10 +13,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toolbar
-import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatDialog
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.core.content.getSystemService
 import androidx.fragment.app.Fragment
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentEnrollPlantBinding
@@ -44,17 +39,17 @@ class EnrollPlantFragment : Fragment() {
     lateinit var weektime: String
     var switchvalue: Boolean = false
 
-    lateinit var usernickname:String
-    lateinit var userbirth:String
-    var plant_explanation: String=""
-    var username:String=""
-    var plant_modify: String=""
+    lateinit var usernickname: String
+    lateinit var userbirth: String
+    var plant_explanation: String = ""
+    var username: String = ""
+    var plant_modify: String = ""
     var clockvalue: Boolean = false
     var weekvalue: Boolean = false
 
 
-    var plant_mean: String=""
-    var plant_url: String=""
+    var plant_mean: String = ""
+    var plant_url: String = ""
 
     var user_water = 0
 
@@ -69,9 +64,8 @@ class EnrollPlantFragment : Fragment() {
         binding = FragmentEnrollPlantBinding.bind(view)
 
         //enrollToolbar.title="식물 상세 입력"
-        binding.editNick.hint=arguments?.getString("phonename")
+        binding.editNick.hint = arguments?.getString("phonename")
         binding.phoneNumber.text = arguments?.getString("phonenumber")
-
 
 
 /*
@@ -151,7 +145,7 @@ class EnrollPlantFragment : Fragment() {
 //이름
             if (binding.editNick.text.isEmpty()) {
                 usernickname = binding.editNick.hint.toString()
-                username=binding.editBirth.hint.toString()
+                username = binding.editNick.hint.toString()
             } else {
                 usernickname = binding.editNick.text.toString()
                 username = arguments?.getString("phonename").toString()
@@ -161,7 +155,7 @@ class EnrollPlantFragment : Fragment() {
 
             if (binding.editBirth.text.isNotEmpty()) {
                 //userbirth = binding.editBirth.text.substring(0,4)+"-"+binding.editBirth.text.substring(4,6)+"-"+binding.editBirth.text.substring(6,)
-                userbirth=binding.editBirth.text.toString()
+                userbirth = binding.editBirth.text.toString()
             } else {
                 userbirth = "0000/00/00"
 

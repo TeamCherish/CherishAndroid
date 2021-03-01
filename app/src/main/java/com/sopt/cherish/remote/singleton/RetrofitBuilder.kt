@@ -1,6 +1,5 @@
 package com.sopt.cherish.remote.singleton
 
-import com.sopt.cherish.remote.RetrofitService
 import com.sopt.cherish.remote.api.*
 import com.sopt.cherish.remote.model.EnrollmentAPI
 import okhttp3.OkHttpClient
@@ -28,15 +27,11 @@ object RetrofitBuilder {
             .build()
     }
 
-    // Sample Code
-    val retrofitService: RetrofitService = getRetrofit().create(RetrofitService::class.java)
-
     val userAPI: UserAPI = getRetrofit().create(UserAPI::class.java)
 
     val myPageAPI: MyPageAPI = getRetrofit().create(MyPageAPI::class.java)
 
     val notificationAPI: NotificationAPI = getRetrofit().create(NotificationAPI::class.java)
-
 
     val signinAPI: AuthAPI = getRetrofit().create(AuthAPI::class.java)
 
@@ -60,16 +55,15 @@ object RetrofitBuilder {
 
     val modifyAPI: ModifyAPI = getRetrofit().create(ModifyAPI::class.java)
 
-    val userinfoAPI:UserInfoAPI= getRetrofit().create(UserInfoAPI::class.java)
+    val userinfoAPI: UserInfoAPI = getRetrofit().create(UserInfoAPI::class.java)
 
-    val checkphoneAPI: CheckPhoneAPI= getRetrofit().create(CheckPhoneAPI::class.java)
+    val checkphoneAPI: CheckPhoneAPI = getRetrofit().create(CheckPhoneAPI::class.java)
 
+    val nicknameChangeAPI: NicknameChangeAPI = getRetrofit().create(NicknameChangeAPI::class.java)
 
-    val nicknameChangeAPI:NicknameChangeAPI= getRetrofit().create(NicknameChangeAPI::class.java)
+    val signUpEmailAPI: SignUpEmailAPI = getRetrofit().create(SignUpEmailAPI::class.java)
 
-    val signUpEmailAPI:SignUpEmailAPI= getRetrofit().create(SignUpEmailAPI::class.java)
+    val phoneAuthAPI: PhoneAuthAPI = getRetrofit().create(PhoneAuthAPI::class.java)
 
-    val phoneAuthAPI:PhoneAuthAPI= getRetrofit().create(PhoneAuthAPI::class.java)
-
-    val signUpAPI:SignUpAPI= getRetrofit().create(SignUpAPI::class.java)
+    val signUpAPI: SignUpAPI = getRetrofit().create(SignUpAPI::class.java)
 }
