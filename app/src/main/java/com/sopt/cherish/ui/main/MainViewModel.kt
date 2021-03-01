@@ -70,6 +70,17 @@ class MainViewModel(
         }
     }
 
+    fun sendRemindReview(notificationRemindReviewReq: NotificationRemindReviewReq) =
+        viewModelScope.launch {
+            runCatching {
+                notificationRepository.sendRemindReviewNotification(notificationRemindReviewReq)
+            }.onSuccess {
+                SimpleLogger.logI("${it.message}")
+            }.onFailure {
+                throw it
+            }
+        }
+
     // Contact Dialog
     private val _calendarData = MutableLiveData<CalendarRes?>()
     val calendarData: MutableLiveData<CalendarRes?>
@@ -91,10 +102,6 @@ class MainViewModel(
     private val todayDay = DateUtil.getDay(today).toString()
 
     val delayWateringDateText = "${todayMonth}월${todayDay}일에 물주기"
-
-    private val _postponeData = MutableLiveData<PostponeWateringRes>()
-    val postponeData: MutableLiveData<PostponeWateringRes>
-        get() = _postponeData
 
     fun postponeWateringDate(postponeWateringDateReq: PostponeWateringDateReq) =
         viewModelScope.launch {

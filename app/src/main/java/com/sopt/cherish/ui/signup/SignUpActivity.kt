@@ -2,14 +2,12 @@ package com.sopt.cherish.ui.signup
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivitySignUpBinding
-import com.sopt.cherish.ui.main.MainActivity
 import com.sopt.cherish.ui.signin.SignInActivity
 
 class SignUpActivity : AppCompatActivity() {
@@ -34,11 +32,13 @@ class SignUpActivity : AppCompatActivity() {
 
 
     }
+
     fun setFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_signup, fragment)
         transaction.commit()
     }
+
     private fun initializeFragment() {
         supportFragmentManager.beginTransaction()
             .add(R.id.fragment_signup, SignUpFirstFragment()).commit()
@@ -55,9 +55,10 @@ class SignUpActivity : AppCompatActivity() {
             binding.toolbarTitleSignup.text = title
         }
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            android.R.id.home -> startActivity(Intent(this,SignInActivity::class.java))
+            android.R.id.home -> startActivity(Intent(this, SignInActivity::class.java))
         }
         return super.onOptionsItemSelected(item)
     }
@@ -66,10 +67,11 @@ class SignUpActivity : AppCompatActivity() {
         val transAction = supportFragmentManager.beginTransaction()
 
         when (index) {
-            0 ->{
+            0 -> {
                 transAction.replace(R.id.fragment_signup, SignUpFirstFragment())
-                  //  transAction.addToBackStack(null)
-            transAction.commit()}
+                //  transAction.addToBackStack(null)
+                transAction.commit()
+            }
             1 ->
                 transAction.replace(R.id.fragment_signup, SignUpSecondFragment())
                     .commit()

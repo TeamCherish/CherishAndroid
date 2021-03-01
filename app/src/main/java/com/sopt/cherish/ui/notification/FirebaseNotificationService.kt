@@ -26,27 +26,17 @@ class FirebaseNotificationService : FirebaseMessagingService() {
         const val CHANNEL_ID = "cherish_channel"
     }
 
-    override fun onCreate() {
-        super.onCreate()
-        SimpleLogger.logI("MessagingService is Running~")
-    }
-
     override fun onNewToken(token: String) {
         Log.d("Refreshed Token", token)
-        sendRegistrationToServer(token)
-    }
-
-    private fun sendRegistrationToServer(token: String) {
-
     }
 
     override fun onMessageReceived(message: RemoteMessage) {
         super.onMessageReceived(message)
         val alarmController = AlarmController(Injection.provideAlarmDataStore(this))
 
-        Log.d("FirebaseNotification", alarmController.getAlarmKey().toString())
         if (alarmController.getAlarmKey()) {
             val intent = Intent(this, SignInActivity::class.java)
+            // 이거 intent 경로도 다시한번 생각을 해봐야할 거 같은데
             val notificationManager =
                 getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
             val notificationId = Random.nextInt()
@@ -54,6 +44,7 @@ class FirebaseNotificationService : FirebaseMessagingService() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                 createNotificationChannel(notificationManager)
             }
+
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             val pendingIntent = PendingIntent.getActivity(this, 0, intent, FLAG_ONE_SHOT)
             val notification = NotificationCompat.Builder(this, CHANNEL_ID)
@@ -69,7 +60,6 @@ class FirebaseNotificationService : FirebaseMessagingService() {
             SimpleLogger.logI("message Denied $message")
         }
     }
-
 
     private fun createNotificationChannel(notificationManager: NotificationManager) {
         val channelName = "CherishNotificationChannel"

@@ -12,49 +12,49 @@
 
     <!-- background color 추가해주세요!-->
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/my_page_bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#eff1f5"
-        android:id="@+id/my_page_bg"
         tools:context=".ui.main.manageplant.ManagePlantFragment">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:contentDescription="@null"
             android:id="@+id/my_page_add_plant_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/margin_16dp"
             android:layout_marginBottom="14dp"
             android:backgroundTint="@color/cherish_green_main"
-            app:borderWidth="0dp"
-            android:visibility="invisible"
+            android:contentDescription="@null"
             android:src="@drawable/icon_plus"
-            app:tint="@color/white"
+            android:visibility="invisible"
+            app:borderWidth="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@color/white" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/original_bar"
             android:layout_width="match_parent"
             android:layout_height="44dp"
-            android:visibility="visible"
             android:layout_marginTop="@dimen/margin_18dp"
-            app:layout_constraintStart_toStartOf="parent"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
                 android:id="@+id/my_page_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="@+id/original_bar"
-                app:layout_constraintTop_toTopOf="@+id/original_bar"
-                app:layout_constraintBottom_toBottomOf="@+id/original_bar"
-                android:textColor="@color/cherish_light_black"
-                android:font="@font/notosanscjkkr_medium"
-                android:textSize="16sp"
                 android:layout_marginStart="@dimen/margin_16dp"
-                android:text="@string/myPage_title_text" />
+                android:font="@font/notosanscjkkr_medium"
+                android:text="@string/myPage_title_text"
+                android:textColor="@color/cherish_light_black"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="@+id/original_bar"
+                app:layout_constraintStart_toStartOf="@+id/original_bar"
+                app:layout_constraintTop_toTopOf="@+id/original_bar" />
 
             <ImageView
                 android:id="@+id/search_box"
@@ -68,68 +68,65 @@
                 app:layout_constraintTop_toTopOf="@+id/original_bar" />
 
             <TextView
-                android:visibility="invisible"
                 android:id="@+id/cancel_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/notosanscjkkr_regular"
-                app:layout_constraintEnd_toEndOf="@+id/original_bar"
-                app:layout_constraintTop_toTopOf="@+id/original_bar"
-                app:layout_constraintBottom_toBottomOf="@+id/original_bar"
                 android:layout_marginEnd="@dimen/margin_20dp"
-                android:text="@string/myPage_cancel_text"/>
+                android:fontFamily="@font/notosanscjkkr_regular"
+                android:text="@string/myPage_cancel_text"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@+id/original_bar"
+                app:layout_constraintEnd_toEndOf="@+id/original_bar"
+                app:layout_constraintTop_toTopOf="@+id/original_bar" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <!-- tabTextColor 추가해주세요!-->
-                <com.google.android.material.tabs.TabLayout
-                    android:id="@+id/my_page_bottom_tab"
-                    style="?attr/bottomSheetStyle"
-                    android:layout_width="match_parent"
-                    android:layout_height="58dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/original_bar"
-                    app:tabGravity="start"
-                    app:tabIndicatorColor="@color/cherish_light_black"
-                    app:tabIndicatorHeight="3dp"
-                    app:tabMode="scrollable" />
+        <!-- tabTextColor 추가해주세요!-->
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/my_page_bottom_tab"
+            style="?attr/bottomSheetStyle"
+            android:layout_width="match_parent"
+            android:layout_height="58dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/original_bar"
+            app:tabGravity="start"
+            app:tabIndicatorColor="@color/cherish_light_black"
+            app:tabIndicatorHeight="3dp"
+            app:tabMode="scrollable" />
 
-                <ImageView
-                    android:id="@+id/my_page_reset_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_20dp"
-                    android:layout_marginEnd="22dp"
-                    android:clickable="true"
-                    android:contentDescription="@null"
-                    android:src="@drawable/icn_reset"
-                    android:visibility="invisible"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/my_page_reset_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_20dp"
+            android:layout_marginEnd="22dp"
+            android:clickable="true"
+            android:contentDescription="@null"
+            android:src="@drawable/icn_reset"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-                <!-- background color 추가해주세요!-->
-                <TextView
-                    android:id="@+id/tab_bar_line"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#e9e9e9"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/my_page_bottom_tab" />
-
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/my_page_bottom_container"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tab_bar_line"
-                    />
+        <!-- background color 추가해주세요!-->
+        <TextView
+            android:id="@+id/tab_bar_line"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#e9e9e9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/my_page_bottom_tab" />
 
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/my_page_bottom_container"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tab_bar_line" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

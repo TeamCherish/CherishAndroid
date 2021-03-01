@@ -1,7 +1,6 @@
 package com.sopt.cherish.ui.signup
 
 import android.os.Bundle
-import android.telephony.PhoneNumberFormattingTextWatcher
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -38,7 +37,7 @@ class SignUpSecondFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_sign_up_second, container, false)
 
         binding = FragmentSignUpSecondBinding.bind(view)
-        binding.userPhone.addTextChangedListener(PhoneNumberFormattingTextWatcher())
+        //binding.userPhone.addTextChangedListener(PhoneNumberFormattingTextWatcher())
 
 
         val bundle = (activity as SignUpActivity).mBundle
@@ -92,7 +91,7 @@ class SignUpSecondFragment : Fragment() {
 
     private fun isPhoneNumberValid(phone: String): Boolean {
         if (!Pattern.matches(
-                "^\\s*(010|011|016|017|018|019)(-|\\)|\\s)*(\\d{3,4})(-|\\s)*(\\d{4})\\s*$",
+                "^\\s*(010|011|016|017|018|019)(|\\)|\\s)*(\\d{3,4})(|\\s)*(\\d{4})\\s*$",
                 phone
             )
         ) {

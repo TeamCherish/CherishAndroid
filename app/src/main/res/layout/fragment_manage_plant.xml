@@ -298,14 +298,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
 
-                    app:layout_constraintBottom_toBottomOf="@+id/home_standardBottomSheet_mypage"
-
                     android:layout_marginBottom="?attr/actionBarSize"
+
+                    app:layout_constraintBottom_toBottomOf="@+id/home_standardBottomSheet_mypage"
 
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tab_bar_line"
-                    />
+                    app:layout_constraintTop_toBottomOf="@+id/tab_bar_line" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -87,7 +87,7 @@
     <string name="sign_up_button_finish">완료</string>
     <string name="sign_up_button_next">다음</string>
     <string name="sign_up_phone">전화번호를 입력해주세요</string>
-    <string name="sign_up_phone_hint">ex)010&#8211;1234&#8211;5678</string>
+    <string name="sign_up_phone_hint">ex)01012345678</string>
     <string name="sign_up_certification_number">인증번호 받기</string>
     <string name="sign_up_certification_text">인증번호를 입력해주세요</string>
     <string name="sign_up_certification_hint">인증번호 입력</string>

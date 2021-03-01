@@ -18,8 +18,6 @@
         app:layout_constraintTop_toTopOf="parent">
 
 
-
-
     </androidx.appcompat.widget.Toolbar>
 
     <TextView
