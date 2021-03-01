@@ -16,6 +16,7 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.activityViewModels
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.DialogContactBinding
+import com.sopt.cherish.remote.api.NotificationRemindReviewReq
 import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.ui.review.ReviewActivity
 import com.sopt.cherish.util.DialogUtil
@@ -107,6 +108,7 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
         } else {
             requireContext().moveMarket(KAKAO_PACKAGE_NAME)
         }
+        sendRemindReviewNotification()
     }
 
     private fun startPhoneCall() {
@@ -119,6 +121,7 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
             callIntent,
             codeThatReviewPage
         )
+        sendRemindReviewNotification()
     }
 
     private fun startSendMessage() {
@@ -130,6 +133,7 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
             messageIntent,
             codeThatReviewPage
         )
+        sendRemindReviewNotification()
     }
 
     private fun startReview() {
@@ -138,6 +142,10 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
         intent.putExtra("selectedCherishNickname", viewModel.selectedCherishUser.value!!.nickName)
         intent.putExtra("selectedCherishId", viewModel.selectedCherishUser.value!!.id)
         startActivityForResult(intent, codeThatGetWatering)
+    }
+
+    private fun sendRemindReviewNotification() {
+        viewModel.sendRemindReview(NotificationRemindReviewReq(viewModel.selectedCherishUser.value!!.id))
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

@@ -30,5 +30,4 @@ class SplashActivity : AppCompatActivity() {
         val fadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.anim_splash_fade_in)
         binding.imageView3.animation = fadeInAnimation
     }
-
 }

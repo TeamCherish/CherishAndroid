@@ -10,7 +10,7 @@ data class NotificationReq(
     @SerializedName("fcm_token") val fcmToken: String
 )
 
-data class NotificationWateringReq(
+data class NotificationRemindReviewReq(
     @SerializedName("CherishId") val cherishId: Int
 )
 
@@ -20,10 +20,9 @@ interface NotificationAPI {
         @Body notificationReq: NotificationReq
     ): UtilResponseWithOutStatus
 
-    @POST("push")
-    suspend fun sendRefreshedWateringTimeNotification(
-        @Body notificationWateringReq: NotificationWateringReq
+    @POST("pushReview")
+    suspend fun sendRemindReviewNotification(
+        @Body notificationRemindReviewReq: NotificationRemindReviewReq
     ): UtilResponseWithOutStatus
-
 
 }
