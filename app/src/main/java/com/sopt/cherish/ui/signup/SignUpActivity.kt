@@ -69,32 +69,7 @@ class SignUpActivity : AppCompatActivity() {
                     .commit()
         }
     }
-/*
-    fun setData(fragment:Fragment,email:String,password:String,phone:String,sex:Boolean,birth:String,nickname:String){
-        this.email=email
-        this.password=password
-        this.phone=phone
-        this.sex=sex
-        this.birth=birth
-        this.nickname=nickname
 
-        Log.d("activity",email)
-
-        postData(fragment)
-    }
-
-    fun postData(fragment: Fragment){
-        var bundle=Bundle()
-        bundle.putString("email",email)
-        bundle.putString("password",password)
-        bundle.putString("phone",phone)
-        bundle.putBoolean("sex",sex)
-        bundle.putString("birth",birth)
-        bundle.putString("nickname",nickname)
-
-        Log.d("postdata",email)
-        fragment.arguments=bundle
-    }  */
 
     fun postData(bundle: Bundle) {
         this.mBundle = bundle
