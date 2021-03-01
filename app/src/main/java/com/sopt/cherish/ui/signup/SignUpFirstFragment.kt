@@ -183,6 +183,13 @@ class SignUpFirstFragment : Fragment() {
                         response: Response<ResponseEmailData>
                     ) {
                         Log.d("error","이메일 중복")
+                        binding.isUsableEmail.text = "이미 존재하는 이메일입니다."
+                        binding.isUsableEmail.setTextColor(
+                            ContextCompat.getColor(
+                                binding.root.context,
+                                R.color.cherish_pink_sub
+                            )
+                        )
 
                         response.takeIf {
                             it.isSuccessful
