@@ -51,6 +51,7 @@ class SignUpFirstFragment : Fragment() {
             (activity as SignUpActivity).setActionBarTitlesignup("회원가입")
         }
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> activity?.onBackPressed()

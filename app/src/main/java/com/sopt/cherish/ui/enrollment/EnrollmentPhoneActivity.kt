@@ -53,7 +53,6 @@ class EnrollmentPhoneActivity : AppCompatActivity(),
     }
 
 
-
     fun setActionBarTitle(title: String?) {
         setSupportActionBar(binding.toolbarEnrollPhone)
         val actionBar: ActionBar? = supportActionBar
