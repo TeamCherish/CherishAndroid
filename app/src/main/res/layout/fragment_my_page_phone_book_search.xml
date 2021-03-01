@@ -46,6 +46,7 @@
             app:srcCompat="@drawable/icn_search_box" />
 
         <ImageView
+            android:contentDescription="@null"
             android:id="@+id/imageView18"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -75,14 +76,14 @@
         style="@style/RoundButton.Gray"
         android:layout_width="0dp"
         android:layout_height="48dp"
-        android:layout_marginBottom="16dp"
         android:contentDescription="@null"
         android:fontFamily="@font/notosanscjkkr_medium"
         android:includeFontPadding="false"
         android:text="@string/myPage_add_phone_text"
         android:textColor="@color/white"
         android:textSize="@dimen/text_16sp"
-        app:layout_constraintBottom_toBottomOf="@id/phonebookcancel"
+        android:layout_marginBottom="@dimen/margin_16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/phonebookcancel"
         app:layout_constraintEnd_toEndOf="@+id/recycler_mypage"
         app:layout_constraintStart_toStartOf="@+id/recycler_mypage" />
 </androidx.constraintlayout.widget.ConstraintLayout>

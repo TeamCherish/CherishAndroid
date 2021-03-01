@@ -217,7 +217,7 @@ class ManagePlantFragment : Fragment() {
         data: List<MyPageCherishData>
     ) {
 
-        activity?.supportFragmentManager!!.beginTransaction()
+        requireActivity().supportFragmentManager.beginTransaction()
             .add(R.id.my_page_bottom_container, PlantFragment(data)).commit()
 
         for (i in 0 until binding.myPageBottomTab.tabCount) {
