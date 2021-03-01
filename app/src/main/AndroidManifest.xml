@@ -34,7 +34,6 @@
             </intent-filter>
         </service>
 
-
         <activity
             android:name=".ui.detail.DetailUserInputActivity"
             android:screenOrientation="portrait" />

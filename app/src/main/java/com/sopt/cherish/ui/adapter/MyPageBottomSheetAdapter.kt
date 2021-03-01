@@ -23,16 +23,18 @@ class MyPageBottomSheetAdapter(private var data: List<MyPageCherishData>?) :
             binding.mypageCherryName.text = cherishData.name
             binding.mypageCherryLevel.text = "Lv. " + cherishData.level.toString()
 
-            //초록색
+            //빨간색: D+
             if (cherishData.dDay < 0) {
-                Log.d("dday ", cherishData.dDay.toString())
-                Log.d("nickname", cherishData.nickName)
-                binding.myPageDDay.text = "D" + cherishData.dDay.toString()
-                binding.myPageDDay.setBackgroundResource(R.drawable.my_page_chip_green) //초록색으로
+                //Log.d("dday ", cherishData.dDay.toString())
+                //Log.d("nickname", cherishData.nickName)
+                val dDay = cherishData.dDay * (-1) //양수로 바꿈
+                Log.d("change dDay", dDay.toString())
+                binding.myPageDDay.text = "D+" + dDay.toString()
+                binding.myPageDDay.setBackgroundResource(R.drawable.my_page_chip_red)
                 binding.myPageDDay.setTextColor(
                     ContextCompat.getColor(
                         binding.root.context,
-                        R.color.cherish_green_main
+                        R.color.cherish_pink_sub
                     )
                 )
             } else if (cherishData.dDay == 0) {
@@ -44,13 +46,13 @@ class MyPageBottomSheetAdapter(private var data: List<MyPageCherishData>?) :
                         R.color.cherish_pink_sub
                     )
                 )
-            } else { //양수(빨간색): 그대로
-                binding.myPageDDay.text = "D+" + cherishData.dDay.toString()
-                binding.myPageDDay.setBackgroundResource(R.drawable.my_page_chip_red) //초록색으로
+            } else { //양수: 초록색: D-
+                binding.myPageDDay.text = "D-" + cherishData.dDay.toString()
+                binding.myPageDDay.setBackgroundResource(R.drawable.my_page_chip_green) //초록색으로
                 binding.myPageDDay.setTextColor(
                     ContextCompat.getColor(
                         binding.root.context,
-                        R.color.cherish_pink_sub
+                        R.color.cherish_green_main
                     )
                 )
             }

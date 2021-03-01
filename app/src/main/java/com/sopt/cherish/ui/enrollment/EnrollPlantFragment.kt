@@ -145,7 +145,7 @@ class EnrollPlantFragment : Fragment() {
 //이름
             if (binding.editNick.text.isEmpty()) {
                 usernickname = binding.editNick.hint.toString()
-                username = binding.editBirth.hint.toString()
+                username = binding.editNick.hint.toString()
             } else {
                 usernickname = binding.editNick.text.toString()
                 username = arguments?.getString("phonename").toString()
