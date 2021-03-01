@@ -25,6 +25,7 @@ import com.sopt.cherish.ui.adapter.MypagePhoneBookSearchAdapter
 import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
 import com.sopt.cherish.ui.main.MainActivity
 import com.sopt.cherish.ui.main.MainViewModel
+import com.sopt.cherish.ui.main.setting.UserModifyFragment
 import com.sopt.cherish.util.PixelUtil.dp
 import com.sopt.cherish.util.SimpleLogger
 import retrofit2.Call
@@ -46,7 +47,8 @@ class ManagePlantFragment : Fragment() {
     private lateinit var tabBindingSecond: MyPageCustomTabBinding
     lateinit var data: List<MyPageCherishData>
     lateinit var binding: FragmentManagePlantBinding
-
+    var mypageusername:String=""
+    var mypageuseremail:String=""
     lateinit var madapter: MypagePhoneBookSearchAdapter
 
     override fun onCreateView(
@@ -133,6 +135,18 @@ class ManagePlantFragment : Fragment() {
             /*    val intent=Intent(context,ManagePlantActivity::class.java)
                 intent.putExtra("searchuserid",viewModel.cherishuserId.value)
                 startActivity(intent)*/
+        }
+        binding.goToSetting.setOnClickListener {
+            val transaction = parentFragmentManager.beginTransaction()
+            transaction.replace(R.id.main_fragment_container, UserModifyFragment().apply {
+                arguments = Bundle().apply {
+                    putString("settingusernickname", mypageusername)
+                    putString("settinguseremail", mypageuseremail)
+
+                }
+            })
+            transaction.addToBackStack(null)
+            transaction.commit()
         }
 
 
@@ -381,7 +395,8 @@ class ManagePlantFragment : Fragment() {
                                 binding.myPageFinishCnt.text =
                                     it.myPageUserData.completeCount.toString()
                                 binding.myPageUserName.text = it.myPageUserData.user_nickname
-
+                                mypageusername=it.myPageUserData.user_nickname
+                                mypageuseremail=it.myPageUserData.email
                                 binding.myPageBottomTab.addTab(
                                     binding.myPageBottomTab.newTab().setCustomView(
                                         createTabView(

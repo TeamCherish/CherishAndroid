@@ -219,12 +219,12 @@ class DetailPlantFragment : Fragment() {
 
                                     val mAdapter = DetailMemoAdapter(memoList)
                                     binding.recyclerDetail.adapter = mAdapter
-
+/*
                                     binding.recyclerDetail.addItemDecoration(
                                         VerticalSpaceItemDecoration(
                                             20
                                         )
-                                    )
+                                    )*/
                                     mAdapter.setItemClickListener(object :
                                         DetailMemoAdapter.ItemClickListener {
                                         override fun onClick(view: View, position: Int) {
