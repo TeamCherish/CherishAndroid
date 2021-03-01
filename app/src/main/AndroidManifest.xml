@@ -35,22 +35,50 @@
         </service>
 
 
-        <activity android:name=".ui.detail.DetailUserInputActivity" />
-        <activity android:name=".ui.enrollment.EnrollmentUserActivity" />
-        <activity android:name=".ui.enrollment.EnrollmentPhoneActivity" />
-        <activity android:name=".ui.tutorial.TutorialActivity" />
-        <activity android:name=".ui.detail.DetailPlantActivity" />
-        <activity android:name=".ui.signup.SignUpActivity" />
-        <activity android:name=".ui.main.MainActivity" />
-        <activity android:name=".ui.main.home.HomeBlankActivity" />
-        <activity android:name=".ui.signin.SignInActivity" />
-        <activity android:name=".ui.enrollment.PhoneBookActivity" />
-        <activity android:name=".ui.enrollment.EnrollPlantActicity" />
-        <activity android:name=".ui.enrollment.ResultPlantActivity" />
-        <activity android:name=".ui.review.ReviewActivity" />
+        <activity
+            android:name=".ui.detail.DetailUserInputActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.enrollment.EnrollmentUserActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.enrollment.EnrollmentPhoneActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.tutorial.TutorialActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.detail.DetailPlantActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.signup.SignUpActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.main.home.HomeBlankActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.signin.SignInActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.enrollment.PhoneBookActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.enrollment.EnrollPlantActicity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.enrollment.ResultPlantActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.review.ReviewActivity"
+            android:screenOrientation="portrait" />
 
 
-        <activity android:name=".ui.splash.SplashActivity">
+        <activity
+            android:name=".ui.splash.SplashActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
