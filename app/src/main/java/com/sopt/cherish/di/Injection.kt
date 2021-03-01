@@ -3,6 +3,8 @@ package com.sopt.cherish.di
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.lifecycle.ViewModelProvider
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKey
 import com.sopt.cherish.remote.api.*
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.repository.*
@@ -14,6 +16,9 @@ import com.sopt.cherish.util.MyKeyStore
  * do not use koin or hilt , just use singleton pattern
  */
 object Injection {
+    private const val CONNECT_TIMEOUT = 15
+    private const val WRITE_TIMEOUT = 15
+    private const val READ_TIMEOUT = 15
 
     fun provideMainViewModelFactory(): ViewModelProvider.Factory {
         return MainViewModelFactory(
@@ -99,5 +104,22 @@ object Injection {
             Context.MODE_PRIVATE
         )
     }
+
+    // 암호화 쉐어드 프리퍼런스 di , token 발급되었을 때 여기다가 넣어놓고서 작업하면 될거 같음
+    fun provideEncryptedSharedPreference(context: Context): SharedPreferences {
+        val masterKey =
+            MasterKey.Builder(context).setKeyScheme(MasterKey.KeyScheme.AES256_GCM).build()
+        return EncryptedSharedPreferences.create(
+            context,
+            MyKeyStore.provideEncryptedSharedPrefsName(),
+            masterKey,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        )
+    }
+
+    // okHttp Interceptor
+    // token을 sharedPrefs에 넣어서 저장을 하긴 할 건데 encrypted 하게 된 sharedPref에 넣어서 관리할 것이다.
+    // todo : okHttpInterceptor 만들어놓기
 
 }

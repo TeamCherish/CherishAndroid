@@ -27,8 +27,8 @@ class MyPageBottomSheetAdapter(private var data: List<MyPageCherishData>?) :
             if (cherishData.dDay < 0) {
                 //Log.d("dday ", cherishData.dDay.toString())
                 //Log.d("nickname", cherishData.nickName)
-                val dDay=cherishData.dDay*(-1) //양수로 바꿈
-                Log.d("change dDay",dDay.toString())
+                val dDay = cherishData.dDay * (-1) //양수로 바꿈
+                Log.d("change dDay", dDay.toString())
                 binding.myPageDDay.text = "D+" + dDay.toString()
                 binding.myPageDDay.setBackgroundResource(R.drawable.my_page_chip_red)
                 binding.myPageDDay.setTextColor(

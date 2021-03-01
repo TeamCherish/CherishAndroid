@@ -2,28 +2,16 @@ package com.sopt.cherish.remote.singleton
 
 import com.sopt.cherish.remote.api.*
 import com.sopt.cherish.remote.model.EnrollmentAPI
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitBuilder {
     private const val BaseUrl = "http://cherishserver.com/"
 
-    private fun provideOkHttpClient(): OkHttpClient {
-        val loggingInterceptor = HttpLoggingInterceptor()
-        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BASIC)
-
-        return OkHttpClient.Builder()
-            .addInterceptor(loggingInterceptor)
-            .build()
-    }
-
     private fun getRetrofit(): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BaseUrl)
             .addConverterFactory(GsonConverterFactory.create())
-            .client(provideOkHttpClient())
             .build()
     }
 

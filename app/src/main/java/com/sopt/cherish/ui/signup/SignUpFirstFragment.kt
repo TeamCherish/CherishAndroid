@@ -51,6 +51,7 @@ class SignUpFirstFragment : Fragment() {
             (activity as SignUpActivity).setActionBarTitlesignup("회원가입")
         }
     }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> activity?.onBackPressed()
@@ -182,7 +183,7 @@ class SignUpFirstFragment : Fragment() {
                         call: Call<ResponseEmailData>,
                         response: Response<ResponseEmailData>
                     ) {
-                        Log.d("error","이메일 중복")
+                        Log.d("error", "이메일 중복")
                         binding.isUsableEmail.text = "이미 존재하는 이메일입니다."
                         binding.isUsableEmail.setTextColor(
                             ContextCompat.getColor(
@@ -190,7 +191,6 @@ class SignUpFirstFragment : Fragment() {
                                 R.color.cherish_pink_sub
                             )
                         )
-
                         response.takeIf {
                             it.isSuccessful
                         }?.body()

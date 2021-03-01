@@ -32,8 +32,8 @@ class SignInActivity : AppCompatActivity() {
             signIn(email, pw)
         }
 
-        binding.textView31.setOnClickListener{
-            val signUpIntent=Intent(this@SignInActivity,SignUpActivity::class.java)
+        binding.textView31.setOnClickListener {
+            val signUpIntent = Intent(this@SignInActivity, SignUpActivity::class.java)
             startActivity(signUpIntent)
             finish()
         }

@@ -6,18 +6,13 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.sopt.cherish.R
-import com.sopt.cherish.databinding.ActivityEnrollmentPhoneBinding
 import com.sopt.cherish.databinding.ActivityManageplantBinding
 import com.sopt.cherish.di.Injection
 import com.sopt.cherish.remote.api.MyPageCherishData
-import com.sopt.cherish.ui.dialog.ClockPickerDialogFragment
-import com.sopt.cherish.ui.dialog.WeekPickerDialogFragment
-import com.sopt.cherish.ui.enrollment.EnrollPlantFragment
 import com.sopt.cherish.ui.enrollment.EnrollmentViewModel
-import com.sopt.cherish.ui.enrollment.PhoneBookFragment
 import com.sopt.cherish.util.PermissionUtil
 
-class ManagePlantActivity : AppCompatActivity(){
+class ManagePlantActivity : AppCompatActivity() {
 
 
     private lateinit var binding: ActivityManageplantBinding
@@ -33,14 +28,13 @@ class ManagePlantActivity : AppCompatActivity(){
         setFragment(ManagePlantFragmentSearch())
 
 
-
     }
 
     fun setFragment(fragment: Fragment) {
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.manage_frame, fragment.apply {
             arguments = Bundle().apply {
-                putInt("searchmanageid", intent.getIntExtra("searchuserid",0))
+                putInt("searchmanageid", intent.getIntExtra("searchuserid", 0))
                 Log.d("Enrollmentphoneactiviy", count.toString())
 
             }
@@ -49,7 +43,7 @@ class ManagePlantActivity : AppCompatActivity(){
     }
 
     fun replaceFragment(index: Int, data: List<MyPageCherishData>?, isSearched: Boolean) {
-       // search = isSearched
+        // search = isSearched
         val transAction = supportFragmentManager.beginTransaction()
         when (index) {
             0 -> {

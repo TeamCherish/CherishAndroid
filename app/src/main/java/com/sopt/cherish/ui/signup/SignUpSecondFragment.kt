@@ -1,7 +1,6 @@
 package com.sopt.cherish.ui.signup
 
 import android.os.Bundle
-import android.telephony.PhoneNumberFormattingTextWatcher
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log

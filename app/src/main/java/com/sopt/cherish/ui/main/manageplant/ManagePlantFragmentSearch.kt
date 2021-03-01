@@ -24,7 +24,6 @@ import com.sopt.cherish.ui.adapter.MypagePhoneBookSearchAdapter
 import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
 import com.sopt.cherish.ui.main.MainActivity
 import com.sopt.cherish.ui.main.MainViewModel
-import com.sopt.cherish.util.SimpleLogger
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -52,7 +51,12 @@ class ManagePlantFragmentSearch : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_manage_plant_search, container, false)
+            DataBindingUtil.inflate(
+                inflater,
+                R.layout.fragment_manage_plant_search,
+                container,
+                false
+            )
 
         tabBindingFirst = MyPageCustomTabBinding.inflate(inflater, container, false)
         tabBindingSecond = MyPageCustomTabBinding.inflate(inflater, container, false)
@@ -88,13 +92,6 @@ class ManagePlantFragmentSearch : Fragment() {
         })
         transaction.addToBackStack(null)
         transaction.commit()
-    }
-
-
-    override fun onResume() {
-        super.onResume()
-
-        //initializeBottomSheetBehavior(binding)
     }
 
 

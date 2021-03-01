@@ -130,9 +130,9 @@ class ManagePlantFragment : Fragment() {
 
             }
             (activity as MainActivity).replaceFragment(tabIndex, data, isSearched)
-        /*    val intent=Intent(context,ManagePlantActivity::class.java)
-            intent.putExtra("searchuserid",viewModel.cherishuserId.value)
-            startActivity(intent)*/
+            /*    val intent=Intent(context,ManagePlantActivity::class.java)
+                intent.putExtra("searchuserid",viewModel.cherishuserId.value)
+                startActivity(intent)*/
         }
 
 
