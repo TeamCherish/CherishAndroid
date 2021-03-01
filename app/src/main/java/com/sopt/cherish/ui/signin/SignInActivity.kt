@@ -9,6 +9,7 @@ import com.sopt.cherish.remote.api.*
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.main.MainActivity
 import com.sopt.cherish.ui.main.home.HomeBlankActivity
+import com.sopt.cherish.ui.signup.SignUpActivity
 import com.sopt.cherish.util.extension.hideKeyboard
 import retrofit2.Call
 import retrofit2.Callback
@@ -29,6 +30,12 @@ class SignInActivity : AppCompatActivity() {
             val email = binding.editTextTextPersonName.text.toString()
             val pw = binding.editTextTextPassword.text.toString()
             signIn(email, pw)
+        }
+
+        binding.textView31.setOnClickListener{
+            val signUpIntent=Intent(this@SignInActivity,SignUpActivity::class.java)
+            startActivity(signUpIntent)
+            finish()
         }
     }
 
