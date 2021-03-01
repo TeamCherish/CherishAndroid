@@ -307,12 +307,12 @@
                 android:layout_height="0dp"
                 android:layout_marginStart="10dp"
                 app:layout_constraintBottom_toBottomOf="@+id/cons4"
-                android:layout_marginTop="64dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginEnd="10dp"
                 tools:listitem="@layout/detail_item_layout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView17" />
+                app:layout_constraintTop_toBottomOf="@+id/chip" />
 
 
             <TextView
@@ -339,7 +339,6 @@
                 android:textColor="#454545"
                 android:text="키워드를 입력하지 않았어요!"
                 android:textSize="@dimen/text_12sp"
-
                 app:chipStrokeColor="@color/cherish_light_black"
                 app:chipStrokeWidth="1dp"
                 app:layout_constraintHorizontal_chainStyle="packed"

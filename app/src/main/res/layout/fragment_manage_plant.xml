@@ -117,6 +117,7 @@
             app:layout_constraintStart_toEndOf="@+id/my_page_user_name"
             app:layout_constraintTop_toTopOf="@+id/my_page_user_name" />
 
+
         <ImageView
             android:id="@+id/go_to_setting"
             android:layout_width="wrap_content"
@@ -127,6 +128,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/cherishgarden"
             app:layout_constraintStart_toEndOf="@+id/cherishgarden"
             app:layout_constraintTop_toTopOf="@+id/cherishgarden" />
+
 
         <ImageView
             android:contentDescription="@null"
@@ -237,7 +239,7 @@
             android:id="@+id/coordinatorLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toBottomOf="@+id/my_page_bg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -245,7 +247,7 @@
             app:layout_constraintVertical_bias="0.0">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/home_standardBottomSheet"
+                android:id="@+id/home_standardBottomSheet_mypage"
                 style="?attr/bottomSheetStyle"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -295,13 +297,15 @@
                     android:id="@+id/my_page_bottom_container"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
+
+                    app:layout_constraintBottom_toBottomOf="@+id/home_standardBottomSheet_mypage"
+
                     android:layout_marginBottom="?attr/actionBarSize"
-                    app:layout_constraintBottom_toBottomOf="parent"
+
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tab_bar_line"
-                    app:layout_constraintVertical_bias="0.0" />
+                    />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

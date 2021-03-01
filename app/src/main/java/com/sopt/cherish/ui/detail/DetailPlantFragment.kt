@@ -103,6 +103,7 @@ class DetailPlantFragment : Fragment() {
                                 binding.textViewNick.text = it.data.nickname
                                 Log.d("textViewNick", it.data.nickname.toString())
                                 binding.textViewName.text = it.data.name.toString()
+
                                 binding.textViewPlantname.text = it.data.plant_name.toString()
                                 //식물 아이디 받는 곳 이거를 이제 정보 아이콘 누를때 넘겨줘야함
                                 plantId = it.data.plantId
