@@ -5,7 +5,7 @@ import androidx.annotation.Px
 import kotlin.math.roundToInt
 
 class PixelRatio(private val application: Application) {
-    private val displayMetrics
+    val displayMetrics
         get() = application.resources.displayMetrics
 
     val screenWidth

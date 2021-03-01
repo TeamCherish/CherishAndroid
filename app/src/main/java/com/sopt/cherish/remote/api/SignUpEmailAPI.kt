@@ -6,7 +6,7 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 
 data class RequestSignUpEmailData(
-    val email:String
+    val email: String
 )
 
 data class ResponseEmailData(
@@ -14,9 +14,9 @@ data class ResponseEmailData(
     @SerializedName("message") val message: String
 )
 
-interface SignUpEmailAPI{
+interface SignUpEmailAPI {
     @POST("checkSameEmail")
     fun postEmail(
-        @Body body:RequestSignUpEmailData
+        @Body body: RequestSignUpEmailData
     ): Call<ResponseEmailData>
 }

@@ -4,16 +4,14 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.sopt.cherish.R
-import com.sopt.cherish.databinding.FragmentEnrollPlantBinding
 import com.sopt.cherish.databinding.FragmentUserModifyBinding
 import com.sopt.cherish.remote.api.RequestNicknameData
-import com.sopt.cherish.remote.api.ResponseDeleteData
 import com.sopt.cherish.remote.api.ResponseNicknameChangedata
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.main.MainViewModel
@@ -25,7 +23,7 @@ import retrofit2.Response
 class UserModifyFragment : Fragment() {
     private val viewModel: MainViewModel by activityViewModels()
 
-    lateinit var binding:FragmentUserModifyBinding
+    lateinit var binding: FragmentUserModifyBinding
     private val requestData = RetrofitBuilder
 
     override fun onCreateView(
@@ -61,11 +59,17 @@ class UserModifyFragment : Fragment() {
             binding.settingEditNickname.setText("")
         }
         binding.buttonNickchange.setOnClickListener {
-            val body=RequestNicknameData(viewModel.cherishuserId.value!!,binding.settingEditNickname.text.toString())
+            val body = RequestNicknameData(
+                viewModel.cherishuserId.value!!,
+                binding.settingEditNickname.text.toString()
+            )
             requestData.nicknameChangeAPI.nicknamechange(body)
                 .enqueue(
                     object : Callback<ResponseNicknameChangedata> {
-                        override fun onFailure(call: Call<ResponseNicknameChangedata>, t: Throwable) {
+                        override fun onFailure(
+                            call: Call<ResponseNicknameChangedata>,
+                            t: Throwable
+                        ) {
                             Log.d("통신 실패", t.toString())
                         }
 
@@ -80,8 +84,9 @@ class UserModifyFragment : Fragment() {
                                 ?.let { it ->
 
                                     Log.d(" 닉네임 변경 오나료 ", it.success.toString())
-                                    binding.settingEditNickname.text=binding.settingEditNickname.text
-                                  // binding.settingEditEmail.text=binding.settingEditNickname.text
+                                    binding.settingEditNickname.text =
+                                        binding.settingEditNickname.text
+                                    // binding.settingEditEmail.text=binding.settingEditNickname.text
 
                                 }
                         }
@@ -96,14 +101,12 @@ class UserModifyFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var usernick=arguments?.getString("settingusernickname").toString()
-        binding.settingEditNickname.hint=(usernick)
+        var usernick = arguments?.getString("settingusernickname").toString()
+        binding.settingEditNickname.hint = (usernick)
 
-        binding.settingEditEmail.hint=(arguments?.getString("settinguseremail"))
-        binding.settingEditEmail.isEnabled=false
+        binding.settingEditEmail.hint = (arguments?.getString("settinguseremail"))
+        binding.settingEditEmail.isEnabled = false
     }
-
-
 
 
 }

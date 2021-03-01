@@ -24,9 +24,11 @@ data class ResponseUserinfoData(
 
     }
 }
+
 data class RequestUserinfoData(
-    val CherishId : Int
+    val CherishId: Int
 )
+
 interface UserInfoAPI {
     @Headers("Content-Type:application/json")
     @GET("getCherishDetail/{CherishId}")

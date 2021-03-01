@@ -9,10 +9,12 @@ data class ResponseCheckPhoneData(
     val success: Boolean,
     val message: String
 )
+
 data class RequestCheckPhoneData(
     val phone: String,
     val UserId: Int
 )
+
 interface CheckPhoneAPI {
     @Headers("Content-Type:application/json")
     @POST("cherish/checkPhone")

@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatDialog
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentResultPlantBinding
@@ -23,6 +24,8 @@ class ResultPlantFragment : Fragment() {
 
     private lateinit var enrollToolbar: Toolbar
 
+    private val viewModel: EnrollmentViewModel by activityViewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,7 +38,7 @@ class ResultPlantFragment : Fragment() {
         Log.d("plantExplanation", arguments?.getString("plant_explanation").toString())
 
 
-        if(arguments?.getString("plant_modify")?.contains("\n") == true) {
+        if (arguments?.getString("plant_modify")?.contains("\n") == true) {
             binding.textViewModify.text = arguments?.getString("plant_modify")?.split("\n")?.get(0)
             binding.textViewModifyUnder.text =
                 arguments?.getString("plant_modify")?.split("\n")?.get(
@@ -55,14 +58,14 @@ class ResultPlantFragment : Fragment() {
             val intent = Intent(requireContext(), MainActivity::class.java)
 
             if (activity?.intent?.getIntExtra("codeFirstStart", -1) == 1) {
-                // userId , userNickname이 없어서 안되는거네 시발 찾았다.
-                // todo : userId랑 userNickname 받으면된다.
                 intent.flags =
                     Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                intent.putExtra("userId", viewModel.userId)
+                intent.putExtra("userNickname", viewModel.userNickname)
                 startActivity(intent)
             } else {
                 activity?.finish()
-              //  startActivity(intent)
+                //  startActivity(intent)
 
             }
         }

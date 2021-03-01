@@ -6,7 +6,9 @@
 
     <data>
 
-
+        <variable
+            name="mainViewModel"
+            type="com.sopt.cherish.ui.main.MainViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -253,6 +255,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/view2">
 
                         <Switch
+                            android:id="@+id/setting_alarm_setting"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             app:layout_constraintBottom_toBottomOf="parent"

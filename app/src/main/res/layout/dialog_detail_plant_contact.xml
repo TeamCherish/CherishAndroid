@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
             name="dialogDetailPlantContact"
             type="com.sopt.cherish.ui.dialog.wateringdialog.DetailPlantContactDialogFragment" />
@@ -43,6 +42,7 @@
                 android:includeFontPadding="false"
                 android:textColor="@color/cherish_light_black"
                 android:textSize="22sp"
+                android:text="@{detailPlantViewModel.cherishNickname}"
                 app:layout_constraintBottom_toTopOf="@id/detail_plant_contact_common_text"
                 app:layout_constraintEnd_toEndOf="@id/detail_plant_contact_image_graphic"
                 app:layout_constraintStart_toStartOf="@id/detail_plant_contact_image_graphic"
@@ -61,49 +61,13 @@
                 app:layout_constraintStart_toStartOf="@id/detail_plant_contact_image_graphic"
                 app:layout_constraintTop_toBottomOf="@id/detail_plant_contact_user_name" />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/detail_plant_contact_user_status_first_chip"
-                style="@style/CustomChip"
+            <com.google.android.flexbox.FlexboxLayout
+                android:id="@+id/detail_plant_contact_chip_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_12dp"
-                android:fontFamily="@font/notosanscjkkr_regular"
-                android:includeFontPadding="false"
-                app:chipStrokeColor="@color/cherish_light_black"
-                app:chipStrokeWidth="1dp"
-                app:layout_constraintEnd_toStartOf="@id/detail_plant_contact_user_status_second_chip"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/detail_plant_contact_common_text" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/detail_plant_contact_user_status_second_chip"
-                style="@style/CustomChip"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/margin_8dp"
-                android:layout_marginTop="@dimen/margin_12dp"
-                android:layout_marginEnd="@dimen/margin_8dp"
-                android:fontFamily="@font/notosanscjkkr_regular"
-                android:includeFontPadding="false"
-                app:chipStrokeColor="@color/cherish_light_black"
-                app:chipStrokeWidth="1dp"
-                app:layout_constraintEnd_toStartOf="@id/detail_plant_contact_user_status_thrid_chip"
-                app:layout_constraintStart_toEndOf="@id/detail_plant_contact_user_status_first_chip"
-                app:layout_constraintTop_toBottomOf="@id/detail_plant_contact_common_text" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/detail_plant_contact_user_status_thrid_chip"
-                style="@style/CustomChip"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_12dp"
-                android:fontFamily="@font/notosanscjkkr_regular"
-                android:includeFontPadding="false"
-                app:chipStrokeColor="@color/cherish_light_black"
-                app:chipStrokeWidth="1dp"
+                android:textAlignment="center"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/detail_plant_contact_user_status_second_chip"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/detail_plant_contact_common_text" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -113,9 +77,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="23dp"
                 android:src="@drawable/contact_icn_call"
+                android:onClick="@{() -> dialogDetailPlantContact.navigateCall()}"
+                app:tint="@color/black"
                 app:layout_constraintEnd_toStartOf="@id/detail_plant_contact_kakao_talk"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/detail_plant_contact_user_status_first_chip" />
+                app:layout_constraintTop_toBottomOf="@id/detail_plant_contact_chip_layout" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/detail_plant_contact_kakao_talk"
@@ -124,9 +90,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="23dp"
                 android:src="@drawable/contact_icn_kakaotalk"
+                app:tint="@color/black"
+                android:onClick="@{() -> dialogDetailPlantContact.navigateKakao()}"
                 app:layout_constraintEnd_toStartOf="@id/detail_plant_contact_message"
                 app:layout_constraintStart_toEndOf="@id/detail_plant_contact_call"
-                app:layout_constraintTop_toBottomOf="@id/detail_plant_contact_user_status_first_chip" />
+                app:layout_constraintTop_toBottomOf="@id/detail_plant_contact_chip_layout" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/detail_plant_contact_message"
@@ -135,9 +103,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="23dp"
                 android:src="@drawable/contact_icn_text"
+                app:tint="@color/black"
+                android:onClick="@{() -> dialogDetailPlantContact.navigateToSendMessage()}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/detail_plant_contact_kakao_talk"
-                app:layout_constraintTop_toBottomOf="@id/detail_plant_contact_user_status_first_chip" />
+                app:layout_constraintTop_toBottomOf="@id/detail_plant_contact_chip_layout" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

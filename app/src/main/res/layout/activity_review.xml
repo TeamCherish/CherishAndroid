@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="reviewViewModel"
             type="com.sopt.cherish.ui.review.ReviewViewModel" />
@@ -59,13 +58,14 @@
             android:id="@+id/review_edit_keyword"
             style="@style/CustomEditText"
             android:layout_width="0dp"
-            android:layout_height="44dp"
-            android:layout_marginTop="@dimen/margin_16dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
             android:layout_marginEnd="@dimen/margin_16dp"
             android:fontFamily="@font/notosanscjkkr_regular"
             android:hint="@string/review_keyword_text"
             android:inputType="text"
             android:includeFontPadding="false"
+            android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/review_user"
             app:layout_constraintTop_toBottomOf="@id/review_description" />
@@ -101,14 +101,15 @@
             style="@style/CustomEditText"
             android:layout_width="0dp"
             android:layout_height="150dp"
-            android:layout_marginTop="18dp"
+            android:layout_marginTop="28dp"
             android:fontFamily="@font/notosanscjkkr_regular"
             android:gravity="top"
-            android:inputType="textMultiLine"
             android:hint="@string/review_memo_text"
             android:includeFontPadding="false"
+            android:inputType="textMultiLine"
             android:singleLine="false"
             android:scrollHorizontally="false"
+            android:textSize="15sp"
             app:layout_constraintEnd_toEndOf="@id/review_edit_keyword"
             app:layout_constraintStart_toStartOf="@id/review_edit_keyword"
             app:layout_constraintTop_toBottomOf="@id/review_flex_box" />

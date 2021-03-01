@@ -10,7 +10,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
+        android:fontFamily="@font/notosanscjkkr_regular"
+        android:includeFontPadding="false"
+        android:textColor="@color/black"
         android:text="@string/review_limit_memo_number_text"
-        android:textSize="@dimen/text_16sp" />
+        android:textSize="13sp" />
 
 </androidx.cardview.widget.CardView>

@@ -5,6 +5,10 @@
     <data>
 
         <variable
+            name="detailPlantViewModel"
+            type="com.sopt.cherish.ui.detail.DetailPlantViewModel" />
+
+        <variable
             name="dialogDetailWatering"
             type="com.sopt.cherish.ui.dialog.wateringdialog.DetailWateringDialogFragment" />
     </data>
@@ -76,6 +80,7 @@
                 android:onClick="@{() -> dialogDetailWatering.navigateNextTimeContact()}"
                 android:text="@string/next_time"
                 android:textColor="#404040"
+                android:delayVisiblity="@{detailPlantViewModel.selectedUserDday}"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/detail_plant_watering_image_graphic"
