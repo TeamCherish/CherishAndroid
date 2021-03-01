@@ -63,7 +63,6 @@ class DeletePlantDialogFragment(
                                 ?.let { it ->
 
                                     Log.d("data success_delete", it.success.toString())
-                                    viewModel.fetchUsers()
                                     parentFragmentManager.beginTransaction()
                                         .detach(ManagePlantFragment()).attach(ManagePlantFragment())
                                         .commit()

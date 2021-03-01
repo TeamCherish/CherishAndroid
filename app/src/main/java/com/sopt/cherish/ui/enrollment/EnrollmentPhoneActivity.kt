@@ -52,15 +52,7 @@ class EnrollmentPhoneActivity : AppCompatActivity(),
         }
     }
 
-    private fun setToolbar() {
 
-
-        // 툴바 왼쪽 버튼 설정
-        supportActionBar!!.setDisplayHomeAsUpEnabled(true)  // 왼쪽 버튼 사용 여부 true
-        supportActionBar!!.setHomeAsUpIndicator(R.drawable.icon_gnb_back)  // 왼쪽 버튼 이미지 설정
-        supportActionBar!!.setDisplayShowTitleEnabled(true)    // 타이틀 안보이게 하기
-        supportActionBar!!.title = "식물 선택"
-    }
 
     fun setActionBarTitle(title: String?) {
         setSupportActionBar(binding.toolbarEnrollPhone)

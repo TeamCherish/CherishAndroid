@@ -1,11 +1,16 @@
 package com.sopt.cherish.ui.signup
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivitySignUpBinding
+import com.sopt.cherish.ui.main.MainActivity
+import com.sopt.cherish.ui.signin.SignInActivity
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -23,32 +28,36 @@ class SignUpActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         binding = ActivitySignUpBinding.inflate(layoutInflater)
-
+        setContentView(binding.root)
         initializeFragment()
+        //setFragment(SignUpFirstFragment())
 
-        setContentView(R.layout.activity_sign_up)
+
     }
-
+    fun setFragment(fragment: Fragment) {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragment_signup, fragment)
+        transaction.commit()
+    }
     private fun initializeFragment() {
         supportFragmentManager.beginTransaction()
-            .add(R.id.sign_up_fragment_container, SignUpFirstFragment()).commit()
+            .add(R.id.fragment_signup, SignUpFirstFragment()).commit()
     }
 
-    fun setActionBarTitle(title: String?) {
-        setSupportActionBar(binding.signUpToolBar)
+    fun setActionBarTitlesignup(title: String?) {
+        setSupportActionBar(binding.toolbarSignup)
         val actionBar: ActionBar? = supportActionBar
         if (actionBar != null) {
+
             actionBar.setDisplayHomeAsUpEnabled(true)
             actionBar.setHomeAsUpIndicator(R.drawable.icon_gnb_back)
             actionBar.setDisplayShowTitleEnabled(false)
-
-            binding.signUpText.text = title
+            binding.toolbarTitleSignup.text = title
         }
     }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            android.R.id.home -> onBackPressed()
+            android.R.id.home -> startActivity(Intent(this,SignInActivity::class.java))
         }
         return super.onOptionsItemSelected(item)
     }
@@ -57,15 +66,17 @@ class SignUpActivity : AppCompatActivity() {
         val transAction = supportFragmentManager.beginTransaction()
 
         when (index) {
-            0 ->
-                transAction.replace(R.id.sign_up_fragment_container, SignUpFirstFragment()).commit()
+            0 ->{
+                transAction.replace(R.id.fragment_signup, SignUpFirstFragment())
+                  //  transAction.addToBackStack(null)
+            transAction.commit()}
             1 ->
-                transAction.replace(R.id.sign_up_fragment_container, SignUpSecondFragment())
+                transAction.replace(R.id.fragment_signup, SignUpSecondFragment())
                     .commit()
             2 ->
-                transAction.replace(R.id.sign_up_fragment_container, SignUpThirdFragment()).commit()
+                transAction.replace(R.id.fragment_signup, SignUpThirdFragment()).commit()
             3 ->
-                transAction.replace(R.id.sign_up_fragment_container, SignUpFourthFragment())
+                transAction.replace(R.id.fragment_signup, SignUpFourthFragment())
                     .commit()
         }
     }
