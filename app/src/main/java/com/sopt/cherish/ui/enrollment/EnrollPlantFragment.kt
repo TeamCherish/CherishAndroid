@@ -50,6 +50,7 @@ class EnrollPlantFragment : Fragment() {
 
     var plant_mean: String = ""
     var plant_url: String = ""
+    var plant_id:Int =0
 
     var user_water = 0
 
@@ -232,7 +233,7 @@ class EnrollPlantFragment : Fragment() {
                                             it.data.plant.flower_meaning
                                         )
 
-                                        it.data.plant.id
+                                        plant_id=it.data.plant.PlantStatusId
                                         plant_explanation = it.data.plant.explanation
                                         plant_modify = it.data.plant.modifier
                                         plant_mean = it.data.plant.flower_meaning
@@ -266,6 +267,7 @@ class EnrollPlantFragment : Fragment() {
                                 plant_mean
                             )
                             putString("plant_url", plant_url)
+                            putInt("plant_id",plant_id)
 
                         }
                     })

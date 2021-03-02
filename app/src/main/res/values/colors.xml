@@ -35,4 +35,9 @@
     <color name="cherish_pass_text_gray">#c4c4c4</color>
     <color name="cherish_my_page_bg">#eff1f5</color>
 
+    <color name="plantid1">#F1B0BC</color>
+    <color name="plantid2">#AAB3D1</color>
+    <color name="plantid3">#97CDBD</color>
+    <color name="plantid4">#9AB7DE</color>
+    <color name="plantid5">#9EC8EC</color>
 </resources>

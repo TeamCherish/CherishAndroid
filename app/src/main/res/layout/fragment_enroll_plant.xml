@@ -34,7 +34,7 @@
             android:layout_width="0dp"
             android:layout_height="44dp"
 
-            android:background="@drawable/box_add_plant_detail"
+            android:background="@drawable/box_add_plant"
 
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="@dimen/margin_4dp"
@@ -94,7 +94,7 @@
             android:layout_width="0dp"
             android:layout_height="44dp"
 
-            android:background="@drawable/box_add_plant_detail"
+            android:background="@drawable/box_add_plant"
 
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="@dimen/margin_4dp"
@@ -155,7 +155,7 @@
             android:layout_width="0dp"
             android:layout_height="44dp"
 
-            android:background="@drawable/box_add_plant_detail"
+            android:background="@drawable/box_add_plant"
 
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="@dimen/margin_4dp"
@@ -200,7 +200,7 @@
             android:id="@+id/editclock"
             android:layout_width="0dp"
             android:layout_height="44dp"
-            android:background="@drawable/box_add_plant_detail"
+            android:background="@drawable/box_add_plant"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="@dimen/margin_4dp"
             app:layout_constraintStart_toStartOf="@+id/cons3"
@@ -259,7 +259,7 @@
             android:layout_width="0dp"
             android:layout_height="44dp"
             android:layout_marginTop="@dimen/margin_4dp"
-            android:background="@drawable/box_add_plant_detail"
+            android:background="@drawable/box_add_plant"
 
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/cons4"
@@ -286,7 +286,7 @@
         style="@style/RoundButton.Gray"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="10dp"
         android:text="완료"
         android:clickable="false"
         android:textSize="@dimen/text_16sp"

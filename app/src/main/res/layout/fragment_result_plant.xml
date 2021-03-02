@@ -38,13 +38,12 @@
         android:layout_marginTop="19dp"
         android:layout_marginEnd="17dp"
         android:gravity="center"
-        android:fontFamily="@font/notosanscjkkr_regular"
         android:text="한달에 한번이지만 홀씨가 있어서 어디론가 정착을
 \n 감성적으로 주기와 관계를 연결짓는 문장이 필요하다?"
         android:textSize="@dimen/text_14sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView7" />
+        app:layout_constraintTop_toBottomOf="@+id/tip_box" />
 
     <Button
         android:id="@+id/startbtn"
@@ -62,53 +61,57 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/imageView7"
-        android:layout_width="200dp"
+        android:id="@+id/tip_box"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:background="@drawable/plant_tip_box"
         app:layout_constraintEnd_toEndOf="@+id/imageView_url"
         app:layout_constraintStart_toStartOf="@+id/imageView_url"
         app:layout_constraintTop_toBottomOf="@+id/imageView_url"
-        app:srcCompat="@drawable/plant_tip_box">
+      >
 
         <View
+            android:id="@+id/view_flower"
             android:layout_width="2dp"
-            android:layout_height="0dp"
+            android:layout_height="11dp"
             android:background="#9099cc"
-            app:layout_constraintBottom_toBottomOf="@+id/textView7"
-            app:layout_constraintEnd_toStartOf="@+id/textView1_mean"
-            app:layout_constraintStart_toEndOf="@+id/textView7"
-            app:layout_constraintTop_toTopOf="@+id/textView7" />
+            android:layout_marginStart="51dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textView_flower"
+            app:layout_constraintEnd_toStartOf="@+id/textViewflower_mean"
+            app:layout_constraintStart_toStartOf="@id/tip_box"
+            app:layout_constraintTop_toTopOf="@+id/textView_flower" />
 
         <TextView
-            android:id="@+id/textView7"
+            android:id="@+id/textView_flower"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="17dp"
+            android:layout_marginBottom="3dp"
             android:text="꽃말"
-            android:textColor="#8189b3"
             android:textSize="13sp"
+            app:layout_constraintStart_toStartOf="@id/tip_box"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/textView1_mean"
-            app:layout_constraintTop_toTopOf="@+id/imageView7" />
+            app:layout_constraintEnd_toStartOf="@+id/view_flower"
+            app:layout_constraintTop_toTopOf="@+id/tip_box" />
 
         <TextView
-            android:id="@+id/textView1_mean"
+            android:id="@+id/textViewflower_mean"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginBottom="5dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
             android:text="인연에서의 행복"
-            android:textColor="#8189b3"
+            android:layout_marginEnd="17dp"
             android:textSize="13sp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView7"
+            android:layout_marginStart="@dimen/margin_8dp"
+            app:layout_constraintStart_toEndOf="@+id/view_flower"
+            app:layout_constraintBottom_toBottomOf="@+id/tip_box"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/imageView7"
-            app:layout_constraintVertical_bias="0.476" />
+            app:layout_constraintTop_toTopOf="@+id/tip_box"
+           />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
@@ -121,7 +124,6 @@
         android:text="따뜻한 민들레"
         android:textSize="23sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_modify" />
 </androidx.constraintlayout.widget.ConstraintLayout>
