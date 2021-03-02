@@ -1,5 +1,6 @@
 package com.sopt.cherish.ui.enrollment
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -26,6 +27,7 @@ class ResultPlantFragment : Fragment() {
 
     private val viewModel: EnrollmentViewModel by activityViewModels()
 
+    @SuppressLint("ResourceAsColor")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -47,11 +49,55 @@ class ResultPlantFragment : Fragment() {
 
         }
 
-        binding.textView1Mean.text = arguments?.getString("plant_mean")
+
 
         val urlstring = arguments?.getString("plant_url")
         Log.d("url", urlstring.toString())
         Glide.with(this).load(urlstring.toString()).into(binding.imageViewUrl)
+
+        val plant_id_btn=arguments?.getInt("plant_id")
+
+        Log.d("plant_id_btn",plant_id_btn.toString())
+
+
+        when(plant_id_btn){
+            1 -> {binding.startbtn.setBackgroundColor(R.color.plantid1)
+                binding.textViewFlower.setTextColor(R.color.plantid1)
+                binding.viewFlower.setBackgroundColor(R.color.plantid1)
+                binding.tipBox.setBackgroundResource(R.drawable.plant_tip_box)
+                binding.textViewflowerMean.setTextColor(R.color.plantid1)
+            }
+            2 -> {binding.startbtn.setBackgroundColor(R.color.plantid2)
+                binding.textViewFlower.setTextColor(R.color.plantid2)
+                binding.viewFlower.setBackgroundColor(R.color.plantid2)
+              //  binding.tipBox.setBackgroundResource(R.drawable.plant_tip_box2)
+                binding.textViewflowerMean.setTextColor(R.color.plantid2)
+
+            }
+            3 -> {binding.startbtn.setBackgroundColor(R.color.plantid3)
+                binding.textViewFlower.setTextColor(R.color.plantid3)
+                binding.viewFlower.setBackgroundColor(R.color.plantid3)
+               // binding.tipBox.setBackgroundResource(R.drawable.plant_tip_box3)
+                binding.textViewflowerMean.setTextColor(R.color.plantid3)
+
+            }
+            4 -> {binding.startbtn.setBackgroundColor(R.color.plantid4)
+                binding.textViewFlower.setTextColor(R.color.plantid4)
+                binding.viewFlower.setBackgroundColor(R.color.plantid4)
+             //   binding.tipBox.setBackgroundResource(R.drawable.plant_tip_box4)
+                binding.textViewflowerMean.setTextColor(R.color.plantid4)
+            }
+            5 -> {binding.startbtn.setBackgroundColor(R.color.plantid5)
+                binding.textViewFlower.setTextColor(R.color.plantid5)
+                binding.viewFlower.setBackgroundColor(R.color.plantid5)
+                binding.tipBox.setBackgroundResource(R.drawable.plant_tip_box5)
+                binding.textViewflowerMean.setTextColor(R.color.plantid5)
+            }
+        }
+
+        binding.textViewflowerMean.text = arguments?.getString("plant_mean")
+
+
 
         binding.startbtn.setOnClickListener {
             // LoadingDialog를 보여주면 됨
