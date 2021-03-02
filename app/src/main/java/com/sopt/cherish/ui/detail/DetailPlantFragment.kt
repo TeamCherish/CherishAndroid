@@ -228,6 +228,7 @@ class DetailPlantFragment : Fragment() {
                                     mAdapter.setItemClickListener(object :
                                         DetailMemoAdapter.ItemClickListener {
                                         override fun onClick(view: View, position: Int) {
+                                            // 여기부분인데
                                             val item = mAdapter.memolist[position]
                                             val transaction =
                                                 parentFragmentManager.beginTransaction()
