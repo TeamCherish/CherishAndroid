@@ -4,10 +4,11 @@ object MyKeyStore {
     private const val alarmDataStoreName = "cherishAlarmDataStore"
     private const val alarmKeyName = "cherishAlarm"
     private const val encryptedSharedPreferencesName = "encryptedSharedPrefs"
+    private const val loginTokenPrefsName = "cherishLoginToken"
 
     fun provideAlarmKeyName(): String = alarmKeyName
 
-    fun provideAlarmDataStoreName(): String = alarmDataStoreName
-
     fun provideEncryptedSharedPrefsName(): String = encryptedSharedPreferencesName
+
+    fun provideLoginTokenPrefsName(): String = loginTokenPrefsName
 }

@@ -97,14 +97,6 @@ object Injection {
         return NotificationRepository(provideNotificationAPI())
     }
 
-    // alarm di
-    fun provideAlarmDataStore(context: Context): SharedPreferences {
-        return context.getSharedPreferences(
-            MyKeyStore.provideAlarmDataStoreName(),
-            Context.MODE_PRIVATE
-        )
-    }
-
     // 암호화 쉐어드 프리퍼런스 di , token 발급되었을 때 여기다가 넣어놓고서 작업하면 될거 같음
     fun provideEncryptedSharedPreference(context: Context): SharedPreferences {
         val masterKey =
