@@ -69,16 +69,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showInitialFragment() {
-        if (PermissionUtil.isCheckedCallPermission(this) && PermissionUtil.isCheckedSendMessagePermission(
-                this
-            )
-        ) {
-            supportFragmentManager.beginTransaction()
-                .add(R.id.main_fragment_container, HomeFragment()).commit()
-        } else {
-            shortToast(this, "권한이 설정되어 있지 않아 앱을 실행할 수 없어요 ㅠ")
-            openSettings()
-        }
+        supportFragmentManager.beginTransaction()
+            .add(R.id.main_fragment_container, HomeFragment()).commit()
+
     }
 
     private fun requestCherishPermissions() {
