@@ -2,6 +2,7 @@ package com.sopt.cherish.ui.enrollment
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -81,17 +82,17 @@ class ResultPlantFragment : Fragment() {
                 binding.textViewflowerMean.setTextColor(R.color.plantid3)
 
             }
-            4 -> {binding.startbtn.setBackgroundColor(R.color.plantid4)
-                binding.textViewFlower.setTextColor(R.color.plantid4)
-                binding.viewFlower.setBackgroundColor(R.color.plantid4)
+            4 -> {binding.startbtn.setBackgroundColor(Color.parseColor("#9AB7DE"))
+                binding.textViewFlower.setTextColor(Color.parseColor("#9AB7DE"))
+                binding.viewFlower.setBackgroundColor(Color.parseColor("#9AB7DE"))
              //   binding.tipBox.setBackgroundResource(R.drawable.plant_tip_box4)
-                binding.textViewflowerMean.setTextColor(R.color.plantid4)
+                binding.textViewflowerMean.setTextColor(Color.parseColor("#9AB7DE"))
             }
-            5 -> {binding.startbtn.setBackgroundColor(R.color.plantid5)
-                binding.textViewFlower.setTextColor(R.color.plantid5)
-                binding.viewFlower.setBackgroundColor(R.color.plantid5)
+            5 -> {binding.startbtn.setBackgroundColor(Color.parseColor("#9EC8EC"))
+                binding.textViewFlower.setTextColor(Color.parseColor("#9EC8EC"))
+                binding.viewFlower.setBackgroundColor(Color.parseColor("#9EC8EC"))
                 binding.tipBox.setBackgroundResource(R.drawable.plant_tip_box5)
-                binding.textViewflowerMean.setTextColor(R.color.plantid5)
+                binding.textViewflowerMean.setTextColor(Color.parseColor("#9EC8EC"))
             }
         }
 

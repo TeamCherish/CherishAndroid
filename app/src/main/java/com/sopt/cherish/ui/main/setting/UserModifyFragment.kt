@@ -1,5 +1,7 @@
 package com.sopt.cherish.ui.main.setting
 
+import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -50,8 +52,9 @@ class UserModifyFragment : Fragment() {
                 ) {
                 }
 
+                @SuppressLint("ResourceType")
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    binding.buttonNickchange.setBackgroundResource(R.color.cherish_green_main)
+                    binding.buttonNickchange.setBackgroundResource(Color.parseColor("#1AD287"))
                 }
             })
 
