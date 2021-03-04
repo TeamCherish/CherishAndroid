@@ -120,7 +120,7 @@ class ManagePlantFragment : Fragment() {
             BottomSheetBehavior.from(binding.homeStandardBottomSheetMypage)
         // bottom sheet state 지정
         standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-        standardBottomSheetBehavior.peekHeight = 340.dp
+        standardBottomSheetBehavior.peekHeight = 300.dp
         standardBottomSheetBehavior.expandedOffset = 68.dp
         standardBottomSheetBehavior.isHideable = false
 
@@ -169,6 +169,15 @@ class ManagePlantFragment : Fragment() {
                         isSearched = (activity as MainActivity).getIsSearched()
                         binding.myPageAddPlantBtn.visibility = View.VISIBLE //식물 추가 visible
                         isCollapsed = false
+                    }
+
+                    if(newState==BottomSheetBehavior.STATE_DRAGGING){
+                        binding.myPageBg.setBackgroundColor(
+                            ContextCompat.getColor(
+                                binding.root.context,
+                                R.color.cherish_my_page_bg
+                            )
+                        )
                     }
 
                     if (newState == BottomSheetBehavior.STATE_COLLAPSED) { //바텀시트 축소됐을 경우
@@ -234,23 +243,27 @@ class ManagePlantFragment : Fragment() {
 
     private fun setTabLayout(){
 
-        binding.myPageBottomTab.addTab(
-            binding.myPageBottomTab.newTab().setCustomView(
-                createTabView(
-                    "식물 ",
-                    "0"
+        if(binding.myPageBottomTab.getTabAt(0)==null){
+            binding.myPageBottomTab.addTab(
+                binding.myPageBottomTab.newTab().setCustomView(
+                    createTabView(
+                        "식물 ",
+                        "0"
+                    )
                 )
             )
-        )
+        }
 
-        binding.myPageBottomTab.addTab(
-            binding.myPageBottomTab.newTab().setCustomView(
-                createTabView(
-                    "연락처 ",
-                    "0"
+        if(binding.myPageBottomTab.getTabAt(1)==null){
+            binding.myPageBottomTab.addTab(
+                binding.myPageBottomTab.newTab().setCustomView(
+                    createTabView(
+                        "연락처 ",
+                        "0"
+                    )
                 )
             )
-        )
+        }
     }
 
     private fun initializeTabLayoutView(
