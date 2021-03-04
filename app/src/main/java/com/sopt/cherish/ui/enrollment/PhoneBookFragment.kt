@@ -1,6 +1,7 @@
 package com.sopt.cherish.ui.enrollment
 
 import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
 import android.provider.ContactsContract
 import android.text.Editable
@@ -59,7 +60,8 @@ class PhoneBookFragment : Fragment() {
             override fun onchange(radio: Boolean) {
                 Log.d("radio", radio.toString())
                 if (radio == true) {
-                    binding.buttonnext.setBackgroundColor(R.color.cherish_green_main)
+                    binding.buttonnext.setBackgroundColor(Color.parseColor("#1AD287"))
+                    binding.buttonnext.setTextColor(Color.parseColor("#ffffff"))
 
                 }
             }

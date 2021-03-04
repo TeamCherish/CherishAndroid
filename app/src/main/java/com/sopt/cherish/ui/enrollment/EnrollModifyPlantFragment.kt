@@ -13,6 +13,7 @@ import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.detail.DetailPlantActivity
 import com.sopt.cherish.ui.dialog.ClockPickerDialogFragment
 import com.sopt.cherish.ui.dialog.DeletePlantDialogFragment
+import com.sopt.cherish.ui.dialog.ModifyWeekAlertFragment
 import com.sopt.cherish.ui.dialog.WeekPickerDialogFragment
 import retrofit2.Call
 import retrofit2.Callback
@@ -110,10 +111,9 @@ class EnrollModifyPlantFragment : Fragment() {
 
         binding.editweek.setOnClickListener {
 
-            val needweek = WeekPickerDialogFragment(R.layout.weekpicker_layout).show(
-                parentFragmentManager,
-                "MainActivity"
-            )
+            ModifyWeekAlertFragment(R.layout.fragment_modify_week_alert).show(parentFragmentManager,"modify")
+
+
 
 
         }
