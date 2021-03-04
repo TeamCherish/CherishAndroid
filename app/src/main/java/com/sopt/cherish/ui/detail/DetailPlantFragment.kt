@@ -24,6 +24,7 @@ import com.sopt.cherish.ui.detail.calendar.CalendarFragment
 import com.sopt.cherish.ui.dialog.AlertPlantDialogFragment
 import com.sopt.cherish.ui.dialog.wateringdialog.DetailWateringDialogFragment
 import com.sopt.cherish.ui.domain.MemoListDataclass
+import com.sopt.cherish.util.DateUtil
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -230,6 +231,17 @@ class DetailPlantFragment : Fragment() {
                                         override fun onClick(view: View, position: Int) {
                                             // 여기부분인데
                                             val item = mAdapter.memolist[position]
+                                            if (item.date != null) {
+                                                viewModel.selectedMemoCalendarDay.value =
+                                                    item.date.let { itemDate ->
+                                                        DateUtil.convertStringToDateBar(itemDate)
+                                                            ?.let { it1 ->
+                                                                DateUtil.convertDateToCalendarDay(
+                                                                    it1
+                                                                )
+                                                            }
+                                                    }
+                                            }
                                             val transaction =
                                                 parentFragmentManager.beginTransaction()
                                             transaction.replace(
@@ -269,6 +281,17 @@ class DetailPlantFragment : Fragment() {
                                             DetailMemoAdapter.ItemClickListener {
                                             override fun onClick(view: View, position: Int) {
                                                 val item = mAdapter.memolist[position]
+                                                if (item.date != null) {
+                                                    viewModel.selectedMemoCalendarDay.value =
+                                                        item.date.let { itemDate ->
+                                                            DateUtil.convertStringToDateBar(itemDate)
+                                                                ?.let { it1 ->
+                                                                    DateUtil.convertDateToCalendarDay(
+                                                                        it1
+                                                                    )
+                                                                }
+                                                        }
+                                                }
                                                 val transaction =
                                                     parentFragmentManager.beginTransaction()
                                                 transaction.replace(

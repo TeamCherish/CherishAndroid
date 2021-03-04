@@ -1,3 +1,5 @@
+@file:Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+
 package com.sopt.cherish.util
 
 import com.prolificinteractive.materialcalendarview.CalendarDay
@@ -8,10 +10,17 @@ object DateUtil {
     private val simpleDateFormatKorean = SimpleDateFormat("yyyy년 mm월 dd일", Locale.KOREA)
     private val simpleDateFormatBar = SimpleDateFormat("yyyy-MM-dd", Locale.KOREA)
 
-    fun convertDateToString(date: Date): String = simpleDateFormatBar.format(date)
-
-    private fun convertStringToDate(stringDate: String): Date? =
+    fun convertStringToDate(stringDate: String): Date? =
         simpleDateFormatKorean.parse(stringDate)
+
+    fun convertStringToDateBar(stringDate: String?): Date? {
+        return if (stringDate != "_ _") {
+            simpleDateFormatBar.parse(stringDate)
+        } else {
+            null
+        }
+    }
+
 
     fun getYear(stringDate: String) = Integer.parseInt(stringDate.substring(0, 4))
 
@@ -24,5 +33,7 @@ object DateUtil {
         val stringDate = convertDateToString(date)
         return CalendarDay.from(getYear(stringDate), getMonth(stringDate), getDay(stringDate))
     }
+
+    fun convertDateToString(date: Date): String = simpleDateFormatBar.format(date)
 
 }

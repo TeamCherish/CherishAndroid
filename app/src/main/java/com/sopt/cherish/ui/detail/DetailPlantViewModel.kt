@@ -39,6 +39,8 @@ class DetailPlantViewModel(
 
     var wateringText = " "
 
+    val selectedMemoCalendarDay = MutableLiveData<CalendarDay>()
+
     private val today = DateUtil.convertDateToString(Calendar.getInstance().time)
     private val todayMonth = DateUtil.getMonth(today).toString()
     private val todayDay = DateUtil.getDay(today).toString()
