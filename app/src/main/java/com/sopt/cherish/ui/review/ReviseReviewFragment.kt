@@ -138,6 +138,7 @@ class ReviseReviewFragment : Fragment() {
         binding.reviseReviewEditKeyword.countNumberOfCharacters { keyword ->
             binding.reviseReviewNumberOfCharacters.text = keyword?.length.toString()
             if (keyword?.length!! > 5) {
+                // TODO : 여기 바꿔야함
                 CustomDialogFragment(R.layout.dialog_warning_keyword_limit_error).show(
                     parentFragmentManager,
                     ReviewActivity.TAG

@@ -28,6 +28,7 @@ import com.sopt.cherish.util.extension.longToast
 
 
 /**
+ * Created on 2021-03-05 by SSong-develop
  * 메인 홈뷰
  */
 

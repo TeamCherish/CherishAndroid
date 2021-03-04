@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
 
     private val viewModel: MainViewModel by viewModels { Injection.provideMainViewModelFactory() }
     var search: Boolean = false
+    private var backPressedTime: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +40,18 @@ class MainActivity : AppCompatActivity() {
         getFirebaseDeviceToken()
         observeFirebaseDeviceToken()
         setBottomNavigationListener(binding)
+    }
+
+    override fun onBackPressed() {
+        val TIME_INTERVAL: Long = 2000
+        val currentTime = System.currentTimeMillis()
+        val intervalTime = currentTime - backPressedTime
+        if (intervalTime in 0..TIME_INTERVAL)
+            finish()
+        else {
+            backPressedTime = currentTime
+            shortToast(this, "뒤로가기 버튼을 한번 더 누르시면 종료됩니다")
+        }
     }
 
     private fun initializeToken() {
