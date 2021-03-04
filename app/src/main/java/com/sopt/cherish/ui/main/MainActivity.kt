@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
+import com.sopt.cherish.MainApplication
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityMainBinding
 import com.sopt.cherish.di.Injection
@@ -31,12 +32,21 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding: ActivityMainBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_main)
+        initializeToken()
         initializeViewModelData()
         requestCherishPermissions()
         showInitialFragment()
         getFirebaseDeviceToken()
         observeFirebaseDeviceToken()
         setBottomNavigationListener(binding)
+    }
+
+    private fun initializeToken() {
+        intent?.getStringExtra("loginToken")?.let { token ->
+            MainApplication.sharedPreferenceController.setToken(
+                token
+            )
+        }
     }
 
     override fun onResume() {
@@ -63,8 +73,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initializeViewModelData() {
-        viewModel.cherishuserId.value = intent.getIntExtra("userId", -1)
-        viewModel.userNickName.value = intent.getStringExtra("userNickname")
+        viewModel.cherishuserId.value = intent?.getIntExtra("userId", -1)
+        viewModel.userNickName.value = intent?.getStringExtra("userNickname")
         viewModel.fetchUsers()
     }
 

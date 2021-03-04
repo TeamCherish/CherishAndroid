@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.sopt.cherish.MainApplication
 import com.sopt.cherish.databinding.ActivitySignInBinding
 import com.sopt.cherish.remote.api.*
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
@@ -25,6 +26,7 @@ class SignInActivity : AppCompatActivity() {
 
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        Log.d("hello", MainApplication.sharedPreferenceController.getToken().toString())
 
         binding.loginBtn.setOnClickListener {
             val email = binding.editTextTextPersonName.text.toString()
@@ -60,14 +62,15 @@ class SignInActivity : AppCompatActivity() {
                                 Log.d("isSuccess", response.body().toString())
                                 hasUser(
                                     response.body()?.editUserData?.userId!!,
-                                    response.body()!!.editUserData.userNickName
+                                    response.body()!!.editUserData.userNickName,
+                                    response.body()!!.editUserData.token
                                 )
                             }
                     }
                 })
     }
 
-    private fun hasUser(userId: Int, userNickName: String) {
+    private fun hasUser(userId: Int, userNickName: String, token: String) {
         var trigger: Boolean
         RetrofitBuilder.userAPI.hasUser(userId).enqueue(object : Callback<UserResult> {
             override fun onResponse(call: Call<UserResult>, response: Response<UserResult>) {
@@ -90,6 +93,10 @@ class SignInActivity : AppCompatActivity() {
                         mainActivityIntent.putExtra(
                             "userNickname",
                             userNickName
+                        )
+                        mainActivityIntent.putExtra(
+                            "loginToken",
+                            token
                         )
                         startActivity(mainActivityIntent)
                         finish()

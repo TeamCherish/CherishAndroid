@@ -5,11 +5,13 @@ import android.content.SharedPreferences
 import androidx.lifecycle.ViewModelProvider
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
+import com.sopt.cherish.MainApplication
 import com.sopt.cherish.remote.api.*
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.repository.*
 import com.sopt.cherish.ui.factory.*
 import com.sopt.cherish.util.MyKeyStore
+import okhttp3.OkHttpClient
 
 /**
  * Created on 01-03 by SSong-develop
@@ -113,5 +115,15 @@ object Injection {
     // okHttp Interceptor
     // token을 sharedPrefs에 넣어서 저장을 하긴 할 건데 encrypted 하게 된 sharedPref에 넣어서 관리할 것이다.
     // todo : okHttpInterceptor 만들어놓기
+    fun provideOkHttpClient() =
+        OkHttpClient.Builder().addInterceptor {
+            val request = it.request().newBuilder()
+                .addHeader(
+                    "Authorization",
+                    "Bearer " + MainApplication.sharedPreferenceController.getToken()
+                )
+                .build()
+            return@addInterceptor it.proceed(request)
+        }.build()
 
 }
