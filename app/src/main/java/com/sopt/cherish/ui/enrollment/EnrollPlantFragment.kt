@@ -94,7 +94,8 @@ class EnrollPlantFragment : Fragment() {
                         binding.detailOkBtn.isEnabled = true
                         Log.d("clockvalue", binding.detailOkBtn.isClickable.toString())
 
-                        binding.detailOkBtn.setBackgroundColor(R.color.cherish_green_main)
+                        binding.detailOkBtn.setBackgroundColor(Color.parseColor("#1AD287"))
+                        binding.detailOkBtn.setTextColor(Color.parseColor("#ffffff"))
 
                     }
                 }
