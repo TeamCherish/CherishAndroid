@@ -67,7 +67,7 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun hasUser(userId: Int, userNickName: String) {
-        
+
         RetrofitBuilder.userAPI.hasUser(userId).enqueue(object : Callback<UserResult> {
             override fun onResponse(call: Call<UserResult>, response: Response<UserResult>) {
                 if (response.isSuccessful) {

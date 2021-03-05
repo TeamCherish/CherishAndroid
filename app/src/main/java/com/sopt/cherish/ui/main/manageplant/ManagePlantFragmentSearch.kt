@@ -41,7 +41,7 @@ class ManagePlantFragmentSearch : Fragment() {
     private val requestData = RetrofitBuilder
     private lateinit var tabBindingFirst: MyPageCustomTabBinding
     private lateinit var tabBindingSecond: MyPageCustomTabBinding
-    lateinit var data: List<MyPageCherishData>
+    lateinit var data: ArrayList<MyPageCherishData>
     lateinit var binding: FragmentManagePlantSearchBinding
 
     lateinit var madapter: MypagePhoneBookSearchAdapter
@@ -77,7 +77,7 @@ class ManagePlantFragmentSearch : Fragment() {
             binding.cancelBtn.visibility = View.INVISIBLE
             if (!isCollapsed && tabIndex == 1)
                 binding.myPageAddPlantBtn.visibility = View.VISIBLE
-            (activity as MainActivity).replaceFragment(tabIndex, data, isSearched)
+            (activity as MainActivity).replaceFragment(tabIndex, data)
         }
         return binding.root
     }
@@ -199,7 +199,7 @@ class ManagePlantFragmentSearch : Fragment() {
 */
     private fun initializeTabLayoutView(
         binding: FragmentManagePlantSearchBinding,
-        data: List<MyPageCherishData>
+        data: ArrayList<MyPageCherishData>
     ) {
 
         activity?.supportFragmentManager!!.beginTransaction()
@@ -258,11 +258,11 @@ class ManagePlantFragmentSearch : Fragment() {
                                 R.color.white
                             )
                         )
-                        isSearched = (activity as MainActivity).getIsSearched()
+                        //isSearched = (activity as MainActivity).getIsSearched()
 
                         binding.myPageAddPlantBtn.visibility = View.VISIBLE
                     }
-                    (activity as MainActivity).replaceFragment(tabIndex, data, isSearched)
+                    (activity as MainActivity).replaceFragment(tabIndex, data)
                 }
                 if (tabIndex == 1) {
 
@@ -297,14 +297,14 @@ class ManagePlantFragmentSearch : Fragment() {
                             )
                         )
 
-                        isSearched = (activity as MainActivity).getIsSearched()
+                       // isSearched = (activity as MainActivity).getIsSearched()
                         if (isSearched) {
                             binding.myPageAddPlantBtn.visibility = View.INVISIBLE
                         } else {
                             binding.myPageAddPlantBtn.visibility = View.VISIBLE
                         }
                     }
-                    (activity as ManagePlantActivity).replaceFragment(tabIndex, data, isSearched)
+                    //(activity as ManagePlantActivity).replaceFragment(tabIndex, data, isSearched)
                 }
             }
         })

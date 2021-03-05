@@ -18,7 +18,7 @@ import com.sopt.cherish.ui.detail.DetailPlantActivity
  * bottom sheet에서 보여지는 recyclerview fragment
  */
 
-class PlantFragment(private var data: List<MyPageCherishData>?) : Fragment() {
+class PlantFragment(private var data: ArrayList<MyPageCherishData>?) : Fragment() {
 
     private var _binding: FragmentPlantBinding? = null
     private val binding get() = _binding!!
