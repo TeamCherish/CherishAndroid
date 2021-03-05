@@ -35,7 +35,6 @@ class SignInActivity : AppCompatActivity() {
         binding.textView31.setOnClickListener {
             val signUpIntent = Intent(this@SignInActivity, SignUpActivity::class.java)
             startActivity(signUpIntent)
-            finish()
         }
     }
 
@@ -68,7 +67,7 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun hasUser(userId: Int, userNickName: String) {
-        var trigger: Boolean
+        
         RetrofitBuilder.userAPI.hasUser(userId).enqueue(object : Callback<UserResult> {
             override fun onResponse(call: Call<UserResult>, response: Response<UserResult>) {
                 if (response.isSuccessful) {
