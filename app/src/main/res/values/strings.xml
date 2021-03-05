@@ -94,7 +94,7 @@
     <string name="sign_up_certification_again">재발송</string>
     <string name="sign_up_certification_check">올바르지 않은 인증번호입니다.</string>
     <string name="sign_up_sex_text">성별을 입력해주세요</string>
-    <string name="sign_up_age_hint">2021</string>
+    <string name="sign_up_age_hint">Ex)2021</string>
     <string name="sign_up_age_text">나이(출생년도)를 입력해주세요</string>
     <string name="sign_up_text">Cherish의 더 나은 서비스를 위해 활용됩니다!</string>
     <string name="sign_up_service1">\'시작하기\'버튼을 누르면 cherish의 개인정보보호 정책과\n 서비스 이용 약관을 읽고 동의한 것으로 간주합니다.</string>

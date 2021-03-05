@@ -59,6 +59,9 @@
         <activity
             android:name=".ui.review.ReviewActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".ui.main.manageplant.ManagePlantActivity"
+            android:screenOrientation="portrait" />
 
         <activity
             android:name=".ui.splash.SplashActivity"
