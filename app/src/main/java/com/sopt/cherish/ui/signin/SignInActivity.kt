@@ -38,7 +38,7 @@ class SignInActivity : AppCompatActivity() {
         }
     }
 
-    private fun signIn(email: String, password: String) {
+    private fun signIn(email: String, password: String) { //로그인 버튼 클릭
         binding.editTextTextPassword.hideKeyboard()
         requestData.authAPI.postLogin(EditUserReq(email, password))
             .enqueue(
@@ -66,7 +66,7 @@ class SignInActivity : AppCompatActivity() {
                 })
     }
 
-    private fun hasUser(userId: Int, userNickName: String) {
+    private fun hasUser(userId: Int, userNickName: String) { //정보 있는지 확인
 
         RetrofitBuilder.userAPI.hasUser(userId).enqueue(object : Callback<UserResult> {
             override fun onResponse(call: Call<UserResult>, response: Response<UserResult>) {
