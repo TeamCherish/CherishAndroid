@@ -26,17 +26,40 @@ class MainActivity : AppCompatActivity() {
 
     private val viewModel: MainViewModel by viewModels { Injection.provideMainViewModelFactory() }
     var search: Boolean = false
+    private var backPressedTime: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding: ActivityMainBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_main)
+        initializeToken()
         initializeViewModelData()
         requestCherishPermissions()
         showInitialFragment()
         getFirebaseDeviceToken()
         observeFirebaseDeviceToken()
         setBottomNavigationListener(binding)
+    }
+
+    override fun onBackPressed() {
+        val TIME_INTERVAL: Long = 2000
+        val currentTime = System.currentTimeMillis()
+        val intervalTime = currentTime - backPressedTime
+        if (intervalTime in 0..TIME_INTERVAL)
+            finish()
+        else {
+            backPressedTime = currentTime
+            shortToast(this, "뒤로가기 버튼을 한번 더 누르시면 종료됩니다")
+        }
+    }
+
+    private fun initializeToken() {
+        /*
+        intent?.getStringExtra("loginToken")?.let { token ->
+            MainApplication.sharedPreferenceController.setToken(
+                token
+            )
+        } */
     }
 
     override fun onResume() {
@@ -63,8 +86,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initializeViewModelData() {
-        viewModel.cherishuserId.value = intent.getIntExtra("userId", -1)
-        viewModel.userNickName.value = intent.getStringExtra("userNickname")
+        viewModel.cherishuserId.value = intent?.getIntExtra("userId", -1)
+        viewModel.userNickName.value = intent?.getStringExtra("userNickname")
         viewModel.fetchUsers()
     }
 
@@ -166,8 +189,8 @@ class MainActivity : AppCompatActivity() {
             ContactsContract.CommonDataKinds.Phone.NUMBER
         )
         // 2.2 조건 정의
-        var where: String? = null
-        var whereValues: Array<String>? = null
+        val where: String? = null
+        val whereValues: Array<String>? = null
 
         applicationContext?.run {
             val cursor = contentResolver.query(phonUri, projections, where, whereValues, "")
@@ -219,7 +242,4 @@ class MainActivity : AppCompatActivity() {
         return search
     }
 
-    fun setIsSearched(isSearched: Boolean) {
-        search = isSearched
-    }
 }
