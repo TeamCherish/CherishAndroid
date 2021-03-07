@@ -6,6 +6,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivitySignUpBinding
 import com.sopt.cherish.ui.signin.SignInActivity
@@ -47,7 +48,7 @@ class SignUpActivity : AppCompatActivity() {
             .add(R.id.fragment_signup, SignUpFirstFragment()).commit()
     }
 
-    fun setActionBarTitlesignup(title: String?) {
+    fun setActionBarTitleSignUp(title: String?) {
         setSupportActionBar(binding.toolbarSignup)
         val actionBar: ActionBar? = supportActionBar
         if (actionBar != null) {
@@ -72,12 +73,12 @@ class SignUpActivity : AppCompatActivity() {
         when (index) {
             0 -> {
                 transAction.replace(R.id.fragment_signup, SignUpFirstFragment())
-                //  transAction.addToBackStack(null)
+                transAction.addToBackStack(null)
                 transAction.commit()
             }
             1 ->
                 transAction.replace(R.id.fragment_signup, SignUpSecondFragment())
-                    .commit()
+
             2 ->
                 transAction.replace(R.id.fragment_signup, SignUpThirdFragment()).commit()
             3 ->
