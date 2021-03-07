@@ -1,3 +1,4 @@
+
 package com.sopt.cherish.ui.main.manageplant
 
 import android.content.Intent
@@ -20,7 +21,7 @@ import com.sopt.cherish.ui.detail.DetailPlantActivity
  * bottom sheet에서 보여지는 recyclerview fragment
  */
 
-class PlantSearchFragment(private var data: ArrayList<MyPageCherishData>?) : Fragment() {
+class PlantSearchFragment(private var data: List<MyPageCherishData>?) : Fragment() {
 
     private var _binding: FragmentPlantSearchBinding? = null
     private val binding get() = _binding!!
@@ -114,8 +115,8 @@ class PlantSearchFragment(private var data: ArrayList<MyPageCherishData>?) : Fra
 
     fun changeList(searchText: String) {
 
-        val mulist: ArrayList<MyPageCherishData> =
-            arrayListOf<MyPageCherishData>()
+        val mulist: MutableList<MyPageCherishData> =
+            mutableListOf<MyPageCherishData>()
         for (i in 0 until data!!.size - 1) {
 
             if (data!![i].nickName.contains(searchText)) {

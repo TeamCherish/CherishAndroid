@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
+import com.sopt.cherish.MainApplication
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityMainBinding
 import com.sopt.cherish.di.Injection
@@ -26,17 +27,40 @@ class MainActivity : AppCompatActivity() {
 
     private val viewModel: MainViewModel by viewModels { Injection.provideMainViewModelFactory() }
     var search: Boolean = false
+    private var backPressedTime: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding: ActivityMainBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_main)
+        initializeToken()
         initializeViewModelData()
         requestCherishPermissions()
         showInitialFragment()
         getFirebaseDeviceToken()
         observeFirebaseDeviceToken()
         setBottomNavigationListener(binding)
+    }
+
+    override fun onBackPressed() {
+        val TIME_INTERVAL: Long = 2000
+        val currentTime = System.currentTimeMillis()
+        val intervalTime = currentTime - backPressedTime
+        if (intervalTime in 0..TIME_INTERVAL)
+            finish()
+        else {
+            backPressedTime = currentTime
+            shortToast(this, "뒤로가기 버튼을 한번 더 누르시면 종료됩니다")
+        }
+    }
+
+    private fun initializeToken() {
+        /*
+        intent?.getStringExtra("loginToken")?.let { token ->
+            MainApplication.sharedPreferenceController.setToken(
+                token
+            )
+        } */
     }
 
     override fun onResume() {
@@ -63,22 +87,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initializeViewModelData() {
-        viewModel.cherishuserId.value = intent.getIntExtra("userId", -1)
-        viewModel.userNickName.value = intent.getStringExtra("userNickname")
+        viewModel.cherishuserId.value = intent?.getIntExtra("userId", -1)
+        viewModel.userNickName.value = intent?.getStringExtra("userNickname")
         viewModel.fetchUsers()
     }
 
     private fun showInitialFragment() {
-        if (PermissionUtil.isCheckedCallPermission(this) && PermissionUtil.isCheckedSendMessagePermission(
-                this
-            )
-        ) {
-            supportFragmentManager.beginTransaction()
-                .add(R.id.main_fragment_container, HomeFragment()).commit()
-        } else {
-            shortToast(this, "권한이 설정되어 있지 않아 앱을 실행할 수 없어요 ㅠ")
-            openSettings()
-        }
+        supportFragmentManager.beginTransaction()
+            .add(R.id.main_fragment_container, HomeFragment()).commit()
+
     }
 
     private fun requestCherishPermissions() {
@@ -158,7 +175,7 @@ class MainActivity : AppCompatActivity() {
         val list = mutableListOf<Phonemypage>()
 
         val phonUri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI
-
+        val phoneUri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI
         // 2.1 전화번호에서 가져올 컬럼 정의
         val projections = arrayOf(
             ContactsContract.CommonDataKinds.Phone.CONTACT_ID,
@@ -186,23 +203,37 @@ class MainActivity : AppCompatActivity() {
         return list.size
     }
 
-    fun replaceFragment(index: Int, data: ArrayList<MyPageCherishData>?) {
+    fun replaceFragment(index: Int, data: List<MyPageCherishData>?, isSearched: Boolean) {
+        search = isSearched
         val transAction = supportFragmentManager.beginTransaction()
         when (index) {
             0 -> {
-                transAction.replace(R.id.my_page_bottom_container, PlantFragment(data)).commit()
+                if (isSearched) //검색창 있는 뷰
+                    transAction.replace(R.id.my_page_bottom_container, PlantSearchFragment(data))
+                        .commit()
+                else //검색창 없는 뷰
+                    transAction.replace(R.id.my_page_bottom_container, PlantFragment(data)).commit()
             }
             1 -> {
                 if (PermissionUtil.isCheckedReadContactsPermission(this)) {
-                    transAction.replace(
-                        R.id.my_page_bottom_container, MyPagePhoneBookFragment()
-                    ).commit()
+                    if (isSearched)
+                        transAction.replace(
+                            R.id.my_page_bottom_container, MyPagePhoneBookSearchFragment()
+                        ).commit()
+                    else
+                        transAction.replace(
+                            R.id.my_page_bottom_container, MyPagePhoneBookFragment()
+                        ).commit()
                 } else {
                     PermissionUtil.openPermissionSettings(this)
                 }
                 //true
             }
         }
+    }
+
+    fun getIsSearched(): Boolean {
+        return search
     }
 
 }

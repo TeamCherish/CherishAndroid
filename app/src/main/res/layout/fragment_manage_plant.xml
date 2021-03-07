@@ -67,6 +67,17 @@
                 app:layout_constraintEnd_toEndOf="@+id/original_bar"
                 app:layout_constraintTop_toTopOf="@+id/original_bar" />
 
+            <TextView
+                android:visibility="invisible"
+                android:id="@+id/cancel_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosanscjkkr_regular"
+                app:layout_constraintEnd_toEndOf="@+id/original_bar"
+                app:layout_constraintTop_toTopOf="@+id/original_bar"
+                app:layout_constraintBottom_toBottomOf="@+id/original_bar"
+                android:layout_marginEnd="@dimen/margin_20dp"
+                android:text="@string/myPage_cancel_text"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -228,7 +239,6 @@
             android:id="@+id/coordinatorLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:nestedScrollingEnabled="false"
             app:layout_constraintBottom_toBottomOf="@+id/my_page_bg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -255,22 +265,9 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:tabGravity="start"
+                    app:tabMode="scrollable"
                     app:tabIndicatorColor="@color/cherish_light_black"
-                    app:tabIndicatorHeight="3dp"
-                    app:tabMode="scrollable" />
-
-                <ImageView
-                    android:id="@+id/my_page_reset_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/margin_20dp"
-                    android:layout_marginEnd="22dp"
-                    android:clickable="true"
-                    android:contentDescription="@null"
-                    android:src="@drawable/icn_reset"
-                    android:visibility="invisible"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:tabIndicatorHeight="3dp"/>
 
                 <!-- background color 추가해주세요!-->
                 <TextView
@@ -287,8 +284,11 @@
                     android:id="@+id/my_page_bottom_container"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
+
                     android:layout_marginBottom="?attr/actionBarSize"
+
                     app:layout_constraintBottom_toBottomOf="@+id/home_standardBottomSheet_mypage"
+
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tab_bar_line" />
