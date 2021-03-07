@@ -87,6 +87,7 @@ class ManagePlantFragment : Fragment() {
             intent.putExtra("plantData",data)
             intent.putExtra("plantCount",plantCount)
             intent.putExtra("phoneCount",phoneCount)
+            intent.putExtra("userId",viewModel.cherishuserId.value)
             requireContext().startActivity(intent)
         }
 
