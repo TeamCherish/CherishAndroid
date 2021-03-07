@@ -158,7 +158,7 @@ class MainActivity : AppCompatActivity() {
         val list = mutableListOf<Phonemypage>()
 
         val phonUri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI
-
+        val phoneUri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI
         // 2.1 전화번호에서 가져올 컬럼 정의
         val projections = arrayOf(
             ContactsContract.CommonDataKinds.Phone.CONTACT_ID,
@@ -166,8 +166,8 @@ class MainActivity : AppCompatActivity() {
             ContactsContract.CommonDataKinds.Phone.NUMBER
         )
         // 2.2 조건 정의
-        val where: String? = null
-        val whereValues: Array<String>? = null
+        var where: String? = null
+        var whereValues: Array<String>? = null
 
         applicationContext?.run {
             val cursor = contentResolver.query(phonUri, projections, where, whereValues, "")
@@ -186,17 +186,27 @@ class MainActivity : AppCompatActivity() {
         return list.size
     }
 
-    fun replaceFragment(index: Int, data: ArrayList<MyPageCherishData>?) {
+    fun replaceFragment(index: Int, data: List<MyPageCherishData>?, isSearched: Boolean) {
+        search = isSearched
         val transAction = supportFragmentManager.beginTransaction()
         when (index) {
             0 -> {
-                transAction.replace(R.id.my_page_bottom_container, PlantFragment(data)).commit()
+                if (isSearched) //검색창 있는 뷰
+                    transAction.replace(R.id.my_page_bottom_container, PlantSearchFragment(data))
+                        .commit()
+                else //검색창 없는 뷰
+                    transAction.replace(R.id.my_page_bottom_container, PlantFragment(data)).commit()
             }
             1 -> {
                 if (PermissionUtil.isCheckedReadContactsPermission(this)) {
-                    transAction.replace(
-                        R.id.my_page_bottom_container, MyPagePhoneBookFragment()
-                    ).commit()
+                    if (isSearched)
+                        transAction.replace(
+                            R.id.my_page_bottom_container, MyPagePhoneBookSearchFragment()
+                        ).commit()
+                    else
+                        transAction.replace(
+                            R.id.my_page_bottom_container, MyPagePhoneBookFragment()
+                        ).commit()
                 } else {
                     PermissionUtil.openPermissionSettings(this)
                 }
@@ -205,4 +215,11 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun getIsSearched(): Boolean {
+        return search
+    }
+
+    fun setIsSearched(isSearched: Boolean) {
+        search = isSearched
+    }
 }

@@ -67,6 +67,17 @@
                 app:layout_constraintEnd_toEndOf="@+id/original_bar"
                 app:layout_constraintTop_toTopOf="@+id/original_bar" />
 
+            <TextView
+                android:visibility="invisible"
+                android:id="@+id/cancel_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosanscjkkr_regular"
+                app:layout_constraintEnd_toEndOf="@+id/original_bar"
+                app:layout_constraintTop_toTopOf="@+id/original_bar"
+                app:layout_constraintBottom_toBottomOf="@+id/original_bar"
+                android:layout_marginEnd="@dimen/margin_20dp"
+                android:text="@string/myPage_cancel_text"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -228,7 +239,6 @@
             android:id="@+id/coordinatorLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:nestedScrollingEnabled="false"
             app:layout_constraintBottom_toBottomOf="@+id/my_page_bg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -287,8 +297,11 @@
                     android:id="@+id/my_page_bottom_container"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
+
                     android:layout_marginBottom="?attr/actionBarSize"
+
                     app:layout_constraintBottom_toBottomOf="@+id/home_standardBottomSheet_mypage"
+
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tab_bar_line" />
