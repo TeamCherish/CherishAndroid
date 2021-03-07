@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
-import com.sopt.cherish.MainApplication
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityMainBinding
 import com.sopt.cherish.di.Injection
@@ -93,9 +92,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showInitialFragment() {
-        supportFragmentManager.beginTransaction()
-            .add(R.id.main_fragment_container, HomeFragment()).commit()
-
+        if (PermissionUtil.isCheckedCallPermission(this) && PermissionUtil.isCheckedSendMessagePermission(
+                this
+            )
+        ) {
+            supportFragmentManager.beginTransaction()
+                .add(R.id.main_fragment_container, HomeFragment()).commit()
+        } else {
+            shortToast(this, "권한이 설정되어 있지 않아 앱을 실행할 수 없어요 ㅠ")
+            openSettings()
+        }
     }
 
     private fun requestCherishPermissions() {

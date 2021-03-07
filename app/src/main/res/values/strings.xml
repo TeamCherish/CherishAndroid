@@ -73,7 +73,7 @@
     <string name="enroll_phone_text">식물 등록하기</string>
 
     <string name="detail_plant_with">함께한 날</string>
-
+    <string name="dialog_sign_up_close">닫기</string>
     <string name="sign_up_title">회원가입</string>
     <string name="sign_up_email">이메일을 입력해주세요</string>
     <string name="sign_up_email_hint">Ex) cherish@naver.com</string>
