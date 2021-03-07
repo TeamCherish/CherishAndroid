@@ -1,7 +1,6 @@
 package com.sopt.cherish.util
 
 object MyKeyStore {
-    private const val alarmDataStoreName = "cherishAlarmDataStore"
     private const val alarmKeyName = "cherishAlarm"
     private const val encryptedSharedPreferencesName = "encryptedSharedPrefs"
     private const val loginTokenPrefsName = "cherishLoginToken"
