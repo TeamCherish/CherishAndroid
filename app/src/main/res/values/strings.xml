@@ -101,6 +101,4 @@
     <string name="sign_up_nickname_text">사용할 닉네임을 입력해주세요</string>
     <string name="sign_up_nickname_hint">최대 8글자</string>
     <string name="sign_up_nickname_ok">사용하실 수 있는 닉네임입니다.</string>
-
-    <string name="dialog_sign_up_close">닫기</string>
 </resources>

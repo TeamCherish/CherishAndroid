@@ -23,7 +23,6 @@ import com.sopt.cherish.remote.api.MyPageUserRes
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.adapter.MypagePhoneBookSearchAdapter
 import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
-import com.sopt.cherish.ui.enrollment.PhoneBookFragment
 import com.sopt.cherish.ui.main.MainActivity
 import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.ui.main.setting.UserModifyFragment
@@ -75,7 +74,15 @@ class ManagePlantFragment : Fragment() {
         binding.goToSetting.setOnClickListener {
             navigateUserModifyFragment()
         }
-        initializeSearchBtn()
+        binding.cancelBtn.setOnClickListener {
+            binding.searchBox.visibility = View.VISIBLE
+            isSearched = false
+            binding.cancelBtn.visibility = View.INVISIBLE
+            if (!isCollapsed && tabIndex == 1)
+                binding.myPageAddPlantBtn.visibility = View.VISIBLE
+            (activity as MainActivity).replaceFragment(tabIndex, data, isSearched)
+        }
+        //initializeSearchBtn()
         return binding.root
     }
 
@@ -84,9 +91,23 @@ class ManagePlantFragment : Fragment() {
         super.onResume()
         setTabLayout()
         initializeServerRequest(binding)
-        initializeSearchBtn()
+        //initializeSearchBtn()
         initializeBottomSheetBehavior(binding)
     }
+
+    private fun navigateUserModifyFragment(){
+        val transaction = parentFragmentManager.beginTransaction()
+        transaction.replace(R.id.main_fragment_container, UserModifyFragment().apply {
+            arguments = Bundle().apply {
+                putString("settingusernickname", mypageusername)
+                putString("settinguseremail", mypageuseremail)
+
+            }
+        })
+        transaction.addToBackStack(null)
+        transaction.commit()
+    }
+
 
     private fun initializeSearchBtn() {
         isSearched = (activity as MainActivity).getIsSearched()
@@ -117,9 +138,7 @@ class ManagePlantFragment : Fragment() {
 
             }
             (activity as MainActivity).replaceFragment(tabIndex, data, isSearched)
-            /*    val intent=Intent(context,ManagePlantActivity::class.java)
-                intent.putExtra("searchuserid",viewModel.cherishuserId.value)
-                startActivity(intent)*/
+
         }
         binding.goToSetting.setOnClickListener {
             val transaction = parentFragmentManager.beginTransaction()
@@ -263,8 +282,8 @@ class ManagePlantFragment : Fragment() {
         binding: FragmentManagePlantBinding,
         data: List<MyPageCherishData>
     ) {
-        when(tabIndex){
-            0->{
+        when (tabIndex) {
+            0 -> {
                 tabBindingFirst.tabName.setTextAppearance(R.style.MyPageTabSelected)
                 tabBindingFirst.tabCount.setTextAppearance(R.style.MyPageTabSelected)
 
@@ -274,99 +293,102 @@ class ManagePlantFragment : Fragment() {
                 tabBindingFirst.tabName.setTextColor(Color.parseColor("#454545"))
                 tabBindingFirst.tabCount.setTextColor(Color.parseColor("#1AD287"))
 
-        requireActivity().supportFragmentManager.beginTransaction()
-            .add(R.id.my_page_bottom_container, PlantFragment(data)).commit()
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .add(R.id.my_page_bottom_container, PlantFragment(data)).commit()
 
-        for (i in 0 until binding.myPageBottomTab.tabCount) {
-            val tab = (binding.myPageBottomTab.getChildAt(0) as ViewGroup).getChildAt(i)
-            val p = tab.layoutParams as ViewGroup.MarginLayoutParams
-            p.setMargins(24, 0, 0, 0)
-            tab.requestLayout()
-        }
-
-        binding.myPageBottomTab.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-
-            override fun onTabReselected(tab: TabLayout.Tab?) {}
-            override fun onTabUnselected(tab: TabLayout.Tab?) {}
-            override fun onTabSelected(tab: TabLayout.Tab?) {
-                tabIndex = binding.myPageBottomTab.selectedTabPosition
-
-                if (tabIndex == 0) {
-                    tabBindingFirst.tabName.setTextAppearance(R.style.MyPageTabSelected)
-                    tabBindingFirst.tabCount.setTextAppearance(R.style.MyPageTabSelected)
-
-                    tabBindingSecond.tabName.setTextAppearance(R.style.MyPageTab)
-                    tabBindingSecond.tabCount.setTextAppearance(R.style.MyPageTab)
-
-                    tabBindingFirst.tabName.setTextColor(Color.parseColor("#454545"))
-                    tabBindingFirst.tabCount.setTextColor(Color.parseColor("#1AD287"))
-
-                    if (isCollapsed) {
-                        binding.myPageBg.setBackgroundColor(
-                            ContextCompat.getColor(
-                                binding.root.context,
-                                R.color.cherish_my_page_bg
-                            )
-                        )
-                        binding.cancelBtn.visibility = View.INVISIBLE
-                        binding.myPageAddPlantBtn.visibility = View.INVISIBLE
-                        isSearched = false
-
-                    } else {
-                        binding.myPageBg.setBackgroundColor(
-                            ContextCompat.getColor(
-                                binding.root.context,
-                                R.color.white
-                            )
-                        )
-                        isSearched = (activity as MainActivity).getIsSearched()
-
-                        binding.myPageAddPlantBtn.visibility = View.VISIBLE
-                    }
-                    (activity as MainActivity).replaceFragment(tabIndex, data, isSearched)
+                for (i in 0 until binding.myPageBottomTab.tabCount) {
+                    val tab = (binding.myPageBottomTab.getChildAt(0) as ViewGroup).getChildAt(i)
+                    val p = tab.layoutParams as ViewGroup.MarginLayoutParams
+                    p.setMargins(24, 0, 0, 0)
+                    tab.requestLayout()
                 }
-                if (tabIndex == 1) {
-                    tabBindingFirst.tabName.setTextAppearance(R.style.MyPageTab)
-                    tabBindingFirst.tabCount.setTextAppearance(R.style.MyPageTab)
 
-                    tabBindingSecond.tabName.setTextAppearance(R.style.MyPageTabSelected)
-                    tabBindingSecond.tabCount.setTextAppearance(R.style.MyPageTabSelected)
+                binding.myPageBottomTab.addOnTabSelectedListener(object :
+                    TabLayout.OnTabSelectedListener {
 
-                    tabBindingSecond.tabName.setTextColor(Color.parseColor("#454545"))
-                    tabBindingSecond.tabCount.setTextColor(Color.parseColor("#1AD287"))
+                    override fun onTabReselected(tab: TabLayout.Tab?) {}
+                    override fun onTabUnselected(tab: TabLayout.Tab?) {}
+                    override fun onTabSelected(tab: TabLayout.Tab?) {
+                        tabIndex = binding.myPageBottomTab.selectedTabPosition
 
-                    if (isCollapsed) {
-                        binding.myPageBg.setBackgroundColor(
-                            ContextCompat.getColor(
-                                binding.root.context,
-                                R.color.cherish_my_page_bg
-                            )
-                        )
+                        if (tabIndex == 0) {
+                            tabBindingFirst.tabName.setTextAppearance(R.style.MyPageTabSelected)
+                            tabBindingFirst.tabCount.setTextAppearance(R.style.MyPageTabSelected)
 
-                        binding.cancelBtn.visibility = View.INVISIBLE
+                            tabBindingSecond.tabName.setTextAppearance(R.style.MyPageTab)
+                            tabBindingSecond.tabCount.setTextAppearance(R.style.MyPageTab)
 
-                        isSearched = false
+                            tabBindingFirst.tabName.setTextColor(Color.parseColor("#454545"))
+                            tabBindingFirst.tabCount.setTextColor(Color.parseColor("#1AD287"))
 
-                    } else {
-                        binding.myPageBg.setBackgroundColor(
-                            ContextCompat.getColor(
-                                binding.root.context,
-                                R.color.white
-                            )
-                        )
+                            if (isCollapsed) {
+                                binding.myPageBg.setBackgroundColor(
+                                    ContextCompat.getColor(
+                                        binding.root.context,
+                                        R.color.cherish_my_page_bg
+                                    )
+                                )
+                                binding.cancelBtn.visibility = View.INVISIBLE
+                                binding.myPageAddPlantBtn.visibility = View.INVISIBLE
+                                isSearched = false
 
-                        isSearched = (activity as MainActivity).getIsSearched()
-                        if (isSearched) {
-                            binding.myPageAddPlantBtn.visibility = View.INVISIBLE
-                        } else {
-                            binding.myPageAddPlantBtn.visibility = View.VISIBLE
+                            } else {
+                                binding.myPageBg.setBackgroundColor(
+                                    ContextCompat.getColor(
+                                        binding.root.context,
+                                        R.color.white
+                                    )
+                                )
+                                isSearched = (activity as MainActivity).getIsSearched()
+
+                                binding.myPageAddPlantBtn.visibility = View.VISIBLE
+                            }
+                            (activity as MainActivity).replaceFragment(tabIndex, data, isSearched)
+                        }
+                        if (tabIndex == 1) {
+                            tabBindingFirst.tabName.setTextAppearance(R.style.MyPageTab)
+                            tabBindingFirst.tabCount.setTextAppearance(R.style.MyPageTab)
+
+                            tabBindingSecond.tabName.setTextAppearance(R.style.MyPageTabSelected)
+                            tabBindingSecond.tabCount.setTextAppearance(R.style.MyPageTabSelected)
+
+                            tabBindingSecond.tabName.setTextColor(Color.parseColor("#454545"))
+                            tabBindingSecond.tabCount.setTextColor(Color.parseColor("#1AD287"))
+
+                            if (isCollapsed) {
+                                binding.myPageBg.setBackgroundColor(
+                                    ContextCompat.getColor(
+                                        binding.root.context,
+                                        R.color.cherish_my_page_bg
+                                    )
+                                )
+
+                                binding.cancelBtn.visibility = View.INVISIBLE
+
+                                isSearched = false
+
+                            } else {
+                                binding.myPageBg.setBackgroundColor(
+                                    ContextCompat.getColor(
+                                        binding.root.context,
+                                        R.color.white
+                                    )
+                                )
+
+                                isSearched = (activity as MainActivity).getIsSearched()
+                                if (isSearched) {
+                                    binding.myPageAddPlantBtn.visibility = View.INVISIBLE
+                                } else {
+                                    binding.myPageAddPlantBtn.visibility = View.VISIBLE
+                                }
+                            }
+                            (activity as MainActivity).replaceFragment(tabIndex, data, isSearched)
                         }
                     }
-                    (activity as MainActivity).replaceFragment(tabIndex, data, isSearched)
-                }
-            }
-        })
+                })
 
+            }
+        }
     }
 
     private fun createTabView(name: String, count: String?): LinearLayout {
@@ -387,12 +409,12 @@ class ManagePlantFragment : Fragment() {
 
     }
 
+
     private fun navigatePhoneBook() {
         val intent = Intent(context, EnrollmentPhoneActivity::class.java)
         intent.putExtra("userId", viewModel.cherishuserId.value!!)
         startActivity(intent)
     }
-
 
     private fun initializeServerRequest(binding: FragmentManagePlantBinding) {
         requestData.myPageAPI.fetchUserPage(viewModel.cherishuserId.value!!)
@@ -436,6 +458,8 @@ class ManagePlantFragment : Fragment() {
                                     )
                                 )
 
+
+
                                 initializeTabLayoutView(
                                     binding,
                                     it.myPageUserData.result
@@ -446,6 +470,5 @@ class ManagePlantFragment : Fragment() {
                     }
                 })
     }
-
 
 }
