@@ -164,9 +164,9 @@ class ManagePlantActivity : AppCompatActivity() {
             override fun onTabReselected(tab: TabLayout.Tab?) {}
             override fun onTabUnselected(tab: TabLayout.Tab?) {}
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                tabIndex = binding.myPageBottomTab.selectedTabPosition
+                tabIndexChanged = binding.myPageBottomTab.selectedTabPosition
 
-                if (tabIndex == 0) {
+                if (tabIndexChanged == 0) {
                     binding.myPageAddPlantBtn.visibility = View.VISIBLE
 
                     tabBindingFirst.tabName.setTextAppearance(R.style.MyPageTabSelected)
@@ -179,9 +179,9 @@ class ManagePlantActivity : AppCompatActivity() {
                     tabBindingFirst.tabCount.setTextColor(Color.parseColor("#1AD287"))
 
 
-                    replaceFragment(tabIndex, data)
+                    replaceFragment(tabIndexChanged, data)
                 }
-                if (tabIndex == 1) {
+                if (tabIndexChanged == 1) {
                     binding.myPageAddPlantBtn.visibility = View.INVISIBLE
 
                     tabBindingFirst.tabName.setTextAppearance(R.style.MyPageTab)
@@ -193,7 +193,7 @@ class ManagePlantActivity : AppCompatActivity() {
                     tabBindingSecond.tabName.setTextColor(Color.parseColor("#454545"))
                     tabBindingSecond.tabCount.setTextColor(Color.parseColor("#1AD287"))
 
-                    replaceFragment(tabIndex, data)
+                    replaceFragment(tabIndexChanged, data)
                 }
             }
         })
@@ -239,7 +239,7 @@ class ManagePlantActivity : AppCompatActivity() {
                                 Log.d("data success!", it.myPageUserData.waterCount.toString())
 
 
-                                plantCount=it.myPageUserData.totalCherish.toString()
+                                //plantCount=it.myPageUserData.totalCherish.toString()
                                 //phoneCount=arguments?.getString("phonecount")
 
                                 binding.myPageBottomTab.getTabAt(0)!!.setCustomView(
