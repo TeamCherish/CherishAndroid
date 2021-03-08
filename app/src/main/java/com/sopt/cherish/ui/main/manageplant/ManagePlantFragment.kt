@@ -428,13 +428,10 @@ class ManagePlantFragment : Fragment() {
                         call: Call<MyPageUserRes>,
                         response: Response<MyPageUserRes>
                     ) {
-                        Log.d("success", response.body().toString())
                         response.takeIf {
                             it.isSuccessful
                         }?.body()
                             ?.let { it ->
-
-                                Log.d("data success!", it.myPageUserData.waterCount.toString())
 
                                 binding.myPageWateringCnt.text =
                                     it.myPageUserData.waterCount.toString()
@@ -454,14 +451,11 @@ class ManagePlantFragment : Fragment() {
                                     arguments?.getString("phonecount")
                                 )
 
-
-
                                 initializeTabLayoutView(
                                     binding,
                                     it.myPageUserData.result
                                 )
                                 data = it.myPageUserData.result
-                                Log.d("list", it.myPageUserData.result.toString())
                             }
                     }
                 })
