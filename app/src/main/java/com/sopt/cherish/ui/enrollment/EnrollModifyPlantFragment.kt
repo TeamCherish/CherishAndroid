@@ -92,6 +92,10 @@ class EnrollModifyPlantFragment : Fragment() {
                                 }
 
                                 binding.waterAlarmTime.text = it.data.cherishDetail.notice_time
+
+
+
+
                                 binding.phoneNumber.text = it.data.cherishDetail.phone
 
 
@@ -127,19 +131,19 @@ class EnrollModifyPlantFragment : Fragment() {
             }
 
             var birth_modify = binding.editBirth.text.toString()
-            if (birth_modify == "") {
-                birth_modify = binding.editBirth.hint.substring(0, 4) + "-" +
+        /*    if (birth_modify == "") {
+                birth_modify = binding.editBirth.hint.substring(0, 4) + "/" +
                         binding.editBirth.hint.substring(
                             4,
                             6
-                        ) + "-" + binding.editBirth.hint.substring(6).toString()
+                        ) + "/" + binding.editBirth.hint.substring(6).toString()
             } else {
-                birth_modify = binding.editBirth.text.substring(0, 4) + "-" +
+                birth_modify = binding.editBirth.text.substring(0, 4) + "/" +
                         binding.editBirth.text.substring(
                             4,
                             6
-                        ) + "-" + binding.editBirth.text.substring(6).toString()
-            }
+                        ) + "/" + binding.editBirth.text.substring(6).toString()
+            }*/
 
             val userwater = binding.waterAlarmWeek.text.toString()
             Log.d("userwater", binding.waterAlarmWeek.text.toString())
@@ -160,7 +164,7 @@ class EnrollModifyPlantFragment : Fragment() {
             //var week_switch_modify = binding.alarmSwitch.isChecked
 
             val usertime = binding.waterAlarmTime.text.toString()
-            val usertime_hour_modify = usertime.substring(0, 5).toString()
+            //val usertime_hour_modify = usertime.substring(0, 5).toString()
             Log.d("modifycherish", modifycherish.toString())
             Log.d("birth_modify", birth_modify.toString())
 
@@ -168,7 +172,7 @@ class EnrollModifyPlantFragment : Fragment() {
                 nickname = nickname_modify,
                 birth = birth_modify,
                 cycle_date = week_modify,
-                notice_time = usertime_hour_modify,
+                notice_time = usertime,
                 water_notice = true,
                 id = modifycherish
             )
