@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
-import com.sopt.cherish.MainApplication
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityMainBinding
 import com.sopt.cherish.di.Injection
@@ -55,11 +54,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initializeToken() {
+        /*
         intent?.getStringExtra("loginToken")?.let { token ->
             MainApplication.sharedPreferenceController.setToken(
                 token
             )
-        }
+         */
     }
 
     override fun onResume() {
@@ -182,8 +182,8 @@ class MainActivity : AppCompatActivity() {
             ContactsContract.CommonDataKinds.Phone.NUMBER
         )
         // 2.2 조건 정의
-        var where: String? = null
-        var whereValues: Array<String>? = null
+        val where: String? = null
+        val whereValues: Array<String>? = null
 
         applicationContext?.run {
             val cursor = contentResolver.query(phonUri, projections, where, whereValues, "")
@@ -235,7 +235,4 @@ class MainActivity : AppCompatActivity() {
         return search
     }
 
-    fun setIsSearched(isSearched: Boolean) {
-        search = isSearched
-    }
 }

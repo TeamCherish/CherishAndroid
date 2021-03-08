@@ -61,34 +61,39 @@ class ResultPlantFragment : Fragment() {
         Log.d("plant_id_btn",plant_id_btn.toString())
 
 
-        when(plant_id_btn){
-            1 -> {binding.startbtn.setBackgroundColor(R.color.plantid1)
-                binding.textViewFlower.setTextColor(R.color.plantid1)
-                binding.viewFlower.setBackgroundColor(R.color.plantid1)
+        when (plant_id_btn) {
+            1 -> {
+                binding.startbtn.setBackgroundColor(Color.parseColor("#F1B0BC"))
+                binding.textViewFlower.setTextColor(Color.parseColor("#F1B0BC"))
+                binding.viewFlower.setBackgroundColor(Color.parseColor("#F1B0BC"))
                 binding.tipBox.setBackgroundResource(R.drawable.plant_tip_box)
-                binding.textViewflowerMean.setTextColor(R.color.plantid1)
+                binding.textViewflowerMean.setTextColor(Color.parseColor("#F1B0BC"))
             }
-            2 -> {binding.startbtn.setBackgroundColor(R.color.plantid2)
-                binding.textViewFlower.setTextColor(R.color.plantid2)
-                binding.viewFlower.setBackgroundColor(R.color.plantid2)
-              //  binding.tipBox.setBackgroundResource(R.drawable.plant_tip_box2)
-                binding.textViewflowerMean.setTextColor(R.color.plantid2)
+            2 -> {
+                binding.startbtn.setBackgroundColor(Color.parseColor("#AAB3D1"))
+                binding.textViewFlower.setTextColor(Color.parseColor("#AAB3D1"))
+                binding.viewFlower.setBackgroundColor(Color.parseColor("#AAB3D1"))
+                binding.tipBox.setBackgroundResource(R.drawable.plant_tip_box2)
+                binding.textViewflowerMean.setTextColor(Color.parseColor("#AAB3D1"))
 
             }
-            3 -> {binding.startbtn.setBackgroundColor(R.color.plantid3)
-                binding.textViewFlower.setTextColor(R.color.plantid3)
-                binding.viewFlower.setBackgroundColor(R.color.plantid3)
-               // binding.tipBox.setBackgroundResource(R.drawable.plant_tip_box3)
-                binding.textViewflowerMean.setTextColor(R.color.plantid3)
+            3 -> {
+                binding.startbtn.setBackgroundColor(Color.parseColor(" #97CDBD "))
+                binding.textViewFlower.setTextColor(Color.parseColor(" #97CDBD "))
+                binding.viewFlower.setBackgroundColor(Color.parseColor(" #97CDBD "))
+                binding.tipBox.setBackgroundResource(R.drawable.plant_tip_box3)
+                binding.textViewflowerMean.setTextColor(Color.parseColor(" #97CDBD "))
 
             }
-            4 -> {binding.startbtn.setBackgroundColor(Color.parseColor("#9AB7DE"))
+            4 -> {
+                binding.startbtn.setBackgroundColor(Color.parseColor("#9AB7DE"))
                 binding.textViewFlower.setTextColor(Color.parseColor("#9AB7DE"))
                 binding.viewFlower.setBackgroundColor(Color.parseColor("#9AB7DE"))
-             //   binding.tipBox.setBackgroundResource(R.drawable.plant_tip_box4)
+                binding.tipBox.setBackgroundResource(R.drawable.plant_tip_box4)
                 binding.textViewflowerMean.setTextColor(Color.parseColor("#9AB7DE"))
             }
-            5 -> {binding.startbtn.setBackgroundColor(Color.parseColor("#9EC8EC"))
+            5 -> {
+                binding.startbtn.setBackgroundColor(Color.parseColor("#9EC8EC"))
                 binding.textViewFlower.setTextColor(Color.parseColor("#9EC8EC"))
                 binding.viewFlower.setBackgroundColor(Color.parseColor("#9EC8EC"))
                 binding.tipBox.setBackgroundResource(R.drawable.plant_tip_box5)

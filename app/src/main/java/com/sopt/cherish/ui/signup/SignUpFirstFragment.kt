@@ -48,7 +48,7 @@ class SignUpFirstFragment : Fragment() {
         super.onResume()
         val activity = activity
         if (activity != null) {
-            (activity as SignUpActivity).setActionBarTitlesignup("회원가입")
+            (activity as SignUpActivity).setActionBarTitleSignUp("회원가입")
         }
     }
 
@@ -111,7 +111,7 @@ class SignUpFirstFragment : Fragment() {
 
                                 showPw()
                             } else { //중복 있으면
-                                binding.isUsableEmail.text = "사용하실 수 없는 이메일입니다."
+                                binding.isUsableEmail.text = "이미 존재하는 이메일입니다."
                                 binding.isUsableEmail.setTextColor(
                                     ContextCompat.getColor(
                                         binding.root.context,

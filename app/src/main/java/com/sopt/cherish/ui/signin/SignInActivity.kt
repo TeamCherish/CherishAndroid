@@ -37,11 +37,10 @@ class SignInActivity : AppCompatActivity() {
         binding.textView31.setOnClickListener {
             val signUpIntent = Intent(this@SignInActivity, SignUpActivity::class.java)
             startActivity(signUpIntent)
-            finish()
         }
     }
 
-    private fun signIn(email: String, password: String) {
+    private fun signIn(email: String, password: String) { //로그인 버튼 클릭
         binding.editTextTextPassword.hideKeyboard()
         requestData.authAPI.postLogin(EditUserReq(email, password))
             .enqueue(
