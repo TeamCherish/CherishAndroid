@@ -27,7 +27,10 @@ class SignInActivity : AppCompatActivity() {
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        if (MainApplication.sharedPreferenceController.getUserId() != null && MainApplication.sharedPreferenceController.getUserNickname() != null) {
+        if (MainApplication.sharedPreferenceController.getUserId() != null &&
+            MainApplication.sharedPreferenceController.getUserNickname() != null &&
+            MainApplication.sharedPreferenceController.getToken() != null
+        ) {
             hasUser(
                 MainApplication.sharedPreferenceController.getUserId()!!,
                 MainApplication.sharedPreferenceController.getUserNickname()!!,
