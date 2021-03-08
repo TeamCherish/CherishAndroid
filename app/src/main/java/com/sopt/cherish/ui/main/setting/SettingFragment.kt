@@ -16,6 +16,7 @@ import com.sopt.cherish.databinding.FragmentSettingBinding
 import com.sopt.cherish.remote.api.MyPageUserRes
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.main.MainViewModel
+import com.sopt.cherish.util.extension.shortToast
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -81,6 +82,15 @@ class SettingFragment : Fragment() {
             MainApplication.sharedPreferenceController.setAlarmKey(isChecked)
         }
 
+        binding.friendsCons.setOnClickListener {
+            shortToast(requireContext(), "로그아웃 되었습니다.")
+            MainApplication.sharedPreferenceController.apply {
+                deleteToken()
+                deleteUserId()
+                deleteUserPassword()
+            }
+            requireActivity().finish()
+        }
         return binding.root
     }
 

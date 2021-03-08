@@ -21,4 +21,11 @@ interface OnControlled {
     fun setUserNickname(userNickname: String)
 
     fun getUserNickname(): String?
+
+    // log out
+    fun deleteUserId()
+
+    fun deleteUserPassword()
+
+    fun deleteToken()
 }

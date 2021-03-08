@@ -38,6 +38,18 @@ class EncryptedSharedPreferenceController(
 
     override fun getUserNickname(): String? = dataStore.getString(cherishLoginUserNickname, null)
 
+    override fun deleteUserId() {
+        dataStore.edit().remove(cherishLoginUserId).apply()
+    }
+
+    override fun deleteUserPassword() {
+        dataStore.edit().remove(cherishLoginUserPassword).apply()
+    }
+
+    override fun deleteToken() {
+        dataStore.edit().remove(cherishLoginTokenKey).apply()
+    }
+
     companion object {
         private val cherishAlarmDataKey = MyKeyStore.provideAlarmKeyName()
         private val cherishLoginTokenKey = MyKeyStore.provideLoginTokenPrefsName()
