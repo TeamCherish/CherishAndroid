@@ -265,6 +265,7 @@ class SignUpFirstFragment : Fragment() {
                     )
                     isFinish = true
                     binding.signUpButton.setOnClickListener {
+                        Log.d("회원가입","버튼클릭")
                         val bundle = Bundle()
                         bundle.putString("email", email)
                         bundle.putString("password", pw)
