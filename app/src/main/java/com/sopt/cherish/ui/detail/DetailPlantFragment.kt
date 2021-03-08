@@ -25,6 +25,7 @@ import com.sopt.cherish.ui.dialog.AlertPlantDialogFragment
 import com.sopt.cherish.ui.dialog.wateringdialog.DetailWateringDialogFragment
 import com.sopt.cherish.ui.domain.MemoListDataclass
 import com.sopt.cherish.util.DateUtil
+import com.sopt.cherish.util.extension.longToast
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -80,7 +81,11 @@ class DetailPlantFragment : Fragment() {
                 parentFragmentManager,
                 "DetailPlantFragment"
             )*/
-            DetailWateringDialogFragment().show(parentFragmentManager, "DetailPlantFragment")
+            if (viewModel.dDay <= 0) {
+                DetailWateringDialogFragment().show(parentFragmentManager, "DetailPlantFragment")
+            } else {
+                longToast(requireContext(), "물 줄수있는 날이 아니에요 ㅠ")
+            }
         }
 
         Log.d("gogo", cherishid.toString())
@@ -108,6 +113,7 @@ class DetailPlantFragment : Fragment() {
                                 binding.textViewPlantname.text = it.data.plant_name.toString()
                                 //식물 아이디 받는 곳 이거를 이제 정보 아이콘 누를때 넘겨줘야함
                                 plantId = it.data.plantId
+                                viewModel.dDay = it.data.dDay
                                 if (it.data.dDay > 0) {
                                     binding.textViewDday.text = "D-" + it.data.dDay.toString()
 
