@@ -95,7 +95,7 @@ class ManagePlantFragment : Fragment() {
         initializeBottomSheetBehavior(binding)
     }
 
-    private fun navigateUserModifyFragment(){
+    private fun navigateUserModifyFragment() {
         val transaction = parentFragmentManager.beginTransaction()
         transaction.replace(R.id.main_fragment_container, UserModifyFragment().apply {
             arguments = Bundle().apply {
@@ -158,7 +158,7 @@ class ManagePlantFragment : Fragment() {
             BottomSheetBehavior.BottomSheetCallback() {
 
             override fun onStateChanged(bottomSheet: View, newState: Int) {
-                if(newState==BottomSheetBehavior.STATE_DRAGGING){
+                if (newState == BottomSheetBehavior.STATE_DRAGGING) {
                     binding.myPageBg.setBackgroundColor(
                         ContextCompat.getColor(
                             binding.root.context,
@@ -181,7 +181,7 @@ class ManagePlantFragment : Fragment() {
                         isCollapsed = false
                     }
 
-                    if(newState==BottomSheetBehavior.STATE_DRAGGING){
+                    if (newState == BottomSheetBehavior.STATE_DRAGGING) {
                         binding.myPageBg.setBackgroundColor(
                             ContextCompat.getColor(
                                 binding.root.context,
@@ -253,9 +253,9 @@ class ManagePlantFragment : Fragment() {
         })
     }
 
-    private fun setTabLayout(){
+    private fun setTabLayout() {
 
-        if(binding.myPageBottomTab.getTabAt(0)==null){
+        if (binding.myPageBottomTab.getTabAt(0) == null) {
             binding.myPageBottomTab.addTab(
                 binding.myPageBottomTab.newTab().setCustomView(
                     createTabView(
@@ -266,7 +266,7 @@ class ManagePlantFragment : Fragment() {
             )
         }
 
-        if(binding.myPageBottomTab.getTabAt(1)==null){
+        if (binding.myPageBottomTab.getTabAt(1) == null) {
             binding.myPageBottomTab.addTab(
                 binding.myPageBottomTab.newTab().setCustomView(
                     createTabView(
@@ -443,19 +443,15 @@ class ManagePlantFragment : Fragment() {
                                 binding.myPageFinishCnt.text =
                                     it.myPageUserData.completeCount.toString()
                                 binding.myPageUserName.text = it.myPageUserData.user_nickname
-                                mypageusername=it.myPageUserData.user_nickname
-                                mypageuseremail=it.myPageUserData.email
-                                binding.myPageBottomTab.getTabAt(0)!!.setCustomView(
-                                    createTabView(
-                                        "식물 ",
-                                        it.myPageUserData.totalCherish.toString()
-                                    )
+                                mypageusername = it.myPageUserData.user_nickname
+                                mypageuseremail = it.myPageUserData.email
+                                binding.myPageBottomTab.getTabAt(0)!!.customView = createTabView(
+                                    "식물 ",
+                                    it.myPageUserData.totalCherish.toString()
                                 )
-                                binding.myPageBottomTab.getTabAt(1)!!.setCustomView(
-                                    createTabView(
-                                        "연락처 ",
-                                        arguments?.getString("phonecount")
-                                    )
+                                binding.myPageBottomTab.getTabAt(1)!!.customView = createTabView(
+                                    "연락처 ",
+                                    arguments?.getString("phonecount")
                                 )
 
 

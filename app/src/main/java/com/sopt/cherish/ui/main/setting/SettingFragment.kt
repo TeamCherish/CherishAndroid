@@ -10,10 +10,9 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.sopt.cherish.MainApplication
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentSettingBinding
-import com.sopt.cherish.di.Injection
-import com.sopt.cherish.local.AlarmController
 import com.sopt.cherish.remote.api.MyPageUserRes
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.main.MainViewModel
@@ -30,7 +29,6 @@ class SettingFragment : Fragment() {
     private var usernickname: String = ""
     private var useremail: String = ""
     private val viewModel: MainViewModel by activityViewModels()
-    private lateinit var alarmController: AlarmController
     private lateinit var binding: FragmentSettingBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,7 +38,6 @@ class SettingFragment : Fragment() {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_setting, container, false)
         binding.mainViewModel = viewModel
-        alarmController = AlarmController(Injection.provideAlarmDataStore(requireContext()))
         binding = FragmentSettingBinding.bind(view)
 
         setView()
@@ -81,7 +78,7 @@ class SettingFragment : Fragment() {
         }
 
         binding.settingAlarmSetting.setOnCheckedChangeListener { buttonView, isChecked ->
-            alarmController.setAlarmKey(isChecked)
+            MainApplication.sharedPreferenceController.setAlarmKey(isChecked)
         }
 
         return binding.root
@@ -89,7 +86,8 @@ class SettingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.settingAlarmSetting.isChecked = alarmController.getAlarmKey()
+        binding.settingAlarmSetting.isChecked =
+            MainApplication.sharedPreferenceController.getAlarmKey()
         setView()
     }
 

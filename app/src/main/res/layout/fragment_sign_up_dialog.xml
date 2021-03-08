@@ -57,8 +57,7 @@
         android:background="#dbdbdb"
         app:layout_constraintBottom_toTopOf="@+id/button_close"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

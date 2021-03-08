@@ -265,9 +265,9 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:tabGravity="start"
-                    app:tabMode="scrollable"
+                    app:tabIndicatorHeight="3dp"
                     app:tabIndicatorColor="@color/cherish_light_black"
-                    app:tabIndicatorHeight="3dp"/>
+                    app:tabMode="scrollable" />
 
                 <!-- background color 추가해주세요!-->
                 <TextView

@@ -6,7 +6,6 @@ import android.view.MenuItem
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivitySignUpBinding
 import com.sopt.cherish.ui.signin.SignInActivity

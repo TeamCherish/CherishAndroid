@@ -1,6 +1,5 @@
 package com.sopt.cherish.ui.main.home
 
-import android.animation.ArgbEvaluator
 import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.os.Bundle
@@ -29,6 +28,7 @@ import com.sopt.cherish.util.extension.longToast
 
 
 /**
+ * Created on 2021-03-05 by SSong-develop
  * 메인 홈뷰
  */
 
@@ -162,12 +162,6 @@ class HomeFragment : Fragment(), OnItemClickListener {
         }
     }
 
-    // 바텀시트 뒤에 녀석 색상 변경
-    private fun transitionBottomSheetParentView(slideOffset: Float) {
-        val argbEvaluator =
-            ArgbEvaluator().evaluate(slideOffset, R.color.transparent, R.color.black)
-    }
-
     private fun addBottomSheetCallback() {
         standardBottomSheetBehavior.addBottomSheetCallback(object :
             BottomSheetBehavior.BottomSheetCallback() {
@@ -178,7 +172,6 @@ class HomeFragment : Fragment(), OnItemClickListener {
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
                 if (standardBottomSheetBehavior.state == BottomSheetBehavior.STATE_DRAGGING)
                     standardBottomSheetBehavior.peekHeight = 60.dp
-
             }
         })
     }
