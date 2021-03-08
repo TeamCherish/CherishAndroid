@@ -26,7 +26,20 @@ class SignInActivity : AppCompatActivity() {
 
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        Log.d("hello", MainApplication.sharedPreferenceController.getToken().toString())
+
+        Log.d("hello", MainApplication.sharedPreferenceController.getUserId().toString())
+        Log.d("hello", MainApplication.sharedPreferenceController.getUserNickname().toString())
+        if (MainApplication.sharedPreferenceController.getUserId() != null && MainApplication.sharedPreferenceController.getUserNickname() != null) {
+            val Intent =
+                Intent(this@SignInActivity, MainActivity::class.java)
+            Intent.putExtra("userId", MainApplication.sharedPreferenceController.getUserId())
+            Intent.putExtra(
+                "userNickname",
+                MainApplication.sharedPreferenceController.getUserNickname()
+            )
+            startActivity(Intent)
+            finish()
+        }
 
         binding.loginBtn.setOnClickListener {
             val email = binding.editTextTextPersonName.text.toString()
@@ -79,8 +92,12 @@ class SignInActivity : AppCompatActivity() {
                             Intent(this@SignInActivity, HomeBlankActivity::class.java)
                         blankHomeIntent.putExtra("userId", userId)
                         blankHomeIntent.putExtra("userNickname", userNickName)
+                        MainApplication.sharedPreferenceController.apply {
+                            setUserId(userId)
+                            setUserNickname(userNickName)
+                            setToken(token)
+                        }
                         startActivity(blankHomeIntent)
-
                         finish()
                     } else {
                         val mainActivityIntent =
@@ -97,6 +114,11 @@ class SignInActivity : AppCompatActivity() {
                             "loginToken",
                             token
                         )
+                        MainApplication.sharedPreferenceController.apply {
+                            setUserId(userId)
+                            setUserNickname(userNickName)
+                            setToken(token)
+                        }
                         startActivity(mainActivityIntent)
                         finish()
                     }

@@ -3,16 +3,13 @@ package com.sopt.cherish.ui.dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.DialogFragment
 import com.sopt.cherish.R
-import com.sopt.cherish.databinding.FragmentCheckPhoneDialogBinding
 import com.sopt.cherish.databinding.FragmentModifyWeekAlertBinding
-
 
 
 class ModifyWeekAlertFragment(

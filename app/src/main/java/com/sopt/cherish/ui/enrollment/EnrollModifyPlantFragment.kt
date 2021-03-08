@@ -14,7 +14,6 @@ import com.sopt.cherish.ui.detail.DetailPlantActivity
 import com.sopt.cherish.ui.dialog.ClockPickerDialogFragment
 import com.sopt.cherish.ui.dialog.DeletePlantDialogFragment
 import com.sopt.cherish.ui.dialog.ModifyWeekAlertFragment
-import com.sopt.cherish.ui.dialog.WeekPickerDialogFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
