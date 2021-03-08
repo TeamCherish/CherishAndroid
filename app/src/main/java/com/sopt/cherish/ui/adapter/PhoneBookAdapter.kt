@@ -3,10 +3,8 @@ package com.sopt.cherish.ui.adapter
 import android.util.Log
 import android.util.SparseBooleanArray
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.CompoundButton
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.sopt.cherish.databinding.ItemLayoutBinding
 
@@ -49,10 +47,10 @@ class PhoneBookAdapter(private val phoneBookList: List<Phone>) :
 
         holder.radioButton.setOnClickListener {
             if ( mStateButtons.get(position, false) ){
-                mStateButtons.put(position, false);
+                mStateButtons.put(position, false)
                 holder.radioButton.isChecked=false
             } else {
-                mStateButtons.put(position, true);
+                mStateButtons.put(position, true)
                 holder.radioButton.isChecked=true
             }
 

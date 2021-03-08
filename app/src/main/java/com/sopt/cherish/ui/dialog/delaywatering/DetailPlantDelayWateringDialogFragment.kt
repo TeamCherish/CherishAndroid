@@ -14,6 +14,7 @@ import com.sopt.cherish.R
 import com.sopt.cherish.databinding.DialogDetailDelayWateringBinding
 import com.sopt.cherish.remote.api.PostponeWateringDateReq
 import com.sopt.cherish.ui.detail.DetailPlantViewModel
+import com.sopt.cherish.util.DialogUtil
 import com.sopt.cherish.util.extension.shortToast
 
 class DetailPlantDelayWateringDialogFragment : DialogFragment() {
@@ -42,6 +43,11 @@ class DetailPlantDelayWateringDialogFragment : DialogFragment() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        DialogUtil.adjustDialogSize(this, 0.9f, 0.6f)
+    }
+    
     private fun initializeNumberPicker(binding: DialogDetailDelayWateringBinding) {
         binding.detailDelayWateringDayPicker.apply {
             wrapSelectorWheel = false

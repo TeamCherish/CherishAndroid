@@ -24,36 +24,25 @@ class MainViewModel(
     private val calendarRepository: CalendarRepository,
     private val notificationRepository: NotificationRepository
 ) : ViewModel() {
-    // [home] Server connection
-
-    // Utilities
     val animationTrigger = SingleLiveEvent<Boolean>()
-    val exceptionLiveData = MutableLiveData<String>()
-
-    // 로그인 하는 cherish를 이용하는 유저
     val cherishuserId = MutableLiveData<Int>()
-
-    // 유저가 가지고 있는 cherish들
     val userNickName = MutableLiveData<String>()
-
-    // FCM Token
     val fcmToken = MutableLiveData<String>()
 
-    // Home에서 호출된 여러명
     private val _cherishUsers = MutableLiveData<UserResult>()
     val cherishUsers: MutableLiveData<UserResult>
         get() = _cherishUsers
 
-    // recyclerview에 클릭된 유저 1명
-    // 다른 곳에서 observing을 통해서 값을 변경시켜줘야 하기 때문에 라이브데이터를 사용해야 한다.
     val selectedCherishUser = MutableLiveData<User>()
 
     fun fetchUsers() = viewModelScope.launch {
         runCatching {
             mainRepository.fetchCherishUser(cherishuserId.value!!)
         }.onSuccess {
-            it.userData.userList.add(0, it.userData.userList[0])
-            _cherishUsers.value = it
+            if (it.userData.totalUser != 0) {
+                it.userData.userList.add(0, it.userData.userList[0])
+                _cherishUsers.value = it
+            }
         }.onFailure { error ->
             throw error
         }
@@ -75,7 +64,7 @@ class MainViewModel(
             runCatching {
                 notificationRepository.sendRemindReviewNotification(notificationRemindReviewReq)
             }.onSuccess {
-                SimpleLogger.logI("${it.message}")
+                SimpleLogger.logI(it.message)
             }.onFailure {
                 throw it
             }

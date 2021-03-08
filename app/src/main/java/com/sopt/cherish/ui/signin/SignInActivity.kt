@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.sopt.cherish.MainApplication
 import com.sopt.cherish.databinding.ActivitySignInBinding
 import com.sopt.cherish.remote.api.*
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
@@ -25,6 +26,17 @@ class SignInActivity : AppCompatActivity() {
 
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        if (MainApplication.sharedPreferenceController.getUserId() != null &&
+            MainApplication.sharedPreferenceController.getUserNickname() != null &&
+            MainApplication.sharedPreferenceController.getToken() != null
+        ) {
+            hasUser(
+                MainApplication.sharedPreferenceController.getUserId()!!,
+                MainApplication.sharedPreferenceController.getUserNickname()!!,
+                MainApplication.sharedPreferenceController.getToken()!!
+            )
+        }
 
         binding.loginBtn.setOnClickListener {
             val email = binding.editTextTextPersonName.text.toString()
@@ -59,15 +71,16 @@ class SignInActivity : AppCompatActivity() {
                                 Log.d("isSuccess", response.body().toString())
                                 hasUser(
                                     response.body()?.editUserData?.userId!!,
-                                    response.body()!!.editUserData.userNickName
+                                    response.body()!!.editUserData.userNickName,
+                                    response.body()!!.editUserData.token
                                 )
                             }
                     }
                 })
     }
 
-    private fun hasUser(userId: Int, userNickName: String) { //정보 있는지 확인
-
+    private fun hasUser(userId: Int, userNickName: String, token: String) {
+        var trigger: Boolean
         RetrofitBuilder.userAPI.hasUser(userId).enqueue(object : Callback<UserResult> {
             override fun onResponse(call: Call<UserResult>, response: Response<UserResult>) {
                 if (response.isSuccessful) {
@@ -76,8 +89,12 @@ class SignInActivity : AppCompatActivity() {
                             Intent(this@SignInActivity, HomeBlankActivity::class.java)
                         blankHomeIntent.putExtra("userId", userId)
                         blankHomeIntent.putExtra("userNickname", userNickName)
+                        MainApplication.sharedPreferenceController.apply {
+                            setUserId(userId)
+                            setUserNickname(userNickName)
+                            setToken(token)
+                        }
                         startActivity(blankHomeIntent)
-
                         finish()
                     } else {
                         val mainActivityIntent =
@@ -90,6 +107,15 @@ class SignInActivity : AppCompatActivity() {
                             "userNickname",
                             userNickName
                         )
+                        mainActivityIntent.putExtra(
+                            "loginToken",
+                            token
+                        )
+                        MainApplication.sharedPreferenceController.apply {
+                            setUserId(userId)
+                            setUserNickname(userNickName)
+                            setToken(token)
+                        }
                         startActivity(mainActivityIntent)
                         finish()
                     }

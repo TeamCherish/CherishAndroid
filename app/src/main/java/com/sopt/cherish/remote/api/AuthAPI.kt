@@ -21,7 +21,8 @@ data class EditUserRes(
 
 data class EditUserData(
     @SerializedName("UserId") val userId: Int,
-    @SerializedName("user_nickname") val userNickName: String
+    @SerializedName("user_nickname") val userNickName: String,
+    @SerializedName("token") val token: String
 )
 
 // 회원가입 request

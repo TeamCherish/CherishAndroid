@@ -4,7 +4,6 @@ import com.google.gson.annotations.SerializedName
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path
-import java.io.Serializable
 
 // Request param id
 // MyPage 조회
@@ -15,13 +14,13 @@ data class MyPageUserData(
     @SerializedName("waterCount") val waterCount: Int,
     @SerializedName("completeCount") val completeCount: Int,
     @SerializedName("totalCherish") val totalCherish: Int,
-    @SerializedName("result") val result: ArrayList<MyPageCherishData>
-):Serializable
+    @SerializedName("result") val result: List<MyPageCherishData>
+)
 
 data class MyPageUserRes(
     val myPageUserResponse: UtilResponse,
     @SerializedName("data") val myPageUserData: MyPageUserData
-):Serializable
+)
 
 data class MyPageCherishData(
     @SerializedName("id") val id: Int,
@@ -31,7 +30,7 @@ data class MyPageCherishData(
     @SerializedName("thumbnail_image_url") val thumbnailImageUrl: String,
     @SerializedName("level") val level: Int,
     @SerializedName("PlantId") val plantId: Int
-):Serializable
+)
 
 interface MyPageAPI {
     @GET("user/{id}")

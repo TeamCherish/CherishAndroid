@@ -25,4 +25,5 @@ interface NotificationAPI {
         @Body notificationRemindReviewReq: NotificationRemindReviewReq
     ): UtilResponseWithOutStatus
 
+
 }

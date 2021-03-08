@@ -1,5 +1,6 @@
 package com.sopt.cherish.remote.singleton
 
+import com.sopt.cherish.di.Injection
 import com.sopt.cherish.remote.api.*
 import com.sopt.cherish.remote.model.EnrollmentAPI
 import retrofit2.Retrofit
@@ -12,6 +13,7 @@ object RetrofitBuilder {
         return Retrofit.Builder()
             .baseUrl(BaseUrl)
             .addConverterFactory(GsonConverterFactory.create())
+            .client(Injection.provideOkHttpClient())
             .build()
     }
 

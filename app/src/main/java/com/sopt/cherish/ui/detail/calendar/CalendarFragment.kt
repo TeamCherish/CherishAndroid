@@ -34,9 +34,17 @@ class CalendarFragment : Fragment() {
         initializeViewModelData()
         initializeCalendar(binding)
         addDateClickListener(binding)
+        observeSelectedMemoCalendarDay(binding)
         observeSelectedDay()
 
         return binding.root
+    }
+
+    private fun observeSelectedMemoCalendarDay(binding: FragmentCalendarBinding) {
+        viewModel.selectedMemoCalendarDay.observe(viewLifecycleOwner) {
+            binding.calendarView.setDateSelected(it, true)
+            viewModel.selectedCalendarDay.value = it
+        }
     }
 
     fun navigateReviseReview() {
@@ -136,6 +144,7 @@ class CalendarFragment : Fragment() {
         removeSelectedDate(binding)
         viewModel.selectedCalendarDay.value = null
         binding.calendarViewChipLayout.clearChips()
+        viewModel.selectedMemoCalendarDay.value = null
     }
 
     companion object {
