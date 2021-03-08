@@ -20,7 +20,7 @@ data class Phone(
 class PhoneBookAdapter(private val phoneBookList: List<Phone>) :
     RecyclerView.Adapter<PhoneBookAdapter.Holder>() {
     var mStateButtons = SparseBooleanArray()
-    var mStateButtonsradio = SparseBooleanArray()
+
 
     var radiobutton: Boolean = true
     var checkedRadioButton: CompoundButton? = null
