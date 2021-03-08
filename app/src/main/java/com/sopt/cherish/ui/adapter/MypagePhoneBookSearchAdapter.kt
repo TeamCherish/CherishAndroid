@@ -1,6 +1,7 @@
 package com.sopt.cherish.ui.adapter
 
 import android.util.Log
+import android.util.SparseBooleanArray
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.CompoundButton
@@ -15,6 +16,7 @@ data class Phonemypagesearch(
 // created by nayoung : 사용자 연락처들을 받아서 보여주는 adapter
 class MypagePhoneBookSearchAdapter(private val phoneBookList: List<Phonemypage>) :
     RecyclerView.Adapter<MypagePhoneBookSearchAdapter.Holder>() {
+    var mStateButtons = SparseBooleanArray()
 
     var radiobutton: Boolean = true
     var checkedRadioButton: CompoundButton? = null
@@ -41,6 +43,19 @@ class MypagePhoneBookSearchAdapter(private val phoneBookList: List<Phonemypage>)
     override fun onBindViewHolder(holder: MypagePhoneBookSearchAdapter.Holder, position: Int) {
         /*val phone = phoneBookList[position]
         holder.setPhone(phone)*/
+        holder.radioButton.isChecked = mStateButtons.get(position, false)
+
+
+        holder.radioButton.setOnClickListener {
+            if ( mStateButtons.get(position, false) ){
+                mStateButtons.put(position, false);
+                holder.radioButton.isChecked=false
+            } else {
+                mStateButtons.put(position, true);
+                holder.radioButton.isChecked=true
+            }
+
+        }
         holder.radioButton.setOnCheckedChangeListener { compoundButton, isChecked ->
 
             checkedRadioButton?.apply { setChecked(!isChecked) }
