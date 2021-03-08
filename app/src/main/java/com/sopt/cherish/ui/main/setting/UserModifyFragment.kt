@@ -54,7 +54,7 @@ class UserModifyFragment : Fragment() {
 
                 @SuppressLint("ResourceType")
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    binding.buttonNickchange.setBackgroundResource(Color.parseColor("#1AD287"))
+                    binding.buttonNickchange.setBackgroundColor(Color.parseColor("#1AD287"))
                 }
             })
 
