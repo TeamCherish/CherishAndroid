@@ -41,7 +41,8 @@ class MainActivity : AppCompatActivity() {
         setBottomNavigationListener(binding)
     }
 
-    override fun onBackPressed() {
+    // 혹시나 마켓에 올릴 때 이거 없어서 문제생기면 그때 로직 변경
+/*    override fun onBackPressed() {
         val TIME_INTERVAL: Long = 2000
         val currentTime = System.currentTimeMillis()
         val intervalTime = currentTime - backPressedTime
@@ -51,7 +52,7 @@ class MainActivity : AppCompatActivity() {
             backPressedTime = currentTime
             shortToast(this, "뒤로가기 버튼을 한번 더 누르시면 종료됩니다")
         }
-    }
+    }*/
 
     private fun initializeToken() {
         /*
