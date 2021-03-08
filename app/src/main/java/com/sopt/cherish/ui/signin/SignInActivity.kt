@@ -30,15 +30,11 @@ class SignInActivity : AppCompatActivity() {
         Log.d("hello", MainApplication.sharedPreferenceController.getUserId().toString())
         Log.d("hello", MainApplication.sharedPreferenceController.getUserNickname().toString())
         if (MainApplication.sharedPreferenceController.getUserId() != null && MainApplication.sharedPreferenceController.getUserNickname() != null) {
-            val Intent =
-                Intent(this@SignInActivity, MainActivity::class.java)
-            Intent.putExtra("userId", MainApplication.sharedPreferenceController.getUserId())
-            Intent.putExtra(
-                "userNickname",
-                MainApplication.sharedPreferenceController.getUserNickname()
+            hasUser(
+                MainApplication.sharedPreferenceController.getUserId()!!,
+                MainApplication.sharedPreferenceController.getUserNickname()!!,
+                MainApplication.sharedPreferenceController.getToken()!!
             )
-            startActivity(Intent)
-            finish()
         }
 
         binding.loginBtn.setOnClickListener {
