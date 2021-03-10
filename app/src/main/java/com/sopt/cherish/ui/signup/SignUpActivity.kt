@@ -33,7 +33,7 @@ class SignUpActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         super.onBackPressed()
-        finish()
+        //finish()
     }
 
     fun setFragment(fragment: Fragment) {
