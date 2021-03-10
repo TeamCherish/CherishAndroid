@@ -63,23 +63,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/indicator_first" />
 
-    <NumberPicker
+    <TextView
         android:id="@+id/user_sex"
         android:layout_width="0dp"
         android:layout_height="44dp"
-        android:padding="0dp"
         android:layout_marginTop="4dp"
         android:background="@drawable/search_background"
-        android:gravity="start"
-        android:orientation="vertical"
+        android:text="디자인 팝업뷰 주세요"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginStart="@dimen/margin_16dp"
         android:layout_marginEnd="@dimen/margin_16dp"
-        android:scrollbarSize="@dimen/margin_5dp"
-        android:textAlignment="viewStart"
-        app:layout_constraintTop_toBottomOf="@+id/sex_text"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/sex_text" />
 
 
     <TextView
