@@ -52,20 +52,28 @@
         android:layout_height="0dp"
         android:splitMotionEvents="false"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/constraint1"
-        app:layout_constraintStart_toStartOf="@+id/constraint1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraint1"
         tools:listitem="@layout/item_layout" />
 
 
     <Button
         android:id="@+id/buttonnext"
-        style="@style/RoundButton.Gray"
+        style="@style/RoundButton.pinkish_Gray"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="534dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="20dp"
         android:text="다음"
+        android:textColor="@color/white"
+        android:letterSpacing="-0.03"
+        android:lineSpacingExtra="8sp"
+        android:fontFamily="@font/notosanscjkkr_bold"
+        android:includeFontPadding="false"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/recycler"
-        app:layout_constraintStart_toStartOf="@+id/recycler"
-        app:layout_constraintTop_toBottomOf="@+id/constraint1" />
+        app:layout_constraintStart_toStartOf="@+id/recycler" />
 </androidx.constraintlayout.widget.ConstraintLayout>
