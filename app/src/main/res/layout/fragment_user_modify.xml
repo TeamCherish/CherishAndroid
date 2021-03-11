@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -7,33 +9,20 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
 
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.main.setting.UserModifyFragment">
 
 
-        <TextView
-            android:id="@+id/textView13"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="내 정보 수정"
-            app:layout_constraintBottom_toBottomOf="@+id/constraintLayout_setting_Back"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/constraintLayout_setting_Back" />
-
         <ImageView
             android:id="@+id/imageView17"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="69dp"
+            android:layout_marginTop="57dp"
             android:src="@drawable/user_img"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView13" />
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout_setting_Back" />
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -52,13 +41,19 @@
                 android:id="@+id/setting_edit_nickname"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="24dp"
                 android:background="@null"
                 android:ems="10"
+                android:fontFamily="@font/notosanscjkkr_medium"
                 android:hint=""
+                android:includeFontPadding="false"
                 android:inputType="textPersonName"
+                android:letterSpacing="-0.03"
+                android:lineSpacingExtra="9sp"
                 android:maxLength="6"
                 android:text=""
+                android:textColor="#454545"
+                android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -78,7 +73,13 @@
             android:id="@+id/textView14"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="24dp"
+            android:letterSpacing="-0.02"
+            android:lineSpacingExtra="12sp"
+            android:fontFamily="@font/notosanscjkkr_regular"
+            android:includeFontPadding="false"
+            android:textSize="@dimen/text_12sp"
+            android:textColor="#aaaaaa"
             android:text="닉네임은 최대 6글자까지 가능합니다."
             app:layout_constraintStart_toStartOf="@+id/cons_nickname"
             app:layout_constraintTop_toBottomOf="@+id/cons_nickname" />
@@ -99,9 +100,15 @@
                 android:id="@+id/setting_edit_email"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="24dp"
                 android:background="@null"
                 android:ems="10"
+                android:letterSpacing="-0.01"
+                android:lineSpacingExtra="9sp"
+                android:fontFamily="@font/roboto_regular"
+                android:textSize="@dimen/text_12sp"
+                android:includeFontPadding="false"
+                android:textColor="#aaaaaa"
                 android:hint=""
                 android:inputType="textPersonName"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -119,28 +126,56 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:text="변경완료"
+            android:letterSpacing="-0.01"
+            android:lineSpacingExtra="8sp"
+            android:fontFamily="@font/notosanscjkkr_medium"
+            android:includeFontPadding="false"
+            android:textSize="16sp"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="@+id/cons_emial"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/cons_emial"
             app:layout_constraintTop_toBottomOf="@+id/cons_emial" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout_setting_Back"
-            android:layout_width="48dp"
+            android:layout_width="0dp"
             android:layout_height="48dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/settingModifyBack"
+            <TextView
+                android:id="@+id/textView13"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/icon_gnb_back"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:text="내 정보 수정"
+                android:letterSpacing="-0.03"
+                android:lineSpacingExtra="8sp"
+                android:fontFamily="@font/notosanscjkkr_medium"
+                android:includeFontPadding="false"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toBottomOf="@+id/constraintLayout_setting_Back"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/constraintLayout_setting_Back" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/settingModifyBack"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_gnb_back"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

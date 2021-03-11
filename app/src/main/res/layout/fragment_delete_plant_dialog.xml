@@ -14,6 +14,9 @@
         android:layout_marginStart="34dp"
         android:layout_marginTop="45dp"
         android:layout_marginEnd="34dp"
+        android:letterSpacing="-0.03"
+        android:lineSpacingExtra="10sp"
+        android:textColor="@color/black"
         android:fontFamily="@font/notosanscjkkr_regular"
         android:includeFontPadding="false"
         android:text="정말로 식물을 삭제하시겠어요?"
@@ -33,7 +36,7 @@
         android:text="취소"
         android:textColor="#4286f6"
         android:textSize="13sp"
-
+        android:lineSpacingExtra="10sp"
         app:layout_constraintEnd_toStartOf="@+id/button_delete_plant"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
@@ -65,6 +68,7 @@
         android:text="삭제"
         android:textColor="#fe6827"
         android:textSize="13sp"
+        android:lineSpacingExtra="10sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/button_cancel"
         app:layout_constraintTop_toTopOf="@+id/button_cancel" />
