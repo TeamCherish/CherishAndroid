@@ -55,6 +55,11 @@
         <item name="android:textColor">@color/cherish_text_gray</item>
     </style>
 
+    <style name="RoundButton.pinkish_Gray">
+        <item name="android:layout_height">48dp</item>
+        <item name="android:backgroundTint">@color/btn_next_un</item>
+    </style>
+
     <style name="RoundButton.SignUp">
         <item name="android:layout_height">48dp</item>
         <item name="android:backgroundTint">@color/cherish_light_gray</item>

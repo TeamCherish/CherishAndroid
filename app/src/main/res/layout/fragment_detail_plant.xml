@@ -27,6 +27,7 @@
                 android:id="@+id/cons2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -34,32 +35,46 @@
 
                 <com.jackandphantom.circularprogressbar.CircleProgressbar
                     android:id="@+id/test"
-                    android:layout_width="158dp"
+                    android:layout_width="0dp"
                     android:layout_height="158dp"
+                    android:layout_marginStart="100dp"
+                    android:layout_marginTop="50dp"
+                    android:layout_marginEnd="100dp"
+                    android:layout_marginBottom="12dp"
                     app:cpb_backgroundProgressColor="@color/white"
                     app:cpb_backgroundProgressWidth="20"
                     app:cpb_foregroundProgressColor="#31d693"
                     app:cpb_foregroundProgressWidth="20"
                     app:cpb_roundedCorner="true"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageView_detail_url"
-                    app:layout_constraintEnd_toEndOf="@+id/imageView_detail_url"
-                    app:layout_constraintStart_toStartOf="@+id/imageView_detail_url"
-                    app:layout_constraintTop_toTopOf="@+id/imageView_detail_url" />
+
+                    app:layout_constraintBottom_toTopOf="@+id/textView_nick"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
                     android:id="@+id/imageView_detail_url"
-                    android:layout_width="140dp"
-                    android:layout_height="140dp"
-                    android:layout_marginTop="30dp"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="109dp"
+                    android:layout_marginTop="59dp"
+                    android:layout_marginEnd="111dp"
+                    android:layout_marginBottom="21dp"
+                    app:layout_constraintBottom_toTopOf="@+id/textView_nick"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:srcCompat="@drawable/img_plant_detail" />
+
                 <ImageView
                     android:id="@+id/imageView_detail_dim"
-                    android:layout_width="140dp"
-                    android:layout_height="140dp"
-                    android:layout_marginTop="30dp"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="109dp"
+                    android:layout_marginTop="59dp"
+                    android:layout_marginEnd="111dp"
+                    android:layout_marginBottom="21dp"
+                    app:layout_constraintBottom_toTopOf="@+id/textView_nick"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -142,8 +157,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
-                    android:layout_marginBottom="30dp"
+                    android:layout_marginBottom="25dp"
                     app:layout_constraintBottom_toBottomOf="@+id/cons2"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView6">
 
                     <View
@@ -211,6 +228,7 @@
                         android:text="물주기"
                         android:textColor="#6b6a6a"
                         android:textSize="@dimen/text_14sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@+id/textView_Dday"
                         app:layout_constraintStart_toStartOf="@+id/textView_Dday"
                         app:layout_constraintTop_toBottomOf="@+id/textView_Dday" />
@@ -226,6 +244,7 @@
                         android:text="@string/detail_plant_with"
                         android:textColor="#6b6a6a"
                         android:textSize="@dimen/text_14sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@+id/textView_duration"
                         app:layout_constraintStart_toStartOf="@+id/textView_duration"
                         app:layout_constraintTop_toBottomOf="@+id/textView_duration" />
@@ -241,22 +260,31 @@
                         android:text="생일"
                         android:textColor="#6b6a6a"
                         android:textSize="@dimen/text_14sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@+id/textView_birth"
                         app:layout_constraintStart_toStartOf="@+id/textView_birth"
                         app:layout_constraintTop_toBottomOf="@+id/textView_birth" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-                <ImageButton
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/imageButton_3detail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="12dp"
-                    android:background="@color/white"
+
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/icn_info" />
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@color/white"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/icn_info" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
                     android:id="@+id/textView_status_message"
@@ -302,15 +330,13 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_detail"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:layout_marginStart="10dp"
                 app:layout_constraintBottom_toBottomOf="@+id/cons4"
-                android:layout_marginEnd="10dp"
-                tools:listitem="@layout/detail_item_layout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/chip" />
+                app:layout_constraintTop_toBottomOf="@+id/chip"
+                tools:listitem="@layout/detail_item_layout" />
 
 
             <TextView

@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.NumberPicker
 import androidx.annotation.LayoutRes
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.DialogFragment
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ClockpickerLayoutBinding
@@ -58,7 +59,7 @@ class ClockPickerDialogFragment(
         val clock_minute: NumberPicker = view.findViewById(R.id.numberPicker2_clock)
         val clock_ampm: NumberPicker = view.findViewById(R.id.numberPicker3_clock)
 
-        val cancel: Button = view.findViewById(R.id.button_cancel_clock)
+        val cancel: ConstraintLayout = view.findViewById(R.id.button_cancel_clock)
         cancel.setOnClickListener {
             dismiss()
 

@@ -40,4 +40,6 @@
     <color name="plantid3">#97CDBD</color>
     <color name="plantid4">#9AB7DE</color>
     <color name="plantid5">#9EC8EC</color>
+
+    <color name="btn_next_un">#f5f5f5</color>
 </resources>

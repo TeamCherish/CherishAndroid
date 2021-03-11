@@ -38,7 +38,7 @@ class UserModifyFragment : Fragment() {
 
         binding = FragmentUserModifyBinding.bind(view)
 
-        binding.constraintLayoutSettingBack.setOnClickListener {
+        binding.settingModifyBack.setOnClickListener {
             activity?.onBackPressed()
         }
         binding.settingEditNickname.addTextChangedListener(
