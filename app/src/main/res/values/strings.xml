@@ -101,4 +101,8 @@
     <string name="sign_up_nickname_text">사용할 닉네임을 입력해주세요</string>
     <string name="sign_up_nickname_hint">최대 8글자</string>
     <string name="sign_up_nickname_ok">사용하실 수 있는 닉네임입니다.</string>
+
+    <string name="pw_finding_email">가입했던 이메일을 입력해주세요</string>
+    <string name="pw_finding_email_finish">등록된 번호로\n인증번호를 보내드렸어요!</string>
+    <string name="pw_finding_new_password">새로운 비밀번호를 입력해주세요</string>
 </resources>

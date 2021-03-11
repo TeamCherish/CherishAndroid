@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.pwfinding.PwFindingThirdFragment">
+
+    <TextView
+        android:id="@+id/new_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pw_finding_new_password"
+        android:fontFamily="@font/notosanscjkkr_medium"
+        android:textStyle="normal"
+        android:textSize="20sp"
+        android:textColor="#2a2a2a"
+        android:letterSpacing="-0.03"
+        android:lineSpacingExtra="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="@dimen/margin_16dp"
+        android:layout_marginTop="69dp"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/user_pw_layout"
+        app:hintAnimationEnabled="false"
+        app:hintEnabled="false"
+        android:layout_width="0dp"
+        android:layout_marginEnd="@dimen/margin_16dp"
+        android:layout_height="44dip"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/search_background"
+        android:textColorHint="#aaaaaa"
+        android:layout_marginTop="5dp"
+        app:boxStrokeWidth="0dp"
+        app:endIconMode="password_toggle"
+        app:boxStrokeWidthFocused="0dp"
+        app:layout_constraintStart_toStartOf="@+id/new_password"
+        app:layout_constraintTop_toBottomOf="@+id/new_password">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/user_pw"
+            android:paddingTop="@dimen/margin_12dp"
+            android:hint="@string/sign_up_pw_hint"
+            android:background="@drawable/search_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textPassword"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/pw_again_layout"
+        app:hintAnimationEnabled="false"
+        app:hintEnabled="false"
+        android:layout_width="0dp"
+        android:layout_marginEnd="@dimen/margin_16dp"
+        android:layout_height="44dip"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/search_background"
+        android:textColorHint="#aaaaaa"
+        android:layout_marginTop="5dp"
+        app:boxStrokeWidth="0dp"
+        app:endIconMode="password_toggle"
+        app:boxStrokeWidthFocused="0dp"
+        app:layout_constraintStart_toStartOf="@+id/user_pw_layout"
+        app:layout_constraintTop_toBottomOf="@+id/user_pw_layout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/user_pw_again"
+            android:paddingTop="@dimen/margin_12dp"
+            android:hint="@string/sign_up_pw_again"
+            android:background="@drawable/search_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="textPassword"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:visibility="invisible"
+        android:id="@+id/is_usable_pw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/sign_up_pw_usable"
+        app:layout_constraintTop_toBottomOf="@+id/pw_again_layout"
+        app:layout_constraintEnd_toEndOf="@+id/pw_again_layout"
+        android:textColor="@color/cherish_green_main"
+        android:fontFamily="@font/notosanscjkkr_regular"/>
+
+    <Button
+        android:id="@+id/sign_up_button"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        style="@style/RoundButton.SignUp"
+        android:text="@string/sign_up_button_finish"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:layout_marginStart="@dimen/margin_16dp"
+        android:layout_marginEnd="@dimen/margin_16dp"
+        android:layout_marginBottom="@dimen/margin_21dp"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

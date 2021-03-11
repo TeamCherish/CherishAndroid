@@ -10,31 +10,33 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
-    <permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" android:protectionLevel="signature"/>
+    <permission
+        android:name="android.permission.INTERACT_ACROSS_USERS_FULL"
+        android:protectionLevel="signature" />
 
     <application
         android:name=".MainApplication"
         android:allowBackup="false"
+        android:enabled="true"
         android:fullBackupContent="false"
-        tools:replace="android:allowBackup"
         android:icon="@mipmap/ic_cherish_app_logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_cherish_app_logo_round"
         android:supportsRtl="true"
-        android:enabled="true"
         android:theme="@style/Theme.Cherish"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true"
+        tools:replace="android:allowBackup">
+
 
         <service
             android:name=".ui.notification.FirebaseNotificationService"
-            android:exported="true"
             android:enabled="true"
+            android:exported="true"
             android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
 
         <activity
             android:name=".ui.enrollment.EnrollmentPhoneActivity"
@@ -57,11 +59,11 @@
         <activity
             android:name=".ui.signin.SignInActivity"
             android:screenOrientation="portrait" />
-
         <activity
             android:name=".ui.review.ReviewActivity"
             android:screenOrientation="portrait" />
-
+        <activity android:name=".ui.pwfinding.PwFindingActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.splash.SplashActivity"
             android:screenOrientation="portrait">
