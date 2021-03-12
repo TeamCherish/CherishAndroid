@@ -278,11 +278,11 @@ class DetailPlantFragment : Fragment() {
                                         val mAdapter = DetailMemoAdapter(memoList)
                                         binding.recyclerDetail.adapter = mAdapter
 
-                                        binding.recyclerDetail.addItemDecoration(
+                                      /*  binding.recyclerDetail.addItemDecoration(
                                             VerticalSpaceItemDecoration(
                                                 20
                                             )
-                                        )
+                                        )*/
                                         mAdapter.setItemClickListener(object :
                                             DetailMemoAdapter.ItemClickListener {
                                             override fun onClick(view: View, position: Int) {
@@ -327,11 +327,11 @@ class DetailPlantFragment : Fragment() {
                                         val mAdapter = DetailMemoAdapter(memoList)
                                         binding.recyclerDetail.adapter = mAdapter
 
-                                        binding.recyclerDetail.addItemDecoration(
+                                       /* binding.recyclerDetail.addItemDecoration(
                                             VerticalSpaceItemDecoration(
                                                 20
                                             )
-                                        )
+                                        )*/
                                         mAdapter.setItemClickListener(object :
                                             DetailMemoAdapter.ItemClickListener {
                                             override fun onClick(view: View, position: Int) {
@@ -485,11 +485,11 @@ class DetailPlantFragment : Fragment() {
                                     val mAdapter = DetailMemoAdapter(memoList)
                                     binding.recyclerDetail.adapter = mAdapter
 
-                                    binding.recyclerDetail.addItemDecoration(
+                                    /*binding.recyclerDetail.addItemDecoration(
                                         VerticalSpaceItemDecoration(
                                             20
                                         )
-                                    )
+                                    )*/
                                     mAdapter.setItemClickListener(object :
                                         DetailMemoAdapter.ItemClickListener {
                                         override fun onClick(view: View, position: Int) {
@@ -524,11 +524,11 @@ class DetailPlantFragment : Fragment() {
                                         val mAdapter = DetailMemoAdapter(memoList)
                                         binding.recyclerDetail.adapter = mAdapter
 
-                                        binding.recyclerDetail.addItemDecoration(
+                                        /*binding.recyclerDetail.addItemDecoration(
                                             VerticalSpaceItemDecoration(
                                                 20
                                             )
-                                        )
+                                        )*/
                                         mAdapter.setItemClickListener(object :
                                             DetailMemoAdapter.ItemClickListener {
                                             override fun onClick(view: View, position: Int) {
@@ -561,12 +561,12 @@ class DetailPlantFragment : Fragment() {
                                         )
                                         val mAdapter = DetailMemoAdapter(memoList)
                                         binding.recyclerDetail.adapter = mAdapter
-
+/*
                                         binding.recyclerDetail.addItemDecoration(
                                             VerticalSpaceItemDecoration(
                                                 20
                                             )
-                                        )
+                                        )*/
                                         mAdapter.setItemClickListener(object :
                                             DetailMemoAdapter.ItemClickListener {
                                             override fun onClick(view: View, position: Int) {
@@ -682,7 +682,7 @@ class DetailPlantFragment : Fragment() {
     }
 
 
-    inner class VerticalSpaceItemDecoration(private val verticalSpaceHeight: Int) :
+/*    inner class VerticalSpaceItemDecoration(private val verticalSpaceHeight: Int) :
         RecyclerView.ItemDecoration() {
 
         override fun getItemOffsets(
@@ -691,5 +691,5 @@ class DetailPlantFragment : Fragment() {
         ) {
             outRect.bottom = verticalSpaceHeight
         }
-    }
+    }*/
 }
