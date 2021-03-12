@@ -10,6 +10,7 @@ import com.sopt.cherish.remote.api.*
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.main.MainActivity
 import com.sopt.cherish.ui.main.home.HomeBlankActivity
+import com.sopt.cherish.ui.pwfinding.PwFindingActivity
 import com.sopt.cherish.ui.signup.SignUpActivity
 import com.sopt.cherish.util.extension.hideKeyboard
 import retrofit2.Call
@@ -48,6 +49,11 @@ class SignInActivity : AppCompatActivity() {
             val signUpIntent = Intent(this@SignInActivity, SignUpActivity::class.java)
             startActivity(signUpIntent)
         }
+
+        binding.textView30.setOnClickListener{
+            val pwFindingIntent=Intent(this@SignInActivity,PwFindingActivity::class.java)
+            startActivity(pwFindingIntent)
+        }
     }
 
     private fun signIn(email: String, password: String) { //로그인 버튼 클릭
@@ -80,7 +86,6 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun hasUser(userId: Int, userNickName: String, token: String) {
-        var trigger: Boolean
         RetrofitBuilder.userAPI.hasUser(userId).enqueue(object : Callback<UserResult> {
             override fun onResponse(call: Call<UserResult>, response: Response<UserResult>) {
                 if (response.isSuccessful) {
