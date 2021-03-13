@@ -56,4 +56,8 @@ object RetrofitBuilder {
     val phoneAuthAPI: PhoneAuthAPI = getRetrofit().create(PhoneAuthAPI::class.java)
 
     val signUpAPI: SignUpAPI = getRetrofit().create(SignUpAPI::class.java)
+
+    val pwFindingAPI:PwFindingAPI= getRetrofit().create(PwFindingAPI::class.java)
+
+    val updatePasswordAPI:UpdatePasswordAPI= getRetrofit().create(UpdatePasswordAPI::class.java)
 }

@@ -28,19 +28,8 @@ class SignUpActivity : AppCompatActivity() {
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
         initializeFragment()
-        //setFragment(SignUpFirstFragment())
     }
 
-    override fun onBackPressed() {
-        super.onBackPressed()
-        //finish()
-    }
-
-    fun setFragment(fragment: Fragment) {
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragment_signup, fragment)
-        transaction.commit()
-    }
 
     private fun initializeFragment() {
         supportFragmentManager.beginTransaction()
@@ -61,7 +50,7 @@ class SignUpActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            android.R.id.home -> startActivity(Intent(this, SignInActivity::class.java))
+            android.R.id.home -> finish()
         }
         return super.onOptionsItemSelected(item)
     }
