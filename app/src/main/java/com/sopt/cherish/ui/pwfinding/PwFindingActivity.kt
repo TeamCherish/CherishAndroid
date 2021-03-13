@@ -24,7 +24,7 @@ class PwFindingActivity : AppCompatActivity() {
 
     private fun initializeFragment() {
         supportFragmentManager.beginTransaction()
-            .add(R.id.fragment_finding, SignUpFirstFragment()).commit()
+            .add(R.id.fragment_finding, PwFindingFirstFragment()).commit()
     }
 
     fun setActionBarTitlePwFinding(title: String?) {
@@ -41,7 +41,7 @@ class PwFindingActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            android.R.id.home -> startActivity(Intent(this, SignInActivity::class.java))
+            android.R.id.home -> finish()
         }
         return super.onOptionsItemSelected(item)
     }
