@@ -27,7 +27,7 @@ class SignUpThirdFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_sign_up_third, container, false)
 
@@ -42,7 +42,7 @@ class SignUpThirdFragment : Fragment() {
         phoneNumber = bundle.getString("phone").toString()
 
 
-        initializePicker()
+        //initializePicker()
         getUserAge()
 
         return binding.root
@@ -69,7 +69,7 @@ class SignUpThirdFragment : Fragment() {
                     )
 
                     binding.signUpButton.setOnClickListener {
-                        sex = binding.userSex.value
+                        //sex = binding.userSex.value
                         Log.d("picker", sex.toString())
 
                         when (sex) {
@@ -113,13 +113,13 @@ class SignUpThirdFragment : Fragment() {
             }
         })
     }
-
+/*
     private fun initializePicker() {
         binding.userSex.minValue = 0
         binding.userSex.maxValue = 1
         binding.userSex.displayedValues = genders
         binding.userSex.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
         binding.userSex.wrapSelectorWheel = true
-    }
+    } */
 
 }
