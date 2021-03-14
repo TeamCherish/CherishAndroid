@@ -33,7 +33,7 @@ class SignUpActivity : AppCompatActivity() {
 
     private fun initializeFragment() {
         supportFragmentManager.beginTransaction()
-            .add(R.id.fragment_signup, SignUpFirstFragment()).commit()
+            .add(R.id.fragment_signup, SignUpThirdFragment()).commit()
     }
 
     fun setActionBarTitleSignUp(title: String?) {
