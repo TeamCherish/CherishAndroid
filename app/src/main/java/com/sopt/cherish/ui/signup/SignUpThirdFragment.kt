@@ -1,5 +1,7 @@
 package com.sopt.cherish.ui.signup
 
+
+import android.app.AlertDialog
 import android.os.Bundle
 import android.telephony.PhoneNumberFormattingTextWatcher
 import android.text.Editable
@@ -8,6 +10,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.NumberPicker
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -24,6 +27,10 @@ class SignUpThirdFragment : Fragment() {
     var postSex: Boolean = true
 
 
+    companion object {
+        private val TAG = "SignUpThirdFragment"
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,16 +41,18 @@ class SignUpThirdFragment : Fragment() {
         binding = FragmentSignUpThirdBinding.bind(view)
 
         binding.userAge.addTextChangedListener(PhoneNumberFormattingTextWatcher())
-
+/*
         val bundle = (activity as SignUpActivity).mBundle
 
         email = bundle.getString("email").toString()
         password = bundle.getString("password").toString()
         phoneNumber = bundle.getString("phone").toString()
 
-
-        //initializePicker()
-        getUserAge()
+*/
+        binding.userSex.setOnClickListener {
+            getUserGender()
+        }
+        //getUserAge()
 
         return binding.root
     }
@@ -69,7 +78,6 @@ class SignUpThirdFragment : Fragment() {
                     )
 
                     binding.signUpButton.setOnClickListener {
-                        //sex = binding.userSex.value
                         Log.d("picker", sex.toString())
 
                         when (sex) {
@@ -113,13 +121,19 @@ class SignUpThirdFragment : Fragment() {
             }
         })
     }
-/*
-    private fun initializePicker() {
-        binding.userSex.minValue = 0
-        binding.userSex.maxValue = 1
-        binding.userSex.displayedValues = genders
-        binding.userSex.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
-        binding.userSex.wrapSelectorWheel = true
-    } */
+
+    private fun getUserGender(){
+        val builder=AlertDialog.Builder(context)
+        val dialogView=layoutInflater.inflate(R.layout.dialog_select_gender,null)
+        sex=dialogView.findViewById<NumberPicker>(R.id.select_gender_picker).value
+        Log.d("get success!",sex.toString())
+
+        builder.setView(dialogView).show()
+        val button=dialogView.findViewById<Button>(R.id.select_gender_accept_btn)
+
+        button.setOnClickListener {
+
+        }
+    }
 
 }
