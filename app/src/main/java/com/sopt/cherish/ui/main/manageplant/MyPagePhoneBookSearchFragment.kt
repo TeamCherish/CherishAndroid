@@ -67,7 +67,7 @@ class MyPagePhoneBookSearchFragment : Fragment() {
                 ) + "-" +
                         madapter.phonenumber.substring(7)
             Log.d("phonenumbervvvv", phonenumber)
-            var user_id = viewModel.cherishuserId.value
+            var user_id = viewModel.cherishUserId.value
             val body = RequestCheckPhoneData(phone = phonenumber.toString(), UserId = user_id!!)
             requestData.checkphoneAPI.checkphone(body)
                 .enqueue(
@@ -106,11 +106,11 @@ class MyPagePhoneBookSearchFragment : Fragment() {
                                     intent.putExtra("name", madapter.phonename)
                                     intent.putExtra("phone", madapter.phonenumber)
                                     intent.putExtra("check", 0)
-                                    intent.putExtra("userId", viewModel.cherishuserId.value)
+                                    intent.putExtra("userId", viewModel.cherishUserId.value)
                                     startActivity(intent)
                                     Log.d("name", madapter.phonename)
                                     Log.d("number", madapter.phonenumber)
-                                    Log.d("userId", viewModel.cherishuserId.value.toString())
+                                    Log.d("userId", viewModel.cherishUserId.value.toString())
 
 
                                 }

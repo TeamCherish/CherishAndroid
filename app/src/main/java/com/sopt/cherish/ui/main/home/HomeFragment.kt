@@ -62,7 +62,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
 
         binding.homeMovePlantDetail.setOnClickListener {
             navigateDetailPlant(
-                viewModel.cherishuserId.value!!
+                viewModel.cherishUserId.value!!
             )
         }
 
@@ -138,7 +138,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
 
     private fun navigatePhoneBook() {
         val intent = Intent(context, EnrollmentPhoneActivity::class.java)
-        intent.putExtra("userId", viewModel.cherishuserId.value)
+        intent.putExtra("userId", viewModel.cherishUserId.value)
         startActivity(intent)
     }
 
@@ -149,7 +149,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
         intent.putExtra("cherishUserPhoneNumber", viewModel.selectedCherishUser.value?.phoneNumber)
         intent.putExtra("cherishNickname", viewModel.selectedCherishUser.value?.nickName)
         intent.putExtra("userNickname", viewModel.userNickName.value)
-        intent.putExtra("cherishuserId", viewModel.cherishuserId.value)
+        intent.putExtra("cherishuserId", viewModel.cherishUserId.value)
         intent.putExtra("selectedUserDday", viewModel.selectedCherishUser.value!!.dDay)
         startActivityForResult(intent, CODE_MOVE_DETAIL_PLANT)
     }

@@ -63,7 +63,7 @@ class ManagePlantFragment : Fragment() {
 
 
         // 예진이 userId , viewModel.userId.value 라고하면 userId 찾을 수 있어요
-        SimpleLogger.logI(viewModel.cherishuserId.value.toString())
+        SimpleLogger.logI(viewModel.cherishUserId.value.toString())
         setTabLayout()
         initializeServerRequest(binding)
 
@@ -412,12 +412,12 @@ class ManagePlantFragment : Fragment() {
 
     private fun navigatePhoneBook() {
         val intent = Intent(context, EnrollmentPhoneActivity::class.java)
-        intent.putExtra("userId", viewModel.cherishuserId.value!!)
+        intent.putExtra("userId", viewModel.cherishUserId.value!!)
         startActivity(intent)
     }
 
     private fun initializeServerRequest(binding: FragmentManagePlantBinding) {
-        requestData.myPageAPI.fetchUserPage(viewModel.cherishuserId.value!!)
+        requestData.myPageAPI.fetchUserPage(viewModel.cherishUserId.value!!)
             .enqueue(
                 object : Callback<MyPageUserRes> {
                     override fun onFailure(call: Call<MyPageUserRes>, t: Throwable) {

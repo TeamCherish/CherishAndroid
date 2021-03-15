@@ -25,7 +25,7 @@ class MainViewModel(
     private val notificationRepository: NotificationRepository
 ) : ViewModel() {
     val animationTrigger = SingleLiveEvent<Boolean>()
-    val cherishuserId = MutableLiveData<Int>()
+    val cherishUserId = MutableLiveData<Int>()
     val userNickName = MutableLiveData<String>()
     val fcmToken = MutableLiveData<String>()
 
@@ -37,7 +37,7 @@ class MainViewModel(
 
     fun fetchUsers() = viewModelScope.launch {
         runCatching {
-            mainRepository.fetchCherishUser(cherishuserId.value!!)
+            mainRepository.fetchCherishUser(cherishUserId.value!!)
         }.onSuccess {
             if (it.userData.totalUser != 0) {
                 it.userData.userList.add(0, it.userData.userList[0])
