@@ -61,6 +61,7 @@ class WeekPickerDialogFragment(
 
         val list_cycle = resources.getStringArray(R.array.cycle)
         val list_every = resources.getStringArray(R.array.week)
+        val list_Day=resources.getStringArray(R.array.day)
 
         week_every.removeDivider()
         week_number.removeDivider()
@@ -70,13 +71,13 @@ class WeekPickerDialogFragment(
         week_every.maxValue = list_every.size - 1
 
         week_number.minValue = 1
-        week_number.maxValue = 3
+        week_number.maxValue = 90
 
         week_month.minValue = 0
-        week_month.maxValue = list_cycle.size - 1
+        week_month.maxValue = list_Day.size - 1
 
         week_every.displayedValues = list_every
-        week_month.displayedValues = list_cycle
+        week_month.displayedValues = list_Day
 
         week_every.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
         week_month.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
@@ -87,7 +88,7 @@ class WeekPickerDialogFragment(
         btn_ok.setOnClickListener {
 
             weektext =
-                list_every[week_every.value] + " " + week_number.value.toString() + " " + list_cycle[week_month.value]
+                list_every[week_every.value] + " " + week_number.value.toString() + " " + list_Day[week_month.value]
             someAction()
             dialog?.dismiss()
 

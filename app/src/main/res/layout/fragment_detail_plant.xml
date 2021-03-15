@@ -36,7 +36,6 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_margin="9dp"
-            android:src="@drawable/img_plant_detail"
             app:layout_constraintBottom_toBottomOf="@+id/test"
             app:layout_constraintEnd_toEndOf="@+id/test"
             app:layout_constraintStart_toStartOf="@+id/test"
@@ -46,7 +45,7 @@
             android:id="@+id/imageView_detail_dim"
             android:layout_width="0dp"
             android:layout_height="0dp"
-
+            android:visibility="invisible"
             android:src="@drawable/plantdetail_dim_plant"
             app:layout_constraintBottom_toBottomOf="@+id/imageView_detail_url"
             app:layout_constraintEnd_toEndOf="@+id/imageView_detail_url"
@@ -257,6 +256,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="52dp"
+            android:visibility="invisible"
             android:layout_marginBottom="58dp"
             android:fontFamily="@font/notosanscjkkr_bold"
             android:includeFontPadding="false"
@@ -275,7 +275,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/notosanscjkkr_bold"
             android:includeFontPadding="false"
-
+            android:visibility="invisible"
             android:text="건강상태"
             android:textColor="@color/white"
             android:textSize="@dimen/text_12sp"
