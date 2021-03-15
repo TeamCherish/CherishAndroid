@@ -75,9 +75,10 @@ class EnrollModifyPlantFragment : Fragment() {
                                     binding.editBirth.hint = it.data.cherishDetail.birth
 
                                 }
-                                binding.waterAlarmWeek.text =
-                                    it.data.cherishDetail.cycle_date.toString()
-                                if (it.data.cherishDetail.cycle_date <= 3) {
+                                binding.waterAlarmWeek.text ="Every "+
+                                    it.data.cherishDetail.cycle_date.toString()+" day"
+
+                                /*if (it.data.cherishDetail.cycle_date <= 3) {
                                     binding.waterAlarmWeek.text =
                                         "Every " + it.data.cherishDetail.cycle_date.toString() + " day"
 
@@ -89,9 +90,13 @@ class EnrollModifyPlantFragment : Fragment() {
                                     binding.waterAlarmWeek.text =
                                         "Every " + (it.data.cherishDetail.cycle_date / 30).toString() + " month"
 
+                                }*/
+                                if(it.data.cherishDetail.notice_time.split(":")[0].toInt()<12){
+                                    binding.waterAlarmTime.text = it.data.cherishDetail.notice_time+" AM"
+                                }else{
+                                    binding.waterAlarmTime.text=it.data.cherishDetail.notice_time+" PM"
                                 }
-
-                                binding.waterAlarmTime.text = it.data.cherishDetail.notice_time
+                                //binding.waterAlarmTime.text = it.data.cherishDetail.notice_time
 
 
 
