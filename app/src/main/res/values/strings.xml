@@ -17,6 +17,9 @@
     <string-array name="week">
         <item>Every</item>
     </string-array>
+    <string-array name="day">
+        <item>day</item>
+    </string-array>
     <string-array name="ampm">
         <item>AM</item>
         <item>PM</item>

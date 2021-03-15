@@ -174,11 +174,12 @@ class EnrollPlantFragment : Fragment() {
            // Log.d("userphonebook", userphonebook.toString())
 //번호나눈거
 
-            val userwater = binding.waterAlarmWeek.text.toString()
+            val userwater = binding.waterAlarmWeek.text.split(" ")[1]
+
             Log.d("userwater", binding.waterAlarmWeek.text.toString())
             //알람 주기
             //user_water = userwater.substring(6, 7).toInt()
-            if (userwater.substring(8) == "month") {
+            /*if (userwater.substring(8) == "month") {
                 user_water = userwater.substring(6, 7).toInt() * 30
                 Log.d("userwater2", user_water.toString())
             } else if (userwater.substring(8) == "week") {
@@ -187,7 +188,7 @@ class EnrollPlantFragment : Fragment() {
             } else {
                 user_water = userwater.substring(6, 7).toInt()
                 Log.d("userwater2", user_water.toString())
-            }
+            }*/
 
             val usertime = binding.waterAlarmTime.text.toString()
             val usertime_hour = usertime.substring(0, 5).toString()
@@ -201,7 +202,7 @@ class EnrollPlantFragment : Fragment() {
                     nickname = usernickname,
                     birth = userbirth,
                     phone = userphone!!,
-                    cycle_date = user_water,
+                    cycle_date = userwater.toInt(),
                     notice_time = usertime_hour,
                     water_notice = true,
                     UserId = userid.toInt()
