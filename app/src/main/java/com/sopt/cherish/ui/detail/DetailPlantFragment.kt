@@ -1,5 +1,6 @@
 package com.sopt.cherish.ui.detail
 
+import android.graphics.Color
 import android.graphics.Rect
 import android.os.Bundle
 import android.util.Log
@@ -50,6 +51,9 @@ class DetailPlantFragment : Fragment() {
     lateinit var userNickname: String
     var userId = 0
 
+    var statusmessagebig=""
+    var statusmessagesmall=""
+    var touchimage=false
     companion object {
         private val TAG = "DetailPlantFragment"
     }
@@ -57,6 +61,23 @@ class DetailPlantFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         detailserver()
+        binding.imageViewDetailUrl.setOnClickListener {
+
+            if(!touchimage){
+                binding.textViewStatusMessage.text = statusmessagebig
+                binding.textViewStatus.text = statusmessagesmall
+                binding.imageViewDetailDim.isVisible=true
+                binding.textViewStatusMessage.isVisible=true
+                binding.textViewStatus.isVisible=true
+                touchimage=true
+            }else{
+
+                binding.imageViewDetailDim.isVisible=false
+                binding.textViewStatusMessage.isVisible=false
+                binding.textViewStatus.isVisible=false
+                touchimage=false
+            }
+        }
         //여기에 작성
     }
     override fun onCreateView(
@@ -67,6 +88,11 @@ class DetailPlantFragment : Fragment() {
 
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_detail_plant, container, false)
+
+
+
+
+
 
         plantId = arguments?.getInt("plantId_detail")!!
 
@@ -105,6 +131,8 @@ class DetailPlantFragment : Fragment() {
         }
         return binding.root
     }
+
+
 
     fun detailserver(){
         requestData.responsePlantCardData.Detailcherishcard(cherishid)
@@ -149,8 +177,11 @@ class DetailPlantFragment : Fragment() {
 
                                 }
                                 binding.textView1WithName.text = it.data.name.toString()
-                                binding.textViewStatusMessage.text = it.data.status_message
-                                binding.textViewStatus.text = it.data.status.toString()
+
+                                statusmessagebig=it.data.status_message
+                                statusmessagesmall=it.data.status
+                              /*  binding.textViewStatusMessage.text = it.data.status_message
+                                binding.textViewStatus.text = it.data.status.toString()*/
                                 Glide.with(this@DetailPlantFragment)
                                     .load(it.data.plant_thumbnail_image_url)
                                     .into(binding.imageViewDetailUrl)
@@ -158,11 +189,21 @@ class DetailPlantFragment : Fragment() {
                                 plant_id = it.data.plantId
                                 Log.d("fdfdfd", it.data.plantId.toString())
 
+                                if(it.data.gage<0.5){
 
-                                circleProgressbar.setProgressWithAnimation(
-                                    it.data.gage.toFloat() * 100,
-                                    animationDuration
-                                )
+                                    circleProgressbar.foregroundProgressColor=Color.parseColor("#F7596C")
+                                    circleProgressbar.setProgressWithAnimation(
+                                        it.data.gage.toFloat() * 100,
+                                        animationDuration
+                                    )
+
+                                }else{
+                                    circleProgressbar.setProgressWithAnimation(
+                                        it.data.gage.toFloat() * 100,
+                                        animationDuration
+                                    )
+                                }
+
                                 binding.chip.isVisible = false
                                 binding.chip2.isVisible = false
                                 binding.chip3.isVisible = false
