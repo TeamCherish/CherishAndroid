@@ -1,5 +1,7 @@
 package com.sopt.cherish.ui.dialog.selectgender
 
+import android.content.Intent
+import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -18,11 +20,7 @@ class SelectGenderDialogFragment: DialogFragment() {
     private lateinit var binding:DialogSelectGenderBinding
     private val genders = arrayOf("여성", "남성")
     private var selectGender:Int=0
-    //private val
 
-    interface SelectGenderDialogListener{
-        fun myCallback()
-    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -32,12 +30,14 @@ class SelectGenderDialogFragment: DialogFragment() {
 
         binding = DialogSelectGenderBinding.bind(view)
 
+
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         initializeGenderPicker(binding)
 
         binding.selectGenderAcceptBtn.setOnClickListener {
             postGender(binding)
         }
+
         return binding.root
     }
 
@@ -46,7 +46,8 @@ class SelectGenderDialogFragment: DialogFragment() {
         DialogUtil.adjustDialogSize(this, 0.9f, 0.6f)
     }
 
-    private fun initializeGenderPicker(binding:DialogSelectGenderBinding){
+
+    private fun initializeGenderPicker(binding: DialogSelectGenderBinding){
         binding.selectGenderPicker.apply {
             wrapSelectorWheel = false
             maxValue = 1
@@ -54,13 +55,37 @@ class SelectGenderDialogFragment: DialogFragment() {
             descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
             displayedValues=genders
         }
+
+        binding.selectGenderPicker.removeDivider()
     }
 
-    private fun postGender(binding:DialogSelectGenderBinding){
+    private fun postGender(binding: DialogSelectGenderBinding){
         selectGender=binding.selectGenderPicker.value
         Log.d("postGender",selectGender.toString())
-        val bundle=Bundle()
-        bundle.putInt("gender",selectGender)
-        dismiss()
+        val intent=Intent()
+        intent.putExtra("gender",selectGender)
+        targetFragment!!.onActivityResult(targetRequestCode,101,intent)
+        dialog?.dismiss()
     }
+
+    private fun NumberPicker.removeDivider() {
+        val pickerFields = NumberPicker::class.java.declaredFields
+        for (pf in pickerFields) {
+            if (pf.name == "mSelectionDivider") {
+                pf.isAccessible = true
+                try {
+                    val colorDrawable = ColorDrawable(Color.TRANSPARENT)
+                    pf[this] = colorDrawable
+                } catch (e: java.lang.IllegalArgumentException) {
+
+                } catch (e: Resources.NotFoundException) {
+
+                } catch (e: IllegalAccessException) {
+
+                }
+                break
+            }
+        }
+    }
+
 }
