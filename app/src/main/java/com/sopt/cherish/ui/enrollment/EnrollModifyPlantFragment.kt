@@ -11,6 +11,7 @@ import com.sopt.cherish.remote.api.ResponseModifyData
 import com.sopt.cherish.remote.api.ResponseUserinfoData
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.detail.DetailPlantActivity
+import com.sopt.cherish.ui.dialog.BirthPickerDialogFragment
 import com.sopt.cherish.ui.dialog.ClockPickerDialogFragment
 import com.sopt.cherish.ui.dialog.DeletePlantDialogFragment
 import com.sopt.cherish.ui.dialog.ModifyWeekAlertFragment
@@ -125,6 +126,9 @@ class EnrollModifyPlantFragment : Fragment() {
 
 
 
+        }
+        binding.editBirth.setOnClickListener {
+            BirthPickerDialogFragment(R.layout.birthpicker_layout).show(parentFragmentManager,"modify")
         }
         binding.detailOkBtnModify.setOnClickListener {
             //수정 버튼을 눌렀을 때
