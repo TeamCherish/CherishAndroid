@@ -11,24 +11,28 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentPhoneBookBinding
+import com.sopt.cherish.di.Injection
 import com.sopt.cherish.remote.api.RequestCheckPhoneData
 import com.sopt.cherish.remote.api.ResponseCheckPhoneData
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.adapter.Phone
 import com.sopt.cherish.ui.adapter.PhoneBookAdapter
 import com.sopt.cherish.ui.dialog.CheckPhoneDialogFragment
+import com.sopt.cherish.ui.main.MainViewModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 
 class PhoneBookFragment : Fragment() {
-
+    private val viewModel: MainViewModel by viewModels { Injection.provideMainViewModelFactory() }
     lateinit var madapter: PhoneBookAdapter
     var phonelist = mutableListOf<Phone>()
     var phonelistphone = mutableListOf<Phone>()
@@ -52,6 +56,7 @@ class PhoneBookFragment : Fragment() {
 
         binding = FragmentPhoneBookBinding.bind(view)
         countphonebook = arguments?.getInt("useridenroll")!!
+        Log.d("useridna",countphonebook.toString())
         startProcess()
 
         Log.d("checkedRadioButton", madapter.checkedRadioButton?.isClickable.toString())
@@ -76,14 +81,14 @@ class PhoneBookFragment : Fragment() {
             if (madapter.checkedRadioButton != null) {
 
                 Log.d("vvvv", madapter.phonename.toString())
-                val phonenumber =
-                    madapter.phonenumber.substring(0, 3) + "-" + madapter.phonenumber.substring(
+                val phonenumber =madapter.phonenumber
+                    /*madapter.phonenumber.substring(0, 3) + "-" + madapter.phonenumber.substring(
                         3,
                         7
                     ) + "-" +
-                            madapter.phonenumber.substring(7)
+                            madapter.phonenumber.substring(7)*/
                 Log.d("phonenumbervvvv", phonenumber)
-
+                Log.d("useriduserid",viewModel.cherishuserId.value.toString()!!)
                 val body =
                     RequestCheckPhoneData(phone = phonenumber.toString(), UserId = countphonebook)
                 requestData.checkphoneAPI.checkphone(body)
