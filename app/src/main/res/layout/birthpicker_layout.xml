@@ -54,7 +54,6 @@
             android:id="@+id/numberPicker3"
             android:layout_width="wrap_content"
             android:layout_height="132dp"
-            app:layout_constraintBottom_toBottomOf="@+id/numberPicker2"
             app:layout_constraintEnd_toEndOf="@+id/view7"
             app:layout_constraintStart_toStartOf="@+id/view7"
             app:layout_constraintTop_toTopOf="parent" />
