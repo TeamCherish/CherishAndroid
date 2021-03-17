@@ -113,13 +113,13 @@
             app:layout_constraintStart_toStartOf="@+id/cons1"
             app:layout_constraintTop_toBottomOf="@+id/textbirth">
 
-            <EditText
+            <TextView
                 android:id="@+id/edit_birth"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
                 android:background="@null"
-                android:hint="0000/00/00"
+                android:hint="00/00"
                 android:textColor="#979797"
                 android:letterSpacing="-0.01"
                 android:fontFamily="@font/roboto_regular"

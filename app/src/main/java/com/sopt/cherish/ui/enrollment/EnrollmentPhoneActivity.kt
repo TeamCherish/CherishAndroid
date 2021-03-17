@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityEnrollmentPhoneBinding
 import com.sopt.cherish.di.Injection
+import com.sopt.cherish.ui.dialog.BirthPickerDialogFragment
 import com.sopt.cherish.ui.dialog.ClockPickerDialogFragment
 import com.sopt.cherish.ui.dialog.WeekPickerDialogFragment
 
@@ -21,7 +22,8 @@ import com.sopt.cherish.ui.dialog.WeekPickerDialogFragment
 
 class EnrollmentPhoneActivity : AppCompatActivity(),
     WeekPickerDialogFragment.TestDialogFragmentListener,
-    ClockPickerDialogFragment.TestDialogFragmentListener {
+    ClockPickerDialogFragment.TestDialogFragmentListener,
+    BirthPickerDialogFragment.TestDialogFragmentListener{
 
 
     private lateinit var binding: ActivityEnrollmentPhoneBinding
@@ -112,6 +114,13 @@ class EnrollmentPhoneActivity : AppCompatActivity(),
         var textclock: TextView = findViewById(R.id.water_alarm_time)
 
         textclock.text = someData.toString()
+    }
+
+    override fun onTestDialogBirth(dialog: DialogFragment?, someData: String?) {
+        Log.d("nana", someData.toString())
+        var birthtext: TextView = findViewById(R.id.edit_birth)
+
+        birthtext.text = someData.toString()
     }
 
 

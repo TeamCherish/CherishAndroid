@@ -11,6 +11,7 @@ import com.sopt.cherish.remote.api.ResponseModifyData
 import com.sopt.cherish.remote.api.ResponseUserinfoData
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.detail.DetailPlantActivity
+import com.sopt.cherish.ui.dialog.BirthPickerDialogFragment
 import com.sopt.cherish.ui.dialog.ClockPickerDialogFragment
 import com.sopt.cherish.ui.dialog.DeletePlantDialogFragment
 import com.sopt.cherish.ui.dialog.ModifyWeekAlertFragment
@@ -67,12 +68,13 @@ class EnrollModifyPlantFragment : Fragment() {
                         }?.body()
                             ?.let { it ->
                                 Log.d("식물수정asdf", "asdf")
-
+                                Log.d("식물생일 수정수정", it.data.cherishDetail.birth)
                                 binding.editNick.hint = it.data.cherishDetail.nickname.toString()
                                 if (it.data.cherishDetail.birth == "Invalid Date") {
-                                    binding.editBirth.hint = "0000/00/00"
+                                    binding.editBirth.hint = "00/00"
                                 } else {
-                                    binding.editBirth.hint = it.data.cherishDetail.birth
+                                    binding.editBirth.hint = it.data.cherishDetail.birth.split("-")[1]+"/"+
+                                    it.data.cherishDetail.birth.split("-")[2]
 
                                 }
                                 binding.waterAlarmWeek.text ="Every "+
@@ -124,6 +126,9 @@ class EnrollModifyPlantFragment : Fragment() {
 
 
 
+        }
+        binding.editBirth.setOnClickListener {
+            BirthPickerDialogFragment(R.layout.birthpicker_layout).show(parentFragmentManager,"modify")
         }
         binding.detailOkBtnModify.setOnClickListener {
             //수정 버튼을 눌렀을 때

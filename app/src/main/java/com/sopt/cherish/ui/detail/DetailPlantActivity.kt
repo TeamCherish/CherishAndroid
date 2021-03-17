@@ -18,6 +18,7 @@ import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityDetailPlantBinding
 import com.sopt.cherish.di.Injection
 import com.sopt.cherish.ui.detail.calendar.CalendarFragment
+import com.sopt.cherish.ui.dialog.BirthPickerDialogFragment
 import com.sopt.cherish.ui.dialog.ClockPickerDialogFragment
 import com.sopt.cherish.ui.dialog.WeekPickerDialogFragment
 import com.sopt.cherish.ui.enrollment.EnrollModifyPlantFragment
@@ -30,7 +31,8 @@ import com.sopt.cherish.ui.enrollment.EnrollModifyPlantFragment
 //created by nayoung : 사용자가 메모한 내용 보여주는 activity
 class DetailPlantActivity : AppCompatActivity(),
     WeekPickerDialogFragment.TestDialogFragmentListener,
-    ClockPickerDialogFragment.TestDialogFragmentListener {
+    ClockPickerDialogFragment.TestDialogFragmentListener,
+    BirthPickerDialogFragment.TestDialogFragmentListener{
 
     private lateinit var circleProgressbar: CircleProgressbar
     private lateinit var binding: ActivityDetailPlantBinding
@@ -201,15 +203,14 @@ class DetailPlantActivity : AppCompatActivity(),
         textclock.text = someData.toString()
     }
 
-    inner class VerticalSpaceItemDecoration(private val verticalSpaceHeight: Int) :
-        RecyclerView.ItemDecoration() {
 
-        override fun getItemOffsets(
-            outRect: Rect, view: View, parent: RecyclerView,
-            state: RecyclerView.State
-        ) {
-            outRect.bottom = verticalSpaceHeight
-        }
+
+    override fun onTestDialogBirth(dialog: DialogFragment?, someData: String?) {
+
+
+        var textbirth: TextView = findViewById(R.id.edit_birth)
+
+        textbirth.text = someData.toString()
     }
 
 }
