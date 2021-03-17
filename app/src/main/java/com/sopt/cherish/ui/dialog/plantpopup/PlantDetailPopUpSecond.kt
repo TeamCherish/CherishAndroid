@@ -12,6 +12,7 @@ import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentPlantDetailPopUpSecondBinding
 import com.sopt.cherish.remote.api.PlantDetailData
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
+import com.sopt.cherish.util.PixelUtil.dp
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -23,14 +24,13 @@ class PlantDetailPopUpSecond(plantId: Int) : Fragment() {
     private val binding get() = _binding!!
     private val requestData = RetrofitBuilder
     var plantId = plantId
-    var flowerName:String=""
     var chip:String=""
     var wateringText:String=""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         _binding = FragmentPlantDetailPopUpSecondBinding.inflate(inflater, container, false)
 
@@ -64,7 +64,7 @@ class PlantDetailPopUpSecond(plantId: Int) : Fragment() {
                             it.isSuccessful
                         }?.body()
                             ?.let { it ->
-
+                                Log.d("image url",it.data.toString())
                                 Glide.with(binding.root.context)
                                     .load(it.data.plantDetail[0].image_url)
                                     .into(binding.flowerImg)
@@ -75,25 +75,27 @@ class PlantDetailPopUpSecond(plantId: Int) : Fragment() {
                                 binding.chip.text=chip
                                 binding.wateringText.text=wateringText
 
-                                setMargin(flowerName,chip,wateringText)
+                                setMargin()
                             }
                     }
                 })
     }
 
-    private fun setMargin(flowerName:String,chip:String,wateringText:String){
-        when(flowerName){
-            "따뜻한 민들레"->setDandelion()
-            "씩씩한 단모환"->setCactus()
-            "푸른 빛의 아메리칸 블루"->setAmericanBlue()
-            "향기로운 로즈마리"->setRosmary()
-            "든든한 스투키"->setStookie()
+    private fun setMargin(){
+        when(plantId){
+            1->setRosmary()
+            2->setAmericanBlue()
+            3->setDandelion()
+            4->setCactus()
+            5->setStookie()
         }
     }
 
     private fun setDandelion(){
         var param=binding.flowerImg.layoutParams as ViewGroup.MarginLayoutParams
         param.setMargins(0,70,0,0)
+        param.width=101.dp
+        param.height=127.dp
         binding.flowerImg.layoutParams=param
 
         param=binding.chip.layoutParams as ViewGroup.MarginLayoutParams

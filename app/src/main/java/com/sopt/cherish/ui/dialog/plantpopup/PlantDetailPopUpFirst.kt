@@ -13,6 +13,7 @@ import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentPlantDetailPopUpFirstBinding
 import com.sopt.cherish.remote.api.PlantDetailData
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
+import com.sopt.cherish.util.PixelUtil.dp
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -64,6 +65,8 @@ class PlantDetailPopUpFirst(plantId: Int) : Fragment() {
                             it.isSuccessful
                         }?.body()
                             ?.let { it ->
+
+                                Log.d("image url",it.data.toString())
                                 flowerName = it.data.plantResponse[0].modifier
                                 Glide.with(binding.root.context)
                                     .load(it.data.plantResponse[0].image_url)
@@ -75,26 +78,29 @@ class PlantDetailPopUpFirst(plantId: Int) : Fragment() {
                                 binding.chip.text=chip
                                 binding.wateringText.text=wateringText
 
-                                setMargin(flowerName,chip,wateringText)
+                                setMargin()
                             }
                     }
                 })
     }
 
-    private fun setMargin(flowerName:String,chip:String,wateringText:String){
-            when(flowerName){
-                "따뜻한 민들레"->setDandelion()
-                "씩씩한 단모환"->setCactus()
-                "푸른 빛의 아메리칸 블루"->setAmericanBlue()
-                "향기로운 로즈마리"->setRosmary()
-                "든든한 스투키"->setStookie()
+    private fun setMargin(){
+            when(plantId){
+                1->setRosmary()
+                2->setAmericanBlue()
+                3->setDandelion()
+                4->setCactus()
+                5->setStookie()
             }
     }
 
     private fun setDandelion(){
         var param=binding.flowerImg.layoutParams as ViewGroup.MarginLayoutParams
         param.setMargins(0,23,0,0)
+        param.width=95
+        param.height=117
         binding.flowerImg.layoutParams=param
+
 
         param=binding.chip.layoutParams as ViewGroup.MarginLayoutParams
         param.setMargins(0,9,0,0)
