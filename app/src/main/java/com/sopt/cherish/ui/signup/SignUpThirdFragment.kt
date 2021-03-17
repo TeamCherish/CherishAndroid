@@ -1,7 +1,7 @@
 package com.sopt.cherish.ui.signup
 
 
-import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.telephony.PhoneNumberFormattingTextWatcher
 import android.text.Editable
@@ -10,26 +10,19 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.NumberPicker
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentSignUpThirdBinding
+import com.sopt.cherish.ui.dialog.selectgender.SelectGenderDialogFragment
 
-class SignUpThirdFragment : Fragment() {
+class SignUpThirdFragment : Fragment(){
     lateinit var binding: FragmentSignUpThirdBinding
-    private val genders = arrayOf("여성", "남성")
     var email: String = ""
     var password: String = ""
     var phoneNumber: String = ""
     var sex: Int = 0
     var postSex: Boolean = true
-
-
-    companion object {
-        private val TAG = "SignUpThirdFragment"
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,21 +34,36 @@ class SignUpThirdFragment : Fragment() {
         binding = FragmentSignUpThirdBinding.bind(view)
 
         binding.userAge.addTextChangedListener(PhoneNumberFormattingTextWatcher())
-/*
+
         val bundle = (activity as SignUpActivity).mBundle
 
         email = bundle.getString("email").toString()
         password = bundle.getString("password").toString()
         phoneNumber = bundle.getString("phone").toString()
 
-*/
-        binding.userSex.setOnClickListener {
-            getUserGender()
-        }
-        //getUserAge()
+
+        binding.userSex.setOnClickListener(View.OnClickListener {
+            val fm=requireActivity().supportFragmentManager
+            val dialogFragment=SelectGenderDialogFragment()
+            dialogFragment.setTargetFragment(this@SignUpThirdFragment,101)
+            dialogFragment.show(fm,"SignUpActivity")
+        })
+        getUserAge()
 
         return binding.root
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        sex=data!!.getIntExtra("gender",0)
+        Log.d("getGender",sex.toString())
+
+        when(sex){
+            0->binding.userSex.text="여성"
+            1->binding.userSex.text="남성"
+        }
+    }
+
 
     private fun getUserAge() {
         binding.userAge.addTextChangedListener(object : TextWatcher {
@@ -122,18 +130,5 @@ class SignUpThirdFragment : Fragment() {
         })
     }
 
-    private fun getUserGender(){
-        val builder=AlertDialog.Builder(context)
-        val dialogView=layoutInflater.inflate(R.layout.dialog_select_gender,null)
-        sex=dialogView.findViewById<NumberPicker>(R.id.select_gender_picker).value
-        Log.d("get success!",sex.toString())
-
-        builder.setView(dialogView).show()
-        val button=dialogView.findViewById<Button>(R.id.select_gender_accept_btn)
-
-        button.setOnClickListener {
-
-        }
-    }
 
 }

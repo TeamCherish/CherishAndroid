@@ -82,6 +82,7 @@
         android:hint="@string/sign_up_nickname_hint"/>
 
     <TextView
+        android:visibility="invisible"
         android:id="@+id/is_usable_nickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
