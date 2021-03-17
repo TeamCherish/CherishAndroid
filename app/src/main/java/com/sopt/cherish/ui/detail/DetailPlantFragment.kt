@@ -1,11 +1,9 @@
 package com.sopt.cherish.ui.detail
 
 import android.graphics.Color
-import android.graphics.Rect
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
@@ -13,7 +11,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.jackandphantom.circularprogressbar.CircleProgressbar
 import com.sopt.cherish.R
@@ -22,7 +19,7 @@ import com.sopt.cherish.remote.api.ResponsePlantCardDatas
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.adapter.DetailMemoAdapter
 import com.sopt.cherish.ui.detail.calendar.CalendarFragment
-import com.sopt.cherish.ui.dialog.AlertPlantDialogFragment
+import com.sopt.cherish.ui.dialog.plantpopup.AlertPlantDialogFragment
 import com.sopt.cherish.ui.dialog.wateringdialog.DetailWateringDialogFragment
 import com.sopt.cherish.ui.domain.MemoListDataclass
 import com.sopt.cherish.util.DateUtil
