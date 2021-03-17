@@ -13,277 +13,285 @@
         android:layout_height="match_parent"
         android:background="@drawable/plant_detail">
 
-
-        <com.jackandphantom.circularprogressbar.CircleProgressbar
-            android:id="@+id/test"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="100dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginEnd="102dp"
-            app:cpb_backgroundProgressColor="@color/white"
-            app:cpb_backgroundProgressWidth="18"
-            app:cpb_foregroundProgressColor="#31d693"
-            app:cpb_foregroundProgressWidth="18"
-            app:cpb_roundedCorner="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-        <ImageView
-            android:id="@+id/imageView_detail_url"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_margin="9dp"
-            app:layout_constraintBottom_toBottomOf="@+id/test"
-            app:layout_constraintEnd_toEndOf="@+id/test"
-            app:layout_constraintStart_toStartOf="@+id/test"
-            app:layout_constraintTop_toTopOf="@+id/test" />
-
-        <ImageView
-            android:id="@+id/imageView_detail_dim"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:visibility="invisible"
-            android:src="@drawable/plantdetail_dim_plant"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView_detail_url"
-            app:layout_constraintEnd_toEndOf="@+id/imageView_detail_url"
-            app:layout_constraintStart_toStartOf="@+id/imageView_detail_url"
-            app:layout_constraintTop_toTopOf="@+id/imageView_detail_url" />
-
-
-        <TextView
-            android:id="@+id/textView_nick"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="5dp"
-            android:fontFamily="@font/notosanscjkkr_bold"
-            android:includeFontPadding="false"
-            android:letterSpacing="-0.03"
-            android:text="남쿵둥이"
-            android:textColor="#454545"
-            android:textSize="@dimen/text_20sp"
-            app:layout_constraintBottom_toTopOf="@+id/textView6"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView_detail_url" />
-
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/textView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/plantdetail_chip"
-            android:text="TextView"
+            android:id="@+id/cons2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/cons4"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView_nick">
+            app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/textView_name"
-                android:layout_width="wrap_content"
+            <com.jackandphantom.circularprogressbar.CircleProgressbar
+                android:id="@+id/test"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="13dp"
-                android:layout_marginTop="3dp"
-                android:layout_marginBottom="4dp"
-                android:fontFamily="@font/notosanscjkkr_regular"
-                android:includeFontPadding="false"
-                android:text="남궁선규"
-                android:textColor="@color/cherish_green_main"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView6"
+                android:layout_marginStart="100dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginEnd="102dp"
+                app:cpb_backgroundProgressColor="@color/white"
+                app:cpb_backgroundProgressWidth="18"
+                app:cpb_foregroundProgressColor="#31d693"
+                app:cpb_foregroundProgressWidth="18"
+                app:cpb_roundedCorner="true"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
 
-            <View
-                android:id="@+id/view3"
-                android:layout_width="1dp"
-                android:layout_height="13dp"
-                android:layout_marginStart="@dimen/margin_8dp"
-                android:layout_marginEnd="@dimen/margin_8dp"
-                android:background="#1ad287"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/textView_plantname"
-                app:layout_constraintStart_toEndOf="@+id/textView_name"
-                app:layout_constraintTop_toTopOf="@+id/textView_name" />
+            <ImageView
+                android:id="@+id/imageView_detail_url"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="9dp"
+                app:layout_constraintBottom_toBottomOf="@+id/test"
+                app:layout_constraintEnd_toEndOf="@+id/test"
+                app:layout_constraintStart_toStartOf="@+id/test"
+                app:layout_constraintTop_toTopOf="@+id/test" />
+
+            <ImageView
+                android:id="@+id/imageView_detail_dim"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:src="@drawable/plantdetail_dim_plant"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView_detail_url"
+                app:layout_constraintEnd_toEndOf="@+id/imageView_detail_url"
+                app:layout_constraintStart_toStartOf="@+id/imageView_detail_url"
+                app:layout_constraintTop_toTopOf="@+id/imageView_detail_url" />
+
 
             <TextView
-                android:id="@+id/textView_plantname"
+                android:id="@+id/textView_nick"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="3dp"
-                android:layout_marginEnd="11dp"
-                android:layout_marginBottom="4dp"
-                android:fontFamily="@font/notosanscjkkr_regular"
+                android:layout_marginTop="21dp"
+                android:layout_marginBottom="5dp"
+                android:fontFamily="@font/notosanscjkkr_bold"
                 android:includeFontPadding="false"
-                android:text="스투키"
-                android:textColor="@color/cherish_green_main"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView6"
-                app:layout_constraintEnd_toEndOf="@id/textView6"
-                app:layout_constraintTop_toTopOf="@+id/textView6" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        <View
-            android:id="@+id/view"
-            android:layout_width="1dp"
-            android:layout_height="31dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="31dp"
-            android:background="#c4c4c4"
-            app:layout_constraintEnd_toStartOf="@+id/textView19"
-            app:layout_constraintTop_toTopOf="@+id/textView_Dday" />
-
-        <View
-            android:id="@+id/view2"
-            android:layout_width="1dp"
-            android:layout_height="31dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginBottom="31dp"
-            android:background="#c4c4c4"
-            app:layout_constraintStart_toEndOf="@+id/textView19"
-            app:layout_constraintTop_toTopOf="@+id/textView_birth" />
-
-        <TextView
-            android:id="@+id/textView_Dday"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/notosanscjkkr_bold"
-            android:includeFontPadding="false"
-            android:text="d-21"
-            android:textColor="#00aba2"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="@+id/textView18"
-            app:layout_constraintStart_toStartOf="@+id/textView18"
-            app:layout_constraintTop_toTopOf="@+id/textView_duration" />
-
-        <TextView
-            android:id="@+id/textView_duration"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:fontFamily="@font/notosanscjkkr_bold"
-            android:includeFontPadding="false"
-            android:text="3일째"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView6" />
-
-        <TextView
-            android:id="@+id/textView_birth"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/notosanscjkkr_bold"
-            android:includeFontPadding="false"
-            android:text="09.18"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="@+id/textView20"
-            app:layout_constraintStart_toStartOf="@+id/textView20"
-            app:layout_constraintTop_toTopOf="@+id/textView_duration" />
-
-        <TextView
-            android:id="@+id/textView18"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="1dp"
-            android:layout_marginEnd="24dp"
-            android:fontFamily="@font/notosanscjkkr_regular"
-            android:includeFontPadding="false"
-            android:text="물주기"
-            android:textColor="#6b6a6a"
-            android:textSize="@dimen/text_14sp"
-            app:layout_constraintEnd_toStartOf="@+id/view"
-            app:layout_constraintTop_toBottomOf="@+id/textView_Dday" />
-
-        <TextView
-            android:id="@+id/textView19"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="1dp"
-
-            android:fontFamily="@font/notosanscjkkr_regular"
-            android:includeFontPadding="false"
-            android:text="지속한날"
-            android:textColor="#6b6a6a"
-            android:textSize="@dimen/text_14sp"
-            app:layout_constraintEnd_toEndOf="@+id/textView_duration"
-            app:layout_constraintStart_toStartOf="@+id/textView_duration"
-            app:layout_constraintTop_toBottomOf="@+id/textView_duration" />
-
-
-        <TextView
-            android:id="@+id/textView20"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="36dp"
-            android:layout_marginTop="1dp"
-
-            android:fontFamily="@font/notosanscjkkr_regular"
-            android:includeFontPadding="false"
-            android:text="생일"
-            android:textColor="#6b6a6a"
-            android:textSize="@dimen/text_14sp"
-            app:layout_constraintStart_toEndOf="@+id/view2"
-            app:layout_constraintTop_toBottomOf="@+id/textView_birth" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/imageButton_3detail"
-
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:letterSpacing="-0.03"
+                android:text="남쿵둥이"
+                android:textColor="#454545"
+                android:textSize="@dimen/text_20sp"
+                app:layout_constraintBottom_toTopOf="@+id/textView6"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/icn_info" />
+                app:layout_constraintTop_toBottomOf="@+id/imageView_detail_url" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/plantdetail_chip"
+                android:text="TextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_nick">
+
+                <TextView
+                    android:id="@+id/textView_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="13dp"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginBottom="4dp"
+                    android:fontFamily="@font/notosanscjkkr_regular"
+                    android:includeFontPadding="false"
+                    android:text="남궁선규"
+                    android:textColor="@color/cherish_green_main"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView6"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <View
+                    android:id="@+id/view3"
+                    android:layout_width="1dp"
+                    android:layout_height="13dp"
+                    android:layout_marginStart="@dimen/margin_8dp"
+                    android:layout_marginEnd="@dimen/margin_8dp"
+                    android:background="#1ad287"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/textView_plantname"
+                    app:layout_constraintStart_toEndOf="@+id/textView_name"
+                    app:layout_constraintTop_toTopOf="@+id/textView_name" />
+
+                <TextView
+                    android:id="@+id/textView_plantname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="11dp"
+                    android:layout_marginBottom="4dp"
+                    android:fontFamily="@font/notosanscjkkr_regular"
+                    android:includeFontPadding="false"
+                    android:text="스투키"
+                    android:textColor="@color/cherish_green_main"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/textView6"
+                    app:layout_constraintEnd_toEndOf="@id/textView6"
+                    app:layout_constraintTop_toTopOf="@+id/textView6" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="1dp"
+                android:layout_height="31dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="31dp"
+                android:background="#c4c4c4"
+                app:layout_constraintEnd_toStartOf="@+id/textView19"
+                app:layout_constraintTop_toTopOf="@+id/textView_Dday" />
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="1dp"
+                android:layout_height="31dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginBottom="31dp"
+                android:background="#c4c4c4"
+                app:layout_constraintStart_toEndOf="@+id/textView19"
+                app:layout_constraintTop_toTopOf="@+id/textView_birth" />
+
+            <TextView
+                android:id="@+id/textView_Dday"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosanscjkkr_bold"
+                android:includeFontPadding="false"
+                android:text="d-21"
+                android:textColor="#00aba2"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/textView18"
+                app:layout_constraintStart_toStartOf="@+id/textView18"
+                app:layout_constraintTop_toTopOf="@+id/textView_duration" />
+
+            <TextView
+                android:id="@+id/textView_duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/notosanscjkkr_bold"
+                android:includeFontPadding="false"
+                android:text="3일째"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+            <TextView
+                android:id="@+id/textView_birth"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosanscjkkr_bold"
+                android:includeFontPadding="false"
+                android:text="09.18"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="@+id/textView20"
+                app:layout_constraintStart_toStartOf="@+id/textView20"
+                app:layout_constraintTop_toTopOf="@+id/textView_duration" />
+
+            <TextView
+                android:id="@+id/textView18"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginTop="1dp"
+                android:layout_marginEnd="24dp"
+                android:fontFamily="@font/notosanscjkkr_regular"
+                android:includeFontPadding="false"
+                android:text="물주기"
+                android:textColor="#6b6a6a"
+                android:textSize="@dimen/text_14sp"
+                app:layout_constraintEnd_toStartOf="@+id/view"
+                app:layout_constraintTop_toBottomOf="@+id/textView_Dday" />
+
+            <TextView
+                android:id="@+id/textView19"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+
+                android:fontFamily="@font/notosanscjkkr_regular"
+                android:includeFontPadding="false"
+                android:text="지속한날"
+                android:textColor="#6b6a6a"
+                android:textSize="@dimen/text_14sp"
+                app:layout_constraintEnd_toEndOf="@+id/textView_duration"
+                app:layout_constraintStart_toStartOf="@+id/textView_duration"
+                app:layout_constraintTop_toBottomOf="@+id/textView_duration" />
+
+
+            <TextView
+                android:id="@+id/textView20"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="36dp"
+                android:layout_marginTop="1dp"
+
+                android:fontFamily="@font/notosanscjkkr_regular"
+                android:includeFontPadding="false"
+                android:text="생일"
+                android:textColor="#6b6a6a"
+                android:textSize="@dimen/text_14sp"
+                app:layout_constraintStart_toEndOf="@+id/view2"
+                app:layout_constraintTop_toBottomOf="@+id/textView_birth" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/imageButton_3detail"
+
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/icn_info" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/textView_status_message"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="52dp"
+                android:layout_marginBottom="58dp"
+                android:fontFamily="@font/notosanscjkkr_bold"
+                android:includeFontPadding="false"
+                android:letterSpacing="-0.03"
+                android:text="힘이 솟아요"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_20sp"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="@+id/imageView_detail_dim"
+                app:layout_constraintEnd_toEndOf="@+id/imageView_detail_dim"
+                app:layout_constraintStart_toStartOf="@+id/imageView_detail_dim"
+                app:layout_constraintTop_toTopOf="@+id/imageView_detail_dim" />
+
+            <TextView
+                android:id="@+id/textView_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosanscjkkr_bold"
+                android:includeFontPadding="false"
+                android:text="건강상태"
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_12sp"
+                android:visibility="invisible"
+                app:layout_constraintEnd_toEndOf="@+id/textView_status_message"
+                app:layout_constraintStart_toStartOf="@+id/textView_status_message"
+                app:layout_constraintTop_toBottomOf="@+id/textView_status_message" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <TextView
-            android:id="@+id/textView_status_message"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="52dp"
-            android:visibility="invisible"
-            android:layout_marginBottom="58dp"
-            android:fontFamily="@font/notosanscjkkr_bold"
-            android:includeFontPadding="false"
-            android:letterSpacing="-0.03"
-            android:text="힘이 솟아요"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_20sp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView_detail_dim"
-            app:layout_constraintEnd_toEndOf="@+id/imageView_detail_dim"
-            app:layout_constraintStart_toStartOf="@+id/imageView_detail_dim"
-            app:layout_constraintTop_toTopOf="@+id/imageView_detail_dim" />
-
-        <TextView
-            android:id="@+id/textView_status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/notosanscjkkr_bold"
-            android:includeFontPadding="false"
-            android:visibility="invisible"
-            android:text="건강상태"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_12sp"
-            app:layout_constraintEnd_toEndOf="@+id/textView_status_message"
-            app:layout_constraintStart_toStartOf="@+id/textView_status_message"
-            app:layout_constraintTop_toBottomOf="@+id/textView_status_message" />
-
-
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cons4"
@@ -292,12 +300,9 @@
             android:background="@drawable/dialog_round_corner"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView19"
-            android:layout_marginTop="25dp"
-            >
+            app:layout_constraintStart_toStartOf="parent">
 
-            <androidx.recyclerview.widget.RecyclerView
+            <!--<androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_detail"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
@@ -307,19 +312,144 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/chip"
-                tools:listitem="@layout/detail_item_layout" />
+                tools:listitem="@layout/detail_item_layout" />-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/memocons"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/detail_layout"
+                app:layout_constraintBottom_toTopOf="@+id/memocons2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <TextView
+                    android:id="@+id/userdate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="17dp"
+                    android:layout_marginBottom="17dp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:includeFontPadding="false"
+                    android:letterSpacing="-0.02"
+                    android:text="TextView"
+                    android:textColor="#454545"
+                    android:textSize="@dimen/text_14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/usermemo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginEnd="20dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/notosanscjkkr_regular"
+                    android:includeFontPadding="false"
+                    android:letterSpacing="-0.02"
+                    android:maxLines="1"
+                    android:text="TextView"
+                    android:textColor="#454545"
+                    android:textSize="@dimen/text_14sp"
+                    app:layout_constraintBottom_toBottomOf="@+id/userdate"
+                    app:layout_constraintEnd_toStartOf="@+id/imageButton2"
+                    app:layout_constraintStart_toEndOf="@+id/userdate"
+                    app:layout_constraintTop_toTopOf="@+id/userdate" />
+
+                <ImageView
+                    android:id="@+id/imageButton2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="19dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/usermemo"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/usermemo"
+                    app:srcCompat="@drawable/ic_more" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/memocons2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="23dp"
+                android:background="@drawable/detail_layout"
+                app:layout_constraintBottom_toTopOf="@+id/button_water"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+        >
+
+                <TextView
+                    android:id="@+id/userdate2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="17dp"
+                    android:layout_marginBottom="17dp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:includeFontPadding="false"
+                    android:letterSpacing="-0.02"
+                    android:text="TextView"
+                    android:textColor="#454545"
+                    android:textSize="@dimen/text_14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/usermemo2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="17dp"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginBottom="17dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/notosanscjkkr_regular"
+                    android:includeFontPadding="false"
+                    android:letterSpacing="-0.02"
+                    android:maxLines="1"
+                    android:text="TextView"
+                    android:textColor="#454545"
+                    android:textSize="@dimen/text_14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/imageButton3"
+                    app:layout_constraintStart_toEndOf="@+id/userdate2"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imageButton3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="17dp"
+                    android:layout_marginEnd="19dp"
+                    android:layout_marginBottom="17dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_more" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
 
             <TextView
                 android:id="@+id/textView1_with_name"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="19dp"
                 android:fontFamily="@font/notosanscjkkr_bold"
                 android:includeFontPadding="false"
                 android:text="나영"
                 android:textSize="@dimen/text_16sp"
+                app:layout_constraintBottom_toTopOf="@+id/chip"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -336,9 +466,9 @@
                 android:textSize="@dimen/text_12sp"
                 app:chipStrokeColor="@color/cherish_light_black"
                 app:chipStrokeWidth="1dp"
+                app:layout_constraintBottom_toTopOf="@+id/memocons"
                 app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintStart_toStartOf="@id/textView1_with_name"
-                app:layout_constraintTop_toBottomOf="@id/textView1_with_name" />
+                app:layout_constraintStart_toStartOf="@id/textView1_with_name" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip2"
@@ -356,7 +486,7 @@
                 app:chipStrokeWidth="1dp"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toEndOf="@+id/chip"
-                app:layout_constraintTop_toBottomOf="@id/textView1_with_name" />
+                app:layout_constraintTop_toTopOf="@+id/chip" />
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip3"
@@ -373,7 +503,7 @@
                 app:chipStrokeWidth="1dp"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toEndOf="@+id/chip2"
-                app:layout_constraintTop_toBottomOf="@id/textView1_with_name" />
+                app:layout_constraintTop_toTopOf="@+id/chip" />
 
             <TextView
                 android:id="@+id/textView17"

@@ -67,12 +67,13 @@ class EnrollModifyPlantFragment : Fragment() {
                         }?.body()
                             ?.let { it ->
                                 Log.d("식물수정asdf", "asdf")
-
+                                Log.d("식물생일 수정수정", it.data.cherishDetail.birth)
                                 binding.editNick.hint = it.data.cherishDetail.nickname.toString()
                                 if (it.data.cherishDetail.birth == "Invalid Date") {
-                                    binding.editBirth.hint = "0000/00/00"
+                                    binding.editBirth.hint = "00/00"
                                 } else {
-                                    binding.editBirth.hint = it.data.cherishDetail.birth
+                                    binding.editBirth.hint = it.data.cherishDetail.birth.split("-")[1]+"/"+
+                                    it.data.cherishDetail.birth.split("-")[2]
 
                                 }
                                 binding.waterAlarmWeek.text ="Every "+
