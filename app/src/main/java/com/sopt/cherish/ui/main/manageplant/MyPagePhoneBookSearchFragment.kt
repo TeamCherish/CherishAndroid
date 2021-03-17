@@ -60,14 +60,15 @@ class MyPagePhoneBookSearchFragment : Fragment() {
             binding.editSearch.setText("")
         }
         binding.myPageAddPhoneBtn.setOnClickListener {
-            val phonenumber =
-                madapter.phonenumber.substring(0, 3) + "-" + madapter.phonenumber.substring(
+            val phonenumber =madapter.phonenumber
+               /* madapter.phonenumber.substring(0, 3) + "-" + madapter.phonenumber.substring(
                     3,
                     7
                 ) + "-" +
-                        madapter.phonenumber.substring(7)
+                        madapter.phonenumber.substring(7)*/
             Log.d("phonenumbervvvv", phonenumber)
             var user_id = viewModel.cherishuserId.value
+            Log.d("userfun",user_id.toString())
             val body = RequestCheckPhoneData(phone = phonenumber.toString(), UserId = user_id!!)
             requestData.checkphoneAPI.checkphone(body)
                 .enqueue(

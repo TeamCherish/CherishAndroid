@@ -20,6 +20,7 @@ import com.sopt.cherish.databinding.FragmentEnrollPlantBinding
 import com.sopt.cherish.remote.model.RequestEnrollData
 import com.sopt.cherish.remote.model.ResponseEnrollData
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
+import com.sopt.cherish.ui.dialog.BirthPickerDialogFragment
 import com.sopt.cherish.ui.dialog.ClockPickerDialogFragment
 import com.sopt.cherish.ui.dialog.WeekPickerDialogFragment
 import retrofit2.Call
@@ -159,7 +160,7 @@ class EnrollPlantFragment : Fragment() {
                 //userbirth = binding.editBirth.text.substring(0,4)+"-"+binding.editBirth.text.substring(4,6)+"-"+binding.editBirth.text.substring(6,)
                 userbirth = binding.editBirth.text.toString()
             } else {
-                userbirth = "0000/00/00"
+                userbirth = "00/00"
 
             }
             Log.d("userbirth", userbirth.toString())
@@ -281,7 +282,12 @@ class EnrollPlantFragment : Fragment() {
             }, 4000)
         }
 
-
+        binding.editBirth.setOnClickListener {
+            BirthPickerDialogFragment(R.layout.birthpicker_layout).show(
+                parentFragmentManager,
+                "MainActivity"
+            )
+        }
         //timepicker 나오는 부분
         binding.editclock.setOnClickListener {
             val needWaterDialog = ClockPickerDialogFragment(R.layout.clockpicker_layout).show(

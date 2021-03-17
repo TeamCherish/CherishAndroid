@@ -261,9 +261,71 @@ class DetailPlantFragment : Fragment() {
 
                                 }
 */
+                                if(it.data.reviews.isEmpty()){
+                                    binding.userdate.text="_ _"
+                                    binding.usermemo.text="메모를 입력하지 않았어요!"
+
+                                    binding.userdate2.text="_ _"
+                                    binding.usermemo2.text="메모를 입력하지 않았어요!"
+
+                                }else if(it.data.reviews.size==1){
+                                    binding.userdate.text=( it.data.reviews[0].water_date)
+                                    binding.usermemo.text= it.data.reviews[0].review
+                                    binding.memocons2.isVisible=false
+                                }else {
+                                    binding.userdate.text=( it.data.reviews[0].water_date)
+                                    binding.usermemo.text= it.data.reviews[0].review
+
+                                    binding.userdate2.text=( it.data.reviews[1].water_date)
+                                    binding.usermemo2.text= it.data.reviews[1].review
+
+                                }
+                                binding.memocons.setOnClickListener {
+
+                                    if(binding.userdate.text!="_ _"){
+                                    viewModel.selectedMemoCalendarDay.value =
+                                      //  item.date.let { itemDate ->
+                                            DateUtil.convertStringToDateBar(binding.userdate.text.toString())
+                                                ?.let { it1 ->
+                                                    DateUtil.convertDateToCalendarDay(
+                                                        it1
+                                                    )
+                                                }
+                                    val transaction =
+                                        parentFragmentManager.beginTransaction()
+                                    transaction.replace(
+                                        R.id.fragment_detail,
+                                        CalendarFragment()
+                                    )
+                                    transaction.addToBackStack(null)
+                                    transaction.commit()
+                                      //  }
+                                    }
+                                }
+                                binding.memocons2.setOnClickListener {
+                                    if(binding.userdate2.text!="_ _") {
+                                        viewModel.selectedMemoCalendarDay.value =
+                                                //  item.date.let { itemDate ->
+                                            DateUtil.convertStringToDateBar(binding.userdate2.text.toString())
+                                                ?.let { it1 ->
+                                                    DateUtil.convertDateToCalendarDay(
+                                                        it1
+                                                    )
+                                                }
+                                        val transaction =
+                                            parentFragmentManager.beginTransaction()
+                                        transaction.replace(
+                                            R.id.fragment_detail,
+                                            CalendarFragment()
+                                        )
+                                        transaction.addToBackStack(null)
+                                        transaction.commit()
+                                        //  }
+                                    }
+                                }
 
 
-                                if (it.data.reviews.isEmpty()) {
+                               /* if (it.data.reviews.isEmpty()) {
 
 
                                     var memoList = arrayListOf<MemoListDataclass>(
@@ -280,12 +342,12 @@ class DetailPlantFragment : Fragment() {
 
                                     val mAdapter = DetailMemoAdapter(memoList)
                                     binding.recyclerDetail.adapter = mAdapter
-/*
+*//*
                                     binding.recyclerDetail.addItemDecoration(
                                         VerticalSpaceItemDecoration(
                                             20
                                         )
-                                    )*/
+                                    )*//*
                                     mAdapter.setItemClickListener(object :
                                         DetailMemoAdapter.ItemClickListener {
                                         override fun onClick(view: View, position: Int) {
@@ -332,11 +394,11 @@ class DetailPlantFragment : Fragment() {
                                         val mAdapter = DetailMemoAdapter(memoList)
                                         binding.recyclerDetail.adapter = mAdapter
 
-                                        /*  binding.recyclerDetail.addItemDecoration(
+                                        *//*  binding.recyclerDetail.addItemDecoration(
                                               VerticalSpaceItemDecoration(
                                                   20
                                               )
-                                          )*/
+                                          )*//*
                                         mAdapter.setItemClickListener(object :
                                             DetailMemoAdapter.ItemClickListener {
                                             override fun onClick(view: View, position: Int) {
@@ -381,11 +443,11 @@ class DetailPlantFragment : Fragment() {
                                         val mAdapter = DetailMemoAdapter(memoList)
                                         binding.recyclerDetail.adapter = mAdapter
 
-                                        /* binding.recyclerDetail.addItemDecoration(
+                                        *//* binding.recyclerDetail.addItemDecoration(
                                              VerticalSpaceItemDecoration(
                                                  20
                                              )
-                                         )*/
+                                         )*//*
                                         mAdapter.setItemClickListener(object :
                                             DetailMemoAdapter.ItemClickListener {
                                             override fun onClick(view: View, position: Int) {
@@ -408,7 +470,7 @@ class DetailPlantFragment : Fragment() {
 
 
                                 }
-
+*/
 
                             }
                     }
