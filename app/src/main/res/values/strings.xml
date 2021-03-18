@@ -17,6 +17,9 @@
     <string-array name="week">
         <item>Every</item>
     </string-array>
+    <string-array name="day">
+        <item>day</item>
+    </string-array>
     <string-array name="ampm">
         <item>AM</item>
         <item>PM</item>
@@ -99,6 +102,7 @@
     <string name="sign_up_text">Cherish의 더 나은 서비스를 위해 활용됩니다!</string>
     <string name="sign_up_service1">\'시작하기\'버튼을 누르면 cherish의 개인정보보호 정책과\n 서비스 이용 약관을 읽고 동의한 것으로 간주합니다.</string>
     <string name="sign_up_nickname_text">사용할 닉네임을 입력해주세요</string>
+    <string name="sign_up_select_gender">여성</string>
     <string name="sign_up_nickname_hint">최대 8글자</string>
     <string name="sign_up_nickname_ok">사용하실 수 있는 닉네임입니다.</string>
 

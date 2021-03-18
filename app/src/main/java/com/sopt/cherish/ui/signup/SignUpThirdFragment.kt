@@ -1,5 +1,7 @@
 package com.sopt.cherish.ui.signup
 
+
+import android.content.Intent
 import android.os.Bundle
 import android.telephony.PhoneNumberFormattingTextWatcher
 import android.text.Editable
@@ -8,21 +10,19 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.NumberPicker
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentSignUpThirdBinding
+import com.sopt.cherish.ui.dialog.selectgender.SelectGenderDialogFragment
 
 class SignUpThirdFragment : Fragment() {
     lateinit var binding: FragmentSignUpThirdBinding
-    private val genders = arrayOf("여성", "남성")
     var email: String = ""
     var password: String = ""
     var phoneNumber: String = ""
     var sex: Int = 0
     var postSex: Boolean = true
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,11 +42,28 @@ class SignUpThirdFragment : Fragment() {
         phoneNumber = bundle.getString("phone").toString()
 
 
-        //initializePicker()
+        binding.userSex.setOnClickListener(View.OnClickListener {
+            val fm = requireActivity().supportFragmentManager
+            val dialogFragment = SelectGenderDialogFragment()
+            dialogFragment.setTargetFragment(this@SignUpThirdFragment, 101)
+            dialogFragment.show(fm, "SignUpActivity")
+        })
         getUserAge()
 
         return binding.root
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        sex = data!!.getIntExtra("gender", 0)
+        Log.d("getGender", sex.toString())
+
+        when (sex) {
+            0 -> binding.userSex.text = "여성"
+            1 -> binding.userSex.text = "남성"
+        }
+    }
+
 
     private fun getUserAge() {
         binding.userAge.addTextChangedListener(object : TextWatcher {
@@ -69,7 +86,6 @@ class SignUpThirdFragment : Fragment() {
                     )
 
                     binding.signUpButton.setOnClickListener {
-                        //sex = binding.userSex.value
                         Log.d("picker", sex.toString())
 
                         when (sex) {
@@ -113,13 +129,6 @@ class SignUpThirdFragment : Fragment() {
             }
         })
     }
-/*
-    private fun initializePicker() {
-        binding.userSex.minValue = 0
-        binding.userSex.maxValue = 1
-        binding.userSex.displayedValues = genders
-        binding.userSex.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
-        binding.userSex.wrapSelectorWheel = true
-    } */
+
 
 }

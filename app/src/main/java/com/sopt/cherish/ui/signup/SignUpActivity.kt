@@ -1,22 +1,18 @@
 package com.sopt.cherish.ui.signup
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.Fragment
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivitySignUpBinding
-import com.sopt.cherish.ui.signin.SignInActivity
+
 
 class SignUpActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySignUpBinding
     lateinit var email: String
-    lateinit var password: String
     lateinit var phone: String
-    var sex: Boolean = true
     lateinit var birth: String
     lateinit var nickname: String
     lateinit var mBundle: Bundle

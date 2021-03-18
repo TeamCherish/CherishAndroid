@@ -11,6 +11,7 @@ import com.sopt.cherish.remote.api.ResponseModifyData
 import com.sopt.cherish.remote.api.ResponseUserinfoData
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.detail.DetailPlantActivity
+import com.sopt.cherish.ui.dialog.BirthPickerDialogFragment
 import com.sopt.cherish.ui.dialog.ClockPickerDialogFragment
 import com.sopt.cherish.ui.dialog.DeletePlantDialogFragment
 import com.sopt.cherish.ui.dialog.ModifyWeekAlertFragment
@@ -67,17 +68,20 @@ class EnrollModifyPlantFragment : Fragment() {
                         }?.body()
                             ?.let { it ->
                                 Log.d("식물수정asdf", "asdf")
-
+                                Log.d("식물생일 수정수정", it.data.cherishDetail.birth)
                                 binding.editNick.hint = it.data.cherishDetail.nickname.toString()
                                 if (it.data.cherishDetail.birth == "Invalid Date") {
-                                    binding.editBirth.hint = "0000/00/00"
+                                    binding.editBirth.hint = "00/00"
                                 } else {
-                                    binding.editBirth.hint = it.data.cherishDetail.birth
+                                    binding.editBirth.hint =
+                                        it.data.cherishDetail.birth.split("-")[1] + "/" +
+                                                it.data.cherishDetail.birth.split("-")[2]
 
                                 }
-                                binding.waterAlarmWeek.text =
-                                    it.data.cherishDetail.cycle_date.toString()
-                                if (it.data.cherishDetail.cycle_date <= 3) {
+                                binding.waterAlarmWeek.text = "Every " +
+                                        it.data.cherishDetail.cycle_date.toString() + " day"
+
+                                /*if (it.data.cherishDetail.cycle_date <= 3) {
                                     binding.waterAlarmWeek.text =
                                         "Every " + it.data.cherishDetail.cycle_date.toString() + " day"
 
@@ -89,11 +93,14 @@ class EnrollModifyPlantFragment : Fragment() {
                                     binding.waterAlarmWeek.text =
                                         "Every " + (it.data.cherishDetail.cycle_date / 30).toString() + " month"
 
+                                }*/
+                                Log.d("clockokay", it.data.cherishDetail.notice_time)
+                                if (it.data.cherishDetail.notice_time.split(":")[0].toInt() < 12) {
+                                    binding.waterAlarmTime.text = it.data.cherishDetail.notice_time
+                                } else {
+                                    binding.waterAlarmTime.text = it.data.cherishDetail.notice_time
                                 }
-
-                                binding.waterAlarmTime.text = it.data.cherishDetail.notice_time
-
-
+                                //binding.waterAlarmTime.text = it.data.cherishDetail.notice_time
 
 
                                 binding.phoneNumber.text = it.data.cherishDetail.phone
@@ -114,11 +121,18 @@ class EnrollModifyPlantFragment : Fragment() {
 
         binding.editweek.setOnClickListener {
 
-            ModifyWeekAlertFragment(R.layout.fragment_modify_week_alert).show(parentFragmentManager,"modify")
+            ModifyWeekAlertFragment(R.layout.fragment_modify_week_alert).show(
+                parentFragmentManager,
+                "modify"
+            )
 
 
-
-
+        }
+        binding.editBirth.setOnClickListener {
+            BirthPickerDialogFragment(R.layout.birthpicker_layout).show(
+                parentFragmentManager,
+                "modify"
+            )
         }
         binding.detailOkBtnModify.setOnClickListener {
             //수정 버튼을 눌렀을 때
@@ -131,26 +145,29 @@ class EnrollModifyPlantFragment : Fragment() {
             }
 
             var birth_modify = binding.editBirth.text.toString()
-        /*    if (birth_modify == "") {
-                birth_modify = binding.editBirth.hint.substring(0, 4) + "/" +
-                        binding.editBirth.hint.substring(
-                            4,
-                            6
-                        ) + "/" + binding.editBirth.hint.substring(6).toString()
-            } else {
-                birth_modify = binding.editBirth.text.substring(0, 4) + "/" +
-                        binding.editBirth.text.substring(
-                            4,
-                            6
-                        ) + "/" + binding.editBirth.text.substring(6).toString()
-            }*/
+            if (binding.editBirth.text.isEmpty()) {
+                birth_modify = binding.editBirth.hint.toString()
+            }
+            /*    if (birth_modify == "") {
+                    birth_modify = binding.editBirth.hint.substring(0, 4) + "/" +
+                            binding.editBirth.hint.substring(
+                                4,
+                                6
+                            ) + "/" + binding.editBirth.hint.substring(6).toString()
+                } else {
+                    birth_modify = binding.editBirth.text.substring(0, 4) + "/" +
+                            binding.editBirth.text.substring(
+                                4,
+                                6
+                            ) + "/" + binding.editBirth.text.substring(6).toString()
+                }*/
 
-            val userwater = binding.waterAlarmWeek.text.toString()
-            Log.d("userwater", binding.waterAlarmWeek.text.toString())
+            val userwater = binding.waterAlarmWeek.text.split(" ")[1].toInt()
+            Log.d("userwater", userwater.toString())
             //알람 주기
 
             //user_water = userwater.substring(6, 7).toInt()
-            if (userwater.substring(8) == "month") {
+            /*if (userwater.substring(8) == "month") {
                 week_modify = userwater.substring(6, 7).toInt() * 30
                 Log.d("userwater2", week_modify.toString())
             } else if (userwater.substring(8) == "week") {
@@ -160,7 +177,7 @@ class EnrollModifyPlantFragment : Fragment() {
                 week_modify = userwater.substring(6, 7).toInt()
                 Log.d("userwater2", week_modify.toString())
             }
-
+*/
             //var week_switch_modify = binding.alarmSwitch.isChecked
 
             val usertime = binding.waterAlarmTime.text.toString()
@@ -171,7 +188,7 @@ class EnrollModifyPlantFragment : Fragment() {
             var body = RequestModifyData(
                 nickname = nickname_modify,
                 birth = birth_modify,
-                cycle_date = week_modify,
+                cycle_date = userwater,
                 notice_time = usertime,
                 water_notice = true,
                 id = modifycherish

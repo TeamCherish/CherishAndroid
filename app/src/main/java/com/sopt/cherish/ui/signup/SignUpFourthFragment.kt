@@ -113,7 +113,9 @@ class SignUpFourthFragment : Fragment() {
             override fun afterTextChanged(s: Editable?) {
                 nickName = binding.userNickname.text.toString()
 
+
                 if (nickName.length <= 8) {
+                    binding.isUsableNickname.visibility = View.VISIBLE
                     binding.isUsableNickname.text = "사용하실 수 있는 닉네임입니다."
                     binding.isUsableNickname.setTextColor(
                         ContextCompat.getColor(

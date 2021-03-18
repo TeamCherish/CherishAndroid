@@ -20,6 +20,7 @@ import com.sopt.cherish.databinding.FragmentEnrollPlantBinding
 import com.sopt.cherish.remote.model.RequestEnrollData
 import com.sopt.cherish.remote.model.ResponseEnrollData
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
+import com.sopt.cherish.ui.dialog.BirthPickerDialogFragment
 import com.sopt.cherish.ui.dialog.ClockPickerDialogFragment
 import com.sopt.cherish.ui.dialog.WeekPickerDialogFragment
 import retrofit2.Call
@@ -159,7 +160,7 @@ class EnrollPlantFragment : Fragment() {
                 //userbirth = binding.editBirth.text.substring(0,4)+"-"+binding.editBirth.text.substring(4,6)+"-"+binding.editBirth.text.substring(6,)
                 userbirth = binding.editBirth.text.toString()
             } else {
-                userbirth = "0000/00/00"
+                userbirth = "00/00"
 
             }
             Log.d("userbirth", userbirth.toString())
@@ -167,18 +168,19 @@ class EnrollPlantFragment : Fragment() {
             val userphone = arguments?.getString("phonenumber")
             Log.d("userphone", userphone.toString())
 //번호
-           /* val userphonebook = userphone?.substring(0, 3) + "-" + userphone?.substring(
-                3,
-                7
-            ) + "-" + userphone?.substring(7)*/
-           // Log.d("userphonebook", userphonebook.toString())
+            /* val userphonebook = userphone?.substring(0, 3) + "-" + userphone?.substring(
+                 3,
+                 7
+             ) + "-" + userphone?.substring(7)*/
+            // Log.d("userphonebook", userphonebook.toString())
 //번호나눈거
 
-            val userwater = binding.waterAlarmWeek.text.toString()
+            val userwater = binding.waterAlarmWeek.text.split(" ")[1]
+
             Log.d("userwater", binding.waterAlarmWeek.text.toString())
             //알람 주기
             //user_water = userwater.substring(6, 7).toInt()
-            if (userwater.substring(8) == "month") {
+            /*if (userwater.substring(8) == "month") {
                 user_water = userwater.substring(6, 7).toInt() * 30
                 Log.d("userwater2", user_water.toString())
             } else if (userwater.substring(8) == "week") {
@@ -187,7 +189,7 @@ class EnrollPlantFragment : Fragment() {
             } else {
                 user_water = userwater.substring(6, 7).toInt()
                 Log.d("userwater2", user_water.toString())
-            }
+            }*/
 
             val usertime = binding.waterAlarmTime.text.toString()
             val usertime_hour = usertime.substring(0, 5).toString()
@@ -201,7 +203,7 @@ class EnrollPlantFragment : Fragment() {
                     nickname = usernickname,
                     birth = userbirth,
                     phone = userphone!!,
-                    cycle_date = user_water,
+                    cycle_date = userwater.toInt(),
                     notice_time = usertime_hour,
                     water_notice = true,
                     UserId = userid.toInt()
@@ -268,7 +270,7 @@ class EnrollPlantFragment : Fragment() {
                                 plant_mean
                             )
                             putString("plant_url", plant_url)
-                            putInt("plant_id",plant_id)
+                            putInt("plant_id", plant_id)
 
                         }
                     })
@@ -280,7 +282,12 @@ class EnrollPlantFragment : Fragment() {
             }, 4000)
         }
 
-
+        binding.editBirth.setOnClickListener {
+            BirthPickerDialogFragment(R.layout.birthpicker_layout).show(
+                parentFragmentManager,
+                "MainActivity"
+            )
+        }
         //timepicker 나오는 부분
         binding.editclock.setOnClickListener {
             val needWaterDialog = ClockPickerDialogFragment(R.layout.clockpicker_layout).show(
