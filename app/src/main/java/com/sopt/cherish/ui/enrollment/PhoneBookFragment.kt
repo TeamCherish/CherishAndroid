@@ -11,7 +11,6 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -56,7 +55,7 @@ class PhoneBookFragment : Fragment() {
 
         binding = FragmentPhoneBookBinding.bind(view)
         countphonebook = arguments?.getInt("useridenroll")!!
-        Log.d("useridna",countphonebook.toString())
+        Log.d("useridna", countphonebook.toString())
         startProcess()
 
         Log.d("checkedRadioButton", madapter.checkedRadioButton?.isClickable.toString())
@@ -81,14 +80,14 @@ class PhoneBookFragment : Fragment() {
             if (madapter.checkedRadioButton != null) {
 
                 Log.d("vvvv", madapter.phonename.toString())
-                val phonenumber =madapter.phonenumber
-                    /*madapter.phonenumber.substring(0, 3) + "-" + madapter.phonenumber.substring(
-                        3,
-                        7
-                    ) + "-" +
-                            madapter.phonenumber.substring(7)*/
+                val phonenumber = madapter.phonenumber
+                /*madapter.phonenumber.substring(0, 3) + "-" + madapter.phonenumber.substring(
+                    3,
+                    7
+                ) + "-" +
+                        madapter.phonenumber.substring(7)*/
                 Log.d("phonenumbervvvv", phonenumber)
-                Log.d("useriduserid",viewModel.cherishuserId.value.toString()!!)
+                Log.d("useriduserid", viewModel.cherishuserId.value.toString()!!)
                 val body =
                     RequestCheckPhoneData(phone = phonenumber.toString(), UserId = countphonebook)
                 requestData.checkphoneAPI.checkphone(body)

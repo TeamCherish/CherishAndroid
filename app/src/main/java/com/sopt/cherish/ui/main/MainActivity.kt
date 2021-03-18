@@ -82,12 +82,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun observeFirebaseDeviceToken() {
         viewModel.fcmToken.observe(this) {
-            viewModel.sendFcmToken(NotificationReq(viewModel.cherishuserId.value!!, it))
+            viewModel.sendFcmToken(NotificationReq(viewModel.cherishUserId.value!!, it))
         }
     }
 
     private fun initializeViewModelData() {
-        viewModel.cherishuserId.value = intent?.getIntExtra("userId", -1)
+        viewModel.cherishUserId.value = intent?.getIntExtra("userId", -1)
         viewModel.userNickName.value = intent?.getStringExtra("userNickname")
         viewModel.fetchUsers()
     }

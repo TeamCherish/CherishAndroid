@@ -1,18 +1,15 @@
 package com.sopt.cherish.ui.detail
 
-import android.graphics.Rect
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerView
 import com.jackandphantom.circularprogressbar.CircleProgressbar
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityDetailPlantBinding
@@ -32,7 +29,7 @@ import com.sopt.cherish.ui.enrollment.EnrollModifyPlantFragment
 class DetailPlantActivity : AppCompatActivity(),
     WeekPickerDialogFragment.TestDialogFragmentListener,
     ClockPickerDialogFragment.TestDialogFragmentListener,
-    BirthPickerDialogFragment.TestDialogFragmentListener{
+    BirthPickerDialogFragment.TestDialogFragmentListener {
 
     private lateinit var circleProgressbar: CircleProgressbar
     private lateinit var binding: ActivityDetailPlantBinding
@@ -202,7 +199,6 @@ class DetailPlantActivity : AppCompatActivity(),
 
         textclock.text = someData.toString()
     }
-
 
 
     override fun onTestDialogBirth(dialog: DialogFragment?, someData: String?) {

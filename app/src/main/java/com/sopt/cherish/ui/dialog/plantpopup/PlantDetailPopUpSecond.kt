@@ -23,9 +23,9 @@ class PlantDetailPopUpSecond(plantId: Int) : Fragment() {
     private val binding get() = _binding!!
     private val requestData = RetrofitBuilder
     var plantId = plantId
-    var flowerName:String=""
-    var chip:String=""
-    var wateringText:String=""
+    var flowerName: String = ""
+    var chip: String = ""
+    var wateringText: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -72,54 +72,54 @@ class PlantDetailPopUpSecond(plantId: Int) : Fragment() {
                                 wateringText = it.data.plantDetail[0].description
 
 
-                                binding.chip.text=chip
-                                binding.wateringText.text=wateringText
+                                binding.chip.text = chip
+                                binding.wateringText.text = wateringText
 
-                                setMargin(flowerName,chip,wateringText)
+                                setMargin(flowerName, chip, wateringText)
                             }
                     }
                 })
     }
 
-    private fun setMargin(flowerName:String,chip:String,wateringText:String){
-        when(flowerName){
-            "따뜻한 민들레"->setDandelion()
-            "씩씩한 단모환"->setCactus()
-            "푸른 빛의 아메리칸 블루"->setAmericanBlue()
-            "향기로운 로즈마리"->setRosmary()
-            "든든한 스투키"->setStookie()
+    private fun setMargin(flowerName: String, chip: String, wateringText: String) {
+        when (flowerName) {
+            "따뜻한 민들레" -> setDandelion()
+            "씩씩한 단모환" -> setCactus()
+            "푸른 빛의 아메리칸 블루" -> setAmericanBlue()
+            "향기로운 로즈마리" -> setRosmary()
+            "든든한 스투키" -> setStookie()
         }
     }
 
-    private fun setDandelion(){
-        var param=binding.flowerImg.layoutParams as ViewGroup.MarginLayoutParams
-        param.setMargins(0,70,0,0)
-        binding.flowerImg.layoutParams=param
+    private fun setDandelion() {
+        var param = binding.flowerImg.layoutParams as ViewGroup.MarginLayoutParams
+        param.setMargins(0, 70, 0, 0)
+        binding.flowerImg.layoutParams = param
 
-        param=binding.chip.layoutParams as ViewGroup.MarginLayoutParams
-        param.setMargins(0,9,0,0)
-        binding.chip.layoutParams=param
+        param = binding.chip.layoutParams as ViewGroup.MarginLayoutParams
+        param.setMargins(0, 9, 0, 0)
+        binding.chip.layoutParams = param
         binding.chip.setTextColor(Color.parseColor("#97cdbd"))
         binding.chip.setChipStrokeColorResource(R.color.cherish_dandelion_background_color)
 
-        param=binding.wateringText.layoutParams as ViewGroup.MarginLayoutParams
-        param.setMargins(0,8,0,0)
-        binding.wateringText.layoutParams=param
+        param = binding.wateringText.layoutParams as ViewGroup.MarginLayoutParams
+        param.setMargins(0, 8, 0, 0)
+        binding.wateringText.layoutParams = param
     }
 
-    private fun setCactus(){
-
-    }
-
-    private fun setAmericanBlue(){
+    private fun setCactus() {
 
     }
 
-    private fun setRosmary(){
+    private fun setAmericanBlue() {
 
     }
 
-    private fun setStookie(){
+    private fun setRosmary() {
+
+    }
+
+    private fun setStookie() {
 
     }
 }

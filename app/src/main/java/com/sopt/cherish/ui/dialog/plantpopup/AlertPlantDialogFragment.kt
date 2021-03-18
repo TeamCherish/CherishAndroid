@@ -3,7 +3,6 @@ package com.sopt.cherish.ui.dialog.plantpopup
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -75,7 +74,7 @@ class AlertPlantDialogFragment(plantId: Int) : DialogFragment(), View.OnClickLis
         dismiss()
     }
 
-    private fun initializeViewPager(binding:FragmentAlertPlantDialogBinding){
+    private fun initializeViewPager(binding: FragmentAlertPlantDialogBinding) {
         viewpagerAdapter = DialogViewPagerAdapter(childFragmentManager)
 
         viewpagerAdapter.fragments = listOf(
@@ -88,7 +87,7 @@ class AlertPlantDialogFragment(plantId: Int) : DialogFragment(), View.OnClickLis
         binding.dialogViewpager.adapter = viewpagerAdapter
     }
 
-    private fun initializeIndicatorView(binding:FragmentAlertPlantDialogBinding){
+    private fun initializeIndicatorView(binding: FragmentAlertPlantDialogBinding) {
         binding.indicatorView.apply {
             setSliderColor(Color.parseColor("#c4c4c4"), Color.parseColor("#31d693"))
             setSliderWidth(resources.getDimension(R.dimen.margin_10dp))

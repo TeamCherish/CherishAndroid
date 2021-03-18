@@ -168,11 +168,11 @@ class EnrollPlantFragment : Fragment() {
             val userphone = arguments?.getString("phonenumber")
             Log.d("userphone", userphone.toString())
 //번호
-           /* val userphonebook = userphone?.substring(0, 3) + "-" + userphone?.substring(
-                3,
-                7
-            ) + "-" + userphone?.substring(7)*/
-           // Log.d("userphonebook", userphonebook.toString())
+            /* val userphonebook = userphone?.substring(0, 3) + "-" + userphone?.substring(
+                 3,
+                 7
+             ) + "-" + userphone?.substring(7)*/
+            // Log.d("userphonebook", userphonebook.toString())
 //번호나눈거
 
             val userwater = binding.waterAlarmWeek.text.split(" ")[1]
@@ -270,7 +270,7 @@ class EnrollPlantFragment : Fragment() {
                                 plant_mean
                             )
                             putString("plant_url", plant_url)
-                            putInt("plant_id",plant_id)
+                            putInt("plant_id", plant_id)
 
                         }
                     })

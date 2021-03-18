@@ -63,7 +63,7 @@ class UserModifyFragment : Fragment() {
         }
         binding.buttonNickchange.setOnClickListener {
             val body = RequestNicknameData(
-                viewModel.cherishuserId.value!!,
+                viewModel.cherishUserId.value!!,
                 binding.settingEditNickname.text.toString()
             )
             requestData.nicknameChangeAPI.nicknamechange(body)

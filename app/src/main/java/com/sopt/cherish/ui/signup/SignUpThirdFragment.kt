@@ -16,7 +16,7 @@ import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentSignUpThirdBinding
 import com.sopt.cherish.ui.dialog.selectgender.SelectGenderDialogFragment
 
-class SignUpThirdFragment : Fragment(){
+class SignUpThirdFragment : Fragment() {
     lateinit var binding: FragmentSignUpThirdBinding
     var email: String = ""
     var password: String = ""
@@ -43,10 +43,10 @@ class SignUpThirdFragment : Fragment(){
 
 
         binding.userSex.setOnClickListener(View.OnClickListener {
-            val fm=requireActivity().supportFragmentManager
-            val dialogFragment=SelectGenderDialogFragment()
-            dialogFragment.setTargetFragment(this@SignUpThirdFragment,101)
-            dialogFragment.show(fm,"SignUpActivity")
+            val fm = requireActivity().supportFragmentManager
+            val dialogFragment = SelectGenderDialogFragment()
+            dialogFragment.setTargetFragment(this@SignUpThirdFragment, 101)
+            dialogFragment.show(fm, "SignUpActivity")
         })
         getUserAge()
 
@@ -55,12 +55,12 @@ class SignUpThirdFragment : Fragment(){
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        sex=data!!.getIntExtra("gender",0)
-        Log.d("getGender",sex.toString())
+        sex = data!!.getIntExtra("gender", 0)
+        Log.d("getGender", sex.toString())
 
-        when(sex){
-            0->binding.userSex.text="여성"
-            1->binding.userSex.text="남성"
+        when (sex) {
+            0 -> binding.userSex.text = "여성"
+            1 -> binding.userSex.text = "남성"
         }
     }
 

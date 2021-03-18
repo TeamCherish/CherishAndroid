@@ -115,7 +115,7 @@ class SettingFragment : Fragment() {
     }
 
     fun setView() {
-        requestData.myPageAPI.fetchUserPage(viewModel.cherishuserId.value!!)
+        requestData.myPageAPI.fetchUserPage(viewModel.cherishUserId.value!!)
             .enqueue(
                 object : Callback<MyPageUserRes> {
                     override fun onFailure(call: Call<MyPageUserRes>, t: Throwable) {

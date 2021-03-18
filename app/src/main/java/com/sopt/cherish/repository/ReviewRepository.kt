@@ -1,12 +1,10 @@
 package com.sopt.cherish.repository
 
-import com.sopt.cherish.remote.api.NotificationAPI
 import com.sopt.cherish.remote.api.ReviewAPI
 import com.sopt.cherish.remote.api.ReviewWateringReq
 
 class ReviewRepository(
-    private val reviewAPI: ReviewAPI,
-    private val notificationAPI: NotificationAPI
+    private val reviewAPI: ReviewAPI
 ) {
     suspend fun sendReviewData(reviewWateringReq: ReviewWateringReq) =
         reviewAPI.reviewWatering(reviewWateringReq)
