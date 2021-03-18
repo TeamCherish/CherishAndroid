@@ -24,6 +24,7 @@ import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
 import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.util.GridItemDecorator
 import com.sopt.cherish.util.PixelUtil.dp
+import com.sopt.cherish.util.SimpleLogger
 import com.sopt.cherish.util.extension.longToast
 
 
@@ -91,9 +92,19 @@ class HomeFragment : Fragment(), OnItemClickListener {
     }
 
     private fun observeCherishUsers() {
+        SimpleLogger.logI("hello!!!")
         viewModel.cherishUsers.observe(viewLifecycleOwner) {
-            setCherishUserListAdapter(it)
-            setSelectedUser(it.userData.userList[1])
+            if (it != null) {
+                setCherishUserListAdapter(it)
+                setSelectedUser(it.userData.userList[1])
+            } else {
+                val blankIntent = Intent(requireContext(), HomeBlankActivity::class.java)
+                blankIntent.putExtra("userNickname", viewModel.userNickName.value)
+                blankIntent.putExtra("userId", viewModel.cherishUserId.value)
+                blankIntent.flags = Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
+                startActivity(blankIntent)
+                requireActivity().finish()
+            }
         }
     }
 

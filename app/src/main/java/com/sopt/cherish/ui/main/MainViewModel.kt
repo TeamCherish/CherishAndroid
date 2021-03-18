@@ -29,8 +29,8 @@ class MainViewModel(
     val userNickName = MutableLiveData<String>()
     val fcmToken = MutableLiveData<String>()
 
-    private val _cherishUsers = MutableLiveData<UserResult>()
-    val cherishUsers: MutableLiveData<UserResult>
+    private val _cherishUsers = MutableLiveData<UserResult?>()
+    val cherishUsers: MutableLiveData<UserResult?>
         get() = _cherishUsers
 
     val selectedCherishUser = MutableLiveData<User>()
@@ -42,6 +42,9 @@ class MainViewModel(
             if (it.userData.totalUser != 0) {
                 it.userData.userList.add(0, it.userData.userList[0])
                 _cherishUsers.value = it
+            } else {
+                // 0 일 경우에
+                _cherishUsers.value = null
             }
         }.onFailure { error ->
             throw error
