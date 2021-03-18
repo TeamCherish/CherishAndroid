@@ -165,7 +165,7 @@ class DetailPlantFragment : Fragment() {
                                     binding.textViewDday.text = "D-" + abs(it.data.dDay).toString()
 
                                 }
-                                binding.textViewDuration.text = it.data.duration.toString()
+                                binding.textViewDuration.text = it.data.duration.toString()+"일째"
                                 if ((it.data.birth.toString()) == "Invalid Date") {
                                     binding.textViewBirth.text = "_ _"
 

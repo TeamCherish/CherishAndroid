@@ -78,11 +78,11 @@ class ResultPlantFragment : Fragment() {
 
             }
             3 -> {
-                binding.startbtn.setBackgroundColor(Color.parseColor(" #97CDBD "))
-                binding.textViewFlower.setTextColor(Color.parseColor(" #97CDBD "))
-                binding.viewFlower.setBackgroundColor(Color.parseColor(" #97CDBD "))
+                binding.startbtn.setBackgroundColor(Color.parseColor("#97CDBD"))
+                binding.textViewFlower.setTextColor(Color.parseColor("#97CDBD"))
+                binding.viewFlower.setBackgroundColor(Color.parseColor("#97CDBD"))
                 binding.tipBox.setBackgroundResource(R.drawable.plant_tip_box3)
-                binding.textViewflowerMean.setTextColor(Color.parseColor(" #97CDBD "))
+                binding.textViewflowerMean.setTextColor(Color.parseColor("#97CDBD"))
 
             }
             4 -> {
