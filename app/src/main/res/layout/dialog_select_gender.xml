@@ -18,6 +18,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <View
+                android:id="@+id/view5"
+                android:layout_width="80dp"
+                android:layout_height="32dp"
+                android:background="@drawable/spinner_box"
+                app:layout_constraintBottom_toBottomOf="@+id/select_gender_picker"
+                app:layout_constraintEnd_toEndOf="@+id/select_gender_picker"
+                app:layout_constraintStart_toStartOf="@+id/select_gender_picker"
+                app:layout_constraintTop_toTopOf="@+id/select_gender_picker" />
+
             <NumberPicker
                 android:id="@+id/select_gender_picker"
                 android:layout_width="wrap_content"
@@ -27,6 +37,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
 
             <Button
                 android:id="@+id/select_gender_accept_btn"

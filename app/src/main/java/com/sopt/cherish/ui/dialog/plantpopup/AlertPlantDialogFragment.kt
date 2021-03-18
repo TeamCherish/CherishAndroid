@@ -1,4 +1,4 @@
-package com.sopt.cherish.ui.dialog
+package com.sopt.cherish.ui.dialog.plantpopup
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -33,32 +33,11 @@ class AlertPlantDialogFragment(plantId: Int) : DialogFragment(), View.OnClickLis
 
         //var cherishId:Int=cherishid
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        Log.d("plantid", plantId.toString())
+
         _binding = FragmentAlertPlantDialogBinding.inflate(inflater, container, false)
 
-        Log.d("cherishId in fragment", plantId.toString())
-
-        viewpagerAdapter = DialogViewPagerAdapter(childFragmentManager)
-
-        viewpagerAdapter.fragments = listOf(
-            PlantDetailPopUpFirst(plantId),
-            PlantDetailPopUpSecond(plantId),
-            PlantDetailPopUpThird(plantId),
-            PlantDetailPopUpFourth(plantId)
-        )
-
-        binding.dialogViewpager.adapter = viewpagerAdapter
-
-
-        binding.indicatorView.apply {
-            setSliderColor(Color.parseColor("#c4c4c4"), Color.parseColor("#31d693"))
-            setSliderWidth(resources.getDimension(R.dimen.margin_10dp))
-            setSliderHeight(resources.getDimension(R.dimen.margin_5dp))
-            setSlideMode(IndicatorSlideMode.NORMAL)
-            setIndicatorStyle(IndicatorStyle.CIRCLE)
-            setPageSize(binding.dialogViewpager.adapter!!.count)
-            notifyDataChanged()
-        }
+        initializeViewPager(binding)
+        initializeIndicatorView(binding)
 
         binding.dialogViewpager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrolled(
@@ -94,5 +73,30 @@ class AlertPlantDialogFragment(plantId: Int) : DialogFragment(), View.OnClickLis
 
     override fun onClick(view: View?) {
         dismiss()
+    }
+
+    private fun initializeViewPager(binding:FragmentAlertPlantDialogBinding){
+        viewpagerAdapter = DialogViewPagerAdapter(childFragmentManager)
+
+        viewpagerAdapter.fragments = listOf(
+            PlantDetailPopUpFirst(plantId),
+            PlantDetailPopUpSecond(plantId),
+            PlantDetailPopUpThird(plantId),
+            PlantDetailPopUpFourth(plantId)
+        )
+
+        binding.dialogViewpager.adapter = viewpagerAdapter
+    }
+
+    private fun initializeIndicatorView(binding:FragmentAlertPlantDialogBinding){
+        binding.indicatorView.apply {
+            setSliderColor(Color.parseColor("#c4c4c4"), Color.parseColor("#31d693"))
+            setSliderWidth(resources.getDimension(R.dimen.margin_10dp))
+            setSliderHeight(resources.getDimension(R.dimen.margin_5dp))
+            setSlideMode(IndicatorSlideMode.NORMAL)
+            setIndicatorStyle(IndicatorStyle.CIRCLE)
+            setPageSize(binding.dialogViewpager.adapter!!.count)
+            notifyDataChanged()
+        }
     }
 }
