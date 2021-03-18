@@ -24,7 +24,6 @@ import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
 import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.util.GridItemDecorator
 import com.sopt.cherish.util.PixelUtil.dp
-import com.sopt.cherish.util.SimpleLogger
 import com.sopt.cherish.util.extension.longToast
 
 
@@ -92,7 +91,6 @@ class HomeFragment : Fragment(), OnItemClickListener {
     }
 
     private fun observeCherishUsers() {
-        SimpleLogger.logI("hello!!!")
         viewModel.cherishUsers.observe(viewLifecycleOwner) {
             if (it != null) {
                 setCherishUserListAdapter(it)
