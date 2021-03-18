@@ -93,10 +93,11 @@ class EnrollModifyPlantFragment : Fragment() {
                                         "Every " + (it.data.cherishDetail.cycle_date / 30).toString() + " month"
 
                                 }*/
+                                Log.d("clockokay",it.data.cherishDetail.notice_time)
                                 if(it.data.cherishDetail.notice_time.split(":")[0].toInt()<12){
-                                    binding.waterAlarmTime.text = it.data.cherishDetail.notice_time+" AM"
+                                    binding.waterAlarmTime.text = it.data.cherishDetail.notice_time
                                 }else{
-                                    binding.waterAlarmTime.text=it.data.cherishDetail.notice_time+" PM"
+                                    binding.waterAlarmTime.text=it.data.cherishDetail.notice_time
                                 }
                                 //binding.waterAlarmTime.text = it.data.cherishDetail.notice_time
 
@@ -141,6 +142,9 @@ class EnrollModifyPlantFragment : Fragment() {
             }
 
             var birth_modify = binding.editBirth.text.toString()
+            if(binding.editBirth.text.isEmpty()){
+                birth_modify=binding.editBirth.hint.toString()
+            }
         /*    if (birth_modify == "") {
                 birth_modify = binding.editBirth.hint.substring(0, 4) + "/" +
                         binding.editBirth.hint.substring(
@@ -155,12 +159,12 @@ class EnrollModifyPlantFragment : Fragment() {
                         ) + "/" + binding.editBirth.text.substring(6).toString()
             }*/
 
-            val userwater = binding.waterAlarmWeek.text.toString()
-            Log.d("userwater", binding.waterAlarmWeek.text.toString())
+            val userwater = binding.waterAlarmWeek.text.split(" ")[1].toInt()
+            Log.d("userwater", userwater.toString())
             //알람 주기
 
             //user_water = userwater.substring(6, 7).toInt()
-            if (userwater.substring(8) == "month") {
+            /*if (userwater.substring(8) == "month") {
                 week_modify = userwater.substring(6, 7).toInt() * 30
                 Log.d("userwater2", week_modify.toString())
             } else if (userwater.substring(8) == "week") {
@@ -170,7 +174,7 @@ class EnrollModifyPlantFragment : Fragment() {
                 week_modify = userwater.substring(6, 7).toInt()
                 Log.d("userwater2", week_modify.toString())
             }
-
+*/
             //var week_switch_modify = binding.alarmSwitch.isChecked
 
             val usertime = binding.waterAlarmTime.text.toString()
@@ -181,7 +185,7 @@ class EnrollModifyPlantFragment : Fragment() {
             var body = RequestModifyData(
                 nickname = nickname_modify,
                 birth = birth_modify,
-                cycle_date = week_modify,
+                cycle_date = userwater,
                 notice_time = usertime,
                 water_notice = true,
                 id = modifycherish
