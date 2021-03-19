@@ -79,7 +79,7 @@ class PhoneBookFragment : Fragment() {
         binding.buttonnext.setOnClickListener {
             if (madapter.checkedRadioButton != null) {
 
-                Log.d("vvvv", madapter.phonename.toString())
+                Log.d("vvvv", madapter.phonename)
                 val phonenumber = madapter.phonenumber
                 /*madapter.phonenumber.substring(0, 3) + "-" + madapter.phonenumber.substring(
                     3,
@@ -87,9 +87,9 @@ class PhoneBookFragment : Fragment() {
                 ) + "-" +
                         madapter.phonenumber.substring(7)*/
                 Log.d("phonenumbervvvv", phonenumber)
-                Log.d("useriduserid", viewModel.cherishuserId.value.toString()!!)
+
                 val body =
-                    RequestCheckPhoneData(phone = phonenumber.toString(), UserId = countphonebook)
+                    RequestCheckPhoneData(phone = phonenumber, UserId = countphonebook)
                 requestData.checkphoneAPI.checkphone(body)
                     .enqueue(
                         object : Callback<ResponseCheckPhoneData> {
