@@ -68,7 +68,7 @@ class PlantDetailPopUpSecond(plantId: Int) : Fragment() {
                             it.isSuccessful
                         }?.body()
                             ?.let { it ->
-                                Log.d("image url",it.data.toString())
+
                                 Glide.with(binding.root.context)
                                     .load(it.data.plantDetail[0].image_url)
                                     .into(binding.flowerImg)

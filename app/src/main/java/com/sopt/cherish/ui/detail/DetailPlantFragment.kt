@@ -10,14 +10,12 @@ import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.jackandphantom.circularprogressbar.CircleProgressbar
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentDetailPlantBinding
 import com.sopt.cherish.remote.api.ResponsePlantCardDatas
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
-import com.sopt.cherish.ui.adapter.DetailMemoAdapter
 import com.sopt.cherish.ui.detail.calendar.CalendarFragment
 import com.sopt.cherish.ui.dialog.plantpopup.AlertPlantDialogFragment
 import com.sopt.cherish.ui.dialog.wateringdialog.DetailWateringDialogFragment
@@ -48,9 +46,10 @@ class DetailPlantFragment : Fragment() {
     lateinit var userNickname: String
     var userId = 0
 
-    var statusmessagebig=""
-    var statusmessagesmall=""
-    var touchimage=false
+    var statusmessagebig = ""
+    var statusmessagesmall = ""
+    var touchimage = false
+
     companion object {
         private val TAG = "DetailPlantFragment"
     }
@@ -60,19 +59,19 @@ class DetailPlantFragment : Fragment() {
         detailserver()
         binding.imageViewDetailUrl.setOnClickListener {
 
-            if(!touchimage){
+            if (!touchimage) {
                 binding.textViewStatusMessage.text = statusmessagebig
                 binding.textViewStatus.text = statusmessagesmall
-                binding.imageViewDetailDim.isVisible=true
-                binding.textViewStatusMessage.isVisible=true
-                binding.textViewStatus.isVisible=true
-                touchimage=true
-            }else{
+                binding.imageViewDetailDim.isVisible = true
+                binding.textViewStatusMessage.isVisible = true
+                binding.textViewStatus.isVisible = true
+                touchimage = true
+            } else {
 
-                binding.imageViewDetailDim.isVisible=false
-                binding.textViewStatusMessage.isVisible=false
-                binding.textViewStatus.isVisible=false
-                touchimage=false
+                binding.imageViewDetailDim.isVisible = false
+                binding.textViewStatusMessage.isVisible = false
+                binding.textViewStatus.isVisible = false
+                touchimage = false
             }
         }
         //여기에 작성
@@ -130,7 +129,6 @@ class DetailPlantFragment : Fragment() {
     }
 
 
-
     fun detailserver(){
         requestData.responsePlantCardData.Detailcherishcard(cherishid)
             .enqueue(
@@ -165,7 +163,7 @@ class DetailPlantFragment : Fragment() {
                                     binding.textViewDday.text = "D-" + abs(it.data.dDay).toString()
 
                                 }
-                                binding.textViewDuration.text = it.data.duration.toString()
+                                binding.textViewDuration.text = it.data.duration.toString() + "일째"
                                 if ((it.data.birth.toString()) == "Invalid Date") {
                                     binding.textViewBirth.text = "_ _"
 
@@ -175,10 +173,10 @@ class DetailPlantFragment : Fragment() {
                                 }
                                 binding.textView1WithName.text = it.data.name.toString()
 
-                                statusmessagebig=it.data.status_message
-                                statusmessagesmall=it.data.status
-                              /*  binding.textViewStatusMessage.text = it.data.status_message
-                                binding.textViewStatus.text = it.data.status.toString()*/
+                                statusmessagebig = it.data.status_message
+                                statusmessagesmall = it.data.status
+                                /*  binding.textViewStatusMessage.text = it.data.status_message
+                                  binding.textViewStatus.text = it.data.status.toString()*/
                                 Glide.with(this@DetailPlantFragment)
                                     .load(it.data.plant_thumbnail_image_url)
                                     .into(binding.imageViewDetailUrl)
@@ -186,15 +184,16 @@ class DetailPlantFragment : Fragment() {
                                 plant_id = it.data.plantId
                                 Log.d("fdfdfd", it.data.plantId.toString())
 
-                                if(it.data.gage<0.5){
+                                if (it.data.gage < 0.5) {
 
-                                    circleProgressbar.foregroundProgressColor=Color.parseColor("#F7596C")
+                                    circleProgressbar.foregroundProgressColor =
+                                        Color.parseColor("#F7596C")
                                     circleProgressbar.setProgressWithAnimation(
                                         it.data.gage.toFloat() * 100,
                                         animationDuration
                                     )
 
-                                }else{
+                                } else {
                                     circleProgressbar.setProgressWithAnimation(
                                         it.data.gage.toFloat() * 100,
                                         animationDuration
@@ -261,49 +260,49 @@ class DetailPlantFragment : Fragment() {
 
                                 }
 */
-                                if(it.data.reviews.isEmpty()){
-                                    binding.userdate.text="_ _"
-                                    binding.usermemo.text="메모를 입력하지 않았어요!"
+                                if (it.data.reviews.isEmpty()) {
+                                    binding.userdate.text = "_ _"
+                                    binding.usermemo.text = "메모를 입력하지 않았어요!"
 
-                                    binding.userdate2.text="_ _"
-                                    binding.usermemo2.text="메모를 입력하지 않았어요!"
+                                    binding.userdate2.text = "_ _"
+                                    binding.usermemo2.text = "메모를 입력하지 않았어요!"
 
-                                }else if(it.data.reviews.size==1){
-                                    binding.userdate.text=( it.data.reviews[0].water_date)
-                                    binding.usermemo.text= it.data.reviews[0].review
-                                    binding.memocons2.isVisible=false
-                                }else {
-                                    binding.userdate.text=( it.data.reviews[0].water_date)
-                                    binding.usermemo.text= it.data.reviews[0].review
+                                } else if (it.data.reviews.size == 1) {
+                                    binding.userdate.text = (it.data.reviews[0].water_date)
+                                    binding.usermemo.text = it.data.reviews[0].review
+                                    binding.memocons2.isVisible = false
+                                } else {
+                                    binding.userdate.text = (it.data.reviews[0].water_date)
+                                    binding.usermemo.text = it.data.reviews[0].review
 
-                                    binding.userdate2.text=( it.data.reviews[1].water_date)
-                                    binding.usermemo2.text= it.data.reviews[1].review
+                                    binding.userdate2.text = (it.data.reviews[1].water_date)
+                                    binding.usermemo2.text = it.data.reviews[1].review
 
                                 }
                                 binding.memocons.setOnClickListener {
 
-                                    if(binding.userdate.text!="_ _"){
-                                    viewModel.selectedMemoCalendarDay.value =
-                                      //  item.date.let { itemDate ->
+                                    if (binding.userdate.text != "_ _") {
+                                        viewModel.selectedMemoCalendarDay.value =
+                                                //  item.date.let { itemDate ->
                                             DateUtil.convertStringToDateBar(binding.userdate.text.toString())
                                                 ?.let { it1 ->
                                                     DateUtil.convertDateToCalendarDay(
                                                         it1
                                                     )
                                                 }
-                                    val transaction =
-                                        parentFragmentManager.beginTransaction()
-                                    transaction.replace(
-                                        R.id.fragment_detail,
-                                        CalendarFragment()
-                                    )
-                                    transaction.addToBackStack(null)
-                                    transaction.commit()
-                                      //  }
+                                        val transaction =
+                                            parentFragmentManager.beginTransaction()
+                                        transaction.replace(
+                                            R.id.fragment_detail,
+                                            CalendarFragment()
+                                        )
+                                        transaction.addToBackStack(null)
+                                        transaction.commit()
+                                        //  }
                                     }
                                 }
                                 binding.memocons2.setOnClickListener {
-                                    if(binding.userdate2.text!="_ _") {
+                                    if (binding.userdate2.text != "_ _") {
                                         viewModel.selectedMemoCalendarDay.value =
                                                 //  item.date.let { itemDate ->
                                             DateUtil.convertStringToDateBar(binding.userdate2.text.toString())
@@ -325,24 +324,24 @@ class DetailPlantFragment : Fragment() {
                                 }
 
 
-                               /* if (it.data.reviews.isEmpty()) {
+                                /* if (it.data.reviews.isEmpty()) {
 
 
-                                    var memoList = arrayListOf<MemoListDataclass>(
+                                     var memoList = arrayListOf<MemoListDataclass>(
 
-                                        MemoListDataclass(
-                                            "_ _",
-                                            "메모를 입력하지 않았어요!"
-                                        ),
-                                        MemoListDataclass(
-                                            "_ _",
-                                            "메모를 입력하지 않았어요!"
-                                        )
-                                    )
+                                         MemoListDataclass(
+                                             "_ _",
+                                             "메모를 입력하지 않았어요!"
+                                         ),
+                                         MemoListDataclass(
+                                             "_ _",
+                                             "메모를 입력하지 않았어요!"
+                                         )
+                                     )
 
-                                    val mAdapter = DetailMemoAdapter(memoList)
-                                    binding.recyclerDetail.adapter = mAdapter
-*//*
+                                     val mAdapter = DetailMemoAdapter(memoList)
+                                     binding.recyclerDetail.adapter = mAdapter
+ *//*
                                     binding.recyclerDetail.addItemDecoration(
                                         VerticalSpaceItemDecoration(
                                             20

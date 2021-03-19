@@ -15,11 +15,11 @@ import com.sopt.cherish.R
 import com.sopt.cherish.databinding.DialogSelectGenderBinding
 import com.sopt.cherish.util.DialogUtil
 
-class SelectGenderDialogFragment: DialogFragment() {
+class SelectGenderDialogFragment : DialogFragment() {
 
-    private lateinit var binding:DialogSelectGenderBinding
+    private lateinit var binding: DialogSelectGenderBinding
     private val genders = arrayOf("여성", "남성")
-    private var selectGender:Int=0
+    private var selectGender: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,24 +47,24 @@ class SelectGenderDialogFragment: DialogFragment() {
     }
 
 
-    private fun initializeGenderPicker(binding: DialogSelectGenderBinding){
+    private fun initializeGenderPicker(binding: DialogSelectGenderBinding) {
         binding.selectGenderPicker.apply {
             wrapSelectorWheel = false
             maxValue = 1
             minValue = 0
             descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
-            displayedValues=genders
+            displayedValues = genders
         }
 
         binding.selectGenderPicker.removeDivider()
     }
 
-    private fun postGender(binding: DialogSelectGenderBinding){
-        selectGender=binding.selectGenderPicker.value
-        Log.d("postGender",selectGender.toString())
-        val intent=Intent()
-        intent.putExtra("gender",selectGender)
-        targetFragment!!.onActivityResult(targetRequestCode,101,intent)
+    private fun postGender(binding: DialogSelectGenderBinding) {
+        selectGender = binding.selectGenderPicker.value
+        Log.d("postGender", selectGender.toString())
+        val intent = Intent()
+        intent.putExtra("gender", selectGender)
+        targetFragment!!.onActivityResult(targetRequestCode, 101, intent)
         dialog?.dismiss()
     }
 

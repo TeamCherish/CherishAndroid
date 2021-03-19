@@ -12,7 +12,6 @@ import androidx.annotation.LayoutRes
 import androidx.fragment.app.DialogFragment
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.BirthpickerLayoutBinding
-import com.sopt.cherish.databinding.WeekpickerLayoutBinding
 
 class BirthPickerDialogFragment(
     @LayoutRes
@@ -22,7 +21,8 @@ class BirthPickerDialogFragment(
         TODO("Not yet implemented")
     }
 
-    var birthtext=""
+    var birthtext = ""
+
     interface TestDialogFragmentListener {
         fun onTestDialogBirth(dialog: DialogFragment?, someData: String?)
     }
@@ -34,10 +34,6 @@ class BirthPickerDialogFragment(
             this@BirthPickerDialogFragment, birthtext
         )
     }
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,7 +44,8 @@ class BirthPickerDialogFragment(
         val view = inflater.inflate(layoutResId, container, false)
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-        testDialogFragmentListener = activity as BirthPickerDialogFragment.TestDialogFragmentListener
+        testDialogFragmentListener =
+            activity as BirthPickerDialogFragment.TestDialogFragmentListener
 
         val binding = BirthpickerLayoutBinding.bind(view)
 
@@ -69,7 +66,7 @@ class BirthPickerDialogFragment(
 
 
         //birthMonth.displayedValues = list_every
-       // birthDay.displayedValues = list_Day
+        // birthDay.displayedValues = list_Day
 
         birthMonth.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS
         birthDay.descendantFocusability = NumberPicker.FOCUS_BLOCK_DESCENDANTS

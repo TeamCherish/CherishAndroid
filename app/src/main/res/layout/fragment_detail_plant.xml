@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
@@ -16,8 +15,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cons2"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/cons4"
+            android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -28,13 +26,15 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="100dp"
-                android:layout_marginTop="50dp"
-                android:layout_marginEnd="102dp"
+                android:layout_marginTop="59dp"
+                android:layout_marginEnd="100dp"
+                android:layout_marginBottom="12dp"
                 app:cpb_backgroundProgressColor="@color/white"
                 app:cpb_backgroundProgressWidth="18"
                 app:cpb_foregroundProgressColor="#31d693"
                 app:cpb_foregroundProgressWidth="18"
                 app:cpb_roundedCorner="true"
+                app:layout_constraintBottom_toTopOf="@+id/textView_nick"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -66,7 +66,6 @@
                 android:id="@+id/textView_nick"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="21dp"
                 android:layout_marginBottom="5dp"
                 android:fontFamily="@font/notosanscjkkr_bold"
                 android:includeFontPadding="false"
@@ -76,19 +75,18 @@
                 android:textSize="@dimen/text_20sp"
                 app:layout_constraintBottom_toTopOf="@+id/textView6"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView_detail_url" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/textView6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginBottom="30dp"
                 android:background="@drawable/plantdetail_chip"
                 android:text="TextView"
+                app:layout_constraintBottom_toTopOf="@+id/textView_duration"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView_nick">
+                app:layout_constraintStart_toStartOf="parent">
 
                 <TextView
                     android:id="@+id/textView_name"
@@ -175,14 +173,14 @@
                 android:id="@+id/textView_duration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginBottom="1dp"
                 android:fontFamily="@font/notosanscjkkr_bold"
                 android:includeFontPadding="false"
                 android:text="3일째"
                 android:textSize="18sp"
+                app:layout_constraintBottom_toTopOf="@+id/textView19"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView6" />
+                app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
                 android:id="@+id/textView_birth"
@@ -200,30 +198,30 @@
                 android:id="@+id/textView18"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:layout_marginTop="1dp"
                 android:layout_marginEnd="24dp"
+                android:layout_marginBottom="25dp"
                 android:fontFamily="@font/notosanscjkkr_regular"
                 android:includeFontPadding="false"
                 android:text="물주기"
                 android:textColor="#6b6a6a"
                 android:textSize="@dimen/text_14sp"
-                app:layout_constraintEnd_toStartOf="@+id/view"
-                app:layout_constraintTop_toBottomOf="@+id/textView_Dday" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/view" />
 
             <TextView
                 android:id="@+id/textView19"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="1dp"
 
+                android:layout_marginBottom="25dp"
                 android:fontFamily="@font/notosanscjkkr_regular"
                 android:includeFontPadding="false"
-                android:text="지속한날"
+                android:text="함께한날"
                 android:textColor="#6b6a6a"
                 android:textSize="@dimen/text_14sp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/textView_duration"
-                app:layout_constraintStart_toStartOf="@+id/textView_duration"
-                app:layout_constraintTop_toBottomOf="@+id/textView_duration" />
+                app:layout_constraintStart_toStartOf="@+id/textView_duration" />
 
 
             <TextView
@@ -231,15 +229,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="36dp"
-                android:layout_marginTop="1dp"
 
+                android:layout_marginBottom="25dp"
                 android:fontFamily="@font/notosanscjkkr_regular"
                 android:includeFontPadding="false"
                 android:text="생일"
                 android:textColor="#6b6a6a"
                 android:textSize="@dimen/text_14sp"
-                app:layout_constraintStart_toEndOf="@+id/view2"
-                app:layout_constraintTop_toBottomOf="@+id/textView_birth" />
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/view2" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/imageButton_3detail"
@@ -300,7 +298,8 @@
             android:background="@drawable/dialog_round_corner"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cons2">
 
             <!--<androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_detail"
@@ -383,8 +382,7 @@
                 android:background="@drawable/detail_layout"
                 app:layout_constraintBottom_toTopOf="@+id/button_water"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-        >
+                app:layout_constraintStart_toStartOf="parent">
 
                 <TextView
                     android:id="@+id/userdate2"
@@ -442,7 +440,7 @@
             <TextView
                 android:id="@+id/textView1_with_name"
                 android:layout_width="wrap_content"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="19dp"
                 android:fontFamily="@font/notosanscjkkr_bold"

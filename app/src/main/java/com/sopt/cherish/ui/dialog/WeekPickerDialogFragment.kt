@@ -61,7 +61,7 @@ class WeekPickerDialogFragment(
 
         val list_cycle = resources.getStringArray(R.array.cycle)
         val list_every = resources.getStringArray(R.array.week)
-        val list_Day=resources.getStringArray(R.array.day)
+        val list_Day = resources.getStringArray(R.array.day)
 
         week_every.removeDivider()
         week_number.removeDivider()

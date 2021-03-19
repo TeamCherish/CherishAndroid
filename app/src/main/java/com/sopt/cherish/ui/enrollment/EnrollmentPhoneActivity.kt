@@ -23,7 +23,7 @@ import com.sopt.cherish.ui.dialog.WeekPickerDialogFragment
 class EnrollmentPhoneActivity : AppCompatActivity(),
     WeekPickerDialogFragment.TestDialogFragmentListener,
     ClockPickerDialogFragment.TestDialogFragmentListener,
-    BirthPickerDialogFragment.TestDialogFragmentListener{
+    BirthPickerDialogFragment.TestDialogFragmentListener {
 
 
     private lateinit var binding: ActivityEnrollmentPhoneBinding

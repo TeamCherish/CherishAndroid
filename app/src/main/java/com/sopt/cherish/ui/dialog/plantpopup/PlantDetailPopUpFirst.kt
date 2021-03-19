@@ -76,10 +76,11 @@ class PlantDetailPopUpFirst(plantId: Int) : Fragment() {
                                 chip = "꽃말 | " + it.data.plantResponse[0].flower_meaning
                                 wateringText = it.data.plantResponse[0].explanation
 
-                                binding.flowerName.text = flowerName
-                                binding.chip.text = chip
-                                binding.wateringText.text = wateringText
+                                binding.flowerName.text=flowerName
+                                binding.chip.text=chip
+                                binding.wateringText.text=wateringText
 
+                                setMargin(flowerName,chip,wateringText)
                             }
                     }
                 })

@@ -64,7 +64,7 @@ object Injection {
 
     // review di
     private fun provideReviewRepository(): ReviewRepository {
-        return ReviewRepository(provideReviewAPI(), provideNotificationAPI())
+        return ReviewRepository(provideReviewAPI())
     }
 
     private fun provideReviewAPI(): ReviewAPI {
@@ -112,9 +112,6 @@ object Injection {
         )
     }
 
-    // okHttp Interceptor
-    // token을 sharedPrefs에 넣어서 저장을 하긴 할 건데 encrypted 하게 된 sharedPref에 넣어서 관리할 것이다.
-    // todo : okHttpInterceptor 만들어놓기
     fun provideOkHttpClient() =
         OkHttpClient.Builder().addInterceptor {
             val request = it.request().newBuilder()
