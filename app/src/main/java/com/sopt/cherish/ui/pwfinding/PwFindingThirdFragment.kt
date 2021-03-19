@@ -5,11 +5,11 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentPwFindingThirdBinding
 import com.sopt.cherish.remote.api.RequestUpdatePasswordAPI
@@ -25,10 +25,10 @@ import retrofit2.Response
 class PwFindingThirdFragment : Fragment() {
 
     lateinit var binding: FragmentPwFindingThirdBinding
-    var pw:String=""
-    var isValidPW:Boolean=false
-    var pwAgain: String="1"
-    var email:String=""
+    var pw: String = ""
+    var isValidPW: Boolean = false
+    var pwAgain: String = "1"
+    var email: String = ""
     private val requestData = RetrofitBuilder
 
     override fun onCreateView(
@@ -48,13 +48,13 @@ class PwFindingThirdFragment : Fragment() {
         return binding.root
     }
 
-    private fun getPassword(){
+    private fun getPassword() {
         binding.userPw.addTextChangedListener(object : TextWatcher {
 
             override fun afterTextChanged(s: Editable?) {
                 pw = binding.userPw.text.toString()
                 binding.isUsablePw.visibility = View.VISIBLE
-                Log.d("textchanged",pw)
+                Log.d("textchanged", pw)
 
                 binding.isUsablePw.text = "사용하실 수 없는 비밀번호입니다."
                 binding.isUsablePw.setTextColor(
@@ -64,10 +64,10 @@ class PwFindingThirdFragment : Fragment() {
                     )
                 )
 
-                isValidPW=isValidPW(pw)
-                Log.d("signup",isValidPW.toString())
+                isValidPW = isValidPW(pw)
+                Log.d("signup", isValidPW.toString())
                 if (isValidPW) {
-                    Log.d("last","왜 안들어오냐")
+                    Log.d("last", "왜 안들어오냐")
                     binding.isUsablePw.text = "사용가능한 비밀번호입니다."
                     binding.isUsablePw.setTextColor(
                         ContextCompat.getColor(
@@ -91,10 +91,11 @@ class PwFindingThirdFragment : Fragment() {
         })
     }
 
-    private fun isValidPW(password:String):Boolean{
-        Log.d("isvalid function","들어옴")
-        val reg=Regex("^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[\$@\$!%*#?&])[A-Za-z[0-9]\$@\$!%*#?&]{8,}\$")
-        if(!password.matches(reg)){
+    private fun isValidPW(password: String): Boolean {
+        Log.d("isvalid function", "들어옴")
+        val reg =
+            Regex("^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[\$@\$!%*#?&])[A-Za-z[0-9]\$@\$!%*#?&]{8,}\$")
+        if (!password.matches(reg)) {
             return false
         }
         return true
@@ -127,9 +128,9 @@ class PwFindingThirdFragment : Fragment() {
                 R.color.cherish_pass_text_gray
             )
         )
-        Log.d("pwagain",pwAgain)
+        Log.d("pwagain", pwAgain)
         if (first == pwAgain) {
-            Log.d("toggle","들어와야지")
+            Log.d("toggle", "들어와야지")
             binding.isUsablePw.text = "비밀번호가 일치합니다."
             binding.isUsablePw.setTextColor(
                 ContextCompat.getColor(
@@ -152,7 +153,7 @@ class PwFindingThirdFragment : Fragment() {
             )
 
             binding.signUpButton.setOnClickListener {
-                Log.d("회원가입","버튼클릭")
+                Log.d("회원가입", "버튼클릭")
                 val bundle = Bundle()
                 bundle.putString("email", email)
                 bundle.putString("password", pw)
@@ -162,7 +163,7 @@ class PwFindingThirdFragment : Fragment() {
             }
 
         }
-        if(pwAgain!="1"){
+        if (pwAgain != "1") {
             binding.isUsablePw.text = "비밀번호가 일치하지 않습니다."
             binding.isUsablePw.setTextColor(
                 ContextCompat.getColor(
@@ -173,8 +174,8 @@ class PwFindingThirdFragment : Fragment() {
         }
     }
 
-    private fun checkPW(){
-        if(pw==pwAgain){
+    private fun checkPW() {
+        if (pw == pwAgain) {
             binding.isUsablePw.text = "비밀번호가 일치합니다."
             binding.isUsablePw.setTextColor(
                 ContextCompat.getColor(
@@ -184,16 +185,16 @@ class PwFindingThirdFragment : Fragment() {
             )
 
             binding.signUpButton.setOnClickListener {
-                Log.d("비밀번호변경","버튼클릭")
+                Log.d("비밀번호변경", "버튼클릭")
 
-                requestServer(email,pw,pwAgain)
+                requestServer(email, pw, pwAgain)
             }
         }
     }
 
-    private fun requestServer(email:String,password1:String,password2:String){
+    private fun requestServer(email: String, password1: String, password2: String) {
         requestData.updatePasswordAPI.postPwFUpdate(
-            RequestUpdatePasswordAPI(email = email,password1=password1,password2=password2)
+            RequestUpdatePasswordAPI(email = email, password1 = password1, password2 = password2)
         ).enqueue(
             object : Callback<ResponseUpdatePasswordAPI> {
                 override fun onFailure(call: Call<ResponseUpdatePasswordAPI>, t: Throwable) {
@@ -211,7 +212,7 @@ class PwFindingThirdFragment : Fragment() {
                             Log.d("finding success", it.success.toString())
                             Log.d("finding message", it.message)
 
-                            if(it.success){
+                            if (it.success) {
                                 val intent = Intent(context, SignInActivity::class.java)
                                 startActivity(intent)
                                 requireActivity().finish()

@@ -1,18 +1,15 @@
 package com.sopt.cherish.ui.pwfinding
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBar
+import androidx.appcompat.app.AppCompatActivity
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityPwFindingBinding
-import com.sopt.cherish.ui.signin.SignInActivity
-import com.sopt.cherish.ui.signup.SignUpFirstFragment
 
 class PwFindingActivity : AppCompatActivity() {
 
-    private lateinit var binding:ActivityPwFindingBinding
+    private lateinit var binding: ActivityPwFindingBinding
     lateinit var mBundle: Bundle
 
     override fun onCreate(savedInstanceState: Bundle?) {

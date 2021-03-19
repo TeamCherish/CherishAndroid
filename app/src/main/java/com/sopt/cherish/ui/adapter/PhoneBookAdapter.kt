@@ -46,19 +46,17 @@ class PhoneBookAdapter(private val phoneBookList: List<Phone>) :
 
 
         holder.radioButton.setOnClickListener {
-            if ( mStateButtons.get(position, false) ){
+            if (mStateButtons.get(position, false)) {
                 mStateButtons.put(position, false)
-                holder.radioButton.isChecked=false
+                holder.radioButton.isChecked = false
             } else {
                 mStateButtons.put(position, true)
-                holder.radioButton.isChecked=true
+                holder.radioButton.isChecked = true
             }
 
         }
 
         holder.radioButton.setOnCheckedChangeListener { compoundButton, isChecked ->
-
-
 
 
             checkedRadioButton?.apply { setChecked(!isChecked) }
@@ -91,7 +89,6 @@ class PhoneBookAdapter(private val phoneBookList: List<Phone>) :
 
         var mPhone: Phone? = null
         var radioButton = binding.radioButton
-
 
 
         fun setPhone(phone: Phone) {

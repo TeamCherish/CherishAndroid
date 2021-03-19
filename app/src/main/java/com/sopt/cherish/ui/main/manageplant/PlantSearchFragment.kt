@@ -1,4 +1,3 @@
-
 package com.sopt.cherish.ui.main.manageplant
 
 import android.content.Intent
@@ -38,12 +37,14 @@ class PlantSearchFragment(private var data: List<MyPageCherishData>?) : Fragment
         // Inflate the layout for this fragment
         _binding = FragmentPlantSearchBinding.inflate(inflater, container, false)
 
-        startProcess()
 
-        binding.plantsearchcancel.setOnClickListener {
-            binding.editSearch.setText("")
-        }
+
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        startProcess()
     }
 
     override fun onResume() {
@@ -111,6 +112,10 @@ class PlantSearchFragment(private var data: List<MyPageCherishData>?) : Fragment
                     changeList(searchText)
                 }
             })
+
+        binding.plantsearchcancel.setOnClickListener {
+            binding.editSearch.setText("")
+        }
     }
 
     fun changeList(searchText: String) {

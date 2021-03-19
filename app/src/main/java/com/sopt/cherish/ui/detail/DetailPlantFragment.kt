@@ -76,6 +76,7 @@ class DetailPlantFragment : Fragment() {
         }
         //여기에 작성
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -118,7 +119,6 @@ class DetailPlantFragment : Fragment() {
         Log.d("gogo", cherishid.toString())
 
 
-
         // memolist 어댑터 연결 부분
         binding.imageButton3detail.setOnClickListener {
 
@@ -129,7 +129,7 @@ class DetailPlantFragment : Fragment() {
     }
 
 
-    fun detailserver(){
+    fun detailserver() {
         requestData.responsePlantCardData.Detailcherishcard(cherishid)
             .enqueue(
                 object : Callback<ResponsePlantCardDatas> {

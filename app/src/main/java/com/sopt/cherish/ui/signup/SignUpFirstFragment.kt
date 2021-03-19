@@ -22,14 +22,14 @@ import retrofit2.Response
 class SignUpFirstFragment : Fragment() {
 
     lateinit var binding: FragmentSignUpFirstBinding
-    var email: String=""
-    var pw: String=""
-    var pwAgain: String="1"
+    var email: String = ""
+    var pw: String = ""
+    var pwAgain: String = "1"
     private val requestData = RetrofitBuilder
     var checkEmail: Boolean = false //이메일 형식확인
     var isValid: Boolean = false //이메일 중복확인
     var isFinish: Boolean = false
-    var isValidPW:Boolean=false
+    var isValidPW: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -69,9 +69,9 @@ class SignUpFirstFragment : Fragment() {
 
                 binding.isUsableEmail.setTextAppearance(R.style.SignUpTextAppearance)
 
-                Log.d("emailcheck",email)
+                Log.d("emailcheck", email)
                 checkEmail = isEmailValid(email) //이메일 형식 확인
-                Log.d("isEmailValid",checkEmail.toString())
+                Log.d("isEmailValid", checkEmail.toString())
 
                 if (checkEmail) { //이메일 형식 올바르면
                     Log.d("email", "is usable ok!")
@@ -296,7 +296,7 @@ class SignUpFirstFragment : Fragment() {
                 isFinish = false
                 pw = binding.userPw.text.toString()
                 binding.isUsablePw.visibility = View.VISIBLE
-                Log.d("textchanged",pw)
+                Log.d("textchanged", pw)
 
                 binding.isUsablePw.text = "사용하실 수 없는 비밀번호입니다."
                 binding.isUsablePw.setTextColor(
@@ -306,10 +306,10 @@ class SignUpFirstFragment : Fragment() {
                     )
                 )
 
-                isValidPW=isValidPW(pw)
-                Log.d("signup",isValidPW.toString())
+                isValidPW = isValidPW(pw)
+                Log.d("signup", isValidPW.toString())
                 if (isValidPW) {
-                    Log.d("last","왜 안들어오냐")
+                    Log.d("last", "왜 안들어오냐")
                     binding.isUsablePw.text = "사용가능한 비밀번호입니다."
                     binding.isUsablePw.setTextColor(
                         ContextCompat.getColor(
@@ -333,10 +333,11 @@ class SignUpFirstFragment : Fragment() {
         })
     }
 
-    private fun isValidPW(password:String):Boolean{
-        Log.d("isvalid function","들어옴")
-        val reg=Regex("^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[\$@\$!%*#?&])[A-Za-z[0-9]\$@\$!%*#?&]{8,}\$")
-        if(!password.matches(reg)){
+    private fun isValidPW(password: String): Boolean {
+        Log.d("isvalid function", "들어옴")
+        val reg =
+            Regex("^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[\$@\$!%*#?&])[A-Za-z[0-9]\$@\$!%*#?&]{8,}\$")
+        if (!password.matches(reg)) {
             return false
         }
         return true
@@ -357,9 +358,9 @@ class SignUpFirstFragment : Fragment() {
 
             }
         })
-        Log.d("pwagain",pwAgain)
+        Log.d("pwagain", pwAgain)
         if (first == pwAgain) {
-            Log.d("toggle","들어와야지")
+            Log.d("toggle", "들어와야지")
             binding.isUsablePw.text = "비밀번호가 일치합니다."
             binding.isUsablePw.setTextColor(
                 ContextCompat.getColor(
@@ -369,7 +370,7 @@ class SignUpFirstFragment : Fragment() {
             )
             isFinish = true
             binding.signUpButton.setOnClickListener {
-                Log.d("회원가입","버튼클릭")
+                Log.d("회원가입", "버튼클릭")
                 val bundle = Bundle()
                 bundle.putString("email", email)
                 bundle.putString("password", pw)
@@ -379,7 +380,7 @@ class SignUpFirstFragment : Fragment() {
             }
 
         }
-        if(pwAgain!="1"){
+        if (pwAgain != "1") {
             binding.isUsablePw.text = "비밀번호가 일치하지 않습니다."
             binding.isUsablePw.setTextColor(
                 ContextCompat.getColor(
@@ -391,8 +392,8 @@ class SignUpFirstFragment : Fragment() {
         }
     }
 
-    private fun checkPW(){
-        if(pw==pwAgain){
+    private fun checkPW() {
+        if (pw == pwAgain) {
             binding.isUsablePw.text = "비밀번호가 일치합니다."
             binding.isUsablePw.setTextColor(
                 ContextCompat.getColor(
@@ -402,7 +403,7 @@ class SignUpFirstFragment : Fragment() {
             )
 
             binding.signUpButton.setOnClickListener {
-                Log.d("회원가입","버튼클릭")
+                Log.d("회원가입", "버튼클릭")
                 val bundle = Bundle()
                 bundle.putString("email", email)
                 bundle.putString("password", pw)
