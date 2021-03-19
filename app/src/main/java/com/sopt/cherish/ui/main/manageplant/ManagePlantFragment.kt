@@ -122,10 +122,12 @@ class ManagePlantFragment : Fragment() {
         val standardBottomSheetBehavior =
             BottomSheetBehavior.from(binding.homeStandardBottomSheetMypage)
         // bottom sheet state 지정
-        standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
-        standardBottomSheetBehavior.peekHeight = 300.dp
-        standardBottomSheetBehavior.expandedOffset = 68.dp
+        standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
+        val metrics=resources.displayMetrics
+        standardBottomSheetBehavior.peekHeight = (metrics.heightPixels-44.dp)/2
+        standardBottomSheetBehavior.expandedOffset = 44.dp
         standardBottomSheetBehavior.isHideable = false
+        standardBottomSheetBehavior.isGestureInsetBottomIgnored=true
 
         //검색 버튼 눌렀을 때
         binding.searchBox.setOnClickListener {
