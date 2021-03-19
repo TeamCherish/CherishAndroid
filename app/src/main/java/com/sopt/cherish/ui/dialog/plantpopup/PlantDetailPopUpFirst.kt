@@ -80,7 +80,6 @@ class PlantDetailPopUpFirst(plantId: Int) : Fragment() {
                                 binding.chip.text=chip
                                 binding.wateringText.text=wateringText
 
-                                setMargin(flowerName,chip,wateringText)
                             }
                     }
                 })
