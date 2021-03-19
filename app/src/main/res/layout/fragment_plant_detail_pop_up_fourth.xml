@@ -25,7 +25,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="20sp"
-                android:text="3단계"
+                android:text="@string/plant_pop_up_third"
                 android:font="@font/notosanscjkkr_bold"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -35,10 +35,11 @@
 
 
             <ImageView
-                android:layout_width="85dp"
-                android:layout_height="162dp"
-                app:layout_constraintStart_toStartOf="@+id/flower_name"
-                app:layout_constraintEnd_toEndOf="@+id/flower_name"
+                android:contentDescription="@string/contentDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/flower_name"
                 android:layout_marginTop="29dp"
                 android:id="@+id/flower_img"/>
@@ -51,7 +52,7 @@
                 android:font="@font/notosanscjkkr_regular"
                 android:includeFontPadding="false"
                 android:textColor="#8189b3"
-                android:text="개화"
+                android:text=""
                 android:textSize="@dimen/text_12sp"
                 app:chipStrokeColor="#8189b3"
                 app:chipStrokeWidth="1dp"
@@ -65,7 +66,7 @@
                 android:id="@+id/watering_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="예쁜 꽃이 활짝 피어났어요!"
+                android:text=""
                 android:textAlignment="center"
                 app:layout_constraintStart_toStartOf="@+id/chip"
                 app:layout_constraintEnd_toEndOf="@+id/chip"
