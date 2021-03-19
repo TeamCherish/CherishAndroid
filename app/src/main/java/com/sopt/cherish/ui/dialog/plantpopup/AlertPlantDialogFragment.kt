@@ -12,6 +12,7 @@ import androidx.viewpager.widget.ViewPager
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentAlertPlantDialogBinding
 import com.sopt.cherish.ui.adapter.DialogViewPagerAdapter
+import com.sopt.cherish.util.DialogUtil
 import com.zhpan.indicator.enums.IndicatorSlideMode
 import com.zhpan.indicator.enums.IndicatorStyle
 
@@ -28,7 +29,7 @@ class AlertPlantDialogFragment(plantId: Int) : DialogFragment(), View.OnClickLis
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
 
         //var cherishId:Int=cherishid
@@ -69,6 +70,11 @@ class AlertPlantDialogFragment(plantId: Int) : DialogFragment(), View.OnClickLis
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    override fun onResume() {
+        super.onResume()
+        DialogUtil.adjustDialogSize(this, 0.9f, 0.6f)
     }
 
     override fun onClick(view: View?) {

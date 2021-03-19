@@ -34,6 +34,7 @@ class PlantDetailPopUpThird(plantId: Int) : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentPlantDetailPopUpThirdBinding.inflate(inflater, container, false)
 
+        setMargin()
         initializeServerRequest(binding)
         return binding.root
     }
@@ -64,7 +65,6 @@ class PlantDetailPopUpThird(plantId: Int) : Fragment() {
                                 binding.chip.text = chip
                                 binding.wateringText.text = wateringText
 
-                                setMargin()
                             }
                     }
                 })
@@ -81,35 +81,110 @@ class PlantDetailPopUpThird(plantId: Int) : Fragment() {
 
     private fun setDandelion(){
         var param=binding.flowerImg.layoutParams as ViewGroup.MarginLayoutParams
-        param.setMargins(0,60,0,0)
-        param.width=84.dp
-        param.height=139.dp
+        binding.flowerImg.layoutParams.width=84.dp
+        binding.flowerImg.layoutParams.height=139.dp
+        var margin=60.dp
+        param.setMargins(0,margin,0,0)
         binding.flowerImg.layoutParams=param
 
         param=binding.chip.layoutParams as ViewGroup.MarginLayoutParams
-        param.setMargins(0,7,0,0)
+        margin=7.dp
+        param.setMargins(0,margin,0,0)
         binding.chip.layoutParams=param
         binding.chip.setTextColor(Color.parseColor("#97cdbd"))
         binding.chip.setChipStrokeColorResource(R.color.cherish_dandelion_background_color)
 
         param=binding.wateringText.layoutParams as ViewGroup.MarginLayoutParams
-        param.setMargins(0,8,0,0)
+        margin=8.dp
+        param.setMargins(0,margin,0,0)
         binding.wateringText.layoutParams=param
     }
 
     private fun setCactus(){
+        var param=binding.flowerImg.layoutParams as ViewGroup.MarginLayoutParams
+        binding.flowerImg.layoutParams.width=117.dp
+        binding.flowerImg.layoutParams.height=144.dp
 
+        var margin=54.dp
+        param.setMargins(0,margin,0,0)
+        binding.flowerImg.layoutParams=param
+
+        param=binding.chip.layoutParams as ViewGroup.MarginLayoutParams
+        margin=8.dp
+        param.setMargins(0, margin, 0, 0)
+        binding.chip.layoutParams=param
+        binding.chip.setTextColor(Color.parseColor("#9AB7DE"))
+        binding.chip.setChipStrokeColorResource(R.color.plantid4)
+
+        param=binding.wateringText.layoutParams as ViewGroup.MarginLayoutParams
+        margin=8.dp
+        param.setMargins(0, margin, 0, 0)
+        binding.wateringText.layoutParams=param
     }
 
     private fun setAmericanBlue(){
+        var param=binding.flowerImg.layoutParams as ViewGroup.MarginLayoutParams
+        binding.flowerImg.layoutParams.width=67.dp
+        binding.flowerImg.layoutParams.height=152.dp
 
+        var margin=34.dp
+        param.setMargins(0,margin,0,0)
+        binding.flowerImg.layoutParams=param
+
+        param=binding.chip.layoutParams as ViewGroup.MarginLayoutParams
+        margin=20.dp
+        param.setMargins(0, margin, 0, 0)
+        binding.chip.layoutParams=param
+        binding.chip.setTextColor(Color.parseColor("#8f95af"))
+        binding.chip.setChipStrokeColorResource(R.color.cherish_american_blue_background_color)
+
+        param=binding.wateringText.layoutParams as ViewGroup.MarginLayoutParams
+        margin=8.dp
+        param.setMargins(0, margin, 0, 0)
+        binding.wateringText.layoutParams=param
     }
 
     private fun setRosmary(){
+        var param=binding.flowerImg.layoutParams as ViewGroup.MarginLayoutParams
+        binding.flowerImg.layoutParams.width=56.dp
+        binding.flowerImg.layoutParams.height=156.dp
 
+        var margin=37.dp
+        param.setMargins(0,margin,0,0)
+        binding.flowerImg.layoutParams=param
+
+        param=binding.chip.layoutParams as ViewGroup.MarginLayoutParams
+        margin=13.dp
+        param.setMargins(0, margin, 0, 0)
+        binding.chip.layoutParams=param
+        binding.chip.setTextColor(Color.parseColor("#f1b0bc"))
+        binding.chip.setChipStrokeColorResource(R.color.cherish_rosemary_background_color)
+
+        param=binding.wateringText.layoutParams as ViewGroup.MarginLayoutParams
+        margin=8.dp
+        param.setMargins(0, margin, 0, 0)
+        binding.wateringText.layoutParams=param
     }
 
     private fun setStookie(){
+        var param=binding.flowerImg.layoutParams as ViewGroup.MarginLayoutParams
+        binding.flowerImg.layoutParams.width=138.dp
+        binding.flowerImg.layoutParams.height=144.dp
 
+        var margin=38.dp
+        param.setMargins(0,margin,0,0)
+        binding.flowerImg.layoutParams=param
+
+        param=binding.chip.layoutParams as ViewGroup.MarginLayoutParams
+        margin=24.dp
+        param.setMargins(0, margin, 0, 0)
+        binding.chip.layoutParams=param
+        binding.chip.setTextColor(Color.parseColor("#9ab7de"))
+        binding.chip.setChipStrokeColorResource(R.color.cherish_stuki_background_color)
+
+        param=binding.wateringText.layoutParams as ViewGroup.MarginLayoutParams
+        margin=8.dp
+        param.setMargins(0, margin, 0, 0)
+        binding.wateringText.layoutParams=param
     }
 }
