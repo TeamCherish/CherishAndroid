@@ -47,8 +47,8 @@ class ManagePlantFragment : Fragment() {
     private lateinit var tabBindingSecond: MyPageCustomTabBinding
     lateinit var data: List<MyPageCherishData>
     lateinit var binding: FragmentManagePlantBinding
-    var mypageusername:String=""
-    var mypageuseremail:String=""
+    var mypageusername: String = ""
+    var mypageuseremail: String = ""
     lateinit var madapter: MypagePhoneBookSearchAdapter
 
     override fun onCreateView(
@@ -123,11 +123,11 @@ class ManagePlantFragment : Fragment() {
             BottomSheetBehavior.from(binding.homeStandardBottomSheetMypage)
         // bottom sheet state 지정
         standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
-        val metrics=resources.displayMetrics
-        standardBottomSheetBehavior.peekHeight = (metrics.heightPixels-44.dp)/2
+        val metrics = resources.displayMetrics
+        standardBottomSheetBehavior.peekHeight = (metrics.heightPixels - 44.dp) / 2
         standardBottomSheetBehavior.expandedOffset = 44.dp
         standardBottomSheetBehavior.isHideable = false
-        standardBottomSheetBehavior.isGestureInsetBottomIgnored=true
+        standardBottomSheetBehavior.isGestureInsetBottomIgnored = true
 
         //검색 버튼 눌렀을 때
         binding.searchBox.setOnClickListener {

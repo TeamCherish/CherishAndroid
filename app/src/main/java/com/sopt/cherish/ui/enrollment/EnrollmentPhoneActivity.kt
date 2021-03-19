@@ -44,7 +44,7 @@ class EnrollmentPhoneActivity : AppCompatActivity(),
         count = intent.getIntExtra("userId", 0)
         viewModel.userId = intent.getIntExtra("userId", -1)
         viewModel.userNickname = intent.getStringExtra("userNickname").toString()
-        //count=intent.getIntExtra("user_id", 0)
+
 
         if (intent.getIntExtra("check", 1) == 0) {
             setFragmentsearch(EnrollPlantFragment())
@@ -52,6 +52,7 @@ class EnrollmentPhoneActivity : AppCompatActivity(),
         } else {
             setFragment(PhoneBookFragment())
         }
+
     }
 
 

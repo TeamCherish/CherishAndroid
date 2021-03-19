@@ -4,16 +4,14 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentPwFindingSecondBinding
-import com.sopt.cherish.remote.api.RequestPhoneAuthData
 import com.sopt.cherish.remote.api.RequestPwFindingData
-import com.sopt.cherish.remote.api.ResponsePhoneAuthData
 import com.sopt.cherish.remote.api.ResponsePwFindingData
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import retrofit2.Call
@@ -23,10 +21,10 @@ import retrofit2.Response
 
 class PwFindingSecondFragment : Fragment() {
 
-    var email:String=""
+    var email: String = ""
     lateinit var binding: FragmentPwFindingSecondBinding
     private val requestData = RetrofitBuilder
-    private var certificationNumber:String=""
+    private var certificationNumber: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,13 +40,13 @@ class PwFindingSecondFragment : Fragment() {
 
         requestServer(email)
 
-        binding.certificationAgain.setOnClickListener{
+        binding.certificationAgain.setOnClickListener {
             requestServer(email)
         }
         return binding.root
     }
 
-    private fun requestServer(email:String){
+    private fun requestServer(email: String) {
         requestData.pwFindingAPI.postPwFinding(
             RequestPwFindingData(email = email)
         ).enqueue(
@@ -75,10 +73,10 @@ class PwFindingSecondFragment : Fragment() {
         )
     }
 
-    private fun getCertificationNumber(){
-        binding.identificationNumber.addTextChangedListener(object: TextWatcher {
+    private fun getCertificationNumber() {
+        binding.identificationNumber.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                certificationNumber=binding.identificationNumber.text.toString()
+                certificationNumber = binding.identificationNumber.text.toString()
 
                 binding.signUpButton.setBackgroundColor(
                     ContextCompat.getColor(
@@ -92,7 +90,7 @@ class PwFindingSecondFragment : Fragment() {
                         R.color.cherish_pass_text_gray
                     )
                 )
-                if(certificationNumber.length==4){
+                if (certificationNumber.length == 4) {
                     //버튼 초록색 활성화
                     binding.signUpButton.setBackgroundColor(
                         ContextCompat.getColor(

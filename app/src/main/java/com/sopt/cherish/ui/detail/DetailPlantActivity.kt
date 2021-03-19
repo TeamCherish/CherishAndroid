@@ -10,7 +10,6 @@ import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
-import com.jackandphantom.circularprogressbar.CircleProgressbar
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityDetailPlantBinding
 import com.sopt.cherish.di.Injection
@@ -31,7 +30,6 @@ class DetailPlantActivity : AppCompatActivity(),
     ClockPickerDialogFragment.TestDialogFragmentListener,
     BirthPickerDialogFragment.TestDialogFragmentListener {
 
-    private lateinit var circleProgressbar: CircleProgressbar
     private lateinit var binding: ActivityDetailPlantBinding
     private val viewModel: DetailPlantViewModel by viewModels { Injection.provideDetailViewModelFactory() }
 
@@ -80,14 +78,14 @@ class DetailPlantActivity : AppCompatActivity(),
         //유저 dDay
         viewModel.selectedUserDday = intent.getIntExtra("selectedUserDday", 0)
 
-        Log.d("cherishid_main", cherishid_main.toString())
-        Log.d("cherishid_plant", cherishid_plant.toString())
+
 
         viewModel.fetchCalendarData()
         setFragment(DetailPlantFragment())
         setActionBarTitle("식물 상세")
         setContentView(binding.root)
     }
+
 
     override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
         if (menu != null) {
@@ -163,13 +161,6 @@ class DetailPlantActivity : AppCompatActivity(),
             }
         })
         transaction.commit()
-    }
-
-    fun OptionsMenu(menu: Menu): Boolean {
-        menu.getItem(0).isVisible = false //disable menuitem 5
-        menu.getItem(1).isVisible = false // invisible menuitem 2
-        invalidateOptionsMenu()
-        return true
     }
 
 

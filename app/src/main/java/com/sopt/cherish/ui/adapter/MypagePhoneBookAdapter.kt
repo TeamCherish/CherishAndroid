@@ -2,7 +2,6 @@ package com.sopt.cherish.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.CompoundButton
 import androidx.recyclerview.widget.RecyclerView
 import com.sopt.cherish.databinding.ItemLayoutPlantBinding
 
@@ -15,8 +14,6 @@ data class Phonemypage(
 class MypagePhoneBookAdapter(private val phoneBookList: List<Phonemypage>) :
     RecyclerView.Adapter<MypagePhoneBookAdapter.Holder>() {
 
-    var radiobutton: Boolean = true
-    var checkedRadioButton: CompoundButton? = null
     lateinit var phonename: String
     lateinit var phonenumber: String
 
@@ -52,7 +49,7 @@ class MypagePhoneBookAdapter(private val phoneBookList: List<Phonemypage>) :
         }
     }
 
-    interface ItemClickListener {
+/*    interface ItemClickListener {
         fun onchange(radio: Boolean)
         fun oncount(count: Int)
     }
@@ -63,7 +60,7 @@ class MypagePhoneBookAdapter(private val phoneBookList: List<Phonemypage>) :
     //클릭리스너 등록 매소드
     fun setItemClickListener(itemClickListener: ItemClickListener) {
         this.itemClickListner = itemClickListener
-    }
+    }*/
 
 
 }

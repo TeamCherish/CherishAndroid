@@ -8,7 +8,6 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
@@ -54,40 +53,24 @@ class PhoneBookFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_phone_book, container, false)
 
         binding = FragmentPhoneBookBinding.bind(view)
-        countphonebook = arguments?.getInt("useridenroll")!!
-        Log.d("useridna", countphonebook.toString())
+
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         startProcess()
+        setListeners()
+    }
 
-        Log.d("checkedRadioButton", madapter.checkedRadioButton?.isClickable.toString())
-
-        madapter.setItemClickListener(object : PhoneBookAdapter.ItemClickListener {
-            override fun onchange(radio: Boolean) {
-                Log.d("radio", radio.toString())
-                if (radio == true) {
-                    binding.buttonnext.setBackgroundColor(Color.parseColor("#1AD287"))
-                    binding.buttonnext.setTextColor(Color.parseColor("#ffffff"))
-
-                }
-            }
-
-        })
-
-
-
-
-
+    fun setListeners() {
+        countphonebook = arguments?.getInt("useridenroll")!!
         binding.buttonnext.setOnClickListener {
             if (madapter.checkedRadioButton != null) {
 
-                Log.d("vvvv", madapter.phonename)
-                val phonenumber = madapter.phonenumber
-                /*madapter.phonenumber.substring(0, 3) + "-" + madapter.phonenumber.substring(
-                    3,
-                    7
-                ) + "-" +
-                        madapter.phonenumber.substring(7)*/
-                Log.d("phonenumbervvvv", phonenumber)
 
+                val phonenumber = madapter.phonenumber
                 val body =
                     RequestCheckPhoneData(phone = phonenumber, UserId = countphonebook)
                 requestData.checkphoneAPI.checkphone(body)
@@ -106,23 +89,20 @@ class PhoneBookFragment : Fragment() {
                             ) {
                                 Log.d("success", response.body().toString())
                                 if (response.body() == null) {
-                                    val deletedialog =
-                                        CheckPhoneDialogFragment(
-                                            R.layout.fragment_check_phone_dialog,
+                                    CheckPhoneDialogFragment(
+                                        R.layout.fragment_check_phone_dialog,
 
-                                            ).show(
-                                            parentFragmentManager, "asdf"
-                                        )
+                                        ).show(
+                                        parentFragmentManager, "asdf"
+                                    )
 
                                 }
                                 response.takeIf {
                                     it.isSuccessful
                                 }?.body()
                                     ?.let { it ->
-                                        Log.d("중복", "중복")
 
                                         setFragment(EnrollPlantFragment())
-
 
                                     }
                             }
@@ -131,9 +111,17 @@ class PhoneBookFragment : Fragment() {
             }
 
         }
+        madapter.setItemClickListener(object : PhoneBookAdapter.ItemClickListener {
+            override fun onchange(radio: Boolean) {
+                Log.d("radio", radio.toString())
+                if (radio) {
+                    binding.buttonnext.setBackgroundColor(Color.parseColor("#1AD287"))
+                    binding.buttonnext.setTextColor(Color.parseColor("#ffffff"))
 
+                }
+            }
 
-        return view
+        })
     }
 
 
@@ -145,17 +133,17 @@ class PhoneBookFragment : Fragment() {
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val id = item.itemId
-        when (id) {
-            android.R.id.home -> {
-                activity?.finish()
-                return true
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
-
+    /* override fun onOptionsItemSelected(item: MenuItem): Boolean {
+         val id = item.itemId
+         when (id) {
+             android.R.id.home -> {
+                 activity?.finish()
+                 return true
+             }
+         }
+         return super.onOptionsItemSelected(item)
+     }
+ */
     fun setFragment(fragment: Fragment) {
         val transaction = parentFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment_enroll, fragment.apply {

@@ -17,7 +17,7 @@ class ModifyWeekAlertFragment(
     private val layoutResId: Int
 ) : DialogFragment() {
 
-     private lateinit var binding: FragmentModifyWeekAlertBinding
+    private lateinit var binding: FragmentModifyWeekAlertBinding
 
 
     override fun onCreateView(

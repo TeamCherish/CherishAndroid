@@ -47,7 +47,7 @@ class DetailPlantDelayWateringDialogFragment : DialogFragment() {
         super.onResume()
         DialogUtil.adjustDialogSize(this, 0.9f, 0.6f)
     }
-    
+
     private fun initializeNumberPicker(binding: DialogDetailDelayWateringBinding) {
         binding.detailDelayWateringDayPicker.apply {
             wrapSelectorWheel = false
