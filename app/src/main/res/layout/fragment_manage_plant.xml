@@ -156,6 +156,7 @@
             app:layout_constraintStart_toStartOf="@+id/my_page_watering_cnt"
             app:layout_constraintEnd_toEndOf="@+id/my_page_watering_cnt"
             android:text="@string/myPage_watering_text"
+            android:id="@+id/watering_text"
             android:font="@font/notosanscjkkr_regular"
             android:textColor="@color/cherish_light_black"
             android:textSize="12sp" />
