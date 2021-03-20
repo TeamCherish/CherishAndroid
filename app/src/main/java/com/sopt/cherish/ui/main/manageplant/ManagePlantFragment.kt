@@ -50,8 +50,9 @@ class ManagePlantFragment : Fragment() {
     private lateinit var tabBindingSecond: MyPageCustomTabBinding
     lateinit var data: List<MyPageCherishData>
     lateinit var binding: FragmentManagePlantBinding
-    var mypageusername:String=""
-    var mypageuseremail:String=""
+    var mypageusername: String = ""
+    var mypageuseremail: String = ""
+    lateinit var madapter: MypagePhoneBookSearchAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

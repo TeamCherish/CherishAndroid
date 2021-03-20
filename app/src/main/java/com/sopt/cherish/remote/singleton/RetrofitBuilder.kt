@@ -57,7 +57,7 @@ object RetrofitBuilder {
 
     val signUpAPI: SignUpAPI = getRetrofit().create(SignUpAPI::class.java)
 
-    val pwFindingAPI:PwFindingAPI= getRetrofit().create(PwFindingAPI::class.java)
+    val pwFindingAPI: PwFindingAPI = getRetrofit().create(PwFindingAPI::class.java)
 
-    val updatePasswordAPI:UpdatePasswordAPI= getRetrofit().create(UpdatePasswordAPI::class.java)
+    val updatePasswordAPI: UpdatePasswordAPI = getRetrofit().create(UpdatePasswordAPI::class.java)
 }

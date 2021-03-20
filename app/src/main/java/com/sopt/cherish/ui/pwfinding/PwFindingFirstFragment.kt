@@ -3,20 +3,19 @@ package com.sopt.cherish.ui.pwfinding
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentPwFindingFirstBinding
-import com.sopt.cherish.ui.signup.SignUpActivity
 
 class PwFindingFirstFragment : Fragment() {
 
-    lateinit var binding:FragmentPwFindingFirstBinding
-    var email:String=""
+    lateinit var binding: FragmentPwFindingFirstBinding
+    var email: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,19 +45,19 @@ class PwFindingFirstFragment : Fragment() {
         return super.onOptionsItemSelected(item)
     }
 
-    private fun postEmail(email:String){
+    private fun postEmail(email: String) {
         val bundle = Bundle()
         bundle.putString("email", email)
         (activity as PwFindingActivity).postData(bundle)
         (activity as PwFindingActivity).replaceFragment(1)
     }
 
-    private fun checkEmail(){
-        binding.userEmail.addTextChangedListener(object:TextWatcher{
+    private fun checkEmail() {
+        binding.userEmail.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                email=binding.userEmail.text.toString()
+                email = binding.userEmail.text.toString()
 
-                val flag=isEmailValid(email)
+                val flag = isEmailValid(email)
 
                 binding.signUpButton.setBackgroundColor(
                     ContextCompat.getColor(
@@ -73,7 +72,7 @@ class PwFindingFirstFragment : Fragment() {
                     )
                 )
 
-                if(flag){
+                if (flag) {
                     //버튼 초록색 활성화
                     binding.signUpButton.setBackgroundColor(
                         ContextCompat.getColor(
@@ -104,7 +103,7 @@ class PwFindingFirstFragment : Fragment() {
         })
     }
 
-    private fun isEmailValid(email:String):Boolean{
+    private fun isEmailValid(email: String): Boolean {
         if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             return false
         }

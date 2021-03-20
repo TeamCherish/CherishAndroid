@@ -10,7 +10,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,124 +31,29 @@ import retrofit2.Response
 class MyPagePhoneBookSearchFragment : Fragment() {
     private val viewModel: MainViewModel by activityViewModels()
     private val requestData = RetrofitBuilder
-
-    // val permissions = arrayOf(Manifest.permission.READ_CONTACTS, Manifest.permission.CALL_PHONE)
     lateinit var madapter: MypagePhoneBookSearchAdapter
     var phonelist = mutableListOf<Phonemypage>()
     var searchText = ""
-    var sortText = "asc"
-    var phonecount = 0
-    private lateinit var enrollToolbar: Toolbar
-    lateinit var countphone: String
+    var sortText = ""
     private lateinit var binding: FragmentMyPagePhoneBookSearchBinding
-    var namename: String = ""
-    var namephone: String = ""
-    var user_id: Int = 0
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
+    ): View {
+
         val view = inflater.inflate(R.layout.fragment_my_page_phone_book_search, container, false)
 
-
         binding = FragmentMyPagePhoneBookSearchBinding.bind(view)
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         startProcess()
 
-        binding.phonebookcancel.setOnClickListener {
-            binding.editSearch.setText("")
-        }
-        binding.myPageAddPhoneBtn.setOnClickListener {
-            val phonenumber = madapter.phonenumber
-            /* madapter.phonenumber.substring(0, 3) + "-" + madapter.phonenumber.substring(
-                 3,
-                 7
-             ) + "-" +
-                     madapter.phonenumber.substring(7)*/
-            Log.d("phonenumbervvvv", phonenumber)
-            var user_id = viewModel.cherishUserId.value
-            val body = RequestCheckPhoneData(phone = phonenumber.toString(), UserId = user_id!!)
-            requestData.checkphoneAPI.checkphone(body)
-                .enqueue(
-                    object : Callback<ResponseCheckPhoneData> {
-                        override fun onFailure(
-                            call: Call<ResponseCheckPhoneData>,
-                            t: Throwable
-                        ) {
-                            Log.d("통신 실패", t.toString())
-                        }
-
-                        override fun onResponse(
-                            call: Call<ResponseCheckPhoneData>,
-                            response: Response<ResponseCheckPhoneData>
-                        ) {
-                            Log.d("success", response.body().toString())
-                            if (response.body() == null) {
-                                val deletedialog =
-                                    CheckPhoneDialogFragment(
-                                        R.layout.fragment_check_phone_dialog,
-
-                                        ).show(
-                                        parentFragmentManager, "asdf"
-                                    )
-
-                            }
-                            response.takeIf {
-                                it.isSuccessful
-                            }?.body()
-                                ?.let { it ->
-                                    Log.d("중복", "중복")
-
-
-                                    var intent =
-                                        Intent(context, EnrollmentPhoneActivity::class.java)
-                                    intent.putExtra("name", madapter.phonename)
-                                    intent.putExtra("phone", madapter.phonenumber)
-                                    intent.putExtra("check", 0)
-                                    intent.putExtra("userId", viewModel.cherishUserId.value)
-                                    startActivity(intent)
-                                    Log.d("name", madapter.phonename)
-                                    Log.d("number", madapter.phonenumber)
-                                    Log.d("userId", viewModel.cherishUserId.value.toString())
-
-
-                                }
-                        }
-                    }
-                )
-
-
-            //setFragment(EnrollPlantFragment())
-        }
-        madapter.setItemClickListener(object : MypagePhoneBookSearchAdapter.ItemClickListener {
-            @SuppressLint("ResourceAsColor")
-            override fun onchange(radio: Boolean) {
-                Log.d("radio", radio.toString())
-                if (radio == true) {
-                    binding.myPageAddPhoneBtn.setBackgroundColor(R.color.cherish_green_main)
-
-                }
-            }
-
-        })
-        return view
     }
-
-    fun setFragment(fragment: Fragment) {
-        val transaction = parentFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragment_enroll, fragment.apply {
-            arguments = Bundle().apply {
-                putString("phonename_", madapter.phonename)
-                putString("phonenumber_", madapter.phonenumber)
-            }
-
-
-        })
-        transaction.addToBackStack(null)
-
-        transaction.commit()
-    }
-
 
     fun startProcess() {
         setList()
@@ -173,6 +77,67 @@ class MyPagePhoneBookSearchFragment : Fragment() {
                     changeList()
                 }
             })
+        madapter.setItemClickListener(object : MypagePhoneBookSearchAdapter.ItemClickListener {
+            @SuppressLint("ResourceAsColor")
+            override fun onchange(radio: Boolean) {
+                Log.d("radio", radio.toString())
+                if (radio) {
+                    binding.myPageAddPhoneBtn.setBackgroundColor(R.color.cherish_green_main)
+
+                }
+            }
+
+        })
+        binding.phonebookcancel.setOnClickListener {
+            binding.editSearch.setText("")
+        }
+        binding.myPageAddPhoneBtn.setOnClickListener {
+            val phonenumber = madapter.phonenumber
+            Log.d("phonenumbervvvv", phonenumber)
+            val user_id = viewModel.cherishUserId.value
+            val body = RequestCheckPhoneData(phone = phonenumber.toString(), UserId = user_id!!)
+            requestData.checkphoneAPI.checkphone(body)
+                .enqueue(
+                    object : Callback<ResponseCheckPhoneData> {
+                        override fun onFailure(
+                            call: Call<ResponseCheckPhoneData>,
+                            t: Throwable
+                        ) {
+                            Log.d("통신 실패", t.toString())
+                        }
+
+                        override fun onResponse(
+                            call: Call<ResponseCheckPhoneData>,
+                            response: Response<ResponseCheckPhoneData>
+                        ) {
+                            Log.d("success", response.body().toString())
+                            if (response.body() == null) {
+                                CheckPhoneDialogFragment(
+                                    R.layout.fragment_check_phone_dialog,
+
+                                    ).show(
+                                    parentFragmentManager, "asdf"
+                                )
+
+                            }
+                            response.takeIf {
+                                it.isSuccessful
+                            }?.body()
+                                ?.let { it ->
+                                    Log.d("중복", "중복")
+                                    var intent =
+                                        Intent(context, EnrollmentPhoneActivity::class.java)
+                                    intent.putExtra("name", madapter.phonename)
+                                    intent.putExtra("phone", madapter.phonenumber)
+                                    intent.putExtra("check", 0)
+                                    intent.putExtra("userId", viewModel.cherishUserId.value)
+                                    startActivity(intent)
+                                }
+                        }
+                    }
+                )
+
+        }
     }
 
     fun changeList() {

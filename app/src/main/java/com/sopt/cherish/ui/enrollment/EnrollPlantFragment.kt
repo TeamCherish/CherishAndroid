@@ -51,7 +51,7 @@ class EnrollPlantFragment : Fragment() {
 
     var plant_mean: String = ""
     var plant_url: String = ""
-    var plant_id:Int =0
+    var plant_id: Int = 0
 
     var user_water = 0
 
@@ -68,19 +68,6 @@ class EnrollPlantFragment : Fragment() {
         //enrollToolbar.title="식물 상세 입력"
         binding.editNick.hint = arguments?.getString("phonename")
         binding.phoneNumber.text = arguments?.getString("phonenumber")
-
-
-/*
-        binding.editNick.setOnFocusChangeListener { v, hasFocus ->
-            binding.editNick.hint=""
-
-            if(hasFocus==false){
-                binding.editNick.hint=arguments?.getString("phonename")
-
-            }
-        }*/
-
-        // binding.phoneName.text = arguments?.getString("phonename")
 
 
 // 생일 빼고 사용자가 나머지 다 입력 시 버튼 활성화
@@ -157,7 +144,6 @@ class EnrollPlantFragment : Fragment() {
 //애칭
 
             if (binding.editBirth.text.isNotEmpty()) {
-                //userbirth = binding.editBirth.text.substring(0,4)+"-"+binding.editBirth.text.substring(4,6)+"-"+binding.editBirth.text.substring(6,)
                 userbirth = binding.editBirth.text.toString()
             } else {
                 userbirth = "00/00"
@@ -167,29 +153,12 @@ class EnrollPlantFragment : Fragment() {
 //생일
             val userphone = arguments?.getString("phonenumber")
             Log.d("userphone", userphone.toString())
-//번호
-            /* val userphonebook = userphone?.substring(0, 3) + "-" + userphone?.substring(
-                 3,
-                 7
-             ) + "-" + userphone?.substring(7)*/
-            // Log.d("userphonebook", userphonebook.toString())
-//번호나눈거
+
 
             val userwater = binding.waterAlarmWeek.text.split(" ")[1]
 
             Log.d("userwater", binding.waterAlarmWeek.text.toString())
-            //알람 주기
-            //user_water = userwater.substring(6, 7).toInt()
-            /*if (userwater.substring(8) == "month") {
-                user_water = userwater.substring(6, 7).toInt() * 30
-                Log.d("userwater2", user_water.toString())
-            } else if (userwater.substring(8) == "week") {
-                user_water = (userwater.substring(6, 7).toInt()) * 7
-                Log.d("userwater2", user_water.toString())
-            } else {
-                user_water = userwater.substring(6, 7).toInt()
-                Log.d("userwater2", user_water.toString())
-            }*/
+
 
             val usertime = binding.waterAlarmTime.text.toString()
             val usertime_hour = usertime.substring(0, 5).toString()
@@ -210,44 +179,42 @@ class EnrollPlantFragment : Fragment() {
 
                 )
 
-            if (body != null) {
-                requestData.enrollAPI.enrollCherish(body)
-                    .enqueue(
-                        object : Callback<ResponseEnrollData> {
-                            override fun onFailure(
-                                call: Call<ResponseEnrollData>,
-                                t: Throwable
-                            ) {
-                                Log.d("통신 실패", t.toString())
-                            }
-
-                            override fun onResponse(
-                                call: Call<ResponseEnrollData>,
-                                response: Response<ResponseEnrollData>
-                            ) {
-                                Log.d("success", response.body().toString())
-                                response.takeIf {
-                                    it.isSuccessful
-                                }?.body()
-                                    ?.let { it ->
-
-                                        Log.d(
-                                            "data success!enroll",
-                                            it.data.plant.flower_meaning
-                                        )
-
-                                        plant_id=it.data.plant.PlantStatusId
-                                        plant_explanation = it.data.plant.explanation
-                                        plant_modify = it.data.plant.modifier
-                                        plant_mean = it.data.plant.flower_meaning
-                                        plant_url = it.data.plant.image_url
-
-
-                                    }
-                            }
+            requestData.enrollAPI.enrollCherish(body)
+                .enqueue(
+                    object : Callback<ResponseEnrollData> {
+                        override fun onFailure(
+                            call: Call<ResponseEnrollData>,
+                            t: Throwable
+                        ) {
+                            Log.d("통신 실패", t.toString())
                         }
-                    )
-            }
+
+                        override fun onResponse(
+                            call: Call<ResponseEnrollData>,
+                            response: Response<ResponseEnrollData>
+                        ) {
+                            Log.d("success", response.body().toString())
+                            response.takeIf {
+                                it.isSuccessful
+                            }?.body()
+                                ?.let { it ->
+
+                                    Log.d(
+                                        "data success!enroll",
+                                        it.data.plant.flower_meaning
+                                    )
+
+                                    plant_id = it.data.plant.PlantStatusId
+                                    plant_explanation = it.data.plant.explanation
+                                    plant_modify = it.data.plant.modifier
+                                    plant_mean = it.data.plant.flower_meaning
+                                    plant_url = it.data.plant.image_url
+
+
+                                }
+                        }
+                    }
+                )
 
             progressON()
             Handler(Looper.getMainLooper()).postDelayed({
@@ -324,33 +291,13 @@ class EnrollPlantFragment : Fragment() {
     }
 
 
-    fun setFragment(fragment: Fragment) {
-        val transaction = parentFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragment_enroll, fragment.apply {
-            arguments = Bundle().apply {
-                putString("plantkey", binding.waterAlarmWeek.text.toString())
-
-            }
-        })
-        transaction.addToBackStack(null)
-
-        transaction.commit()
-    }
-
-
     fun progressON() {
         progressDialog = AppCompatDialog(context)
         progressDialog.setCancelable(false)
         progressDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         progressDialog.setContentView(R.layout.progress_layout)
         progressDialog.show()
-        /*var img_loading_framge = progressDialog.findViewById<ImageView>(R.id.GIFimage)
-        var frameAnimation = img_loading_framge?.getBackground() as AnimationDrawable
-        img_loading_framge?.post(object : Runnable{
-            override fun run() {
-                frameAnimation.start()
-            }
-        })*/
+
     }
 
     fun progressOFF() {
