@@ -5,11 +5,14 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.marginTop
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -49,7 +52,6 @@ class ManagePlantFragment : Fragment() {
     lateinit var binding: FragmentManagePlantBinding
     var mypageusername:String=""
     var mypageuseremail:String=""
-    lateinit var madapter: MypagePhoneBookSearchAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -64,6 +66,7 @@ class ManagePlantFragment : Fragment() {
 
         // 예진이 userId , viewModel.userId.value 라고하면 userId 찾을 수 있어요
         SimpleLogger.logI(viewModel.cherishUserId.value.toString())
+        setFont(binding)
         setTabLayout()
         initializeServerRequest(binding)
 
@@ -82,7 +85,7 @@ class ManagePlantFragment : Fragment() {
                 binding.myPageAddPlantBtn.visibility = View.VISIBLE
             (activity as MainActivity).replaceFragment(tabIndex, data, isSearched)
         }
-        //initializeSearchBtn()
+
         return binding.root
     }
 
@@ -109,13 +112,29 @@ class ManagePlantFragment : Fragment() {
     }
 
 
-    private fun initializeSearchBtn() {
-        isSearched = (activity as MainActivity).getIsSearched()
+    private fun setFont(binding:FragmentManagePlantBinding){
+        val face=ResourcesCompat.getFont(requireContext(),R.font.notosanscjkkr_bold)
+        binding.myPageUserName.typeface=face
+        binding.myPageUserName.setTextColor(Color.parseColor("#454545"))
+        binding.myPageUserName.setTextSize(TypedValue.COMPLEX_UNIT_SP,18F)
 
-        if (isSearched)
-            binding.searchBox.visibility = View.INVISIBLE
-        else
-            binding.searchBox.visibility = View.VISIBLE
+        binding.cherishgarden.typeface=face
+        binding.cherishgarden.setTextColor(Color.parseColor("#454545"))
+        binding.cherishgarden.setTextSize(TypedValue.COMPLEX_UNIT_SP,18F)
+/*
+        binding.myPageWateringCnt.sty
+        binding.myPageWateringCnt.setTextColor(Color.parseColor("#454545"))
+        //binding.myPageWateringCnt.setTextSize(TypedValue.COMPLEX_UNIT_SP,18F)
+
+        binding.myPagePostponeCnt.typeface=face
+        binding.myPagePostponeCnt.setTextColor(Color.parseColor("#454545"))
+        //binding.myPagePostponeCnt.setTextSize(TypedValue.COMPLEX_UNIT_SP,18F)
+
+        binding.myPageFinishCnt.typeface=face
+        binding.myPageFinishCnt.setTextColor(Color.parseColor("#454545"))
+        //binding.myPageFinishCnt.setTextSize(TypedValue.COMPLEX_UNIT_SP,18F)
+*/
+
     }
 
     private fun initializeBottomSheetBehavior(binding: FragmentManagePlantBinding) {
@@ -124,7 +143,8 @@ class ManagePlantFragment : Fragment() {
         // bottom sheet state 지정
         standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
         val metrics=resources.displayMetrics
-        standardBottomSheetBehavior.peekHeight = (metrics.heightPixels-44.dp)/2
+
+        standardBottomSheetBehavior.peekHeight = (metrics.heightPixels-64.dp)/2
         standardBottomSheetBehavior.expandedOffset = 44.dp
         standardBottomSheetBehavior.isHideable = false
         standardBottomSheetBehavior.isGestureInsetBottomIgnored=true
