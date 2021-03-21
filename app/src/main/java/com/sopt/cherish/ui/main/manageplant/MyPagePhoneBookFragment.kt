@@ -2,11 +2,9 @@ package com.sopt.cherish.ui.main.manageplant
 
 import android.os.Bundle
 import android.provider.ContactsContract
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sopt.cherish.R
@@ -17,84 +15,38 @@ import com.sopt.cherish.ui.adapter.Phonemypage
 
 class MyPagePhoneBookFragment : Fragment() {
 
-    // val permissions = arrayOf(Manifest.permission.READ_CONTACTS, Manifest.permission.CALL_PHONE)
     lateinit var madapter: MypagePhoneBookAdapter
     var phonelist = mutableListOf<Phonemypage>()
     var searchText = ""
-    var sortText = "asc"
-    var phonecount = 0
-    private lateinit var enrollToolbar: Toolbar
-    lateinit var countphone: String
+    var sortText = ""
     private lateinit var binding: FragmentMyPagePhoneBookBinding
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_my_page_phone_book, container, false)
 
-
-
         binding = FragmentMyPagePhoneBookBinding.bind(view)
 
-
-
-        startProcess()
-
-        return view
+        return binding.root
     }
 
-
-    fun setFragment(fragment: Fragment) {
-        val transaction = parentFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragment_enroll, fragment.apply {
-            arguments = Bundle().apply {
-                putString("phonename", madapter.phonename)
-                putString("phonenumber", madapter.phonenumber)
-
-            }
-        })
-        transaction.addToBackStack(null)
-
-        transaction.commit()
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        startProcess()
     }
 
 
     fun startProcess() {
         setList()
-        //setSearchListener()
-    }
-    /*
-    fun setSearchListener() {
-        binding.editSearch.addTextChangedListener(
-            object : TextWatcher {
-                override fun afterTextChanged(s: Editable?) {}
-                override fun beforeTextChanged(
-                    s: CharSequence?,
-                    start: Int,
-                    count: Int,
-                    after: Int
-                ) {
-                }
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    searchText =s.toString()
-                    changeList()
-                }
-            })
-    } */
 
-    fun changeList() {
-        val newList = getPhoneNumbers(sortText, searchText)
-        this.phonelist.clear()
-        this.phonelist.addAll(newList)
-        this.madapter.notifyDataSetChanged()
     }
+
 
     fun setList() {
         phonelist.addAll(getPhoneNumbers(sortText, searchText))
-
         madapter = MypagePhoneBookAdapter(phonelist)
         binding.recyclerMypage.adapter = madapter
         binding.recyclerMypage.layoutManager = LinearLayoutManager(context)
@@ -139,7 +91,6 @@ class MyPagePhoneBookFragment : Fragment() {
                 val Phonemypage = Phonemypage(id, name, number)
 
                 list.add(Phonemypage)
-                //list.distinct()
 
             }
 
@@ -153,13 +104,12 @@ class MyPagePhoneBookFragment : Fragment() {
                 val Phonemypage = Phonemypage(id, name, number)
 
                 list.add(Phonemypage)
-                // list.distinct()
+
             }
 
         }
 
         // 결과목록 반환
-        Log.d("listsize", list.size.toString())
         return list.distinct()
     }
 

@@ -50,8 +50,8 @@ class SignInActivity : AppCompatActivity() {
             startActivity(signUpIntent)
         }
 
-        binding.textView30.setOnClickListener{
-            val pwFindingIntent=Intent(this@SignInActivity,PwFindingActivity::class.java)
+        binding.textView30.setOnClickListener {
+            val pwFindingIntent = Intent(this@SignInActivity, PwFindingActivity::class.java)
             startActivity(pwFindingIntent)
         }
     }

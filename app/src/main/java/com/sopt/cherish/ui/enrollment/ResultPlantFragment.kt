@@ -4,13 +4,9 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toolbar
-import androidx.appcompat.app.AppCompatDialog
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
@@ -22,9 +18,6 @@ import com.sopt.cherish.ui.main.MainActivity
 class ResultPlantFragment : Fragment() {
 
     private lateinit var binding: FragmentResultPlantBinding
-    private lateinit var progressDialog: AppCompatDialog
-
-    private lateinit var enrollToolbar: Toolbar
 
     private val viewModel: EnrollmentViewModel by activityViewModels()
 
@@ -32,14 +25,25 @@ class ResultPlantFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
 
         val view = inflater.inflate(R.layout.fragment_result_plant, container, false)
         binding = FragmentResultPlantBinding.bind(view)
-        binding.plantExplanation.text = arguments?.getString("plant_explanation")
-        Log.d("plantExplanation", arguments?.getString("plant_explanation").toString())
 
+
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setResultView()
+        setListeners()
+    }
+
+    fun setResultView() {
+        binding.plantExplanation.text = arguments?.getString("plant_explanation")
 
         if (arguments?.getString("plant_modify")?.contains("\n") == true) {
             binding.textViewModify.text = arguments?.getString("plant_modify")?.split("\n")?.get(0)
@@ -50,16 +54,10 @@ class ResultPlantFragment : Fragment() {
 
         }
 
-
-
         val urlstring = arguments?.getString("plant_url")
-        Log.d("url", urlstring.toString())
         Glide.with(this).load(urlstring.toString()).into(binding.imageViewUrl)
 
-        val plant_id_btn=arguments?.getInt("plant_id")
-
-        Log.d("plant_id_btn",plant_id_btn.toString())
-
+        val plant_id_btn = arguments?.getInt("plant_id")
 
         when (plant_id_btn) {
             1 -> {
@@ -104,7 +102,9 @@ class ResultPlantFragment : Fragment() {
         binding.textViewflowerMean.text = arguments?.getString("plant_mean")
 
 
+    }
 
+    fun setListeners() {
         binding.startbtn.setOnClickListener {
             // LoadingDialog를 보여주면 됨
             val intent = Intent(requireContext(), MainActivity::class.java)
@@ -117,11 +117,10 @@ class ResultPlantFragment : Fragment() {
                 startActivity(intent)
             } else {
                 activity?.finish()
-                //  startActivity(intent)
+
 
             }
         }
-        return view
     }
 
     override fun onResume() {
@@ -132,14 +131,5 @@ class ResultPlantFragment : Fragment() {
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val id = item.itemId
-        when (id) {
-            android.R.id.home -> {
-                activity?.finish()
-                return true
-            }
-        }
-        return super.onOptionsItemSelected(item)
-    }
+
 }

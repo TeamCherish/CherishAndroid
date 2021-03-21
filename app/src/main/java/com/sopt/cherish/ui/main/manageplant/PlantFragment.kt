@@ -26,7 +26,6 @@ class PlantFragment(private var data: List<MyPageCherishData>?) : Fragment() {
 
 
     lateinit var list: List<MyPageCherishData>
-    var searchText = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,8 +58,6 @@ class PlantFragment(private var data: List<MyPageCherishData>?) : Fragment() {
         cherishAdapter.setItemClickListener(
             object : MyPageBottomSheetAdapter.ItemClickListener {
                 override fun onClick(view: View, position: Int) {
-                    Log.d("onclick", "success")
-
                     val intent =
                         Intent(context, DetailPlantActivity::class.java)
 

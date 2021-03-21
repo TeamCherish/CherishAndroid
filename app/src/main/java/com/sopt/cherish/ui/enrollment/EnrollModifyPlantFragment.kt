@@ -22,35 +22,33 @@ import retrofit2.Response
 
 class EnrollModifyPlantFragment : Fragment() {
     private val requestData = RetrofitBuilder
-
     var modifycherish = 0
     var userid = 0
     lateinit var binding: FragmentEnrollModifyPlantBinding
 
-    var week_modify = 0
-    lateinit var nick: String
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        setHasOptionsMenu(true)
+    ): View {
 
 
         val view = inflater.inflate(R.layout.fragment_enroll_modify_plant, container, false)
         binding = FragmentEnrollModifyPlantBinding.bind(view)
-        // userid= arguments?.getInt("cherishidgo_userid")!!
 
 
-        // 식물카드에서 체리쉬 아이디 가져오기
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setHasOptionsMenu(true)
         modifycherish = arguments?.getInt("cherishid_modify")!!
+        setModifyView()
+        setListener()
+    }
 
-        Log.d("modifycherishid", modifycherish.toString())
-        Log.d("modifyuserid", userid.toString())
-
-
-        //보여지는 부분
+    fun setModifyView() {
         requestData.userinfoAPI.getUserInfo(modifycherish)
             .enqueue(
                 object : Callback<ResponseUserinfoData> {
@@ -67,8 +65,6 @@ class EnrollModifyPlantFragment : Fragment() {
                             it.isSuccessful
                         }?.body()
                             ?.let { it ->
-                                Log.d("식물수정asdf", "asdf")
-                                Log.d("식물생일 수정수정", it.data.cherishDetail.birth)
                                 binding.editNick.hint = it.data.cherishDetail.nickname.toString()
                                 if (it.data.cherishDetail.birth == "Invalid Date") {
                                     binding.editBirth.hint = "00/00"
@@ -78,30 +74,14 @@ class EnrollModifyPlantFragment : Fragment() {
                                                 it.data.cherishDetail.birth.split("-")[2]
 
                                 }
-                                binding.waterAlarmWeek.text = "Every " +
-                                        it.data.cherishDetail.cycle_date.toString() + " day"
+                                binding.waterAlarmWeek.text =
+                                    "Every " + it.data.cherishDetail.cycle_date.toString() + " day"
 
-                                /*if (it.data.cherishDetail.cycle_date <= 3) {
-                                    binding.waterAlarmWeek.text =
-                                        "Every " + it.data.cherishDetail.cycle_date.toString() + " day"
-
-                                } else if (it.data.cherishDetail.cycle_date >= 7 && it.data.cherishDetail.cycle_date <= 21) {
-                                    binding.waterAlarmWeek.text =
-                                        "Every " + (it.data.cherishDetail.cycle_date / 7).toString() + " week"
-
-                                } else {
-                                    binding.waterAlarmWeek.text =
-                                        "Every " + (it.data.cherishDetail.cycle_date / 30).toString() + " month"
-
-                                }*/
-                                Log.d("clockokay", it.data.cherishDetail.notice_time)
                                 if (it.data.cherishDetail.notice_time.split(":")[0].toInt() < 12) {
                                     binding.waterAlarmTime.text = it.data.cherishDetail.notice_time
                                 } else {
                                     binding.waterAlarmTime.text = it.data.cherishDetail.notice_time
                                 }
-                                //binding.waterAlarmTime.text = it.data.cherishDetail.notice_time
-
 
                                 binding.phoneNumber.text = it.data.cherishDetail.phone
 
@@ -109,8 +89,9 @@ class EnrollModifyPlantFragment : Fragment() {
                             }
                     }
                 })
+    }
 
-
+    fun setListener() {
         binding.editclock.setOnClickListener {
             val needWaterDialog = ClockPickerDialogFragment(R.layout.clockpicker_layout).show(
                 parentFragmentManager,
@@ -138,7 +119,6 @@ class EnrollModifyPlantFragment : Fragment() {
             //수정 버튼을 눌렀을 때
 
             var nickname_modify = binding.editNick.text.toString()
-            Log.d("nickname_modify", nickname_modify.toString())
 
             if (nickname_modify == "") {
                 nickname_modify = binding.editNick.hint.toString()
@@ -148,42 +128,10 @@ class EnrollModifyPlantFragment : Fragment() {
             if (binding.editBirth.text.isEmpty()) {
                 birth_modify = binding.editBirth.hint.toString()
             }
-            /*    if (birth_modify == "") {
-                    birth_modify = binding.editBirth.hint.substring(0, 4) + "/" +
-                            binding.editBirth.hint.substring(
-                                4,
-                                6
-                            ) + "/" + binding.editBirth.hint.substring(6).toString()
-                } else {
-                    birth_modify = binding.editBirth.text.substring(0, 4) + "/" +
-                            binding.editBirth.text.substring(
-                                4,
-                                6
-                            ) + "/" + binding.editBirth.text.substring(6).toString()
-                }*/
 
             val userwater = binding.waterAlarmWeek.text.split(" ")[1].toInt()
-            Log.d("userwater", userwater.toString())
-            //알람 주기
-
-            //user_water = userwater.substring(6, 7).toInt()
-            /*if (userwater.substring(8) == "month") {
-                week_modify = userwater.substring(6, 7).toInt() * 30
-                Log.d("userwater2", week_modify.toString())
-            } else if (userwater.substring(8) == "week") {
-                week_modify = (userwater.substring(6, 7).toInt()) * 7
-                Log.d("userwater2", week_modify.toString())
-            } else {
-                week_modify = userwater.substring(6, 7).toInt()
-                Log.d("userwater2", week_modify.toString())
-            }
-*/
-            //var week_switch_modify = binding.alarmSwitch.isChecked
 
             val usertime = binding.waterAlarmTime.text.toString()
-            //val usertime_hour_modify = usertime.substring(0, 5).toString()
-            Log.d("modifycherish", modifycherish.toString())
-            Log.d("birth_modify", birth_modify.toString())
 
             var body = RequestModifyData(
                 nickname = nickname_modify,
@@ -212,7 +160,6 @@ class EnrollModifyPlantFragment : Fragment() {
                         }?.body()
                             ?.let { it ->
 
-
                                 Log.d("수정완료", response.body().toString())
                                 activity?.onBackPressed()
 
@@ -221,10 +168,7 @@ class EnrollModifyPlantFragment : Fragment() {
                 }
             )
         }
-
-        return binding.root
     }
-
 
     override fun onResume() {
         super.onResume()
