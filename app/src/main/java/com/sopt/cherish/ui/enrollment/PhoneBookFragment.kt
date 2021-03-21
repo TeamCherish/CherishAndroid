@@ -87,7 +87,7 @@ class PhoneBookFragment : Fragment() {
                 ) + "-" +
                         madapter.phonenumber.substring(7)*/
                 Log.d("phonenumbervvvv", phonenumber)
-                Log.d("useriduserid", viewModel.cherishuserId.value.toString()!!)
+                Log.d("useriduserid", viewModel.cherishUserId.value.toString())
                 val body =
                     RequestCheckPhoneData(phone = phonenumber.toString(), UserId = countphonebook)
                 requestData.checkphoneAPI.checkphone(body)

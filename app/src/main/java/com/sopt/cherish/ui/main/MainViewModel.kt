@@ -43,7 +43,6 @@ class MainViewModel(
                 it.userData.userList.add(0, it.userData.userList[0])
                 _cherishUsers.value = it
             } else {
-                // 0 일 경우에
                 _cherishUsers.value = null
             }
         }.onFailure { error ->
