@@ -22,6 +22,9 @@ class HomeCherryListAdapter(
     }
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
+        if (position == 0) {
+            holder.bind(data[position], itemClickListener)
+        }
         holder.bind(data[position], itemClickListener)
     }
 
@@ -30,10 +33,12 @@ class HomeCherryListAdapter(
     inner class MainViewHolder(private val binding: MainCherryItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(userData: User, clickListener: OnItemClickListener) {
-            if (adapterPosition == 0) binding.homeItemFirstSelector.visibility = View.VISIBLE
-
+            if (adapterPosition == 0) {
+                binding.homeItemFirstSelector.visibility = View.VISIBLE
+            } else {
+                binding.homeItemFirstSelector.visibility = View.INVISIBLE
+            }
             setAlphaItemClicked(binding, adapterPosition)
-
             binding.apply {
                 homeUserData = userData
                 executePendingBindings()
@@ -45,7 +50,6 @@ class HomeCherryListAdapter(
                         notifyItemRangeChanged(0, data.size)
                         lastSelectedPosition = adapterPosition
                     }
-
                     clickListener.onItemClick(binding, adapterPosition)
                 }
             }

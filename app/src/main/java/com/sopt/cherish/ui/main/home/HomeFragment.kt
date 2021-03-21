@@ -51,7 +51,6 @@ class HomeFragment : Fragment(), OnItemClickListener {
             BottomSheetBehavior.from(binding.homeStandardBottomSheet)
         addBottomSheetCallback()
         initializeRecyclerView(homeCherryListAdapter)
-
         binding.homeWateringBtn.setOnClickListener {
             navigateWatering()
         }

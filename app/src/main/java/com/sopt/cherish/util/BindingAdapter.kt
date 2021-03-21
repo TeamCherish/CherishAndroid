@@ -165,4 +165,5 @@ object BindingAdapter {
             }
         }
     }
+
 }
