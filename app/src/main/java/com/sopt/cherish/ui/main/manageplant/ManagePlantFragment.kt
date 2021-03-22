@@ -66,7 +66,6 @@ class ManagePlantFragment : Fragment() {
 
         // 예진이 userId , viewModel.userId.value 라고하면 userId 찾을 수 있어요
         SimpleLogger.logI(viewModel.cherishUserId.value.toString())
-        setFont(binding)
         setTabLayout()
         initializeServerRequest(binding)
 
@@ -144,7 +143,7 @@ class ManagePlantFragment : Fragment() {
         standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
         val metrics=resources.displayMetrics
 
-        standardBottomSheetBehavior.peekHeight = (metrics.heightPixels-64.dp)/2
+        standardBottomSheetBehavior.peekHeight = (metrics.heightPixels-76.dp)/2
         standardBottomSheetBehavior.expandedOffset = 44.dp
         standardBottomSheetBehavior.isHideable = false
         standardBottomSheetBehavior.isGestureInsetBottomIgnored=true

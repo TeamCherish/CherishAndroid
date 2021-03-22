@@ -18,10 +18,10 @@
             <ImageView
                 android:id="@+id/mypage_user_img"
                 android:layout_width="54dp"
-                android:layout_height="54dp"
-                android:layout_marginTop="2dp"
-                android:layout_marginBottom="2dp"
-                android:contentDescription="StringValue"
+                android:layout_height="0dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:contentDescription="@null"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -31,10 +31,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="14dp"
-                android:font="@font/notosanscjkkr_medium"
-                android:text="남쿵둥이"
+                android:fontFamily="@font/notosanscjkkr_medium"
+                android:text="@null"
                 android:textAlignment="center"
                 android:textSize="16sp"
+                android:textColor="#454545"
                 app:layout_constraintStart_toEndOf="@+id/mypage_user_img"
                 app:layout_constraintTop_toTopOf="@+id/mypage_user_img" />
 
@@ -42,23 +43,25 @@
                 android:id="@+id/mypage_cherry_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:font="@font/roboto_regular"
-                android:text="스투키"
+                android:fontFamily="@font/roboto_regular"
+                android:text="@null"
                 android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="@+id/mypage_user_img"
+                android:textColor="#a7a7a7"
+                android:layout_marginBottom="18dp"
                 app:layout_constraintStart_toStartOf="@+id/mypage_cherry_nickname"
-                app:layout_constraintTop_toBottomOf="@+id/mypage_cherry_nickname" />
+                app:layout_constraintBottom_toBottomOf="parent" />
 
             <TextView
                 android:id="@+id/mypage_cherry_level"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:font="@font/roboto_regular"
-                android:text=" Lv.2"
+                android:fontFamily="@font/roboto_regular"
+                android:text="@null"
                 android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="@+id/mypage_cherry_name"
+                android:textColor="#a7a7a7"
+                android:layout_marginBottom="18dp"
                 app:layout_constraintStart_toEndOf="@+id/mypage_cherry_name"
-                app:layout_constraintTop_toTopOf="@+id/mypage_cherry_name" />
+                app:layout_constraintBottom_toBottomOf="parent" />
 
 
             <TextView
@@ -67,10 +70,12 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/my_page_chip_red"
                 android:gravity="center"
-                android:text="D-Day"
+                android:text="@null"
+                android:fontFamily="@font/roboto_regular"
                 android:textColor="@color/cherish_pink_sub"
                 app:layout_constraintBottom_toBottomOf="@+id/mypage_user_img"
                 app:layout_constraintEnd_toEndOf="parent"
+                android:lineSpacingExtra="9sp"
                 app:layout_constraintTop_toTopOf="@+id/mypage_user_img" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
