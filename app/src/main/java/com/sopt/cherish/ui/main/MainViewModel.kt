@@ -24,7 +24,7 @@ class MainViewModel(
     private val calendarRepository: CalendarRepository,
     private val notificationRepository: NotificationRepository
 ) : ViewModel() {
-    val animationTrigger = SingleLiveEvent<Boolean>()
+    val isWatered = SingleLiveEvent<Boolean>()
     val cherishUserId = MutableLiveData<Int>()
     val userNickName = MutableLiveData<String>()
     val fcmToken = MutableLiveData<String>()

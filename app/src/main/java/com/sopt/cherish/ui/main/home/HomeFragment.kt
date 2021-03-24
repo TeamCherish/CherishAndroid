@@ -70,23 +70,12 @@ class HomeFragment : Fragment(), OnItemClickListener {
 
     override fun onResume() {
         super.onResume()
+        viewModel.isWatered.value = false
         viewModel.fetchUsers()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         observeCherishUsers()
-        observeAnimationTrigger()
-    }
-
-    private fun observeAnimationTrigger() {
-        // 값 보내주는건 끝났구 이제 애니메이션 보여주기만 하면 끝!
-        viewModel.animationTrigger.observe(viewLifecycleOwner) {
-            if (it) {
-                longToast(requireContext(), "식물 물주는 애니메이션 등장!")
-            } else {
-                longToast(requireContext(), "식물 시드는 애니메이션 등장!")
-            }
-        }
     }
 
     private fun observeCherishUsers() {
@@ -187,7 +176,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == CODE_MOVE_DETAIL_PLANT) {
             if (resultCode == RESULT_OK) {
-                viewModel.animationTrigger.value = data?.getBooleanExtra("animationTrigger", false)
+                viewModel.isWatered.value = data?.getBooleanExtra("animationTrigger", false)
             }
         }
     }

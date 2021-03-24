@@ -1,6 +1,7 @@
 package com.sopt.cherish.util
 
 import android.annotation.SuppressLint
+import android.os.Handler
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
@@ -45,7 +46,7 @@ object BindingAdapter {
             .into(imageView)
     }
 
-    @JvmStatic
+/*    @JvmStatic
     @BindingAdapter("android:setPlantBackground")
     fun setPlantBackground(imageView: ImageView, plantName: String?) {
         imageView.setBackgroundColor(
@@ -60,6 +61,76 @@ object BindingAdapter {
                 }
             )
         )
+    }*/
+
+    @JvmStatic
+    @BindingAdapter(value = ["plantName", "dDay"], requireAll = true)
+    fun setPlantBackground(imageView: ImageView, plantName: String?, dDay: Int) {
+        if (dDay < 0) {
+            // 시든상태
+            imageView.setBackgroundColor(
+                ContextCompat.getColor(
+                    imageView.context,
+                    R.color.cherish_light_black
+                )
+            )
+        } else {
+            // 멀쩡한 상태
+            imageView.setBackgroundColor(
+                ContextCompat.getColor(
+                    imageView.context, when (plantName) {
+                        "민들레" -> R.color.cherish_dandelion_background_color
+                        "로즈마리" -> R.color.cherish_rosemary_background_color
+                        "아메리칸블루" -> R.color.cherish_american_blue_background_color
+                        "스투키" -> R.color.cherish_stuki_background_color
+                        "단모환" -> R.color.cherish_sun_background_color
+                        else -> R.color.white
+                    }
+                )
+            )
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter(value = ["isWatered", "remainDay", "wateredPlantName"])
+    fun wateredBackground(
+        imageView: ImageView,
+        isWatered: Boolean,
+        remainDay: Int,
+        plantName: String?
+    ) {
+        if (isWatered) {
+            if (remainDay < 0) {
+                imageView.setBackgroundColor(
+                    ContextCompat.getColor(
+                        imageView.context,
+                        R.color.cherish_light_black
+                    )
+                )
+            } else {
+                imageView.setBackgroundColor(
+                    ContextCompat.getColor(
+                        imageView.context, R.color.cherish_watered_color
+                    )
+                )
+                val delayHandler = Handler(imageView.context.mainLooper)
+                delayHandler.postDelayed({
+                    imageView.setBackgroundColor(
+                        ContextCompat.getColor(
+                            imageView.context, when (plantName) {
+                                "민들레" -> R.color.cherish_dandelion_background_color
+                                "로즈마리" -> R.color.cherish_rosemary_background_color
+                                "아메리칸블루" -> R.color.cherish_american_blue_background_color
+                                "스투키" -> R.color.cherish_stuki_background_color
+                                "단모환" -> R.color.cherish_sun_background_color
+                                else -> R.color.white
+                            }
+                        )
+                    )
+                }, 2000)
+
+            }
+        }
     }
 
     @JvmStatic

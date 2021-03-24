@@ -157,7 +157,7 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
         }
         if (requestCode == codeThatGetWatering) {
             if (resultCode == RESULT_OK) {
-                viewModel.animationTrigger.value = data?.getBooleanExtra("wateringTrigger", false)
+                viewModel.isWatered.value = data?.getBooleanExtra("wateringTrigger", false)
                 dismiss()
             }
         }
