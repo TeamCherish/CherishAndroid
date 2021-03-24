@@ -41,7 +41,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:textColor="@color/cherish_light_black"
-                android:font="@font/notosanscjkkr_medium"
+                android:fontFamily="@font/notosanscjkkr_medium"
                 android:textSize="16sp"
                 android:layout_marginStart="@dimen/margin_16dp"
                 android:text="@string/myPage_title_text" />
@@ -89,8 +89,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="14dp"
-            android:font="@font/notosanscjkkr_bold"
+            android:fontFamily="@font/notosanscjkkr_bold"
             android:text=""
+            android:gravity="center_horizontal"
+            android:lineSpacingExtra="6sp"
+            android:textSize="18sp"
             android:textColor="@color/cherish_light_black"
             app:layout_constraintBottom_toBottomOf="@+id/my_page_user_img"
             app:layout_constraintStart_toEndOf="@+id/my_page_user_img"
@@ -100,9 +103,11 @@
             android:id="@+id/cherishgarden"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:font="@font/notosanscjkkr_bold"
+            android:fontFamily="@font/notosanscjkkr_bold"
             android:text="@string/myPage_user_description_text"
             android:textSize="18sp"
+            android:gravity="center_horizontal"
+            android:lineSpacingExtra="6sp"
             android:textColor="@color/cherish_light_black"
             app:layout_constraintBottom_toBottomOf="@+id/my_page_user_name"
             app:layout_constraintStart_toEndOf="@+id/my_page_user_name"
@@ -142,21 +147,22 @@
             app:layout_constraintTop_toTopOf="@+id/my_page_box"
             app:layout_constraintEnd_toStartOf="@id/divide_bar_1"
             android:text=""
-            android:font="@font/notosanscjkkr_bold"
+            android:layout_marginTop="@dimen/margin_12dp"
             android:textColor="@color/cherish_light_black"
-            android:layout_marginTop="@dimen/margin_20dp"
+            android:fontFamily="@font/notosanscjkkr_bold"
             android:textSize="18sp"
             android:id="@+id/my_page_watering_cnt"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/my_page_watering_cnt"
+            android:layout_marginBottom="8dp"
             app:layout_constraintStart_toStartOf="@+id/my_page_watering_cnt"
             app:layout_constraintEnd_toEndOf="@+id/my_page_watering_cnt"
             android:text="@string/myPage_watering_text"
+            android:fontFamily="@font/notosanscjkkr_regular"
             android:id="@+id/watering_text"
-            android:font="@font/notosanscjkkr_regular"
+            app:layout_constraintBottom_toBottomOf="@+id/my_page_box"
             android:textColor="@color/cherish_light_black"
             android:textSize="12sp" />
 
@@ -178,20 +184,23 @@
             app:layout_constraintTop_toTopOf="@+id/my_page_box"
             app:layout_constraintEnd_toStartOf="@id/divide_bar_2"
             android:text=""
-            android:font="@font/notosanscjkkr_bold"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/notosanscjkkr_bold"
             android:textColor="@color/cherish_light_black"
-            android:layout_marginTop="@dimen/margin_20dp"
+            android:gravity="center_horizontal"
             android:textSize="18sp"
-            android:id="@+id/my_page_postpone_cnt"/>
+            android:id="@+id/my_page_postpone_cnt" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/my_page_postpone_cnt"
+            android:layout_marginBottom="8dp"
             app:layout_constraintStart_toStartOf="@+id/my_page_postpone_cnt"
             app:layout_constraintEnd_toEndOf="@+id/my_page_postpone_cnt"
             android:text="@string/myPage_postpone_text"
-            android:font="@font/notosanscjkkr_regular"
+            android:fontFamily="@font/notosanscjkkr_regular"
+            android:gravity="center_horizontal"
+            app:layout_constraintBottom_toBottomOf="@+id/my_page_box"
             android:textColor="@color/cherish_light_black"
             android:textSize="12sp" />
 
@@ -212,20 +221,23 @@
             app:layout_constraintTop_toTopOf="@+id/my_page_box"
             app:layout_constraintEnd_toEndOf="@+id/my_page_box"
             android:text=""
-            android:font="@font/notosanscjkkr_bold"
+            android:layout_marginTop="12dp"
+            android:fontFamily="@font/notosanscjkkr_bold"
             android:textColor="@color/cherish_light_black"
-            android:layout_marginTop="@dimen/margin_20dp"
+            android:gravity="center_horizontal"
             android:textSize="18sp"
-            android:id="@+id/my_page_finish_cnt"/>
+            android:id="@+id/my_page_finish_cnt" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/my_page_finish_cnt"
+            android:layout_marginBottom="4dp"
             app:layout_constraintStart_toStartOf="@+id/my_page_finish_cnt"
             app:layout_constraintEnd_toEndOf="@+id/my_page_finish_cnt"
             android:text="@string/myPage_complete_text"
-            android:font="@font/notosanscjkkr_regular"
+            android:fontFamily="@font/notosanscjkkr_regular"
+            android:gravity="center_horizontal"
+            app:layout_constraintBottom_toBottomOf="@+id/my_page_box"
             android:textColor="@color/cherish_light_black"
             android:textSize="12sp" />
 

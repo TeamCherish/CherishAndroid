@@ -1,13 +1,10 @@
 package com.sopt.cherish.ui.adapter
 
 import android.annotation.SuppressLint
-import android.graphics.Color
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.sopt.cherish.R
@@ -24,19 +21,6 @@ class MyPageBottomSheetAdapter(private var data: List<MyPageCherishData>?) :
             binding.mypageCherryNickname.text = cherishData.nickName
             binding.mypageCherryName.text = cherishData.name + " "
             binding.mypageCherryLevel.text = "Lv. " + cherishData.level.toString()
-
-            val face = ResourcesCompat.getFont(binding.root.context, R.font.notosanscjkkr_medium)
-            binding.mypageCherryNickname.typeface = face
-            binding.mypageCherryNickname.setTextColor(Color.parseColor("#454545"))
-            binding.mypageCherryNickname.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16F)
-
-            binding.mypageCherryLevel.typeface = face
-            binding.mypageCherryLevel.setTextColor(Color.parseColor("#a7a7a7"))
-            binding.mypageCherryLevel.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14F)
-
-            binding.mypageCherryName.typeface = face
-            binding.mypageCherryName.setTextColor(Color.parseColor("#a7a7a7"))
-            binding.mypageCherryName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 14F)
 
             //빨간색: D+
             if (cherishData.dDay < 0) {
