@@ -128,7 +128,6 @@ object BindingAdapter {
                         )
                     )
                 }, 2000)
-
             }
         }
     }
