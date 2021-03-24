@@ -41,7 +41,7 @@ class DetailPlantViewModel(
 
     var dDay = 0
 
-    val selectedMemoCalendarDay = MutableLiveData<CalendarDay>()
+    val selectedMemoCalendarDay = MutableLiveData<CalendarDay?>()
 
     private val today = DateUtil.convertDateToString(Calendar.getInstance().time)
     private val todayMonth = DateUtil.getMonth(today).toString()

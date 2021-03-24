@@ -26,6 +26,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.lang.Math.abs
+import java.util.*
 
 
 class DetailPlantFragment : Fragment() {
@@ -82,10 +83,9 @@ class DetailPlantFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_detail_plant, container, false)
-
+        binding.lifecycleOwner = viewLifecycleOwner
 
 
 
@@ -113,6 +113,39 @@ class DetailPlantFragment : Fragment() {
                 DetailWateringDialogFragment().show(parentFragmentManager, "DetailPlantFragment")
             } else {
                 longToast(requireContext(), "물 줄수있는 날이 아니에요 ㅠ")
+            }
+        }
+
+        binding.memocons.setOnClickListener {
+            if (binding.userdate.text != "_ _") {
+                viewModel.selectedMemoCalendarDay.value =
+                    DateUtil.convertStringToCalendarDay(binding.userdate.text.toString())
+                viewModel.selectedCalendarDay.value =
+                    DateUtil.convertStringToCalendarDay(binding.userdate.text.toString())
+                val transaction =
+                    parentFragmentManager.beginTransaction()
+                transaction.replace(
+                    R.id.fragment_detail,
+                    CalendarFragment()
+                )
+                transaction.addToBackStack(null)
+                transaction.commit()
+            }
+        }
+        binding.memocons2.setOnClickListener {
+            if (binding.userdate2.text != "_ _") {
+                viewModel.selectedMemoCalendarDay.value =
+                    DateUtil.convertStringToCalendarDay(binding.userdate2.text.toString())
+                viewModel.selectedCalendarDay.value =
+                    DateUtil.convertStringToCalendarDay(binding.userdate2.text.toString())
+                val transaction =
+                    parentFragmentManager.beginTransaction()
+                transaction.replace(
+                    R.id.fragment_detail,
+                    CalendarFragment()
+                )
+                transaction.addToBackStack(null)
+                transaction.commit()
             }
         }
 
@@ -279,50 +312,6 @@ class DetailPlantFragment : Fragment() {
                                     binding.usermemo2.text = it.data.reviews[1].review
 
                                 }
-                                binding.memocons.setOnClickListener {
-
-                                    if (binding.userdate.text != "_ _") {
-                                        viewModel.selectedMemoCalendarDay.value =
-                                                //  item.date.let { itemDate ->
-                                            DateUtil.convertStringToDateBar(binding.userdate.text.toString())
-                                                ?.let { it1 ->
-                                                    DateUtil.convertDateToCalendarDay(
-                                                        it1
-                                                    )
-                                                }
-                                        val transaction =
-                                            parentFragmentManager.beginTransaction()
-                                        transaction.replace(
-                                            R.id.fragment_detail,
-                                            CalendarFragment()
-                                        )
-                                        transaction.addToBackStack(null)
-                                        transaction.commit()
-                                        //  }
-                                    }
-                                }
-                                binding.memocons2.setOnClickListener {
-                                    if (binding.userdate2.text != "_ _") {
-                                        viewModel.selectedMemoCalendarDay.value =
-                                                //  item.date.let { itemDate ->
-                                            DateUtil.convertStringToDateBar(binding.userdate2.text.toString())
-                                                ?.let { it1 ->
-                                                    DateUtil.convertDateToCalendarDay(
-                                                        it1
-                                                    )
-                                                }
-                                        val transaction =
-                                            parentFragmentManager.beginTransaction()
-                                        transaction.replace(
-                                            R.id.fragment_detail,
-                                            CalendarFragment()
-                                        )
-                                        transaction.addToBackStack(null)
-                                        transaction.commit()
-                                        //  }
-                                    }
-                                }
-
 
                                 /* if (it.data.reviews.isEmpty()) {
 
