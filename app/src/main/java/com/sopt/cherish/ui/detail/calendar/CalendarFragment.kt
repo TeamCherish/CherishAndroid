@@ -65,6 +65,14 @@ class CalendarFragment : Fragment() {
         viewModel.fetchCalendarData()
         viewModel.selectedCalendarDay.value = viewModel.selectedCalendarDay.value
         binding.calendarView.removeDecorators()
+        binding.calendarView.clearSelection()
+        removeSelectedCalendarData()
+        removeMemo(binding)
+        removeSelectedDate(binding)
+        viewModel.selectedCalendarDay.value = null
+        binding.calendarViewChipLayout.clearChips()
+        viewModel.selectedMemoCalendarDay.value = null
+
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
