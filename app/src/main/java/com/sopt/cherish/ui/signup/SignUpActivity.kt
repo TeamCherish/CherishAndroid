@@ -46,7 +46,7 @@ class SignUpActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            android.R.id.home -> finish()
+            android.R.id.home -> onBackPressed()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -56,15 +56,18 @@ class SignUpActivity : AppCompatActivity() {
 
         when (index) {
             0 -> {
-                transAction.replace(R.id.fragment_signup, SignUpFirstFragment()).commit()
+                transAction.replace(R.id.fragment_signup, SignUpFirstFragment()).addToBackStack(null)
+                    .commit()
             }
             1 ->
-                transAction.replace(R.id.fragment_signup, SignUpSecondFragment()).commit()
+                transAction.replace(R.id.fragment_signup, SignUpSecondFragment()).addToBackStack(null)
+                    .commit()
 
             2 ->
-                transAction.replace(R.id.fragment_signup, SignUpThirdFragment()).commit()
+                transAction.replace(R.id.fragment_signup, SignUpThirdFragment()).addToBackStack(null)
+                    .commit()
             3 ->
-                transAction.replace(R.id.fragment_signup, SignUpFourthFragment())
+                transAction.replace(R.id.fragment_signup, SignUpFourthFragment()).addToBackStack(null)
                     .commit()
         }
     }
