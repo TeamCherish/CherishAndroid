@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.sopt.cherish.R
@@ -25,6 +26,8 @@ import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.util.GridItemDecorator
 import com.sopt.cherish.util.PixelUtil.dp
 import com.sopt.cherish.util.extension.longToast
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 /**
@@ -70,7 +73,10 @@ class HomeFragment : Fragment(), OnItemClickListener {
 
     override fun onResume() {
         super.onResume()
-        viewModel.isWatered.value = false
+        lifecycleScope.launch {
+            delay(2000)
+            viewModel.isWatered.value = false
+        }
         viewModel.fetchUsers()
     }
 
