@@ -44,7 +44,6 @@ class SignUpSecondFragment : Fragment() {
         email = bundle.getString("email").toString()
         password = bundle.getString("password").toString()
 
-        //Log.d("email received", email)
         getCertificationNumber()
 
         return view
@@ -54,7 +53,6 @@ class SignUpSecondFragment : Fragment() {
         binding.userPhone.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 phoneNumber = binding.userPhone.text.toString()
-                Log.d("phoneNumber", phoneNumber)
 
                 //휴대폰번호 유효성 검사
                 if (isPhoneNumberValid(phoneNumber)) {
@@ -68,7 +66,7 @@ class SignUpSecondFragment : Fragment() {
                         binding.certificationAgain.visibility = View.VISIBLE
                         binding.certificationOk.visibility = View.VISIBLE
 
-                        checkCertificationNumber(authData)
+                        checkCertificationNumber()
                     }
 
                     binding.certificationAgain.setOnClickListener {
@@ -95,11 +93,8 @@ class SignUpSecondFragment : Fragment() {
                 phone
             )
         ) {
-            Log.d("validation", "false")
             return false
         }
-
-        Log.d("validation", "true")
         return true
     }
 
@@ -120,10 +115,6 @@ class SignUpSecondFragment : Fragment() {
                         it.isSuccessful
                     }?.body()
                         ?.let { it ->
-                            Log.d("phone success", it.success.toString())
-                            Log.d("phone message", it.message)
-                            Log.d("phone data", it.data.toString())
-
                             authData = it.data.toString()
                         }
                 }
@@ -131,54 +122,72 @@ class SignUpSecondFragment : Fragment() {
         )
     }
 
-    private fun checkCertificationNumber(authData: String) {
-        if (authData == binding.userCertificationNumber.text.toString()) { //인증번호 일치하면
-            binding.certificationOk.text = "인증번호가 일치합니다."
-            binding.certificationOk.setTextColor(
-                ContextCompat.getColor(
-                    binding.root.context,
-                    R.color.cherish_green_main
-                )
-            )
+    private fun checkCertificationNumber() {
 
-            //버튼 초록색 활성화
-            binding.signUpButton.setBackgroundColor(
-                ContextCompat.getColor(
-                    binding.root.context,
-                    R.color.cherish_green_main
-                )
-            )
-            binding.signUpButton.setTextColor(
-                ContextCompat.getColor(
-                    binding.root.context,
-                    R.color.white
-                )
-            )
-
-            binding.signUpButton.setOnClickListener {
-                val myBundle = Bundle()
-                myBundle.putString("email", email)
-                myBundle.putString("password", password)
-                myBundle.putString("phone", phoneNumber)
-
-                (activity as SignUpActivity).postData(myBundle)
-                (activity as SignUpActivity).replaceFragment(2)
+        binding.userCertificationNumber.addTextChangedListener(object:TextWatcher{
+            override fun afterTextChanged(s: Editable?) {
             }
-        } else {
-            //버튼 비활성화
-            binding.signUpButton.setBackgroundColor(
-                ContextCompat.getColor(
-                    binding.root.context,
-                    R.color.cherish_text_box_gray
-                )
-            )
-            binding.signUpButton.setTextColor(
-                ContextCompat.getColor(
-                    binding.root.context,
-                    R.color.cherish_text_gray
-                )
-            )
-        }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                val certificationNumber=binding.userCertificationNumber.text.toString()
+
+                Log.d("auth",certificationNumber)
+                Log.d("authData",authData)
+                if(authData==certificationNumber){
+                    binding.certificationOk.visibility=View.VISIBLE
+                    binding.certificationOk.text = "인증번호가 일치합니다."
+                    binding.certificationOk.setTextColor(
+                        ContextCompat.getColor(
+                            binding.root.context,
+                            R.color.cherish_green_main
+                        )
+                    )
+
+                    //버튼 초록색 활성화
+                    binding.signUpButton.setBackgroundColor(
+                        ContextCompat.getColor(
+                            binding.root.context,
+                            R.color.cherish_green_main
+                        )
+                    )
+                    binding.signUpButton.setTextColor(
+                        ContextCompat.getColor(
+                            binding.root.context,
+                            R.color.white
+                        )
+                    )
+
+                    binding.signUpButton.setOnClickListener {
+                        val myBundle = Bundle()
+                        myBundle.putString("email", email)
+                        myBundle.putString("password", password)
+                        myBundle.putString("phone", phoneNumber)
+
+                        (activity as SignUpActivity).postData(myBundle)
+                        (activity as SignUpActivity).replaceFragment(2)
+                    }
+                }else{
+                    //버튼 비활성화
+                    binding.signUpButton.setBackgroundColor(
+                        ContextCompat.getColor(
+                            binding.root.context,
+                            R.color.cherish_text_box_gray
+                        )
+                    )
+                    binding.signUpButton.setTextColor(
+                        ContextCompat.getColor(
+                            binding.root.context,
+                            R.color.cherish_text_gray
+                        )
+                    )
+                    binding.certificationOk.visibility=View.INVISIBLE
+                }
+            }
+        })
     }
 
 }
