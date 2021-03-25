@@ -69,12 +69,9 @@ class SignUpFirstFragment : Fragment() {
 
                 binding.isUsableEmail.setTextAppearance(R.style.SignUpTextAppearance)
 
-                Log.d("emailcheck", email)
                 checkEmail = isEmailValid(email) //이메일 형식 확인
-                Log.d("isEmailValid", checkEmail.toString())
 
                 if (checkEmail) { //이메일 형식 올바르면
-                    Log.d("email", "is usable ok!")
                     checkSameEmail(email) //이메일 중복 확인
 
                     binding.isUsableEmail.text = "사용가능한 이메일입니다."
@@ -103,7 +100,6 @@ class SignUpFirstFragment : Fragment() {
                         binding.signUpButton.setOnClickListener {
 
                             if (isValid) { //중복 없으면
-                                //Log.d("email","색깔아 바뀌어라")
                                 binding.isUsableEmail.text = "사용가능한 이메일입니다."
                                 binding.isUsableEmail.setTextColor(
                                     ContextCompat.getColor(
@@ -111,7 +107,6 @@ class SignUpFirstFragment : Fragment() {
                                         R.color.cherish_green_main
                                     )
                                 )
-
                                 showPw()
                             } else { //중복 있으면
                                 binding.isUsableEmail.text = "이미 존재하는 이메일입니다."
@@ -139,7 +134,6 @@ class SignUpFirstFragment : Fragment() {
                             R.color.cherish_pass_text_gray
                         )
                     )
-                    //Log.d("email", "false")
                     binding.isUsableEmail.text = "사용하실 수 없는 이메일입니다."
                     binding.isUsableEmail.setTextColor(
                         ContextCompat.getColor(
@@ -159,84 +153,6 @@ class SignUpFirstFragment : Fragment() {
             }
 
         })
-/*
-        if (checkEmail) { //이메일 형식 올바르면
-            Log.d("email", "is usable ok!")
-            checkSameEmail(email) //이메일 중복 확인
-
-            binding.isUsableEmail.text = "사용가능한 이메일입니다."
-            binding.isUsableEmail.setTextColor(
-                ContextCompat.getColor(
-                    binding.root.context,
-                    R.color.cherish_green_main
-                )
-            )
-
-            //버튼 초록색 활성화
-            binding.signUpButton.setBackgroundColor(
-                ContextCompat.getColor(
-                    binding.root.context,
-                    R.color.cherish_green_main
-                )
-            )
-            binding.signUpButton.setTextColor(
-                ContextCompat.getColor(
-                    binding.root.context,
-                    R.color.white
-                )
-            )
-
-            if (!isFinish) {
-                binding.signUpButton.setOnClickListener {
-
-                    if (isValid) { //중복 없으면
-                        //Log.d("email","색깔아 바뀌어라")
-                        binding.isUsableEmail.text = "사용가능한 이메일입니다."
-                        binding.isUsableEmail.setTextColor(
-                            ContextCompat.getColor(
-                                binding.root.context,
-                                R.color.cherish_green_main
-                            )
-                        )
-
-                        showPw()
-                    } else { //중복 있으면
-                        binding.isUsableEmail.text = "이미 존재하는 이메일입니다."
-                        binding.isUsableEmail.setTextColor(
-                            ContextCompat.getColor(
-                                binding.root.context,
-                                R.color.cherish_pink_sub
-                            )
-                        )
-                    }
-                }
-            }
-
-
-        } else { //이메일 형식 올바르지 않으면
-            binding.signUpButton.setBackgroundColor(
-                ContextCompat.getColor(
-                    binding.root.context,
-                    R.color.cherish_light_gray
-                )
-            )
-            binding.signUpButton.setTextColor(
-                ContextCompat.getColor(
-                    binding.root.context,
-                    R.color.cherish_pass_text_gray
-                )
-            )
-            //Log.d("email", "false")
-            binding.isUsableEmail.text = "사용하실 수 없는 이메일입니다."
-            binding.isUsableEmail.setTextColor(
-                ContextCompat.getColor(
-                    binding.root.context,
-                    R.color.cherish_pink_sub
-                )
-            )
-
-        }
-*/
     }
 
     private fun isEmailValid(email: String): Boolean {
@@ -296,7 +212,6 @@ class SignUpFirstFragment : Fragment() {
                 isFinish = false
                 pw = binding.userPw.text.toString()
                 binding.isUsablePw.visibility = View.VISIBLE
-                Log.d("textchanged", pw)
 
                 binding.isUsablePw.text = "사용하실 수 없는 비밀번호입니다."
                 binding.isUsablePw.setTextColor(
@@ -309,7 +224,6 @@ class SignUpFirstFragment : Fragment() {
                 isValidPW = isValidPW(pw)
                 Log.d("signup", isValidPW.toString())
                 if (isValidPW) {
-                    Log.d("last", "왜 안들어오냐")
                     binding.isUsablePw.text = "사용가능한 비밀번호입니다."
                     binding.isUsablePw.setTextColor(
                         ContextCompat.getColor(
@@ -358,9 +272,8 @@ class SignUpFirstFragment : Fragment() {
 
             }
         })
-        Log.d("pwagain", pwAgain)
+
         if (first == pwAgain) {
-            Log.d("toggle", "들어와야지")
             binding.isUsablePw.text = "비밀번호가 일치합니다."
             binding.isUsablePw.setTextColor(
                 ContextCompat.getColor(
@@ -403,7 +316,6 @@ class SignUpFirstFragment : Fragment() {
             )
 
             binding.signUpButton.setOnClickListener {
-                Log.d("회원가입", "버튼클릭")
                 val bundle = Bundle()
                 bundle.putString("email", email)
                 bundle.putString("password", pw)

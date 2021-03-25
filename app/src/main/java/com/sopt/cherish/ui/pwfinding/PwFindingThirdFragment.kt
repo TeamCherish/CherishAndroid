@@ -67,7 +67,6 @@ class PwFindingThirdFragment : Fragment() {
                 isValidPW = isValidPW(pw)
                 Log.d("signup", isValidPW.toString())
                 if (isValidPW) {
-                    Log.d("last", "왜 안들어오냐")
                     binding.isUsablePw.text = "사용가능한 비밀번호입니다."
                     binding.isUsablePw.setTextColor(
                         ContextCompat.getColor(
@@ -130,7 +129,6 @@ class PwFindingThirdFragment : Fragment() {
         )
         Log.d("pwagain", pwAgain)
         if (first == pwAgain) {
-            Log.d("toggle", "들어와야지")
             binding.isUsablePw.text = "비밀번호가 일치합니다."
             binding.isUsablePw.setTextColor(
                 ContextCompat.getColor(
@@ -153,7 +151,6 @@ class PwFindingThirdFragment : Fragment() {
             )
 
             binding.signUpButton.setOnClickListener {
-                Log.d("회원가입", "버튼클릭")
                 val bundle = Bundle()
                 bundle.putString("email", email)
                 bundle.putString("password", pw)
@@ -184,9 +181,21 @@ class PwFindingThirdFragment : Fragment() {
                 )
             )
 
-            binding.signUpButton.setOnClickListener {
-                Log.d("비밀번호변경", "버튼클릭")
+            //버튼 초록색 활성화
+            binding.signUpButton.setBackgroundColor(
+                ContextCompat.getColor(
+                    binding.root.context,
+                    R.color.cherish_green_main
+                )
+            )
+            binding.signUpButton.setTextColor(
+                ContextCompat.getColor(
+                    binding.root.context,
+                    R.color.white
+                )
+            )
 
+            binding.signUpButton.setOnClickListener {
                 requestServer(email, pw, pwAgain)
             }
         }
@@ -209,9 +218,6 @@ class PwFindingThirdFragment : Fragment() {
                         it.isSuccessful
                     }?.body()
                         ?.let { it ->
-                            Log.d("finding success", it.success.toString())
-                            Log.d("finding message", it.message)
-
                             if (it.success) {
                                 val intent = Intent(context, SignInActivity::class.java)
                                 startActivity(intent)
