@@ -6,10 +6,9 @@
                 android:bottom="3dp"
                 android:top="3dp"
                 android:left="3dp"
-                android:right="3dp"/>
+                android:right="3dp" />
 
-            <corners
-                android:radius="41dp"/>
+            <corners android:radius="41dp" />
 
             <gradient
                 android:startColor="#ffffff"
@@ -21,6 +20,6 @@
         <scale
             android:drawable="@drawable/progressbar_custom"
             android:scaleHeight="100%"
-            android:scaleGravity="bottom"/>
+            android:scaleGravity="bottom" />
     </item>
 </layer-list>

@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable
+
+    <variable
             name="dialogDetailPlantContact"
             type="com.sopt.cherish.ui.dialog.wateringdialog.DetailPlantContactDialogFragment" />
 

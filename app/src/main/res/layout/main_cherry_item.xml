@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-        <variable
+
+    <variable
             name="homeUserData"
             type="com.sopt.cherish.remote.api.User" />
     </data>

@@ -62,8 +62,9 @@
         <activity
             android:name=".ui.review.ReviewActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.pwfinding.PwFindingActivity"
-            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".ui.pwfinding.PwFindingActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".ui.splash.SplashActivity"
             android:screenOrientation="portrait">

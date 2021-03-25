@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <variable
+
+    <variable
             name="reviewViewModel"
             type="com.sopt.cherish.ui.review.ReviewViewModel" />
     </data>

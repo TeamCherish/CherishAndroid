@@ -19,7 +19,7 @@
         android:textColor="#2a2a2a"
         android:textSize="@dimen/text_20sp"
         android:textStyle="normal"
-        android:lineSpacingExtra="16sp"/>
+        android:lineSpacingExtra="16sp" />
 
     <EditText
         android:hint="@string/sign_up_email_hint"
@@ -50,5 +50,5 @@
         android:textSize="16sp"
         android:layout_marginStart="@dimen/margin_16dp"
         android:layout_marginEnd="@dimen/margin_16dp"
-        android:layout_marginBottom="@dimen/margin_21dp"/>
+        android:layout_marginBottom="@dimen/margin_21dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>
