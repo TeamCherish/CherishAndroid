@@ -239,24 +239,15 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/view2" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <ImageButton
                 android:id="@+id/imageButton_3detail"
-
+                android:background="@color/transparent"
                 android:layout_width="48dp"
+                app:srcCompat="@drawable/icn_info"
                 android:layout_height="48dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
-
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/icn_info" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </ImageButton>
 
             <TextView
                 android:id="@+id/textView_status_message"
