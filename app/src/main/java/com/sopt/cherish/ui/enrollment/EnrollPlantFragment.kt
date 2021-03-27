@@ -12,9 +12,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatDialog
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentEnrollPlantBinding
 import com.sopt.cherish.remote.model.RequestEnrollData
@@ -292,10 +294,17 @@ class EnrollPlantFragment : Fragment() {
 
 
     fun progressON() {
+
         progressDialog = AppCompatDialog(context)
         progressDialog.setCancelable(false)
         progressDialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         progressDialog.setContentView(R.layout.progress_layout)
+        progressDialog.findViewById<ImageView>(R.id.imageViewProgress)?.let {
+            Glide.with(this).load(R.raw.cherish_loading).into(
+                it
+            )
+        }
+
         progressDialog.show()
 
     }
