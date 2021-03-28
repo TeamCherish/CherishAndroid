@@ -73,10 +73,11 @@ class HomeFragment : Fragment(), OnItemClickListener {
 
     override fun onResume() {
         super.onResume()
-        viewModel.fetchUsers()
+        // todo : 이것도 별로고
         lifecycleScope.launch {
             delay(2000)
             viewModel.isWatered.value = null
+            viewModel.fetchUsers()
         }
     }
 

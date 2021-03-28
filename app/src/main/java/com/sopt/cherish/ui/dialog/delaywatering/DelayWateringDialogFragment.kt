@@ -51,6 +51,7 @@ class DelayWateringDialogFragment : DialogFragment() {
         }
     }
 
+    // todo : 갱신이 안돼 훈기야
     private fun sendDelayDayToServer(binding: DialogDelayWateringBinding) {
         // 함수화 해야합니다 진짜.
         binding.delayWateringAcceptBtn.setOnClickListener {
@@ -61,9 +62,9 @@ class DelayWateringDialogFragment : DialogFragment() {
                     true
                 )
             )
+            viewModel.fetchUsers()
             viewModel.isWatered.value = false
             shortToast(requireContext(), "미루기 성공!")
-            viewModel.fetchUsers()
             dismiss()
         }
     }

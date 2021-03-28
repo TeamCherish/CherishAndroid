@@ -63,11 +63,6 @@ class MainActivity : AppCompatActivity() {
          */
     }
 
-    override fun onResume() {
-        super.onResume()
-        viewModel.fetchUsers()
-    }
-
     private fun getFirebaseDeviceToken() {
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
             if (!task.isSuccessful) {
