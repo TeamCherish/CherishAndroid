@@ -52,8 +52,10 @@ class HomeFragment : Fragment(), OnItemClickListener {
         homeCherryListAdapter = HomeCherryListAdapter(this)
         standardBottomSheetBehavior =
             BottomSheetBehavior.from(binding.homeStandardBottomSheet)
+
         addBottomSheetCallback()
         initializeRecyclerView(homeCherryListAdapter)
+
         binding.homeWateringBtn.setOnClickListener {
             navigateWatering()
         }
@@ -73,11 +75,11 @@ class HomeFragment : Fragment(), OnItemClickListener {
 
     override fun onResume() {
         super.onResume()
-        // todo : 이것도 별로고
+        // todo : 구현은 했는데 방법이 별로인거같음
         lifecycleScope.launch {
             delay(2000)
-            viewModel.isWatered.value = null
             viewModel.fetchUsers()
+            viewModel.isWatered.value = null
         }
     }
 

@@ -4,7 +4,7 @@
 
     <data>
 
-    <variable
+        <variable
             name="homeUserData"
             type="com.sopt.cherish.remote.api.User" />
     </data>
@@ -34,8 +34,8 @@
             android:layout_marginTop="@dimen/margin_8dp"
             android:background="@drawable/home_bottom_sheet_item_selector"
             android:setProfile="@{homeUserData.thumbnailImageUrl}"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@id/main_user_name"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -43,38 +43,38 @@
             android:id="@+id/water_bg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/main_water_bg"
             android:layout_marginStart="40dp"
-            android:waterVisibility="@{homeUserData.dDay}"
             android:layout_marginTop="36dp"
-            app:layout_constraintStart_toStartOf="@id/main_user_img"
+            android:background="@drawable/main_water_bg"
+            android:waterVisibility="@{homeUserData.dDay}"
             app:layout_constraintBottom_toBottomOf="@id/main_user_img"
             app:layout_constraintEnd_toEndOf="@+id/main_user_img"
+            app:layout_constraintStart_toStartOf="@id/main_user_img"
             app:layout_constraintTop_toTopOf="@id/main_user_img" />
 
         <ImageView
             android:id="@+id/main_user_water"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/group_359"
-            android:waterVisibility="@{homeUserData.dDay}"
             android:layout_marginStart="40dp"
             android:layout_marginTop="36dp"
-            app:layout_constraintStart_toStartOf="@id/main_user_img"
+            android:src="@drawable/group_359"
+            android:waterVisibility="@{homeUserData.dDay}"
             app:layout_constraintBottom_toBottomOf="@id/main_user_img"
             app:layout_constraintEnd_toEndOf="@+id/main_user_img"
+            app:layout_constraintStart_toStartOf="@id/main_user_img"
             app:layout_constraintTop_toTopOf="@id/main_user_img" />
 
         <TextView
             android:id="@+id/main_user_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{homeUserData.nickName}"
-            android:textSize="12sp"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/notosanscjkkr_medium"
             android:includeFontPadding="false"
+            android:text="@{homeUserData.nickName}"
             android:textColor="@color/cherish_light_black"
+            android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="@+id/main_user_img"
             app:layout_constraintStart_toStartOf="@+id/main_user_img"
             app:layout_constraintTop_toBottomOf="@+id/main_user_img" />
