@@ -16,6 +16,7 @@ import com.sopt.cherish.databinding.FragmentSettingBinding
 import com.sopt.cherish.remote.api.MyPageUserRes
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.main.MainViewModel
+import com.sopt.cherish.ui.splash.SplashActivity
 import com.sopt.cherish.util.extension.shortToast
 import retrofit2.Call
 import retrofit2.Callback
@@ -90,6 +91,8 @@ class SettingFragment : Fragment() {
                 deleteUserPassword()
             }
             requireActivity().finish()
+            val intent = Intent(requireActivity(), SplashActivity::class.java)
+            startActivity(intent)
         }
         return binding.root
     }
@@ -137,7 +140,7 @@ class SettingFragment : Fragment() {
                                 useremail = it.myPageUserData.email
                                 Log.d("이메일", it.myPageUserData.email)
                                 binding.settingUsernickname.text =
-                                    it.myPageUserData.user_nickname.toString()
+                                    it.myPageUserData.user_nickname
                                 binding.settingUseremail.text = it.myPageUserData.email
                                 Log.d("list", it.myPageUserData.result.toString())
                             }

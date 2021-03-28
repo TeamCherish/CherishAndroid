@@ -58,6 +58,8 @@ class DetailPlantFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         detailserver()
+
+
         binding.imageViewDetailUrl.setOnClickListener {
 
             if (!touchimage) {
@@ -77,6 +79,7 @@ class DetailPlantFragment : Fragment() {
         }
         //여기에 작성
     }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -114,7 +114,7 @@
         android:layout_width="0dp"
         android:layout_height="50dp"
         style="@style/RoundButton.SignUp"
-        android:text="@string/sign_up_button_next"
+        android:text="@string/home_blank_start_btn_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

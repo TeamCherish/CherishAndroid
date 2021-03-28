@@ -5,13 +5,11 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -110,32 +108,6 @@ class ManagePlantFragment : Fragment() {
         transaction.commit()
     }
 
-
-    private fun setFont(binding: FragmentManagePlantBinding) {
-        val face = ResourcesCompat.getFont(requireContext(), R.font.notosanscjkkr_bold)
-        binding.myPageUserName.typeface = face
-        binding.myPageUserName.setTextColor(Color.parseColor("#454545"))
-        binding.myPageUserName.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18F)
-
-        binding.cherishgarden.typeface = face
-        binding.cherishgarden.setTextColor(Color.parseColor("#454545"))
-        binding.cherishgarden.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18F)
-/*
-        binding.myPageWateringCnt.sty
-        binding.myPageWateringCnt.setTextColor(Color.parseColor("#454545"))
-        //binding.myPageWateringCnt.setTextSize(TypedValue.COMPLEX_UNIT_SP,18F)
-
-        binding.myPagePostponeCnt.typeface=face
-        binding.myPagePostponeCnt.setTextColor(Color.parseColor("#454545"))
-        //binding.myPagePostponeCnt.setTextSize(TypedValue.COMPLEX_UNIT_SP,18F)
-
-        binding.myPageFinishCnt.typeface=face
-        binding.myPageFinishCnt.setTextColor(Color.parseColor("#454545"))
-        //binding.myPageFinishCnt.setTextSize(TypedValue.COMPLEX_UNIT_SP,18F)
-*/
-
-    }
-
     private fun initializeBottomSheetBehavior(binding: FragmentManagePlantBinding) {
         val standardBottomSheetBehavior =
             BottomSheetBehavior.from(binding.homeStandardBottomSheetMypage)
@@ -144,7 +116,7 @@ class ManagePlantFragment : Fragment() {
         val metrics = resources.displayMetrics
 
         standardBottomSheetBehavior.peekHeight = (metrics.heightPixels - 76.dp) / 2
-        standardBottomSheetBehavior.expandedOffset = 44.dp
+        standardBottomSheetBehavior.expandedOffset = 48.dp
         standardBottomSheetBehavior.isHideable = false
         standardBottomSheetBehavior.isGestureInsetBottomIgnored = true
 
