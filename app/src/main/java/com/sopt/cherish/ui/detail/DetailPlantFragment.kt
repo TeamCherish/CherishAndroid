@@ -276,7 +276,11 @@ class DetailPlantFragment : Fragment() {
                                 } else if (it.data.reviews.size == 1) {
                                     binding.userdate.text = (it.data.reviews[0].water_date)
                                     binding.usermemo.text = it.data.reviews[0].review
-                                    binding.memocons2.isVisible = false
+
+                                    binding.userdate2.text = "_ _"
+                                    binding.usermemo2.text = "메모를 입력하지 않았어요!"
+
+                                    binding.memocons2.isVisible = true
                                 } else {
                                     binding.userdate.text = (it.data.reviews[0].water_date)
                                     binding.usermemo.text = it.data.reviews[0].review
