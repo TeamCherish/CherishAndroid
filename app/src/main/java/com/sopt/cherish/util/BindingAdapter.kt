@@ -2,7 +2,6 @@ package com.sopt.cherish.util
 
 import android.annotation.SuppressLint
 import android.os.Handler
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
@@ -213,27 +212,23 @@ object BindingAdapter {
 
     @JvmStatic
     @BindingAdapter("android:setProgressBarBackground")
-    fun setProgressbarBackground(progressbar: ProgressBar, rating: Int?) {
-        if (rating != null) {
-            if (rating <= 30) {
-                Log.d("BindingAdapter", progressbar.context.toString())
-                progressbar.progressDrawable = progressbar.context?.let {
-                    ResourcesCompat.getDrawable(
-                        it.resources,
-                        R.drawable.progress_drawable_verticle_red,
-                        null
-                    )
-                }
-            } else {
-                progressbar.progressDrawable = progressbar.context?.let {
-                    ResourcesCompat.getDrawable(
-                        it.resources,
-                        R.drawable.progress_drawable_vertical,
-                        null
-                    )
-                }
+    fun setProgressbarBackground(progressbar: ProgressBar, rating: Int) {
+        progressbar.progressDrawable = if (rating <= 30) {
+            progressbar.context?.let {
+                ResourcesCompat.getDrawable(
+                    it.resources,
+                    R.drawable.progress_drawable_verticle_red,
+                    null
+                )
+            }
+        } else {
+            progressbar.context?.let {
+                ResourcesCompat.getDrawable(
+                    it.resources,
+                    R.drawable.progress_drawable_vertical,
+                    null
+                )
             }
         }
     }
-
 }

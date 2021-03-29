@@ -102,7 +102,7 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
             val kakaoIntent = requireContext().packageManager.getLaunchIntentForPackage(
                 KAKAO_PACKAGE_NAME
             )
-            kakaoIntent?.flags = FLAG_ACTIVITY_REORDER_TO_FRONT
+            kakaoIntent!!.flags = FLAG_ACTIVITY_REORDER_TO_FRONT
             startReview()
             startActivity(kakaoIntent)
         } else {
