@@ -31,7 +31,6 @@
         android:usesCleartextTraffic="true"
         tools:replace="android:allowBackup">
 
-
         <service
             android:name=".ui.notification.FirebaseNotificationService"
             android:enabled="true"
