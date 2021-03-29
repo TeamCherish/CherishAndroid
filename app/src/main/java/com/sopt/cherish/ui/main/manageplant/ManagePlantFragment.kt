@@ -1,20 +1,28 @@
 package com.sopt.cherish.ui.main.manageplant
 
 
+import android.R.attr.key
+import android.app.Activity
+import android.content.Context.MODE_PRIVATE
 import android.content.Intent
-import android.graphics.Color
+import android.content.SharedPreferences
+import android.graphics.*
+import android.media.ExifInterface
+import android.net.Uri
 import android.os.Bundle
+import android.os.Environment
+import android.preference.PreferenceManager
+import android.provider.MediaStore
 import android.util.Log
-import android.util.TypedValue
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.LinearLayout
+import android.widget.PopupMenu
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
+import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.tabs.TabLayout
 import com.sopt.cherish.R
@@ -23,16 +31,20 @@ import com.sopt.cherish.databinding.MyPageCustomTabBinding
 import com.sopt.cherish.remote.api.MyPageCherishData
 import com.sopt.cherish.remote.api.MyPageUserRes
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
-import com.sopt.cherish.ui.adapter.MypagePhoneBookSearchAdapter
 import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
 import com.sopt.cherish.ui.main.MainActivity
 import com.sopt.cherish.ui.main.MainViewModel
+import com.sopt.cherish.ui.main.setting.ImageSharedPreferences
 import com.sopt.cherish.ui.main.setting.UserModifyFragment
 import com.sopt.cherish.util.PixelUtil.dp
 import com.sopt.cherish.util.SimpleLogger
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.File
+import java.io.IOException
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 /**
@@ -49,9 +61,8 @@ class ManagePlantFragment : Fragment() {
     private lateinit var tabBindingSecond: MyPageCustomTabBinding
     lateinit var data: List<MyPageCherishData>
     lateinit var binding: FragmentManagePlantBinding
-    var mypageusername: String = ""
-    var mypageuseremail: String = ""
-    lateinit var madapter: MypagePhoneBookSearchAdapter
+    private var mypageusername: String = ""
+    private var mypageuseremail: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -85,16 +96,34 @@ class ManagePlantFragment : Fragment() {
             (activity as MainActivity).replaceFragment(tabIndex, data, isSearched)
         }
 
+        initializeProfile(binding)
+
         return binding.root
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId==1)
+            return true
+        return super.onOptionsItemSelected(item)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.profile_menu, menu)
+    }
 
     override fun onResume() {
         super.onResume()
         setTabLayout()
         initializeServerRequest(binding)
-        //initializeSearchBtn()
         initializeBottomSheetBehavior(binding)
+        initializeProfile(binding)
+    }
+
+    private fun initializeProfile(binding:FragmentManagePlantBinding){
+        if(ImageSharedPreferences.getImageFile(requireContext()).length!=0){ //앨범일 때
+            val uri=Uri.parse(ImageSharedPreferences.getImageFile(requireContext()))
+            Glide.with(requireContext()).load(uri).circleCrop().into(binding.myPageUserImg)
+        }
     }
 
     private fun navigateUserModifyFragment() {
