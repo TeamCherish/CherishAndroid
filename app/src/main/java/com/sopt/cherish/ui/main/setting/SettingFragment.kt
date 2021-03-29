@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.bumptech.glide.Glide
 import com.sopt.cherish.MainApplication
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentSettingBinding
@@ -94,7 +95,23 @@ class SettingFragment : Fragment() {
             val intent=Intent(requireActivity(), SplashActivity::class.java)
             startActivity(intent)
         }
+
+        initializeProfile(binding)
+
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        initializeProfile(binding)
+    }
+
+    private fun initializeProfile(binding: FragmentSettingBinding){
+        if(ImageSharedPreferences.getImageFile(requireContext()).length!=0){ //앨범일 때
+            val uri=Uri.parse(ImageSharedPreferences.getImageFile(requireContext()))
+            Glide.with(requireContext()).load(uri).circleCrop().into(binding.imageView8)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
