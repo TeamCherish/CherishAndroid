@@ -47,11 +47,12 @@ class UserModifyFragment : Fragment() {
     val REQUEST_IMAGE_CAPTURE = 1
     val REQUEST_GALLERY_TAKE=2
     lateinit var currentPhotoPath : String
+    var usernick:String?=""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         val view = inflater.inflate(R.layout.fragment_user_modify, container, false)
 
         binding = FragmentUserModifyBinding.bind(view)
@@ -86,9 +87,12 @@ class UserModifyFragment : Fragment() {
             binding.settingEditNickname.setText("")
         }
         binding.buttonNickchange.setOnClickListener {
+            if(binding.settingEditNickname.text.toString().isNotEmpty())
+                usernick=binding.settingEditNickname.text.toString()
+
             val body = RequestNicknameData(
                 viewModel.cherishUserId.value!!,
-                binding.settingEditNickname.text.toString()
+                usernick!!
             )
             requestData.nicknameChangeAPI.nicknamechange(body)
                 .enqueue(
@@ -128,7 +132,7 @@ class UserModifyFragment : Fragment() {
     }
 
     private fun initializeProfile(){
-        if(ImageSharedPreferences.getImageFile(requireContext()).length!=0){ //앨범일 때
+        if(ImageSharedPreferences.getImageFile(requireContext()).isNotEmpty()){ //앨범일 때
             val uri=Uri.parse(ImageSharedPreferences.getImageFile(requireContext()))
             Glide.with(requireContext()).load(uri).circleCrop().into(binding.modifyUserImg)
         }
@@ -259,12 +263,10 @@ class UserModifyFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        var usernick = arguments?.getString("settingusernickname").toString()
+        usernick = arguments?.getString("settingusernickname").toString()
         binding.settingEditNickname.hint = (usernick)
 
         binding.settingEditEmail.hint = (arguments?.getString("settinguseremail"))
         binding.settingEditEmail.isEnabled = false
     }
-
-
 }
