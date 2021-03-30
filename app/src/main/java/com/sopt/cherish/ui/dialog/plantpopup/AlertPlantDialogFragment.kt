@@ -70,11 +70,7 @@ class AlertPlantDialogFragment(plantId: Int) : DialogFragment(), View.OnClickLis
         super.onDestroy()
         _binding = null
     }
-
-    override fun onResume() {
-        super.onResume()
-        DialogUtil.adjustDialogSize(this, 0.9f, 0.6f)
-    }
+    
 
     override fun onClick(view: View?) {
         dismiss()
