@@ -14,7 +14,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
-import com.jackandphantom.circularprogressbar.CircleProgressbar
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentDetailPlantBinding
 import com.sopt.cherish.remote.api.ResponsePlantCardDatas
@@ -33,7 +32,9 @@ import java.lang.Math.abs
 
 class DetailPlantFragment : Fragment() {
 
-    private lateinit var circleProgressbar: CircleProgressbar
+    //private lateinit var circleProgressbar: CircleProgressbar
+
+
     private val viewModel: DetailPlantViewModel by activityViewModels()
     private val requestData = RetrofitBuilder
     lateinit var memoList: ArrayList<MemoListDataclass>
@@ -106,7 +107,7 @@ class DetailPlantFragment : Fragment() {
         userId = arguments?.getInt("userId_detail")!!
         //reset()
 
-        circleProgressbar = binding.test
+        //circleProgressbar = binding.test
 
         //reset()
         binding.buttonWater.setOnClickListener {
@@ -189,21 +190,17 @@ class DetailPlantFragment : Fragment() {
 
                                 plant_id = it.data.plantId
                                 Log.d("fdfdfd", it.data.plantId.toString())
-
                                 if (it.data.gage < 0.5) {
 
-                                    circleProgressbar.foregroundProgressColor =
-                                        Color.parseColor("#F7596C")
-                                    circleProgressbar.setProgressWithAnimation(
-                                        it.data.gage.toFloat() * 100,
-                                        animationDuration
-                                    )
+                                    binding.test.setProgressStartColor(Color.parseColor("#F7596C"))
+                                    binding.test.setProgressEndColor(Color.parseColor("#F7596C"))
+
+                                    binding.test.progress= (it.data.gage.toFloat() * 100).toInt()
+
 
                                 } else {
-                                    circleProgressbar.setProgressWithAnimation(
-                                        it.data.gage.toFloat() * 100,
-                                        animationDuration
-                                    )
+                                    binding.test.progress= (it.data.gage.toFloat() * 100).toInt()
+
                                 }
 
                                 binding.chip.isVisible = false
