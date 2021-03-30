@@ -1,8 +1,7 @@
-package com.sopt.cherish.ui.main.setting
+package com.sopt.cherish.util.extension
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.graphics.Bitmap
 
 object ImageSharedPreferences {
     private val MY_ACCOUNT:String="account"
