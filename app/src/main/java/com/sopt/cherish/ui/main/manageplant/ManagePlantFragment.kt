@@ -1,24 +1,16 @@
 package com.sopt.cherish.ui.main.manageplant
 
 
-import android.R.attr.key
-import android.app.Activity
-import android.content.Context.MODE_PRIVATE
+
 import android.content.Intent
-import android.content.SharedPreferences
 import android.graphics.*
 import android.media.ExifInterface
 import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
-import android.preference.PreferenceManager
-import android.provider.MediaStore
 import android.util.Log
 import android.view.*
 import android.widget.LinearLayout
-import android.widget.PopupMenu
 import androidx.core.content.ContextCompat
-import androidx.core.content.FileProvider
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -120,9 +112,58 @@ class ManagePlantFragment : Fragment() {
     }
 
     private fun initializeProfile(binding:FragmentManagePlantBinding){
-        if(ImageSharedPreferences.getImageFile(requireContext()).length!=0){ //앨범일 때
-            val uri=Uri.parse(ImageSharedPreferences.getImageFile(requireContext()))
+        if(ImageSharedPreferences.getGalleryFile(requireContext()).isNotEmpty()){ //앨범일 때
+            val uri=Uri.parse(ImageSharedPreferences.getGalleryFile(requireContext()))
             Glide.with(requireContext()).load(uri).circleCrop().into(binding.myPageUserImg)
+        }else if(ImageSharedPreferences.getCameraFile(requireContext()).isNotEmpty()){
+            val path=ImageSharedPreferences.getCameraFile(requireContext())
+            val bitmap = BitmapFactory.decodeFile(path)
+            lateinit var exif : ExifInterface
+
+            try{
+                exif = ExifInterface(path)
+                var exifOrientation = 0
+                var exifDegree = 0
+
+                exifOrientation = exif.getAttributeInt(
+                    ExifInterface.TAG_ORIENTATION,
+                    ExifInterface.ORIENTATION_NORMAL
+                )
+                exifDegree = exifOrientationToDegress(exifOrientation)
+
+                Glide.with(requireContext()).load(rotate(bitmap, exifDegree)).circleCrop().into(
+                    binding.myPageUserImg
+                )
+                //binding.myPageUserImg.setImageBitmap(rotate(bitmap, exifDegree))
+            }catch (e: IOException){
+                e.printStackTrace()
+            }
+        }else{
+            binding.myPageUserImg.setBackgroundResource(R.drawable.user_img)
+        }
+    }
+
+    private fun rotate(bitmap: Bitmap, degree: Int) : Bitmap {
+        val matrix = Matrix()
+        matrix.postRotate(degree.toFloat())
+        return Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
+    }
+
+    private fun exifOrientationToDegress(exifOrientation: Int): Int {
+        when(exifOrientation){
+            ExifInterface.ORIENTATION_ROTATE_90 -> {
+                return 90
+            }
+            ExifInterface.ORIENTATION_ROTATE_180 -> {
+                return 180
+            }
+            ExifInterface.ORIENTATION_ROTATE_270 -> {
+                return 270
+            }
+            else -> {
+                return 0
+            }
+
         }
     }
 
