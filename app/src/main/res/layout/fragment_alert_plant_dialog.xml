@@ -9,7 +9,7 @@
 
     <androidx.viewpager.widget.ViewPager
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="410dp"
         android:background="@color/transparent"
         android:id="@+id/dialog_viewpager"
         app:layout_constraintBottom_toBottomOf="parent"
