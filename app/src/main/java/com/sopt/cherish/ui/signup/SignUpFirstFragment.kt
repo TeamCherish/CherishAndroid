@@ -184,11 +184,7 @@ class SignUpFirstFragment : Fragment() {
                             it.isSuccessful
                         }?.body()
                             ?.let { it ->
-                                Log.d("email", it.success.toString())
-                                Log.d("email message", it.message)
-
                                 isValid = it.success
-                                Log.d("isValid", isValid.toString())
 
                             }
                     }
