@@ -1,6 +1,10 @@
 package com.sopt.cherish.ui.main.setting
 
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Matrix
+import android.media.ExifInterface
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +14,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.bumptech.glide.Glide
 import com.sopt.cherish.MainApplication
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentSettingBinding
@@ -21,6 +26,7 @@ import com.sopt.cherish.util.extension.shortToast
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.io.IOException
 
 /**
  * 환경 설정 뷰
@@ -94,7 +100,72 @@ class SettingFragment : Fragment() {
             val intent=Intent(requireActivity(), SplashActivity::class.java)
             startActivity(intent)
         }
+
+        initializeProfile(binding)
+
         return binding.root
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        initializeProfile(binding)
+    }
+
+    private fun initializeProfile(binding: FragmentSettingBinding){
+        if(ImageSharedPreferences.getGalleryFile(requireContext()).isNotEmpty()){ //앨범일 때
+            val uri=Uri.parse(ImageSharedPreferences.getGalleryFile(requireContext()))
+            Glide.with(requireContext()).load(uri).circleCrop().into(binding.imageView8)
+        }else if(ImageSharedPreferences.getCameraFile(requireContext()).isNotEmpty()){
+            val path=ImageSharedPreferences.getCameraFile(requireContext())
+            val bitmap = BitmapFactory.decodeFile(path)
+            lateinit var exif : ExifInterface
+
+            try{
+                exif = ExifInterface(path)
+                var exifOrientation = 0
+                var exifDegree = 0
+
+                exifOrientation = exif.getAttributeInt(
+                    ExifInterface.TAG_ORIENTATION,
+                    ExifInterface.ORIENTATION_NORMAL
+                )
+                exifDegree = exifOrientationToDegress(exifOrientation)
+
+                Glide.with(requireContext()).load(rotate(bitmap, exifDegree)).circleCrop().into(
+                    binding.imageView8
+                )
+                //binding.myPageUserImg.setImageBitmap(rotate(bitmap, exifDegree))
+            }catch (e: IOException){
+                e.printStackTrace()
+            }
+        }else{
+            binding.imageView8.setBackgroundResource(R.drawable.user_img)
+        }
+    }
+
+    private fun rotate(bitmap: Bitmap, degree: Int) : Bitmap {
+        val matrix = Matrix()
+        matrix.postRotate(degree.toFloat())
+        return Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
+    }
+
+    private fun exifOrientationToDegress(exifOrientation: Int): Int {
+        when(exifOrientation){
+            ExifInterface.ORIENTATION_ROTATE_90 -> {
+                return 90
+            }
+            ExifInterface.ORIENTATION_ROTATE_180 -> {
+                return 180
+            }
+            ExifInterface.ORIENTATION_ROTATE_270 -> {
+                return 270
+            }
+            else -> {
+                return 0
+            }
+
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -135,14 +206,13 @@ class SettingFragment : Fragment() {
                         }?.body()
                             ?.let { it ->
 
-                                Log.d("data success!", it.myPageUserData.waterCount.toString())
                                 usernickname = it.myPageUserData.user_nickname
                                 useremail = it.myPageUserData.email
-                                Log.d("이메일", it.myPageUserData.email)
+
                                 binding.settingUsernickname.text =
                                     it.myPageUserData.user_nickname
                                 binding.settingUseremail.text = it.myPageUserData.email
-                                Log.d("list", it.myPageUserData.result.toString())
+
                             }
                     }
                 })

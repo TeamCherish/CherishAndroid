@@ -14,10 +14,10 @@
         tools:context=".ui.main.setting.UserModifyFragment">
 
 
-        <ImageView
-            android:id="@+id/imageView17"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/modify_user_img"
+            android:layout_width="86dp"
+            android:layout_height="86dp"
             android:layout_marginTop="57dp"
             android:src="@drawable/user_img"
             app:layout_constraintEnd_toEndOf="parent"
@@ -35,7 +35,7 @@
             android:background="@drawable/setting_edittext_bg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView17">
+            app:layout_constraintTop_toBottomOf="@+id/modify_user_img">
 
             <EditText
                 android:id="@+id/setting_edit_nickname"
