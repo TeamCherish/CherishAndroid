@@ -3,7 +3,6 @@ package com.sopt.cherish.ui.main.setting
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
-import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
@@ -15,7 +14,6 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -62,8 +60,8 @@ class UserModifyFragment : Fragment() {
         }
 
         binding.modifyUserImg.setOnClickListener{
-            binding.buttonNickchange.setBackgroundColor(Color.parseColor("#1AD287"))
             changeProfileImage()
+            binding.buttonNickchange.setBackgroundColor(Color.parseColor("#1AD287"))
         }
 
         binding.settingEditNickname.addTextChangedListener(
@@ -132,9 +130,34 @@ class UserModifyFragment : Fragment() {
     }
 
     private fun initializeProfile(){
-        if(ImageSharedPreferences.getImageFile(requireContext()).isNotEmpty()){ //앨범일 때
-            val uri=Uri.parse(ImageSharedPreferences.getImageFile(requireContext()))
+        if(ImageSharedPreferences.getGalleryFile(requireContext()).isNotEmpty()){ //앨범일 때
+            val uri=Uri.parse(ImageSharedPreferences.getGalleryFile(requireContext()))
             Glide.with(requireContext()).load(uri).circleCrop().into(binding.modifyUserImg)
+        }else if(ImageSharedPreferences.getCameraFile(requireContext()).isNotEmpty()){
+            val path=ImageSharedPreferences.getCameraFile(requireContext())
+            val bitmap = BitmapFactory.decodeFile(path)
+            lateinit var exif : ExifInterface
+
+            try{
+                exif = ExifInterface(path)
+                var exifOrientation = 0
+                var exifDegree = 0
+
+                exifOrientation = exif.getAttributeInt(
+                    ExifInterface.TAG_ORIENTATION,
+                    ExifInterface.ORIENTATION_NORMAL
+                )
+                exifDegree = exifOrientationToDegress(exifOrientation)
+
+                Glide.with(requireContext()).load(rotate(bitmap, exifDegree)).circleCrop().into(
+                    binding.modifyUserImg
+                )
+                //binding.myPageUserImg.setImageBitmap(rotate(bitmap, exifDegree))
+            }catch (e: IOException){
+                e.printStackTrace()
+            }
+        }else{
+            binding.modifyUserImg.setBackgroundResource(R.drawable.user_img)
         }
     }
 
@@ -179,10 +202,12 @@ class UserModifyFragment : Fragment() {
 
         if(requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK){
             val bitmap = BitmapFactory.decodeFile(currentPhotoPath)
+
             lateinit var exif : ExifInterface
 
-            ImageSharedPreferences.clearImage(requireContext())
-            ImageSharedPreferences.setImageFile(requireContext(),currentPhotoPath)
+            //ImageSharedPreferences.clearImage(requireContext(), "camera")
+            ImageSharedPreferences.clearImage(requireContext(), "gallery")
+            ImageSharedPreferences.setCameraFile(requireContext(), currentPhotoPath)
 
             try{
                 exif = ExifInterface(currentPhotoPath)
@@ -207,8 +232,9 @@ class UserModifyFragment : Fragment() {
 
         if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_GALLERY_TAKE){
             //binding.myPageUserImg.setImageURI(data?.data)
-            ImageSharedPreferences.clearImage(requireContext())
-            ImageSharedPreferences.setImageFile(requireContext(),data?.data.toString())
+            ImageSharedPreferences.clearImage(requireContext(), "camera")
+            //ImageSharedPreferences.clearImage(requireContext(), "gallery")
+            ImageSharedPreferences.setGalleryFile(requireContext(), data?.data.toString())
 
             Glide.with(requireContext()).load(data?.data).circleCrop().into(binding.modifyUserImg)
         }
