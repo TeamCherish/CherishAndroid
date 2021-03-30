@@ -178,7 +178,7 @@ class DetailPlantFragment : Fragment() {
                                     binding.textViewBirth.text = it.data.birth.toString()
 
                                 }
-                                binding.textView1WithName.text = it.data.name.toString()
+                                binding.textView1WithName.text = it.data.nickname.toString()
 
                                 statusmessagebig = it.data.status_message
                                 statusmessagesmall = it.data.status
