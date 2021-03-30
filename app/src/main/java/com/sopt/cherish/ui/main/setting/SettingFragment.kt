@@ -22,6 +22,7 @@ import com.sopt.cherish.remote.api.MyPageUserRes
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.ui.splash.SplashActivity
+import com.sopt.cherish.util.extension.ImageSharedPreferences
 import com.sopt.cherish.util.extension.shortToast
 import retrofit2.Call
 import retrofit2.Callback
@@ -117,7 +118,7 @@ class SettingFragment : Fragment() {
             val uri=Uri.parse(ImageSharedPreferences.getGalleryFile(requireContext()))
             Glide.with(requireContext()).load(uri).circleCrop().into(binding.imageView8)
         }else if(ImageSharedPreferences.getCameraFile(requireContext()).isNotEmpty()){
-            val path=ImageSharedPreferences.getCameraFile(requireContext())
+            val path= ImageSharedPreferences.getCameraFile(requireContext())
             val bitmap = BitmapFactory.decodeFile(path)
             lateinit var exif : ExifInterface
 
