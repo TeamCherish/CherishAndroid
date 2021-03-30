@@ -93,7 +93,10 @@ dependencies {
     implementation 'com.kyleduo.switchbutton:library:2.0.0'
 
     //progress bar
-    implementation 'com.jackandphantom.android:circularprogressbar:1.2.0'
+    //implementation 'com.jackandphantom.android:circularprogressbar:1.2.0'
+
+    implementation 'com.dinuscxj:circleprogressbar:1.3.0'
+
 
     // Firebase BoM
     implementation platform('com.google.firebase:firebase-bom:26.2.0')
