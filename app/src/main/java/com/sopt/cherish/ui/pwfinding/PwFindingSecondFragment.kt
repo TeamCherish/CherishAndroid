@@ -25,6 +25,7 @@ class PwFindingSecondFragment : Fragment() {
     lateinit var binding: FragmentPwFindingSecondBinding
     private val requestData = RetrofitBuilder
     private var certificationNumber: String = ""
+    private var authdata=-1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,11 +39,14 @@ class PwFindingSecondFragment : Fragment() {
 
         binding = FragmentPwFindingSecondBinding.bind(view)
 
+        getCertificationNumber()
+
         requestServer(email)
 
         binding.certificationAgain.setOnClickListener {
             requestServer(email)
         }
+
         return binding.root
     }
 
@@ -63,10 +67,7 @@ class PwFindingSecondFragment : Fragment() {
                         it.isSuccessful
                     }?.body()
                         ?.let { it ->
-                            Log.d("finding success", it.success.toString())
-                            Log.d("finding data", it.data.toString())
-
-                            getCertificationNumber()
+                            authdata=it.data.verifyCode
                         }
                 }
             }
@@ -75,7 +76,7 @@ class PwFindingSecondFragment : Fragment() {
 
     private fun getCertificationNumber() {
         binding.identificationNumber.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 certificationNumber = binding.identificationNumber.text.toString()
 
                 binding.signUpButton.setBackgroundColor(
@@ -105,12 +106,6 @@ class PwFindingSecondFragment : Fragment() {
                         )
                     )
 
-                    binding.signUpButton.setOnClickListener {
-                        val bundle = Bundle()
-                        bundle.putString("email", email)
-                        (activity as PwFindingActivity).postData(bundle)
-                        (activity as PwFindingActivity).replaceFragment(2)
-                    }
                 }
             }
 
@@ -118,7 +113,17 @@ class PwFindingSecondFragment : Fragment() {
 
             }
 
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            override fun afterTextChanged(s: Editable?) {
+                certificationNumber = binding.identificationNumber.text.toString()
+
+                binding.signUpButton.setOnClickListener {
+                    if(certificationNumber==authdata.toString()){
+                        val bundle = Bundle()
+                        bundle.putString("email", email)
+                        (activity as PwFindingActivity).postData(bundle)
+                        (activity as PwFindingActivity).replaceFragment(2)
+                    }
+                }
 
             }
         })

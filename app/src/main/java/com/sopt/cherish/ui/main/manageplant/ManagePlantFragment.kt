@@ -26,17 +26,14 @@ import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
 import com.sopt.cherish.ui.main.MainActivity
 import com.sopt.cherish.ui.main.MainViewModel
-import com.sopt.cherish.ui.main.setting.ImageSharedPreferences
+import com.sopt.cherish.util.extension.ImageSharedPreferences
 import com.sopt.cherish.ui.main.setting.UserModifyFragment
 import com.sopt.cherish.util.PixelUtil.dp
 import com.sopt.cherish.util.SimpleLogger
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.io.File
 import java.io.IOException
-import java.text.SimpleDateFormat
-import java.util.*
 
 
 /**
@@ -116,7 +113,7 @@ class ManagePlantFragment : Fragment() {
             val uri=Uri.parse(ImageSharedPreferences.getGalleryFile(requireContext()))
             Glide.with(requireContext()).load(uri).circleCrop().into(binding.myPageUserImg)
         }else if(ImageSharedPreferences.getCameraFile(requireContext()).isNotEmpty()){
-            val path=ImageSharedPreferences.getCameraFile(requireContext())
+            val path= ImageSharedPreferences.getCameraFile(requireContext())
             val bitmap = BitmapFactory.decodeFile(path)
             lateinit var exif : ExifInterface
 

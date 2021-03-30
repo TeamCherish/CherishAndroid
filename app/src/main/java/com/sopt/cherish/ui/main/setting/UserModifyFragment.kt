@@ -28,6 +28,7 @@ import com.sopt.cherish.remote.api.RequestNicknameData
 import com.sopt.cherish.remote.api.ResponseNicknameChangedata
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.main.MainViewModel
+import com.sopt.cherish.util.extension.ImageSharedPreferences
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -134,7 +135,7 @@ class UserModifyFragment : Fragment() {
             val uri=Uri.parse(ImageSharedPreferences.getGalleryFile(requireContext()))
             Glide.with(requireContext()).load(uri).circleCrop().into(binding.modifyUserImg)
         }else if(ImageSharedPreferences.getCameraFile(requireContext()).isNotEmpty()){
-            val path=ImageSharedPreferences.getCameraFile(requireContext())
+            val path= ImageSharedPreferences.getCameraFile(requireContext())
             val bitmap = BitmapFactory.decodeFile(path)
             lateinit var exif : ExifInterface
 
@@ -172,6 +173,9 @@ class UserModifyFragment : Fragment() {
                 }
                 R.id.gallery ->
                     getAlbum()
+                R.id.delete->
+                    deleteImage()
+
             }
             true
         })
@@ -191,6 +195,14 @@ class UserModifyFragment : Fragment() {
         }
     }
 
+    private fun deleteImage(){
+        ImageSharedPreferences.clearImage(requireContext(),"gallery")
+        ImageSharedPreferences.clearImage(requireContext(),"camera")
+
+        val transaction=parentFragmentManager.beginTransaction()
+        transaction.detach(this).attach(this).commit()
+    }
+
     private fun getAlbum(){
         val intent = Intent(Intent.ACTION_PICK)
         intent.type = "image/*"
@@ -205,7 +217,7 @@ class UserModifyFragment : Fragment() {
 
             lateinit var exif : ExifInterface
 
-            //ImageSharedPreferences.clearImage(requireContext(), "camera")
+            ImageSharedPreferences.clearImage(requireContext(), "camera")
             ImageSharedPreferences.clearImage(requireContext(), "gallery")
             ImageSharedPreferences.setCameraFile(requireContext(), currentPhotoPath)
 
@@ -230,13 +242,17 @@ class UserModifyFragment : Fragment() {
 
         }
 
-        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_GALLERY_TAKE){
+        else if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_GALLERY_TAKE){
             //binding.myPageUserImg.setImageURI(data?.data)
             ImageSharedPreferences.clearImage(requireContext(), "camera")
-            //ImageSharedPreferences.clearImage(requireContext(), "gallery")
+            ImageSharedPreferences.clearImage(requireContext(), "gallery")
             ImageSharedPreferences.setGalleryFile(requireContext(), data?.data.toString())
 
             Glide.with(requireContext()).load(data?.data).circleCrop().into(binding.modifyUserImg)
+        }
+
+        else {
+            binding.modifyUserImg.setBackgroundResource(R.drawable.user_img)
         }
     }
 

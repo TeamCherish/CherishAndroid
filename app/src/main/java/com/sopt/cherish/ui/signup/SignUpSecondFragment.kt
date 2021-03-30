@@ -27,6 +27,7 @@ class SignUpSecondFragment : Fragment() {
     var authData: String = ""
     var email: String = ""
     var password: String = ""
+    private var certificationNumber: String = ""
 
 
     override fun onCreateView(
@@ -126,17 +127,10 @@ class SignUpSecondFragment : Fragment() {
 
         binding.userCertificationNumber.addTextChangedListener(object:TextWatcher{
             override fun afterTextChanged(s: Editable?) {
-            }
+                certificationNumber=binding.userCertificationNumber.text.toString()
 
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                val certificationNumber=binding.userCertificationNumber.text.toString()
-
-                Log.d("auth",certificationNumber)
-                Log.d("authData",authData)
+                Log.d("last 입력",certificationNumber)
+                Log.d("last data",authData)
                 if(authData==certificationNumber){
                     binding.certificationOk.visibility=View.VISIBLE
                     binding.certificationOk.text = "인증번호가 일치합니다."
@@ -162,13 +156,15 @@ class SignUpSecondFragment : Fragment() {
                     )
 
                     binding.signUpButton.setOnClickListener {
-                        val myBundle = Bundle()
-                        myBundle.putString("email", email)
-                        myBundle.putString("password", password)
-                        myBundle.putString("phone", phoneNumber)
+                        if(authData==certificationNumber){
+                            val myBundle = Bundle()
+                            myBundle.putString("email", email)
+                            myBundle.putString("password", password)
+                            myBundle.putString("phone", phoneNumber)
 
-                        (activity as SignUpActivity).postData(myBundle)
-                        (activity as SignUpActivity).replaceFragment(2)
+                            (activity as SignUpActivity).postData(myBundle)
+                            (activity as SignUpActivity).replaceFragment(2)
+                        }
                     }
                 }else{
                     //버튼 비활성화
@@ -186,6 +182,14 @@ class SignUpSecondFragment : Fragment() {
                     )
                     binding.certificationOk.visibility=View.INVISIBLE
                 }
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                certificationNumber=binding.userCertificationNumber.text.toString()
             }
         })
     }
