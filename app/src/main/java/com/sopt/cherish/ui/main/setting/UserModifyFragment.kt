@@ -27,7 +27,9 @@ import com.sopt.cherish.databinding.FragmentUserModifyBinding
 import com.sopt.cherish.remote.api.RequestNicknameData
 import com.sopt.cherish.remote.api.ResponseNicknameChangedata
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
+import com.sopt.cherish.ui.main.MainActivity
 import com.sopt.cherish.ui.main.MainViewModel
+import com.sopt.cherish.util.extension.FinalSharedPreferences
 import com.sopt.cherish.util.extension.ImageSharedPreferences
 import retrofit2.Call
 import retrofit2.Callback
@@ -93,6 +95,21 @@ class UserModifyFragment : Fragment() {
                 viewModel.cherishUserId.value!!,
                 usernick!!
             )
+
+            (activity as MainActivity).beforeClick=false
+
+            val cameraUri=FinalSharedPreferences.getCameraFile(requireContext())
+            val galleryUri=FinalSharedPreferences.getGalleryFile(requireContext())
+
+            if(cameraUri.isNotEmpty())
+                ImageSharedPreferences.setCameraFile(requireContext(),cameraUri)
+            else if(galleryUri.isNotEmpty())
+                ImageSharedPreferences.setGalleryFile(requireContext(),galleryUri)
+            if(cameraUri.isEmpty()&&galleryUri.isEmpty()){
+                ImageSharedPreferences.clearImage(requireContext(),"camera")
+                ImageSharedPreferences.clearImage(requireContext(),"gallery")
+            }
+
             requestData.nicknameChangeAPI.nicknamechange(body)
                 .enqueue(
                     object : Callback<ResponseNicknameChangedata> {
@@ -131,35 +148,42 @@ class UserModifyFragment : Fragment() {
     }
 
     private fun initializeProfile(){
-        if(ImageSharedPreferences.getGalleryFile(requireContext()).isNotEmpty()){ //앨범일 때
-            val uri=Uri.parse(ImageSharedPreferences.getGalleryFile(requireContext()))
-            Glide.with(requireContext()).load(uri).circleCrop().into(binding.modifyUserImg)
-        }else if(ImageSharedPreferences.getCameraFile(requireContext()).isNotEmpty()){
-            val path= ImageSharedPreferences.getCameraFile(requireContext())
-            val bitmap = BitmapFactory.decodeFile(path)
-            lateinit var exif : ExifInterface
-
-            try{
-                exif = ExifInterface(path)
-                var exifOrientation = 0
-                var exifDegree = 0
-
-                exifOrientation = exif.getAttributeInt(
-                    ExifInterface.TAG_ORIENTATION,
-                    ExifInterface.ORIENTATION_NORMAL
-                )
-                exifDegree = exifOrientationToDegress(exifOrientation)
-
-                Glide.with(requireContext()).load(rotate(bitmap, exifDegree)).circleCrop().into(
-                    binding.modifyUserImg
-                )
-                //binding.myPageUserImg.setImageBitmap(rotate(bitmap, exifDegree))
-            }catch (e: IOException){
-                e.printStackTrace()
-            }
-        }else{
+        if((activity as MainActivity).beforeClick){
             binding.modifyUserImg.setBackgroundResource(R.drawable.user_img)
+            (activity as MainActivity).beforeClick=false
         }
+        else {
+            if(ImageSharedPreferences.getGalleryFile(requireContext()).isNotEmpty()){ //앨범일 때
+                val uri=Uri.parse(ImageSharedPreferences.getGalleryFile(requireContext()))
+                Glide.with(requireContext()).load(uri).circleCrop().into(binding.modifyUserImg)
+            }else if(ImageSharedPreferences.getCameraFile(requireContext()).isNotEmpty()){
+                val path= ImageSharedPreferences.getCameraFile(requireContext())
+                val bitmap = BitmapFactory.decodeFile(path)
+                lateinit var exif : ExifInterface
+
+                try{
+                    exif = ExifInterface(path)
+                    var exifOrientation = 0
+                    var exifDegree = 0
+
+                    exifOrientation = exif.getAttributeInt(
+                        ExifInterface.TAG_ORIENTATION,
+                        ExifInterface.ORIENTATION_NORMAL
+                    )
+                    exifDegree = exifOrientationToDegress(exifOrientation)
+
+                    Glide.with(requireContext()).load(rotate(bitmap, exifDegree)).circleCrop().into(
+                        binding.modifyUserImg
+                    )
+                    //binding.myPageUserImg.setImageBitmap(rotate(bitmap, exifDegree))
+                }catch (e: IOException){
+                    e.printStackTrace()
+                }
+            }else{
+                binding.modifyUserImg.setBackgroundResource(R.drawable.user_img)
+            }
+        }
+
     }
 
     private fun changeProfileImage() {
@@ -196,9 +220,10 @@ class UserModifyFragment : Fragment() {
     }
 
     private fun deleteImage(){
-        ImageSharedPreferences.clearImage(requireContext(),"gallery")
-        ImageSharedPreferences.clearImage(requireContext(),"camera")
+        FinalSharedPreferences.clearImage(requireContext(),"gallery")
+        FinalSharedPreferences.clearImage(requireContext(),"camera")
 
+        (activity as MainActivity).beforeClick=true
         val transaction=parentFragmentManager.beginTransaction()
         transaction.detach(this).attach(this).commit()
     }
@@ -217,9 +242,9 @@ class UserModifyFragment : Fragment() {
 
             lateinit var exif : ExifInterface
 
-            ImageSharedPreferences.clearImage(requireContext(), "camera")
-            ImageSharedPreferences.clearImage(requireContext(), "gallery")
-            ImageSharedPreferences.setCameraFile(requireContext(), currentPhotoPath)
+            FinalSharedPreferences.clearImage(requireContext(), "camera")
+            FinalSharedPreferences.clearImage(requireContext(), "gallery")
+            FinalSharedPreferences.setCameraFile(requireContext(), currentPhotoPath)
 
             try{
                 exif = ExifInterface(currentPhotoPath)
@@ -244,9 +269,9 @@ class UserModifyFragment : Fragment() {
 
         else if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_GALLERY_TAKE){
             //binding.myPageUserImg.setImageURI(data?.data)
-            ImageSharedPreferences.clearImage(requireContext(), "camera")
-            ImageSharedPreferences.clearImage(requireContext(), "gallery")
-            ImageSharedPreferences.setGalleryFile(requireContext(), data?.data.toString())
+            FinalSharedPreferences.clearImage(requireContext(), "camera")
+            FinalSharedPreferences.clearImage(requireContext(), "gallery")
+            FinalSharedPreferences.setGalleryFile(requireContext(), data?.data.toString())
 
             Glide.with(requireContext()).load(data?.data).circleCrop().into(binding.modifyUserImg)
         }
