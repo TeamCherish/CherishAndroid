@@ -1,4 +1,4 @@
-package com.sopt.cherish.util.extension
+package com.sopt.cherish.util
 
 import android.content.Context
 import android.content.SharedPreferences

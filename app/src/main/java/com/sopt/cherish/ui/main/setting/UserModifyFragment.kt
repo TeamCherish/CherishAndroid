@@ -29,8 +29,8 @@ import com.sopt.cherish.remote.api.ResponseNicknameChangedata
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.main.MainActivity
 import com.sopt.cherish.ui.main.MainViewModel
-import com.sopt.cherish.util.extension.FinalSharedPreferences
-import com.sopt.cherish.util.extension.ImageSharedPreferences
+import com.sopt.cherish.util.FinalSharedPreferences
+import com.sopt.cherish.util.ImageSharedPreferences
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -98,8 +98,8 @@ class UserModifyFragment : Fragment() {
 
             (activity as MainActivity).beforeClick=false
 
-            val cameraUri=FinalSharedPreferences.getCameraFile(requireContext())
-            val galleryUri=FinalSharedPreferences.getGalleryFile(requireContext())
+            val cameraUri= FinalSharedPreferences.getCameraFile(requireContext())
+            val galleryUri= FinalSharedPreferences.getGalleryFile(requireContext())
 
             if(cameraUri.isNotEmpty())
                 ImageSharedPreferences.setCameraFile(requireContext(),cameraUri)
