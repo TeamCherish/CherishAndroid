@@ -33,13 +33,8 @@ class SignUpDialogFragment(
             dismiss()
         }
 
-
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
-
-
         return binding.root
-
-
     }
 }
