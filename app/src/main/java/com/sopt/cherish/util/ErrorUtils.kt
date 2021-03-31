@@ -1,10 +1,9 @@
-package com.sopt.cherish.util.extension
+package com.sopt.cherish.util
 
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import okhttp3.ResponseBody
 import retrofit2.Converter
 import retrofit2.Response
-import retrofit2.Retrofit
 import java.io.IOException
 
 object ErrorUtils {

@@ -22,7 +22,7 @@ import com.sopt.cherish.remote.api.MyPageUserRes
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.ui.splash.SplashActivity
-import com.sopt.cherish.util.extension.ImageSharedPreferences
+import com.sopt.cherish.util.ImageSharedPreferences
 import com.sopt.cherish.util.extension.shortToast
 import retrofit2.Call
 import retrofit2.Callback

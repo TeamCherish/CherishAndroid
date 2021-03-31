@@ -26,7 +26,7 @@ import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
 import com.sopt.cherish.ui.main.MainActivity
 import com.sopt.cherish.ui.main.MainViewModel
-import com.sopt.cherish.util.extension.ImageSharedPreferences
+import com.sopt.cherish.util.ImageSharedPreferences
 import com.sopt.cherish.ui.main.setting.UserModifyFragment
 import com.sopt.cherish.util.PixelUtil.dp
 import com.sopt.cherish.util.SimpleLogger
