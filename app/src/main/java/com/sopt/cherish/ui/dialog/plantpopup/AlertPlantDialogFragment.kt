@@ -71,6 +71,7 @@ class AlertPlantDialogFragment(plantId: Int) : DialogFragment(), View.OnClickLis
         _binding = null
     }
 
+
     override fun onClick(view: View?) {
         dismiss()
     }
