@@ -100,6 +100,7 @@ class MainViewModel(
                 wateringRepository.postponeWateringDate(postponeWateringDateReq)
             }.onSuccess {
                 SimpleLogger.logI(it.message)
+                fetchUsers()
             }.onFailure {
                 throw it
             }
