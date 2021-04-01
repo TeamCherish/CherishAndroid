@@ -6,13 +6,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sopt.cherish.databinding.MainCherryItemBinding
 import com.sopt.cherish.remote.api.User
+import com.sopt.cherish.ui.main.MainViewModel
 
 class HomeCherryListAdapter(
-    private val itemClickListener: OnItemClickListener
+    private val itemClickListener: OnItemClickListener,
+    private val viewModel: MainViewModel
 ) : RecyclerView.Adapter<HomeCherryListAdapter.MainViewHolder>() {
 
     var data = mutableListOf<User>()
-    var lastSelectedPosition = 1
+    var lastSelectedPosition: Int = viewModel.cherishSelectedPosition.value!!
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)

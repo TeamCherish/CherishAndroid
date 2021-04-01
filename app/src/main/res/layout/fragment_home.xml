@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_20dp"
             android:layout_marginEnd="@dimen/margin_16dp"
-            android:setPlantImage="@{mainViewModel.selectedCherishUser.plantImageUrl}"
+            android:setPlantImage="@{mainViewModel.selectedCherishUser.homeMainBackgroundImageUrl}"
             android:setPlantImageViewSize="@{mainViewModel.selectedCherishUser.growth}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"

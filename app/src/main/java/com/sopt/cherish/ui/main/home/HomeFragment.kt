@@ -24,6 +24,7 @@ import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
 import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.util.GridItemDecorator
 import com.sopt.cherish.util.PixelUtil.dp
+import com.sopt.cherish.util.SimpleLogger
 import com.sopt.cherish.util.extension.longToast
 
 
@@ -46,7 +47,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.mainViewModel = viewModel
-        homeCherryListAdapter = HomeCherryListAdapter(this)
+        homeCherryListAdapter = HomeCherryListAdapter(this, viewModel)
         standardBottomSheetBehavior =
             BottomSheetBehavior.from(binding.homeStandardBottomSheet)
 
@@ -109,6 +110,8 @@ class HomeFragment : Fragment(), OnItemClickListener {
     override fun onItemClick(itemBinding: MainCherryItemBinding, position: Int) {
         viewModel.selectedCherishUser.value = homeCherryListAdapter.data[position]
         homeCherryListAdapter.data[0] = homeCherryListAdapter.data[position]
+        viewModel.cherishSelectedPosition.value = position
+        SimpleLogger.logI(viewModel.cherishSelectedPosition.value.toString())
         homeCherryListAdapter.notifyItemChanged(0)
         slideDownBottomSheet()
     }

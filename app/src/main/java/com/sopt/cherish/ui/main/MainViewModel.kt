@@ -29,6 +29,7 @@ class MainViewModel(
     val cherishUserId = MutableLiveData<Int>()
     val userNickName = MutableLiveData<String>()
     val fcmToken = MutableLiveData<String>()
+    var cherishSelectedPosition = MutableLiveData<Int>()
 
     private val _cherishUsers = MutableLiveData<UserResult?>()
     val cherishUsers: MutableLiveData<UserResult?>
@@ -38,6 +39,7 @@ class MainViewModel(
 
     init {
         isWatered.value = null
+        cherishSelectedPosition.value = 1
     }
 
     fun fetchUsers() = viewModelScope.launch {
