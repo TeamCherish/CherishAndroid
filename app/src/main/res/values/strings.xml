@@ -76,7 +76,7 @@
     <string name="enroll_phone_text">식물 등록하기</string>
 
     <string name="detail_plant_with">함께한 날</string>
-    <string name="dialog_sign_up_close">닫기</string>
+    <string name="dialog_sign_up_close">확인</string>
     <string name="sign_up_title">회원가입</string>
     <string name="sign_up_email">이메일을 입력해주세요</string>
     <string name="sign_up_email_hint">Ex) cherish@naver.com</string>
@@ -115,4 +115,8 @@
     <string name="plant_pop_up_third">3단계</string>
     <string name="plant_pop_up_second">2단계</string>
     <string name="plant_pop_up_first">1단계</string>
+
+    <string name="user_modify_camera">카메라</string>
+    <string name="user_modify_gallery">갤러리</string>
+    <string name="user_modify_delete">삭제</string>
 </resources>

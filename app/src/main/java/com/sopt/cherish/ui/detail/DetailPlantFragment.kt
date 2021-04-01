@@ -11,7 +11,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
-import com.jackandphantom.circularprogressbar.CircleProgressbar
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentDetailPlantBinding
 import com.sopt.cherish.remote.api.ResponsePlantCardDatas
@@ -31,7 +30,9 @@ import java.util.*
 
 class DetailPlantFragment : Fragment() {
 
-    private lateinit var circleProgressbar: CircleProgressbar
+    //private lateinit var circleProgressbar: CircleProgressbar
+
+
     private val viewModel: DetailPlantViewModel by activityViewModels()
     private val requestData = RetrofitBuilder
     lateinit var memoList: ArrayList<MemoListDataclass>
@@ -103,7 +104,7 @@ class DetailPlantFragment : Fragment() {
         userId = arguments?.getInt("userId_detail")!!
         //reset()
 
-        circleProgressbar = binding.test
+        //circleProgressbar = binding.test
 
         //reset()
         binding.buttonWater.setOnClickListener {
@@ -207,7 +208,7 @@ class DetailPlantFragment : Fragment() {
                                     binding.textViewBirth.text = it.data.birth.toString()
 
                                 }
-                                binding.textView1WithName.text = it.data.name.toString()
+                                binding.textView1WithName.text = it.data.nickname.toString()
 
                                 statusmessagebig = it.data.status_message
                                 statusmessagesmall = it.data.status
@@ -219,21 +220,17 @@ class DetailPlantFragment : Fragment() {
 
                                 plant_id = it.data.plantId
                                 Log.d("fdfdfd", it.data.plantId.toString())
-
                                 if (it.data.gage < 0.5) {
 
-                                    circleProgressbar.foregroundProgressColor =
-                                        Color.parseColor("#F7596C")
-                                    circleProgressbar.setProgressWithAnimation(
-                                        it.data.gage.toFloat() * 100,
-                                        animationDuration
-                                    )
+                                    binding.test.setProgressStartColor(Color.parseColor("#F7596C"))
+                                    binding.test.setProgressEndColor(Color.parseColor("#F7596C"))
+
+                                    binding.test.progress = (it.data.gage.toFloat() * 100).toInt()
+
 
                                 } else {
-                                    circleProgressbar.setProgressWithAnimation(
-                                        it.data.gage.toFloat() * 100,
-                                        animationDuration
-                                    )
+                                    binding.test.progress = (it.data.gage.toFloat() * 100).toInt()
+
                                 }
 
                                 binding.chip.isVisible = false
@@ -306,7 +303,11 @@ class DetailPlantFragment : Fragment() {
                                 } else if (it.data.reviews.size == 1) {
                                     binding.userdate.text = (it.data.reviews[0].water_date)
                                     binding.usermemo.text = it.data.reviews[0].review
-                                    binding.memocons2.isVisible = false
+
+                                    binding.userdate2.text = "_ _"
+                                    binding.usermemo2.text = "메모를 입력하지 않았어요!"
+
+                                    binding.memocons2.isVisible = true
                                 } else {
                                     binding.userdate.text = (it.data.reviews[0].water_date)
                                     binding.usermemo.text = it.data.reviews[0].review

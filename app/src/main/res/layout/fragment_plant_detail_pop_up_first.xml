@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.sopt.cherish.ui.dialog.plantpopup.PlantDetailPopUpFirst"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -25,23 +23,23 @@
                 android:id="@+id/flower_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:font="@font/notosanscjkkr_bold"
+                android:layout_marginTop="49dp"
                 android:text=""
-                android:textSize="20sp"
+                android:font="@font/notosanscjkkr_bold"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="49dp" />
+                android:textSize="20sp" />
 
             <ImageView
                 android:id="@+id/flower_img"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="85dp"
+                android:layout_height="162dp"
+                android:contentDescription="@null"
+                app:layout_constraintEnd_toEndOf="@+id/flower_name"
+                app:layout_constraintStart_toStartOf="@+id/flower_name"
                 android:layout_marginTop="29dp"
-                android:contentDescription="@string/contentDescription"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/flower_name" />
 
 
@@ -50,28 +48,28 @@
                 style="@style/CustomChip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:font="@font/notosanscjkkr_regular"
                 android:includeFontPadding="false"
-                android:text=""
                 android:textColor="#8189b3"
+                android:layout_marginTop="16dp"
                 android:textSize="@dimen/text_12sp"
                 app:chipStrokeColor="#8189b3"
                 app:chipStrokeWidth="1dp"
-                app:layout_constraintEnd_toEndOf="@+id/flower_img"
+                android:text=""
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="@id/flower_img"
+                app:layout_constraintEnd_toEndOf="@+id/flower_img"
                 app:layout_constraintTop_toBottomOf="@id/flower_img" />
 
             <TextView
                 android:id="@+id/watering_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:text=""
                 android:textAlignment="center"
-                app:layout_constraintEnd_toEndOf="@+id/chip"
                 app:layout_constraintStart_toStartOf="@+id/chip"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="@+id/chip"
                 app:layout_constraintTop_toBottomOf="@+id/chip" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

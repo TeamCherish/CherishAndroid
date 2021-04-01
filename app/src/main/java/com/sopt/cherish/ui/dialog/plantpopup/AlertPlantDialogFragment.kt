@@ -11,7 +11,6 @@ import androidx.viewpager.widget.ViewPager
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentAlertPlantDialogBinding
 import com.sopt.cherish.ui.adapter.DialogViewPagerAdapter
-import com.sopt.cherish.util.DialogUtil
 import com.zhpan.indicator.enums.IndicatorSlideMode
 import com.zhpan.indicator.enums.IndicatorStyle
 
@@ -71,10 +70,6 @@ class AlertPlantDialogFragment(plantId: Int) : DialogFragment(), View.OnClickLis
         _binding = null
     }
 
-    override fun onResume() {
-        super.onResume()
-        DialogUtil.adjustDialogSize(this, 0.9f, 0.6f)
-    }
 
     override fun onClick(view: View?) {
         dismiss()

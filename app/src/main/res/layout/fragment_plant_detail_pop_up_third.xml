@@ -35,11 +35,11 @@
 
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:contentDescription="@string/contentDescription"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                android:layout_width="85dp"
+                android:layout_height="162dp"
+                android:contentDescription="@null"
+                app:layout_constraintEnd_toEndOf="@+id/flower_name"
+                app:layout_constraintStart_toStartOf="@+id/flower_name"
                 app:layout_constraintTop_toBottomOf="@+id/flower_name"
                 android:layout_marginTop="29dp"
                 android:id="@+id/flower_img" />

@@ -12,6 +12,7 @@ import com.sopt.cherish.ui.main.MainActivity
 import com.sopt.cherish.ui.main.home.HomeBlankActivity
 import com.sopt.cherish.ui.pwfinding.PwFindingActivity
 import com.sopt.cherish.ui.signup.SignUpActivity
+import com.sopt.cherish.util.ErrorUtils
 import com.sopt.cherish.util.extension.hideKeyboard
 import retrofit2.Call
 import retrofit2.Callback
@@ -69,7 +70,11 @@ class SignInActivity : AppCompatActivity() {
                         call: Call<EditUserRes>,
                         response: Response<EditUserRes>
                     ) {
-                        Log.d("success", response.body().toString())
+                        if (response.body() == null) {
+                            val error = ErrorUtils.parseError(response)
+                            Log.d("before convert", response.errorBody().toString())
+                            Log.d("error", error.toString())
+                        }
                         response.takeIf {
                             it.isSuccessful
                         }?.body()

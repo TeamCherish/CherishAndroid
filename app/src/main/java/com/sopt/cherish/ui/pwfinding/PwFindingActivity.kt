@@ -38,7 +38,7 @@ class PwFindingActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            android.R.id.home -> finish()
+            android.R.id.home -> onBackPressed()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -48,13 +48,19 @@ class PwFindingActivity : AppCompatActivity() {
 
         when (index) {
             0 -> {
-                transAction.replace(R.id.fragment_finding, PwFindingFirstFragment()).commit()
+                transAction.replace(R.id.fragment_finding, PwFindingFirstFragment())
+                    .addToBackStack(null)
+                    .commit()
             }
             1 ->
-                transAction.replace(R.id.fragment_finding, PwFindingSecondFragment()).commit()
+                transAction.replace(R.id.fragment_finding, PwFindingSecondFragment())
+                    .addToBackStack(null)
+                    .commit()
 
             2 ->
-                transAction.replace(R.id.fragment_finding, PwFindingThirdFragment()).commit()
+                transAction.replace(R.id.fragment_finding, PwFindingThirdFragment())
+                    .addToBackStack(null)
+                    .commit()
         }
     }
 

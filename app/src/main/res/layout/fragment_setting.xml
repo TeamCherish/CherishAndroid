@@ -46,7 +46,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <ImageView
+                    <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/imageView8"
                         android:layout_width="88dp"
                         android:layout_height="88dp"
@@ -59,36 +59,47 @@
                         app:layout_constraintVertical_bias="0.0"
                         app:srcCompat="@drawable/user_img" />
 
+                    <!--  <androidx.constraintlayout.widget.ConstraintLayout
+                          android:id="@+id/usernicknamecons"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_marginTop="@dimen/margin_12dp"
+                          app:layout_constraintEnd_toEndOf="@+id/imageView8"
+                          app:layout_constraintStart_toStartOf="@+id/imageView8"
+                          app:layout_constraintTop_toBottomOf="@+id/imageView8">-->
+
                     <TextView
                         android:id="@+id/setting_usernickname"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_12dp"
+                        android:layout_marginTop="12dp"
                         android:fontFamily="@font/notosanscjkkr_bold"
                         android:includeFontPadding="false"
+                        android:text=""
                         android:textSize="18sp"
                         app:layout_constraintEnd_toEndOf="@+id/imageView8"
                         app:layout_constraintStart_toStartOf="@+id/imageView8"
                         app:layout_constraintTop_toBottomOf="@+id/imageView8" />
 
+                    <ImageButton
+                        android:id="@+id/setting_next_nickname"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:layout_marginStart="4dp"
+                        android:background="@color/transparent"
+                        android:src="@drawable/ic_btn_more"
+                        app:layout_constraintBottom_toBottomOf="@+id/setting_usernickname"
+                        app:layout_constraintStart_toEndOf="@+id/setting_usernickname"
+                        app:layout_constraintTop_toTopOf="@+id/setting_usernickname" />
+
                     <TextView
                         android:id="@+id/setting_useremail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_4dp"
                         app:layout_constraintEnd_toEndOf="@+id/imageView8"
                         app:layout_constraintStart_toStartOf="@+id/imageView8"
-                        app:layout_constraintTop_toBottomOf="@+id/setting_usernickname" />
+                        app:layout_constraintTop_toBottomOf="@+id/setting_next_nickname" />
 
-                    <ImageView
-                        android:id="@+id/setting_next_nickname"
-                        android:layout_width="0dp"
-                        android:layout_height="24dp"
-                        android:layout_marginStart="4dp"
-                        app:layout_constraintBottom_toBottomOf="@+id/setting_usernickname"
-                        app:layout_constraintStart_toEndOf="@+id/setting_usernickname"
-                        app:layout_constraintTop_toTopOf="@+id/setting_usernickname"
-                        app:srcCompat="@drawable/ic_btn_more" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -15,30 +15,48 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cons2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/cons4"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.jackandphantom.circularprogressbar.CircleProgressbar
+            <!-- <com.jackandphantom.circularprogressbar.CircleProgressbar
+                 android:id="@+id/test"
+                 android:layout_width="0dp"
+                 android:layout_height="0dp"
+                 android:layout_marginHorizontal="100dp"
+                 android:layout_marginBottom="170dp"
+                 app:cpb_backgroundProgressColor="#d9d9d9"
+                 app:cpb_backgroundProgressWidth="18"
+                 app:cpb_foregroundProgressColor="#31d693"
+                 app:cpb_foregroundProgressWidth="18"
+                 app:cpb_roundedCorner="true"
+                 app:layout_constraintBottom_toBottomOf="@+id/cons2"
+                 app:layout_constraintTop_toTopOf="@+id/cons2"
+                 app:layout_constraintStart_toStartOf="@+id/cons2"
+                 app:layout_constraintEnd_toEndOf="@+id/cons2"
+                  />-->
+
+            <com.dinuscxj.progressbar.CircleProgressBar
                 android:id="@+id/test"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginStart="100dp"
-                android:layout_marginTop="59dp"
+                android:layout_marginTop="50dp"
                 android:layout_marginEnd="100dp"
-                android:layout_marginBottom="12dp"
-                app:cpb_backgroundProgressColor="@color/white"
-                app:cpb_backgroundProgressWidth="18"
-                app:cpb_foregroundProgressColor="#31d693"
-                app:cpb_foregroundProgressWidth="18"
-                app:cpb_roundedCorner="true"
-                app:layout_constraintBottom_toTopOf="@+id/textView_nick"
+                android:layout_marginBottom="170dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
+                app:layout_constraintTop_toTopOf="parent"
+                app:progress_background_color="#d9d9d9"
+                app:progress_end_color="#31d693"
+                app:progress_start_color="#31d693"
+                app:progress_stroke_cap="round"
+                app:progress_stroke_width="5dp"
+                app:progress_text_size="0sp"
+                app:style="solid_line" />
 
             <ImageView
                 android:id="@+id/imageView_detail_url"
@@ -65,22 +83,21 @@
             <TextView
                 android:id="@+id/textView_nick"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="7dp"
                 android:fontFamily="@font/notosanscjkkr_bold"
                 android:includeFontPadding="false"
-                android:letterSpacing="-0.03"
                 android:text="남쿵둥이"
                 android:textColor="#454545"
                 android:textSize="@dimen/text_20sp"
-                app:layout_constraintBottom_toTopOf="@+id/textView6"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/test" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/textView6"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginBottom="30dp"
                 android:background="@drawable/plantdetail_chip"
                 android:text="TextView"
@@ -241,12 +258,12 @@
 
             <ImageButton
                 android:id="@+id/imageButton_3detail"
-                android:background="@color/transparent"
                 android:layout_width="48dp"
-                app:srcCompat="@drawable/icn_info"
                 android:layout_height="48dp"
+                android:background="@color/transparent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"></ImageButton>
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/icn_info"></ImageButton>
 
             <TextView
                 android:id="@+id/textView_status_message"
@@ -305,22 +322,22 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/memocons"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="96dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/detail_layout"
                 app:layout_constraintBottom_toTopOf="@+id/memocons2"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
                     android:id="@+id/userdate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
-                    android:layout_marginTop="17dp"
-                    android:layout_marginBottom="17dp"
                     android:fontFamily="@font/roboto_bold"
                     android:includeFontPadding="false"
                     android:letterSpacing="-0.02"
@@ -365,22 +382,22 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/memocons2"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="160dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="23dp"
                 android:background="@drawable/detail_layout"
                 app:layout_constraintBottom_toTopOf="@+id/button_water"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
                     android:id="@+id/userdate2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
-                    android:layout_marginTop="17dp"
-                    android:layout_marginBottom="17dp"
                     android:fontFamily="@font/roboto_bold"
                     android:includeFontPadding="false"
                     android:letterSpacing="-0.02"
@@ -396,9 +413,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="30dp"
-                    android:layout_marginTop="17dp"
                     android:layout_marginEnd="20dp"
-                    android:layout_marginBottom="17dp"
                     android:ellipsize="end"
                     android:fontFamily="@font/notosanscjkkr_regular"
                     android:includeFontPadding="false"
@@ -407,10 +422,10 @@
                     android:text="TextView"
                     android:textColor="#454545"
                     android:textSize="@dimen/text_14sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@+id/userdate2"
                     app:layout_constraintEnd_toStartOf="@+id/imageButton3"
                     app:layout_constraintStart_toEndOf="@+id/userdate2"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="@+id/userdate2" />
 
                 <ImageView
                     android:id="@+id/imageButton3"
@@ -446,7 +461,7 @@
                 android:id="@+id/chip"
                 style="@style/CustomChip"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:fontFamily="@font/notosanscjkkr_regular"
                 android:includeFontPadding="false"
                 android:text="키워드를 입력하지 않았어요!"
@@ -509,18 +524,21 @@
                 android:id="@+id/button_water"
                 style="@style/RoundButton.GreenMain"
                 android:layout_width="0dp"
-                android:layout_height="48dp"
+                android:layout_height="0dp"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="237dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="17dp"
                 android:fontFamily="@font/notosanscjkkr_medium"
                 android:includeFontPadding="false"
                 android:text="물주기"
+                android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

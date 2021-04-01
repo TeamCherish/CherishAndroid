@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object RetrofitBuilder {
     private const val BaseUrl = "http://cherishserver.com/"
 
-    private fun getRetrofit(): Retrofit {
+    fun getRetrofit(): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BaseUrl)
             .addConverterFactory(GsonConverterFactory.create())
