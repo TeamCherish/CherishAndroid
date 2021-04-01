@@ -4,7 +4,7 @@
 
     <data>
 
-    <variable
+        <variable
             name="mainViewModel"
             type="com.sopt.cherish.ui.main.MainViewModel" />
     </data>

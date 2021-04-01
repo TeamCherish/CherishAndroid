@@ -4,7 +4,7 @@
 
     <data>
 
-    <variable
+        <variable
             name="dialogDetailPlantContact"
             type="com.sopt.cherish.ui.dialog.wateringdialog.DetailPlantContactDialogFragment" />
 

@@ -5,7 +5,7 @@
 
     <data>
 
-    <variable
+        <variable
             name="reviewViewModel"
             type="com.sopt.cherish.ui.review.ReviewViewModel" />
     </data>

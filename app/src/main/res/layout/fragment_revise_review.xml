@@ -5,7 +5,7 @@
 
     <data>
 
-    <variable
+        <variable
             name="detailPlantViewModel"
             type="com.sopt.cherish.ui.detail.DetailPlantViewModel" />
     </data>

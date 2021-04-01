@@ -30,7 +30,6 @@ class MainViewModel(
     val userNickName = MutableLiveData<String>()
     val fcmToken = MutableLiveData<String>()
 
-    var selectedPosition = 1
     private val _cherishUsers = MutableLiveData<UserResult?>()
     val cherishUsers: MutableLiveData<UserResult?>
         get() = _cherishUsers
