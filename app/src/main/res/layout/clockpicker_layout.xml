@@ -87,7 +87,7 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_ok_clock"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="45dp"
         android:layout_marginTop="26dp"
         android:layout_marginBottom="26dp"
         android:background="@drawable/picker_btn_bg"
