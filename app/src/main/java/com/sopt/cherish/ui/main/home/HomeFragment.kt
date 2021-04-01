@@ -127,7 +127,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
 
     // 화면이동
     private fun navigateWatering() {
-        if (viewModel.selectedCherishUser.value?.dDay!! >= 0) {
+        if (viewModel.selectedCherishUser.value?.dDay!! <= 0) {
             WateringDialogFragment().show(parentFragmentManager, TAG)
         } else {
             longToast(requireContext(), "물 줄수있는 날이 아니에요 ㅠ")
