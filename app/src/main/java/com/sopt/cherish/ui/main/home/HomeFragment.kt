@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.sopt.cherish.R
@@ -26,8 +25,6 @@ import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.util.GridItemDecorator
 import com.sopt.cherish.util.PixelUtil.dp
 import com.sopt.cherish.util.extension.longToast
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 
 /**
@@ -55,7 +52,6 @@ class HomeFragment : Fragment(), OnItemClickListener {
 
         addBottomSheetCallback()
         initializeRecyclerView(homeCherryListAdapter)
-        observeCherishUsers()
 
         binding.homeWateringBtn.setOnClickListener {
             navigateWatering()
@@ -74,12 +70,12 @@ class HomeFragment : Fragment(), OnItemClickListener {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        observeCherishUsers()
+    }
+
     override fun onResume() {
         super.onResume()
-        lifecycleScope.launch {
-            delay(2000)
-            viewModel.isWatered.value = null
-        }
         viewModel.fetchUsers()
     }
 
@@ -131,7 +127,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
 
     // 화면이동
     private fun navigateWatering() {
-        if (viewModel.selectedCherishUser.value?.dDay!! <= 0) {
+        if (viewModel.selectedCherishUser.value?.dDay!! >= 0) {
             WateringDialogFragment().show(parentFragmentManager, TAG)
         } else {
             longToast(requireContext(), "물 줄수있는 날이 아니에요 ㅠ")

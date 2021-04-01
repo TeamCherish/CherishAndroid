@@ -11,6 +11,7 @@ import com.sopt.cherish.repository.WateringRepository
 import com.sopt.cherish.util.DateUtil
 import com.sopt.cherish.util.SimpleLogger
 import com.sopt.cherish.util.SingleLiveEvent
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.*
 
@@ -24,16 +25,21 @@ class MainViewModel(
     private val calendarRepository: CalendarRepository,
     private val notificationRepository: NotificationRepository
 ) : ViewModel() {
-    val isWatered = SingleLiveEvent<Boolean>()
+    val isWatered = SingleLiveEvent<Boolean?>()
     val cherishUserId = MutableLiveData<Int>()
     val userNickName = MutableLiveData<String>()
     val fcmToken = MutableLiveData<String>()
 
+    var selectedPosition = 1
     private val _cherishUsers = MutableLiveData<UserResult?>()
     val cherishUsers: MutableLiveData<UserResult?>
         get() = _cherishUsers
 
     val selectedCherishUser = MutableLiveData<User>()
+
+    init {
+        isWatered.value = null
+    }
 
     fun fetchUsers() = viewModelScope.launch {
         runCatching {
@@ -100,6 +106,7 @@ class MainViewModel(
                 wateringRepository.postponeWateringDate(postponeWateringDateReq)
             }.onSuccess {
                 SimpleLogger.logI(it.message)
+                delay(2000)
                 fetchUsers()
             }.onFailure {
                 throw it

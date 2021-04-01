@@ -13,6 +13,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.sopt.cherish.R
+import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.util.PixelUtil.dp
 import com.sopt.cherish.util.animation.ProgressbarAnimation
 import kotlin.math.abs
@@ -45,23 +46,6 @@ object BindingAdapter {
             .into(imageView)
     }
 
-/*    @JvmStatic
-    @BindingAdapter("android:setPlantBackground")
-    fun setPlantBackground(imageView: ImageView, plantName: String?) {
-        imageView.setBackgroundColor(
-            ContextCompat.getColor(
-                imageView.context, when (plantName) {
-                    "민들레" -> R.color.cherish_dandelion_background_color
-                    "로즈마리" -> R.color.cherish_rosemary_background_color
-                    "아메리칸블루" -> R.color.cherish_american_blue_background_color
-                    "스투키" -> R.color.cherish_stuki_background_color
-                    "단모환" -> R.color.cherish_sun_background_color
-                    else -> R.color.white
-                }
-            )
-        )
-    }*/
-
     @JvmStatic
     @BindingAdapter(value = ["plantName", "dDay"], requireAll = true)
     fun setPlantBackground(imageView: ImageView, plantName: String?, dDay: Int) {
@@ -91,14 +75,15 @@ object BindingAdapter {
     }
 
     @JvmStatic
-    @BindingAdapter(value = ["isWatered", "remainDay", "wateredPlantName"])
+    @BindingAdapter(value = ["isWatered", "remainDay", "wateredPlantName", "viewModel"])
     fun wateredBackground(
         imageView: ImageView,
-        isWatered: Boolean,
+        isWatered: Boolean?,
         remainDay: Int,
-        plantName: String?
+        plantName: String?,
+        viewModel: MainViewModel
     ) {
-        if (isWatered) {
+        if (isWatered == true) {
             if (remainDay < 0) {
                 imageView.setBackgroundColor(
                     ContextCompat.getColor(
@@ -127,6 +112,39 @@ object BindingAdapter {
                         )
                     )
                 }, 2000)
+                viewModel.isWatered.value = null
+            }
+        }
+        if (isWatered == false) {
+            if (remainDay < 0) {
+                imageView.setBackgroundColor(
+                    ContextCompat.getColor(
+                        imageView.context,
+                        R.color.cherish_light_black
+                    )
+                )
+            } else {
+                imageView.setBackgroundColor(
+                    ContextCompat.getColor(
+                        imageView.context, R.color.cherish_light_black
+                    )
+                )
+                val delayHandler = Handler(imageView.context.mainLooper)
+                delayHandler.postDelayed({
+                    imageView.setBackgroundColor(
+                        ContextCompat.getColor(
+                            imageView.context, when (plantName) {
+                                "민들레" -> R.color.cherish_dandelion_background_color
+                                "로즈마리" -> R.color.cherish_rosemary_background_color
+                                "아메리칸블루" -> R.color.cherish_american_blue_background_color
+                                "스투키" -> R.color.cherish_stuki_background_color
+                                "단모환" -> R.color.cherish_sun_background_color
+                                else -> R.color.white
+                            }
+                        )
+                    )
+                }, 2000)
+                viewModel.isWatered.value = null
             }
         }
     }
