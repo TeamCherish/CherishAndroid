@@ -62,9 +62,9 @@ class DelayWateringDialogFragment : DialogFragment() {
                     true
                 )
             )
-            viewModel.fetchUsers()
             viewModel.isWatered.value = false
             shortToast(requireContext(), "미루기 성공!")
+            viewModel.fetchUsers()
             dismiss()
         }
     }

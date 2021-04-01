@@ -60,6 +60,7 @@ class FirebaseNotificationService : FirebaseMessagingService() {
 }
 
 private fun createNotificationChannel(notificationManager: NotificationManager) {
+    // todo : channelName 이렇게 있는건 좀 안좋아 보이긴 하는데;;
     val channelName = "CherishNotificationChannel"
     val channel = NotificationChannel(CHANNEL_ID, channelName, IMPORTANCE_HIGH).apply {
         description = "Cherish channel description"
