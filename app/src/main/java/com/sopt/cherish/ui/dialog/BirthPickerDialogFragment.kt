@@ -1,5 +1,6 @@
 package com.sopt.cherish.ui.dialog
 
+import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -52,6 +53,9 @@ class BirthPickerDialogFragment(
         val birthMonth: NumberPicker = view.findViewById(R.id.numberPicker)
         val birthDay: NumberPicker = view.findViewById(R.id.numberPicker3)
 
+        birthDay.removeDivider()
+        birthMonth.removeDivider()
+
         //val birth=resources.getStringArray(R.array.day)
         val cancel: Button = view.findViewById(R.id.button_alarm)
         cancel.setOnClickListener {
@@ -82,5 +86,26 @@ class BirthPickerDialogFragment(
 
         }
         return binding.root
+    }
+
+
+    private fun NumberPicker.removeDivider() {
+        val pickerFields = NumberPicker::class.java.declaredFields
+        for (pf in pickerFields) {
+            if (pf.name == "mSelectionDivider") {
+                pf.isAccessible = true
+                try {
+                    val colorDrawable = ColorDrawable(Color.TRANSPARENT)
+                    pf[this] = colorDrawable
+                } catch (e: java.lang.IllegalArgumentException) {
+
+                } catch (e: Resources.NotFoundException) {
+
+                } catch (e: IllegalAccessException) {
+
+                }
+                break
+            }
+        }
     }
 }

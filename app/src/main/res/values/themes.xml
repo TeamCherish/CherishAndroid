@@ -1,6 +1,6 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="Theme.Cherish" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <item name="android:statusBarColor">@color/cherish_status_bar_color</item>
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/black</item>
@@ -139,6 +139,10 @@
 
     <style name="SignUpTextAppearance">
         <item name="android:fontFamily">@font/notosanscjkkr_regular</item>
+    </style>
+
+    <style name="DefaultNumberPickerTheme" parent="AppTheme">
+        <item name="colorControlNormal">#00ffffff</item>
     </style>
 
 </resources>
