@@ -18,7 +18,7 @@ import com.sopt.cherish.R
 import com.sopt.cherish.databinding.DialogContactBinding
 import com.sopt.cherish.remote.api.NotificationRemindReviewReq
 import com.sopt.cherish.ui.main.MainViewModel
-import com.sopt.cherish.ui.review.ReviewActivity
+import com.sopt.cherish.ui.review.ReviewFragment
 import com.sopt.cherish.util.DialogUtil
 import com.sopt.cherish.util.PermissionUtil
 import com.sopt.cherish.util.extension.ContextExtension.isInstalledApp
@@ -137,11 +137,16 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
     }
 
     private fun startReview() {
-        val intent = Intent(requireContext(), ReviewActivity::class.java)
+/*        val intent = Intent(requireContext(), ReviewActivity::class.java)
         intent.putExtra("userNickname", viewModel.userNickName.value)
         intent.putExtra("selectedCherishNickname", viewModel.selectedCherishUser.value!!.nickName)
         intent.putExtra("selectedCherishId", viewModel.selectedCherishUser.value!!.id)
-        startActivityForResult(intent, codeThatGetWatering)
+        startActivityForResult(intent, codeThatGetWatering)*/
+
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.home_parent_fragment_container, ReviewFragment()).commit()
+        parentFragmentManager.executePendingTransactions()
+        dismiss()
     }
 
     private fun sendRemindReviewNotification() {

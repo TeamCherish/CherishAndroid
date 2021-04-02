@@ -249,4 +249,18 @@ object BindingAdapter {
             }
         }
     }
+
+    @SuppressLint("SetTextI18n")
+    @JvmStatic
+    @BindingAdapter(value = ["userNickname", "selectedCherishName"])
+    fun setReviewMainText(textView: TextView, userNickname: String, selectedCherishName: String?) {
+        textView.text = "${userNickname}님!${selectedCherishName}님과의"
+    }
+
+    @SuppressLint("SetTextI18n")
+    @JvmStatic
+    @BindingAdapter("android:setReviewSubText")
+    fun setReviewSubText(textView: TextView, selectedCherishName: String?) {
+        textView.text = "${selectedCherishName}님과의 물주기를 기록해주세요"
+    }
 }

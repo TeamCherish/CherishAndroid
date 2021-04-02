@@ -4,10 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.cherish.remote.api.*
-import com.sopt.cherish.repository.CalendarRepository
-import com.sopt.cherish.repository.MainRepository
-import com.sopt.cherish.repository.NotificationRepository
-import com.sopt.cherish.repository.WateringRepository
+import com.sopt.cherish.repository.*
 import com.sopt.cherish.util.DateUtil
 import com.sopt.cherish.util.SimpleLogger
 import com.sopt.cherish.util.SingleLiveEvent
@@ -23,7 +20,8 @@ class MainViewModel(
     private val mainRepository: MainRepository,
     private val wateringRepository: WateringRepository,
     private val calendarRepository: CalendarRepository,
-    private val notificationRepository: NotificationRepository
+    private val notificationRepository: NotificationRepository,
+    private val reviewRepository: ReviewRepository
 ) : ViewModel() {
     val isWatered = SingleLiveEvent<Boolean?>()
     val cherishUserId = MutableLiveData<Int>()
@@ -36,6 +34,8 @@ class MainViewModel(
         get() = _cherishUsers
 
     val selectedCherishUser = MutableLiveData<User>()
+
+    var reviewWateringRes = ReviewWateringRes(true, " ", 0)
 
     init {
         isWatered.value = null
@@ -56,6 +56,23 @@ class MainViewModel(
             throw error
         }
     }
+
+    fun delayFetchUsers() = viewModelScope.launch {
+        runCatching {
+            mainRepository.fetchCherishUser(cherishUserId.value!!)
+        }.onSuccess {
+            delay(2000)
+            if (it.userData.totalUser != 0) {
+                it.userData.userList.add(0, it.userData.userList[0])
+                _cherishUsers.value = it
+            } else {
+                _cherishUsers.value = null
+            }
+        }.onFailure {
+            throw it
+        }
+    }
+
 
     // notification
     fun sendFcmToken(notificationReq: NotificationReq) = viewModelScope.launch {
@@ -113,5 +130,16 @@ class MainViewModel(
                 throw it
             }
         }
+
+    // Send Review
+    fun sendReviewToServer(reviewWateringReq: ReviewWateringReq) = viewModelScope.launch {
+        runCatching {
+            reviewRepository.sendReviewData(reviewWateringReq)
+        }.onSuccess {
+            reviewWateringRes = it
+        }.onFailure {
+            throw it
+        }
+    }
 
 }

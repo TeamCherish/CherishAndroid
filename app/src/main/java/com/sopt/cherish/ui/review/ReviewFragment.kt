@@ -4,57 +4,112 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import com.sopt.cherish.R
+import com.sopt.cherish.databinding.FragmentReviewBinding
+import com.sopt.cherish.remote.api.ReviewWateringReq
+import com.sopt.cherish.ui.main.MainViewModel
+import com.sopt.cherish.util.MultiViewDialog
+import com.sopt.cherish.util.extension.FlexBoxExtension.getChip
+import com.sopt.cherish.util.extension.countNumberOfCharacters
+import com.sopt.cherish.util.extension.hideKeyboard
+import com.sopt.cherish.util.extension.writeKeyword
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [ReviewFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class ReviewFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
-
+    private val viewModel: MainViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_review, container, false)
+    ): View {
+        val binding: FragmentReviewBinding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_review, container, false)
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.mainViewModel = viewModel
+
+        addUserStatusWithChip(binding)
+        addLimitNumberOfKeywordCharacters(binding)
+        addLimitNumberOfMemoCharacters(binding)
+        sendReviewToServer(binding)
+        ignoreSendReviewToServer(binding)
+        return binding.root
+    }
+
+    private fun addLimitNumberOfMemoCharacters(binding: FragmentReviewBinding) {
+        binding.homeReviewMemo.countNumberOfCharacters { memo ->
+            binding.homeReviewNumberOfMemo.text = memo?.length.toString()
+            if (memo?.length!! >= 100) {
+                MultiViewDialog(R.layout.dialog_warning_review_limit_error, 0.6944f, 0.16875f).show(
+                    parentFragmentManager,
+                    TAG
+                )
+                binding.homeReviewMemo.hideKeyboard()
+            }
+        }
+    }
+
+    private fun addLimitNumberOfKeywordCharacters(binding: FragmentReviewBinding) {
+        binding.homeReviewEditKeyword.countNumberOfCharacters { keyword ->
+            binding.homeReviewNumberOfCharacters.text = keyword?.length.toString()
+            if (keyword?.length!! > 5) {
+                MultiViewDialog(
+                    R.layout.dialog_warning_keyword_wordcount_limit_error,
+                    0.6944f,
+                    0.16875f
+                ).show(
+                    parentFragmentManager,
+                    TAG
+                )
+                binding.homeReviewEditKeyword.hideKeyboard()
+            }
+        }
+    }
+
+    private fun showLoadingDialog() {
+        lifecycleScope.launch {
+            val dialog = MultiViewDialog(R.layout.dialog_loading, 0.35f, 0.169f)
+            dialog.show(parentFragmentManager, TAG)
+            delay(2000)
+            dialog.dismiss()
+            viewModel.isWatered.value = true
+            parentFragmentManager.beginTransaction().remove(this@ReviewFragment).commit()
+            viewModel.delayFetchUsers()
+            parentFragmentManager.popBackStack()
+        }
+    }
+
+    private fun addUserStatusWithChip(binding: FragmentReviewBinding) {
+        binding.homeReviewEditKeyword.writeKeyword(binding.homeReviewFlexBox, parentFragmentManager)
+    }
+
+    private fun sendReviewToServer(binding: FragmentReviewBinding) {
+        binding.homeReviewAdminAccept.setOnClickListener {
+            viewModel.sendReviewToServer(
+                reviewWateringReq = ReviewWateringReq(
+                    binding.homeReviewMemo.text.toString(),
+                    binding.homeReviewFlexBox.getChip(id = 0)?.text.toString(),
+                    binding.homeReviewFlexBox.getChip(id = 1)?.text.toString(),
+                    binding.homeReviewFlexBox.getChip(id = 2)?.text.toString(),
+                    viewModel.selectedCherishUser.value?.id!!
+                )
+            )
+            showLoadingDialog()
+        }
+    }
+
+    private fun ignoreSendReviewToServer(binding: FragmentReviewBinding) {
+        binding.homeReviewIgnoreAccept.setOnClickListener {
+            // 이거 다시 한번 물어봐야 함
+            showLoadingDialog()
+        }
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ReviewFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ReviewFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        const val TAG = "ReviewFragment"
     }
 }
