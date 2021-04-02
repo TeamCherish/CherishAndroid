@@ -84,36 +84,27 @@ object BindingAdapter {
         viewModel: MainViewModel
     ) {
         if (isWatered == true) {
-            if (remainDay < 0) {
+            imageView.setBackgroundColor(
+                ContextCompat.getColor(
+                    imageView.context, R.color.cherish_watered_color
+                )
+            )
+            val delayHandler = Handler(imageView.context.mainLooper)
+            delayHandler.postDelayed({
                 imageView.setBackgroundColor(
                     ContextCompat.getColor(
-                        imageView.context,
-                        R.color.cherish_light_black
+                        imageView.context, when (plantName) {
+                            "민들레" -> R.color.cherish_dandelion_background_color
+                            "로즈마리" -> R.color.cherish_rosemary_background_color
+                            "아메리칸블루" -> R.color.cherish_american_blue_background_color
+                            "스투키" -> R.color.cherish_stuki_background_color
+                            "단모환" -> R.color.cherish_sun_background_color
+                            else -> R.color.white
+                        }
                     )
                 )
-            } else {
-                imageView.setBackgroundColor(
-                    ContextCompat.getColor(
-                        imageView.context, R.color.cherish_watered_color
-                    )
-                )
-                val delayHandler = Handler(imageView.context.mainLooper)
-                delayHandler.postDelayed({
-                    imageView.setBackgroundColor(
-                        ContextCompat.getColor(
-                            imageView.context, when (plantName) {
-                                "민들레" -> R.color.cherish_dandelion_background_color
-                                "로즈마리" -> R.color.cherish_rosemary_background_color
-                                "아메리칸블루" -> R.color.cherish_american_blue_background_color
-                                "스투키" -> R.color.cherish_stuki_background_color
-                                "단모환" -> R.color.cherish_sun_background_color
-                                else -> R.color.white
-                            }
-                        )
-                    )
-                }, 2000)
-                viewModel.isWatered.value = null
-            }
+            }, 2000)
+            viewModel.isWatered.value = null
         }
         if (isWatered == false) {
             if (remainDay < 0) {
