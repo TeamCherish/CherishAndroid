@@ -16,6 +16,7 @@ import com.sopt.cherish.R
 import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.util.PixelUtil.dp
 import com.sopt.cherish.util.animation.ProgressbarAnimation
+import com.sopt.cherish.util.extension.ImageViewExtension.resizeImageView
 import kotlin.math.abs
 
 object BindingAdapter {
@@ -142,26 +143,11 @@ object BindingAdapter {
                 when {
                     growth <= 100 -> {
                         when (plantName) {
-                            "민들레" -> {
-                                maxHeight = 331.dp
-                                maxWidth = 262.dp
-                            }
-                            "로즈마리" -> {
-                                maxWidth = 220.dp
-                                maxHeight = 460.dp
-                            }
-                            "아메리칸블루" -> {
-                                maxWidth = 249.dp
-                                maxHeight = 368.dp
-                            }
-                            "스투키" -> {
-                                maxWidth = 295.dp
-                                maxHeight = 266.6.dp
-                            }
-                            "단모환" -> {
-                                maxWidth = 275.dp
-                                maxHeight = 229.dp
-                            }
+                            "민들레" -> resizeImageView(262, 331)
+                            "로즈마리" -> resizeImageView(220, 460)
+                            "아메리칸블루" -> resizeImageView(249, 368)
+                            "스투키" -> resizeImageView(295, 266.6.toInt())
+                            "단모환" -> resizeImageView(275, 229)
                             else -> {
 
                             }
@@ -169,54 +155,23 @@ object BindingAdapter {
                     }
                     growth in 101..200 -> {
                         when (plantName) {
-                            "민들레" -> {
-                                maxWidth = 235.dp
-                                maxHeight = 388.dp
-                            }
-                            "로즈마리" -> {
-                                maxWidth = 204.dp
-                                maxHeight = 572.dp
-                            }
-                            "아메리칸블루" -> {
-                                maxWidth = 204.dp
-                                maxHeight = 461.dp
-                            }
-                            "스투키" -> {
-                                maxHeight = 313.dp
-                                maxWidth = 294.dp
-                            }
-                            "단모환" -> {
-                                maxWidth = 283.dp
-                                maxHeight = 350.dp
-                            }
+                            "민들레" -> resizeImageView(235, 388)
+                            "로즈마리" -> resizeImageView(204, 572)
+                            "아메리칸블루" -> resizeImageView(204, 461)
+                            "스투키" -> resizeImageView(294, 313)
+                            "단모환" -> resizeImageView(283, 350)
                             else -> {
 
                             }
                         }
                     }
                     else -> {
-                        // 3단계 식물이므로 각 식물의 gif가 보여져야 하기 때문에 glide의 gif 로딩하는 방식으로 해야합니다
                         when (plantName) {
-                            "민들레" -> {
-                                maxWidth = 235.dp
-                                maxHeight = 388.dp
-                            }
-                            "로즈마리" -> {
-                                maxWidth = 204.dp
-                                maxHeight = 572.dp
-                            }
-                            "아메리칸블루" -> {
-                                maxWidth = 204.dp
-                                maxHeight = 461.dp
-                            }
-                            "스투키" -> {
-                                maxHeight = 313.dp
-                                maxWidth = 294.dp
-                            }
-                            "단모환" -> {
-                                maxWidth = 283.dp
-                                maxHeight = 350.dp
-                            }
+                            "민들레" -> resizeImageView(235, 388)
+                            "로즈마리" -> resizeImageView(204, 572)
+                            "아메리칸블루" -> resizeImageView(204, 461)
+                            "스투키" -> resizeImageView(294, 313)
+                            "단모환" -> resizeImageView(283, 350)
                             else -> {
 
                             }
