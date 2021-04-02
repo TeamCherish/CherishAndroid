@@ -197,7 +197,7 @@ class DetailPlantFragment : Fragment() {
                                 } else if (it.data.dDay == 0) {
                                     binding.textViewDday.text = "D-day"
                                 } else {
-                                    binding.textViewDday.text = "D-" + abs(it.data.dDay).toString()
+                                    binding.textViewDday.text = "D+" + abs(it.data.dDay).toString()
 
                                 }
                                 binding.textViewDuration.text = it.data.duration.toString() + "일째"
