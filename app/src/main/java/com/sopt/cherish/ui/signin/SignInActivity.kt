@@ -71,9 +71,9 @@ class SignInActivity : AppCompatActivity() {
                         response: Response<EditUserRes>
                     ) {
                         if (response.body() == null) {
-                            val error= ErrorUtils.parseError(response)
-                            Log.d("before convert",response.errorBody().toString())
-                            Log.d("error",error.toString())
+                            val error = ErrorUtils.parseError(response)
+                            Log.d("before convert", response.errorBody().toString())
+                            Log.d("error", error.toString())
                         }
                         response.takeIf {
                             it.isSuccessful

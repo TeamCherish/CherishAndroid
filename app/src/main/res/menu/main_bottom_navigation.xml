@@ -3,15 +3,15 @@
     <item
         android:id="@+id/main_home"
         android:icon="@drawable/main_icn_home"
-        android:title="Home"/>
+        android:title="Home" />
 
     <item
         android:id="@+id/main_manage_plant"
         android:icon="@drawable/icn_mypage"
-        android:title="Person"/>
+        android:title="Person" />
 
     <item
         android:id="@+id/main_setting"
         android:icon="@drawable/main_tab_more"
-        android:title="More"/>
+        android:title="More" />
 </menu>

@@ -98,7 +98,7 @@ class SettingFragment : Fragment() {
                 deleteUserPassword()
             }
             requireActivity().finish()
-            val intent=Intent(requireActivity(), SplashActivity::class.java)
+            val intent = Intent(requireActivity(), SplashActivity::class.java)
             startActivity(intent)
         }
 
@@ -113,16 +113,16 @@ class SettingFragment : Fragment() {
         initializeProfile(binding)
     }
 
-    private fun initializeProfile(binding: FragmentSettingBinding){
-        if(ImageSharedPreferences.getGalleryFile(requireContext()).isNotEmpty()){ //앨범일 때
-            val uri=Uri.parse(ImageSharedPreferences.getGalleryFile(requireContext()))
+    private fun initializeProfile(binding: FragmentSettingBinding) {
+        if (ImageSharedPreferences.getGalleryFile(requireContext()).isNotEmpty()) { //앨범일 때
+            val uri = Uri.parse(ImageSharedPreferences.getGalleryFile(requireContext()))
             Glide.with(requireContext()).load(uri).circleCrop().into(binding.imageView8)
-        }else if(ImageSharedPreferences.getCameraFile(requireContext()).isNotEmpty()){
-            val path= ImageSharedPreferences.getCameraFile(requireContext())
+        } else if (ImageSharedPreferences.getCameraFile(requireContext()).isNotEmpty()) {
+            val path = ImageSharedPreferences.getCameraFile(requireContext())
             val bitmap = BitmapFactory.decodeFile(path)
-            lateinit var exif : ExifInterface
+            lateinit var exif: ExifInterface
 
-            try{
+            try {
                 exif = ExifInterface(path)
                 var exifOrientation = 0
                 var exifDegree = 0
@@ -137,22 +137,22 @@ class SettingFragment : Fragment() {
                     binding.imageView8
                 )
                 //binding.myPageUserImg.setImageBitmap(rotate(bitmap, exifDegree))
-            }catch (e: IOException){
+            } catch (e: IOException) {
                 e.printStackTrace()
             }
-        }else{
+        } else {
             binding.imageView8.setBackgroundResource(R.drawable.user_img)
         }
     }
 
-    private fun rotate(bitmap: Bitmap, degree: Int) : Bitmap {
+    private fun rotate(bitmap: Bitmap, degree: Int): Bitmap {
         val matrix = Matrix()
         matrix.postRotate(degree.toFloat())
         return Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
     }
 
     private fun exifOrientationToDegress(exifOrientation: Int): Int {
-        when(exifOrientation){
+        when (exifOrientation) {
             ExifInterface.ORIENTATION_ROTATE_90 -> {
                 return 90
             }

@@ -1,7 +1,7 @@
 package com.sopt.cherish.util
 
 import android.annotation.SuppressLint
-import android.util.Log
+import android.os.Handler
 import android.view.View
 import android.widget.ImageView
 import android.widget.ProgressBar
@@ -13,8 +13,10 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.sopt.cherish.R
+import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.util.PixelUtil.dp
 import com.sopt.cherish.util.animation.ProgressbarAnimation
+import com.sopt.cherish.util.extension.ImageViewExtension.resizeImageView
 import kotlin.math.abs
 
 object BindingAdapter {
@@ -38,28 +40,241 @@ object BindingAdapter {
     }
 
     @JvmStatic
-    @BindingAdapter("android:setPlantImage")
-    fun setPlantImage(imageView: ImageView, plantImageUrl: String?) {
-        Glide.with(imageView.context)
-            .load(plantImageUrl)
-            .into(imageView)
+    @BindingAdapter(value = ["plantName", "growth"])
+    fun setPlantImage(imageView: ImageView, plantName: String?, growth: Int?) {
+        if (growth != null) {
+            imageView.setImageDrawable(
+                when {
+                    growth <= 100 -> {
+                        when (plantName) {
+                            "민들레" -> ContextCompat.getDrawable(
+                                imageView.context,
+                                R.drawable.img_dandelion_1
+                            )
+                            "로즈마리" -> ContextCompat.getDrawable(
+                                imageView.context,
+                                R.drawable.img_rose_1
+                            )
+                            "아메리칸블루" -> ContextCompat.getDrawable(
+                                imageView.context,
+                                R.drawable.img_americanblue_1
+                            )
+                            "스투키" -> ContextCompat.getDrawable(
+                                imageView.context,
+                                R.drawable.img_stuki_1
+                            )
+                            "단모환" -> ContextCompat.getDrawable(
+                                imageView.context,
+                                R.drawable.img_sun_1
+                            )
+                            else -> ContextCompat.getDrawable(
+                                imageView.context,
+                                R.drawable.img_white
+                            )
+                        }
+                    }
+                    growth in 101..200 -> {
+                        when (plantName) {
+                            "민들레" -> ContextCompat.getDrawable(
+                                imageView.context,
+                                R.drawable.img_dandelion_2
+                            )
+                            "로즈마리" -> ContextCompat.getDrawable(
+                                imageView.context,
+                                R.drawable.img_rose_2
+                            )
+                            "아메리칸블루" -> ContextCompat.getDrawable(
+                                imageView.context,
+                                R.drawable.img_americanblue_2
+                            )
+                            "스투키" -> ContextCompat.getDrawable(
+                                imageView.context,
+                                R.drawable.img_stuki_2
+                            )
+                            "단모환" -> ContextCompat.getDrawable(
+                                imageView.context,
+                                R.drawable.img_sun_2
+                            )
+                            else -> ContextCompat.getDrawable(
+                                imageView.context,
+                                R.drawable.img_white
+                            )
+                        }
+                    }
+                    else -> {
+                        // 3단계 식물이므로 각 식물의 gif가 보여져야 하기 때문에 glide의 gif 로딩하는 방식으로 해야합니다
+                        when (plantName) {
+                            "민들레" -> ContextCompat.getDrawable(
+                                imageView.context,
+                                R.drawable.img_dandelion_2
+                            )
+                            "로즈마리" -> ContextCompat.getDrawable(
+                                imageView.context,
+                                R.drawable.img_rose_2
+                            )
+                            "아메리칸블루" -> ContextCompat.getDrawable(
+                                imageView.context,
+                                R.drawable.img_americanblue_2
+                            )
+                            "스투키" -> ContextCompat.getDrawable(
+                                imageView.context,
+                                R.drawable.img_stuki_2
+                            )
+                            "단모환" -> ContextCompat.getDrawable(
+                                imageView.context,
+                                R.drawable.img_sun_2
+                            )
+                            else -> ContextCompat.getDrawable(
+                                imageView.context,
+                                R.drawable.img_white
+                            )
+                        }
+                    }
+                }
+            )
+        }
     }
 
     @JvmStatic
-    @BindingAdapter("android:setPlantBackground")
-    fun setPlantBackground(imageView: ImageView, plantName: String?) {
-        imageView.setBackgroundColor(
-            ContextCompat.getColor(
-                imageView.context, when (plantName) {
-                    "민들레" -> R.color.cherish_dandelion_background_color
-                    "로즈마리" -> R.color.cherish_rosemary_background_color
-                    "아메리칸블루" -> R.color.cherish_american_blue_background_color
-                    "스투키" -> R.color.cherish_stuki_background_color
-                    "단모환" -> R.color.cherish_sun_background_color
-                    else -> R.color.white
+    @BindingAdapter(value = ["setImageSizePlantName", "setImageSizeGrowth"])
+    fun setPlantImageViewSize(imageView: ImageView, plantName: String?, growth: Int?) {
+        if (growth != null) {
+            imageView.apply {
+                when {
+                    growth <= 100 -> {
+                        when (plantName) {
+                            "민들레" -> resizeImageView(262, 331)
+                            "로즈마리" -> resizeImageView(220, 460)
+                            "아메리칸블루" -> resizeImageView(249, 368)
+                            "스투키" -> resizeImageView(295, 266.6.toInt())
+                            "단모환" -> resizeImageView(275, 229)
+                            else -> {
+
+                            }
+                        }
+                    }
+                    growth in 101..200 -> {
+                        when (plantName) {
+                            "민들레" -> resizeImageView(235, 388)
+                            "로즈마리" -> resizeImageView(204, 572)
+                            "아메리칸블루" -> resizeImageView(204, 461)
+                            "스투키" -> resizeImageView(294, 313)
+                            "단모환" -> resizeImageView(283, 350)
+                            else -> {
+
+                            }
+                        }
+                    }
+                    else -> {
+                        when (plantName) {
+                            "민들레" -> resizeImageView(235, 388)
+                            "로즈마리" -> resizeImageView(204, 572)
+                            "아메리칸블루" -> resizeImageView(204, 461)
+                            "스투키" -> resizeImageView(294, 313)
+                            "단모환" -> resizeImageView(283, 350)
+                            else -> {
+
+                            }
+                        }
+                    }
                 }
+            }
+        }
+    }
+
+
+    @JvmStatic
+    @BindingAdapter(value = ["plantName", "dDay"], requireAll = true)
+    fun setPlantBackground(imageView: ImageView, plantName: String?, dDay: Int) {
+        if (dDay < 0) {
+            // 시든상태
+            imageView.setBackgroundColor(
+                ContextCompat.getColor(
+                    imageView.context,
+                    R.color.cherish_light_black
+                )
             )
-        )
+        } else {
+            // 멀쩡한 상태
+            imageView.setBackgroundColor(
+                ContextCompat.getColor(
+                    imageView.context, when (plantName) {
+                        "민들레" -> R.color.cherish_dandelion_background_color
+                        "로즈마리" -> R.color.cherish_rosemary_background_color
+                        "아메리칸블루" -> R.color.cherish_american_blue_background_color
+                        "스투키" -> R.color.cherish_stuki_background_color
+                        "단모환" -> R.color.cherish_sun_background_color
+                        else -> R.color.white
+                    }
+                )
+            )
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter(value = ["isWatered", "remainDay", "wateredPlantName", "viewModel"])
+    fun wateredBackground(
+        imageView: ImageView,
+        isWatered: Boolean?,
+        remainDay: Int,
+        plantName: String?,
+        viewModel: MainViewModel
+    ) {
+        if (isWatered == true) {
+            imageView.setBackgroundColor(
+                ContextCompat.getColor(
+                    imageView.context, R.color.cherish_watered_color
+                )
+            )
+            val delayHandler = Handler(imageView.context.mainLooper)
+            delayHandler.postDelayed({
+                imageView.setBackgroundColor(
+                    ContextCompat.getColor(
+                        imageView.context, when (plantName) {
+                            "민들레" -> R.color.cherish_dandelion_background_color
+                            "로즈마리" -> R.color.cherish_rosemary_background_color
+                            "아메리칸블루" -> R.color.cherish_american_blue_background_color
+                            "스투키" -> R.color.cherish_stuki_background_color
+                            "단모환" -> R.color.cherish_sun_background_color
+                            else -> R.color.white
+                        }
+                    )
+                )
+            }, 2000)
+            viewModel.isWatered.value = null
+        }
+        if (isWatered == false) {
+            if (remainDay < 0) {
+                imageView.setBackgroundColor(
+                    ContextCompat.getColor(
+                        imageView.context,
+                        R.color.cherish_light_black
+                    )
+                )
+            } else {
+                imageView.setBackgroundColor(
+                    ContextCompat.getColor(
+                        imageView.context, R.color.cherish_light_black
+                    )
+                )
+                val delayHandler = Handler(imageView.context.mainLooper)
+                delayHandler.postDelayed({
+                    imageView.setBackgroundColor(
+                        ContextCompat.getColor(
+                            imageView.context, when (plantName) {
+                                "민들레" -> R.color.cherish_dandelion_background_color
+                                "로즈마리" -> R.color.cherish_rosemary_background_color
+                                "아메리칸블루" -> R.color.cherish_american_blue_background_color
+                                "스투키" -> R.color.cherish_stuki_background_color
+                                "단모환" -> R.color.cherish_sun_background_color
+                                else -> R.color.white
+                            }
+                        )
+                    )
+                }, 2000)
+                viewModel.isWatered.value = null
+            }
+        }
     }
 
     @JvmStatic
@@ -77,17 +292,6 @@ object BindingAdapter {
                 }
             )
         )
-    }
-
-    @JvmStatic
-    @BindingAdapter("android:setPlantImageViewSize")
-    fun setPlantImageViewSize(imageView: ImageView, temp: Int) {
-        imageView.apply {
-            maxWidth = 207.dp
-            minimumWidth = 207.dp
-            maxHeight = 521.dp
-            minimumHeight = 521.dp
-        }
     }
 
     @JvmStatic
@@ -143,26 +347,37 @@ object BindingAdapter {
 
     @JvmStatic
     @BindingAdapter("android:setProgressBarBackground")
-    fun setProgressbarBackground(progressbar: ProgressBar, rating: Int?) {
-        if (rating != null) {
-            if (rating <= 30) {
-                Log.d("BindingAdapter", progressbar.context.toString())
-                progressbar.progressDrawable = progressbar.context?.let {
-                    ResourcesCompat.getDrawable(
-                        it.resources,
-                        R.drawable.progress_drawable_verticle_red,
-                        null
-                    )
-                }
-            } else {
-                progressbar.progressDrawable = progressbar.context?.let {
-                    ResourcesCompat.getDrawable(
-                        it.resources,
-                        R.drawable.progress_drawable_vertical,
-                        null
-                    )
-                }
+    fun setProgressbarBackground(progressbar: ProgressBar, rating: Int) {
+        progressbar.progressDrawable = if (rating <= 30) {
+            progressbar.context?.let {
+                ResourcesCompat.getDrawable(
+                    it.resources,
+                    R.drawable.progress_drawable_verticle_red,
+                    null
+                )
+            }
+        } else {
+            progressbar.context?.let {
+                ResourcesCompat.getDrawable(
+                    it.resources,
+                    R.drawable.progress_drawable_vertical,
+                    null
+                )
             }
         }
+    }
+
+    @SuppressLint("SetTextI18n")
+    @JvmStatic
+    @BindingAdapter(value = ["userNickname", "selectedCherishName"])
+    fun setReviewMainText(textView: TextView, userNickname: String, selectedCherishName: String?) {
+        textView.text = "${userNickname}님!${selectedCherishName}님과의"
+    }
+
+    @SuppressLint("SetTextI18n")
+    @JvmStatic
+    @BindingAdapter("android:setReviewSubText")
+    fun setReviewSubText(textView: TextView, selectedCherishName: String?) {
+        textView.text = "${selectedCherishName}님과의 물주기를 기록해주세요"
     }
 }

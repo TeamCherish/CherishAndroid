@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="detailPlantViewModel"
             type="com.sopt.cherish.ui.detail.DetailPlantViewModel" />

@@ -48,15 +48,18 @@ class PwFindingActivity : AppCompatActivity() {
 
         when (index) {
             0 -> {
-                transAction.replace(R.id.fragment_finding, PwFindingFirstFragment()).addToBackStack(null)
+                transAction.replace(R.id.fragment_finding, PwFindingFirstFragment())
+                    .addToBackStack(null)
                     .commit()
             }
             1 ->
-                transAction.replace(R.id.fragment_finding, PwFindingSecondFragment()).addToBackStack(null)
+                transAction.replace(R.id.fragment_finding, PwFindingSecondFragment())
+                    .addToBackStack(null)
                     .commit()
 
             2 ->
-                transAction.replace(R.id.fragment_finding, PwFindingThirdFragment()).addToBackStack(null)
+                transAction.replace(R.id.fragment_finding, PwFindingThirdFragment())
+                    .addToBackStack(null)
                     .commit()
         }
     }

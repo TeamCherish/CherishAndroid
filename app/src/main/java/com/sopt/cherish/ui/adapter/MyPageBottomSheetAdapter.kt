@@ -1,13 +1,10 @@
 package com.sopt.cherish.ui.adapter
 
 import android.annotation.SuppressLint
-import android.graphics.Color
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.sopt.cherish.R
@@ -22,7 +19,7 @@ class MyPageBottomSheetAdapter(private var data: List<MyPageCherishData>?) :
         @SuppressLint("SetTextI18n")
         fun bind(cherishData: MyPageCherishData) {
             binding.mypageCherryNickname.text = cherishData.nickName
-            binding.mypageCherryName.text = cherishData.name+" "
+            binding.mypageCherryName.text = cherishData.name + " "
             binding.mypageCherryLevel.text = "Lv. " + cherishData.level.toString()
 
             //빨간색: D+

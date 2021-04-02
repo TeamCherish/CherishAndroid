@@ -79,6 +79,7 @@
             app:layout_constraintStart_toEndOf="@+id/textnick"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cons1"
         android:layout_width="0dp"

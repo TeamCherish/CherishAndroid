@@ -56,18 +56,22 @@ class SignUpActivity : AppCompatActivity() {
 
         when (index) {
             0 -> {
-                transAction.replace(R.id.fragment_signup, SignUpFirstFragment()).addToBackStack(null)
+                transAction.replace(R.id.fragment_signup, SignUpFirstFragment())
+                    .addToBackStack(null)
                     .commit()
             }
             1 ->
-                transAction.replace(R.id.fragment_signup, SignUpSecondFragment()).addToBackStack(null)
+                transAction.replace(R.id.fragment_signup, SignUpSecondFragment())
+                    .addToBackStack(null)
                     .commit()
 
             2 ->
-                transAction.replace(R.id.fragment_signup, SignUpThirdFragment()).addToBackStack(null)
+                transAction.replace(R.id.fragment_signup, SignUpThirdFragment())
+                    .addToBackStack(null)
                     .commit()
             3 ->
-                transAction.replace(R.id.fragment_signup, SignUpFourthFragment()).addToBackStack(null)
+                transAction.replace(R.id.fragment_signup, SignUpFourthFragment())
+                    .addToBackStack(null)
                     .commit()
         }
     }

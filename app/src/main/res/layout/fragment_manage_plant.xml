@@ -33,45 +33,44 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-            <TextView
-                android:id="@+id/my_page_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="@dimen/margin_12dp"
-                android:textColor="@color/cherish_light_black"
-                android:fontFamily="@font/notosanscjkkr_medium"
-                android:textSize="16sp"
-                android:layout_marginStart="@dimen/margin_16dp"
-                android:text="@string/myPage_title_text" />
+        <TextView
+            android:id="@+id/my_page_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_16dp"
+            android:layout_marginTop="@dimen/margin_12dp"
+            android:fontFamily="@font/notosanscjkkr_medium"
+            android:text="@string/myPage_title_text"
+            android:textColor="@color/cherish_light_black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/search_box"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/margin_20dp"
-                android:layout_marginTop="@dimen/margin_16dp"
-                android:contentDescription="@null"
-                android:src="@drawable/icn_search_box"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/search_box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_20dp"
+            android:layout_marginTop="@dimen/margin_16dp"
+            android:contentDescription="@null"
+            android:src="@drawable/icn_search_box"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:visibility="invisible"
-                android:id="@+id/cancel_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/notosanscjkkr_regular"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="10dp"
-                android:textSize="15sp"
-                android:textColor="#454545"
-                android:textStyle="normal"
-                android:layout_marginEnd="16dp"
-                android:text="@string/myPage_cancel_text"/>
-
+        <TextView
+            android:visibility="invisible"
+            android:id="@+id/cancel_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/notosanscjkkr_regular"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="16dp"
+            android:textColor="#454545"
+            android:textSize="15sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="@string/myPage_cancel_text" />
 
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -92,9 +91,9 @@
             android:layout_marginStart="14dp"
             android:fontFamily="@font/notosanscjkkr_bold"
             android:text=""
-            android:textSize="18sp"
-            android:lineSpacingExtra="6sp"
             android:gravity="center_horizontal"
+            android:lineSpacingExtra="6sp"
+            android:textSize="18sp"
             android:textColor="@color/cherish_light_black"
             app:layout_constraintBottom_toBottomOf="@+id/my_page_user_img"
             app:layout_constraintStart_toEndOf="@+id/my_page_user_img"
@@ -107,8 +106,8 @@
             android:fontFamily="@font/notosanscjkkr_bold"
             android:text="@string/myPage_user_description_text"
             android:textSize="18sp"
-            android:lineSpacingExtra="6sp"
             android:gravity="center_horizontal"
+            android:lineSpacingExtra="6sp"
             android:textColor="@color/cherish_light_black"
             app:layout_constraintBottom_toBottomOf="@+id/my_page_user_name"
             app:layout_constraintStart_toEndOf="@+id/my_page_user_name"
@@ -138,7 +137,7 @@
             android:layout_marginEnd="@dimen/margin_16dp"
             android:layout_marginTop="25dp"
             android:id="@+id/my_page_box"
-            android:background="@drawable/my_page_box"/>
+            android:background="@drawable/my_page_box" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -148,22 +147,22 @@
             app:layout_constraintTop_toTopOf="@+id/my_page_box"
             app:layout_constraintEnd_toStartOf="@id/divide_bar_1"
             android:text=""
-            android:fontFamily="@font/notosanscjkkr_bold"
-            android:textColor="@color/cherish_light_black"
             android:layout_marginTop="@dimen/margin_12dp"
+            android:textColor="@color/cherish_light_black"
+            android:fontFamily="@font/notosanscjkkr_bold"
             android:textSize="18sp"
-            android:id="@+id/my_page_watering_cnt"/>
+            android:id="@+id/my_page_watering_cnt" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/my_page_box"
+            android:layout_marginBottom="8dp"
             app:layout_constraintStart_toStartOf="@+id/my_page_watering_cnt"
             app:layout_constraintEnd_toEndOf="@+id/my_page_watering_cnt"
             android:text="@string/myPage_watering_text"
-            android:layout_marginBottom="4dp"
-            android:id="@+id/watering_text"
             android:fontFamily="@font/notosanscjkkr_regular"
+            android:id="@+id/watering_text"
+            app:layout_constraintBottom_toBottomOf="@+id/my_page_box"
             android:textColor="@color/cherish_light_black"
             android:textSize="12sp" />
 
@@ -175,7 +174,7 @@
             app:layout_constraintStart_toEndOf="@+id/my_page_watering_cnt"
             app:layout_constraintEnd_toStartOf="@id/my_page_postpone_cnt"
             app:layout_constraintTop_toTopOf="@+id/my_page_box"
-            android:layout_marginTop="24dp"/>
+            android:layout_marginTop="24dp" />
 
 
         <TextView
@@ -185,23 +184,23 @@
             app:layout_constraintTop_toTopOf="@+id/my_page_box"
             app:layout_constraintEnd_toStartOf="@id/divide_bar_2"
             android:text=""
-            android:gravity="center_horizontal"
+            android:layout_marginTop="12dp"
             android:fontFamily="@font/notosanscjkkr_bold"
             android:textColor="@color/cherish_light_black"
-            android:layout_marginTop="12dp"
+            android:gravity="center_horizontal"
             android:textSize="18sp"
-            android:id="@+id/my_page_postpone_cnt"/>
+            android:id="@+id/my_page_postpone_cnt" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/my_page_box"
+            android:layout_marginBottom="8dp"
             app:layout_constraintStart_toStartOf="@+id/my_page_postpone_cnt"
             app:layout_constraintEnd_toEndOf="@+id/my_page_postpone_cnt"
             android:text="@string/myPage_postpone_text"
-            android:layout_marginBottom="4dp"
-            android:gravity="center_horizontal"
             android:fontFamily="@font/notosanscjkkr_regular"
+            android:gravity="center_horizontal"
+            app:layout_constraintBottom_toBottomOf="@+id/my_page_box"
             android:textColor="@color/cherish_light_black"
             android:textSize="12sp" />
 
@@ -213,7 +212,7 @@
             app:layout_constraintTop_toTopOf="@+id/my_page_box"
             app:layout_constraintEnd_toStartOf="@id/my_page_finish_cnt"
             android:layout_marginTop="24dp"
-            android:background="@color/cherish_divide_gray"/>
+            android:background="@color/cherish_divide_gray" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -222,23 +221,23 @@
             app:layout_constraintTop_toTopOf="@+id/my_page_box"
             app:layout_constraintEnd_toEndOf="@+id/my_page_box"
             android:text=""
-            android:gravity="center_horizontal"
+            android:layout_marginTop="12dp"
             android:fontFamily="@font/notosanscjkkr_bold"
             android:textColor="@color/cherish_light_black"
-            android:layout_marginTop="12dp"
+            android:gravity="center_horizontal"
             android:textSize="18sp"
-            android:id="@+id/my_page_finish_cnt"/>
+            android:id="@+id/my_page_finish_cnt" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/my_page_box"
+            android:layout_marginBottom="4dp"
             app:layout_constraintStart_toStartOf="@+id/my_page_finish_cnt"
             app:layout_constraintEnd_toEndOf="@+id/my_page_finish_cnt"
             android:text="@string/myPage_complete_text"
-            android:layout_marginBottom="4dp"
-            android:gravity="center_horizontal"
             android:fontFamily="@font/notosanscjkkr_regular"
+            android:gravity="center_horizontal"
+            app:layout_constraintBottom_toBottomOf="@+id/my_page_box"
             android:textColor="@color/cherish_light_black"
             android:textSize="12sp" />
 

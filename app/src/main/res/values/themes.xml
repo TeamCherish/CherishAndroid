@@ -67,7 +67,6 @@
     </style>
 
 
-
     <style name="RoundButton.DarkGray">
         <item name="android:layout_height">45dp</item>
         <item name="android:backgroundTint">@color/cherish_next_watering_btn_color</item>

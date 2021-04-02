@@ -20,7 +20,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginStart="@dimen/margin_16dp"
-        android:layout_marginTop="69dp"/>
+        android:layout_marginTop="69dp" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/user_pw_layout"
@@ -46,7 +46,7 @@
             android:background="@drawable/search_background"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -73,7 +73,7 @@
             android:background="@drawable/search_background"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -85,7 +85,7 @@
         app:layout_constraintTop_toBottomOf="@+id/pw_again_layout"
         app:layout_constraintEnd_toEndOf="@+id/pw_again_layout"
         android:textColor="@color/cherish_green_main"
-        android:fontFamily="@font/notosanscjkkr_regular"/>
+        android:fontFamily="@font/notosanscjkkr_regular" />
 
     <Button
         android:id="@+id/sign_up_button"
@@ -100,5 +100,5 @@
         android:textSize="16sp"
         android:layout_marginStart="@dimen/margin_16dp"
         android:layout_marginEnd="@dimen/margin_16dp"
-        android:layout_marginBottom="@dimen/margin_21dp"/>
+        android:layout_marginBottom="@dimen/margin_21dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

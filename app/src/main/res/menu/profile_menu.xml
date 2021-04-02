@@ -2,11 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/camera"
-        android:title="@string/user_modify_camera"/>
+        android:title="@string/user_modify_camera" />
     <item
         android:id="@+id/gallery"
-        android:title="@string/user_modify_gallery"/>
+        android:title="@string/user_modify_gallery" />
     <item
         android:id="@+id/delete"
-        android:title="@string/user_modify_delete"/>
+        android:title="@string/user_modify_delete" />
 </menu>

@@ -16,7 +16,7 @@
         android:src="@drawable/sign_up_indicator_off"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="24dp"/>
+        android:layout_marginStart="24dp" />
 
     <ImageView
         android:contentDescription="@null"
@@ -27,7 +27,7 @@
         android:src="@drawable/sign_up_indicator_on"
         app:layout_constraintStart_toEndOf="@+id/indicator_first"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="9dp"/>
+        android:layout_marginStart="9dp" />
 
     <ImageView
         android:contentDescription="@null"
@@ -38,7 +38,7 @@
         android:src="@drawable/sign_up_indicator_off"
         app:layout_constraintStart_toEndOf="@+id/indicator_second"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="9dp"/>
+        android:layout_marginStart="9dp" />
 
     <ImageView
         android:contentDescription="@null"
@@ -49,7 +49,7 @@
         android:src="@drawable/sign_up_indicator_off"
         app:layout_constraintStart_toEndOf="@+id/indicator_third"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="9dp"/>
+        android:layout_marginStart="9dp" />
 
     <TextView
         android:id="@+id/phone_text"
@@ -62,7 +62,7 @@
         android:layout_marginTop="45dp"
         android:layout_marginStart="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/indicator_first"/>
+        app:layout_constraintTop_toBottomOf="@+id/indicator_first" />
 
     <EditText
         android:autofillHints="@string/sign_up_email_hint"
@@ -79,8 +79,8 @@
         android:layout_marginTop="4dp"
         android:paddingStart="10dp"
         android:paddingEnd="0dp"
-        android:hint="@string/sign_up_phone_hint"/>
-    
+        android:hint="@string/sign_up_phone_hint" />
+
     <TextView
         android:id="@+id/certification_btn"
         android:layout_width="0dp"
@@ -94,7 +94,7 @@
         android:textSize="@dimen/text_16sp"
         app:layout_constraintTop_toBottomOf="@+id/user_phone"
         android:text="@string/sign_up_certification_number"
-        android:layout_marginTop="28dp"/>
+        android:layout_marginTop="28dp" />
 
     <TextView
         android:visibility="gone"
@@ -108,7 +108,7 @@
         android:layout_marginTop="37dp"
         android:layout_marginStart="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/user_phone"/>
+        app:layout_constraintTop_toBottomOf="@+id/user_phone" />
 
     <EditText
         android:visibility="gone"
@@ -127,7 +127,7 @@
         android:layout_marginTop="4dp"
         android:paddingStart="10dp"
         android:paddingEnd="0dp"
-        android:hint="@string/sign_up_certification_hint"/>
+        android:hint="@string/sign_up_certification_hint" />
 
     <TextView
         android:visibility="gone"
@@ -143,7 +143,7 @@
         android:textSize="@dimen/text_16sp"
         app:layout_constraintTop_toBottomOf="@+id/user_certification_number"
         android:text="@string/sign_up_certification_again"
-        android:layout_marginTop="28dp"/>
+        android:layout_marginTop="28dp" />
 
     <TextView
         android:id="@+id/certification_ok"
@@ -154,7 +154,7 @@
         app:layout_constraintTop_toBottomOf="@+id/certification_again"
         android:textColor="@color/cherish_pink_sub"
         android:fontFamily="@font/notosanscjkkr_regular"
-        android:text="@string/sign_up_certification_check"/>
+        android:text="@string/sign_up_certification_check" />
 
     <Button
         android:id="@+id/sign_up_button"
@@ -169,6 +169,6 @@
         android:textSize="16sp"
         android:layout_marginStart="@dimen/margin_16dp"
         android:layout_marginEnd="@dimen/margin_16dp"
-        android:layout_marginBottom="@dimen/margin_21dp"/>
+        android:layout_marginBottom="@dimen/margin_21dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

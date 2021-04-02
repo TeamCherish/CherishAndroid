@@ -25,7 +25,7 @@ object Injection {
     fun provideMainViewModelFactory(): ViewModelProvider.Factory {
         return MainViewModelFactory(
             provideMainRepository(), provideWateringRepository(), provideCalendarRepository(),
-            provideNotificationRepository()
+            provideNotificationRepository(), provideReviewRepository()
         )
     }
 

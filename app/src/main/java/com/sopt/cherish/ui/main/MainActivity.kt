@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
     private val viewModel: MainViewModel by viewModels { Injection.provideMainViewModelFactory() }
     var search: Boolean = false
     private var backPressedTime: Long = 0
-    var beforeClick=true
+    var beforeClick = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,11 +62,6 @@ class MainActivity : AppCompatActivity() {
                 token
             )
          */
-    }
-
-    override fun onResume() {
-        super.onResume()
-        viewModel.fetchUsers()
     }
 
     private fun getFirebaseDeviceToken() {

@@ -15,7 +15,7 @@
         android:src="@drawable/sign_up_indicator_off"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="24dp"/>
+        android:layout_marginStart="24dp" />
 
     <ImageView
         android:contentDescription="@null"
@@ -26,7 +26,7 @@
         android:src="@drawable/sign_up_indicator_off"
         app:layout_constraintStart_toEndOf="@+id/indicator_first"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="9dp"/>
+        android:layout_marginStart="9dp" />
 
     <ImageView
         android:contentDescription="@null"
@@ -37,7 +37,7 @@
         android:src="@drawable/sign_up_indicator_off"
         app:layout_constraintStart_toEndOf="@+id/indicator_second"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="9dp"/>
+        android:layout_marginStart="9dp" />
 
     <ImageView
         android:contentDescription="@null"
@@ -48,7 +48,7 @@
         android:src="@drawable/sign_up_indicator_on"
         app:layout_constraintStart_toEndOf="@+id/indicator_third"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="9dp"/>
+        android:layout_marginStart="9dp" />
 
     <TextView
         android:id="@+id/nickname_text"
@@ -61,7 +61,7 @@
         android:layout_marginTop="45dp"
         android:layout_marginStart="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/indicator_first"/>
+        app:layout_constraintTop_toBottomOf="@+id/indicator_first" />
 
 
     <EditText
@@ -79,7 +79,7 @@
         android:layout_marginTop="4dp"
         android:paddingStart="10dp"
         android:paddingEnd="0dp"
-        android:hint="@string/sign_up_nickname_hint"/>
+        android:hint="@string/sign_up_nickname_hint" />
 
     <TextView
         android:visibility="invisible"
@@ -89,7 +89,7 @@
         app:layout_constraintEnd_toEndOf="@+id/user_nickname"
         app:layout_constraintTop_toBottomOf="@+id/user_nickname"
         android:fontFamily="@font/notosanscjkkr_regular"
-        android:text="@string/sign_up_nickname_ok"/>
+        android:text="@string/sign_up_nickname_ok" />
 
 
     <TextView
@@ -122,6 +122,6 @@
         android:textSize="16sp"
         android:layout_marginStart="@dimen/margin_16dp"
         android:layout_marginEnd="@dimen/margin_16dp"
-        android:layout_marginBottom="@dimen/margin_21dp"/>
+        android:layout_marginBottom="@dimen/margin_21dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

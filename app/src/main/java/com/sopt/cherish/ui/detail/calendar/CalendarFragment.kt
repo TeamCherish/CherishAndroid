@@ -1,5 +1,6 @@
 package com.sopt.cherish.ui.detail.calendar
 
+import android.content.Context
 import android.os.Bundle
 import android.view.*
 import androidx.databinding.DataBindingUtil
@@ -11,6 +12,7 @@ import com.sopt.cherish.ui.detail.DetailPlantActivity
 import com.sopt.cherish.ui.detail.DetailPlantViewModel
 import com.sopt.cherish.ui.review.ReviseReviewFragment
 import com.sopt.cherish.util.DateUtil
+import com.sopt.cherish.util.SimpleLogger
 import com.sopt.cherish.util.extension.FlexBoxExtension.clearChips
 import com.sopt.cherish.util.extension.longToast
 
@@ -20,6 +22,13 @@ class CalendarFragment : Fragment() {
     private val viewModel: DetailPlantViewModel by activityViewModels()
 
     private lateinit var binding: FragmentCalendarBinding
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        viewModel.selectedMemoCalendarDay.value.let {
+            viewModel.selectedCalendarDay.value = it
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -30,17 +39,17 @@ class CalendarFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.detailPlantViewModel = viewModel
         binding.calendarFragment = this
-
+        observeSelectedMemoCalendarDay()
         initializeViewModelData()
-        initializeCalendar(binding)
-        addDateClickListener(binding)
-        observeSelectedMemoCalendarDay(binding)
+        initializeCalendar()
+        addDateClickListener()
         observeSelectedDay()
 
         return binding.root
     }
 
-    private fun observeSelectedMemoCalendarDay(binding: FragmentCalendarBinding) {
+    private fun observeSelectedMemoCalendarDay() {
+        SimpleLogger.logI(viewModel.selectedMemoCalendarDay.value.toString())
         viewModel.selectedMemoCalendarDay.observe(viewLifecycleOwner) {
             binding.calendarView.setDateSelected(it, true)
             viewModel.selectedCalendarDay.value = it
@@ -65,6 +74,14 @@ class CalendarFragment : Fragment() {
         viewModel.fetchCalendarData()
         viewModel.selectedCalendarDay.value = viewModel.selectedCalendarDay.value
         binding.calendarView.removeDecorators()
+        binding.calendarView.clearSelection()
+        removeSelectedCalendarData()
+        removeMemo(binding)
+        removeSelectedDate(binding)
+        viewModel.selectedCalendarDay.value = null
+        binding.calendarViewChipLayout.clearChips()
+        viewModel.selectedMemoCalendarDay.value = null
+
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
@@ -91,7 +108,7 @@ class CalendarFragment : Fragment() {
         viewModel.calendarModeChangeEvent.value = false
     }
 
-    private fun initializeCalendar(binding: FragmentCalendarBinding) {
+    private fun initializeCalendar() {
         changeCalendarMode(binding)
     }
 
@@ -119,7 +136,7 @@ class CalendarFragment : Fragment() {
         }
     }
 
-    private fun addDateClickListener(binding: FragmentCalendarBinding) {
+    private fun addDateClickListener() {
         binding.calendarView.setOnDateChangedListener { widget, date, selected ->
             viewModel.selectedCalendarDay.value = date
         }

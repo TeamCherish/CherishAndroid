@@ -1,9 +1,11 @@
 package com.sopt.cherish.ui.main.manageplant
 
 
-
 import android.content.Intent
-import android.graphics.*
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Color
+import android.graphics.Matrix
 import android.media.ExifInterface
 import android.net.Uri
 import android.os.Bundle
@@ -26,8 +28,8 @@ import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
 import com.sopt.cherish.ui.main.MainActivity
 import com.sopt.cherish.ui.main.MainViewModel
-import com.sopt.cherish.util.ImageSharedPreferences
 import com.sopt.cherish.ui.main.setting.UserModifyFragment
+import com.sopt.cherish.util.ImageSharedPreferences
 import com.sopt.cherish.util.PixelUtil.dp
 import com.sopt.cherish.util.SimpleLogger
 import retrofit2.Call
@@ -91,7 +93,7 @@ class ManagePlantFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId==1)
+        if (item.itemId == 1)
             return true
         return super.onOptionsItemSelected(item)
     }
@@ -108,16 +110,16 @@ class ManagePlantFragment : Fragment() {
         initializeProfile(binding)
     }
 
-    private fun initializeProfile(binding:FragmentManagePlantBinding){
-        if(ImageSharedPreferences.getGalleryFile(requireContext()).isNotEmpty()){ //앨범일 때
-            val uri=Uri.parse(ImageSharedPreferences.getGalleryFile(requireContext()))
+    private fun initializeProfile(binding: FragmentManagePlantBinding) {
+        if (ImageSharedPreferences.getGalleryFile(requireContext()).isNotEmpty()) { //앨범일 때
+            val uri = Uri.parse(ImageSharedPreferences.getGalleryFile(requireContext()))
             Glide.with(requireContext()).load(uri).circleCrop().into(binding.myPageUserImg)
-        }else if(ImageSharedPreferences.getCameraFile(requireContext()).isNotEmpty()){
-            val path= ImageSharedPreferences.getCameraFile(requireContext())
+        } else if (ImageSharedPreferences.getCameraFile(requireContext()).isNotEmpty()) {
+            val path = ImageSharedPreferences.getCameraFile(requireContext())
             val bitmap = BitmapFactory.decodeFile(path)
-            lateinit var exif : ExifInterface
+            lateinit var exif: ExifInterface
 
-            try{
+            try {
                 exif = ExifInterface(path)
                 var exifOrientation = 0
                 var exifDegree = 0
@@ -132,22 +134,22 @@ class ManagePlantFragment : Fragment() {
                     binding.myPageUserImg
                 )
                 //binding.myPageUserImg.setImageBitmap(rotate(bitmap, exifDegree))
-            }catch (e: IOException){
+            } catch (e: IOException) {
                 e.printStackTrace()
             }
-        }else{
+        } else {
             binding.myPageUserImg.setBackgroundResource(R.drawable.user_img)
         }
     }
 
-    private fun rotate(bitmap: Bitmap, degree: Int) : Bitmap {
+    private fun rotate(bitmap: Bitmap, degree: Int): Bitmap {
         val matrix = Matrix()
         matrix.postRotate(degree.toFloat())
         return Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
     }
 
     private fun exifOrientationToDegress(exifOrientation: Int): Int {
-        when(exifOrientation){
+        when (exifOrientation) {
             ExifInterface.ORIENTATION_ROTATE_90 -> {
                 return 90
             }
@@ -182,12 +184,12 @@ class ManagePlantFragment : Fragment() {
             BottomSheetBehavior.from(binding.homeStandardBottomSheetMypage)
         // bottom sheet state 지정
         standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
-        val metrics=resources.displayMetrics
+        val metrics = resources.displayMetrics
 
-        standardBottomSheetBehavior.peekHeight = (metrics.heightPixels-76.dp)/2
+        standardBottomSheetBehavior.peekHeight = (metrics.heightPixels - 76.dp) / 2
         standardBottomSheetBehavior.expandedOffset = 48.dp
         standardBottomSheetBehavior.isHideable = false
-        standardBottomSheetBehavior.isGestureInsetBottomIgnored=true
+        standardBottomSheetBehavior.isGestureInsetBottomIgnored = true
 
         //검색 버튼 눌렀을 때
         binding.searchBox.setOnClickListener {

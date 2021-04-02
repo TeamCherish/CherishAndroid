@@ -8,10 +8,10 @@ import java.io.IOException
 
 object ErrorUtils {
     fun parseError(response: Response<*>): APIError {
-        val converter: Converter<ResponseBody, APIError> =RetrofitBuilder.getRetrofit()
+        val converter: Converter<ResponseBody, APIError> = RetrofitBuilder.getRetrofit()
             .responseBodyConverter(APIError::class.java, arrayOfNulls<Annotation>(0))
 
-        var error: APIError?=null
+        var error: APIError? = null
 
         error = try {
             converter.convert(response.errorBody())
