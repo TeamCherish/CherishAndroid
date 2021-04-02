@@ -18,7 +18,6 @@ import com.sopt.cherish.util.extension.writeKeyword
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-// todo : review Fragment를 만들어봐야겠어요 delay를 위해서
 class ReviewActivity : AppCompatActivity() {
     private val viewModel: ReviewViewModel by viewModels { Injection.provideReviewViewModelFactory() }
 
