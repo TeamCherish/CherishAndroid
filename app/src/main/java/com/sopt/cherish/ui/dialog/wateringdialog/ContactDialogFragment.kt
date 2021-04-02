@@ -157,6 +157,7 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == codeThatReviewPage) {
             if (resultCode == RESULT_CANCELED) {
+                // todo : 여기로 다시 오게 되는데 그럼 문제가 뭐냐면 다시 포커스를 받아버리기 때문에 onCreateView부터 다시 시작하는거라는거지
                 startReview()
             }
         }

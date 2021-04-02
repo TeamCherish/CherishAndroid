@@ -87,6 +87,18 @@ class ReviewActivity : AppCompatActivity() {
         }
     }
 
+    private fun showIgnoreLoadingDialog() {
+        lifecycleScope.launch {
+            val dialog = MultiViewDialog(R.layout.dialog_loading, 0.35f, 0.169f)
+            dialog.show(supportFragmentManager, TAG)
+            delay(2000)
+            dialog.dismiss()
+            val intent = Intent()
+            setResult(RESULT_OK, intent)
+            finish()
+        }
+    }
+
     private fun addUserStatusWithChip(binding: ActivityReviewBinding) {
         binding.reviewEditKeyword.writeKeyword(binding.reviewFlexBox, supportFragmentManager)
     }
@@ -109,7 +121,7 @@ class ReviewActivity : AppCompatActivity() {
     private fun ignoreSendReviewToServer(binding: ActivityReviewBinding) {
         binding.reviewIgnoreAccept.setOnClickListener {
             // 이거 다시 한번 물어봐야 함
-            showLoadingDialog()
+            showIgnoreLoadingDialog()
         }
     }
 
