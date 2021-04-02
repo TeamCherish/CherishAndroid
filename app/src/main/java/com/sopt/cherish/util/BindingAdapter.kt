@@ -45,7 +45,7 @@ object BindingAdapter {
         if (growth != null) {
             imageView.setImageDrawable(
                 when {
-                    growth <= 100 -> {
+                    growth <= 25 -> {
                         when (plantName) {
                             "민들레" -> ContextCompat.getDrawable(
                                 imageView.context,
@@ -73,7 +73,7 @@ object BindingAdapter {
                             )
                         }
                     }
-                    growth in 101..200 -> {
+                    growth in 26..50 -> {
                         when (plantName) {
                             "민들레" -> ContextCompat.getDrawable(
                                 imageView.context,
@@ -141,7 +141,7 @@ object BindingAdapter {
         if (growth != null) {
             imageView.apply {
                 when {
-                    growth <= 100 -> {
+                    growth <= 25 -> {
                         when (plantName) {
                             "민들레" -> resizeImageView(262, 331)
                             "로즈마리" -> resizeImageView(220, 460)
@@ -153,7 +153,7 @@ object BindingAdapter {
                             }
                         }
                     }
-                    growth in 101..200 -> {
+                    growth in 26..50 -> {
                         when (plantName) {
                             "민들레" -> resizeImageView(235, 388)
                             "로즈마리" -> resizeImageView(204, 572)
@@ -181,7 +181,6 @@ object BindingAdapter {
             }
         }
     }
-
 
     @JvmStatic
     @BindingAdapter(value = ["plantName", "dDay"], requireAll = true)
