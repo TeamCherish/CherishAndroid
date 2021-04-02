@@ -83,7 +83,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
         viewModel.cherishUsers.observe(viewLifecycleOwner) {
             if (it != null) {
                 setCherishUserListAdapter(it)
-                setSelectedUser(it.userData.userList[1])
+                setSelectedUser(it.userData.userList[viewModel.cherishSelectedPosition.value!!])
             } else {
                 val blankIntent = Intent(requireContext(), HomeBlankActivity::class.java)
                 blankIntent.putExtra("userNickname", viewModel.userNickName.value)
@@ -97,7 +97,6 @@ class HomeFragment : Fragment(), OnItemClickListener {
 
     private fun setSelectedUser(user: User) {
         viewModel.selectedCherishUser.value = user
-        homeCherryListAdapter.lastSelectedPosition = 1
     }
 
     private fun setCherishUserListAdapter(userResult: UserResult) {
