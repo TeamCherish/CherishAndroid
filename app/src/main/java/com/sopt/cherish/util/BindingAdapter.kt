@@ -39,12 +39,194 @@ object BindingAdapter {
     }
 
     @JvmStatic
-    @BindingAdapter("android:setPlantImage")
-    fun setPlantImage(imageView: ImageView, plantImageUrl: String?) {
-        Glide.with(imageView.context)
-            .load(plantImageUrl)
-            .into(imageView)
+    @BindingAdapter(value = ["plantName", "growth"])
+    fun setPlantImage(imageView: ImageView, plantName: String?, growth: Int?) {
+        if (growth != null) {
+            imageView.setImageDrawable(
+                when {
+                    growth <= 100 -> {
+                        when (plantName) {
+                            "민들레" -> ContextCompat.getDrawable(
+                                imageView.context,
+                                R.drawable.img_dandelion_1
+                            )
+                            "로즈마리" -> ContextCompat.getDrawable(
+                                imageView.context,
+                                R.drawable.img_rose_1
+                            )
+                            "아메리칸블루" -> ContextCompat.getDrawable(
+                                imageView.context,
+                                R.drawable.img_americanblue_1
+                            )
+                            "스투키" -> ContextCompat.getDrawable(
+                                imageView.context,
+                                R.drawable.img_stuki_1
+                            )
+                            "단모환" -> ContextCompat.getDrawable(
+                                imageView.context,
+                                R.drawable.img_sun_1
+                            )
+                            else -> ContextCompat.getDrawable(
+                                imageView.context,
+                                R.drawable.img_white
+                            )
+                        }
+                    }
+                    growth in 101..200 -> {
+                        when (plantName) {
+                            "민들레" -> ContextCompat.getDrawable(
+                                imageView.context,
+                                R.drawable.img_dandelion_2
+                            )
+                            "로즈마리" -> ContextCompat.getDrawable(
+                                imageView.context,
+                                R.drawable.img_rose_2
+                            )
+                            "아메리칸블루" -> ContextCompat.getDrawable(
+                                imageView.context,
+                                R.drawable.img_americanblue_2
+                            )
+                            "스투키" -> ContextCompat.getDrawable(
+                                imageView.context,
+                                R.drawable.img_stuki_2
+                            )
+                            "단모환" -> ContextCompat.getDrawable(
+                                imageView.context,
+                                R.drawable.img_sun_2
+                            )
+                            else -> ContextCompat.getDrawable(
+                                imageView.context,
+                                R.drawable.img_white
+                            )
+                        }
+                    }
+                    else -> {
+                        // 3단계 식물이므로 각 식물의 gif가 보여져야 하기 때문에 glide의 gif 로딩하는 방식으로 해야합니다
+                        when (plantName) {
+                            "민들레" -> ContextCompat.getDrawable(
+                                imageView.context,
+                                R.drawable.img_dandelion_2
+                            )
+                            "로즈마리" -> ContextCompat.getDrawable(
+                                imageView.context,
+                                R.drawable.img_rose_2
+                            )
+                            "아메리칸블루" -> ContextCompat.getDrawable(
+                                imageView.context,
+                                R.drawable.img_americanblue_2
+                            )
+                            "스투키" -> ContextCompat.getDrawable(
+                                imageView.context,
+                                R.drawable.img_stuki_2
+                            )
+                            "단모환" -> ContextCompat.getDrawable(
+                                imageView.context,
+                                R.drawable.img_sun_2
+                            )
+                            else -> ContextCompat.getDrawable(
+                                imageView.context,
+                                R.drawable.img_white
+                            )
+                        }
+                    }
+                }
+            )
+        }
     }
+
+    @JvmStatic
+    @BindingAdapter(value = ["setImageSizePlantName", "setImageSizeGrowth"])
+    fun setPlantImageViewSize(imageView: ImageView, plantName: String?, growth: Int?) {
+        if (growth != null) {
+            imageView.apply {
+                when {
+                    growth <= 100 -> {
+                        when (plantName) {
+                            "민들레" -> {
+                                maxHeight = 331.dp
+                                maxWidth = 262.dp
+                            }
+                            "로즈마리" -> {
+                                maxWidth = 220.dp
+                                maxHeight = 460.dp
+                            }
+                            "아메리칸블루" -> {
+                                maxWidth = 249.dp
+                                maxHeight = 368.dp
+                            }
+                            "스투키" -> {
+                                maxWidth = 295.dp
+                                maxHeight = 266.6.dp
+                            }
+                            "단모환" -> {
+                                maxWidth = 275.dp
+                                maxHeight = 229.dp
+                            }
+                            else -> {
+
+                            }
+                        }
+                    }
+                    growth in 101..200 -> {
+                        when (plantName) {
+                            "민들레" -> {
+                                maxWidth = 235.dp
+                                maxHeight = 388.dp
+                            }
+                            "로즈마리" -> {
+                                maxWidth = 204.dp
+                                maxHeight = 572.dp
+                            }
+                            "아메리칸블루" -> {
+                                maxWidth = 204.dp
+                                maxHeight = 461.dp
+                            }
+                            "스투키" -> {
+                                maxHeight = 313.dp
+                                maxWidth = 294.dp
+                            }
+                            "단모환" -> {
+                                maxWidth = 283.dp
+                                maxHeight = 350.dp
+                            }
+                            else -> {
+
+                            }
+                        }
+                    }
+                    else -> {
+                        // 3단계 식물이므로 각 식물의 gif가 보여져야 하기 때문에 glide의 gif 로딩하는 방식으로 해야합니다
+                        when (plantName) {
+                            "민들레" -> {
+                                maxWidth = 235.dp
+                                maxHeight = 388.dp
+                            }
+                            "로즈마리" -> {
+                                maxWidth = 204.dp
+                                maxHeight = 572.dp
+                            }
+                            "아메리칸블루" -> {
+                                maxWidth = 204.dp
+                                maxHeight = 461.dp
+                            }
+                            "스투키" -> {
+                                maxHeight = 313.dp
+                                maxWidth = 294.dp
+                            }
+                            "단모환" -> {
+                                maxWidth = 283.dp
+                                maxHeight = 350.dp
+                            }
+                            else -> {
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
 
     @JvmStatic
     @BindingAdapter(value = ["plantName", "dDay"], requireAll = true)
@@ -155,17 +337,6 @@ object BindingAdapter {
                 }
             )
         )
-    }
-
-    @JvmStatic
-    @BindingAdapter("android:setPlantImageViewSize")
-    fun setPlantImageViewSize(imageView: ImageView, temp: Int) {
-        imageView.apply {
-            maxWidth = 207.dp
-            minimumWidth = 207.dp
-            maxHeight = 521.dp
-            minimumHeight = 521.dp
-        }
     }
 
     @JvmStatic
