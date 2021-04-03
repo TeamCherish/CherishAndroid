@@ -43,6 +43,7 @@
             android:id="@+id/numberPicker"
             android:layout_width="wrap_content"
             android:layout_height="132dp"
+            style="@style/DefaultNumberPickerTheme"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/view5"
             app:layout_constraintStart_toStartOf="@+id/view5"
@@ -54,6 +55,7 @@
             android:id="@+id/numberPicker3"
             android:layout_width="wrap_content"
             android:layout_height="132dp"
+            style="@style/DefaultNumberPickerTheme"
             app:layout_constraintEnd_toEndOf="@+id/view7"
             app:layout_constraintStart_toStartOf="@+id/view7"
             app:layout_constraintTop_toTopOf="parent" />
@@ -62,9 +64,11 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button_ok"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="247dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="36dp"
         android:layout_marginTop="26dp"
+        android:layout_marginEnd="28dp"
         android:layout_marginBottom="26dp"
         android:background="@drawable/picker_btn_bg"
         android:fontFamily="@font/notosanscjkkr_medium"

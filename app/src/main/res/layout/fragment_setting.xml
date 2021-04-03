@@ -116,13 +116,13 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/cons_page" />
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/constraintLayout3"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/view">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout3"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view">
 
                         <ImageView
                             android:contentDescription="@null"
@@ -150,13 +150,13 @@
                             app:layout_constraintVertical_bias="0.589" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/constraintLayout_info"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
 
                         <ImageView
                             android:contentDescription="@null"
@@ -183,13 +183,13 @@
                             app:layout_constraintTop_toTopOf="parent" />
                     </androidx.constraintlayout.widget.ConstraintLayout>
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/constraintLayout_service"
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/constraintLayout_info">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/constraintLayout_service"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout_info">
 
                         <ImageView
                             android:contentDescription="@null"
@@ -250,34 +250,30 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+                <View
+                    android:id="@+id/view2"
+                    android:layout_width="match_parent"
+                    android:layout_height="6dp"
+                    android:background="#f5f5f5"
+                    app:layout_constraintTop_toBottomOf="@+id/constraintLayout_question" />
 
 
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/lock_cons"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_60dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/view2">
 
-              <View
-                  android:id="@+id/view2"
-                  android:layout_width="match_parent"
-                  android:layout_height="6dp"
-                  android:background="#f5f5f5"
-                  app:layout_constraintTop_toBottomOf="@+id/constraintLayout_question"
-                  />
-
-
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/lock_cons"
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/margin_60dp"
+                    <Switch
+                        android:id="@+id/setting_alarm_setting"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/view2">
-
-                        <Switch
-                            android:id="@+id/setting_alarm_setting"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent"
-                            tools:ignore="UseSwitchCompatOrMaterialXml" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="UseSwitchCompatOrMaterialXml" />
 
                         <TextView
                             android:id="@+id/textView23"
@@ -297,8 +293,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="6dp"
                     android:background="#f5f5f5"
-                    app:layout_constraintTop_toBottomOf="@+id/lock_cons"
-                    />
+                    app:layout_constraintTop_toBottomOf="@+id/lock_cons" />
 
 
                 <androidx.constraintlayout.widget.ConstraintLayout

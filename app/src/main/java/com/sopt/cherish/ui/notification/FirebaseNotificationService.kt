@@ -16,6 +16,7 @@ import com.google.firebase.messaging.RemoteMessage
 import com.sopt.cherish.R
 import com.sopt.cherish.ui.notification.FirebaseNotificationService.Companion.CHANNEL_ID
 import com.sopt.cherish.ui.signin.SignInActivity
+import com.sopt.cherish.util.SimpleLogger
 import kotlin.random.Random
 
 class FirebaseNotificationService : FirebaseMessagingService() {
@@ -51,11 +52,15 @@ class FirebaseNotificationService : FirebaseMessagingService() {
             .setContentIntent(pendingIntent)
             .build()
 
+        // todo : CherishId만 오는 그런겁니다
+        SimpleLogger.logI("FCM Test Data : ${message.data["CherishId"].toString()}")
+
         notificationManager.notify(notificationId, notification)
     }
 }
 
 private fun createNotificationChannel(notificationManager: NotificationManager) {
+    // todo : channelName 이렇게 있는건 좀 안좋아 보이긴 하는데;;
     val channelName = "CherishNotificationChannel"
     val channel = NotificationChannel(CHANNEL_ID, channelName, IMPORTANCE_HIGH).apply {
         description = "Cherish channel description"

@@ -20,7 +20,12 @@
             android:id="@+id/home_plant_background"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:setPlantBackground="@{mainViewModel.selectedCherishUser.plantName}"
+            dDay="@{mainViewModel.selectedCherishUser.DDay}"
+            isWatered="@{mainViewModel.isWatered()}"
+            plantName="@{mainViewModel.selectedCherishUser.plantName}"
+            remainDay="@{mainViewModel.selectedCherishUser.DDay}"
+            wateredPlantName="@{mainViewModel.selectedCherishUser.plantName}"
+            viewModel="@{mainViewModel}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -30,13 +35,13 @@
             android:id="@+id/home_plant_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_20dp"
-            android:layout_marginEnd="@dimen/margin_16dp"
-            android:setPlantImage="@{mainViewModel.selectedCherishUser.homeMainBackgroundImageUrl}"
-            android:setPlantImageViewSize="@{mainViewModel.selectedCherishUser.growth}"
+            android:layout_marginBottom="80dp"
+            growth="@{mainViewModel.selectedCherishUser.growth}"
+            plantName="@{mainViewModel.selectedCherishUser.plantName}"
+            setImageSizeGrowth="@{mainViewModel.selectedCherishUser.growth}"
+            setImageSizePlantName="@{mainViewModel.selectedCherishUser.plantName}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent" />
 
         <TextView
             android:id="@+id/home_remain_date"

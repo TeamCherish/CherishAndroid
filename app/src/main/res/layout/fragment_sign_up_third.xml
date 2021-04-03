@@ -15,7 +15,7 @@
         android:src="@drawable/sign_up_indicator_off"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="24dp"/>
+        android:layout_marginStart="24dp" />
 
     <ImageView
         android:contentDescription="@null"
@@ -26,7 +26,7 @@
         android:src="@drawable/sign_up_indicator_off"
         app:layout_constraintStart_toEndOf="@+id/indicator_first"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="9dp"/>
+        android:layout_marginStart="9dp" />
 
     <ImageView
         android:contentDescription="@null"
@@ -37,7 +37,7 @@
         android:src="@drawable/sign_up_indicator_on"
         app:layout_constraintStart_toEndOf="@+id/indicator_second"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="9dp"/>
+        android:layout_marginStart="9dp" />
 
     <ImageView
         android:contentDescription="@null"
@@ -48,7 +48,7 @@
         android:src="@drawable/sign_up_indicator_off"
         app:layout_constraintStart_toEndOf="@+id/indicator_third"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="9dp"/>
+        android:layout_marginStart="9dp" />
 
     <TextView
         android:id="@+id/sex_text"
@@ -121,7 +121,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginBottom="92dp"
         android:textColor="@color/cherish_light_black"
-        android:fontFamily="@font/notosanscjkkr_regular"/>
+        android:fontFamily="@font/notosanscjkkr_regular" />
 
     <Button
         android:id="@+id/sign_up_button"
@@ -136,5 +136,5 @@
         android:textSize="16sp"
         android:layout_marginStart="@dimen/margin_16dp"
         android:layout_marginEnd="@dimen/margin_16dp"
-        android:layout_marginBottom="@dimen/margin_21dp"/>
+        android:layout_marginBottom="@dimen/margin_21dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

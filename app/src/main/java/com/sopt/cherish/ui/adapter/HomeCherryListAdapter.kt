@@ -6,13 +6,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sopt.cherish.databinding.MainCherryItemBinding
 import com.sopt.cherish.remote.api.User
+import com.sopt.cherish.ui.main.MainViewModel
 
 class HomeCherryListAdapter(
-    private val itemClickListener: OnItemClickListener
+    private val itemClickListener: OnItemClickListener,
+    private val viewModel: MainViewModel
 ) : RecyclerView.Adapter<HomeCherryListAdapter.MainViewHolder>() {
 
     var data = mutableListOf<User>()
-    var lastSelectedPosition = 1
+    var lastSelectedPosition: Int = viewModel.cherishSelectedPosition.value!!
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
@@ -22,6 +24,9 @@ class HomeCherryListAdapter(
     }
 
     override fun onBindViewHolder(holder: MainViewHolder, position: Int) {
+        if (position == 0) {
+            holder.bind(data[position], itemClickListener)
+        }
         holder.bind(data[position], itemClickListener)
     }
 
@@ -30,10 +35,12 @@ class HomeCherryListAdapter(
     inner class MainViewHolder(private val binding: MainCherryItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(userData: User, clickListener: OnItemClickListener) {
-            if (adapterPosition == 0) binding.homeItemFirstSelector.visibility = View.VISIBLE
-
+            if (adapterPosition == 0) {
+                binding.homeItemFirstSelector.visibility = View.VISIBLE
+            } else {
+                binding.homeItemFirstSelector.visibility = View.INVISIBLE
+            }
             setAlphaItemClicked(binding, adapterPosition)
-
             binding.apply {
                 homeUserData = userData
                 executePendingBindings()
@@ -45,7 +52,6 @@ class HomeCherryListAdapter(
                         notifyItemRangeChanged(0, data.size)
                         lastSelectedPosition = adapterPosition
                     }
-
                     clickListener.onItemClick(binding, adapterPosition)
                 }
             }

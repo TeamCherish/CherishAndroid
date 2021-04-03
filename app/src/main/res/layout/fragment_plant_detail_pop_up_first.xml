@@ -23,24 +23,24 @@
                 android:id="@+id/flower_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="20sp"
+                android:layout_marginTop="49dp"
                 android:text=""
                 android:font="@font/notosanscjkkr_bold"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="49dp"/>
+                android:textSize="20sp" />
 
             <ImageView
-                android:contentDescription="@null"
+                android:id="@+id/flower_img"
                 android:layout_width="85dp"
                 android:layout_height="162dp"
-                app:layout_constraintStart_toStartOf="@+id/flower_name"
+                android:contentDescription="@null"
                 app:layout_constraintEnd_toEndOf="@+id/flower_name"
-                app:layout_constraintTop_toBottomOf="@+id/flower_name"
+                app:layout_constraintStart_toStartOf="@+id/flower_name"
                 android:layout_marginTop="29dp"
-                android:id="@+id/flower_img"/>
+                app:layout_constraintTop_toBottomOf="@+id/flower_name" />
 
 
             <com.google.android.material.chip.Chip
@@ -51,11 +51,11 @@
                 android:font="@font/notosanscjkkr_regular"
                 android:includeFontPadding="false"
                 android:textColor="#8189b3"
-                android:text=""
+                android:layout_marginTop="16dp"
                 android:textSize="@dimen/text_12sp"
                 app:chipStrokeColor="#8189b3"
                 app:chipStrokeWidth="1dp"
-                android:layout_marginTop="16dp"
+                android:text=""
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="@id/flower_img"
                 app:layout_constraintEnd_toEndOf="@+id/flower_img"
@@ -68,8 +68,8 @@
                 android:text=""
                 android:textAlignment="center"
                 app:layout_constraintStart_toStartOf="@+id/chip"
-                app:layout_constraintEnd_toEndOf="@+id/chip"
                 android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="@+id/chip"
                 app:layout_constraintTop_toBottomOf="@+id/chip" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

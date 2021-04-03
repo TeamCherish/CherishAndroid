@@ -34,44 +34,44 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-            <TextView
-                android:id="@+id/my_page_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="@dimen/margin_12dp"
-                android:textColor="@color/cherish_light_black"
-                android:fontFamily="@font/notosanscjkkr_medium"
-                android:textSize="16sp"
-                android:layout_marginStart="@dimen/margin_16dp"
-                android:text="@string/myPage_title_text" />
+        <TextView
+            android:id="@+id/my_page_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_16dp"
+            android:layout_marginTop="@dimen/margin_12dp"
+            android:fontFamily="@font/notosanscjkkr_medium"
+            android:text="@string/myPage_title_text"
+            android:textColor="@color/cherish_light_black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:id="@+id/search_box"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/margin_20dp"
-                android:layout_marginTop="@dimen/margin_16dp"
-                android:contentDescription="@null"
-                android:src="@drawable/icn_search_box"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <ImageView
+            android:id="@+id/search_box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_20dp"
+            android:layout_marginTop="@dimen/margin_16dp"
+            android:contentDescription="@null"
+            android:src="@drawable/icn_search_box"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:visibility="invisible"
-                android:id="@+id/cancel_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/notosanscjkkr_regular"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="10dp"
-                android:textSize="15sp"
-                android:textColor="#454545"
-                android:textStyle="normal"
-                android:layout_marginEnd="16dp"
-                android:text="@string/myPage_cancel_text"/>
+        <TextView
+            android:visibility="invisible"
+            android:id="@+id/cancel_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/notosanscjkkr_regular"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="16dp"
+            android:textColor="#454545"
+            android:textSize="15sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="@string/myPage_cancel_text" />
 
 
 

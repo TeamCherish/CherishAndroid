@@ -18,7 +18,7 @@ import com.sopt.cherish.R
 import com.sopt.cherish.databinding.DialogContactBinding
 import com.sopt.cherish.remote.api.NotificationRemindReviewReq
 import com.sopt.cherish.ui.main.MainViewModel
-import com.sopt.cherish.ui.review.ReviewActivity
+import com.sopt.cherish.ui.review.ReviewFragment
 import com.sopt.cherish.util.DialogUtil
 import com.sopt.cherish.util.PermissionUtil
 import com.sopt.cherish.util.extension.ContextExtension.isInstalledApp
@@ -102,7 +102,7 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
             val kakaoIntent = requireContext().packageManager.getLaunchIntentForPackage(
                 KAKAO_PACKAGE_NAME
             )
-            kakaoIntent?.flags = FLAG_ACTIVITY_REORDER_TO_FRONT
+            kakaoIntent!!.flags = FLAG_ACTIVITY_REORDER_TO_FRONT
             startReview()
             startActivity(kakaoIntent)
         } else {
@@ -137,11 +137,16 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
     }
 
     private fun startReview() {
-        val intent = Intent(requireContext(), ReviewActivity::class.java)
+/*        val intent = Intent(requireContext(), ReviewActivity::class.java)
         intent.putExtra("userNickname", viewModel.userNickName.value)
         intent.putExtra("selectedCherishNickname", viewModel.selectedCherishUser.value!!.nickName)
         intent.putExtra("selectedCherishId", viewModel.selectedCherishUser.value!!.id)
-        startActivityForResult(intent, codeThatGetWatering)
+        startActivityForResult(intent, codeThatGetWatering)*/
+
+        parentFragmentManager.beginTransaction()
+            .replace(R.id.home_parent_fragment_container, ReviewFragment()).commit()
+        parentFragmentManager.executePendingTransactions()
+        dismiss()
     }
 
     private fun sendRemindReviewNotification() {
@@ -152,12 +157,13 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == codeThatReviewPage) {
             if (resultCode == RESULT_CANCELED) {
+                // todo : 여기로 다시 오게 되는데 그럼 문제가 뭐냐면 다시 포커스를 받아버리기 때문에 onCreateView부터 다시 시작하는거라는거지
                 startReview()
             }
         }
         if (requestCode == codeThatGetWatering) {
             if (resultCode == RESULT_OK) {
-                viewModel.animationTrigger.value = data?.getBooleanExtra("wateringTrigger", false)
+                viewModel.isWatered.value = data?.getBooleanExtra("wateringTrigger", false)
                 dismiss()
             }
         }

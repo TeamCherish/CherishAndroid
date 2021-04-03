@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
 
 
     <ImageView
@@ -16,7 +14,7 @@
         android:src="@drawable/sign_up_indicator_on"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="24dp"/>
+        android:layout_marginStart="24dp" />
 
     <ImageView
         android:contentDescription="@null"
@@ -27,7 +25,7 @@
         android:src="@drawable/sign_up_indicator_off"
         app:layout_constraintStart_toEndOf="@+id/indicator_first"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="9dp"/>
+        android:layout_marginStart="9dp" />
 
     <ImageView
         android:contentDescription="@null"
@@ -38,7 +36,7 @@
         android:src="@drawable/sign_up_indicator_off"
         app:layout_constraintStart_toEndOf="@+id/indicator_second"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="9dp"/>
+        android:layout_marginStart="9dp" />
 
     <ImageView
         android:contentDescription="@null"
@@ -49,7 +47,7 @@
         android:src="@drawable/sign_up_indicator_off"
         app:layout_constraintStart_toEndOf="@+id/indicator_third"
         app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="9dp"/>
+        android:layout_marginStart="9dp" />
 
     <TextView
         android:id="@+id/email_text"
@@ -62,7 +60,7 @@
         android:layout_marginTop="45dp"
         android:layout_marginStart="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/indicator_first"/>
+        app:layout_constraintTop_toBottomOf="@+id/indicator_first" />
 
     <EditText
         android:autofillHints="@string/sign_up_email_hint"
@@ -78,7 +76,7 @@
         android:layout_marginTop="4dp"
         android:paddingStart="10dp"
         android:paddingEnd="0dp"
-        android:hint="@string/sign_up_email_hint"/>
+        android:hint="@string/sign_up_email_hint" />
 
     <TextView
         android:id="@+id/is_usable_email"
@@ -88,7 +86,7 @@
         app:layout_constraintTop_toBottomOf="@+id/user_email"
         app:layout_constraintEnd_toEndOf="@+id/user_email"
         android:textColor="@color/cherish_green_main"
-        android:fontFamily="@font/notosanscjkkr_regular"/>
+        android:fontFamily="@font/notosanscjkkr_regular" />
 
     <TextView
         android:visibility="invisible"
@@ -101,7 +99,7 @@
         android:textColor="#2a2a2a"
         android:layout_marginTop="14dp"
         app:layout_constraintStart_toStartOf="@+id/user_email"
-        app:layout_constraintTop_toBottomOf="@+id/is_usable_email"/>
+        app:layout_constraintTop_toBottomOf="@+id/is_usable_email" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:visibility="invisible"
@@ -128,7 +126,7 @@
             android:background="@drawable/search_background"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -156,7 +154,7 @@
             android:background="@drawable/search_background"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -168,7 +166,7 @@
         app:layout_constraintTop_toBottomOf="@+id/pw_again_layout"
         app:layout_constraintEnd_toEndOf="@+id/pw_again_layout"
         android:textColor="@color/cherish_green_main"
-        android:fontFamily="@font/notosanscjkkr_regular"/>
+        android:fontFamily="@font/notosanscjkkr_regular" />
 
     <Button
         android:id="@+id/sign_up_button"
@@ -183,6 +181,6 @@
         android:textSize="16sp"
         android:layout_marginStart="@dimen/margin_16dp"
         android:layout_marginEnd="@dimen/margin_16dp"
-        android:layout_marginBottom="@dimen/margin_21dp"/>
+        android:layout_marginBottom="@dimen/margin_21dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

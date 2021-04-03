@@ -125,14 +125,14 @@ class SignUpSecondFragment : Fragment() {
 
     private fun checkCertificationNumber() {
 
-        binding.userCertificationNumber.addTextChangedListener(object:TextWatcher{
+        binding.userCertificationNumber.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                certificationNumber=binding.userCertificationNumber.text.toString()
+                certificationNumber = binding.userCertificationNumber.text.toString()
 
-                Log.d("last 입력",certificationNumber)
-                Log.d("last data",authData)
-                if(authData==certificationNumber){
-                    binding.certificationOk.visibility=View.VISIBLE
+                Log.d("last 입력", certificationNumber)
+                Log.d("last data", authData)
+                if (authData == certificationNumber) {
+                    binding.certificationOk.visibility = View.VISIBLE
                     binding.certificationOk.text = "인증번호가 일치합니다."
                     binding.certificationOk.setTextColor(
                         ContextCompat.getColor(
@@ -156,7 +156,7 @@ class SignUpSecondFragment : Fragment() {
                     )
 
                     binding.signUpButton.setOnClickListener {
-                        if(authData==certificationNumber){
+                        if (authData == certificationNumber) {
                             val myBundle = Bundle()
                             myBundle.putString("email", email)
                             myBundle.putString("password", password)
@@ -166,7 +166,7 @@ class SignUpSecondFragment : Fragment() {
                             (activity as SignUpActivity).replaceFragment(2)
                         }
                     }
-                }else{
+                } else {
                     //버튼 비활성화
                     binding.signUpButton.setBackgroundColor(
                         ContextCompat.getColor(
@@ -180,7 +180,7 @@ class SignUpSecondFragment : Fragment() {
                             R.color.cherish_text_gray
                         )
                     )
-                    binding.certificationOk.visibility=View.INVISIBLE
+                    binding.certificationOk.visibility = View.INVISIBLE
                 }
             }
 
@@ -189,7 +189,7 @@ class SignUpSecondFragment : Fragment() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                certificationNumber=binding.userCertificationNumber.text.toString()
+                certificationNumber = binding.userCertificationNumber.text.toString()
             }
         })
     }

@@ -46,10 +46,10 @@ class MypagePhoneBookSearchAdapter(private val phoneBookList: List<Phonemypage>)
 
         holder.radioButton.setOnClickListener {
             if (mStateButtons.get(position, false)) {
-                mStateButtons.put(position, false);
+                mStateButtons.put(position, false)
                 holder.radioButton.isChecked = false
             } else {
-                mStateButtons.put(position, true);
+                mStateButtons.put(position, true)
                 holder.radioButton.isChecked = true
             }
 

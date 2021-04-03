@@ -1,14 +1,11 @@
 package com.sopt.cherish.ui.detail
 
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.appcompat.app.AppCompatDialog
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -28,6 +25,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.lang.Math.abs
+import java.util.*
 
 
 class DetailPlantFragment : Fragment() {
@@ -89,10 +87,9 @@ class DetailPlantFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_detail_plant, container, false)
-
+        binding.lifecycleOwner = viewLifecycleOwner
 
 
 
@@ -120,6 +117,39 @@ class DetailPlantFragment : Fragment() {
                 DetailWateringDialogFragment().show(parentFragmentManager, "DetailPlantFragment")
             } else {
                 longToast(requireContext(), "물 줄수있는 날이 아니에요 ㅠ")
+            }
+        }
+
+        binding.memocons.setOnClickListener {
+            if (binding.userdate.text != "_ _") {
+                viewModel.selectedMemoCalendarDay.value =
+                    DateUtil.convertStringToCalendarDay(binding.userdate.text.toString())
+                viewModel.selectedCalendarDay.value =
+                    DateUtil.convertStringToCalendarDay(binding.userdate.text.toString())
+                val transaction =
+                    parentFragmentManager.beginTransaction()
+                transaction.replace(
+                    R.id.fragment_detail,
+                    CalendarFragment()
+                )
+                transaction.addToBackStack(null)
+                transaction.commit()
+            }
+        }
+        binding.memocons2.setOnClickListener {
+            if (binding.userdate2.text != "_ _") {
+                viewModel.selectedMemoCalendarDay.value =
+                    DateUtil.convertStringToCalendarDay(binding.userdate2.text.toString())
+                viewModel.selectedCalendarDay.value =
+                    DateUtil.convertStringToCalendarDay(binding.userdate2.text.toString())
+                val transaction =
+                    parentFragmentManager.beginTransaction()
+                transaction.replace(
+                    R.id.fragment_detail,
+                    CalendarFragment()
+                )
+                transaction.addToBackStack(null)
+                transaction.commit()
             }
         }
 
@@ -195,11 +225,11 @@ class DetailPlantFragment : Fragment() {
                                     binding.test.setProgressStartColor(Color.parseColor("#F7596C"))
                                     binding.test.setProgressEndColor(Color.parseColor("#F7596C"))
 
-                                    binding.test.progress= (it.data.gage.toFloat() * 100).toInt()
+                                    binding.test.progress = (it.data.gage.toFloat() * 100).toInt()
 
 
                                 } else {
-                                    binding.test.progress= (it.data.gage.toFloat() * 100).toInt()
+                                    binding.test.progress = (it.data.gage.toFloat() * 100).toInt()
 
                                 }
 
@@ -286,50 +316,6 @@ class DetailPlantFragment : Fragment() {
                                     binding.usermemo2.text = it.data.reviews[1].review
 
                                 }
-                                binding.memocons.setOnClickListener {
-
-                                    if (binding.userdate.text != "_ _") {
-                                        viewModel.selectedMemoCalendarDay.value =
-                                                //  item.date.let { itemDate ->
-                                            DateUtil.convertStringToDateBar(binding.userdate.text.toString())
-                                                ?.let { it1 ->
-                                                    DateUtil.convertDateToCalendarDay(
-                                                        it1
-                                                    )
-                                                }
-                                        val transaction =
-                                            parentFragmentManager.beginTransaction()
-                                        transaction.replace(
-                                            R.id.fragment_detail,
-                                            CalendarFragment()
-                                        )
-                                        transaction.addToBackStack(null)
-                                        transaction.commit()
-                                        //  }
-                                    }
-                                }
-                                binding.memocons2.setOnClickListener {
-                                    if (binding.userdate2.text != "_ _") {
-                                        viewModel.selectedMemoCalendarDay.value =
-                                                //  item.date.let { itemDate ->
-                                            DateUtil.convertStringToDateBar(binding.userdate2.text.toString())
-                                                ?.let { it1 ->
-                                                    DateUtil.convertDateToCalendarDay(
-                                                        it1
-                                                    )
-                                                }
-                                        val transaction =
-                                            parentFragmentManager.beginTransaction()
-                                        transaction.replace(
-                                            R.id.fragment_detail,
-                                            CalendarFragment()
-                                        )
-                                        transaction.addToBackStack(null)
-                                        transaction.commit()
-                                        //  }
-                                    }
-                                }
-
 
                                 /* if (it.data.reviews.isEmpty()) {
 

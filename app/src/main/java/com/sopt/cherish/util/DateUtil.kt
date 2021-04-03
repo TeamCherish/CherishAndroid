@@ -10,17 +10,13 @@ object DateUtil {
     private val simpleDateFormatKorean = SimpleDateFormat("yyyy년 mm월 dd일", Locale.KOREA)
     private val simpleDateFormatBar = SimpleDateFormat("yyyy-MM-dd", Locale.KOREA)
 
-    fun convertStringToDate(stringDate: String): Date? =
-        simpleDateFormatKorean.parse(stringDate)
-
-    fun convertStringToDateBar(stringDate: String?): Date? {
+    fun convertStringToDateBar(stringDate: String?): String? {
         return if (stringDate != "_ _") {
-            simpleDateFormatBar.parse(stringDate)
+            simpleDateFormatBar.format(stringDate)
         } else {
             null
         }
     }
-
 
     fun getYear(stringDate: String) = Integer.parseInt(stringDate.substring(0, 4))
 
@@ -32,6 +28,14 @@ object DateUtil {
     fun convertDateToCalendarDay(date: Date): CalendarDay {
         val stringDate = convertDateToString(date)
         return CalendarDay.from(getYear(stringDate), getMonth(stringDate), getDay(stringDate))
+    }
+
+    fun convertStringToCalendarDay(stringDate: String?): CalendarDay? {
+        return if (stringDate != null) {
+            CalendarDay.from(getYear(stringDate), getMonth(stringDate), getDay(stringDate))
+        } else {
+            null
+        }
     }
 
     fun convertDateToString(date: Date): String = simpleDateFormatBar.format(date)

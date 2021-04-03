@@ -25,7 +25,7 @@ class PwFindingSecondFragment : Fragment() {
     lateinit var binding: FragmentPwFindingSecondBinding
     private val requestData = RetrofitBuilder
     private var certificationNumber: String = ""
-    private var authdata=-1
+    private var authdata = -1
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -67,7 +67,7 @@ class PwFindingSecondFragment : Fragment() {
                         it.isSuccessful
                     }?.body()
                         ?.let { it ->
-                            authdata=it.data.verifyCode
+                            authdata = it.data.verifyCode
                         }
                 }
             }
@@ -117,7 +117,7 @@ class PwFindingSecondFragment : Fragment() {
                 certificationNumber = binding.identificationNumber.text.toString()
 
                 binding.signUpButton.setOnClickListener {
-                    if(certificationNumber==authdata.toString()){
+                    if (certificationNumber == authdata.toString()) {
                         val bundle = Bundle()
                         bundle.putString("email", email)
                         (activity as PwFindingActivity).postData(bundle)
