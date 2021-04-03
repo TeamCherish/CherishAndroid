@@ -12,7 +12,6 @@ import com.sopt.cherish.remote.api.DeleteReviewReq
 import com.sopt.cherish.remote.api.ReviseReviewReq
 import com.sopt.cherish.ui.detail.DetailPlantActivity
 import com.sopt.cherish.ui.detail.DetailPlantViewModel
-import com.sopt.cherish.ui.dialog.CustomDialogFragment
 import com.sopt.cherish.util.DateUtil
 import com.sopt.cherish.util.MultiViewDialog
 import com.sopt.cherish.util.SimpleLogger
@@ -68,9 +67,15 @@ class ReviseReviewFragment : Fragment() {
                 )
             }
             binding.reviseReviewFlexBox.apply {
-                it?.userStatus1?.let { it1 -> addChip(it1) }
-                it?.userStatus2?.let { it1 -> addChip(it1) }
-                it?.userStatus3?.let { it1 -> addChip(it1) }
+                it?.userStatus1?.let { userStatus1 ->
+                    if (userStatus1 != "null") addChip(userStatus1)
+                }
+                it?.userStatus2?.let { userStatus2 ->
+                    if (userStatus2 != "null") addChip(userStatus2)
+                }
+                it?.userStatus3?.let { userStatus3 ->
+                    if (userStatus3 != "null") addChip(userStatus3)
+                }
             }
             binding.reviseReviewMemo.setText(it?.review)
         }
@@ -138,8 +143,11 @@ class ReviseReviewFragment : Fragment() {
         binding.reviseReviewEditKeyword.countNumberOfCharacters { keyword ->
             binding.reviseReviewNumberOfCharacters.text = keyword?.length.toString()
             if (keyword?.length!! > 5) {
-                // TODO : 여기 바꿔야함
-                CustomDialogFragment(R.layout.dialog_warning_keyword_limit_error).show(
+                MultiViewDialog(
+                    R.layout.dialog_warning_keyword_wordcount_limit_error,
+                    0.6944f,
+                    0.16875f
+                ).show(
                     parentFragmentManager,
                     ReviewActivity.TAG
                 )
