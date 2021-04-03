@@ -119,4 +119,17 @@
     <string name="user_modify_camera">카메라</string>
     <string name="user_modify_gallery">갤러리</string>
     <string name="user_modify_delete">삭제</string>
+
+    <string name="setting_more">더보기</string>
+    <string name="setting_about_cherish">About Cherish</string>
+    <string name="setting_private">개인정보처리방침</string>
+    <string name="setting_service">서비스이용약관</string>
+    <string name="setting_one_by_one">1대1 문의하기</string>
+    <string name="setting_logout">로그아웃</string>
+    <string name="setting_watering_alarm">물주기 알림</string>
+    <string name="setting_trash">회원탈퇴</string>
+
+    <string name="user_modify_nickname">닉네임은 최대 6글자까지 가능합니다.</string>
+    <string name="user_modify_finish">변경완료</string>
+    <string name="user_modify_mine">내 정보 수정</string>
 </resources>

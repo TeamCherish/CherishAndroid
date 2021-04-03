@@ -4,7 +4,7 @@ package com.sopt.cherish.ui.main.manageplant
 
 import android.content.Intent
 import android.graphics.*
-import android.media.ExifInterface
+import androidx.exifinterface.media.ExifInterface
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -73,7 +73,7 @@ class ManagePlantFragment : Fragment() {
             navigatePhoneBook()
         }
 
-        binding.goToSetting.setOnClickListener {
+        binding.userTouch.setOnClickListener {
             navigateUserModifyFragment()
         }
         binding.cancelBtn.setOnClickListener {
@@ -119,14 +119,11 @@ class ManagePlantFragment : Fragment() {
 
             try{
                 exif = ExifInterface(path)
-                var exifOrientation = 0
-                var exifDegree = 0
-
-                exifOrientation = exif.getAttributeInt(
+                val exifOrientation = exif.getAttributeInt(
                     ExifInterface.TAG_ORIENTATION,
                     ExifInterface.ORIENTATION_NORMAL
                 )
-                exifDegree = exifOrientationToDegress(exifOrientation)
+                val exifDegree = exifOrientationToDegress(exifOrientation)
 
                 Glide.with(requireContext()).load(rotate(bitmap, exifDegree)).circleCrop().into(
                     binding.myPageUserImg

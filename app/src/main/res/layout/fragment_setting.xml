@@ -12,6 +12,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:tag="setting"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
@@ -22,7 +23,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
 
 
@@ -43,7 +44,7 @@
                         android:layout_marginTop="@dimen/margin_14dp"
                         android:fontFamily="@font/notosanscjkkr_medium"
                         android:includeFontPadding="false"
-                        android:text="더보기"
+                        android:text="@string/setting_more"
                         android:textSize="@dimen/text_16sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -83,6 +84,7 @@
                         app:layout_constraintStart_toStartOf="@+id/imageView8"
                         app:layout_constraintTop_toBottomOf="@+id/imageView8" />
                     <ImageButton
+                        android:contentDescription="@null"
                         android:id="@+id/setting_next_nickname"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
@@ -123,6 +125,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/view">
 
                         <ImageView
+                            android:contentDescription="@null"
                             android:id="@+id/imageView9"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -139,7 +142,7 @@
                             android:layout_marginStart="16dp"
                             android:fontFamily="@font/notosanscjkkr_medium"
                             android:includeFontPadding="false"
-                            android:text="About Cherish"
+                            android:text="@string/setting_about_cherish"
                             android:textSize="15sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -156,6 +159,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
 
                         <ImageView
+                            android:contentDescription="@null"
                             android:id="@+id/imageView11"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -172,7 +176,7 @@
                             android:layout_marginStart="16dp"
                             android:fontFamily="@font/notosanscjkkr_medium"
                             android:includeFontPadding="false"
-                            android:text="개인정보처리방침"
+                            android:text="@string/setting_private"
                             android:textSize="15sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -188,6 +192,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/constraintLayout_info">
 
                         <ImageView
+                            android:contentDescription="@null"
                             android:id="@+id/imageView12"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -204,7 +209,7 @@
                             android:layout_marginStart="16dp"
                             android:fontFamily="@font/notosanscjkkr_medium"
                             android:includeFontPadding="false"
-                            android:text="서비스이용약관"
+                            android:text="@string/setting_service"
                             android:textSize="15sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -223,7 +228,7 @@
                         android:id="@+id/btn_question"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-
+                        android:contentDescription="@null"
                         android:layout_marginEnd="24dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -237,7 +242,7 @@
                         android:layout_marginStart="16dp"
                         android:fontFamily="@font/notosanscjkkr_medium"
                         android:includeFontPadding="false"
-                        android:text="1대1 문의하기"
+                        android:text="@string/setting_one_by_one"
                         android:textSize="15sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -281,7 +286,7 @@
                             android:layout_marginStart="16dp"
                             android:fontFamily="@font/notosanscjkkr_medium"
                             android:includeFontPadding="false"
-                            android:text="물주기 알림"
+                            android:text="@string/setting_watering_alarm"
                             android:textSize="15sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -310,7 +315,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
-                        android:text="로그아웃"
+                        android:text="@string/setting_logout"
                         android:textColor="#f7596c"
 
                         android:fontFamily="@font/notosanscjkkr_medium"
@@ -338,7 +343,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="16dp"
-                        android:text="회원탈퇴"
+                        android:text="@string/setting_trash"
                         android:fontFamily="@font/notosanscjkkr_medium"
                         android:includeFontPadding="false"
                         android:textSize="15sp"

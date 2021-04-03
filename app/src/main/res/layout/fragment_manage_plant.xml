@@ -12,6 +12,7 @@
 
     <!-- background color 추가해주세요!-->
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:tag="manage_plant"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#eff1f5"
@@ -85,47 +86,55 @@
             android:src="@drawable/user_img"
             android:layout_marginTop="38dp" />
 
-        <TextView
-            android:id="@+id/my_page_user_name"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
-            android:fontFamily="@font/notosanscjkkr_bold"
-            android:text=""
-            android:textSize="18sp"
-            android:lineSpacingExtra="6sp"
-            android:gravity="center_horizontal"
-            android:textColor="@color/cherish_light_black"
-            app:layout_constraintBottom_toBottomOf="@+id/my_page_user_img"
+            android:id="@+id/user_touch"
             app:layout_constraintStart_toEndOf="@+id/my_page_user_img"
-            app:layout_constraintTop_toTopOf="@+id/my_page_user_img" />
+            android:layout_marginStart="14dp"
+            app:layout_constraintBottom_toBottomOf="@+id/my_page_user_img"
+            app:layout_constraintTop_toTopOf="@+id/my_page_user_img">
 
-        <TextView
-            android:id="@+id/cherishgarden"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/notosanscjkkr_bold"
-            android:text="@string/myPage_user_description_text"
-            android:textSize="18sp"
-            android:lineSpacingExtra="6sp"
-            android:gravity="center_horizontal"
-            android:textColor="@color/cherish_light_black"
-            app:layout_constraintBottom_toBottomOf="@+id/my_page_user_name"
-            app:layout_constraintStart_toEndOf="@+id/my_page_user_name"
-            app:layout_constraintTop_toTopOf="@+id/my_page_user_name" />
+            <TextView
+                android:id="@+id/my_page_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosanscjkkr_bold"
+                android:text=""
+                android:textSize="18sp"
+                android:lineSpacingExtra="6sp"
+                android:gravity="center_horizontal"
+                android:textColor="@color/cherish_light_black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/cherishgarden"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosanscjkkr_bold"
+                android:text="@string/myPage_user_description_text"
+                android:textSize="18sp"
+                android:lineSpacingExtra="6sp"
+                android:gravity="center_horizontal"
+                android:textColor="@color/cherish_light_black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/my_page_user_name"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
-        <ImageView
-            android:id="@+id/go_to_setting"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_6dp"
-            android:contentDescription="@null"
-            android:src="@drawable/ic_btn_more"
-            app:layout_constraintBottom_toBottomOf="@+id/cherishgarden"
-            app:layout_constraintStart_toEndOf="@+id/cherishgarden"
-            app:layout_constraintTop_toTopOf="@+id/cherishgarden" />
-
+            <ImageView
+                android:id="@+id/go_to_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_6dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_btn_more"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/cherishgarden"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageView
             android:contentDescription="@null"
