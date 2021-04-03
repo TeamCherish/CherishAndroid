@@ -7,13 +7,14 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.Matrix
-import android.media.ExifInterface
+import androidx.exifinterface.media.ExifInterface
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -162,14 +163,12 @@ class UserModifyFragment : Fragment() {
 
                 try {
                     exif = ExifInterface(path)
-                    var exifOrientation = 0
-                    var exifDegree = 0
 
-                    exifOrientation = exif.getAttributeInt(
+                    val exifOrientation = exif.getAttributeInt(
                         ExifInterface.TAG_ORIENTATION,
                         ExifInterface.ORIENTATION_NORMAL
                     )
-                    exifDegree = exifOrientationToDegress(exifOrientation)
+                    val exifDegree = exifOrientationToDegress(exifOrientation)
 
                     Glide.with(requireContext()).load(rotate(bitmap, exifDegree)).circleCrop().into(
                         binding.modifyUserImg
@@ -247,14 +246,12 @@ class UserModifyFragment : Fragment() {
 
             try {
                 exif = ExifInterface(currentPhotoPath)
-                var exifOrientation = 0
-                var exifDegree = 0
 
-                exifOrientation = exif.getAttributeInt(
+                val exifOrientation = exif.getAttributeInt(
                     ExifInterface.TAG_ORIENTATION,
                     ExifInterface.ORIENTATION_NORMAL
                 )
-                exifDegree = exifOrientationToDegress(exifOrientation)
+                val exifDegree = exifOrientationToDegress(exifOrientation)
 
                 Glide.with(requireContext()).load(rotate(bitmap, exifDegree)).circleCrop().into(
                     binding.modifyUserImg
@@ -298,7 +295,9 @@ class UserModifyFragment : Fragment() {
     private fun captureCamera() {
         Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
             takePictureIntent.resolveActivity(requireActivity().packageManager)?.also {
-                val photoFile: File? = try {
+                //startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+
+                val photoFile: File? = try{
                     createImageFile()
                 } catch (ex: IOException) {
                     null

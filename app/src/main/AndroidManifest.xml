@@ -18,11 +18,16 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.LOCATION_HARDWARE.camera2" />
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true"/>
+
     <permission
         android:name="android.permission.INTERACT_ACROSS_USERS_FULL"
         android:protectionLevel="signature" />
 
     <application
+        android:requestLegacyExternalStorage="true"
         android:name=".MainApplication"
         android:allowBackup="false"
         android:enabled="true"
