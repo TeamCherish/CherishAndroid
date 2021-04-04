@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivitySplashBinding
+import com.sopt.cherish.ui.main.onboarding.OnBoardingActivity
 import com.sopt.cherish.ui.signin.SignInActivity
 
 /**
@@ -24,7 +25,7 @@ class SplashActivity : AppCompatActivity() {
         )
 
         Handler(Looper.getMainLooper()).postDelayed({
-            startActivity(Intent(this, SignInActivity::class.java))
+            startActivity(Intent(this, OnBoardingActivity::class.java))
             finish()
         }, 2000)
         val fadeInAnimation = AnimationUtils.loadAnimation(this, R.anim.anim_splash_fade_in)
