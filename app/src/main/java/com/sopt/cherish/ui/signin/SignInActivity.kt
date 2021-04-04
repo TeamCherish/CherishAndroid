@@ -4,19 +4,22 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.DialogFragment
 import com.sopt.cherish.MainApplication
+import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivitySignInBinding
 import com.sopt.cherish.remote.api.*
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
+import com.sopt.cherish.ui.dialog.SignUpDialogFragment
 import com.sopt.cherish.ui.main.MainActivity
 import com.sopt.cherish.ui.main.home.HomeBlankActivity
 import com.sopt.cherish.ui.pwfinding.PwFindingActivity
 import com.sopt.cherish.ui.signup.SignUpActivity
-import com.sopt.cherish.util.ErrorUtils
 import com.sopt.cherish.util.extension.hideKeyboard
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.Calendar.getInstance
 
 class SignInActivity : AppCompatActivity() {
 
@@ -71,9 +74,8 @@ class SignInActivity : AppCompatActivity() {
                         response: Response<EditUserRes>
                     ) {
                         if (response.body() == null) {
-                            val error = ErrorUtils.parseError(response)
-                            Log.d("before convert", response.errorBody().toString())
-                            Log.d("error", error.toString())
+                            val dialog=SignUpDialogFragment(R.layout.fragment_sign_up_dialog)
+                            dialog.show(supportFragmentManager,"SignInActivity")
                         }
                         response.takeIf {
                             it.isSuccessful

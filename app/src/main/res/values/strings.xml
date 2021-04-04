@@ -132,4 +132,6 @@
     <string name="user_modify_nickname">닉네임은 최대 6글자까지 가능합니다.</string>
     <string name="user_modify_finish">변경완료</string>
     <string name="user_modify_mine">내 정보 수정</string>
+
+    <string name="sign_in_error">아이디 또는 비밀번호를 확인해주세요</string>
 </resources>
