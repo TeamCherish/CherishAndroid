@@ -97,6 +97,8 @@ class HomeFragment : Fragment(), OnItemClickListener {
 
     private fun setSelectedUser(user: User) {
         viewModel.selectedCherishUser.value = user
+        homeCherryListAdapter.data[0] =
+            homeCherryListAdapter.data[viewModel.cherishSelectedPosition.value!!]
     }
 
     private fun setCherishUserListAdapter(userResult: UserResult) {
