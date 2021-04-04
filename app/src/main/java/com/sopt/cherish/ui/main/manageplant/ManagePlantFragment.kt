@@ -186,6 +186,13 @@ class ManagePlantFragment : Fragment() {
         standardBottomSheetBehavior.isHideable = false
         standardBottomSheetBehavior.isGestureInsetBottomIgnored = true
 
+        binding.myPageBg.setBackgroundColor(
+            ContextCompat.getColor(
+                binding.root.context,
+                R.color.cherish_my_page_bg
+            )
+        )
+
         //검색 버튼 눌렀을 때
         binding.searchBox.setOnClickListener {
             binding.searchBox.visibility = View.INVISIBLE

@@ -18,8 +18,10 @@ import com.bumptech.glide.Glide
 import com.sopt.cherish.MainApplication
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentSettingBinding
-import com.sopt.cherish.remote.api.MyPageUserRes
+import com.sopt.cherish.remote.api.*
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
+import com.sopt.cherish.ui.dialog.deletedialog.DeleteUserDialog
+import com.sopt.cherish.ui.dialog.selectgender.SelectGenderDialogFragment
 import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.ui.splash.SplashActivity
 import com.sopt.cherish.util.ImageSharedPreferences
@@ -88,6 +90,13 @@ class SettingFragment : Fragment() {
 
         binding.settingAlarmSetting.setOnCheckedChangeListener { buttonView, isChecked ->
             MainApplication.sharedPreferenceController.setAlarmKey(isChecked)
+        }
+
+        binding.quit.setOnClickListener{
+            val fm = requireActivity().supportFragmentManager
+            val dialogFragment = DeleteUserDialog(R.layout.fragment_delete_user_dialog)
+            dialogFragment.setTargetFragment(this@SettingFragment, 101)
+            dialogFragment.show(fm, "SettingFragment")
         }
 
         binding.friendsCons.setOnClickListener {
