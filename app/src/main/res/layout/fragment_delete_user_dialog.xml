@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/delete_dialog"
+    tools:context=".ui.dialog.deletedialog.DeleteUserDialog">
+
+    <TextView
+        android:id="@+id/question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginEnd="34dp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/notosanscjkkr_regular"
+        android:textStyle="bold"
+        android:includeFontPadding="false"
+        android:text="@string/delete_user_question"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/mail_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="34dp"
+        android:layout_marginEnd="34dp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/notosanscjkkr_regular"
+        android:includeFontPadding="false"
+        android:text="@string/delete_user_small"
+        android:textSize="13sp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/question" />
+
+    <Button
+        android:id="@+id/button_copy"
+        style="@style/RoundButton.White"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:fontFamily="@font/notosanscjkkr_regular"
+        android:includeFontPadding="false"
+        android:text="@string/delete_user_yes"
+        android:textColor="#fe6827"
+        android:textSize="13sp"
+        android:lineSpacingExtra="10sp"
+        app:layout_constraintEnd_toStartOf="@+id/button_close"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mail_name" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="#dbdbdb"
+        app:layout_constraintBottom_toTopOf="@+id/button_copy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <View
+        android:layout_width="2dp"
+        android:layout_height="0dp"
+        android:background="#dbdbdb"
+        app:layout_constraintBottom_toBottomOf="@+id/button_copy"
+        app:layout_constraintEnd_toEndOf="@+id/button_copy"
+        app:layout_constraintStart_toEndOf="@+id/button_copy"
+        app:layout_constraintTop_toTopOf="@+id/button_copy" />
+
+    <Button
+        android:id="@+id/button_close"
+        style="@style/RoundButton.White"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/notosanscjkkr_regular"
+        android:includeFontPadding="false"
+        android:text="@string/delete_user_no"
+        android:textColor="#4286f6"
+        android:textSize="13sp"
+        android:lineSpacingExtra="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/button_copy"
+        app:layout_constraintTop_toTopOf="@+id/button_copy" />
+</androidx.constraintlayout.widget.ConstraintLayout>
