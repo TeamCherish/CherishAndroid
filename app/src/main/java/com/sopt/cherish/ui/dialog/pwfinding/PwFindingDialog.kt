@@ -1,4 +1,4 @@
-package com.sopt.cherish.ui.dialog.signupdialog
+package com.sopt.cherish.ui.dialog.pwfinding
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -8,15 +8,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.DialogFragment
-import com.sopt.cherish.databinding.FragmentSignUpDialogBinding
+import com.sopt.cherish.databinding.FragmentPwFindingDialogBinding
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 
-class SignUpDialogFragment(
+class PwFindingDialog(
     @LayoutRes
     private val layoutResId: Int
 ) : DialogFragment() {
 
-    private lateinit var binding: FragmentSignUpDialogBinding
+    private lateinit var binding: FragmentPwFindingDialogBinding
 
 
     override fun onCreateView(
@@ -26,7 +26,7 @@ class SignUpDialogFragment(
         // Inflate the layout for this fragment
 
         val view = inflater.inflate(layoutResId, container, false)
-        binding = FragmentSignUpDialogBinding.bind(view)
+        binding = FragmentPwFindingDialogBinding.bind(view)
 
         binding.buttonClose.setOnClickListener {
             dismiss()

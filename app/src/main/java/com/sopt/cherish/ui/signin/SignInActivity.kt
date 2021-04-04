@@ -5,14 +5,16 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.sopt.cherish.MainApplication
+import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivitySignInBinding
 import com.sopt.cherish.remote.api.*
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
+import com.sopt.cherish.ui.dialog.pwfinding.IDFindingDialog
+import com.sopt.cherish.ui.dialog.signupdialog.SignUpDialogFragment
 import com.sopt.cherish.ui.main.MainActivity
 import com.sopt.cherish.ui.main.home.HomeBlankActivity
 import com.sopt.cherish.ui.pwfinding.PwFindingActivity
 import com.sopt.cherish.ui.signup.SignUpActivity
-import com.sopt.cherish.util.ErrorUtils
 import com.sopt.cherish.util.extension.hideKeyboard
 import retrofit2.Call
 import retrofit2.Callback
@@ -55,6 +57,11 @@ class SignInActivity : AppCompatActivity() {
             val pwFindingIntent = Intent(this@SignInActivity, PwFindingActivity::class.java)
             startActivity(pwFindingIntent)
         }
+
+        binding.textView4.setOnClickListener{
+            val dialog=IDFindingDialog(R.layout.fragment_id_finding_dialog)
+            dialog.show(supportFragmentManager,"SignInActivity")
+        }
     }
 
     private fun signIn(email: String, password: String) { //로그인 버튼 클릭
@@ -71,9 +78,8 @@ class SignInActivity : AppCompatActivity() {
                         response: Response<EditUserRes>
                     ) {
                         if (response.body() == null) {
-                            val error = ErrorUtils.parseError(response)
-                            Log.d("before convert", response.errorBody().toString())
-                            Log.d("error", error.toString())
+                            val dialog=SignUpDialogFragment(R.layout.fragment_sign_up_dialog)
+                            dialog.show(supportFragmentManager,"SignInActivity")
                         }
                         response.takeIf {
                             it.isSuccessful

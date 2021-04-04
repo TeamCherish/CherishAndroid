@@ -187,4 +187,3 @@ class HomeFragment : Fragment(), OnItemClickListener {
         private const val CODE_MOVE_DETAIL_PLANT = 1005
     }
 }
-
