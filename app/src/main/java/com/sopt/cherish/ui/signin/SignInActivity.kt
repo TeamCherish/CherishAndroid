@@ -4,13 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.DialogFragment
 import com.sopt.cherish.MainApplication
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivitySignInBinding
 import com.sopt.cherish.remote.api.*
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
-import com.sopt.cherish.ui.dialog.SignUpDialogFragment
+import com.sopt.cherish.ui.dialog.pwfinding.IDFindingDialog
+import com.sopt.cherish.ui.dialog.signupdialog.SignUpDialogFragment
 import com.sopt.cherish.ui.main.MainActivity
 import com.sopt.cherish.ui.main.home.HomeBlankActivity
 import com.sopt.cherish.ui.pwfinding.PwFindingActivity
@@ -19,7 +19,6 @@ import com.sopt.cherish.util.extension.hideKeyboard
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.Calendar.getInstance
 
 class SignInActivity : AppCompatActivity() {
 
@@ -57,6 +56,11 @@ class SignInActivity : AppCompatActivity() {
         binding.textView30.setOnClickListener {
             val pwFindingIntent = Intent(this@SignInActivity, PwFindingActivity::class.java)
             startActivity(pwFindingIntent)
+        }
+
+        binding.textView4.setOnClickListener{
+            val dialog=IDFindingDialog(R.layout.fragment_id_finding_dialog)
+            dialog.show(supportFragmentManager,"SignInActivity")
         }
     }
 
