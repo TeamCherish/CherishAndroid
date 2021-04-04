@@ -19,7 +19,7 @@ class BirthPickerDialogFragment(
     private val layoutResId: Int
 ) : DialogFragment(), View.OnClickListener {
     override fun onClick(v: View?) {
-        TODO("Not yet implemented")
+
     }
 
     var birthtext = ""

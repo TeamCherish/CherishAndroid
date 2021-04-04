@@ -33,7 +33,7 @@ class FirebaseNotificationService : FirebaseMessagingService() {
         super.onMessageReceived(message)
 
         val intent = Intent(this, SignInActivity::class.java)
-        // 이거 intent 경로도 다시한번 생각을 해봐야할 거 같은데
+
         val notificationManager =
             getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val notificationId = Random.nextInt()
@@ -60,7 +60,6 @@ class FirebaseNotificationService : FirebaseMessagingService() {
 }
 
 private fun createNotificationChannel(notificationManager: NotificationManager) {
-    // todo : channelName 이렇게 있는건 좀 안좋아 보이긴 하는데;;
     val channelName = "CherishNotificationChannel"
     val channel = NotificationChannel(CHANNEL_ID, channelName, IMPORTANCE_HIGH).apply {
         description = "Cherish channel description"
