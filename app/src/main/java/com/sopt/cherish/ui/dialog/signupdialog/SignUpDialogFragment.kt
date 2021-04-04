@@ -1,4 +1,4 @@
-package com.sopt.cherish.ui.dialog
+package com.sopt.cherish.ui.dialog.signupdialog
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -17,7 +17,6 @@ class SignUpDialogFragment(
 ) : DialogFragment() {
 
     private lateinit var binding: FragmentSignUpDialogBinding
-    private val requestData = RetrofitBuilder
 
 
     override fun onCreateView(

@@ -16,7 +16,9 @@ import com.sopt.cherish.R
 import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.util.PixelUtil.dp
 import com.sopt.cherish.util.animation.ProgressbarAnimation
+import com.sopt.cherish.util.extension.ImageViewExtension.matchSizeImageView
 import com.sopt.cherish.util.extension.ImageViewExtension.resizeImageView
+import com.sopt.cherish.util.extension.ImageViewExtension.setMargin
 import kotlin.math.abs
 
 object BindingAdapter {
@@ -43,95 +45,99 @@ object BindingAdapter {
     @BindingAdapter(value = ["plantName", "growth"])
     fun setPlantImage(imageView: ImageView, plantName: String?, growth: Int?) {
         if (growth != null) {
-            imageView.setImageDrawable(
-                when {
-                    growth <= 100 -> {
-                        when (plantName) {
-                            "민들레" -> ContextCompat.getDrawable(
+            when {
+                growth <= 25 -> {
+                    when (plantName) {
+                        "민들레" -> imageView.setImageDrawable(
+                            ContextCompat.getDrawable(
                                 imageView.context,
                                 R.drawable.img_dandelion_1
                             )
-                            "로즈마리" -> ContextCompat.getDrawable(
+                        )
+                        "로즈마리" -> imageView.setImageDrawable(
+                            ContextCompat.getDrawable(
                                 imageView.context,
                                 R.drawable.img_rose_1
                             )
-                            "아메리칸블루" -> ContextCompat.getDrawable(
+                        )
+                        "아메리칸블루" -> imageView.setImageDrawable(
+                            ContextCompat.getDrawable(
                                 imageView.context,
                                 R.drawable.img_americanblue_1
                             )
-                            "스투키" -> ContextCompat.getDrawable(
+                        )
+                        "스투키" -> imageView.setImageDrawable(
+                            ContextCompat.getDrawable(
                                 imageView.context,
                                 R.drawable.img_stuki_1
                             )
-                            "단모환" -> ContextCompat.getDrawable(
+                        )
+                        "단모환" -> {
+                            ContextCompat.getDrawable(
                                 imageView.context,
                                 R.drawable.img_sun_1
                             )
-                            else -> ContextCompat.getDrawable(
-                                imageView.context,
-                                R.drawable.img_white
-                            )
                         }
-                    }
-                    growth in 101..200 -> {
-                        when (plantName) {
-                            "민들레" -> ContextCompat.getDrawable(
-                                imageView.context,
-                                R.drawable.img_dandelion_2
-                            )
-                            "로즈마리" -> ContextCompat.getDrawable(
-                                imageView.context,
-                                R.drawable.img_rose_2
-                            )
-                            "아메리칸블루" -> ContextCompat.getDrawable(
-                                imageView.context,
-                                R.drawable.img_americanblue_2
-                            )
-                            "스투키" -> ContextCompat.getDrawable(
-                                imageView.context,
-                                R.drawable.img_stuki_2
-                            )
-                            "단모환" -> ContextCompat.getDrawable(
-                                imageView.context,
-                                R.drawable.img_sun_2
-                            )
-                            else -> ContextCompat.getDrawable(
-                                imageView.context,
-                                R.drawable.img_white
-                            )
-                        }
-                    }
-                    else -> {
-                        // 3단계 식물이므로 각 식물의 gif가 보여져야 하기 때문에 glide의 gif 로딩하는 방식으로 해야합니다
-                        when (plantName) {
-                            "민들레" -> ContextCompat.getDrawable(
-                                imageView.context,
-                                R.drawable.img_dandelion_2
-                            )
-                            "로즈마리" -> ContextCompat.getDrawable(
-                                imageView.context,
-                                R.drawable.img_rose_2
-                            )
-                            "아메리칸블루" -> ContextCompat.getDrawable(
-                                imageView.context,
-                                R.drawable.img_americanblue_2
-                            )
-                            "스투키" -> ContextCompat.getDrawable(
-                                imageView.context,
-                                R.drawable.img_stuki_2
-                            )
-                            "단모환" -> ContextCompat.getDrawable(
-                                imageView.context,
-                                R.drawable.img_sun_2
-                            )
-                            else -> ContextCompat.getDrawable(
-                                imageView.context,
-                                R.drawable.img_white
+                        else -> {
+                            imageView.setImageDrawable(
+                                ContextCompat.getDrawable(
+                                    imageView.context,
+                                    R.drawable.img_white
+                                )
                             )
                         }
                     }
                 }
-            )
+                growth in 26..50 -> {
+                    when (plantName) {
+                        "민들레" -> imageView.setImageDrawable(
+                            ContextCompat.getDrawable(
+                                imageView.context,
+                                R.drawable.img_dandelion_2
+                            )
+                        )
+                        "로즈마리" -> imageView.setImageDrawable(
+                            ContextCompat.getDrawable(
+                                imageView.context,
+                                R.drawable.img_rose_2
+                            )
+                        )
+                        "아메리칸블루" -> imageView.setImageDrawable(
+                            ContextCompat.getDrawable(
+                                imageView.context,
+                                R.drawable.img_americanblue_2
+                            )
+                        )
+                        "스투키" -> imageView.setImageDrawable(
+                            ContextCompat.getDrawable(
+                                imageView.context,
+                                R.drawable.img_stuki_2
+                            )
+                        )
+                        "단모환" -> {
+                            ContextCompat.getDrawable(
+                                imageView.context,
+                                R.drawable.img_sun_2
+                            )
+                        }
+                        else -> {
+                            imageView.setImageDrawable(
+                                ContextCompat.getDrawable(
+                                    imageView.context,
+                                    R.drawable.img_white
+                                )
+                            )
+                        }
+                    }
+                }
+                else -> {
+                    // 3단계 테스팅
+                    Glide.with(imageView)
+                        .asGif()
+                        .load(R.raw.img_dandelion_gif3)
+                        .into(imageView)
+                }
+            }
         }
     }
 
@@ -141,7 +147,7 @@ object BindingAdapter {
         if (growth != null) {
             imageView.apply {
                 when {
-                    growth <= 100 -> {
+                    growth <= 25 -> {
                         when (plantName) {
                             "민들레" -> resizeImageView(262, 331)
                             "로즈마리" -> resizeImageView(220, 460)
@@ -153,7 +159,7 @@ object BindingAdapter {
                             }
                         }
                     }
-                    growth in 101..200 -> {
+                    growth in 26..50 -> {
                         when (plantName) {
                             "민들레" -> resizeImageView(235, 388)
                             "로즈마리" -> resizeImageView(204, 572)
@@ -167,11 +173,26 @@ object BindingAdapter {
                     }
                     else -> {
                         when (plantName) {
-                            "민들레" -> resizeImageView(235, 388)
-                            "로즈마리" -> resizeImageView(204, 572)
-                            "아메리칸블루" -> resizeImageView(204, 461)
-                            "스투키" -> resizeImageView(294, 313)
-                            "단모환" -> resizeImageView(283, 350)
+                            "민들레" -> {
+                                matchSizeImageView()
+                                setMargin(0.dp, 0.dp, 0.dp, 0.dp)
+                            }
+                            "로즈마리" -> {
+                                setMargin(0.dp, 0.dp, 0.dp, 0.dp)
+                                matchSizeImageView()
+                            }
+                            "아메리칸블루" -> {
+                                setMargin(0.dp, 0.dp, 0.dp, 0.dp)
+                                matchSizeImageView()
+                            }
+                            "스투키" -> {
+                                setMargin(0.dp, 0.dp, 0.dp, 0.dp)
+                                matchSizeImageView()
+                            }
+                            "단모환" -> {
+                                setMargin(0.dp, 0.dp, 0.dp, 0.dp)
+                                matchSizeImageView()
+                            }
                             else -> {
 
                             }
@@ -181,7 +202,6 @@ object BindingAdapter {
             }
         }
     }
-
 
     @JvmStatic
     @BindingAdapter(value = ["plantName", "dDay"], requireAll = true)

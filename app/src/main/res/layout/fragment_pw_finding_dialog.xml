@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/delete_dialog"
+    tools:context=".ui.dialog.signupdialog.SignUpDialogFragment">
+
+    <TextView
+        android:id="@+id/bold_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="34dp"
+        android:fontFamily="@font/notosanscjkkr_bold"
+        android:includeFontPadding="false"
+        android:text="@string/certification_number_error"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_close"
+        style="@style/RoundButton.White"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:fontFamily="@font/notosanscjkkr_regular"
+        android:includeFontPadding="false"
+        android:text="@string/dialog_sign_up_close"
+        android:textColor="#4286f6"
+        android:textSize="13sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bold_text" />
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:background="#dbdbdb"
+        app:layout_constraintBottom_toTopOf="@+id/button_close"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -132,4 +132,18 @@
     <string name="user_modify_nickname">닉네임은 최대 6글자까지 가능합니다.</string>
     <string name="user_modify_finish">변경완료</string>
     <string name="user_modify_mine">내 정보 수정</string>
+
+    <string name="sign_in_error">아이디 또는 비밀번호를 확인해주세요</string>
+
+    <string name="certification_number_error">인증번호가 일치하지 않아요</string>
+
+    <string name="finding_id_no">아니오</string>
+    <string name="finding_id_copy">메일 복사</string>
+    <string name="finding_id_cherish">Cherish에 메일로\n 문의하시겠어요?</string>
+    <string name="finding_id_mail">co.cherishteam@gmail.com 으로\n 문의 주시면 계정을 찾아드릴게요!</string>
+
+    <string name="delete_user_question">정말 계정을 삭제하시겠어요?</string>
+    <string name="delete_user_small">소중한 식물들이 모두 삭제되고 되돌릴 수 없어요.</string>
+    <string name="delete_user_yes">네, 삭제할게요.</string>
+    <string name="delete_user_no">계속 함께 할게요!</string>
 </resources>
