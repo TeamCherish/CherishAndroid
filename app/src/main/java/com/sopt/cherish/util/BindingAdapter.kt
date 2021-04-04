@@ -73,9 +73,11 @@ object BindingAdapter {
                             )
                         )
                         "단모환" -> {
-                            ContextCompat.getDrawable(
-                                imageView.context,
-                                R.drawable.img_sun_1
+                            imageView.setImageDrawable(
+                                ContextCompat.getDrawable(
+                                    imageView.context,
+                                    R.drawable.img_sun_1
+                                )
                             )
                         }
                         else -> {
@@ -115,9 +117,11 @@ object BindingAdapter {
                             )
                         )
                         "단모환" -> {
-                            ContextCompat.getDrawable(
-                                imageView.context,
-                                R.drawable.img_sun_2
+                            imageView.setImageDrawable(
+                                ContextCompat.getDrawable(
+                                    imageView.context,
+                                    R.drawable.img_sun_2
+                                )
                             )
                         }
                         else -> {
@@ -149,11 +153,26 @@ object BindingAdapter {
                 when {
                     growth <= 25 -> {
                         when (plantName) {
-                            "민들레" -> resizeImageView(262, 331)
-                            "로즈마리" -> resizeImageView(220, 460)
-                            "아메리칸블루" -> resizeImageView(249, 368)
-                            "스투키" -> resizeImageView(295, 266.6.toInt())
-                            "단모환" -> resizeImageView(275, 229)
+                            "민들레" -> {
+                                resizeImageView(262, 331)
+                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 100.dp)
+                            }
+                            "로즈마리" -> {
+                                resizeImageView(220, 460)
+                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 100.dp)
+                            }
+                            "아메리칸블루" -> {
+                                resizeImageView(249, 368)
+                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 100.dp)
+                            }
+                            "스투키" -> {
+                                resizeImageView(295, 266.6.toInt())
+                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 100.dp)
+                            }
+                            "단모환" -> {
+                                resizeImageView(275, 229)
+                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 100.dp)
+                            }
                             else -> {
 
                             }
@@ -161,11 +180,26 @@ object BindingAdapter {
                     }
                     growth in 26..50 -> {
                         when (plantName) {
-                            "민들레" -> resizeImageView(235, 388)
-                            "로즈마리" -> resizeImageView(204, 572)
-                            "아메리칸블루" -> resizeImageView(204, 461)
-                            "스투키" -> resizeImageView(294, 313)
-                            "단모환" -> resizeImageView(283, 350)
+                            "민들레" -> {
+                                resizeImageView(235, 388)
+                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 100.dp)
+                            }
+                            "로즈마리" -> {
+                                resizeImageView(204, 572)
+                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 100.dp)
+                            }
+                            "아메리칸블루" -> {
+                                resizeImageView(204, 461)
+                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 100.dp)
+                            }
+                            "스투키" -> {
+                                resizeImageView(294, 313)
+                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 100.dp)
+                            }
+                            "단모환" -> {
+                                resizeImageView(283, 350)
+                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 100.dp)
+                            }
                             else -> {
 
                             }
@@ -175,22 +209,22 @@ object BindingAdapter {
                         when (plantName) {
                             "민들레" -> {
                                 matchSizeImageView()
-                                setMargin(0.dp, 0.dp, 0.dp, 0.dp)
+                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 0.dp)
                             }
                             "로즈마리" -> {
-                                setMargin(0.dp, 0.dp, 0.dp, 0.dp)
+                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 0.dp)
                                 matchSizeImageView()
                             }
                             "아메리칸블루" -> {
-                                setMargin(0.dp, 0.dp, 0.dp, 0.dp)
+                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 0.dp)
                                 matchSizeImageView()
                             }
                             "스투키" -> {
-                                setMargin(0.dp, 0.dp, 0.dp, 0.dp)
+                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 0.dp)
                                 matchSizeImageView()
                             }
                             "단모환" -> {
-                                setMargin(0.dp, 0.dp, 0.dp, 0.dp)
+                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 0.dp)
                                 matchSizeImageView()
                             }
                             else -> {
