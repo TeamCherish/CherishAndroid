@@ -66,6 +66,11 @@ class SettingFragment : Fragment() {
             startActivity(intent)
         }
 
+        binding.constraintLayoutAboutCherish.setOnClickListener {
+            val intent = Intent(context,AboutCherishActivity::class.java)
+            startActivity(intent)
+        }
+
         binding.constraintLayoutInfo.setOnClickListener {
             val intent = Intent(
                 Intent.ACTION_VIEW,
