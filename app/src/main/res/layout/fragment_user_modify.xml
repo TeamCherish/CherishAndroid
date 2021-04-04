@@ -8,7 +8,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-
+        android:tag="modify"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.main.setting.UserModifyFragment">
@@ -38,6 +38,7 @@
             app:layout_constraintTop_toBottomOf="@+id/modify_user_img">
 
             <EditText
+                android:autofillHints="@string/setting_trash"
                 android:id="@+id/setting_edit_nickname"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -59,6 +60,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
+                android:contentDescription="@null"
                 android:id="@+id/settingmodifycancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -80,7 +82,7 @@
             android:includeFontPadding="false"
             android:textSize="@dimen/text_12sp"
             android:textColor="#aaaaaa"
-            android:text="닉네임은 최대 6글자까지 가능합니다."
+            android:text="@string/user_modify_nickname"
             app:layout_constraintStart_toStartOf="@+id/cons_nickname"
             app:layout_constraintTop_toBottomOf="@+id/cons_nickname" />
 
@@ -97,6 +99,7 @@
             app:layout_constraintTop_toBottomOf="@id/textView14">
 
             <EditText
+                android:autofillHints="@string/user_modify_nickname"
                 android:id="@+id/setting_edit_email"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -125,7 +128,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="변경완료"
+            android:text="@string/user_modify_finish"
             android:letterSpacing="-0.01"
             android:lineSpacingExtra="8sp"
             android:fontFamily="@font/notosanscjkkr_medium"
@@ -148,7 +151,7 @@
                 android:id="@+id/textView13"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="내 정보 수정"
+                android:text="@string/user_modify_mine"
                 android:letterSpacing="-0.03"
                 android:lineSpacingExtra="8sp"
                 android:fontFamily="@font/notosanscjkkr_medium"
@@ -168,6 +171,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
+                    android:contentDescription="@null"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/icon_gnb_back"

@@ -1,12 +1,10 @@
 package com.sopt.cherish.ui.main.manageplant
 
 
+
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.graphics.Color
-import android.graphics.Matrix
-import android.media.ExifInterface
+import android.graphics.*
+import androidx.exifinterface.media.ExifInterface
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -28,8 +26,8 @@ import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
 import com.sopt.cherish.ui.main.MainActivity
 import com.sopt.cherish.ui.main.MainViewModel
-import com.sopt.cherish.ui.main.setting.UserModifyFragment
 import com.sopt.cherish.util.ImageSharedPreferences
+import com.sopt.cherish.ui.main.setting.UserModifyFragment
 import com.sopt.cherish.util.PixelUtil.dp
 import com.sopt.cherish.util.SimpleLogger
 import retrofit2.Call
@@ -75,7 +73,7 @@ class ManagePlantFragment : Fragment() {
             navigatePhoneBook()
         }
 
-        binding.goToSetting.setOnClickListener {
+        binding.userTouch.setOnClickListener {
             navigateUserModifyFragment()
         }
         binding.cancelBtn.setOnClickListener {
@@ -121,14 +119,11 @@ class ManagePlantFragment : Fragment() {
 
             try {
                 exif = ExifInterface(path)
-                var exifOrientation = 0
-                var exifDegree = 0
-
-                exifOrientation = exif.getAttributeInt(
+                val exifOrientation = exif.getAttributeInt(
                     ExifInterface.TAG_ORIENTATION,
                     ExifInterface.ORIENTATION_NORMAL
                 )
-                exifDegree = exifOrientationToDegress(exifOrientation)
+                val exifDegree = exifOrientationToDegress(exifOrientation)
 
                 Glide.with(requireContext()).load(rotate(bitmap, exifDegree)).circleCrop().into(
                     binding.myPageUserImg
@@ -190,6 +185,13 @@ class ManagePlantFragment : Fragment() {
         standardBottomSheetBehavior.expandedOffset = 48.dp
         standardBottomSheetBehavior.isHideable = false
         standardBottomSheetBehavior.isGestureInsetBottomIgnored = true
+
+        binding.myPageBg.setBackgroundColor(
+            ContextCompat.getColor(
+                binding.root.context,
+                R.color.cherish_my_page_bg
+            )
+        )
 
         //검색 버튼 눌렀을 때
         binding.searchBox.setOnClickListener {

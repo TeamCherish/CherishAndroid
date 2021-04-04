@@ -14,6 +14,8 @@ import com.sopt.cherish.databinding.FragmentPwFindingSecondBinding
 import com.sopt.cherish.remote.api.RequestPwFindingData
 import com.sopt.cherish.remote.api.ResponsePwFindingData
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
+import com.sopt.cherish.ui.dialog.pwfinding.PwFindingDialog
+import com.sopt.cherish.ui.dialog.selectgender.SelectGenderDialogFragment
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -122,6 +124,11 @@ class PwFindingSecondFragment : Fragment() {
                         bundle.putString("email", email)
                         (activity as PwFindingActivity).postData(bundle)
                         (activity as PwFindingActivity).replaceFragment(2)
+                    }else{
+                        val fm = requireActivity().supportFragmentManager
+                        val dialogFragment = PwFindingDialog(R.layout.fragment_pw_finding_dialog)
+                        dialogFragment.setTargetFragment(this@PwFindingSecondFragment, 101)
+                        dialogFragment.show(fm, "PwFindingSecondFragment")
                     }
                 }
 

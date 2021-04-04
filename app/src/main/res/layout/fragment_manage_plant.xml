@@ -12,6 +12,7 @@
 
     <!-- background color 추가해주세요!-->
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:tag="manage_plant"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#eff1f5"
@@ -73,6 +74,7 @@
             android:text="@string/myPage_cancel_text" />
 
 
+
         <de.hdodenhof.circleimageview.CircleImageView
             android:contentDescription="@null"
             android:id="@+id/my_page_user_img"
@@ -84,47 +86,57 @@
             android:src="@drawable/user_img"
             android:layout_marginTop="38dp" />
 
-        <TextView
-            android:id="@+id/my_page_user_name"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
-            android:fontFamily="@font/notosanscjkkr_bold"
-            android:text=""
-            android:gravity="center_horizontal"
-            android:lineSpacingExtra="6sp"
-            android:textSize="18sp"
-            android:textColor="@color/cherish_light_black"
-            app:layout_constraintBottom_toBottomOf="@+id/my_page_user_img"
+            android:id="@+id/user_touch"
             app:layout_constraintStart_toEndOf="@+id/my_page_user_img"
-            app:layout_constraintTop_toTopOf="@+id/my_page_user_img" />
+            android:layout_marginStart="14dp"
+            app:layout_constraintBottom_toBottomOf="@+id/my_page_user_img"
+            app:layout_constraintTop_toTopOf="@+id/my_page_user_img">
 
-        <TextView
-            android:id="@+id/cherishgarden"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/notosanscjkkr_bold"
-            android:text="@string/myPage_user_description_text"
-            android:textSize="18sp"
-            android:gravity="center_horizontal"
-            android:lineSpacingExtra="6sp"
-            android:textColor="@color/cherish_light_black"
-            app:layout_constraintBottom_toBottomOf="@+id/my_page_user_name"
-            app:layout_constraintStart_toEndOf="@+id/my_page_user_name"
-            app:layout_constraintTop_toTopOf="@+id/my_page_user_name" />
+            <TextView
+                android:id="@+id/my_page_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosanscjkkr_bold"
+                android:text=""
+                android:includeFontPadding="false"
+                android:textSize="18sp"
+                android:lineSpacingExtra="6sp"
+                android:gravity="center_horizontal"
+                android:textColor="@color/cherish_light_black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/cherishgarden"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosanscjkkr_bold"
+                android:includeFontPadding="false"
+                android:text="@string/myPage_user_description_text"
+                android:textSize="18sp"
+                android:lineSpacingExtra="6sp"
+                android:gravity="center_horizontal"
+                android:textColor="@color/cherish_light_black"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/my_page_user_name"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
-        <ImageView
-            android:id="@+id/go_to_setting"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_6dp"
-            android:contentDescription="@null"
-            android:src="@drawable/ic_btn_more"
-            app:layout_constraintBottom_toBottomOf="@+id/cherishgarden"
-            app:layout_constraintStart_toEndOf="@+id/cherishgarden"
-            app:layout_constraintTop_toTopOf="@+id/cherishgarden" />
-
+            <ImageView
+                android:id="@+id/go_to_setting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_6dp"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_btn_more"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/cherishgarden"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageView
             android:contentDescription="@null"
@@ -137,7 +149,7 @@
             android:layout_marginEnd="@dimen/margin_16dp"
             android:layout_marginTop="25dp"
             android:id="@+id/my_page_box"
-            android:background="@drawable/my_page_box" />
+            android:background="@drawable/my_page_box"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -147,22 +159,22 @@
             app:layout_constraintTop_toTopOf="@+id/my_page_box"
             app:layout_constraintEnd_toStartOf="@id/divide_bar_1"
             android:text=""
-            android:layout_marginTop="@dimen/margin_12dp"
-            android:textColor="@color/cherish_light_black"
             android:fontFamily="@font/notosanscjkkr_bold"
+            android:includeFontPadding="false"
+            android:textColor="@color/cherish_light_black"
+            android:layout_marginTop="@dimen/margin_20dp"
             android:textSize="18sp"
-            android:id="@+id/my_page_watering_cnt" />
+            android:id="@+id/my_page_watering_cnt"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/my_page_watering_cnt"
             app:layout_constraintStart_toStartOf="@+id/my_page_watering_cnt"
             app:layout_constraintEnd_toEndOf="@+id/my_page_watering_cnt"
             android:text="@string/myPage_watering_text"
             android:fontFamily="@font/notosanscjkkr_regular"
-            android:id="@+id/watering_text"
-            app:layout_constraintBottom_toBottomOf="@+id/my_page_box"
+            android:includeFontPadding="false"
             android:textColor="@color/cherish_light_black"
             android:textSize="12sp" />
 
@@ -174,7 +186,7 @@
             app:layout_constraintStart_toEndOf="@+id/my_page_watering_cnt"
             app:layout_constraintEnd_toStartOf="@id/my_page_postpone_cnt"
             app:layout_constraintTop_toTopOf="@+id/my_page_box"
-            android:layout_marginTop="24dp" />
+            android:layout_marginTop="24dp"/>
 
 
         <TextView
@@ -184,23 +196,22 @@
             app:layout_constraintTop_toTopOf="@+id/my_page_box"
             app:layout_constraintEnd_toStartOf="@id/divide_bar_2"
             android:text=""
-            android:layout_marginTop="12dp"
             android:fontFamily="@font/notosanscjkkr_bold"
+            android:includeFontPadding="false"
             android:textColor="@color/cherish_light_black"
-            android:gravity="center_horizontal"
+            android:layout_marginTop="@dimen/margin_20dp"
             android:textSize="18sp"
-            android:id="@+id/my_page_postpone_cnt" />
+            android:id="@+id/my_page_postpone_cnt"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/my_page_postpone_cnt"
             app:layout_constraintStart_toStartOf="@+id/my_page_postpone_cnt"
             app:layout_constraintEnd_toEndOf="@+id/my_page_postpone_cnt"
             android:text="@string/myPage_postpone_text"
             android:fontFamily="@font/notosanscjkkr_regular"
-            android:gravity="center_horizontal"
-            app:layout_constraintBottom_toBottomOf="@+id/my_page_box"
+            android:includeFontPadding="false"
             android:textColor="@color/cherish_light_black"
             android:textSize="12sp" />
 
@@ -212,7 +223,7 @@
             app:layout_constraintTop_toTopOf="@+id/my_page_box"
             app:layout_constraintEnd_toStartOf="@id/my_page_finish_cnt"
             android:layout_marginTop="24dp"
-            android:background="@color/cherish_divide_gray" />
+            android:background="@color/cherish_divide_gray"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -221,25 +232,25 @@
             app:layout_constraintTop_toTopOf="@+id/my_page_box"
             app:layout_constraintEnd_toEndOf="@+id/my_page_box"
             android:text=""
-            android:layout_marginTop="12dp"
             android:fontFamily="@font/notosanscjkkr_bold"
+            android:includeFontPadding="false"
             android:textColor="@color/cherish_light_black"
-            android:gravity="center_horizontal"
+            android:layout_marginTop="@dimen/margin_20dp"
             android:textSize="18sp"
-            android:id="@+id/my_page_finish_cnt" />
+            android:id="@+id/my_page_finish_cnt"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
+            app:layout_constraintTop_toBottomOf="@+id/my_page_finish_cnt"
             app:layout_constraintStart_toStartOf="@+id/my_page_finish_cnt"
             app:layout_constraintEnd_toEndOf="@+id/my_page_finish_cnt"
             android:text="@string/myPage_complete_text"
             android:fontFamily="@font/notosanscjkkr_regular"
-            android:gravity="center_horizontal"
-            app:layout_constraintBottom_toBottomOf="@+id/my_page_box"
+            android:includeFontPadding="false"
             android:textColor="@color/cherish_light_black"
             android:textSize="12sp" />
+
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/coordinatorLayout"
