@@ -1,5 +1,6 @@
 package com.sopt.cherish.ui.detail
 
+import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -19,6 +20,8 @@ import com.sopt.cherish.ui.detail.calendar.CalendarFragment
 import com.sopt.cherish.ui.dialog.plantpopup.AlertPlantDialogFragment
 import com.sopt.cherish.ui.dialog.wateringdialog.DetailWateringDialogFragment
 import com.sopt.cherish.ui.domain.MemoListDataclass
+import com.sopt.cherish.ui.main.onboarding.OnBoardingActivity
+import com.sopt.cherish.ui.main.onboarding.onboardingFragment
 import com.sopt.cherish.util.DateUtil
 import com.sopt.cherish.util.extension.longToast
 import retrofit2.Call
@@ -160,6 +163,8 @@ class DetailPlantFragment : Fragment() {
         binding.imageButton3detail.setOnClickListener {
 
             AlertPlantDialogFragment(plantId).show(parentFragmentManager, DetailPlantFragment.TAG)
+           // startActivity(Intent(context,OnBoardingActivity::class.java))
+
             //3단계 식물 뷰 들어가는 곳
         }
         return binding.root

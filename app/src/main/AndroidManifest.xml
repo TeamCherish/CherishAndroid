@@ -65,6 +65,9 @@
         <activity
             android:name=".ui.main.MainActivity"
             android:screenOrientation="portrait" />
+        <activity android:name=".ui.main.setting.AboutCherishActivity"/>
+
+        <activity android:name=".ui.main.onboarding.OnBoardingActivity"/>
         <activity
             android:name=".ui.main.home.HomeBlankActivity"
             android:screenOrientation="portrait" />
