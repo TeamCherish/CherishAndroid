@@ -101,6 +101,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/notosanscjkkr_bold"
                 android:text=""
+                android:includeFontPadding="false"
                 android:textSize="18sp"
                 android:lineSpacingExtra="6sp"
                 android:gravity="center_horizontal"
@@ -114,6 +115,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/notosanscjkkr_bold"
+                android:includeFontPadding="false"
                 android:text="@string/myPage_user_description_text"
                 android:textSize="18sp"
                 android:lineSpacingExtra="6sp"
@@ -158,21 +160,21 @@
             app:layout_constraintEnd_toStartOf="@id/divide_bar_1"
             android:text=""
             android:fontFamily="@font/notosanscjkkr_bold"
+            android:includeFontPadding="false"
             android:textColor="@color/cherish_light_black"
-            android:layout_marginTop="@dimen/margin_12dp"
+            android:layout_marginTop="@dimen/margin_20dp"
             android:textSize="18sp"
             android:id="@+id/my_page_watering_cnt"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/my_page_box"
+            app:layout_constraintTop_toBottomOf="@+id/my_page_watering_cnt"
             app:layout_constraintStart_toStartOf="@+id/my_page_watering_cnt"
             app:layout_constraintEnd_toEndOf="@+id/my_page_watering_cnt"
             android:text="@string/myPage_watering_text"
-            android:layout_marginBottom="4dp"
-            android:id="@+id/watering_text"
             android:fontFamily="@font/notosanscjkkr_regular"
+            android:includeFontPadding="false"
             android:textColor="@color/cherish_light_black"
             android:textSize="12sp" />
 
@@ -194,23 +196,22 @@
             app:layout_constraintTop_toTopOf="@+id/my_page_box"
             app:layout_constraintEnd_toStartOf="@id/divide_bar_2"
             android:text=""
-            android:gravity="center_horizontal"
             android:fontFamily="@font/notosanscjkkr_bold"
+            android:includeFontPadding="false"
             android:textColor="@color/cherish_light_black"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="@dimen/margin_20dp"
             android:textSize="18sp"
             android:id="@+id/my_page_postpone_cnt"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/my_page_box"
+            app:layout_constraintTop_toBottomOf="@+id/my_page_postpone_cnt"
             app:layout_constraintStart_toStartOf="@+id/my_page_postpone_cnt"
             app:layout_constraintEnd_toEndOf="@+id/my_page_postpone_cnt"
             android:text="@string/myPage_postpone_text"
-            android:layout_marginBottom="4dp"
-            android:gravity="center_horizontal"
             android:fontFamily="@font/notosanscjkkr_regular"
+            android:includeFontPadding="false"
             android:textColor="@color/cherish_light_black"
             android:textSize="12sp" />
 
@@ -231,25 +232,25 @@
             app:layout_constraintTop_toTopOf="@+id/my_page_box"
             app:layout_constraintEnd_toEndOf="@+id/my_page_box"
             android:text=""
-            android:gravity="center_horizontal"
             android:fontFamily="@font/notosanscjkkr_bold"
+            android:includeFontPadding="false"
             android:textColor="@color/cherish_light_black"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="@dimen/margin_20dp"
             android:textSize="18sp"
             android:id="@+id/my_page_finish_cnt"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/my_page_box"
+            app:layout_constraintTop_toBottomOf="@+id/my_page_finish_cnt"
             app:layout_constraintStart_toStartOf="@+id/my_page_finish_cnt"
             app:layout_constraintEnd_toEndOf="@+id/my_page_finish_cnt"
             android:text="@string/myPage_complete_text"
-            android:layout_marginBottom="4dp"
-            android:gravity="center_horizontal"
             android:fontFamily="@font/notosanscjkkr_regular"
+            android:includeFontPadding="false"
             android:textColor="@color/cherish_light_black"
             android:textSize="12sp" />
+
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/coordinatorLayout"
