@@ -86,9 +86,12 @@ class HomeFragment : Fragment(), OnItemClickListener {
                 try {
                     setSelectedUser(it.userData.userList[viewModel.cherishSelectedPosition.value!!])
                 } catch (exception: Exception) {
-                    setSelectedUser(it.userData.userList[1])
+                    viewModel.cherishSelectedPosition.value =
+                        viewModel.cherishSelectedPosition.value!! - 1
+                    homeCherryListAdapter.lastSelectedPosition =
+                        viewModel.cherishSelectedPosition.value!!
+                    setSelectedUser(it.userData.userList[viewModel.cherishSelectedPosition.value!!])
                 }
-
             } else {
                 val blankIntent = Intent(requireContext(), HomeBlankActivity::class.java)
                 blankIntent.putExtra("userNickname", viewModel.userNickName.value)
@@ -102,13 +105,8 @@ class HomeFragment : Fragment(), OnItemClickListener {
 
     private fun setSelectedUser(user: User) {
         viewModel.selectedCherishUser.value = user
-        try {
-            homeCherryListAdapter.data[0] =
-                homeCherryListAdapter.data[viewModel.cherishSelectedPosition.value!!]
-        } catch (exception: Exception) {
-            homeCherryListAdapter.data[0] =
-                homeCherryListAdapter.data[1]
-        }
+        homeCherryListAdapter.data[0] =
+            homeCherryListAdapter.data[viewModel.cherishSelectedPosition.value!!]
 
     }
 
