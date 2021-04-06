@@ -209,16 +209,9 @@ class SignUpFirstFragment : Fragment() {
                 pw = binding.userPw.text.toString()
                 binding.isUsablePw.visibility = View.VISIBLE
 
-                binding.isUsablePw.text = "사용하실 수 없는 비밀번호입니다."
-                binding.isUsablePw.setTextColor(
-                    ContextCompat.getColor(
-                        binding.root.context,
-                        R.color.cherish_pink_sub
-                    )
-                )
-
-                isValidPW = isValidPW(pw)
-                Log.d("signup", isValidPW.toString())
+                isValidPW = isValidPW(pw) //비밀번호 형식 확인
+                Log.d("비밀번호 형식 확인",isValidPW.toString())
+                Log.d("pw",pw)
                 if (isValidPW) {
                     binding.isUsablePw.text = "사용가능한 비밀번호입니다."
                     binding.isUsablePw.setTextColor(
@@ -228,9 +221,17 @@ class SignUpFirstFragment : Fragment() {
                         )
                     )
 
-                    checkPwAgain(pw)
+                    checkPwAgain() //비밀번호 다시 입력받음
+                }else{
+                    binding.isUsablePw.text = "사용하실 수 없는 비밀번호입니다."
+                    binding.isUsablePw.setTextColor(
+                        ContextCompat.getColor(
+                            binding.root.context,
+                            R.color.cherish_pink_sub
+                        )
+                    )
                 }
-                checkPW()
+                checkPW() //두 개 비밀번호 일치하는지 확인
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
@@ -244,19 +245,20 @@ class SignUpFirstFragment : Fragment() {
     }
 
     private fun isValidPW(password: String): Boolean {
-        Log.d("isvalid function", "들어옴")
+        Log.d("isValidPW",password)
         val reg =
-            Regex("^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[\$@\$!%*#?&])[A-Za-z[0-9]\$@\$!%*#?&]{8,}\$")
+            Regex("^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[$@$!%*#?&]).{8,}.\$")
         if (!password.matches(reg)) {
             return false
         }
         return true
     }
 
-    private fun checkPwAgain(first: String) {
+    private fun checkPwAgain() {
         binding.userPwAgain.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 pwAgain = binding.userPwAgain.text.toString()
+                Log.d("pwagain",pwAgain)
                 checkPW()
             }
 
@@ -269,7 +271,7 @@ class SignUpFirstFragment : Fragment() {
             }
         })
 
-        if (first == pwAgain) {
+        if (pw == pwAgain) {
             binding.isUsablePw.text = "비밀번호가 일치합니다."
             binding.isUsablePw.setTextColor(
                 ContextCompat.getColor(
@@ -279,15 +281,15 @@ class SignUpFirstFragment : Fragment() {
             )
             isFinish = true
             binding.signUpButton.setOnClickListener {
-                Log.d("회원가입", "버튼클릭")
-                val bundle = Bundle()
-                bundle.putString("email", email)
-                bundle.putString("password", pw)
+                if(pw==pwAgain){
+                    val bundle = Bundle()
+                    bundle.putString("email", email)
+                    bundle.putString("password", pw)
 
-                (activity as SignUpActivity).postData(bundle)
-                (activity as SignUpActivity).replaceFragment(1)
+                    (activity as SignUpActivity).postData(bundle)
+                    (activity as SignUpActivity).replaceFragment(1)
+                }
             }
-
         }
         if (pwAgain != "1") {
             binding.isUsablePw.text = "비밀번호가 일치하지 않습니다."
@@ -312,12 +314,14 @@ class SignUpFirstFragment : Fragment() {
             )
 
             binding.signUpButton.setOnClickListener {
-                val bundle = Bundle()
-                bundle.putString("email", email)
-                bundle.putString("password", pw)
+                if(pw==pwAgain){
+                    val bundle = Bundle()
+                    bundle.putString("email", email)
+                    bundle.putString("password", pw)
 
-                (activity as SignUpActivity).postData(bundle)
-                (activity as SignUpActivity).replaceFragment(1)
+                    (activity as SignUpActivity).postData(bundle)
+                    (activity as SignUpActivity).replaceFragment(1)
+                }
             }
         }
     }
