@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -84,7 +85,7 @@
                 android:id="@+id/textView_nick"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:layout_marginTop="7dp"
+                android:layout_marginTop="21dp"
                 android:fontFamily="@font/notosanscjkkr_bold"
                 android:includeFontPadding="false"
                 android:text="남쿵둥이"
@@ -92,18 +93,20 @@
                 android:textSize="@dimen/text_20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/test" />
+                app:layout_constraintTop_toBottomOf="@+id/imageView_detail_url" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/textView6"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
+                android:layout_marginTop="5dp"
                 android:layout_marginBottom="30dp"
                 android:background="@drawable/plantdetail_chip"
                 android:text="TextView"
                 app:layout_constraintBottom_toTopOf="@+id/textView_duration"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView_nick">
 
                 <TextView
                     android:id="@+id/textView_name"
@@ -324,14 +327,12 @@
                 android:layout_width="0dp"
                 android:layout_height="53dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="96dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/detail_layout"
                 app:layout_constraintBottom_toTopOf="@+id/memocons2"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintStart_toStartOf="parent">
 
                 <TextView
                     android:id="@+id/userdate"
@@ -384,14 +385,12 @@
                 android:layout_width="0dp"
                 android:layout_height="53dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="160dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="23dp"
                 android:background="@drawable/detail_layout"
                 app:layout_constraintBottom_toTopOf="@+id/button_water"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintStart_toStartOf="parent">
 
                 <TextView
                     android:id="@+id/userdate2"
@@ -447,8 +446,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="19dp"
-                android:layout_marginBottom="10dp"
                 android:fontFamily="@font/notosanscjkkr_bold"
                 android:includeFontPadding="false"
                 android:text="나영"
@@ -463,7 +460,6 @@
                 style="@style/CustomChip"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:layout_marginBottom="15dp"
                 android:fontFamily="@font/notosanscjkkr_regular"
                 android:includeFontPadding="false"
                 android:text="키워드를 입력하지 않았어요!"
@@ -528,7 +524,6 @@
                 android:layout_width="0dp"
                 android:layout_height="48dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="237dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="17dp"
                 android:fontFamily="@font/notosanscjkkr_medium"
@@ -539,8 +534,7 @@
                 android:textSize="@dimen/text_16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toStartOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
