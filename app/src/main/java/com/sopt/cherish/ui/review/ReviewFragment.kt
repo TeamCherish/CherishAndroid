@@ -83,18 +83,6 @@ class ReviewFragment : Fragment() {
         }
     }
 
-    private fun showIgnoreLoadingDialog() {
-        lifecycleScope.launch {
-            val dialog = MultiViewDialog(R.layout.dialog_loading, 0.35f, 0.169f)
-            dialog.show(parentFragmentManager, ReviewActivity.TAG)
-            delay(2000)
-            dialog.dismiss()
-            parentFragmentManager.beginTransaction().remove(this@ReviewFragment).commit()
-            viewModel.fetchUsers()
-            parentFragmentManager.popBackStack()
-        }
-    }
-
     private fun addUserStatusWithChip(binding: FragmentReviewBinding) {
         binding.homeReviewEditKeyword.writeKeyword(binding.homeReviewFlexBox, parentFragmentManager)
     }
@@ -116,8 +104,16 @@ class ReviewFragment : Fragment() {
 
     private fun ignoreSendReviewToServer(binding: FragmentReviewBinding) {
         binding.homeReviewIgnoreAccept.setOnClickListener {
-            // 이거 다시 한번 물어봐야 함
-            showIgnoreLoadingDialog()
+            viewModel.sendReviewToServer(
+                reviewWateringReq = ReviewWateringReq(
+                    null,
+                    null,
+                    null,
+                    null,
+                    viewModel.selectedCherishUser.value?.id!!
+                )
+            )
+            showLoadingDialog()
         }
     }
 

@@ -155,23 +155,23 @@ object BindingAdapter {
                         when (plantName) {
                             "민들레" -> {
                                 resizeImageView(262, 331)
-                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 100.dp)
+                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 60.dp)
                             }
                             "로즈마리" -> {
                                 resizeImageView(220, 460)
-                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 100.dp)
+                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 60.dp)
                             }
                             "아메리칸블루" -> {
                                 resizeImageView(249, 368)
-                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 100.dp)
+                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 60.dp)
                             }
                             "스투키" -> {
                                 resizeImageView(295, 266.6.toInt())
-                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 100.dp)
+                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 60.dp)
                             }
                             "단모환" -> {
                                 resizeImageView(275, 229)
-                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 100.dp)
+                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 60.dp)
                             }
                             else -> {
 
@@ -182,23 +182,23 @@ object BindingAdapter {
                         when (plantName) {
                             "민들레" -> {
                                 resizeImageView(235, 388)
-                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 100.dp)
+                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 60.dp)
                             }
                             "로즈마리" -> {
                                 resizeImageView(204, 572)
-                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 100.dp)
+                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 60.dp)
                             }
                             "아메리칸블루" -> {
                                 resizeImageView(204, 461)
-                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 100.dp)
+                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 60.dp)
                             }
                             "스투키" -> {
                                 resizeImageView(294, 313)
-                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 100.dp)
+                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 60.dp)
                             }
                             "단모환" -> {
                                 resizeImageView(283, 350)
-                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 100.dp)
+                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 60.dp)
                             }
                             else -> {
 
