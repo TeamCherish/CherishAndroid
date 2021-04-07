@@ -280,6 +280,7 @@ object BindingAdapter {
                     imageView.context, R.color.cherish_watered_color
                 )
             )
+            // todo : argb로 좀더 색이 변화하도록 해달라는 요청
             val delayHandler = Handler(imageView.context.mainLooper)
             delayHandler.postDelayed({
                 imageView.setBackgroundColor(
