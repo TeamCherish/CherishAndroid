@@ -10,13 +10,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.sopt.cherish.R
-import com.sopt.cherish.databinding.FragmentAlertPlantDialogBinding
 import com.sopt.cherish.databinding.FragmentOnboardingBinding
-import com.sopt.cherish.ui.adapter.DialogViewPagerAdapter
-import com.sopt.cherish.ui.dialog.plantpopup.PlantDetailPopUpFirst
-import com.sopt.cherish.ui.dialog.plantpopup.PlantDetailPopUpFourth
-import com.sopt.cherish.ui.dialog.plantpopup.PlantDetailPopUpSecond
-import com.sopt.cherish.ui.dialog.plantpopup.PlantDetailPopUpThird
 import com.sopt.cherish.ui.main.onboarding.adapter.OnBoardingViewPagerAdapter
 import com.zhpan.indicator.enums.IndicatorSlideMode
 import com.zhpan.indicator.enums.IndicatorStyle
@@ -30,7 +24,7 @@ class onboardingFragment : Fragment(){
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
 
         binding = FragmentOnboardingBinding.inflate(inflater, container, false)
@@ -94,10 +88,5 @@ class onboardingFragment : Fragment(){
             notifyDataChanged()
         }
     }
-
-    fun setIndicator(){
-        binding.indicatorView.isVisible=false
-    }
-
 
 }
