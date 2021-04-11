@@ -1,5 +1,7 @@
 package com.sopt.cherish.util
 
+import android.animation.ArgbEvaluator
+import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.os.Handler
 import android.view.View
@@ -41,113 +43,117 @@ object BindingAdapter {
             imageView.visibility = View.INVISIBLE
     }
 
+    // 여기에 remainDay속성을 하나 넣어줘서 만약에 그게 진행이 된 상태면 시든이미지로 보여준다! 라고생각하면 될듯?
     @JvmStatic
-    @BindingAdapter(value = ["plantName", "growth"])
-    fun setPlantImage(imageView: ImageView, plantName: String?, growth: Int?) {
+    @BindingAdapter(value = ["plantName", "growth", "dDay"])
+    fun setPlantImage(imageView: ImageView, plantName: String?, growth: Int?, dDay: Int?) {
         if (growth != null) {
             when {
                 growth <= 25 -> {
-                    when (plantName) {
-                        "민들레" -> imageView.setImageDrawable(
-                            ContextCompat.getDrawable(
-                                imageView.context,
-                                R.drawable.img_dandelion_1
-                            )
-                        )
-                        "로즈마리" -> imageView.setImageDrawable(
-                            ContextCompat.getDrawable(
-                                imageView.context,
-                                R.drawable.img_rose_1
-                            )
-                        )
-                        "아메리칸블루" -> imageView.setImageDrawable(
-                            ContextCompat.getDrawable(
-                                imageView.context,
-                                R.drawable.img_americanblue_1
-                            )
-                        )
-                        "스투키" -> imageView.setImageDrawable(
-                            ContextCompat.getDrawable(
-                                imageView.context,
-                                R.drawable.img_stuki_1
-                            )
-                        )
-                        "단모환" -> {
-                            imageView.setImageDrawable(
-                                ContextCompat.getDrawable(
-                                    imageView.context,
-                                    R.drawable.img_sun_1
+                    if (dDay != null) {
+                        if (dDay < 0) {
+                            Glide.with(imageView)
+                                .asDrawable()
+                                .load(
+                                    when (plantName) {
+                                        "민들레" -> R.drawable.dandelion_grayshadow_1
+                                        "로즈마리" -> R.drawable.rosemary_grayshadow_1
+                                        "아메리칸블루" -> R.drawable.americanblue_grayshadow_1
+                                        "스투키" -> R.drawable.stuckyi_grayshadow_1
+                                        "단모환" -> R.drawable.cactus_grayshadow_1
+                                        else -> R.drawable.img_white
+                                    }
                                 )
-                            )
-                        }
-                        else -> {
-                            imageView.setImageDrawable(
-                                ContextCompat.getDrawable(
-                                    imageView.context,
-                                    R.drawable.img_white
+                                .into(imageView)
+                        } else {
+                            Glide.with(imageView)
+                                .asDrawable()
+                                .load(
+                                    when (plantName) {
+                                        "민들레" -> R.drawable.img_dandelion_1
+                                        "로즈마리" -> R.drawable.img_rose_1
+                                        "아메리칸블루" -> R.drawable.img_americanblue_1
+                                        "스투키" -> R.drawable.img_stuki_1
+                                        "단모환" -> R.drawable.img_sun_1
+                                        else -> R.drawable.img_white
+                                    }
                                 )
-                            )
+                                .into(imageView)
                         }
                     }
                 }
                 growth in 26..50 -> {
-                    when (plantName) {
-                        "민들레" -> imageView.setImageDrawable(
-                            ContextCompat.getDrawable(
-                                imageView.context,
-                                R.drawable.img_dandelion_2
-                            )
-                        )
-                        "로즈마리" -> imageView.setImageDrawable(
-                            ContextCompat.getDrawable(
-                                imageView.context,
-                                R.drawable.img_rose_2
-                            )
-                        )
-                        "아메리칸블루" -> imageView.setImageDrawable(
-                            ContextCompat.getDrawable(
-                                imageView.context,
-                                R.drawable.img_americanblue_2
-                            )
-                        )
-                        "스투키" -> imageView.setImageDrawable(
-                            ContextCompat.getDrawable(
-                                imageView.context,
-                                R.drawable.img_stuki_2
-                            )
-                        )
-                        "단모환" -> {
-                            imageView.setImageDrawable(
-                                ContextCompat.getDrawable(
-                                    imageView.context,
-                                    R.drawable.img_sun_2
+                    if (dDay != null) {
+                        if (dDay < 0) {
+                            Glide.with(imageView)
+                                .asDrawable()
+                                .load(
+                                    when (plantName) {
+                                        "민들레" -> R.drawable.dandelion_grayshadow_2
+                                        "로즈마리" -> R.drawable.rosemary_grayshadow_2
+                                        "아메리칸블루" -> R.drawable.americanblue_grayshadow_2
+                                        "스투키" -> R.drawable.stuckyi_grayshadow_2
+                                        "단모환" -> R.drawable.cactus_grayshadow_2
+                                        else -> R.drawable.img_white
+                                    }
                                 )
-                            )
-                        }
-                        else -> {
-                            imageView.setImageDrawable(
-                                ContextCompat.getDrawable(
-                                    imageView.context,
-                                    R.drawable.img_white
+                                .into(imageView)
+                        } else {
+                            Glide.with(imageView)
+                                .asDrawable()
+                                .load(
+                                    when (plantName) {
+                                        "민들레" -> R.drawable.img_dandelion_2
+                                        "로즈마리" -> R.drawable.img_rose_2
+                                        "아메리칸블루" -> R.drawable.img_americanblue_2
+                                        "스투키" -> R.drawable.img_stuki_2
+                                        "단모환" -> R.drawable.img_sun_2
+                                        else -> R.drawable.img_white
+                                    }
                                 )
-                            )
+                                .into(imageView)
                         }
                     }
                 }
                 else -> {
-                    // 3단계 테스팅
-                    Glide.with(imageView)
-                        .asGif()
-                        .load(R.raw.img_dandelion_gif3)
-                        .into(imageView)
+                    if (dDay != null) {
+                        if (dDay < 0) {
+                            Glide.with(imageView)
+                                .asDrawable()
+                                .load(
+                                    when (plantName) {
+                                        "민들레" -> R.drawable.dandelion_grayshadow_3
+                                        "로즈마리" -> R.drawable.rosemary_grayshadow_3
+                                        "아메리칸블루" -> R.drawable.americanblue_grayshadow_3
+                                        "스투키" -> R.drawable.stuckyi_grayshadow_3
+                                        "단모환" -> R.drawable.cactus_grayshadow_3
+                                        else -> R.drawable.img_white
+                                    }
+                                )
+                                .into(imageView)
+                        } else {
+                            Glide.with(imageView)
+                                .asGif()
+                                .load(
+                                    when (plantName) {
+                                        "민들레" -> R.raw.min_android
+                                        "로즈마리" -> R.raw.rose_android
+                                        "아메리칸블루" -> R.raw.blue_android
+                                        "스투키" -> R.raw.stuki_android
+                                        "단모환" -> R.raw.sun_android
+                                        else -> R.raw.cherish_loading
+                                    }
+                                ).into(imageView)
+                        }
+                    }
                 }
             }
         }
     }
 
     @JvmStatic
-    @BindingAdapter(value = ["setImageSizePlantName", "setImageSizeGrowth"])
-    fun setPlantImageViewSize(imageView: ImageView, plantName: String?, growth: Int?) {
+    @BindingAdapter(value = ["setImageSizePlantName", "setImageSizeGrowth", "setImageSizedDay"])
+    fun setPlantImageViewSize(imageView: ImageView, plantName: String?, growth: Int?, dDay: Int?) {
         if (growth != null) {
             imageView.apply {
                 when {
@@ -206,29 +212,109 @@ object BindingAdapter {
                         }
                     }
                     else -> {
-                        when (plantName) {
-                            "민들레" -> {
-                                matchSizeImageView()
-                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 0.dp)
-                            }
-                            "로즈마리" -> {
-                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 0.dp)
-                                matchSizeImageView()
-                            }
-                            "아메리칸블루" -> {
-                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 0.dp)
-                                matchSizeImageView()
-                            }
-                            "스투키" -> {
-                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 0.dp)
-                                matchSizeImageView()
-                            }
-                            "단모환" -> {
-                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 0.dp)
-                                matchSizeImageView()
-                            }
-                            else -> {
+                        if (dDay != null) {
+                            if (dDay < 0) {
+                                when (plantName) {
+                                    "민들레" -> {
+                                        resizeImageView(235, 388)
+                                        setMargin(
+                                            top = 0.dp,
+                                            start = 0.dp,
+                                            end = 0.dp,
+                                            bottom = 60.dp
+                                        )
+                                    }
+                                    "로즈마리" -> {
+                                        resizeImageView(204, 572)
+                                        setMargin(
+                                            top = 0.dp,
+                                            start = 0.dp,
+                                            end = 0.dp,
+                                            bottom = 60.dp
+                                        )
+                                    }
+                                    "아메리칸블루" -> {
+                                        resizeImageView(204, 461)
+                                        setMargin(
+                                            top = 0.dp,
+                                            start = 0.dp,
+                                            end = 0.dp,
+                                            bottom = 60.dp
+                                        )
+                                    }
+                                    "스투키" -> {
+                                        resizeImageView(294, 313)
+                                        setMargin(
+                                            top = 0.dp,
+                                            start = 0.dp,
+                                            end = 0.dp,
+                                            bottom = 60.dp
+                                        )
+                                    }
+                                    "단모환" -> {
+                                        resizeImageView(283, 350)
+                                        setMargin(
+                                            top = 0.dp,
+                                            start = 0.dp,
+                                            end = 0.dp,
+                                            bottom = 60.dp
+                                        )
+                                    }
+                                    else -> {
 
+                                    }
+                                }
+                            } else {
+                                when (plantName) {
+                                    "민들레" -> {
+                                        matchSizeImageView()
+                                        setMargin(
+                                            top = 0.dp,
+                                            start = 0.dp,
+                                            end = 0.dp,
+                                            bottom = 0.dp
+                                        )
+                                    }
+                                    "로즈마리" -> {
+                                        setMargin(
+                                            top = 0.dp,
+                                            start = 0.dp,
+                                            end = 0.dp,
+                                            bottom = 0.dp
+                                        )
+                                        matchSizeImageView()
+                                    }
+                                    "아메리칸블루" -> {
+                                        setMargin(
+                                            top = 0.dp,
+                                            start = 0.dp,
+                                            end = 0.dp,
+                                            bottom = 0.dp
+                                        )
+                                        matchSizeImageView()
+                                    }
+                                    "스투키" -> {
+                                        setMargin(
+                                            top = 0.dp,
+                                            start = 0.dp,
+                                            end = 0.dp,
+                                            bottom = 0.dp
+                                        )
+                                        matchSizeImageView()
+                                    }
+                                    "단모환" -> {
+                                        setMargin(
+                                            top = 0.dp,
+                                            start = 0.dp,
+                                            end = 0.dp,
+                                            bottom = 0.dp
+                                        )
+                                        matchSizeImageView()
+                                    }
+                                    else -> {
+
+                                    }
+                                }
                             }
                         }
                     }
@@ -245,7 +331,7 @@ object BindingAdapter {
             imageView.setBackgroundColor(
                 ContextCompat.getColor(
                     imageView.context,
-                    R.color.cherish_light_black
+                    R.color.cherish_wither_background_color
                 )
             )
         } else {
@@ -265,6 +351,7 @@ object BindingAdapter {
         }
     }
 
+    // 이건 이제 gif로 변경될거여서 background안할거에요
     @JvmStatic
     @BindingAdapter(value = ["isWatered", "remainDay", "wateredPlantName", "viewModel"])
     fun wateredBackground(
@@ -275,27 +362,26 @@ object BindingAdapter {
         viewModel: MainViewModel
     ) {
         if (isWatered == true) {
-            imageView.setBackgroundColor(
+            val valueAnimator = ValueAnimator.ofObject(
+                ArgbEvaluator(),
+                ContextCompat.getColor(imageView.context, R.color.cherish_wither_background_color),
                 ContextCompat.getColor(
-                    imageView.context, R.color.cherish_watered_color
+                    imageView.context, when (plantName) {
+                        "민들레" -> R.color.cherish_dandelion_background_color
+                        "로즈마리" -> R.color.cherish_rosemary_background_color
+                        "아메리칸블루" -> R.color.cherish_american_blue_background_color
+                        "스투키" -> R.color.cherish_stuki_background_color
+                        "단모환" -> R.color.cherish_sun_background_color
+                        else -> R.color.white
+                    }
                 )
-            )
-            // todo : argb로 좀더 색이 변화하도록 해달라는 요청
-            val delayHandler = Handler(imageView.context.mainLooper)
-            delayHandler.postDelayed({
-                imageView.setBackgroundColor(
-                    ContextCompat.getColor(
-                        imageView.context, when (plantName) {
-                            "민들레" -> R.color.cherish_dandelion_background_color
-                            "로즈마리" -> R.color.cherish_rosemary_background_color
-                            "아메리칸블루" -> R.color.cherish_american_blue_background_color
-                            "스투키" -> R.color.cherish_stuki_background_color
-                            "단모환" -> R.color.cherish_sun_background_color
-                            else -> R.color.white
-                        }
-                    )
-                )
-            }, 2000)
+            ).apply {
+                duration = 2000
+                addUpdateListener {
+                    imageView.setBackgroundColor(it.animatedValue as Int)
+                }
+            }
+            valueAnimator.start()
             viewModel.isWatered.value = null
         }
         if (isWatered == false) {
@@ -425,7 +511,11 @@ object BindingAdapter {
     @SuppressLint("SetTextI18n")
     @JvmStatic
     @BindingAdapter(value = ["userNickname", "selectedCherishName"])
-    fun setReviewMainText(textView: TextView, userNickname: String, selectedCherishName: String?) {
+    fun setReviewMainText(
+        textView: TextView,
+        userNickname: String,
+        selectedCherishName: String?
+    ) {
         textView.text = "${userNickname}님!${selectedCherishName}님과의"
     }
 
