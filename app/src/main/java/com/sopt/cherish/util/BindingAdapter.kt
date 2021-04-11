@@ -366,26 +366,31 @@ object BindingAdapter {
         viewModel: MainViewModel
     ) {
         if (isWatered == true) {
-            val valueAnimator = ValueAnimator.ofObject(
-                ArgbEvaluator(),
-                ContextCompat.getColor(imageView.context, R.color.cherish_wither_background_color),
-                ContextCompat.getColor(
-                    imageView.context, when (plantName) {
-                        "민들레" -> R.color.cherish_dandelion_background_color
-                        "로즈마리" -> R.color.cherish_rosemary_background_color
-                        "아메리칸블루" -> R.color.cherish_american_blue_background_color
-                        "스투키" -> R.color.cherish_stuki_background_color
-                        "단모환" -> R.color.cherish_sun_background_color
-                        else -> R.color.white
+            if (remainDay < 0) {
+                val valueAnimator = ValueAnimator.ofObject(
+                    ArgbEvaluator(),
+                    ContextCompat.getColor(
+                        imageView.context,
+                        R.color.cherish_wither_background_color
+                    ),
+                    ContextCompat.getColor(
+                        imageView.context, when (plantName) {
+                            "민들레" -> R.color.cherish_dandelion_background_color
+                            "로즈마리" -> R.color.cherish_rosemary_background_color
+                            "아메리칸블루" -> R.color.cherish_american_blue_background_color
+                            "스투키" -> R.color.cherish_stuki_background_color
+                            "단모환" -> R.color.cherish_sun_background_color
+                            else -> R.color.white
+                        }
+                    )
+                ).apply {
+                    duration = 2000
+                    addUpdateListener {
+                        imageView.setBackgroundColor(it.animatedValue as Int)
                     }
-                )
-            ).apply {
-                duration = 2000
-                addUpdateListener {
-                    imageView.setBackgroundColor(it.animatedValue as Int)
                 }
-            }
-            valueAnimator.start()
+                valueAnimator.start()
+            } // 0일때는 그냥 보글보글거리는 애니메이션만 나오면 되는겁니다~
             viewModel.isWatered.value = null
         }
         if (isWatered == false) {
