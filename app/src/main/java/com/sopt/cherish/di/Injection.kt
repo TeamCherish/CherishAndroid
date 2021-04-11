@@ -16,6 +16,7 @@ import okhttp3.OkHttpClient
 /**
  * Created on 01-03 by SSong-develop
  * do not use koin or hilt , just use singleton pattern
+ * we need to divide file in module like DetailModule
  */
 object Injection {
     private const val CONNECT_TIMEOUT = 15

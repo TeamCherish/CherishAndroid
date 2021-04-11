@@ -23,6 +23,10 @@ import com.sopt.cherish.util.extension.ImageViewExtension.resizeImageView
 import com.sopt.cherish.util.extension.ImageViewExtension.setMargin
 import kotlin.math.abs
 
+/**
+ * Create by SSong-develop
+ * need to divide
+ */
 object BindingAdapter {
 
     @JvmStatic
