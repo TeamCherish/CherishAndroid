@@ -35,6 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_20dp"
             android:font="@font/notosanscjkkr_bold"
+            android:textColor="@color/black"
             android:text="@string/home_blank_enroll_plant_text"
             android:textSize="22sp"
             android:textStyle="bold"

@@ -46,11 +46,12 @@ class ReviewActivity : AppCompatActivity() {
     private fun addLimitNumberOfMemoCharacters(binding: ActivityReviewBinding) {
         binding.reviewMemo.countNumberOfCharacters { memo ->
             binding.reviewNumberOfMemo.text = memo?.length.toString()
-            if (memo?.length!! >= 100) {
+            if (memo?.length!! > 100) {
                 MultiViewDialog(R.layout.dialog_warning_review_limit_error, 0.6944f, 0.16875f).show(
                     supportFragmentManager,
                     TAG
                 )
+                binding.reviewMemo.text = null
                 binding.reviewMemo.hideKeyboard()
             }
         }
@@ -86,41 +87,44 @@ class ReviewActivity : AppCompatActivity() {
         }
     }
 
-    private fun showIgnoreLoadingDialog() {
-        lifecycleScope.launch {
-            val dialog = MultiViewDialog(R.layout.dialog_loading, 0.35f, 0.169f)
-            dialog.show(supportFragmentManager, TAG)
-            delay(2000)
-            dialog.dismiss()
-            val intent = Intent()
-            setResult(RESULT_OK, intent)
-            finish()
-        }
-    }
-
     private fun addUserStatusWithChip(binding: ActivityReviewBinding) {
         binding.reviewEditKeyword.writeKeyword(binding.reviewFlexBox, supportFragmentManager)
     }
 
     private fun sendReviewToServer(binding: ActivityReviewBinding) {
         binding.reviewAdminAccept.setOnClickListener {
-            viewModel.sendReviewToServer(
-                reviewWateringReq = ReviewWateringReq(
-                    binding.reviewMemo.text.toString(),
-                    binding.reviewFlexBox.getChip(id = 0)?.text.toString(),
-                    binding.reviewFlexBox.getChip(id = 1)?.text.toString(),
-                    binding.reviewFlexBox.getChip(id = 2)?.text.toString(),
-                    viewModel.selectedCherishId
+            if (binding.reviewMemo.text.length <= 100) {
+                viewModel.sendReviewToServer(
+                    reviewWateringReq = ReviewWateringReq(
+                        binding.reviewMemo.text.toString(),
+                        binding.reviewFlexBox.getChip(id = 0)?.text.toString(),
+                        binding.reviewFlexBox.getChip(id = 1)?.text.toString(),
+                        binding.reviewFlexBox.getChip(id = 2)?.text.toString(),
+                        viewModel.selectedCherishId
+                    )
                 )
-            )
-            showLoadingDialog()
+                showLoadingDialog()
+            } else {
+                MultiViewDialog(R.layout.dialog_warning_review_limit_error, 0.6944f, 0.16875f).show(
+                    supportFragmentManager,
+                    TAG
+                )
+            }
         }
     }
 
     private fun ignoreSendReviewToServer(binding: ActivityReviewBinding) {
         binding.reviewIgnoreAccept.setOnClickListener {
-            // 이거 다시 한번 물어봐야 함
-            showIgnoreLoadingDialog()
+            viewModel.sendReviewToServer(
+                reviewWateringReq = ReviewWateringReq(
+                    null,
+                    null,
+                    null,
+                    null,
+                    viewModel.selectedCherishId
+                )
+            )
+            showLoadingDialog()
         }
     }
 
