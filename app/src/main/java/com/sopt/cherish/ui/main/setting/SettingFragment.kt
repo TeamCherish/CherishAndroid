@@ -92,6 +92,9 @@ class SettingFragment : Fragment() {
         binding.settingNextNickname.setOnClickListener {
             setFragment(UserModifyFragment())
         }
+        binding.settingUsernickname.setOnClickListener {
+            setFragment(UserModifyFragment())
+        }
 
         binding.settingAlarmSetting.setOnCheckedChangeListener { buttonView, isChecked ->
             MainApplication.sharedPreferenceController.setAlarmKey(isChecked)
