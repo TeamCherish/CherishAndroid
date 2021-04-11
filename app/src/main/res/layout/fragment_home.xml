@@ -38,8 +38,10 @@
             android:layout_marginBottom="80dp"
             growth="@{mainViewModel.selectedCherishUser.growth}"
             plantName="@{mainViewModel.selectedCherishUser.plantName}"
+            dDay="@{mainViewModel.selectedCherishUser.DDay}"
             setImageSizeGrowth="@{mainViewModel.selectedCherishUser.growth}"
             setImageSizePlantName="@{mainViewModel.selectedCherishUser.plantName}"
+            setImageSizedDay="@{mainViewModel.selectedCherishUser.DDay}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
 
