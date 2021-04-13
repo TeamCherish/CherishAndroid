@@ -1,29 +1,20 @@
 package com.sopt.cherish.ui.main.onboarding
 
+import android.content.Context
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import com.sopt.cherish.R
-import com.sopt.cherish.databinding.FragmentDeletePlantDialogBinding
-import com.sopt.cherish.databinding.FragmentOnboardingBinding
 import com.sopt.cherish.databinding.FragmentOnboardingDetailBinding
-import com.sopt.cherish.databinding.FragmentPlantDetailPopUpFirstBinding
-import com.sopt.cherish.ui.detail.DetailPlantActivity
-import com.sopt.cherish.ui.main.MainActivity
-import com.sopt.cherish.ui.main.home.HomeBlankActivity
 import com.sopt.cherish.ui.signin.SignInActivity
-import com.zhpan.indicator.enums.IndicatorSlideMode
-import com.zhpan.indicator.enums.IndicatorStyle
 
 class onBoardingDetailFragment(val index:Int) :Fragment(){
 
-
     lateinit var binding:FragmentOnboardingDetailBinding
+    var activity=OnBoardingActivity()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,9 +25,11 @@ class onBoardingDetailFragment(val index:Int) :Fragment(){
 
         binding.onBoardingBtn.setOnClickListener {
             startActivity(Intent(context,SignInActivity::class.java))
+            requireActivity().finish()
         }
         binding.skipBtn.setOnClickListener {
             startActivity(Intent(context,SignInActivity::class.java))
+            requireActivity().finish()
         }
 
 
@@ -81,6 +74,13 @@ class onBoardingDetailFragment(val index:Int) :Fragment(){
         }
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+
+        if(context is OnBoardingActivity)
+            activity = context
+
+    }
 
 
 }
