@@ -35,7 +35,6 @@
             android:id="@+id/home_plant_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="80dp"
             growth="@{mainViewModel.selectedCherishUser.growth}"
             plantName="@{mainViewModel.selectedCherishUser.plantName}"
             dDay="@{mainViewModel.selectedCherishUser.DDay}"
@@ -55,6 +54,7 @@
             android:textColor="@color/white"
             android:textSize="40sp"
             android:textStyle="bold"
+            android:autoSizeTextType="uniform"
             android:includeFontPadding="false"
             android:setDeadLineDay="@{mainViewModel.selectedCherishUser.DDay}"
             app:layout_constraintStart_toStartOf="parent"
@@ -69,6 +69,7 @@
             android:includeFontPadding="false"
             android:textSize="28sp"
             android:textStyle="bold"
+            android:autoSizeTextType="uniform"
             android:text="@{mainViewModel.selectedCherishUser.plantModifier}"
             app:layout_constraintStart_toStartOf="@+id/home_remain_date"
             app:layout_constraintTop_toBottomOf="@+id/home_remain_date" />
@@ -81,6 +82,7 @@
             android:includeFontPadding="false"
             android:textColor="@color/white"
             android:textSize="28sp"
+            android:autoSizeTextType="uniform"
             android:text="@{mainViewModel.selectedCherishUser.nickName}"
             app:layout_constraintStart_toStartOf="@+id/home_selected_user_status"
             app:layout_constraintTop_toBottomOf="@+id/home_selected_user_status" />
