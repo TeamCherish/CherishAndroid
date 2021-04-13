@@ -129,7 +129,7 @@ class ReviseReviewFragment : Fragment() {
     private fun addLimitNumberOfMemoCharacters(binding: FragmentReviseReviewBinding) {
         binding.reviseReviewMemo.countNumberOfCharacters { memo ->
             binding.reviseReviewNumberOfMemo.text = memo?.length.toString()
-            if (memo?.length!! > 100) {
+            if (memo?.length!! == 100) {
                 MultiViewDialog(R.layout.dialog_warning_review_limit_error, 0.6944f, 0.16875f).show(
                     parentFragmentManager,
                     TAG
@@ -142,7 +142,7 @@ class ReviseReviewFragment : Fragment() {
     private fun addLimitNumberOfKeywordCharacters(binding: FragmentReviseReviewBinding) {
         binding.reviseReviewEditKeyword.countNumberOfCharacters { keyword ->
             binding.reviseReviewNumberOfCharacters.text = keyword?.length.toString()
-            if (keyword?.length!! > 5) {
+            if (keyword?.length!! == 5) {
                 MultiViewDialog(
                     R.layout.dialog_warning_keyword_wordcount_limit_error,
                     0.6944f,

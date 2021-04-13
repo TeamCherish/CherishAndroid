@@ -46,12 +46,11 @@ class ReviewActivity : AppCompatActivity() {
     private fun addLimitNumberOfMemoCharacters(binding: ActivityReviewBinding) {
         binding.reviewMemo.countNumberOfCharacters { memo ->
             binding.reviewNumberOfMemo.text = memo?.length.toString()
-            if (memo?.length!! > 100) {
+            if (memo?.length!! == 100) {
                 MultiViewDialog(R.layout.dialog_warning_review_limit_error, 0.6944f, 0.16875f).show(
                     supportFragmentManager,
                     TAG
                 )
-                binding.reviewMemo.text = null
                 binding.reviewMemo.hideKeyboard()
             }
         }
@@ -60,7 +59,7 @@ class ReviewActivity : AppCompatActivity() {
     private fun addLimitNumberOfKeywordCharacters(binding: ActivityReviewBinding) {
         binding.reviewEditKeyword.countNumberOfCharacters { keyword ->
             binding.reviewNumberOfCharacters.text = keyword?.length.toString()
-            if (keyword?.length!! > 5) {
+            if (keyword?.length!! == 5) {
                 MultiViewDialog(
                     R.layout.dialog_warning_keyword_wordcount_limit_error,
                     0.6944f,

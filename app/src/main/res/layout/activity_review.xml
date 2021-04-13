@@ -67,6 +67,7 @@
             android:inputType="text"
             android:includeFontPadding="false"
             android:textSize="15sp"
+            android:maxLength="5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/review_user"
             app:layout_constraintTop_toBottomOf="@id/review_description" />
@@ -111,6 +112,7 @@
             android:singleLine="false"
             android:scrollHorizontally="false"
             android:textSize="15sp"
+            android:maxLength="100"
             app:layout_constraintEnd_toEndOf="@id/review_edit_keyword"
             app:layout_constraintStart_toStartOf="@id/review_edit_keyword"
             app:layout_constraintTop_toBottomOf="@id/review_flex_box" />
