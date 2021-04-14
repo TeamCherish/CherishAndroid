@@ -16,7 +16,6 @@ import com.google.firebase.messaging.RemoteMessage
 import com.sopt.cherish.R
 import com.sopt.cherish.ui.notification.FirebaseNotificationService.Companion.CHANNEL_ID
 import com.sopt.cherish.ui.signin.SignInActivity
-import com.sopt.cherish.util.SimpleLogger
 import kotlin.random.Random
 
 class FirebaseNotificationService : FirebaseMessagingService() {
@@ -33,6 +32,7 @@ class FirebaseNotificationService : FirebaseMessagingService() {
         super.onMessageReceived(message)
 
         val intent = Intent(this, SignInActivity::class.java)
+        intent.putExtra("needToWWateringCherishId", message.data["CherishId"]?.toInt())
 
         val notificationManager =
             getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
@@ -51,9 +51,6 @@ class FirebaseNotificationService : FirebaseMessagingService() {
             .setAutoCancel(true)
             .setContentIntent(pendingIntent)
             .build()
-
-        // todo : CherishId만 오는 그런겁니다
-        SimpleLogger.logI("FCM Test Data : ${message.data["CherishId"].toString()}")
 
         notificationManager.notify(notificationId, notification)
     }

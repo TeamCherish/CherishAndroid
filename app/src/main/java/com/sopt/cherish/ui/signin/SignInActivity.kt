@@ -31,16 +31,7 @@ class SignInActivity : AppCompatActivity() {
         binding = ActivitySignInBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        if (MainApplication.sharedPreferenceController.getUserId() != null &&
-            MainApplication.sharedPreferenceController.getUserNickname() != null &&
-            MainApplication.sharedPreferenceController.getToken() != null
-        ) {
-            hasUser(
-                MainApplication.sharedPreferenceController.getUserId()!!,
-                MainApplication.sharedPreferenceController.getUserNickname()!!,
-                MainApplication.sharedPreferenceController.getToken()!!
-            )
-        }
+        autoLogin()
 
         binding.loginBtn.setOnClickListener {
             val email = binding.editTextTextPersonName.text.toString()
@@ -58,9 +49,22 @@ class SignInActivity : AppCompatActivity() {
             startActivity(pwFindingIntent)
         }
 
-        binding.textView4.setOnClickListener{
-            val dialog=IDFindingDialog(R.layout.fragment_id_finding_dialog)
-            dialog.show(supportFragmentManager,"SignInActivity")
+        binding.textView4.setOnClickListener {
+            val dialog = IDFindingDialog(R.layout.fragment_id_finding_dialog)
+            dialog.show(supportFragmentManager, "SignInActivity")
+        }
+    }
+
+    private fun autoLogin() {
+        if (MainApplication.sharedPreferenceController.getUserId() != null &&
+            MainApplication.sharedPreferenceController.getUserNickname() != null &&
+            MainApplication.sharedPreferenceController.getToken() != null
+        ) {
+            hasUser(
+                MainApplication.sharedPreferenceController.getUserId()!!,
+                MainApplication.sharedPreferenceController.getUserNickname()!!,
+                MainApplication.sharedPreferenceController.getToken()!!
+            )
         }
     }
 
@@ -78,8 +82,8 @@ class SignInActivity : AppCompatActivity() {
                         response: Response<EditUserRes>
                     ) {
                         if (response.body() == null) {
-                            val dialog=SignUpDialogFragment(R.layout.fragment_sign_up_dialog)
-                            dialog.show(supportFragmentManager,"SignInActivity")
+                            val dialog = SignUpDialogFragment(R.layout.fragment_sign_up_dialog)
+                            dialog.show(supportFragmentManager, "SignInActivity")
                         }
                         response.takeIf {
                             it.isSuccessful
@@ -126,6 +130,10 @@ class SignInActivity : AppCompatActivity() {
                         mainActivityIntent.putExtra(
                             "loginToken",
                             token
+                        )
+                        mainActivityIntent.putExtra(
+                            "needToWaterCherishId",
+                            intent.getIntExtra("needToWateringCherishId", -1)
                         )
                         MainApplication.sharedPreferenceController.apply {
                             setUserId(userId)

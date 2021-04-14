@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.sopt.cherish.MainApplication
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentHomeBinding
 import com.sopt.cherish.databinding.MainCherryItemBinding
@@ -166,8 +167,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
     private fun slideDownBottomSheet() {
         standardBottomSheetBehavior.apply {
             state = BottomSheetBehavior.STATE_COLLAPSED
-            peekHeight = 160.dp
-            expandedOffset = 100.dp
+            peekHeight = (MainApplication.pixelRatio.screenHeight.dp / 5.dp)
         }
     }
 
@@ -179,8 +179,16 @@ class HomeFragment : Fragment(), OnItemClickListener {
             }
 
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                if (standardBottomSheetBehavior.state == BottomSheetBehavior.STATE_DRAGGING)
+                val lowerSlide = 0.3
+                val middleSlide = 0.5
+                if (slideOffset < lowerSlide) {
                     standardBottomSheetBehavior.peekHeight = 60.dp
+                } else if (slideOffset <= middleSlide) {
+                    standardBottomSheetBehavior.setPeekHeight(
+                        (MainApplication.pixelRatio.screenHeight.dp / 5.dp),
+                        true
+                    )
+                }
             }
         })
     }

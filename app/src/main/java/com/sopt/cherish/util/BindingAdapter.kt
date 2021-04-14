@@ -5,6 +5,7 @@ import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.os.Handler
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -14,6 +15,7 @@ import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.sopt.cherish.MainApplication
 import com.sopt.cherish.R
 import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.util.PixelUtil.dp
@@ -23,6 +25,10 @@ import com.sopt.cherish.util.extension.ImageViewExtension.resizeImageView
 import com.sopt.cherish.util.extension.ImageViewExtension.setMargin
 import kotlin.math.abs
 
+/**
+ * Create by SSong-develop
+ * need to divide
+ */
 object BindingAdapter {
 
     @JvmStatic
@@ -43,7 +49,27 @@ object BindingAdapter {
             imageView.visibility = View.INVISIBLE
     }
 
-    // 여기에 remainDay속성을 하나 넣어줘서 만약에 그게 진행이 된 상태면 시든이미지로 보여준다! 라고생각하면 될듯?
+    @JvmStatic
+    @BindingAdapter("android:wateringAnimation")
+    fun wateringAnimation(imageView: ImageView, isWatered: Boolean?) {
+        val fadeOutAnimation =
+            AnimationUtils.loadAnimation(imageView.context, R.anim.waterinf_fade_out)
+        if (isWatered != null) {
+            if (isWatered == true) {
+                imageView.animation = fadeOutAnimation
+                Glide.with(imageView.context)
+                    .asGif()
+                    .load(R.raw.watering)
+                    .into(imageView)
+                val delayHandler = Handler(imageView.context.mainLooper)
+                delayHandler.postDelayed({
+                    imageView.visibility = View.INVISIBLE
+                }, 2000)
+                imageView.visibility = View.VISIBLE
+            }
+        }
+    }
+
     @JvmStatic
     @BindingAdapter(value = ["plantName", "growth", "dDay"])
     fun setPlantImage(imageView: ImageView, plantName: String?, growth: Int?, dDay: Int?) {
@@ -158,26 +184,27 @@ object BindingAdapter {
             imageView.apply {
                 when {
                     growth <= 25 -> {
+                        // 여기 위치작업은 더이상 할거 없음!
                         when (plantName) {
                             "민들레" -> {
                                 resizeImageView(262, 331)
-                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 60.dp)
+                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 40.dp)
                             }
                             "로즈마리" -> {
-                                resizeImageView(220, 460)
-                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 60.dp)
+                                resizeImageView(220, 380)
+                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 44.dp)
                             }
                             "아메리칸블루" -> {
                                 resizeImageView(249, 368)
-                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 60.dp)
+                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 40.dp)
                             }
                             "스투키" -> {
                                 resizeImageView(295, 266.6.toInt())
-                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 60.dp)
+                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 40.dp)
                             }
                             "단모환" -> {
                                 resizeImageView(275, 229)
-                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 60.dp)
+                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 44.dp)
                             }
                             else -> {
 
@@ -188,23 +215,23 @@ object BindingAdapter {
                         when (plantName) {
                             "민들레" -> {
                                 resizeImageView(235, 388)
-                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 60.dp)
+                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 40.dp)
                             }
                             "로즈마리" -> {
-                                resizeImageView(204, 572)
-                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 60.dp)
+                                resizeImageView(192, 500)
+                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 40.dp)
                             }
                             "아메리칸블루" -> {
                                 resizeImageView(204, 461)
-                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 60.dp)
+                                setMargin(top = 0.dp, start = 0.dp, end = 22.dp, bottom = 40.dp)
                             }
                             "스투키" -> {
-                                resizeImageView(294, 313)
-                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 60.dp)
+                                resizeImageView(240, 313)
+                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 40.dp)
                             }
                             "단모환" -> {
                                 resizeImageView(283, 350)
-                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 60.dp)
+                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 40.dp)
                             }
                             else -> {
 
@@ -221,16 +248,16 @@ object BindingAdapter {
                                             top = 0.dp,
                                             start = 0.dp,
                                             end = 0.dp,
-                                            bottom = 60.dp
+                                            bottom = 40.dp
                                         )
                                     }
                                     "로즈마리" -> {
-                                        resizeImageView(204, 572)
+                                        resizeImageView(204, 500)
                                         setMargin(
                                             top = 0.dp,
                                             start = 0.dp,
                                             end = 0.dp,
-                                            bottom = 60.dp
+                                            bottom = 40.dp
                                         )
                                     }
                                     "아메리칸블루" -> {
@@ -239,16 +266,16 @@ object BindingAdapter {
                                             top = 0.dp,
                                             start = 0.dp,
                                             end = 0.dp,
-                                            bottom = 60.dp
+                                            bottom = 40.dp
                                         )
                                     }
                                     "스투키" -> {
-                                        resizeImageView(294, 313)
+                                        resizeImageView(305, 440)
                                         setMargin(
                                             top = 0.dp,
                                             start = 0.dp,
                                             end = 0.dp,
-                                            bottom = 60.dp
+                                            bottom = 40.dp
                                         )
                                     }
                                     "단모환" -> {
@@ -257,7 +284,7 @@ object BindingAdapter {
                                             top = 0.dp,
                                             start = 0.dp,
                                             end = 0.dp,
-                                            bottom = 60.dp
+                                            bottom = 40.dp
                                         )
                                     }
                                     else -> {
@@ -362,26 +389,31 @@ object BindingAdapter {
         viewModel: MainViewModel
     ) {
         if (isWatered == true) {
-            val valueAnimator = ValueAnimator.ofObject(
-                ArgbEvaluator(),
-                ContextCompat.getColor(imageView.context, R.color.cherish_wither_background_color),
-                ContextCompat.getColor(
-                    imageView.context, when (plantName) {
-                        "민들레" -> R.color.cherish_dandelion_background_color
-                        "로즈마리" -> R.color.cherish_rosemary_background_color
-                        "아메리칸블루" -> R.color.cherish_american_blue_background_color
-                        "스투키" -> R.color.cherish_stuki_background_color
-                        "단모환" -> R.color.cherish_sun_background_color
-                        else -> R.color.white
+            if (remainDay < 0) {
+                val valueAnimator = ValueAnimator.ofObject(
+                    ArgbEvaluator(),
+                    ContextCompat.getColor(
+                        imageView.context,
+                        R.color.cherish_wither_background_color
+                    ),
+                    ContextCompat.getColor(
+                        imageView.context, when (plantName) {
+                            "민들레" -> R.color.cherish_dandelion_background_color
+                            "로즈마리" -> R.color.cherish_rosemary_background_color
+                            "아메리칸블루" -> R.color.cherish_american_blue_background_color
+                            "스투키" -> R.color.cherish_stuki_background_color
+                            "단모환" -> R.color.cherish_sun_background_color
+                            else -> R.color.white
+                        }
+                    )
+                ).apply {
+                    duration = 2000
+                    addUpdateListener {
+                        imageView.setBackgroundColor(it.animatedValue as Int)
                     }
-                )
-            ).apply {
-                duration = 2000
-                addUpdateListener {
-                    imageView.setBackgroundColor(it.animatedValue as Int)
                 }
+                valueAnimator.start()
             }
-            valueAnimator.start()
             viewModel.isWatered.value = null
         }
         if (isWatered == false) {
@@ -438,12 +470,14 @@ object BindingAdapter {
     @JvmStatic
     @BindingAdapter("android:setBottomSheet")
     fun setBottomSheet(view: View, temp: Int) {
+        // 160.dp 기준 0.208f가 비율 똑같음
         val standardBottomSheetBehavior = BottomSheetBehavior.from(view)
         standardBottomSheetBehavior.apply {
             state = BottomSheetBehavior.STATE_COLLAPSED
-            peekHeight = 160.dp
+            isFitToContents = false
+            peekHeight = (MainApplication.pixelRatio.screenHeight.dp / 5.dp)
+            halfExpandedRatio = 0.23f // 이거 비율만 좀 수정해주면 될듯?
             expandedOffset = 100.dp
-            halfExpandedRatio = 0.24f
             isHideable = false
         }
     }
