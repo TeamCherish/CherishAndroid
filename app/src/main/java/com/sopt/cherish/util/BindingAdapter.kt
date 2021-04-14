@@ -5,6 +5,7 @@ import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.os.Handler
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -46,6 +47,27 @@ object BindingAdapter {
             imageView.visibility = View.VISIBLE
         else
             imageView.visibility = View.INVISIBLE
+    }
+
+    @JvmStatic
+    @BindingAdapter("android:wateringAnimation")
+    fun wateringAnimation(imageView: ImageView, isWatered: Boolean?) {
+        val fadeOutAnimation =
+            AnimationUtils.loadAnimation(imageView.context, R.anim.waterinf_fade_out)
+        if (isWatered != null) {
+            if (isWatered == true) {
+                imageView.animation = fadeOutAnimation
+                Glide.with(imageView.context)
+                    .asGif()
+                    .load(R.raw.watering)
+                    .into(imageView)
+                val delayHandler = Handler(imageView.context.mainLooper)
+                delayHandler.postDelayed({
+                    imageView.visibility = View.INVISIBLE
+                }, 2000)
+                imageView.visibility = View.VISIBLE
+            }
+        }
     }
 
     @JvmStatic
@@ -391,7 +413,7 @@ object BindingAdapter {
                     }
                 }
                 valueAnimator.start()
-            } // 0일때는 그냥 보글보글거리는 애니메이션만 나오면 되는겁니다~
+            }
             viewModel.isWatered.value = null
         }
         if (isWatered == false) {
