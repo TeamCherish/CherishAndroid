@@ -2,7 +2,6 @@
 
     <item android:drawable="@drawable/radio_off" android:state_checked="false" />
     <item android:drawable="@drawable/radio_on" android:state_checked="true" />
-    <item android:drawable="@drawable/radio_off" />
 
 </selector>
 

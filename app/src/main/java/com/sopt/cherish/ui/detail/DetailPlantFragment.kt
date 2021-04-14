@@ -245,7 +245,7 @@ class DetailPlantFragment : Fragment() {
                                  binding.chip2.text = it.data.keyword2
                                  binding.chip3.text = it.data.keyword3*/
                                 if (it.data.keyword1 == "" && it.data.keyword2 == "" && it.data.keyword3 == "") {
-                                    binding.chip.text = "키워드를 입력하지 않았어요!"
+                                    binding.chip.text = "등록된 키워드가 없어요"
                                     binding.chip.isVisible = true
                                     binding.chip2.isVisible = false
                                     binding.chip3.isVisible = false
@@ -307,18 +307,29 @@ class DetailPlantFragment : Fragment() {
 
                                 } else if (it.data.reviews.size == 1) {
                                     binding.userdate.text = (it.data.reviews[0].water_date)
-                                    binding.usermemo.text = it.data.reviews[0].review
-
+                                    if(it.data.reviews[0].review=="") {
+                                        binding.usermemo.text = "메모를 입력하지 않았어요!"
+                                    }else{
+                                        binding.usermemo.text = it.data.reviews[0].review
+                                    }
                                     binding.userdate2.text = "_ _"
                                     binding.usermemo2.text = "메모를 입력하지 않았어요!"
 
                                     binding.memocons2.isVisible = true
                                 } else {
                                     binding.userdate.text = (it.data.reviews[0].water_date)
-                                    binding.usermemo.text = it.data.reviews[0].review
+                                    if(it.data.reviews[0].review=="") {
+                                        binding.usermemo.text = "메모를 입력하지 않았어요!"
+                                    }else{
+                                        binding.usermemo.text = it.data.reviews[0].review
+                                    }
 
                                     binding.userdate2.text = (it.data.reviews[1].water_date)
-                                    binding.usermemo2.text = it.data.reviews[1].review
+                                    if(it.data.reviews[1].review=="") {
+                                        binding.usermemo2.text = "메모를 입력하지 않았어요!"
+                                    }else{
+                                        binding.usermemo2.text = it.data.reviews[1].review
+                                    }
 
                                 }
 
