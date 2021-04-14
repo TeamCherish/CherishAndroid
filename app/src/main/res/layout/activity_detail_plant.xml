@@ -28,7 +28,7 @@
             android:fontFamily="@font/notosanscjkkr_medium"
             android:includeFontPadding="false"
             android:text="식물카드"
-            android:textColor="@color/black"
+            android:textColor="#454545"
             android:letterSpacing="-0.03"
             android:lineSpacingExtra="8sp"
             android:textSize="@dimen/text_16sp"
