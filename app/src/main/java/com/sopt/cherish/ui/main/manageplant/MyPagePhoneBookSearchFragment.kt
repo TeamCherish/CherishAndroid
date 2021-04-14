@@ -2,6 +2,7 @@ package com.sopt.cherish.ui.main.manageplant
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.provider.ContactsContract
 import android.text.Editable
@@ -82,7 +83,7 @@ class MyPagePhoneBookSearchFragment : Fragment() {
             override fun onchange(radio: Boolean) {
                 Log.d("radio", radio.toString())
                 if (radio) {
-                    binding.myPageAddPhoneBtn.setBackgroundColor(R.color.cherish_green_main)
+                    binding.myPageAddPhoneBtn.setBackgroundColor(Color.parseColor("#1AD287"))
 
                 }
             }

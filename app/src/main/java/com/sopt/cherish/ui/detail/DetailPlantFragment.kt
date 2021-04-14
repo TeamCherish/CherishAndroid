@@ -245,7 +245,7 @@ class DetailPlantFragment : Fragment() {
                                  binding.chip2.text = it.data.keyword2
                                  binding.chip3.text = it.data.keyword3*/
                                 if (it.data.keyword1 == "" && it.data.keyword2 == "" && it.data.keyword3 == "") {
-                                    binding.chip.text = "키워드를 입력하지 않았어요!"
+                                    binding.chip.text = "등록된 키워드가 없어요"
                                     binding.chip.isVisible = true
                                     binding.chip2.isVisible = false
                                     binding.chip3.isVisible = false
@@ -267,37 +267,7 @@ class DetailPlantFragment : Fragment() {
 
                                 }
 
-                                /*binding.chip.isVisible= true
-                                binding.chip2.isVisible = false
-                                binding.chip3.isVisible = false
-
-                                if (it.data.keyword1.toString() != "null" && it.data.keyword1 != "") {
-                                    binding.chip.text = it.data.keyword1
-                                    binding.chip.isVisible = true
-
-                                }
-                                else{
-                                    binding.chip.text = "키워드를 입력하지 않았어요!"
-
-                                }
-                                if (it.data.keyword2.toString() != "null" && it.data.keyword2 != "") {
-                                    binding.chip2.text = it.data.keyword2
-                                    binding.chip2.isVisible = true
-
-                                } else{
-                                    binding.chip2.text = "키워드를 입력하지 않았어요!"
-
-                                }
-                                if (it.data.keyword3.toString() != "null" && it.data.keyword3 != "") {
-                                    binding.chip3.text = it.data.keyword3
-                                    binding.chip3.isVisible = true
-
-                                }
-                                else{
-                                    binding.chip3.text = "키워드를 입력하지 않았어요!"
-
-                                }
-*/
+                            
                                 if (it.data.reviews.isEmpty()) {
                                     binding.userdate.text = "_ _"
                                     binding.usermemo.text = "메모를 입력하지 않았어요!"
@@ -307,167 +277,33 @@ class DetailPlantFragment : Fragment() {
 
                                 } else if (it.data.reviews.size == 1) {
                                     binding.userdate.text = (it.data.reviews[0].water_date)
-                                    binding.usermemo.text = it.data.reviews[0].review
-
+                                    if(it.data.reviews[0].review=="") {
+                                        binding.usermemo.text = "메모를 입력하지 않았어요!"
+                                    }else{
+                                        binding.usermemo.text = it.data.reviews[0].review
+                                    }
                                     binding.userdate2.text = "_ _"
                                     binding.usermemo2.text = "메모를 입력하지 않았어요!"
 
                                     binding.memocons2.isVisible = true
                                 } else {
                                     binding.userdate.text = (it.data.reviews[0].water_date)
-                                    binding.usermemo.text = it.data.reviews[0].review
-
-                                    binding.userdate2.text = (it.data.reviews[1].water_date)
-                                    binding.usermemo2.text = it.data.reviews[1].review
-
-                                }
-
-                                /* if (it.data.reviews.isEmpty()) {
-
-
-                                     var memoList = arrayListOf<MemoListDataclass>(
-
-                                         MemoListDataclass(
-                                             "_ _",
-                                             "메모를 입력하지 않았어요!"
-                                         ),
-                                         MemoListDataclass(
-                                             "_ _",
-                                             "메모를 입력하지 않았어요!"
-                                         )
-                                     )
-
-                                     val mAdapter = DetailMemoAdapter(memoList)
-                                     binding.recyclerDetail.adapter = mAdapter
- *//*
-                                    binding.recyclerDetail.addItemDecoration(
-                                        VerticalSpaceItemDecoration(
-                                            20
-                                        )
-                                    )*//*
-                                    mAdapter.setItemClickListener(object :
-                                        DetailMemoAdapter.ItemClickListener {
-                                        override fun onClick(view: View, position: Int) {
-                                            // 여기부분인데
-                                            val item = mAdapter.memolist[position]
-                                            if (item.date != null) {
-                                                viewModel.selectedMemoCalendarDay.value =
-                                                    item.date.let { itemDate ->
-                                                        DateUtil.convertStringToDateBar(itemDate)
-                                                            ?.let { it1 ->
-                                                                DateUtil.convertDateToCalendarDay(
-                                                                    it1
-                                                                )
-                                                            }
-                                                    }
-                                            }
-                                            val transaction =
-                                                parentFragmentManager.beginTransaction()
-                                            transaction.replace(
-                                                R.id.fragment_detail,
-                                                CalendarFragment()
-                                            )
-                                            transaction.addToBackStack(null)
-                                            transaction.commit()
-                                        }
-                                    })
-
-                                    binding.recyclerDetail.layoutManager =
-                                        LinearLayoutManager(context)
-                                    binding.recyclerDetail.setHasFixedSize(true)
-
-                                } else {
-
-
-                                    Log.d("asdfasdf", it.data.reviews.size.toString())
-                                    if (it.data.reviews.size == 1) {
-                                        var memoList = arrayListOf<MemoListDataclass>(
-
-                                            MemoListDataclass(
-                                                it.data.reviews[0].water_date,
-                                                it.data.reviews[0].review
-                                            ),
-                                        )
-                                        val mAdapter = DetailMemoAdapter(memoList)
-                                        binding.recyclerDetail.adapter = mAdapter
-
-                                        *//*  binding.recyclerDetail.addItemDecoration(
-                                              VerticalSpaceItemDecoration(
-                                                  20
-                                              )
-                                          )*//*
-                                        mAdapter.setItemClickListener(object :
-                                            DetailMemoAdapter.ItemClickListener {
-                                            override fun onClick(view: View, position: Int) {
-                                                val item = mAdapter.memolist[position]
-                                                if (item.date != null) {
-                                                    viewModel.selectedMemoCalendarDay.value =
-                                                        item.date.let { itemDate ->
-                                                            DateUtil.convertStringToDateBar(itemDate)
-                                                                ?.let { it1 ->
-                                                                    DateUtil.convertDateToCalendarDay(
-                                                                        it1
-                                                                    )
-                                                                }
-                                                        }
-                                                }
-                                                val transaction =
-                                                    parentFragmentManager.beginTransaction()
-                                                transaction.replace(
-                                                    R.id.fragment_detail,
-                                                    CalendarFragment()
-                                                )
-                                                transaction.addToBackStack(null)
-                                                transaction.commit()
-                                            }
-                                        })
-
-                                        binding.recyclerDetail.layoutManager =
-                                            LinearLayoutManager(context)
-                                        binding.recyclerDetail.setHasFixedSize(true)
-                                    } else if (it.data.reviews.size >= 2) {
-                                        var memoList = arrayListOf<MemoListDataclass>(
-
-                                            MemoListDataclass(
-                                                it.data.reviews[0].water_date,
-                                                it.data.reviews[0].review
-                                            ),
-                                            MemoListDataclass(
-                                                it.data.reviews[1].water_date,
-                                                it.data.reviews[1].review
-                                            )
-                                        )
-                                        val mAdapter = DetailMemoAdapter(memoList)
-                                        binding.recyclerDetail.adapter = mAdapter
-
-                                        *//* binding.recyclerDetail.addItemDecoration(
-                                             VerticalSpaceItemDecoration(
-                                                 20
-                                             )
-                                         )*//*
-                                        mAdapter.setItemClickListener(object :
-                                            DetailMemoAdapter.ItemClickListener {
-                                            override fun onClick(view: View, position: Int) {
-                                                val item = mAdapter.memolist[position]
-                                                val transaction =
-                                                    parentFragmentManager.beginTransaction()
-                                                transaction.replace(
-                                                    R.id.fragment_detail,
-                                                    CalendarFragment()
-                                                )
-                                                transaction.addToBackStack(null)
-                                                transaction.commit()
-                                            }
-                                        })
-
-                                        binding.recyclerDetail.layoutManager =
-                                            LinearLayoutManager(context)
-                                        binding.recyclerDetail.setHasFixedSize(true)
+                                    if(it.data.reviews[0].review=="") {
+                                        binding.usermemo.text = "메모를 입력하지 않았어요!"
+                                    }else{
+                                        binding.usermemo.text = it.data.reviews[0].review
                                     }
 
+                                    binding.userdate2.text = (it.data.reviews[1].water_date)
+                                    if(it.data.reviews[1].review=="") {
+                                        binding.usermemo2.text = "메모를 입력하지 않았어요!"
+                                    }else{
+                                        binding.usermemo2.text = it.data.reviews[1].review
+                                    }
 
                                 }
-*/
+
+
 
                             }
                     }
