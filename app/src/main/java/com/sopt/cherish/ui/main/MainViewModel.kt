@@ -61,7 +61,7 @@ class MainViewModel(
         runCatching {
             mainRepository.fetchCherishUser(cherishUserId.value!!)
         }.onSuccess {
-            delay(2000)
+            delay(4000)
             if (it.userData.totalUser != 0) {
                 it.userData.userList.add(0, it.userData.userList[0])
                 _cherishUsers.value = it

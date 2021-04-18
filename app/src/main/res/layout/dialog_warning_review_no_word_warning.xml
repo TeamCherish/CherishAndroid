@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:backgroundTint="@color/white"
+    app:cardCornerRadius="@dimen/radius_20dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fontFamily="@font/notosanscjkkr_regular"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:text="@string/review_limit_memo_number_text"
+        android:textColor="@color/black"
+        android:textSize="13sp" />
+
+</androidx.cardview.widget.CardView>

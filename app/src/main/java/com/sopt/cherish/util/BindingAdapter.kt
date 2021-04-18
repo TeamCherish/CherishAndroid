@@ -64,7 +64,7 @@ object BindingAdapter {
                 val delayHandler = Handler(imageView.context.mainLooper)
                 delayHandler.postDelayed({
                     imageView.visibility = View.INVISIBLE
-                }, 2000)
+                }, 4000)
                 imageView.visibility = View.VISIBLE
             }
         }
@@ -407,7 +407,7 @@ object BindingAdapter {
                         }
                     )
                 ).apply {
-                    duration = 2000
+                    duration = 4000
                     addUpdateListener {
                         imageView.setBackgroundColor(it.animatedValue as Int)
                     }
