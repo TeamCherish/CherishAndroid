@@ -104,14 +104,11 @@
                         android:layout_marginBottom="28dp"
                         android:fontFamily="@font/roboto_regular"
                         android:includeFontPadding="false"
-                        android:textColor="#aaaaaa"
                         android:textSize="15sp"
+                        android:textColor="#aaaaaa"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/imageView8"
                         app:layout_constraintTop_toBottomOf="@+id/setting_usernickname" />
-
-
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <View
@@ -335,10 +332,6 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
-
-
-
-
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout

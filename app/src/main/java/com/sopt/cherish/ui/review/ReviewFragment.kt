@@ -89,22 +89,37 @@ class ReviewFragment : Fragment() {
 
     private fun sendReviewToServer(binding: FragmentReviewBinding) {
         binding.homeReviewAdminAccept.setOnClickListener {
-            if (binding.homeReviewMemo.text.length <= 100) {
-                viewModel.sendReviewToServer(
-                    reviewWateringReq = ReviewWateringReq(
-                        binding.homeReviewMemo.text.toString(),
-                        binding.homeReviewFlexBox.getChip(id = 0)?.text.toString(),
-                        binding.homeReviewFlexBox.getChip(id = 1)?.text.toString(),
-                        binding.homeReviewFlexBox.getChip(id = 2)?.text.toString(),
-                        viewModel.selectedCherishUser.value?.id!!
-                    )
-                )
-                showLoadingDialog()
-            } else {
-                MultiViewDialog(R.layout.dialog_warning_review_limit_error, 0.6944f, 0.16875f).show(
+            if (binding.homeReviewMemo.text.isEmpty()) {
+                MultiViewDialog(
+                    R.layout.dialog_warning_review_no_word_warning,
+                    0.6944f,
+                    0.16875f
+                ).show(
                     parentFragmentManager,
-                    ReviewActivity.TAG
+                    TAG
                 )
+            } else {
+                if (binding.homeReviewMemo.text.length <= 100) {
+                    viewModel.sendReviewToServer(
+                        reviewWateringReq = ReviewWateringReq(
+                            binding.homeReviewMemo.text.toString(),
+                            binding.homeReviewFlexBox.getChip(id = 0)?.text.toString(),
+                            binding.homeReviewFlexBox.getChip(id = 1)?.text.toString(),
+                            binding.homeReviewFlexBox.getChip(id = 2)?.text.toString(),
+                            viewModel.selectedCherishUser.value?.id!!
+                        )
+                    )
+                    showLoadingDialog()
+                } else {
+                    MultiViewDialog(
+                        R.layout.dialog_warning_review_limit_error,
+                        0.6944f,
+                        0.16875f
+                    ).show(
+                        parentFragmentManager,
+                        TAG
+                    )
+                }
             }
         }
     }
