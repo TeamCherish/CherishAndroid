@@ -61,7 +61,7 @@
 
     <Button
         android:id="@+id/buttonnext"
-        style="@style/RoundButton.pinkish_Gray"
+        style="@style/RoundButton.btn_next_un"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"

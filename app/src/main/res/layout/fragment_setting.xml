@@ -45,6 +45,7 @@
                         android:fontFamily="@font/notosanscjkkr_medium"
                         android:includeFontPadding="false"
                         android:text="@string/setting_more"
+                        android:textColor="#454545"
                         android:textSize="@dimen/text_16sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
@@ -79,6 +80,7 @@
                         android:fontFamily="@font/notosanscjkkr_bold"
                         android:includeFontPadding="false"
                         android:text="asdf"
+                        android:textColor="#454545"
                         android:textSize="18sp"
                         app:layout_constraintEnd_toEndOf="@+id/imageView8"
                         app:layout_constraintStart_toStartOf="@+id/imageView8"
@@ -87,7 +89,6 @@
                         android:id="@+id/setting_next_nickname"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
-                        android:layout_marginStart="4dp"
                         android:background="@color/transparent"
                         app:layout_constraintBottom_toBottomOf="@+id/setting_usernickname"
                         app:layout_constraintStart_toEndOf="@+id/setting_usernickname"
@@ -98,9 +99,16 @@
                         android:id="@+id/setting_useremail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
                         app:layout_constraintEnd_toEndOf="@+id/imageView8"
+                        android:layout_marginBottom="28dp"
+                        android:fontFamily="@font/roboto_regular"
+                        android:includeFontPadding="false"
+                        android:textColor="#aaaaaa"
+                        android:textSize="15sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="@+id/imageView8"
-                        app:layout_constraintTop_toBottomOf="@+id/setting_next_nickname" />
+                        app:layout_constraintTop_toBottomOf="@+id/setting_usernickname" />
 
 
 
@@ -142,6 +150,7 @@
                             android:fontFamily="@font/notosanscjkkr_medium"
                             android:includeFontPadding="false"
                             android:text="@string/setting_about_cherish"
+                            android:textColor="#454545"
                             android:textSize="15sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -176,6 +185,7 @@
                             android:fontFamily="@font/notosanscjkkr_medium"
                             android:includeFontPadding="false"
                             android:text="@string/setting_private"
+                            android:textColor="#454545"
                             android:textSize="15sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -209,6 +219,7 @@
                             android:fontFamily="@font/notosanscjkkr_medium"
                             android:includeFontPadding="false"
                             android:text="@string/setting_service"
+                            android:textColor="#454545"
                             android:textSize="15sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -242,6 +253,7 @@
                         android:fontFamily="@font/notosanscjkkr_medium"
                         android:includeFontPadding="false"
                         android:text="@string/setting_one_by_one"
+                        android:textColor="#454545"
                         android:textSize="15sp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -265,10 +277,14 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/view2">
 
+
                     <Switch
                         android:id="@+id/setting_alarm_setting"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="45dp"
+                        android:layout_height="18dp"
+                        android:layout_marginEnd="24dp"
+                        android:thumb="@drawable/switch_thumb"
+                        android:track="@drawable/switch_track"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -282,6 +298,7 @@
                             android:fontFamily="@font/notosanscjkkr_medium"
                             android:includeFontPadding="false"
                             android:text="@string/setting_watering_alarm"
+                            android:textColor="#454545"
                             android:textSize="15sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"

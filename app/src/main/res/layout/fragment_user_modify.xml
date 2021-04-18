@@ -38,7 +38,6 @@
             app:layout_constraintTop_toBottomOf="@+id/modify_user_img">
 
             <EditText
-                android:autofillHints="@string/setting_trash"
                 android:id="@+id/setting_edit_nickname"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -46,15 +45,16 @@
                 android:background="@null"
                 android:ems="10"
                 android:fontFamily="@font/notosanscjkkr_medium"
-                android:hint=""
                 android:includeFontPadding="false"
                 android:inputType="textPersonName"
                 android:letterSpacing="-0.03"
                 android:lineSpacingExtra="9sp"
                 android:maxLength="6"
+                android:layout_marginEnd="24dp"
                 android:text=""
                 android:textColor="#454545"
                 android:textSize="15sp"
+                app:layout_constraintEnd_toStartOf="@+id/settingmodifycancel"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -124,9 +124,9 @@
 
         <Button
             android:id="@+id/button_nickchange"
-            style="@style/RoundButton.Gray"
+            style="@style/RoundButton.btn_next_un"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:layout_marginTop="24dp"
             android:text="@string/user_modify_finish"
             android:letterSpacing="-0.01"
@@ -181,6 +181,17 @@
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageButton
+            android:id="@+id/profileButton"
+            android:layout_width="26dp"
+            android:layout_height="26dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginTop="60dp"
+            android:background="@drawable/camera_bg"
+            android:src="@drawable/baseline_photo_camera_black_18_1"
+            app:layout_constraintStart_toStartOf="@+id/modify_user_img"
+            app:layout_constraintTop_toTopOf="@+id/modify_user_img" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

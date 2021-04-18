@@ -75,7 +75,7 @@
 
     <Button
         android:id="@+id/my_page_add_phone_btn"
-        style="@style/RoundButton.pinkish_Gray"
+        style="@style/RoundButton.btn_next_un"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginStart="16dp"
