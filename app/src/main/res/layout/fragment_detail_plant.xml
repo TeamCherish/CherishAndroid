@@ -521,7 +521,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/notosanscjkkr_bold"
                 android:includeFontPadding="false"
-                android:text="(와)과 함께했던 이야기"
+                android:text="와(과) 함께했던 이야기"
                 android:textColor="#454545"
                 android:textSize="@dimen/text_16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/textView1_with_name"
