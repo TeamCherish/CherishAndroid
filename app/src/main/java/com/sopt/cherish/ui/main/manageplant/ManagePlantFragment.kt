@@ -106,6 +106,13 @@ class ManagePlantFragment : Fragment() {
         initializeServerRequest(binding)
         initializeBottomSheetBehavior(binding)
         initializeProfile(binding)
+
+        binding.myPageBg.setBackgroundColor(
+            ContextCompat.getColor(
+                binding.root.context,
+                R.color.cherish_my_page_bg
+            )
+        )
     }
 
     private fun initializeProfile(binding: FragmentManagePlantBinding) {
