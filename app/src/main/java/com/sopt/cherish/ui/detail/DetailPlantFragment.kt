@@ -251,6 +251,14 @@ class DetailPlantFragment : Fragment() {
                                     binding.chip3.isVisible = false
 
                                 }
+                                if (it.data.keyword1 == "null" && it.data.keyword2 == "null" && it.data.keyword3 == "null") {
+                                    binding.chip.text = "등록된 키워드가 없어요"
+                                    binding.chip.isVisible = true
+                                    binding.chip2.isVisible = false
+                                    binding.chip3.isVisible = false
+
+                                }
+
                                 if (it.data.keyword1.toString() != "null" && it.data.keyword1 != "") {
                                     binding.chip.text = it.data.keyword1
                                     binding.chip.isVisible = true
