@@ -156,6 +156,7 @@
                 android:lineSpacingExtra="8sp"
                 android:fontFamily="@font/notosanscjkkr_medium"
                 android:includeFontPadding="false"
+                android:textSize="16sp"
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toBottomOf="@+id/constraintLayout_setting_Back"
                 app:layout_constraintEnd_toEndOf="parent"
