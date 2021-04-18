@@ -137,15 +137,8 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
     }
 
     private fun startReview() {
-/*        val intent = Intent(requireContext(), ReviewActivity::class.java)
-        intent.putExtra("userNickname", viewModel.userNickName.value)
-        intent.putExtra("selectedCherishNickname", viewModel.selectedCherishUser.value!!.nickName)
-        intent.putExtra("selectedCherishId", viewModel.selectedCherishUser.value!!.id)
-        startActivityForResult(intent, codeThatGetWatering)*/
-
         parentFragmentManager.beginTransaction()
-            .replace(R.id.home_parent_fragment_container, ReviewFragment()).commit()
-        parentFragmentManager.executePendingTransactions()
+            .add(R.id.home_parent_fragment_container, ReviewFragment()).commitNow()
         dismiss()
     }
 
