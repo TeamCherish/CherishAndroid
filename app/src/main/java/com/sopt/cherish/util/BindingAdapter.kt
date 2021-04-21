@@ -52,6 +52,7 @@ object BindingAdapter {
     @JvmStatic
     @BindingAdapter("android:wateringAnimation")
     fun wateringAnimation(imageView: ImageView, isWatered: Boolean?) {
+        // todo : 물주는 애니메이션이 나오는 범위를 식물에게만 적용하도록 해야함
         val fadeOutAnimation =
             AnimationUtils.loadAnimation(imageView.context, R.anim.waterinf_fade_out)
         if (isWatered != null) {

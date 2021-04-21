@@ -100,6 +100,7 @@ class ReviewFragment : Fragment() {
                 )
             } else {
                 if (binding.homeReviewMemo.text.length <= 100) {
+                    // todo : chip 순서 확인해서 보내도록 해봅시다. 적을 때도 순서가 이상하게 바뀌는 상황이 발생하는데 그것도 적용해서요~
                     viewModel.sendReviewToServer(
                         reviewWateringReq = ReviewWateringReq(
                             binding.homeReviewMemo.text.toString(),

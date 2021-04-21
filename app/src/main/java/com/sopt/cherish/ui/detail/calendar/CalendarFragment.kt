@@ -27,6 +27,8 @@ class CalendarFragment : Fragment() {
         }
     }
 
+    // todo : 메모를 클릭했을 떄는 calendar가 weekmode로 변경된상태에서 보여지게 하고
+    // todo : 메모의 길이를 최대로 보여주세요!!! 라고 오퍼가 왔음
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

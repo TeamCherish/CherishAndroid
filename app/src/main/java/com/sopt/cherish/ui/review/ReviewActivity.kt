@@ -103,6 +103,7 @@ class ReviewActivity : AppCompatActivity() {
                 )
             } else {
                 if (binding.reviewMemo.text.length <= 100) {
+                    // todo : 이녀석도 마찬가지로 해줘야 합니다~
                     viewModel.sendReviewToServer(
                         reviewWateringReq = ReviewWateringReq(
                             binding.reviewMemo.text.toString(),
