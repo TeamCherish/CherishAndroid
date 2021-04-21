@@ -124,8 +124,7 @@ class DetailPlantFragment : Fragment() {
             if (binding.userdate.text != "_ _") {
                 viewModel.selectedMemoCalendarDay.value =
                     DateUtil.convertStringToCalendarDay(binding.userdate.text.toString())
-                viewModel.selectedCalendarDay.value =
-                    DateUtil.convertStringToCalendarDay(binding.userdate.text.toString())
+                viewModel.isMemoClicked.value = true
                 val transaction =
                     parentFragmentManager.beginTransaction()
                 transaction.replace(
@@ -140,8 +139,7 @@ class DetailPlantFragment : Fragment() {
             if (binding.userdate2.text != "_ _") {
                 viewModel.selectedMemoCalendarDay.value =
                     DateUtil.convertStringToCalendarDay(binding.userdate2.text.toString())
-                viewModel.selectedCalendarDay.value =
-                    DateUtil.convertStringToCalendarDay(binding.userdate2.text.toString())
+                viewModel.isMemoClicked.value = true
                 val transaction =
                     parentFragmentManager.beginTransaction()
                 transaction.replace(

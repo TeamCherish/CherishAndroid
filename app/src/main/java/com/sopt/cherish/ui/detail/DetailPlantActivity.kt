@@ -119,6 +119,7 @@ class DetailPlantActivity : AppCompatActivity(),
                 transaction.addToBackStack(null)
                 // }
                 transaction.commit()
+                viewModel.isMemoClicked.value = false
 
                 return true
             }

@@ -12,7 +12,6 @@ import com.sopt.cherish.ui.detail.DetailPlantActivity
 import com.sopt.cherish.ui.detail.DetailPlantViewModel
 import com.sopt.cherish.ui.review.ReviseReviewFragment
 import com.sopt.cherish.util.DateUtil
-import com.sopt.cherish.util.SimpleLogger
 import com.sopt.cherish.util.extension.FlexBoxExtension.clearChips
 import com.sopt.cherish.util.extension.longToast
 
@@ -48,7 +47,6 @@ class CalendarFragment : Fragment() {
     }
 
     private fun observeSelectedMemoCalendarDay() {
-        SimpleLogger.logI(viewModel.selectedMemoCalendarDay.value.toString())
         viewModel.selectedMemoCalendarDay.observe(viewLifecycleOwner) {
             binding.calendarView.setDateSelected(it, true)
             viewModel.selectedCalendarDay.value = it
@@ -71,16 +69,18 @@ class CalendarFragment : Fragment() {
             (activity as DetailPlantActivity).setActionBarTitle("식물 캘린더")
         }
         viewModel.fetchCalendarData()
-        viewModel.selectedCalendarDay.value = viewModel.selectedCalendarDay.value
-        binding.calendarView.removeDecorators()
-        binding.calendarView.clearSelection()
-        removeSelectedCalendarData()
-        removeMemo(binding)
-        removeSelectedDate(binding)
-        viewModel.selectedCalendarDay.value = null
-        binding.calendarViewChipLayout.clearChips()
-        viewModel.selectedMemoCalendarDay.value = null
-
+        // todo : 여기만 어뜨케 잘 나눠서 기존에 보여질 때랑 메모클릭해서 오는 로직을 나눈다면 될 거 같습니다
+        if (viewModel.isMemoClicked.value == false) {
+            viewModel.selectedCalendarDay.value = viewModel.selectedCalendarDay.value
+            binding.calendarView.removeDecorators()
+            binding.calendarView.clearSelection()
+            removeSelectedCalendarData()
+            removeMemo(binding)
+            removeSelectedDate(binding)
+            viewModel.selectedCalendarDay.value = null
+            binding.calendarViewChipLayout.clearChips()
+            viewModel.selectedMemoCalendarDay.value = null
+        }
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
@@ -89,7 +89,6 @@ class CalendarFragment : Fragment() {
         menu.getItem(2).isVisible = false // invisible menuitem 2
 
         (activity as DetailPlantActivity).invalidateOptionsMenu()
-
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -155,6 +154,7 @@ class CalendarFragment : Fragment() {
 
     override fun onDestroy() {
         super.onDestroy()
+        viewModel.isMemoClicked.value = null
         removeSelectedCalendarData()
         removeMemo(binding)
         removeSelectedDate(binding)
