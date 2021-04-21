@@ -21,7 +21,7 @@ import com.sopt.cherish.databinding.FragmentSettingBinding
 import com.sopt.cherish.remote.api.*
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.dialog.deletedialog.DeleteUserDialog
-import com.sopt.cherish.ui.dialog.selectgender.SelectGenderDialogFragment
+import com.sopt.cherish.ui.main.MainActivity
 import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.ui.splash.SplashActivity
 import com.sopt.cherish.util.ImageSharedPreferences
@@ -31,10 +31,11 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.io.IOException
 
+
 /**
  * 환경 설정 뷰
  */
-class SettingFragment : Fragment() {
+class SettingFragment : Fragment() ,MainActivity.OnBackPressedListener{
 
     private val requestData = RetrofitBuilder
     private var usernickname: String = ""
@@ -69,7 +70,7 @@ class SettingFragment : Fragment() {
         }
 
         binding.constraintLayoutAboutCherish.setOnClickListener {
-            val intent = Intent(context,AboutCherishActivity::class.java)
+            val intent = Intent(context, AboutCherishActivity::class.java)
             startActivity(intent)
         }
 
@@ -234,6 +235,16 @@ class SettingFragment : Fragment() {
                             }
                     }
                 })
+    }
+
+    override fun onBack() {
+        val activity = activity as MainActivity?
+        // 한번 뒤로가기 버튼을 눌렀다면 Listener 를 null 로 해제해줍니다.
+        // 한번 뒤로가기 버튼을 눌렀다면 Listener 를 null 로 해제해줍니다.
+        activity!!.setOnBackPressedListener(null)
+        // MainFragment 로 교체
+        // MainFragment 로 교체
+
     }
 
 }

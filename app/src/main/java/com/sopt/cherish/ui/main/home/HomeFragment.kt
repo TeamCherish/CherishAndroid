@@ -22,6 +22,7 @@ import com.sopt.cherish.ui.adapter.OnItemClickListener
 import com.sopt.cherish.ui.detail.DetailPlantActivity
 import com.sopt.cherish.ui.dialog.wateringdialog.WateringDialogFragment
 import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
+import com.sopt.cherish.ui.main.MainActivity
 import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.util.GridItemDecorator
 import com.sopt.cherish.util.PixelUtil.dp
@@ -33,7 +34,7 @@ import com.sopt.cherish.util.extension.longToast
  * 메인 홈뷰
  */
 
-class HomeFragment : Fragment(), OnItemClickListener {
+class HomeFragment : Fragment(), OnItemClickListener,MainActivity.OnBackPressedListener {
 
     private val viewModel: MainViewModel by activityViewModels()
     private lateinit var binding: FragmentHomeBinding
@@ -204,5 +205,12 @@ class HomeFragment : Fragment(), OnItemClickListener {
     companion object {
         private const val TAG = "HomeFragment"
         private const val CODE_MOVE_DETAIL_PLANT = 1005
+    }
+
+    override fun onBack() {
+        val activity = activity as MainActivity?
+        // 한번 뒤로가기 버튼을 눌렀다면 Listener 를 null 로 해제해줍니다.
+        // 한번 뒤로가기 버튼을 눌렀다면 Listener 를 null 로 해제해줍니다.
+        activity!!.setOnBackPressedListener(null)
     }
 }

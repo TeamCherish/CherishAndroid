@@ -64,6 +64,11 @@
         <item name="android:layout_height">48dp</item>
         <item name="android:backgroundTint">#c4c4c4</item>
     </style>
+
+    <style name="RoundButton.btn_next_un_phone">
+        <item name="android:layout_height">48dp</item>
+        <item name="android:backgroundTint">#f0f0f0</item>
+    </style>
     <style name="RoundButton.SignUp">
         <item name="android:layout_height">48dp</item>
         <item name="android:backgroundTint">@color/cherish_light_gray</item>
