@@ -2,16 +2,21 @@ package com.sopt.cherish.ui.main.manageplant
 
 
 
+import android.content.Context
 import android.content.Intent
-import android.graphics.*
-import androidx.exifinterface.media.ExifInterface
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Color
+import android.graphics.Matrix
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.exifinterface.media.ExifInterface
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
@@ -26,8 +31,9 @@ import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
 import com.sopt.cherish.ui.main.MainActivity
 import com.sopt.cherish.ui.main.MainViewModel
-import com.sopt.cherish.util.ImageSharedPreferences
+import com.sopt.cherish.ui.main.home.HomeFragment
 import com.sopt.cherish.ui.main.setting.UserModifyFragment
+import com.sopt.cherish.util.ImageSharedPreferences
 import com.sopt.cherish.util.PixelUtil.dp
 import com.sopt.cherish.util.SimpleLogger
 import retrofit2.Call
@@ -39,7 +45,7 @@ import java.io.IOException
 /**
  * 식물 보관함 뷰
  */
-class ManagePlantFragment : Fragment() {
+class ManagePlantFragment : Fragment() ,MainActivity.OnBackPressedListener{
 
     private val viewModel: MainViewModel by activityViewModels()
     private var tabIndex: Int = 0
@@ -53,10 +59,15 @@ class ManagePlantFragment : Fragment() {
     private var mypageusername: String = ""
     private var mypageuseremail: String = ""
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    var check:Boolean=false
+
+
+
+
+override fun onCreateView(
+    inflater: LayoutInflater, container: ViewGroup?,
+    savedInstanceState: Bundle?
+): View {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_manage_plant, container, false)
 
@@ -89,6 +100,12 @@ class ManagePlantFragment : Fragment() {
 
         return binding.root
     }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (context as MainActivity).setOnBackPressedListener(this)
+    }
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == 1)
@@ -211,6 +228,8 @@ class ManagePlantFragment : Fragment() {
 
             }
             (activity as MainActivity).replaceFragment(tabIndex, data, isSearched)
+
+            check=true
 
         }
         binding.goToSetting.setOnClickListener {
@@ -533,5 +552,32 @@ class ManagePlantFragment : Fragment() {
                     }
                 })
     }
+
+    override fun onBack() {
+
+
+
+       /* binding.searchBox.visibility = View.VISIBLE
+        isSearched = false
+        binding.cancelBtn.visibility = View.INVISIBLE
+        if (!isCollapsed && tabIndex == 1)
+            binding.myPageAddPlantBtn.visibility = View.VISIBLE
+        (activity as MainActivity).replaceFragment(tabIndex, data, isSearched)
+        Toast.makeText(context,"메인홈으로 가",Toast.LENGTH_SHORT).show()*/
+
+        if(check) {
+            val transaction = parentFragmentManager.beginTransaction()
+            transaction.detach(this).attach(this).commit()
+            check=false
+        }else{
+            val activity = activity as MainActivity?
+            // 한번 뒤로가기 버튼을 눌렀다면 Listener 를 null 로 해제해줍니다.
+            // 한번 뒤로가기 버튼을 눌렀다면 Listener 를 null 로 해제해줍니다.
+            activity!!.setOnBackPressedListener(null)
+
+        }
+    }
+
+
 
 }

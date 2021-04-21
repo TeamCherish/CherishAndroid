@@ -332,7 +332,7 @@
         android:layout_marginBottom="20dp"
         android:clickable="false"
         android:text="완료"
-        android:textColor="@color/white"
+        android:textColor="#c4c4c4"
         android:textSize="@dimen/text_16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
