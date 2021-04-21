@@ -98,7 +98,7 @@ class PhoneBookAdapter(private val phoneBookList: List<Phone>) :
 
         var mPhone: Phone? = null
         var radioButton = binding.radioButton
-        var consPhoneNumber=binding.searchPhoneItem
+        var consPhoneNumber = binding.searchPhoneItem
 
 
         fun setPhone(phone: Phone) {

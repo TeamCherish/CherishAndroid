@@ -35,13 +35,14 @@ class IDFindingDialog(
             dismiss()
         }
 
-        binding.buttonCopy.setOnClickListener{
+        binding.buttonCopy.setOnClickListener {
             //클립보드 사용 코드
-            val clipboard=requireActivity().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-            val clipData:ClipData=ClipData.newPlainText("mail","co.cherishteam@gmail.com")
+            val clipboard =
+                requireActivity().getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+            val clipData: ClipData = ClipData.newPlainText("mail", "co.cherishteam@gmail.com")
             clipboard.setPrimaryClip(clipData)
 
-            Toast.makeText(context,"메일 주소가 복사되었습니다.",Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "메일 주소가 복사되었습니다.", Toast.LENGTH_SHORT).show()
             dismiss()
         }
 

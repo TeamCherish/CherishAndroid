@@ -2,7 +2,6 @@ package com.sopt.cherish.ui.splash
 
 import android.app.Activity
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -28,17 +27,17 @@ class SplashActivity : AppCompatActivity() {
             this, R.layout.activity_splash
         )
 
-        val prefs=getSharedPreferences("isFirstRun", Activity.MODE_PRIVATE)
+        val prefs = getSharedPreferences("isFirstRun", Activity.MODE_PRIVATE)
 
-        val isFirstRun=prefs.getBoolean("isFirstRun",true)
+        val isFirstRun = prefs.getBoolean("isFirstRun", true)
 
 
         Handler(Looper.getMainLooper()).postDelayed({
-            if(isFirstRun){
+            if (isFirstRun) {
                 startActivity(Intent(this@SplashActivity, OnBoardingActivity::class.java))
-                prefs.edit().putBoolean("isFirstRun",false).apply()
+                prefs.edit().putBoolean("isFirstRun", false).apply()
                 finish()
-            }else{
+            } else {
                 startActivity(Intent(this@SplashActivity, SignInActivity::class.java))
                 finish()
             }

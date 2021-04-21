@@ -1,10 +1,11 @@
 package com.sopt.cherish.ui.main.manageplant
 
 
-
 import android.content.Intent
-import android.graphics.*
-import androidx.exifinterface.media.ExifInterface
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Color
+import android.graphics.Matrix
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
@@ -12,6 +13,7 @@ import android.view.*
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.exifinterface.media.ExifInterface
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
@@ -26,8 +28,8 @@ import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.enrollment.EnrollmentPhoneActivity
 import com.sopt.cherish.ui.main.MainActivity
 import com.sopt.cherish.ui.main.MainViewModel
-import com.sopt.cherish.util.ImageSharedPreferences
 import com.sopt.cherish.ui.main.setting.UserModifyFragment
+import com.sopt.cherish.util.ImageSharedPreferences
 import com.sopt.cherish.util.PixelUtil.dp
 import com.sopt.cherish.util.SimpleLogger
 import retrofit2.Call

@@ -21,7 +21,6 @@ import com.sopt.cherish.databinding.FragmentSettingBinding
 import com.sopt.cherish.remote.api.*
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.dialog.deletedialog.DeleteUserDialog
-import com.sopt.cherish.ui.dialog.selectgender.SelectGenderDialogFragment
 import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.ui.splash.SplashActivity
 import com.sopt.cherish.util.ImageSharedPreferences
@@ -69,7 +68,7 @@ class SettingFragment : Fragment() {
         }
 
         binding.constraintLayoutAboutCherish.setOnClickListener {
-            val intent = Intent(context,AboutCherishActivity::class.java)
+            val intent = Intent(context, AboutCherishActivity::class.java)
             startActivity(intent)
         }
 
@@ -100,7 +99,7 @@ class SettingFragment : Fragment() {
             MainApplication.sharedPreferenceController.setAlarmKey(isChecked)
         }
 
-        binding.quit.setOnClickListener{
+        binding.quit.setOnClickListener {
             val fm = requireActivity().supportFragmentManager
             val dialogFragment = DeleteUserDialog(R.layout.fragment_delete_user_dialog)
             dialogFragment.setTargetFragment(this@SettingFragment, 101)

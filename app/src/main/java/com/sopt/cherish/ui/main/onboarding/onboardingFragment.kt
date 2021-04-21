@@ -15,9 +15,9 @@ import com.sopt.cherish.ui.main.onboarding.adapter.OnBoardingViewPagerAdapter
 import com.zhpan.indicator.enums.IndicatorSlideMode
 import com.zhpan.indicator.enums.IndicatorStyle
 
-class onboardingFragment : Fragment(){
+class onboardingFragment : Fragment() {
 
-    lateinit var binding:FragmentOnboardingBinding
+    lateinit var binding: FragmentOnboardingBinding
     private lateinit var viewpagerAdapter: OnBoardingViewPagerAdapter
 
     override fun onCreateView(
@@ -43,13 +43,14 @@ class onboardingFragment : Fragment(){
 
             override fun onPageSelected(position: Int) {
                 binding.indicatorView.onPageSelected(position)
-                Log.d("ppppppp",position.toString())
-                binding.indicatorView.isVisible=true
-                if(position==4){
-                    binding.indicatorView.isVisible=false
+                Log.d("ppppppp", position.toString())
+                binding.indicatorView.isVisible = true
+                if (position == 4) {
+                    binding.indicatorView.isVisible = false
                 }
 
             }
+
             override fun onPageScrollStateChanged(state: Int) {
 
             }
@@ -60,7 +61,6 @@ class onboardingFragment : Fragment(){
         return binding.root
 
     }
-
 
 
     private fun initializeViewPager(binding: FragmentOnboardingBinding) {
@@ -77,7 +77,7 @@ class onboardingFragment : Fragment(){
         binding.viewpager.adapter = viewpagerAdapter
     }
 
-     fun initializeIndicatorView(binding: FragmentOnboardingBinding) {
+    fun initializeIndicatorView(binding: FragmentOnboardingBinding) {
         binding.indicatorView.apply {
             setSliderColor(Color.parseColor("#c4c4c4"), Color.parseColor("#31d693"))
             setSliderWidth(resources.getDimension(R.dimen.margin_7dp))

@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityOnboardingBinding
 
-class OnBoardingActivity: AppCompatActivity() {
+class OnBoardingActivity : AppCompatActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

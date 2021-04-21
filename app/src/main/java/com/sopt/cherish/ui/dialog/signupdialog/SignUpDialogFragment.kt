@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.DialogFragment
 import com.sopt.cherish.databinding.FragmentSignUpDialogBinding
-import com.sopt.cherish.remote.singleton.RetrofitBuilder
 
 class SignUpDialogFragment(
     @LayoutRes
