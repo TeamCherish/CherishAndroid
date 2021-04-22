@@ -14,12 +14,10 @@ class CherishMaterialCalendarView constructor(context: Context, attrs: Attribute
 
     fun changeCalendarModeWeeks() {
         state().edit().setCalendarDisplayMode(CalendarMode.WEEKS).commit()
-        /*layoutParams.height = 150.dp*/
     }
 
     fun changeCalendarModeMonths() {
         state().edit().setCalendarDisplayMode(CalendarMode.MONTHS).commit()
-        /*layoutParams.height = 388.dp*/
     }
 
 }
