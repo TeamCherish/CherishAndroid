@@ -22,7 +22,7 @@ class CalendarFragment : Fragment() {
     private lateinit var binding: FragmentCalendarBinding
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        viewModel.selectedMemoCalendarDay.value.let {
+        viewModel.selectedMemoCalendarDay.value?.let {
             viewModel.selectedCalendarDay.value = it
         }
     }
@@ -46,6 +46,13 @@ class CalendarFragment : Fragment() {
         observeSelectedDay()
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        viewModel.isMemoClicked.observe(viewLifecycleOwner) {
+            if (it)
+                binding.calendarView.changeCalendarModeWeeks()
+        }
     }
 
     private fun observeSelectedMemoCalendarDay() {
