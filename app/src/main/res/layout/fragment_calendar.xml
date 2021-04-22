@@ -114,16 +114,18 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/calendar_memo_view"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginTop="14dp"
+            android:layout_marginBottom="24dp"
             app:cardCornerRadius="@dimen/radius_20dp"
             app:layout_constraintEnd_toEndOf="@id/calendar_card_view"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/calendar_card_view"
             app:layout_constraintTop_toBottomOf="@id/calendar_card_view">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_margin="15dp">
 
                 <TextView
@@ -160,7 +162,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ellipsize="end"
-                    android:maxLines="2"
                     android:layout_marginTop="16dp"
                     android:showMemo="@{detailPlantViewModel.selectedCalendarData.review}"
                     app:layout_constraintTop_toBottomOf="@id/calendarView_chip_layout" />
@@ -173,7 +174,7 @@
                     android:background="@color/white"
                     app:layout_constraintEnd_toEndOf="@id/review_all_text"
                     app:layout_constraintStart_toStartOf="@id/review_all_text"
-                    app:layout_constraintTop_toBottomOf="@id/review_all_text" />
+                    app:layout_constraintBottom_toBottomOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -22,13 +22,10 @@ class CalendarFragment : Fragment() {
     private lateinit var binding: FragmentCalendarBinding
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        viewModel.selectedMemoCalendarDay.value.let {
+        viewModel.selectedMemoCalendarDay.value?.let {
             viewModel.selectedCalendarDay.value = it
         }
     }
-
-    // todo : 메모를 클릭했을 떄는 calendar가 weekmode로 변경된상태에서 보여지게 하고
-    // todo : 메모의 길이를 최대로 보여주세요!!! 라고 오퍼가 왔음
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,6 +43,13 @@ class CalendarFragment : Fragment() {
         observeSelectedDay()
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        viewModel.isMemoClicked.observe(viewLifecycleOwner) {
+            if (it)
+                binding.calendarView.changeCalendarModeWeeks()
+        }
     }
 
     private fun observeSelectedMemoCalendarDay() {
@@ -71,7 +75,6 @@ class CalendarFragment : Fragment() {
             (activity as DetailPlantActivity).setActionBarTitle("식물 캘린더")
         }
         viewModel.fetchCalendarData()
-        // todo : 여기만 어뜨케 잘 나눠서 기존에 보여질 때랑 메모클릭해서 오는 로직을 나눈다면 될 거 같습니다
         if (viewModel.isMemoClicked.value == false) {
             viewModel.selectedCalendarDay.value = viewModel.selectedCalendarDay.value
             binding.calendarView.removeDecorators()
@@ -115,11 +118,6 @@ class CalendarFragment : Fragment() {
     private fun changeCalendarMode(binding: FragmentCalendarBinding) {
         binding.reviewBack.setOnClickListener { view ->
             viewModel.calendarModeChangeEvent.value = !viewModel.calendarModeChangeEvent.value!!
-            if (viewModel.calendarModeChangeEvent.value!!) {
-                binding.reviewAllText.maxLines = 5
-            } else {
-                binding.reviewAllText.maxLines = 2
-            }
         }
     }
 

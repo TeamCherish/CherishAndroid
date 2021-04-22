@@ -138,7 +138,8 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
 
     private fun startReview() {
         parentFragmentManager.beginTransaction()
-            .add(R.id.home_parent_fragment_container, ReviewFragment()).commitNow()
+            .replace(R.id.home_parent_fragment_container, ReviewFragment())
+            .commitNow()
         dismiss()
     }
 
