@@ -33,7 +33,7 @@ fun EditText.writeKeyword(reviewFlexBoxLayout: FlexboxLayout, fragmentManager: F
                     if (keyword.length > 5) {
                         this.text = null
                     } else {
-                        if (reviewFlexBoxLayout.getChipsCount() < 4)
+                        if (reviewFlexBoxLayout.getChipsCount() < 5)
                             reviewFlexBoxLayout.addChip(keyword)
                         else {
                             MultiViewDialog(
