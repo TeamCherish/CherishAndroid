@@ -47,8 +47,10 @@ class CalendarFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel.isMemoClicked.observe(viewLifecycleOwner) {
-            if (it)
+            if (it) {
                 binding.calendarView.changeCalendarModeWeeks()
+                viewModel.calendarModeChangeEvent.value = false
+            }
         }
     }
 

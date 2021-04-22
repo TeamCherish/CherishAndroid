@@ -1,4 +1,4 @@
-package com.sopt.cherish.util
+package com.s
 
 import android.animation.ArgbEvaluator
 import android.animation.ValueAnimator
@@ -13,7 +13,13 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.load.resource.gif.GifDrawable
+import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.Target
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.sopt.cherish.MainApplication
 import com.sopt.cherish.R
@@ -49,6 +55,7 @@ object BindingAdapter {
             imageView.visibility = View.INVISIBLE
     }
 
+    // todo : gif 속도 조절해야함
     @JvmStatic
     @BindingAdapter("android:wateringAnimation")
     fun wateringAnimation(imageView: ImageView, isWatered: Boolean?) {
@@ -60,12 +67,33 @@ object BindingAdapter {
                 Glide.with(imageView.context)
                     .asGif()
                     .load(R.raw.watering)
+                    .skipMemoryCache(true)
+                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                    .addListener(object : RequestListener<GifDrawable> {
+                        override fun onLoadFailed(
+                            e: GlideException?,
+                            model: Any?,
+                            target: Target<GifDrawable>?,
+                            isFirstResource: Boolean
+                        ): Boolean = false
+
+                        override fun onResourceReady(
+                            resource: GifDrawable?,
+                            model: Any?,
+                            target: Target<GifDrawable>?,
+                            dataSource: DataSource?,
+                            isFirstResource: Boolean
+                        ): Boolean {
+                            resource?.setLoopCount(1)
+                            return false
+                        }
+                    })
                     .into(imageView)
-                val delayHandler = Handler(imageView.context.mainLooper)
+                /*val delayHandler = Handler(imageView.context.mainLooper)
                 delayHandler.postDelayed({
                     imageView.visibility = View.INVISIBLE
                 }, 4000)
-                imageView.visibility = View.VISIBLE
+                imageView.visibility = View.VISIBLE*/
             }
         }
     }
