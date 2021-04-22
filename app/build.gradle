@@ -120,6 +120,9 @@ dependencies {
     // encrypto
     implementation "androidx.security:security-crypto:1.1.0-alpha03"
 
+    // spring Animation
+    implementation 'androidx.dynamicanimation:dynamicanimation:1.1.0-alpha03'
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation "androidx.exifinterface:exifinterface:1.3.2"

@@ -4,7 +4,6 @@ import android.content.Context
 import android.util.AttributeSet
 import com.prolificinteractive.materialcalendarview.CalendarMode
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView
-import com.sopt.cherish.util.PixelUtil.dp
 
 /**
  * Created on 01-06 by SSong-develop
@@ -15,12 +14,12 @@ class CherishMaterialCalendarView constructor(context: Context, attrs: Attribute
 
     fun changeCalendarModeWeeks() {
         state().edit().setCalendarDisplayMode(CalendarMode.WEEKS).commit()
-        layoutParams.height = 150.dp
+        /*layoutParams.height = 150.dp*/
     }
 
     fun changeCalendarModeMonths() {
         state().edit().setCalendarDisplayMode(CalendarMode.MONTHS).commit()
-        layoutParams.height = 388.dp
+        /*layoutParams.height = 388.dp*/
     }
 
 }

@@ -71,7 +71,6 @@ class CalendarFragment : Fragment() {
             (activity as DetailPlantActivity).setActionBarTitle("식물 캘린더")
         }
         viewModel.fetchCalendarData()
-        // todo : 여기만 어뜨케 잘 나눠서 기존에 보여질 때랑 메모클릭해서 오는 로직을 나눈다면 될 거 같습니다
         if (viewModel.isMemoClicked.value == false) {
             viewModel.selectedCalendarDay.value = viewModel.selectedCalendarDay.value
             binding.calendarView.removeDecorators()
@@ -115,11 +114,6 @@ class CalendarFragment : Fragment() {
     private fun changeCalendarMode(binding: FragmentCalendarBinding) {
         binding.reviewBack.setOnClickListener { view ->
             viewModel.calendarModeChangeEvent.value = !viewModel.calendarModeChangeEvent.value!!
-            if (viewModel.calendarModeChangeEvent.value!!) {
-                binding.reviewAllText.maxLines = 5
-            } else {
-                binding.reviewAllText.maxLines = 2
-            }
         }
     }
 
