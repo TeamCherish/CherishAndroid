@@ -1,6 +1,5 @@
 package com.sopt.cherish.ui.detail
 
-import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
@@ -20,8 +19,6 @@ import com.sopt.cherish.ui.detail.calendar.CalendarFragment
 import com.sopt.cherish.ui.dialog.plantpopup.AlertPlantDialogFragment
 import com.sopt.cherish.ui.dialog.wateringdialog.DetailWateringDialogFragment
 import com.sopt.cherish.ui.domain.MemoListDataclass
-import com.sopt.cherish.ui.main.onboarding.OnBoardingActivity
-import com.sopt.cherish.ui.main.onboarding.onboardingFragment
 import com.sopt.cherish.util.DateUtil
 import com.sopt.cherish.util.extension.longToast
 import retrofit2.Call
@@ -127,8 +124,7 @@ class DetailPlantFragment : Fragment() {
             if (binding.userdate.text != "_ _") {
                 viewModel.selectedMemoCalendarDay.value =
                     DateUtil.convertStringToCalendarDay(binding.userdate.text.toString())
-                viewModel.selectedCalendarDay.value =
-                    DateUtil.convertStringToCalendarDay(binding.userdate.text.toString())
+                viewModel.isMemoClicked.value = true
                 val transaction =
                     parentFragmentManager.beginTransaction()
                 transaction.replace(
@@ -143,8 +139,7 @@ class DetailPlantFragment : Fragment() {
             if (binding.userdate2.text != "_ _") {
                 viewModel.selectedMemoCalendarDay.value =
                     DateUtil.convertStringToCalendarDay(binding.userdate2.text.toString())
-                viewModel.selectedCalendarDay.value =
-                    DateUtil.convertStringToCalendarDay(binding.userdate2.text.toString())
+                viewModel.isMemoClicked.value = true
                 val transaction =
                     parentFragmentManager.beginTransaction()
                 transaction.replace(
@@ -163,7 +158,7 @@ class DetailPlantFragment : Fragment() {
         binding.imageButton3detail.setOnClickListener {
 
             AlertPlantDialogFragment(plantId).show(parentFragmentManager, DetailPlantFragment.TAG)
-           // startActivity(Intent(context,OnBoardingActivity::class.java))
+            // startActivity(Intent(context,OnBoardingActivity::class.java))
 
             //3단계 식물 뷰 들어가는 곳
         }
@@ -275,7 +270,7 @@ class DetailPlantFragment : Fragment() {
 
                                 }
 
-                            
+
                                 if (it.data.reviews.isEmpty()) {
                                     binding.userdate.text = "_ _"
                                     binding.usermemo.text = "메모를 입력하지 않았어요!"
@@ -285,9 +280,9 @@ class DetailPlantFragment : Fragment() {
 
                                 } else if (it.data.reviews.size == 1) {
                                     binding.userdate.text = (it.data.reviews[0].water_date)
-                                    if(it.data.reviews[0].review=="") {
+                                    if (it.data.reviews[0].review == "") {
                                         binding.usermemo.text = "메모를 입력하지 않았어요!"
-                                    }else{
+                                    } else {
                                         binding.usermemo.text = it.data.reviews[0].review
                                     }
                                     binding.userdate2.text = "_ _"
@@ -296,21 +291,20 @@ class DetailPlantFragment : Fragment() {
                                     binding.memocons2.isVisible = true
                                 } else {
                                     binding.userdate.text = (it.data.reviews[0].water_date)
-                                    if(it.data.reviews[0].review=="") {
+                                    if (it.data.reviews[0].review == "") {
                                         binding.usermemo.text = "메모를 입력하지 않았어요!"
-                                    }else{
+                                    } else {
                                         binding.usermemo.text = it.data.reviews[0].review
                                     }
 
                                     binding.userdate2.text = (it.data.reviews[1].water_date)
-                                    if(it.data.reviews[1].review=="") {
+                                    if (it.data.reviews[1].review == "") {
                                         binding.usermemo2.text = "메모를 입력하지 않았어요!"
-                                    }else{
+                                    } else {
                                         binding.usermemo2.text = it.data.reviews[1].review
                                     }
 
                                 }
-
 
 
                             }

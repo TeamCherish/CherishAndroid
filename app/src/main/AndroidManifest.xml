@@ -20,7 +20,7 @@
 
     <uses-feature
         android:name="android.hardware.camera"
-        android:required="true"/>
+        android:required="true" />
 
     <permission
         android:name="android.permission.INTERACT_ACROSS_USERS_FULL"
@@ -65,9 +65,9 @@
         <activity
             android:name=".ui.main.MainActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".ui.main.setting.AboutCherishActivity"/>
+        <activity android:name=".ui.main.setting.AboutCherishActivity" />
 
-        <activity android:name=".ui.main.onboarding.OnBoardingActivity"/>
+        <activity android:name=".ui.main.onboarding.OnBoardingActivity" />
         <activity
             android:name=".ui.main.home.HomeBlankActivity"
             android:screenOrientation="portrait" />

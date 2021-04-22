@@ -14,7 +14,6 @@
         android:layout_height="80dp">
 
 
-
         <ImageView
             android:id="@+id/mypage_user_img"
             android:layout_width="54dp"

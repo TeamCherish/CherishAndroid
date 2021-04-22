@@ -86,6 +86,11 @@ class ReviseReviewFragment : Fragment() {
         (requireActivity() as DetailPlantActivity).setActionBarTitle("메모 수정")
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        viewModel.isMemoClicked.value = false
+    }
+
     override fun onPrepareOptionsMenu(menu: Menu) {
         menu.getItem(0).isVisible = false
         menu.getItem(1).isVisible = false // invisible menuitem 2

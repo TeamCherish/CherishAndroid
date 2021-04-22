@@ -46,7 +46,7 @@ class DeleteUserDialog(
             dismiss()
         }
 
-        binding.buttonCopy.setOnClickListener{
+        binding.buttonCopy.setOnClickListener {
             shortToast(requireContext(), "계정이 삭제되었습니다.")
             quitCherish()
             MainApplication.sharedPreferenceController.apply {
@@ -65,8 +65,8 @@ class DeleteUserDialog(
         return binding.root
     }
 
-    private fun quitCherish(){
-        Log.d("userId",viewModel.cherishUserId.value!!.toString())
+    private fun quitCherish() {
+        Log.d("userId", viewModel.cherishUserId.value!!.toString())
         requestData.userDeleteAPI.deleteUser(
             RequestUserDeleteData(id = viewModel.cherishUserId.value!!)
         ).enqueue(

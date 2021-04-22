@@ -50,6 +50,11 @@ class MultiViewDialog(
                     .into(binding.dialogLoadingImage)
                 binding.root
             }
+            // 리뷰를 적지 않았을 때 떠야하는 dialog
+            R.layout.dialog_warning_review_no_word_warning -> {
+                val binding = DialogWarningReviewLimitErrorBinding.bind(view)
+                binding.root
+            }
             else -> {
                 view
             }

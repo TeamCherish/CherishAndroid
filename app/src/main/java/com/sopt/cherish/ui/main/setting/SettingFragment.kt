@@ -35,7 +35,7 @@ import java.io.IOException
 /**
  * 환경 설정 뷰
  */
-class SettingFragment : Fragment() ,MainActivity.OnBackPressedListener{
+class SettingFragment : Fragment(), MainActivity.OnBackPressedListener {
 
     private val requestData = RetrofitBuilder
     private var usernickname: String = ""
@@ -101,7 +101,7 @@ class SettingFragment : Fragment() ,MainActivity.OnBackPressedListener{
             MainApplication.sharedPreferenceController.setAlarmKey(isChecked)
         }
 
-        binding.quit.setOnClickListener{
+        binding.quit.setOnClickListener {
             val fm = requireActivity().supportFragmentManager
             val dialogFragment = DeleteUserDialog(R.layout.fragment_delete_user_dialog)
             dialogFragment.setTargetFragment(this@SettingFragment, 101)

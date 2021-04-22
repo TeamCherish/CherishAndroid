@@ -93,7 +93,7 @@ class MypagePhoneBookSearchAdapter(private val phoneBookList: List<Phonemypage>)
         RecyclerView.ViewHolder(binding.root) {
 
         val radioButton = binding.radioButton
-        var consPhoneNumber=binding.searchPhoneItem
+        var consPhoneNumber = binding.searchPhoneItem
         var mPhone: Phonemypage? = null
 
         fun setPhone(phone: Phonemypage) {

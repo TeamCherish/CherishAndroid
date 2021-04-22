@@ -76,7 +76,6 @@
             android:text="@string/myPage_cancel_text" />
 
 
-
         <de.hdodenhof.circleimageview.CircleImageView
             android:contentDescription="@null"
             android:id="@+id/my_page_user_img"
@@ -151,7 +150,7 @@
             android:layout_marginEnd="@dimen/margin_16dp"
             android:layout_marginTop="25dp"
             android:id="@+id/my_page_box"
-            android:background="@drawable/my_page_box"/>
+            android:background="@drawable/my_page_box" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -166,7 +165,7 @@
             android:textColor="@color/cherish_light_black"
             android:layout_marginTop="@dimen/margin_20dp"
             android:textSize="18sp"
-            android:id="@+id/my_page_watering_cnt"/>
+            android:id="@+id/my_page_watering_cnt" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -188,7 +187,7 @@
             app:layout_constraintStart_toEndOf="@+id/my_page_watering_cnt"
             app:layout_constraintEnd_toStartOf="@id/my_page_postpone_cnt"
             app:layout_constraintTop_toTopOf="@+id/my_page_box"
-            android:layout_marginTop="24dp"/>
+            android:layout_marginTop="24dp" />
 
 
         <TextView
@@ -203,7 +202,7 @@
             android:textColor="@color/cherish_light_black"
             android:layout_marginTop="@dimen/margin_20dp"
             android:textSize="18sp"
-            android:id="@+id/my_page_postpone_cnt"/>
+            android:id="@+id/my_page_postpone_cnt" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -225,7 +224,7 @@
             app:layout_constraintTop_toTopOf="@+id/my_page_box"
             app:layout_constraintEnd_toStartOf="@id/my_page_finish_cnt"
             android:layout_marginTop="24dp"
-            android:background="@color/cherish_divide_gray"/>
+            android:background="@color/cherish_divide_gray" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -239,7 +238,7 @@
             android:textColor="@color/cherish_light_black"
             android:layout_marginTop="@dimen/margin_20dp"
             android:textSize="18sp"
-            android:id="@+id/my_page_finish_cnt"/>
+            android:id="@+id/my_page_finish_cnt" />
 
         <TextView
             android:layout_width="wrap_content"

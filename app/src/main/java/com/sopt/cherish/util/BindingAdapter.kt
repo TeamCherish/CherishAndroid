@@ -64,7 +64,7 @@ object BindingAdapter {
                 val delayHandler = Handler(imageView.context.mainLooper)
                 delayHandler.postDelayed({
                     imageView.visibility = View.INVISIBLE
-                }, 2000)
+                }, 4000)
                 imageView.visibility = View.VISIBLE
             }
         }
@@ -184,7 +184,6 @@ object BindingAdapter {
             imageView.apply {
                 when {
                     growth <= 25 -> {
-                        // 여기 위치작업은 더이상 할거 없음!
                         when (plantName) {
                             "민들레" -> {
                                 resizeImageView(262, 331)
@@ -354,7 +353,6 @@ object BindingAdapter {
     @BindingAdapter(value = ["plantName", "dDay"], requireAll = true)
     fun setPlantBackground(imageView: ImageView, plantName: String?, dDay: Int) {
         if (dDay < 0) {
-            // 시든상태
             imageView.setBackgroundColor(
                 ContextCompat.getColor(
                     imageView.context,
@@ -362,7 +360,6 @@ object BindingAdapter {
                 )
             )
         } else {
-            // 멀쩡한 상태
             imageView.setBackgroundColor(
                 ContextCompat.getColor(
                     imageView.context, when (plantName) {
@@ -378,7 +375,6 @@ object BindingAdapter {
         }
     }
 
-    // 이건 이제 gif로 변경될거여서 background안할거에요
     @JvmStatic
     @BindingAdapter(value = ["isWatered", "remainDay", "wateredPlantName", "viewModel"])
     fun wateredBackground(
@@ -407,7 +403,7 @@ object BindingAdapter {
                         }
                     )
                 ).apply {
-                    duration = 2000
+                    duration = 4000
                     addUpdateListener {
                         imageView.setBackgroundColor(it.animatedValue as Int)
                     }

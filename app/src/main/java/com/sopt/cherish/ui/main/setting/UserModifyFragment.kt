@@ -7,19 +7,18 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.graphics.Matrix
-import androidx.exifinterface.media.ExifInterface
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.core.content.FileProvider
+import androidx.exifinterface.media.ExifInterface
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
@@ -297,7 +296,7 @@ class UserModifyFragment : Fragment() {
             takePictureIntent.resolveActivity(requireActivity().packageManager)?.also {
                 //startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
 
-                val photoFile: File? = try{
+                val photoFile: File? = try {
                     createImageFile()
                 } catch (ex: IOException) {
                     null

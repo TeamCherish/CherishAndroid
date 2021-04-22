@@ -43,6 +43,8 @@ class DetailPlantViewModel(
 
     val selectedMemoCalendarDay = MutableLiveData<CalendarDay?>()
 
+    val isMemoClicked = SingleLiveEvent<Boolean>()
+
     private val today = DateUtil.convertDateToString(Calendar.getInstance().time)
     private val todayMonth = DateUtil.getMonth(today).toString()
     private val todayDay = DateUtil.getDay(today).toString()

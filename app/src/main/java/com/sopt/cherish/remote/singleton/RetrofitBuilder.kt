@@ -61,5 +61,5 @@ object RetrofitBuilder {
 
     val updatePasswordAPI: UpdatePasswordAPI = getRetrofit().create(UpdatePasswordAPI::class.java)
 
-    val userDeleteAPI:UserDeleteAPI= getRetrofit().create(UserDeleteAPI::class.java)
+    val userDeleteAPI: UserDeleteAPI = getRetrofit().create(UserDeleteAPI::class.java)
 }

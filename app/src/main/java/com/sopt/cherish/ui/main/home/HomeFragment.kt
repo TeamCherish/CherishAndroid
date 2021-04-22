@@ -34,7 +34,7 @@ import com.sopt.cherish.util.extension.longToast
  * 메인 홈뷰
  */
 
-class HomeFragment : Fragment(), OnItemClickListener,MainActivity.OnBackPressedListener {
+class HomeFragment : Fragment(), OnItemClickListener, MainActivity.OnBackPressedListener {
 
     private val viewModel: MainViewModel by activityViewModels()
     private lateinit var binding: FragmentHomeBinding

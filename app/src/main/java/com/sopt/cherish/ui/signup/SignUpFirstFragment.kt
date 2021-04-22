@@ -210,8 +210,8 @@ class SignUpFirstFragment : Fragment() {
                 binding.isUsablePw.visibility = View.VISIBLE
 
                 isValidPW = isValidPW(pw) //비밀번호 형식 확인
-                Log.d("비밀번호 형식 확인",isValidPW.toString())
-                Log.d("pw",pw)
+                Log.d("비밀번호 형식 확인", isValidPW.toString())
+                Log.d("pw", pw)
                 if (isValidPW) {
                     binding.isUsablePw.text = "사용가능한 비밀번호입니다."
                     binding.isUsablePw.setTextColor(
@@ -222,7 +222,7 @@ class SignUpFirstFragment : Fragment() {
                     )
 
                     checkPwAgain() //비밀번호 다시 입력받음
-                }else{
+                } else {
                     binding.isUsablePw.text = "사용하실 수 없는 비밀번호입니다."
                     binding.isUsablePw.setTextColor(
                         ContextCompat.getColor(
@@ -245,7 +245,7 @@ class SignUpFirstFragment : Fragment() {
     }
 
     private fun isValidPW(password: String): Boolean {
-        Log.d("isValidPW",password)
+        Log.d("isValidPW", password)
         val reg =
             Regex("^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[$@$!%*#?&]).{8,}.\$")
         if (!password.matches(reg)) {
@@ -258,7 +258,7 @@ class SignUpFirstFragment : Fragment() {
         binding.userPwAgain.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 pwAgain = binding.userPwAgain.text.toString()
-                Log.d("pwagain",pwAgain)
+                Log.d("pwagain", pwAgain)
                 checkPW()
             }
 
@@ -281,7 +281,7 @@ class SignUpFirstFragment : Fragment() {
             )
             isFinish = true
             binding.signUpButton.setOnClickListener {
-                if(pw==pwAgain){
+                if (pw == pwAgain) {
                     val bundle = Bundle()
                     bundle.putString("email", email)
                     bundle.putString("password", pw)
@@ -314,7 +314,7 @@ class SignUpFirstFragment : Fragment() {
             )
 
             binding.signUpButton.setOnClickListener {
-                if(pw==pwAgain){
+                if (pw == pwAgain) {
                     val bundle = Bundle()
                     bundle.putString("email", email)
                     bundle.putString("password", pw)
