@@ -1,6 +1,7 @@
 package com.sopt.cherish.ui.main.manageplant
 
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -41,7 +42,7 @@ import java.io.IOException
 /**
  * 식물 보관함 뷰
  */
-class ManagePlantFragment : Fragment() {
+class ManagePlantFragment : Fragment(), MainActivity.OnBackPressedListener {
 
     private val viewModel: MainViewModel by activityViewModels()
     private var tabIndex: Int = 0
@@ -54,6 +55,9 @@ class ManagePlantFragment : Fragment() {
     lateinit var binding: FragmentManagePlantBinding
     private var mypageusername: String = ""
     private var mypageuseremail: String = ""
+
+    var check: Boolean = false
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -92,6 +96,12 @@ class ManagePlantFragment : Fragment() {
         return binding.root
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (context as MainActivity).setOnBackPressedListener(this)
+    }
+
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == 1)
             return true
@@ -108,6 +118,13 @@ class ManagePlantFragment : Fragment() {
         initializeServerRequest(binding)
         initializeBottomSheetBehavior(binding)
         initializeProfile(binding)
+
+        binding.myPageBg.setBackgroundColor(
+            ContextCompat.getColor(
+                binding.root.context,
+                R.color.cherish_my_page_bg
+            )
+        )
     }
 
     private fun initializeProfile(binding: FragmentManagePlantBinding) {
@@ -206,6 +223,8 @@ class ManagePlantFragment : Fragment() {
 
             }
             (activity as MainActivity).replaceFragment(tabIndex, data, isSearched)
+
+            check = true
 
         }
         binding.goToSetting.setOnClickListener {
@@ -528,5 +547,30 @@ class ManagePlantFragment : Fragment() {
                     }
                 })
     }
+
+    override fun onBack() {
+
+
+        /* binding.searchBox.visibility = View.VISIBLE
+         isSearched = false
+         binding.cancelBtn.visibility = View.INVISIBLE
+         if (!isCollapsed && tabIndex == 1)
+             binding.myPageAddPlantBtn.visibility = View.VISIBLE
+         (activity as MainActivity).replaceFragment(tabIndex, data, isSearched)
+         Toast.makeText(context,"메인홈으로 가",Toast.LENGTH_SHORT).show()*/
+
+        if (check) {
+            val transaction = parentFragmentManager.beginTransaction()
+            transaction.detach(this).attach(this).commit()
+            check = false
+        } else {
+            val activity = activity as MainActivity?
+            // 한번 뒤로가기 버튼을 눌렀다면 Listener 를 null 로 해제해줍니다.
+            // 한번 뒤로가기 버튼을 눌렀다면 Listener 를 null 로 해제해줍니다.
+            activity!!.setOnBackPressedListener(null)
+
+        }
+    }
+
 
 }
