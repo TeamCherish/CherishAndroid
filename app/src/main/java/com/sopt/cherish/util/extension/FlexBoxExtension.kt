@@ -20,7 +20,7 @@ object FlexBoxExtension {
         )
         layoutParams.rightMargin = dpToPx(4)
         chip.setOnCloseIconClickListener { removeView(chip as View) }
-        addView(chip, childCount - 1, layoutParams)
+        addView(chip, childCount, layoutParams)
     }
 
     fun FlexboxLayout.addBlackChipModeChoice(text: String) {
@@ -33,7 +33,7 @@ object FlexBoxExtension {
         )
         layoutParams.rightMargin = dpToPx(4)
         chip.setOnCloseIconClickListener { removeView(chip as View) }
-        addView(chip, childCount - 1, layoutParams)
+        addView(chip, childCount, layoutParams)
     }
 
     fun FlexboxLayout.addChipCalendar(text: String) {
@@ -46,7 +46,7 @@ object FlexBoxExtension {
         )
         layoutParams.rightMargin = dpToPx(4)
         chip.setOnCloseIconClickListener { removeView(chip as View) }
-        addView(chip, childCount - 1, layoutParams)
+        addView(chip, childCount, layoutParams)
     }
 
     fun FlexboxLayout.getAllChips(): List<Chip> {

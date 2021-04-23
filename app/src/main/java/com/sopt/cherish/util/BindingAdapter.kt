@@ -5,7 +5,6 @@ import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.os.Handler
 import android.view.View
-import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -25,6 +24,8 @@ import com.sopt.cherish.MainApplication
 import com.sopt.cherish.R
 import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.util.PixelUtil.dp
+import com.sopt.cherish.util.PixelUtil.screenHeight
+import com.sopt.cherish.util.PixelUtil.screenWidth
 import com.sopt.cherish.util.animation.ProgressbarAnimation
 import com.sopt.cherish.util.extension.ImageViewExtension.matchSizeImageView
 import com.sopt.cherish.util.extension.ImageViewExtension.resizeImageView
@@ -59,15 +60,12 @@ object BindingAdapter {
     @JvmStatic
     @BindingAdapter("android:wateringAnimation")
     fun wateringAnimation(imageView: ImageView, isWatered: Boolean?) {
-        val fadeOutAnimation =
-            AnimationUtils.loadAnimation(imageView.context, R.anim.waterinf_fade_out)
         if (isWatered != null) {
             if (isWatered == true) {
-                imageView.animation = fadeOutAnimation
                 Glide.with(imageView.context)
                     .asGif()
                     .load(R.raw.watering)
-                    .skipMemoryCache(true)
+                    .override((screenWidth / 3).dp, screenHeight)
                     .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                     .addListener(object : RequestListener<GifDrawable> {
                         override fun onLoadFailed(
@@ -78,22 +76,17 @@ object BindingAdapter {
                         ): Boolean = false
 
                         override fun onResourceReady(
-                            resource: GifDrawable?,
+                            resource: GifDrawable,
                             model: Any?,
                             target: Target<GifDrawable>?,
                             dataSource: DataSource?,
                             isFirstResource: Boolean
                         ): Boolean {
-                            resource?.setLoopCount(1)
+                            resource.setLoopCount(1)
                             return false
                         }
                     })
                     .into(imageView)
-                /*val delayHandler = Handler(imageView.context.mainLooper)
-                delayHandler.postDelayed({
-                    imageView.visibility = View.INVISIBLE
-                }, 4000)
-                imageView.visibility = View.VISIBLE*/
             }
         }
     }
