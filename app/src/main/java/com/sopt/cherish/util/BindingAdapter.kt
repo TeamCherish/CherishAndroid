@@ -5,6 +5,7 @@ import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.os.Handler
 import android.view.View
+import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -57,17 +58,19 @@ object BindingAdapter {
     }
 
     // todo : gif 속도 조절해야함
+    // 갑자기 너무 느려짐 시팔
     @JvmStatic
     @BindingAdapter("android:wateringAnimation")
     fun wateringAnimation(imageView: ImageView, isWatered: Boolean?) {
+        val fadeAnimation =
+            AnimationUtils.loadAnimation(imageView.context, R.anim.waterinf_fade_out)
         if (isWatered != null) {
             if (isWatered == true) {
                 Glide.with(imageView.context)
                     .asGif()
-                    .load(R.raw.watering)
-                    .override((screenWidth / 3).dp, screenHeight)
-                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
-                    .addListener(object : RequestListener<GifDrawable> {
+                    .load(R.raw.watering_8000)
+                    .override((screenWidth / 3).dp, screenHeight.dp)
+                    .listener(object : RequestListener<GifDrawable> {
                         override fun onLoadFailed(
                             e: GlideException?,
                             model: Any?,
@@ -83,9 +86,11 @@ object BindingAdapter {
                             isFirstResource: Boolean
                         ): Boolean {
                             resource.setLoopCount(1)
+                            imageView.animation = fadeAnimation
                             return false
                         }
                     })
+                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                     .into(imageView)
             }
         }
@@ -424,7 +429,7 @@ object BindingAdapter {
                         }
                     )
                 ).apply {
-                    duration = 4000
+                    duration = 7000
                     addUpdateListener {
                         imageView.setBackgroundColor(it.animatedValue as Int)
                     }
