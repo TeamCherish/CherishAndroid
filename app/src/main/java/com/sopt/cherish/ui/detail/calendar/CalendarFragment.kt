@@ -12,6 +12,7 @@ import com.sopt.cherish.ui.detail.DetailPlantActivity
 import com.sopt.cherish.ui.detail.DetailPlantViewModel
 import com.sopt.cherish.ui.review.ReviseReviewFragment
 import com.sopt.cherish.util.DateUtil
+import com.sopt.cherish.util.SimpleLogger
 import com.sopt.cherish.util.extension.FlexBoxExtension.clearChips
 import com.sopt.cherish.util.extension.longToast
 
@@ -25,6 +26,7 @@ class CalendarFragment : Fragment() {
         viewModel.selectedMemoCalendarDay.value?.let {
             viewModel.selectedCalendarDay.value = it
         }
+        SimpleLogger.logI("${viewModel.isMemoClicked.value}")
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,9 +49,9 @@ class CalendarFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         viewModel.isMemoClicked.observe(viewLifecycleOwner) {
-            if (it) {
+            if (it == true) {
                 binding.calendarView.changeCalendarModeWeeks()
-                viewModel.calendarModeChangeEvent.value = false
+                viewModel.calendarModeChangeEvent.value = true
             }
         }
     }
