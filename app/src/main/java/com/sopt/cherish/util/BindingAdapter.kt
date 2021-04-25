@@ -408,7 +408,7 @@ object BindingAdapter {
                         }
                     )
                 ).apply {
-                    duration = 4000
+                    duration = 3000
                     addUpdateListener {
                         imageView.setBackgroundColor(it.animatedValue as Int)
                     }
@@ -445,7 +445,7 @@ object BindingAdapter {
                             }
                         )
                     )
-                }, 4000)
+                }, 3000)
                 viewModel.isWatered.value = null
             }
         }
