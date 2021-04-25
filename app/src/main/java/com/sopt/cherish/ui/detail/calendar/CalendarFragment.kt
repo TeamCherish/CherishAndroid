@@ -12,7 +12,6 @@ import com.sopt.cherish.ui.detail.DetailPlantActivity
 import com.sopt.cherish.ui.detail.DetailPlantViewModel
 import com.sopt.cherish.ui.review.ReviseReviewFragment
 import com.sopt.cherish.util.DateUtil
-import com.sopt.cherish.util.SimpleLogger
 import com.sopt.cherish.util.extension.FlexBoxExtension.clearChips
 import com.sopt.cherish.util.extension.longToast
 
@@ -26,7 +25,6 @@ class CalendarFragment : Fragment() {
         viewModel.selectedMemoCalendarDay.value?.let {
             viewModel.selectedCalendarDay.value = it
         }
-        SimpleLogger.logI("${viewModel.isMemoClicked.value}")
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
