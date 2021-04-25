@@ -12,6 +12,7 @@ import com.sopt.cherish.di.Injection
 import com.sopt.cherish.remote.api.ReviewWateringReq
 import com.sopt.cherish.util.MultiViewDialog
 import com.sopt.cherish.util.extension.FlexBoxExtension.getChip
+import com.sopt.cherish.util.extension.FlexBoxExtension.getChipsCount
 import com.sopt.cherish.util.extension.countNumberOfCharacters
 import com.sopt.cherish.util.extension.hideKeyboard
 import com.sopt.cherish.util.extension.writeKeyword
@@ -92,7 +93,7 @@ class ReviewActivity : AppCompatActivity() {
 
     private fun sendReviewToServer(binding: ActivityReviewBinding) {
         binding.reviewAdminAccept.setOnClickListener {
-            if (binding.reviewMemo.text.isEmpty()) {
+            if (binding.reviewFlexBox.getChipsCount() == 0 && binding.reviewMemo.text.isEmpty()) {
                 MultiViewDialog(
                     R.layout.dialog_warning_review_no_word_warning,
                     0.6944f,
@@ -103,7 +104,6 @@ class ReviewActivity : AppCompatActivity() {
                 )
             } else {
                 if (binding.reviewMemo.text.length <= 100) {
-                    // todo : 이녀석도 마찬가지로 해줘야 합니다~
                     viewModel.sendReviewToServer(
                         reviewWateringReq = ReviewWateringReq(
                             binding.reviewMemo.text.toString(),

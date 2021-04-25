@@ -63,7 +63,7 @@ object FlexBoxExtension {
         }
     }
 
-    fun FlexboxLayout.getChipsCount(): Int = childCount + 1
+    fun FlexboxLayout.getChipsCount(): Int = childCount
 
     fun FlexboxLayout.clearChips() {
         val chipViews = (0 until childCount).mapNotNull { index ->

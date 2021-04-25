@@ -15,6 +15,7 @@ import com.sopt.cherish.remote.api.ReviewWateringReq
 import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.util.MultiViewDialog
 import com.sopt.cherish.util.extension.FlexBoxExtension.getChip
+import com.sopt.cherish.util.extension.FlexBoxExtension.getChipsCount
 import com.sopt.cherish.util.extension.countNumberOfCharacters
 import com.sopt.cherish.util.extension.hideKeyboard
 import com.sopt.cherish.util.extension.writeKeyword
@@ -98,7 +99,7 @@ class ReviewFragment : Fragment() {
 
     private fun sendReviewToServer(binding: FragmentReviewBinding) {
         binding.homeReviewAdminAccept.setOnClickListener {
-            if (binding.homeReviewMemo.text.isEmpty()) {
+            if (binding.homeReviewFlexBox.getChipsCount() == 0 && binding.homeReviewMemo.text.isEmpty()) {
                 MultiViewDialog(
                     R.layout.dialog_warning_review_no_word_warning,
                     0.6944f,
