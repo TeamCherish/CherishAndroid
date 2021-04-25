@@ -48,7 +48,6 @@ class PlantFragment(private var data: List<MyPageCherishData>?) : Fragment() {
 
     private fun setAdapterData() {
         cherishAdapter = MyPageBottomSheetAdapter(data)
-
         binding.mypageCherryList.adapter = cherishAdapter
         binding.mypageCherryList.layoutManager = LinearLayoutManager(context)
 

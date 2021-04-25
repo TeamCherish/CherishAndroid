@@ -131,54 +131,11 @@ class ManagePlantFragment : Fragment(), MainActivity.OnBackPressedListener {
         if (ImageSharedPreferences.getGalleryFile(requireContext()).isNotEmpty()) { //앨범일 때
             val uri = Uri.parse(ImageSharedPreferences.getGalleryFile(requireContext()))
             Glide.with(requireContext()).load(uri).circleCrop().into(binding.myPageUserImg)
-        } else if (ImageSharedPreferences.getCameraFile(requireContext()).isNotEmpty()) {
-            val path = ImageSharedPreferences.getCameraFile(requireContext())
-            val bitmap = BitmapFactory.decodeFile(path)
-            lateinit var exif: ExifInterface
-
-            try {
-                exif = ExifInterface(path)
-                val exifOrientation = exif.getAttributeInt(
-                    ExifInterface.TAG_ORIENTATION,
-                    ExifInterface.ORIENTATION_NORMAL
-                )
-                val exifDegree = exifOrientationToDegress(exifOrientation)
-
-                Glide.with(requireContext()).load(rotate(bitmap, exifDegree)).circleCrop().into(
-                    binding.myPageUserImg
-                )
-                //binding.myPageUserImg.setImageBitmap(rotate(bitmap, exifDegree))
-            } catch (e: IOException) {
-                e.printStackTrace()
-            }
         } else {
             binding.myPageUserImg.setBackgroundResource(R.drawable.user_img)
         }
     }
 
-    private fun rotate(bitmap: Bitmap, degree: Int): Bitmap {
-        val matrix = Matrix()
-        matrix.postRotate(degree.toFloat())
-        return Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
-    }
-
-    private fun exifOrientationToDegress(exifOrientation: Int): Int {
-        when (exifOrientation) {
-            ExifInterface.ORIENTATION_ROTATE_90 -> {
-                return 90
-            }
-            ExifInterface.ORIENTATION_ROTATE_180 -> {
-                return 180
-            }
-            ExifInterface.ORIENTATION_ROTATE_270 -> {
-                return 270
-            }
-            else -> {
-                return 0
-            }
-
-        }
-    }
 
     private fun navigateUserModifyFragment() {
         val transaction = parentFragmentManager.beginTransaction()
