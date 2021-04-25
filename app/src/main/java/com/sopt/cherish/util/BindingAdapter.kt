@@ -13,13 +13,8 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.load.resource.gif.GifDrawable
-import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
-import com.bumptech.glide.request.target.Target
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.sopt.cherish.MainApplication
 import com.sopt.cherish.R
@@ -57,41 +52,26 @@ object BindingAdapter {
             imageView.visibility = View.INVISIBLE
     }
 
-    // todo : gif 속도 조절해야함
-    // 갑자기 너무 느려짐 시팔
     @JvmStatic
     @BindingAdapter("android:wateringAnimation")
     fun wateringAnimation(imageView: ImageView, isWatered: Boolean?) {
+        // glide gif speed
         val fadeAnimation =
             AnimationUtils.loadAnimation(imageView.context, R.anim.waterinf_fade_out)
+        imageView.animation = fadeAnimation
         if (isWatered != null) {
             if (isWatered == true) {
+                imageView.visibility = View.VISIBLE
                 Glide.with(imageView.context)
                     .asGif()
-                    .load(R.raw.watering_8000)
-                    .override((screenWidth / 3).dp, screenHeight.dp)
-                    .listener(object : RequestListener<GifDrawable> {
-                        override fun onLoadFailed(
-                            e: GlideException?,
-                            model: Any?,
-                            target: Target<GifDrawable>?,
-                            isFirstResource: Boolean
-                        ): Boolean = false
-
-                        override fun onResourceReady(
-                            resource: GifDrawable,
-                            model: Any?,
-                            target: Target<GifDrawable>?,
-                            dataSource: DataSource?,
-                            isFirstResource: Boolean
-                        ): Boolean {
-                            resource.setLoopCount(1)
-                            imageView.animation = fadeAnimation
-                            return false
-                        }
-                    })
-                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                    .override((screenWidth / 3), screenHeight)
+                    .load(R.raw.watering)
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
                     .into(imageView)
+                val delayHandler = Handler(imageView.context.mainLooper)
+                delayHandler.postDelayed({
+                    imageView.visibility = View.INVISIBLE
+                }, 4000L)
             }
         }
     }
@@ -429,7 +409,7 @@ object BindingAdapter {
                         }
                     )
                 ).apply {
-                    duration = 7000
+                    duration = 4000
                     addUpdateListener {
                         imageView.setBackgroundColor(it.animatedValue as Int)
                     }
@@ -466,7 +446,7 @@ object BindingAdapter {
                             }
                         )
                     )
-                }, 2000)
+                }, 4000)
                 viewModel.isWatered.value = null
             }
         }

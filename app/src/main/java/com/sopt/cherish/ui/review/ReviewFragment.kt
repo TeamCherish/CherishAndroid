@@ -8,6 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentReviewBinding
 import com.sopt.cherish.remote.api.ReviewWateringReq
@@ -31,6 +32,8 @@ class ReviewFragment : Fragment() {
             DataBindingUtil.inflate(inflater, R.layout.fragment_review, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.mainViewModel = viewModel
+        activity?.findViewById<BottomNavigationView>(R.id.main_bottom_navi)?.visibility =
+            View.INVISIBLE
 
         addUserStatusWithChip(binding)
         addLimitNumberOfKeywordCharacters(binding)
@@ -38,6 +41,12 @@ class ReviewFragment : Fragment() {
         sendReviewToServer(binding)
         ignoreSendReviewToServer(binding)
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        activity?.findViewById<BottomNavigationView>(R.id.main_bottom_navi)?.visibility =
+            View.VISIBLE
     }
 
     private fun addLimitNumberOfMemoCharacters(binding: FragmentReviewBinding) {
