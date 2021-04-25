@@ -1,4 +1,4 @@
-package com.s
+package com.sopt.cherish.util
 
 import android.animation.ArgbEvaluator
 import android.animation.ValueAnimator
@@ -55,23 +55,22 @@ object BindingAdapter {
     @JvmStatic
     @BindingAdapter("android:wateringAnimation")
     fun wateringAnimation(imageView: ImageView, isWatered: Boolean?) {
-        // glide gif speed
         val fadeAnimation =
             AnimationUtils.loadAnimation(imageView.context, R.anim.waterinf_fade_out)
-        imageView.animation = fadeAnimation
         if (isWatered != null) {
             if (isWatered == true) {
                 imageView.visibility = View.VISIBLE
+                imageView.animation = fadeAnimation
                 Glide.with(imageView.context)
                     .asGif()
                     .override((screenWidth / 3), screenHeight)
                     .load(R.raw.watering)
-                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                     .into(imageView)
                 val delayHandler = Handler(imageView.context.mainLooper)
                 delayHandler.postDelayed({
                     imageView.visibility = View.INVISIBLE
-                }, 4000L)
+                }, 2700L)
             }
         }
     }
