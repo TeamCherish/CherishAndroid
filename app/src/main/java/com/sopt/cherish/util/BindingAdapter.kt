@@ -13,12 +13,15 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.sopt.cherish.MainApplication
 import com.sopt.cherish.R
 import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.util.PixelUtil.dp
+import com.sopt.cherish.util.PixelUtil.screenHeight
+import com.sopt.cherish.util.PixelUtil.screenWidth
 import com.sopt.cherish.util.animation.ProgressbarAnimation
 import com.sopt.cherish.util.extension.ImageViewExtension.matchSizeImageView
 import com.sopt.cherish.util.extension.ImageViewExtension.resizeImageView
@@ -52,20 +55,22 @@ object BindingAdapter {
     @JvmStatic
     @BindingAdapter("android:wateringAnimation")
     fun wateringAnimation(imageView: ImageView, isWatered: Boolean?) {
-        val fadeOutAnimation =
+        val fadeAnimation =
             AnimationUtils.loadAnimation(imageView.context, R.anim.waterinf_fade_out)
         if (isWatered != null) {
             if (isWatered == true) {
-                imageView.animation = fadeOutAnimation
+                imageView.visibility = View.VISIBLE
+                imageView.animation = fadeAnimation
                 Glide.with(imageView.context)
                     .asGif()
+                    .override((screenWidth / 3), screenHeight)
                     .load(R.raw.watering)
+                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                     .into(imageView)
                 val delayHandler = Handler(imageView.context.mainLooper)
                 delayHandler.postDelayed({
                     imageView.visibility = View.INVISIBLE
-                }, 4000)
-                imageView.visibility = View.VISIBLE
+                }, 2700L)
             }
         }
     }
@@ -403,7 +408,7 @@ object BindingAdapter {
                         }
                     )
                 ).apply {
-                    duration = 4000
+                    duration = 3000
                     addUpdateListener {
                         imageView.setBackgroundColor(it.animatedValue as Int)
                     }
@@ -440,7 +445,7 @@ object BindingAdapter {
                             }
                         )
                     )
-                }, 2000)
+                }, 3000)
                 viewModel.isWatered.value = null
             }
         }

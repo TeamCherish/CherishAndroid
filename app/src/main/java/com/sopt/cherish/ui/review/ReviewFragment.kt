@@ -8,12 +8,14 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentReviewBinding
 import com.sopt.cherish.remote.api.ReviewWateringReq
 import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.util.MultiViewDialog
 import com.sopt.cherish.util.extension.FlexBoxExtension.getChip
+import com.sopt.cherish.util.extension.FlexBoxExtension.getChipsCount
 import com.sopt.cherish.util.extension.countNumberOfCharacters
 import com.sopt.cherish.util.extension.hideKeyboard
 import com.sopt.cherish.util.extension.writeKeyword
@@ -31,6 +33,8 @@ class ReviewFragment : Fragment() {
             DataBindingUtil.inflate(inflater, R.layout.fragment_review, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.mainViewModel = viewModel
+        activity?.findViewById<BottomNavigationView>(R.id.main_bottom_navi)?.visibility =
+            View.INVISIBLE
 
         addUserStatusWithChip(binding)
         addLimitNumberOfKeywordCharacters(binding)
@@ -38,6 +42,12 @@ class ReviewFragment : Fragment() {
         sendReviewToServer(binding)
         ignoreSendReviewToServer(binding)
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        activity?.findViewById<BottomNavigationView>(R.id.main_bottom_navi)?.visibility =
+            View.VISIBLE
     }
 
     private fun addLimitNumberOfMemoCharacters(binding: FragmentReviewBinding) {
@@ -89,7 +99,7 @@ class ReviewFragment : Fragment() {
 
     private fun sendReviewToServer(binding: FragmentReviewBinding) {
         binding.homeReviewAdminAccept.setOnClickListener {
-            if (binding.homeReviewMemo.text.isEmpty()) {
+            if (binding.homeReviewFlexBox.getChipsCount() == 0 && binding.homeReviewMemo.text.isEmpty()) {
                 MultiViewDialog(
                     R.layout.dialog_warning_review_no_word_warning,
                     0.6944f,
@@ -100,7 +110,6 @@ class ReviewFragment : Fragment() {
                 )
             } else {
                 if (binding.homeReviewMemo.text.length <= 100) {
-                    // todo : chip 순서 확인해서 보내도록 해봅시다. 적을 때도 순서가 이상하게 바뀌는 상황이 발생하는데 그것도 적용해서요~
                     viewModel.sendReviewToServer(
                         reviewWateringReq = ReviewWateringReq(
                             binding.homeReviewMemo.text.toString(),
