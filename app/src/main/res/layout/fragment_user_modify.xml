@@ -164,24 +164,17 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/constraintLayout_setting_Back" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <ImageButton
                 android:id="@+id/settingModifyBack"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
+                android:src="@drawable/icon_gnb_back"
+                android:background="@null"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <ImageView
-                    android:contentDescription="@null"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/icon_gnb_back"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </ImageButton>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageButton

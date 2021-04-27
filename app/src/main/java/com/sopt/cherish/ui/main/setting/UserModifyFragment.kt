@@ -29,6 +29,7 @@ import com.sopt.cherish.remote.api.ResponseNicknameChangedata
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.main.MainActivity
 import com.sopt.cherish.ui.main.MainViewModel
+import com.sopt.cherish.ui.main.manageplant.ManagePlantFragment
 import com.sopt.cherish.util.FinalSharedPreferences
 import com.sopt.cherish.util.ImageSharedPreferences
 import retrofit2.Call
@@ -40,13 +41,15 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class UserModifyFragment : Fragment() {
+class UserModifyFragment : Fragment() ,MainActivity.OnBackPressedListener{
     private val viewModel: MainViewModel by activityViewModels()
 
     lateinit var binding: FragmentUserModifyBinding
     private val requestData = RetrofitBuilder
     val REQUEST_GALLERY_TAKE = 2
     var usernick: String? = ""
+
+    var check: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,8 +59,11 @@ class UserModifyFragment : Fragment() {
 
         binding = FragmentUserModifyBinding.bind(view)
 
+
+
         binding.settingModifyBack.setOnClickListener {
-            activity?.onBackPressed()
+
+            onBack()
         }
 
         binding.clickView.setOnClickListener {
@@ -211,5 +217,18 @@ class UserModifyFragment : Fragment() {
 
         binding.settingEditEmail.hint = (arguments?.getString("settinguseremail"))
         binding.settingEditEmail.isEnabled = false
+    }
+
+    override fun onBack() {
+       // if (check) {
+
+        if( arguments?.getInt("setting")==1) {
+            val transaction = parentFragmentManager.beginTransaction()
+            transaction.replace(R.id.main_fragment_container, SettingFragment()).commit()
+        }else{
+            val transaction = parentFragmentManager.beginTransaction()
+            transaction.replace(R.id.main_fragment_container, ManagePlantFragment()).commit()
+        }
+
     }
 }
