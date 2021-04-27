@@ -247,7 +247,7 @@ class SignUpFirstFragment : Fragment() {
     private fun isValidPW(password: String): Boolean {
         Log.d("isValidPW", password)
         val reg =
-            Regex("^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[$@$!%*#?&]).{8,}.\$")
+            Regex("^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[$@$!%*^#?&]).{8,}.\$")
         if (!password.matches(reg)) {
             return false
         }
