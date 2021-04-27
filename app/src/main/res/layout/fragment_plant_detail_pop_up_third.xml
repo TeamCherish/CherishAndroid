@@ -51,6 +51,7 @@
                 android:layout_height="wrap_content"
                 android:font="@font/notosanscjkkr_regular"
                 android:includeFontPadding="false"
+                android:enabled="false"
                 android:textColor="#8189b3"
                 android:text=""
                 android:textSize="@dimen/text_12sp"

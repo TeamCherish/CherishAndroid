@@ -101,7 +101,6 @@ class ManagePlantFragment : Fragment(), MainActivity.OnBackPressedListener {
         (context as MainActivity).setOnBackPressedListener(this)
     }
 
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == 1)
             return true
@@ -525,7 +524,6 @@ class ManagePlantFragment : Fragment(), MainActivity.OnBackPressedListener {
             // 한번 뒤로가기 버튼을 눌렀다면 Listener 를 null 로 해제해줍니다.
             // 한번 뒤로가기 버튼을 눌렀다면 Listener 를 null 로 해제해줍니다.
             activity!!.setOnBackPressedListener(null)
-
         }
     }
 
