@@ -551,13 +551,6 @@ class ManagePlantFragment : Fragment(), MainActivity.OnBackPressedListener {
     override fun onBack() {
 
 
-        /* binding.searchBox.visibility = View.VISIBLE
-         isSearched = false
-         binding.cancelBtn.visibility = View.INVISIBLE
-         if (!isCollapsed && tabIndex == 1)
-             binding.myPageAddPlantBtn.visibility = View.VISIBLE
-         (activity as MainActivity).replaceFragment(tabIndex, data, isSearched)
-         Toast.makeText(context,"메인홈으로 가",Toast.LENGTH_SHORT).show()*/
 
         if (check) {
             val transaction = parentFragmentManager.beginTransaction()
