@@ -53,7 +53,7 @@ class ReviewFragment : Fragment() {
     private fun addLimitNumberOfMemoCharacters(binding: FragmentReviewBinding) {
         binding.homeReviewMemo.countNumberOfCharacters { memo ->
             binding.homeReviewNumberOfMemo.text = memo?.length.toString()
-            if (memo?.length!! == 100) {
+            if (memo?.length!! > 100) {
                 MultiViewDialog(R.layout.dialog_warning_review_limit_error, 0.6944f, 0.16875f).show(
                     parentFragmentManager,
                     TAG
@@ -66,7 +66,7 @@ class ReviewFragment : Fragment() {
     private fun addLimitNumberOfKeywordCharacters(binding: FragmentReviewBinding) {
         binding.homeReviewEditKeyword.countNumberOfCharacters { keyword ->
             binding.homeReviewNumberOfCharacters.text = keyword?.length.toString()
-            if (keyword?.length!! == 5) {
+            if (keyword?.length!! > 5) {
                 MultiViewDialog(
                     R.layout.dialog_warning_keyword_wordcount_limit_error,
                     0.6944f,

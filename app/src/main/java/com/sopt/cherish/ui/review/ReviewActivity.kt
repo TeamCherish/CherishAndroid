@@ -40,14 +40,15 @@ class ReviewActivity : AppCompatActivity() {
         viewModel.userNickname = intent.getStringExtra("userNickname")!!
         viewModel.selectedCherishNickname = intent.getStringExtra("selectedCherishNickname")!!
         viewModel.selectedCherishId = intent.getIntExtra("selectedCherishId", 0)
-        viewModel.reviewText = "${viewModel.userNickname}님! ${viewModel.selectedCherishNickname}과의"
-        viewModel.reviewSubText = "${viewModel.selectedCherishNickname}과/와의 물주기를 기록하세요."
+        viewModel.reviewText =
+            "${viewModel.userNickname}님! ${viewModel.selectedCherishNickname}님와(과)의"
+        viewModel.reviewSubText = "${viewModel.selectedCherishNickname}와(과)의 물주기를 기록하세요."
     }
 
     private fun addLimitNumberOfMemoCharacters(binding: ActivityReviewBinding) {
         binding.reviewMemo.countNumberOfCharacters { memo ->
             binding.reviewNumberOfMemo.text = memo?.length.toString()
-            if (memo?.length!! == 100) {
+            if (memo?.length!! > 100) {
                 MultiViewDialog(R.layout.dialog_warning_review_limit_error, 0.6944f, 0.16875f).show(
                     supportFragmentManager,
                     TAG
@@ -60,7 +61,7 @@ class ReviewActivity : AppCompatActivity() {
     private fun addLimitNumberOfKeywordCharacters(binding: ActivityReviewBinding) {
         binding.reviewEditKeyword.countNumberOfCharacters { keyword ->
             binding.reviewNumberOfCharacters.text = keyword?.length.toString()
-            if (keyword?.length!! == 5) {
+            if (keyword?.length!! > 5) {
                 MultiViewDialog(
                     R.layout.dialog_warning_keyword_wordcount_limit_error,
                     0.6944f,
