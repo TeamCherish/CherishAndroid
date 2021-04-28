@@ -245,7 +245,6 @@ class ManagePlantFragment : Fragment(), MainActivity.OnBackPressedListener {
                         binding.myPageAddPlantBtn.visibility = View.INVISIBLE //식물 추가 invisible
                         isCollapsed = true
                         isSearched = false
-
                     }
 
                 }
@@ -278,7 +277,6 @@ class ManagePlantFragment : Fragment(), MainActivity.OnBackPressedListener {
                         binding.searchBox.visibility = View.VISIBLE
 
                         binding.cancelBtn.visibility = View.INVISIBLE
-
                         binding.myPageAddPlantBtn.visibility = View.INVISIBLE
                         isCollapsed = true
                         isSearched = false
@@ -374,7 +372,6 @@ class ManagePlantFragment : Fragment(), MainActivity.OnBackPressedListener {
                                 binding.cancelBtn.visibility = View.INVISIBLE
                                 binding.myPageAddPlantBtn.visibility = View.INVISIBLE
                                 isSearched = false
-
                             } else {
                                 binding.myPageBg.setBackgroundColor(
                                     ContextCompat.getColor(
@@ -383,7 +380,6 @@ class ManagePlantFragment : Fragment(), MainActivity.OnBackPressedListener {
                                     )
                                 )
                                 isSearched = (activity as MainActivity).getIsSearched()
-
                                 binding.myPageAddPlantBtn.visibility = View.VISIBLE
                             }
                             (activity as MainActivity).replaceFragment(tabIndex, data, isSearched)
@@ -405,7 +401,6 @@ class ManagePlantFragment : Fragment(), MainActivity.OnBackPressedListener {
                                         R.color.cherish_my_page_bg
                                     )
                                 )
-
                                 binding.cancelBtn.visibility = View.INVISIBLE
 
                                 isSearched = false
@@ -417,9 +412,9 @@ class ManagePlantFragment : Fragment(), MainActivity.OnBackPressedListener {
                                         R.color.white
                                     )
                                 )
-
                                 isSearched = (activity as MainActivity).getIsSearched()
                                 if (isSearched) {
+
                                     binding.myPageAddPlantBtn.visibility = View.INVISIBLE
                                 } else {
                                     binding.myPageAddPlantBtn.visibility = View.VISIBLE
@@ -505,9 +500,6 @@ class ManagePlantFragment : Fragment(), MainActivity.OnBackPressedListener {
     }
 
     override fun onBack() {
-
-
-
         if (check) {
             val transaction = parentFragmentManager.beginTransaction()
             transaction.detach(this).attach(this).commit()
