@@ -69,6 +69,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginEnd="16dp"
             android:textColor="#454545"
+            android:includeFontPadding="false"
             android:textSize="15sp"
             android:textStyle="normal"
             app:layout_constraintEnd_toEndOf="parent"
@@ -269,7 +270,6 @@
                 app:behavior_hideable="false"
                 app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
-                <!-- tabTextColor 추가해주세요!-->
                 <com.google.android.material.tabs.TabLayout
                     android:id="@+id/my_page_bottom_tab"
                     style="?attr/bottomSheetStyle"
@@ -283,7 +283,6 @@
                     app:tabIndicatorColor="@color/cherish_light_black"
                     app:tabMode="scrollable" />
 
-                <!-- background color 추가해주세요!-->
                 <TextView
                     android:id="@+id/tab_bar_line"
                     android:layout_width="match_parent"
@@ -293,16 +292,17 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/my_page_bottom_tab" />
 
-
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/my_page_bottom_container"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
+                    android:id="@+id/my_page_bottom_container"
                     android:layout_marginBottom="?attr/actionBarSize"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tab_bar_line">
+
+
                     <androidx.core.widget.NestedScrollView
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
@@ -311,6 +311,7 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"/>
                 </androidx.constraintlayout.widget.ConstraintLayout>
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.coordinatorlayout.widget.CoordinatorLayout>

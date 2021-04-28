@@ -27,6 +27,14 @@
         app:layout_constraintEnd_toEndOf="@+id/dialog_viewpager"
         app:layout_constraintTop_toTopOf="@+id/dialog_viewpager" />
 
+    <View
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/dialog_viewpager"
+        app:layout_constraintTop_toTopOf="@+id/dialog_viewpager"/>
+
     <com.zhpan.indicator.IndicatorView
         android:id="@+id/indicator_view"
         android:layout_width="wrap_content"
