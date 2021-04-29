@@ -54,6 +54,7 @@
                 android:textColor="#8189b3"
                 android:text=""
                 android:textSize="@dimen/text_12sp"
+                android:enabled="false"
                 app:chipStrokeColor="#8189b3"
                 app:chipStrokeWidth="1dp"
                 android:layout_marginTop="16dp"

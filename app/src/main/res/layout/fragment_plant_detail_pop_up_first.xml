@@ -56,6 +56,7 @@
                 app:chipStrokeColor="#8189b3"
                 app:chipStrokeWidth="1dp"
                 android:text=""
+                android:enabled="false"
                 app:layout_constraintHorizontal_chainStyle="packed"
                 app:layout_constraintStart_toStartOf="@id/flower_img"
                 app:layout_constraintEnd_toEndOf="@+id/flower_img"

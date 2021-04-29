@@ -38,6 +38,7 @@
             app:layout_constraintTop_toBottomOf="@+id/modify_user_img">
 
             <EditText
+                android:autofillHints="@string/delete_user_yes"
                 android:id="@+id/setting_edit_nickname"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -163,24 +164,17 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/constraintLayout_setting_Back" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <ImageButton
                 android:id="@+id/settingModifyBack"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
+                android:src="@drawable/icon_gnb_back"
+                android:background="@null"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <ImageView
-                    android:contentDescription="@null"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/icon_gnb_back"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </ImageButton>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageButton
@@ -194,5 +188,13 @@
             app:layout_constraintStart_toStartOf="@+id/modify_user_img"
             app:layout_constraintTop_toTopOf="@+id/modify_user_img" />
 
+        <View
+            android:id="@+id/click_view"
+            android:layout_width="86dp"
+            android:layout_height="86dp"
+            android:layout_marginTop="57dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout_setting_Back"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

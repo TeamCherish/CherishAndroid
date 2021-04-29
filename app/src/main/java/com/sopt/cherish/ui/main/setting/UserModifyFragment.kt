@@ -29,6 +29,7 @@ import com.sopt.cherish.remote.api.ResponseNicknameChangedata
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.ui.main.MainActivity
 import com.sopt.cherish.ui.main.MainViewModel
+import com.sopt.cherish.ui.main.manageplant.ManagePlantFragment
 import com.sopt.cherish.util.FinalSharedPreferences
 import com.sopt.cherish.util.ImageSharedPreferences
 import retrofit2.Call
@@ -40,15 +41,15 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 
-class UserModifyFragment : Fragment() {
+class UserModifyFragment : Fragment() ,MainActivity.OnBackPressedListener{
     private val viewModel: MainViewModel by activityViewModels()
 
     lateinit var binding: FragmentUserModifyBinding
     private val requestData = RetrofitBuilder
-    val REQUEST_IMAGE_CAPTURE = 1
     val REQUEST_GALLERY_TAKE = 2
-    lateinit var currentPhotoPath: String
     var usernick: String? = ""
+
+    var check: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,11 +59,14 @@ class UserModifyFragment : Fragment() {
 
         binding = FragmentUserModifyBinding.bind(view)
 
+
+
         binding.settingModifyBack.setOnClickListener {
-            activity?.onBackPressed()
+
+            onBack()
         }
 
-        binding.modifyUserImg.setOnClickListener {
+        binding.clickView.setOnClickListener {
             changeProfileImage()
             binding.buttonNickchange.setBackgroundColor(Color.parseColor("#1AD287"))
         }
@@ -98,15 +102,11 @@ class UserModifyFragment : Fragment() {
 
             (activity as MainActivity).beforeClick = false
 
-            val cameraUri = FinalSharedPreferences.getCameraFile(requireContext())
             val galleryUri = FinalSharedPreferences.getGalleryFile(requireContext())
 
-            if (cameraUri.isNotEmpty())
-                ImageSharedPreferences.setCameraFile(requireContext(), cameraUri)
-            else if (galleryUri.isNotEmpty())
+            if (galleryUri.isNotEmpty())
                 ImageSharedPreferences.setGalleryFile(requireContext(), galleryUri)
-            if (cameraUri.isEmpty() && galleryUri.isEmpty()) {
-                ImageSharedPreferences.clearImage(requireContext(), "camera")
+            else if (galleryUri.isEmpty()) {
                 ImageSharedPreferences.clearImage(requireContext(), "gallery")
             }
 
@@ -147,6 +147,12 @@ class UserModifyFragment : Fragment() {
         initializeProfile()
     }
 
+    private fun getAlbum() {
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, REQUEST_GALLERY_TAKE)
+    }
+
     private fun initializeProfile() {
         if ((activity as MainActivity).beforeClick) {
             binding.modifyUserImg.setBackgroundResource(R.drawable.user_img)
@@ -155,27 +161,6 @@ class UserModifyFragment : Fragment() {
             if (ImageSharedPreferences.getGalleryFile(requireContext()).isNotEmpty()) { //앨범일 때
                 val uri = Uri.parse(ImageSharedPreferences.getGalleryFile(requireContext()))
                 Glide.with(requireContext()).load(uri).circleCrop().into(binding.modifyUserImg)
-            } else if (ImageSharedPreferences.getCameraFile(requireContext()).isNotEmpty()) {
-                val path = ImageSharedPreferences.getCameraFile(requireContext())
-                val bitmap = BitmapFactory.decodeFile(path)
-                lateinit var exif: ExifInterface
-
-                try {
-                    exif = ExifInterface(path)
-
-                    val exifOrientation = exif.getAttributeInt(
-                        ExifInterface.TAG_ORIENTATION,
-                        ExifInterface.ORIENTATION_NORMAL
-                    )
-                    val exifDegree = exifOrientationToDegress(exifOrientation)
-
-                    Glide.with(requireContext()).load(rotate(bitmap, exifDegree)).circleCrop().into(
-                        binding.modifyUserImg
-                    )
-                    //binding.myPageUserImg.setImageBitmap(rotate(bitmap, exifDegree))
-                } catch (e: IOException) {
-                    e.printStackTrace()
-                }
             } else {
                 binding.modifyUserImg.setBackgroundResource(R.drawable.user_img)
             }
@@ -189,9 +174,6 @@ class UserModifyFragment : Fragment() {
 
         popUp.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item ->
             when (item.itemId) {
-                R.id.camera -> {
-                    captureCamera()
-                }
                 R.id.gallery ->
                     getAlbum()
                 R.id.delete ->
@@ -203,66 +185,21 @@ class UserModifyFragment : Fragment() {
         popUp.show()
     }
 
-    @Throws(IOException::class)
-    private fun createImageFile(): File {
-        val timeStamp: String = SimpleDateFormat("yyyyMMdd__HHmmss").format(Date())
-        val storageDir: File? = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-        return File.createTempFile(
-            "JPEG_${timeStamp}_",
-            ".jpg",
-            storageDir
-        ).apply {
-            currentPhotoPath = absolutePath
-        }
-    }
 
     private fun deleteImage() {
         FinalSharedPreferences.clearImage(requireContext(), "gallery")
-        FinalSharedPreferences.clearImage(requireContext(), "camera")
 
         (activity as MainActivity).beforeClick = true
         val transaction = parentFragmentManager.beginTransaction()
         transaction.detach(this).attach(this).commit()
     }
 
-    private fun getAlbum() {
-        val intent = Intent(Intent.ACTION_PICK)
-        intent.type = "image/*"
-        startActivityForResult(intent, REQUEST_GALLERY_TAKE)
-    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK) {
-            val bitmap = BitmapFactory.decodeFile(currentPhotoPath)
-
-            lateinit var exif: ExifInterface
-
-            FinalSharedPreferences.clearImage(requireContext(), "camera")
-            FinalSharedPreferences.clearImage(requireContext(), "gallery")
-            FinalSharedPreferences.setCameraFile(requireContext(), currentPhotoPath)
-
-            try {
-                exif = ExifInterface(currentPhotoPath)
-
-                val exifOrientation = exif.getAttributeInt(
-                    ExifInterface.TAG_ORIENTATION,
-                    ExifInterface.ORIENTATION_NORMAL
-                )
-                val exifDegree = exifOrientationToDegress(exifOrientation)
-
-                Glide.with(requireContext()).load(rotate(bitmap, exifDegree)).circleCrop().into(
-                    binding.modifyUserImg
-                )
-                //binding.myPageUserImg.setImageBitmap(rotate(bitmap, exifDegree))
-            } catch (e: IOException) {
-                e.printStackTrace()
-            }
-
-        } else if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_GALLERY_TAKE) {
+        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_GALLERY_TAKE) {
             //binding.myPageUserImg.setImageURI(data?.data)
-            FinalSharedPreferences.clearImage(requireContext(), "camera")
             FinalSharedPreferences.clearImage(requireContext(), "gallery")
             FinalSharedPreferences.setGalleryFile(requireContext(), data?.data.toString())
 
@@ -273,54 +210,6 @@ class UserModifyFragment : Fragment() {
     }
 
 
-    private fun exifOrientationToDegress(exifOrientation: Int): Int {
-        when (exifOrientation) {
-            ExifInterface.ORIENTATION_ROTATE_90 -> {
-                return 90
-            }
-            ExifInterface.ORIENTATION_ROTATE_180 -> {
-                return 180
-            }
-            ExifInterface.ORIENTATION_ROTATE_270 -> {
-                return 270
-            }
-            else -> {
-                return 0
-            }
-
-        }
-    }
-
-    private fun captureCamera() {
-        Intent(MediaStore.ACTION_IMAGE_CAPTURE).also { takePictureIntent ->
-            takePictureIntent.resolveActivity(requireActivity().packageManager)?.also {
-                //startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
-
-                val photoFile: File? = try {
-                    createImageFile()
-                } catch (ex: IOException) {
-                    null
-                }
-                photoFile?.also {
-                    val photoURI: Uri = FileProvider.getUriForFile(
-                        requireContext(),
-                        "com.sopt.cherish.fileprovider",
-                        it
-                    )
-                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI)
-                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
-                }
-            }
-        }
-    }
-
-    private fun rotate(bitmap: Bitmap, degree: Int): Bitmap {
-        val matrix = Matrix()
-        matrix.postRotate(degree.toFloat())
-        return Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
-    }
-
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         usernick = arguments?.getString("settingusernickname").toString()
@@ -328,5 +217,18 @@ class UserModifyFragment : Fragment() {
 
         binding.settingEditEmail.hint = (arguments?.getString("settinguseremail"))
         binding.settingEditEmail.isEnabled = false
+    }
+
+    override fun onBack() {
+       // if (check) {
+
+        if( arguments?.getInt("setting")==1) {
+            val transaction = parentFragmentManager.beginTransaction()
+            transaction.replace(R.id.main_fragment_container, SettingFragment()).commit()
+        }else{
+            val transaction = parentFragmentManager.beginTransaction()
+            transaction.replace(R.id.main_fragment_container, ManagePlantFragment()).commit()
+        }
+
     }
 }
