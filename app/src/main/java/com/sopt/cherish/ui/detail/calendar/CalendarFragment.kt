@@ -2,7 +2,6 @@ package com.sopt.cherish.ui.detail.calendar
 
 import android.content.Context
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.*
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -53,16 +52,6 @@ class CalendarFragment : Fragment() {
                 viewModel.calendarModeChangeEvent.value = true
             }
         }
-        binding.reviewAllText.viewTreeObserver.addOnGlobalLayoutListener(object :
-            ViewTreeObserver.OnGlobalLayoutListener {
-            override fun onGlobalLayout() {
-                binding.reviewAllText.viewTreeObserver.removeOnGlobalLayoutListener(this)
-                binding.reviewAllText.apply {
-                    ellipsize = TextUtils.TruncateAt.MARQUEE
-                }
-            }
-
-        })
     }
 
     private fun observeSelectedMemoCalendarDay() {
