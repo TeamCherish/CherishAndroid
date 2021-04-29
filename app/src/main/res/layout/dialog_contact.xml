@@ -52,7 +52,7 @@
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/notosanscjkkr_bold"
                 android:includeFontPadding="false"
-                android:text="@{mainViewModel.selectedCherishUser.nickName}"
+                android:text="@{mainViewModel.selectedCherishUser.nickName + `와(과)는`}"
                 android:textColor="@color/cherish_light_black"
                 android:textSize="22sp"
                 app:layout_constraintBottom_toTopOf="@id/contact_common_text"

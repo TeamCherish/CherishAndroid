@@ -14,6 +14,7 @@ import com.sopt.cherish.ui.review.ReviseReviewFragment
 import com.sopt.cherish.util.DateUtil
 import com.sopt.cherish.util.extension.FlexBoxExtension.clearChips
 import com.sopt.cherish.util.extension.longToast
+import com.sopt.cherish.util.extension.setMaxLinesToEllipsize
 
 class CalendarFragment : Fragment() {
 
@@ -26,6 +27,7 @@ class CalendarFragment : Fragment() {
             viewModel.selectedCalendarDay.value = it
         }
     }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,6 +38,7 @@ class CalendarFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.detailPlantViewModel = viewModel
         binding.calendarFragment = this
+
         observeSelectedMemoCalendarDay()
         initializeViewModelData()
         initializeCalendar()
@@ -51,6 +54,10 @@ class CalendarFragment : Fragment() {
                 binding.calendarView.changeCalendarModeWeeks()
                 viewModel.calendarModeChangeEvent.value = true
             }
+        }
+        binding.reviewAllText.viewTreeObserver.addOnDrawListener {
+            binding.reviewAllText.setMaxLinesToEllipsize()
+            false
         }
     }
 

@@ -159,6 +159,13 @@
             app:layout_constraintStart_toStartOf="@id/home_affection_rating"
             app:layout_constraintTop_toBottomOf="@+id/home_affection_rating" />
 
+        <View
+            android:id="@+id/home_modal_animate_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0"
+            android:background="#99000000" />
+
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">

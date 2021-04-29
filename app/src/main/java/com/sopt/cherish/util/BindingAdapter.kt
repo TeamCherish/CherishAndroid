@@ -551,13 +551,13 @@ object BindingAdapter {
         userNickname: String,
         selectedCherishName: String?
     ) {
-        textView.text = "${userNickname}님!${selectedCherishName}님과의"
+        textView.text = "${userNickname}님!${selectedCherishName}와(과)의"
     }
 
     @SuppressLint("SetTextI18n")
     @JvmStatic
     @BindingAdapter("android:setReviewSubText")
     fun setReviewSubText(textView: TextView, selectedCherishName: String?) {
-        textView.text = "${selectedCherishName}님과의 물주기를 기록해주세요"
+        textView.text = "${selectedCherishName}와(과)의 물주기를 기록해주세요"
     }
 }

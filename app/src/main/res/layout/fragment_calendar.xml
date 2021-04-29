@@ -160,11 +160,14 @@
                 <TextView
                     android:id="@+id/review_all_text"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ellipsize="end"
+                    android:layout_height="0dp"
                     android:layout_marginTop="16dp"
+                    app:layout_constraintBottom_toTopOf="@id/review_back"
                     android:showMemo="@{detailPlantViewModel.selectedCalendarData.review}"
-                    app:layout_constraintTop_toBottomOf="@id/calendarView_chip_layout" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/calendarView_chip_layout"
+                    app:layout_constraintVertical_bias="0.0001" />
 
                 <ImageButton
                     android:id="@+id/review_back"
