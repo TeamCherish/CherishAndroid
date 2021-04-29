@@ -180,6 +180,7 @@ class HomeFragment : Fragment(), OnItemClickListener, MainActivity.OnBackPressed
             }
 
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
+                binding.homeModalAnimateView.alpha = (slideOffset - 0.2f)
                 val lowerSlide = 0.3
                 val middleSlide = 0.5
                 if (slideOffset < lowerSlide) {
