@@ -1,7 +1,9 @@
 package com.sopt.cherish.di
 
+import android.app.NotificationManager
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
@@ -99,6 +101,13 @@ object Injection {
     private fun provideNotificationRepository(): NotificationRepository {
         return NotificationRepository(provideNotificationAPI())
     }
+
+    // NotificationManager
+    fun provideNotificationManager(context: Context): NotificationManager =
+        ContextCompat.getSystemService(
+            context,
+            NotificationManager::class.java
+        ) as NotificationManager
 
     // 암호화 쉐어드 프리퍼런스 di , token 발급되었을 때 여기다가 넣어놓고서 작업하면 될거 같음
     fun provideEncryptedSharedPreference(context: Context): SharedPreferences {

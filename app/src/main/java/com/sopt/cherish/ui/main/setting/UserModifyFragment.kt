@@ -3,22 +3,15 @@ package com.sopt.cherish.ui.main.setting
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.graphics.Color
-import android.graphics.Matrix
 import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
-import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
-import androidx.core.content.FileProvider
-import androidx.exifinterface.media.ExifInterface
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.bumptech.glide.Glide
@@ -35,13 +28,9 @@ import com.sopt.cherish.util.ImageSharedPreferences
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.io.File
-import java.io.IOException
-import java.text.SimpleDateFormat
-import java.util.*
 
 
-class UserModifyFragment : Fragment() ,MainActivity.OnBackPressedListener{
+class UserModifyFragment : Fragment(), MainActivity.OnBackPressedListener {
     private val viewModel: MainViewModel by activityViewModels()
 
     lateinit var binding: FragmentUserModifyBinding
@@ -220,12 +209,12 @@ class UserModifyFragment : Fragment() ,MainActivity.OnBackPressedListener{
     }
 
     override fun onBack() {
-       // if (check) {
+        // if (check) {
 
-        if( arguments?.getInt("setting")==1) {
+        if (arguments?.getInt("setting") == 1) {
             val transaction = parentFragmentManager.beginTransaction()
             transaction.replace(R.id.main_fragment_container, SettingFragment()).commit()
-        }else{
+        } else {
             val transaction = parentFragmentManager.beginTransaction()
             transaction.replace(R.id.main_fragment_container, ManagePlantFragment()).commit()
         }
