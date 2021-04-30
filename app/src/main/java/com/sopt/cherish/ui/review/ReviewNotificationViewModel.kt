@@ -14,10 +14,12 @@ class ReviewNotificationViewModel(
     private val app: Application
 ) : AndroidViewModel(app) {
 
+    private val second: Long = 1000L
+    private val minute: Long = second * 1000L
     fun startNotificationTimer() {
         Injection.provideNotificationManager(app).cancelNotification()
         viewModelScope.launch {
-            delay(15000)
+            delay(10 * minute)
             Injection.provideNotificationManager(app).sendRecallReviewNotification(
                 app.getString(R.string.notification_recall_review_subtitle),
                 app
