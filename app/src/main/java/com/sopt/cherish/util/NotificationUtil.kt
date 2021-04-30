@@ -2,11 +2,14 @@ package com.sopt.cherish.util
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.app.NotificationManager.IMPORTANCE_DEFAULT
 import android.app.NotificationManager.IMPORTANCE_HIGH
+import android.app.PendingIntent
 import android.content.Context
 import android.os.Build
+import androidx.core.app.NotificationCompat
 import com.sopt.cherish.R
+import com.sopt.cherish.ui.receiver.AlarmReceiver
+import com.sopt.cherish.util.extension.ContextExtension.getIntent
 
 fun NotificationManager.createNeedToWateringUser(context: Context) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -31,7 +34,7 @@ fun NotificationManager.createRecallReview(context: Context) {
             context.getString(R.string.notification_cherish_recall_review_channel_name)
         val recallReviewChannelDescription =
             context.getString(R.string.notification_cherish_recall_review_channel_description)
-        val recallReviewChannelImportance = IMPORTANCE_DEFAULT
+        val recallReviewChannelImportance = IMPORTANCE_HIGH
         val recallReviewChannel = NotificationChannel(
             context.getString(R.string.notification_cherish_recall_review_channel_id),
             recallReviewChannelName,
@@ -43,5 +46,26 @@ fun NotificationManager.createRecallReview(context: Context) {
 }
 
 fun NotificationManager.sendRecallReviewNotification(messageBody: String, context: Context) {
+    val contentIntent = context.getIntent<AlarmReceiver>()
+    val contentPendingIntent = PendingIntent.getActivity(
+        context,
+        MyKeyStore.provideRecallReviewNotificationId(),
+        contentIntent,
+        PendingIntent.FLAG_ONE_SHOT
+    )
+    val notificationBuilder = NotificationCompat.Builder(
+        context,
+        context.getString(R.string.notification_cherish_recall_review_channel_id)
+    )
+        .setContentTitle(context.getString(R.string.notification_recall_review_title))
+        .setContentText(messageBody)
+        .setSmallIcon(R.drawable.login_logo)
+        .setAutoCancel(true)
+        .setContentIntent(contentPendingIntent)
 
+    notify(MyKeyStore.provideRecallReviewNotificationId(), notificationBuilder.build())
+}
+
+fun NotificationManager.cancelNotification() {
+    cancelAll()
 }

@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityReviewBinding
@@ -22,13 +23,18 @@ import kotlinx.coroutines.launch
 class ReviewActivity : AppCompatActivity() {
     private val viewModel: ReviewViewModel by viewModels { Injection.provideReviewViewModelFactory() }
 
+    private val reviewNotificationViewModel by lazy {
+        ViewModelProvider(this).get(ReviewNotificationViewModel::class.java)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding: ActivityReviewBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_review)
         initializeViewModelData()
         binding.reviewViewModel = viewModel
-
+        binding.lifecycleOwner = this
+        reviewNotificationViewModel.startNotificationTimer()
         addUserStatusWithChip(binding)
         addLimitNumberOfKeywordCharacters(binding)
         addLimitNumberOfMemoCharacters(binding)

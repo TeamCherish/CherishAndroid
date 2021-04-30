@@ -3,7 +3,6 @@ package com.sopt.cherish.ui.notification
 import android.app.PendingIntent
 import android.app.PendingIntent.FLAG_ONE_SHOT
 import android.content.Intent
-import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
@@ -12,7 +11,6 @@ import com.sopt.cherish.R
 import com.sopt.cherish.di.Injection
 import com.sopt.cherish.ui.signin.SignInActivity
 import com.sopt.cherish.util.MyKeyStore
-import com.sopt.cherish.util.createNeedToWateringUser
 import com.sopt.cherish.util.extension.ContextExtension.getIntent
 
 class FirebaseNotificationService : FirebaseMessagingService() {
@@ -30,10 +28,6 @@ class FirebaseNotificationService : FirebaseMessagingService() {
 
         val notificationManager = Injection.provideNotificationManager(this)
         val notificationId = MyKeyStore.provideNeedToWateringNotificationId()
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            notificationManager.createNeedToWateringUser(this)
-        }
 
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, FLAG_ONE_SHOT)
         val notification = NotificationCompat.Builder(

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.sopt.cherish.R
@@ -25,6 +26,11 @@ import kotlinx.coroutines.launch
 class ReviewFragment : Fragment() {
 
     private val viewModel: MainViewModel by activityViewModels()
+
+    private val reviewNotificationViewModel by lazy {
+        ViewModelProvider(this).get(ReviewNotificationViewModel::class.java)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,6 +39,7 @@ class ReviewFragment : Fragment() {
             DataBindingUtil.inflate(inflater, R.layout.fragment_review, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.mainViewModel = viewModel
+        reviewNotificationViewModel.startNotificationTimer()
         activity?.findViewById<BottomNavigationView>(R.id.main_bottom_navi)?.visibility =
             View.INVISIBLE
 

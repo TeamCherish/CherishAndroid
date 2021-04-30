@@ -155,4 +155,7 @@
     <string name="notification_cherish_recall_review_channel_id" translatable="false">recall_review_channel</string>
     <string name="notification_cherish_recall_review_channel_name" translatable="true">리뷰</string>
     <string name="notification_cherish_recall_review_channel_description">물준 다음 리뷰를 알려줍니다</string>
+
+    <string name="notification_recall_review_title">물주기를 까먹진 않으셨나요?</string>
+    <string name="notification_recall_review_subtitle">연락했던 식물이 물주기를 기다리고 있어요</string>
 </resources>
