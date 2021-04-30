@@ -5,6 +5,7 @@ import android.app.NotificationManager
 import android.app.NotificationManager.IMPORTANCE_HIGH
 import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
 import com.sopt.cherish.R
@@ -47,11 +48,12 @@ fun NotificationManager.createRecallReview(context: Context) {
 
 fun NotificationManager.sendRecallReviewNotification(messageBody: String, context: Context) {
     val contentIntent = context.getIntent<AlarmReceiver>()
-    val contentPendingIntent = PendingIntent.getActivity(
+    contentIntent.flags = Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY
+    val contentPendingIntent = PendingIntent.getBroadcast(
         context,
         MyKeyStore.provideRecallReviewNotificationId(),
         contentIntent,
-        PendingIntent.FLAG_ONE_SHOT
+        PendingIntent.FLAG_UPDATE_CURRENT
     )
     val notificationBuilder = NotificationCompat.Builder(
         context,

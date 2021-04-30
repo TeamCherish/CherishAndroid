@@ -17,12 +17,16 @@ class ReviewNotificationViewModel(
     fun startNotificationTimer() {
         Injection.provideNotificationManager(app).cancelNotification()
         viewModelScope.launch {
-            delay(5000)
+            delay(10000)
             Injection.provideNotificationManager(app).sendRecallReviewNotification(
                 app.getString(R.string.notification_recall_review_subtitle),
                 app
             )
         }
+    }
+
+    fun cancel() {
+        Injection.provideNotificationManager(app).cancelNotification()
     }
 
 }

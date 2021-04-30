@@ -133,6 +133,7 @@ class ReviewActivity : AppCompatActivity() {
                 }
             }
         }
+        reviewNotificationViewModel.cancel()
     }
 
     private fun ignoreSendReviewToServer(binding: ActivityReviewBinding) {
@@ -148,6 +149,7 @@ class ReviewActivity : AppCompatActivity() {
             )
             showLoadingDialog()
         }
+        reviewNotificationViewModel.cancel()
     }
 
     companion object {

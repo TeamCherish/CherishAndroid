@@ -5,6 +5,7 @@
 
     <queries>
         <package android:name="com.kakao.talk" />
+        <package android:name="com.sopt.cherish" />
     </queries>
 
     <uses-permission android:name="android.permission.INTERNET" />

@@ -139,6 +139,7 @@ class ReviewFragment : Fragment() {
                 }
             }
         }
+        reviewNotificationViewModel.cancel()
     }
 
     private fun ignoreSendReviewToServer(binding: FragmentReviewBinding) {
@@ -154,6 +155,7 @@ class ReviewFragment : Fragment() {
             )
             showLoadingDialog()
         }
+        reviewNotificationViewModel.cancel()
     }
 
     companion object {
