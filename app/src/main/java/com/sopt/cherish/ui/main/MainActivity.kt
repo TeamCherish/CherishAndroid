@@ -21,6 +21,8 @@ import com.sopt.cherish.ui.main.manageplant.*
 import com.sopt.cherish.ui.main.setting.SettingFragment
 import com.sopt.cherish.util.PermissionUtil
 import com.sopt.cherish.util.SimpleLogger
+import com.sopt.cherish.util.createNeedToWateringUser
+import com.sopt.cherish.util.createRecallReview
 import com.sopt.cherish.util.extension.shortToast
 
 
@@ -36,6 +38,10 @@ class MainActivity : AppCompatActivity() {
         val binding: ActivityMainBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_main)
         viewModel.cherishUserId.value = intent?.getIntExtra("needToWaterCherishId", -1)
+        Injection.provideNotificationManager(this).let {
+            it.createNeedToWateringUser(this)
+            it.createRecallReview(this)
+        }
         initializeToken()
         initializeViewModelData()
         requestCherishPermissions()

@@ -200,7 +200,7 @@ class SettingFragment : Fragment(), MainActivity.OnBackPressedListener {
             arguments = Bundle().apply {
                 putString("settingusernickname", usernickname)
                 putString("settinguseremail", useremail)
-                putInt("setting",1)
+                putInt("setting", 1)
 
             }
         })

@@ -20,4 +20,6 @@ object ContextExtension {
             longToast(this, "마켓을 열지 못했습니다.")
         }
     }
+
+    inline fun <reified T : Any> Context.getIntent() = Intent(this, T::class.java)
 }
