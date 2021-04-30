@@ -48,7 +48,7 @@ fun NotificationManager.createRecallReview(context: Context) {
 
 fun NotificationManager.sendRecallReviewNotification(messageBody: String, context: Context) {
     val contentIntent = context.getIntent<AlarmReceiver>()
-    contentIntent.flags = Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY
+    contentIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
     val contentPendingIntent = PendingIntent.getBroadcast(
         context,
         MyKeyStore.provideRecallReviewNotificationId(),
