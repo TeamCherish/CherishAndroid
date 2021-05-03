@@ -50,12 +50,20 @@ class EncryptedSharedPreferenceController(
         dataStore.edit().remove(cherishLoginTokenKey).apply()
     }
 
+    override fun isSingleInvoke(): Boolean = dataStore.getBoolean(cherishSingleInvoked, false)
+
+
+    override fun singleInvoked() {
+        dataStore.edit().putBoolean(cherishSingleInvoked, true).apply()
+    }
+
     companion object {
         private val cherishAlarmDataKey = MyKeyStore.provideAlarmKeyName()
         private val cherishLoginTokenKey = MyKeyStore.provideLoginTokenPrefsName()
         private val cherishLoginUserId = MyKeyStore.provideLoginUserId()
         private val cherishLoginUserPassword = MyKeyStore.provideLoginUserPassword()
         private val cherishLoginUserNickname = MyKeyStore.provideLoginUserNickname()
+        private val cherishSingleInvoked = MyKeyStore.provideSingleInvokeKey()
     }
 
 }

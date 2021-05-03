@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
+import com.sopt.cherish.MainApplication
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityMainBinding
 import com.sopt.cherish.di.Injection
@@ -87,7 +88,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun observeFirebaseDeviceToken() {
         viewModel.fcmToken.observe(this) {
-            viewModel.sendFcmToken(NotificationReq(viewModel.cherishUserId.value!!, it))
+            MainApplication.sharedPreferenceController.run {
+                if (!this.isSingleInvoke()) {
+                    this.singleInvoked()
+                    viewModel.sendFcmToken(NotificationReq(viewModel.cherishUserId.value!!, it))
+                }
+            }
         }
     }
 

@@ -28,4 +28,9 @@ interface OnControlled {
     fun deleteUserPassword()
 
     fun deleteToken()
+
+    // Single invoke function
+    fun isSingleInvoke(): Boolean
+
+    fun singleInvoked()
 }

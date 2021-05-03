@@ -3,7 +3,6 @@ package com.sopt.cherish.ui.notification
 import android.app.PendingIntent
 import android.app.PendingIntent.FLAG_ONE_SHOT
 import android.content.Intent
-import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
@@ -11,12 +10,13 @@ import com.sopt.cherish.R
 import com.sopt.cherish.di.Injection
 import com.sopt.cherish.ui.signin.SignInActivity
 import com.sopt.cherish.util.MyKeyStore
+import com.sopt.cherish.util.SimpleLogger
 import com.sopt.cherish.util.extension.ContextExtension.getIntent
 
 class FirebaseNotificationService : FirebaseMessagingService() {
 
     override fun onNewToken(token: String) {
-        Log.d("Refreshed Token", token)
+        SimpleLogger.logI(token)
     }
 
     override fun onMessageReceived(message: RemoteMessage) {
