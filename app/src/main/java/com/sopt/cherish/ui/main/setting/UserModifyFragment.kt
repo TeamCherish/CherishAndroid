@@ -125,7 +125,7 @@ class UserModifyFragment : Fragment(), MainActivity.OnBackPressedListener {
                         }
                     }
                 )
-            activity?.onBackPressed()
+            onBack()
 
         }
         return binding.root
