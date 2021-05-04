@@ -317,11 +317,16 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cons4"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:background="@drawable/dialog_round_corner"
+            android:paddingStart="16dp"
+            android:paddingTop="19dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="17dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cons2">
 
             <!--<androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_detail"
@@ -338,15 +343,13 @@
                 android:id="@+id/memocons"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:paddingTop="17dp"
-                android:paddingBottom="17dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/detail_layout"
+                android:paddingTop="17dp"
+                android:paddingBottom="17dp"
                 app:layout_constraintBottom_toTopOf="@+id/memocons2"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
+                app:layout_constraintStart_toStartOf="@+id/chip">
 
                 <TextView
                     android:id="@+id/userdate"
@@ -396,15 +399,13 @@
                 android:id="@+id/memocons2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:paddingTop="17dp"
-                android:paddingBottom="17dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
                 android:layout_marginBottom="23dp"
                 android:background="@drawable/detail_layout"
+                android:paddingTop="17dp"
+                android:paddingBottom="17dp"
                 app:layout_constraintBottom_toTopOf="@+id/button_water"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
+                app:layout_constraintEnd_toEndOf="@+id/memocons"
+                app:layout_constraintStart_toStartOf="@+id/memocons">
 
                 <TextView
                     android:id="@+id/userdate2"
@@ -456,17 +457,14 @@
                 android:id="@+id/textView1_with_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginBottom="10dp"
                 android:fontFamily="@font/notosanscjkkr_bold"
                 android:includeFontPadding="false"
-                android:textColor="#454545"
                 android:text="나영"
-                app:layout_constraintTop_toTopOf="@+id/cons4"
-                android:layout_marginTop="19dp"
-                android:textSize="@dimen/text_16sp"
+                android:textColor="#454545"
                 app:layout_constraintBottom_toTopOf="@+id/chip"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/cons4" />
 
 
             <com.google.android.material.chip.Chip
@@ -479,7 +477,6 @@
                 android:includeFontPadding="false"
                 android:text="키워드를 입력하지 않았어요!"
                 android:textColor="#454545"
-                android:textSize="@dimen/text_12sp"
                 app:chipStrokeColor="@color/cherish_light_black"
                 app:chipStrokeWidth="1dp"
                 app:layout_constraintBottom_toTopOf="@+id/memocons"
@@ -529,7 +526,6 @@
                 android:includeFontPadding="false"
                 android:text="와(과) 함께했던 이야기"
                 android:textColor="#454545"
-                android:textSize="@dimen/text_16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/textView1_with_name"
                 app:layout_constraintStart_toEndOf="@+id/textView1_with_name"
                 app:layout_constraintTop_toTopOf="@+id/textView1_with_name" />
@@ -539,9 +535,6 @@
                 style="@style/RoundButton.GreenMain"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="17dp"
                 android:fontFamily="@font/notosanscjkkr_medium"
                 android:includeFontPadding="false"
                 android:text="물주기"
@@ -549,8 +542,8 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/text_16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintEnd_toEndOf="@+id/memocons2"
+                app:layout_constraintStart_toStartOf="@+id/memocons2" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
