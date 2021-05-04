@@ -28,7 +28,6 @@ import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.ui.main.setting.UserModifyFragment
 import com.sopt.cherish.util.ImageSharedPreferences
 import com.sopt.cherish.util.PixelUtil.dp
-import com.sopt.cherish.util.SimpleLogger
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -42,7 +41,7 @@ class ManagePlantFragment : Fragment(), MainActivity.OnBackPressedListener {
     private val viewModel: MainViewModel by activityViewModels()
     private var tabIndex: Int = 0
     private var isCollapsed: Boolean = true
-    var isSearched: Boolean = false
+    var isSearched: Boolean = true
     private val requestData = RetrofitBuilder
     private lateinit var tabBindingFirst: MyPageCustomTabBinding
     private lateinit var tabBindingSecond: MyPageCustomTabBinding
@@ -66,7 +65,6 @@ class ManagePlantFragment : Fragment(), MainActivity.OnBackPressedListener {
 
 
         // 예진이 userId , viewModel.userId.value 라고하면 userId 찾을 수 있어요
-        SimpleLogger.logI(viewModel.cherishUserId.value.toString())
         setTabLayout()
         initializeServerRequest(binding)
 
@@ -85,11 +83,55 @@ class ManagePlantFragment : Fragment(), MainActivity.OnBackPressedListener {
                 binding.myPageAddPlantBtn.visibility = View.VISIBLE
             (activity as MainActivity).replaceFragment(tabIndex, data, isSearched)
         }
+        binding.goToSetting.setOnClickListener {
+            val transaction = parentFragmentManager.beginTransaction()
+            transaction.replace(R.id.main_fragment_container, UserModifyFragment().apply {
+                arguments = Bundle().apply {
+                    putString("settingusernickname", mypageusername)
+                    putString("settinguseremail", mypageuseremail)
 
+                }
+            })
+            transaction.addToBackStack(null)
+            transaction.commit()
+        }
+        //검색 버튼 눌렀을 때
+        binding.searchBox.setOnClickListener {
+            binding.searchBox.visibility = View.INVISIBLE
+            isSearched = true
+            binding.cancelBtn.visibility = View.VISIBLE
+            val standardBottomSheetBehavior =
+                BottomSheetBehavior.from(binding.homeStandardBottomSheetMypage)
+            standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+            if (tabIndex == 1) {
+                binding.myPageAddPlantBtn.visibility = View.INVISIBLE
+
+            }
+            (activity as MainActivity).replaceFragment(tabIndex, data, isSearched)
+
+            check = true
+
+        }
+
+        initializeBottomSheetBehavior(binding)
         initializeProfile(binding)
 
+        binding.myPageBg.setBackgroundColor(
+            ContextCompat.getColor(
+                binding.root.context,
+                R.color.cherish_my_page_bg
+            )
+        )
+
+        isSearched = true
         return binding.root
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        isSearched=true
+    }
+
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -163,38 +205,13 @@ class ManagePlantFragment : Fragment(), MainActivity.OnBackPressedListener {
             )
         )
 
-        //검색 버튼 눌렀을 때
-        binding.searchBox.setOnClickListener {
-            binding.searchBox.visibility = View.INVISIBLE
-            isSearched = true
-            binding.cancelBtn.visibility = View.VISIBLE
-            standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-            if (tabIndex == 1) {
-                binding.myPageAddPlantBtn.visibility = View.INVISIBLE
-
-            }
-            (activity as MainActivity).replaceFragment(tabIndex, data, isSearched)
-
-            check = true
-
-        }
-        binding.goToSetting.setOnClickListener {
-            val transaction = parentFragmentManager.beginTransaction()
-            transaction.replace(R.id.main_fragment_container, UserModifyFragment().apply {
-                arguments = Bundle().apply {
-                    putString("settingusernickname", mypageusername)
-                    putString("settinguseremail", mypageuseremail)
-
-                }
-            })
-            transaction.addToBackStack(null)
-            transaction.commit()
-        }
-
 
         standardBottomSheetBehavior.addBottomSheetCallback(object :
             BottomSheetBehavior.BottomSheetCallback() {
 
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+
+            }
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 if (newState == BottomSheetBehavior.STATE_DRAGGING) {
                     binding.myPageBg.setBackgroundColor(
@@ -219,7 +236,7 @@ class ManagePlantFragment : Fragment(), MainActivity.OnBackPressedListener {
                         isCollapsed = false
                     }
 
-                    if (newState == BottomSheetBehavior.STATE_DRAGGING) {
+                     else if (newState == BottomSheetBehavior.STATE_DRAGGING) {
                         binding.myPageBg.setBackgroundColor(
                             ContextCompat.getColor(
                                 binding.root.context,
@@ -228,7 +245,21 @@ class ManagePlantFragment : Fragment(), MainActivity.OnBackPressedListener {
                         )
                     }
 
-                    if (newState == BottomSheetBehavior.STATE_COLLAPSED) { //바텀시트 축소됐을 경우
+                    else if(newState==BottomSheetBehavior.STATE_HALF_EXPANDED){
+                        binding.myPageBg.setBackgroundColor(
+                            ContextCompat.getColor(
+                                binding.root.context,
+                                R.color.cherish_my_page_bg
+                            )
+                        )
+                        binding.searchBox.visibility = View.VISIBLE
+                        binding.cancelBtn.visibility = View.INVISIBLE
+                        binding.myPageAddPlantBtn.visibility = View.INVISIBLE //식물 추가 invisible
+                        isCollapsed = true
+                        isSearched = false
+                    }
+
+                    else if (newState == BottomSheetBehavior.STATE_COLLAPSED) { //바텀시트 축소됐을 경우
                         binding.myPageBg.setBackgroundColor(
                             ContextCompat.getColor(
                                 binding.root.context,
@@ -261,8 +292,21 @@ class ManagePlantFragment : Fragment(), MainActivity.OnBackPressedListener {
                         isCollapsed = false
                     }
 
+                    else if(newState==BottomSheetBehavior.STATE_HALF_EXPANDED){
+                        binding.myPageBg.setBackgroundColor(
+                            ContextCompat.getColor(
+                                binding.root.context,
+                                R.color.cherish_my_page_bg
+                            )
+                        )
+                        binding.searchBox.visibility = View.VISIBLE
+                        binding.cancelBtn.visibility = View.INVISIBLE
+                        binding.myPageAddPlantBtn.visibility = View.INVISIBLE //식물 추가 invisible
+                        isCollapsed = true
+                        isSearched = false
+                    }
 
-                    if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
+                    else if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
                         binding.myPageBg.setBackgroundColor(
                             ContextCompat.getColor(
                                 binding.root.context,
@@ -280,11 +324,6 @@ class ManagePlantFragment : Fragment(), MainActivity.OnBackPressedListener {
                 }
                 (activity as MainActivity).replaceFragment(tabIndex, data, isSearched)
             }
-
-            override fun onSlide(bottomSheet: View, slideOffset: Float) {
-
-            }
-
 
         })
     }
@@ -501,7 +540,6 @@ class ManagePlantFragment : Fragment(), MainActivity.OnBackPressedListener {
             check = false
         } else {
             val activity = activity as MainActivity?
-            // 한번 뒤로가기 버튼을 눌렀다면 Listener 를 null 로 해제해줍니다.
             // 한번 뒤로가기 버튼을 눌렀다면 Listener 를 null 로 해제해줍니다.
             activity!!.setOnBackPressedListener(null)
         }
