@@ -23,7 +23,6 @@ class FirebaseNotificationService : FirebaseMessagingService() {
         super.onMessageReceived(message)
 
         val intent = this.getIntent<SignInActivity>()
-        intent.putExtra("needToWateringCherishId", message.data["CherishId"]?.toInt())
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
 
         val notificationManager = Injection.provideNotificationManager(this)
