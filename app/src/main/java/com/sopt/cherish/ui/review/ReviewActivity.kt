@@ -15,7 +15,6 @@ import com.sopt.cherish.util.MultiViewDialog
 import com.sopt.cherish.util.extension.FlexBoxExtension.getChip
 import com.sopt.cherish.util.extension.FlexBoxExtension.getChipsCount
 import com.sopt.cherish.util.extension.countNumberOfCharacters
-import com.sopt.cherish.util.extension.hideKeyboard
 import com.sopt.cherish.util.extension.writeKeyword
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -54,30 +53,12 @@ class ReviewActivity : AppCompatActivity() {
     private fun addLimitNumberOfMemoCharacters(binding: ActivityReviewBinding) {
         binding.reviewMemo.countNumberOfCharacters { memo ->
             binding.reviewNumberOfMemo.text = memo?.length.toString()
-            if (memo?.length!! > 100) {
-                MultiViewDialog(R.layout.dialog_warning_review_limit_error, 0.6944f, 0.16875f).show(
-                    supportFragmentManager,
-                    TAG
-                )
-                binding.reviewMemo.hideKeyboard()
-            }
         }
     }
 
     private fun addLimitNumberOfKeywordCharacters(binding: ActivityReviewBinding) {
         binding.reviewEditKeyword.countNumberOfCharacters { keyword ->
             binding.reviewNumberOfCharacters.text = keyword?.length.toString()
-            if (keyword?.length!! > 5) {
-                MultiViewDialog(
-                    R.layout.dialog_warning_keyword_wordcount_limit_error,
-                    0.6944f,
-                    0.16875f
-                ).show(
-                    supportFragmentManager,
-                    TAG
-                )
-                binding.reviewEditKeyword.hideKeyboard()
-            }
         }
     }
 
