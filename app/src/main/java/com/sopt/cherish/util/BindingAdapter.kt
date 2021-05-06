@@ -67,7 +67,7 @@ object BindingAdapter {
                 val delayHandler = Handler(imageView.context.mainLooper)
                 delayHandler.postDelayed({
                     imageView.visibility = View.INVISIBLE
-                }, 3500L)
+                }, 3400L)
             }
         }
     }
