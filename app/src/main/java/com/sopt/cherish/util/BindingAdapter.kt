@@ -20,8 +20,6 @@ import com.sopt.cherish.MainApplication
 import com.sopt.cherish.R
 import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.util.PixelUtil.dp
-import com.sopt.cherish.util.PixelUtil.screenHeight
-import com.sopt.cherish.util.PixelUtil.screenWidth
 import com.sopt.cherish.util.animation.ProgressbarAnimation
 import com.sopt.cherish.util.extension.ImageViewExtension.matchSizeImageView
 import com.sopt.cherish.util.extension.ImageViewExtension.resizeImageView
@@ -63,14 +61,13 @@ object BindingAdapter {
                 imageView.animation = fadeAnimation
                 Glide.with(imageView.context)
                     .asGif()
-                    .override((screenWidth / 3), screenHeight)
                     .load(R.raw.watering)
                     .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                     .into(imageView)
                 val delayHandler = Handler(imageView.context.mainLooper)
                 delayHandler.postDelayed({
                     imageView.visibility = View.INVISIBLE
-                }, 2700L)
+                }, 3500L)
             }
         }
     }
@@ -445,7 +442,7 @@ object BindingAdapter {
                             }
                         )
                     )
-                }, 3000)
+                }, 3800)
                 viewModel.isWatered.value = null
             }
         }

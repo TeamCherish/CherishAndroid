@@ -48,8 +48,10 @@
             android:id="@+id/home_plant_watering_animation_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginStart="100dp"
             android:wateringAnimation="@{mainViewModel.isWatered()}"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
