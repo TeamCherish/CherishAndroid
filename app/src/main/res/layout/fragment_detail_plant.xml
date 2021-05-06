@@ -39,11 +39,11 @@
                   />-->
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/procons"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:paddingStart="90dp"
+                android:paddingStart="100dp"
                 android:paddingTop="50dp"
-                android:paddingEnd="90dp"
+                android:paddingEnd="100dp"
                 app:layout_constraintBottom_toTopOf="@+id/textView_nick"
                 app:layout_constraintEnd_toEndOf="@+id/cons2"
                 app:layout_constraintStart_toStartOf="@+id/cons2"
@@ -51,8 +51,9 @@
 
                 <com.dinuscxj.progressbar.CircleProgressBar
                     android:id="@+id/test"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -128,8 +129,8 @@
                 android:fontFamily="@font/notosanscjkkr_bold"
                 android:includeFontPadding="false"
                 android:text="남쿵둥이"
+                android:textSize="20sp"
                 android:textColor="#454545"
-                android:textSize="@dimen/text_20sp"
                 android:layout_marginBottom="5dp"
                 app:layout_constraintBottom_toTopOf="@id/textView6"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -142,6 +143,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="24dp"
+                android:paddingBottom="4dp"
+                android:paddingTop="3dp"
                 android:background="@drawable/plantdetail_chip"
                 android:text="TextView"
                 app:layout_constraintBottom_toTopOf="@+id/textView_duration"
@@ -154,8 +157,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="13dp"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginBottom="4dp"
+
                     android:fontFamily="@font/notosanscjkkr_regular"
                     android:includeFontPadding="false"
                     android:text="남궁선규"
@@ -182,9 +184,7 @@
                     android:id="@+id/textView_plantname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="3dp"
                     android:layout_marginEnd="11dp"
-                    android:layout_marginBottom="4dp"
                     android:fontFamily="@font/notosanscjkkr_regular"
                     android:includeFontPadding="false"
                     android:text="스투키"
@@ -309,7 +309,7 @@
                 android:background="@color/transparent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/icn_info"></ImageButton>
+                app:srcCompat="@drawable/icn_info" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -317,15 +317,15 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cons4"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:background="@drawable/dialog_round_corner"
             android:paddingStart="16dp"
             android:paddingTop="19dp"
             android:paddingEnd="16dp"
             android:paddingBottom="17dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/cons"
+            app:layout_constraintEnd_toEndOf="@id/cons"
+            app:layout_constraintStart_toStartOf="@id/cons"
             app:layout_constraintTop_toBottomOf="@+id/cons2">
 
             <!--<androidx.recyclerview.widget.RecyclerView
@@ -461,10 +461,10 @@
                 android:fontFamily="@font/notosanscjkkr_bold"
                 android:includeFontPadding="false"
                 android:text="나영"
+                android:textSize="16sp"
                 android:textColor="#454545"
                 app:layout_constraintBottom_toTopOf="@+id/chip"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/cons4" />
+                app:layout_constraintStart_toStartOf="parent" />
 
 
             <com.google.android.material.chip.Chip
@@ -472,7 +472,7 @@
                 style="@style/CustomChip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="15dp"
+                android:layout_marginBottom="10dp"
                 android:fontFamily="@font/notosanscjkkr_regular"
                 android:includeFontPadding="false"
                 android:text="키워드를 입력하지 않았어요!"
@@ -525,6 +525,7 @@
                 android:fontFamily="@font/notosanscjkkr_bold"
                 android:includeFontPadding="false"
                 android:text="와(과) 함께했던 이야기"
+                android:textSize="16sp"
                 android:textColor="#454545"
                 app:layout_constraintBottom_toBottomOf="@+id/textView1_with_name"
                 app:layout_constraintStart_toEndOf="@+id/textView1_with_name"

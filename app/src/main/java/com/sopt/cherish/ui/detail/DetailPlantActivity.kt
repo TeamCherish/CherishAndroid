@@ -18,6 +18,7 @@ import com.sopt.cherish.ui.dialog.BirthPickerDialogFragment
 import com.sopt.cherish.ui.dialog.ClockPickerDialogFragment
 import com.sopt.cherish.ui.dialog.WeekPickerDialogFragment
 import com.sopt.cherish.ui.enrollment.EnrollModifyPlantFragment
+import com.sopt.cherish.ui.main.manageplant.ManagePlantFragment
 
 
 /**
@@ -106,7 +107,7 @@ class DetailPlantActivity : AppCompatActivity(),
         val id = item.itemId
         when (id) {
             android.R.id.home -> {
-                onBackPressed()
+                this.onBackPressed()
                 return true
             }
 
