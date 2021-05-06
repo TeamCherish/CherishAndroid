@@ -41,7 +41,7 @@ class ManagePlantFragment : Fragment(), MainActivity.OnBackPressedListener {
     private val viewModel: MainViewModel by activityViewModels()
     private var tabIndex: Int = 0
     private var isCollapsed: Boolean = true
-    var isSearched: Boolean = true
+    var isSearched: Boolean = false
     private val requestData = RetrofitBuilder
     private lateinit var tabBindingFirst: MyPageCustomTabBinding
     private lateinit var tabBindingSecond: MyPageCustomTabBinding
@@ -126,16 +126,31 @@ class ManagePlantFragment : Fragment(), MainActivity.OnBackPressedListener {
             )
         )
 
-        isSearched = true
+        isSearched = false
         return binding.root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        isSearched=true
+        isSearched=false
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
+        setTabLayout()
+        initializeServerRequest(binding)
+        initializeBottomSheetBehavior(binding)
+        initializeProfile(binding)
+        binding.myPageBg.setBackgroundColor(
+            ContextCompat.getColor(
+                binding.root.context,
+                R.color.cherish_my_page_bg
+            )
+        )
+
+        isSearched = false
+    }
     override fun onAttach(context: Context) {
         super.onAttach(context)
         (context as MainActivity).setOnBackPressedListener(this)
@@ -216,6 +231,13 @@ class ManagePlantFragment : Fragment(), MainActivity.OnBackPressedListener {
 
             }
             override fun onStateChanged(bottomSheet: View, newState: Int) {
+                binding.myPageBg.setBackgroundColor(
+                    ContextCompat.getColor(
+                        binding.root.context,
+                        R.color.cherish_my_page_bg
+                    )
+                )
+
                 if (newState == BottomSheetBehavior.STATE_DRAGGING) {
                     binding.myPageBg.setBackgroundColor(
                         ContextCompat.getColor(
@@ -381,6 +403,13 @@ class ManagePlantFragment : Fragment(), MainActivity.OnBackPressedListener {
                     tab.requestLayout()
                 }
 
+                binding.myPageBg.setBackgroundColor(
+                    ContextCompat.getColor(
+                        binding.root.context,
+                        R.color.cherish_my_page_bg
+                    )
+                )
+
                 binding.myPageBottomTab.addOnTabSelectedListener(object :
                     TabLayout.OnTabSelectedListener {
 
@@ -388,6 +417,13 @@ class ManagePlantFragment : Fragment(), MainActivity.OnBackPressedListener {
                     override fun onTabUnselected(tab: TabLayout.Tab?) {}
                     override fun onTabSelected(tab: TabLayout.Tab?) {
                         tabIndex = binding.myPageBottomTab.selectedTabPosition
+
+                        binding.myPageBg.setBackgroundColor(
+                            ContextCompat.getColor(
+                                binding.root.context,
+                                R.color.cherish_my_page_bg
+                            )
+                        )
 
                         if (tabIndex == 0) {
                             tabBindingFirst.tabName.setTextAppearance(R.style.MyPageTabSelected)
@@ -538,8 +574,12 @@ class ManagePlantFragment : Fragment(), MainActivity.OnBackPressedListener {
 
     override fun onBack() {
         if (check) {
-            val transaction = parentFragmentManager.beginTransaction()
-            transaction.detach(this).attach(this).commit()
+            //val transaction = parentFragmentManager.beginTransaction()
+            //transaction.detach(this).attach(this).commit()
+            val standardBottomSheetBehavior =
+                BottomSheetBehavior.from(binding.homeStandardBottomSheetMypage)
+            // bottom sheet state 지정
+            standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
             check = false
         } else {
             val activity = activity as MainActivity?
