@@ -5,18 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.main.MainActivity">
+    
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_mypage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusableInTouchMode="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/item_layout" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_mypage"
-                    android:layout_width="match_parent"
-                    android:layout_marginTop="@dimen/margin_12dp"
-                    android:layout_height="match_parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:focusableInTouchMode="true"
-                    tools:listitem="@layout/item_layout" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -79,33 +79,35 @@
                         android:includeFontPadding="false"
                         android:text="asdf"
                         android:textColor="#454545"
+                        android:gravity="center_horizontal"
                         android:textSize="18sp"
                         app:layout_constraintEnd_toEndOf="@+id/imageView8"
                         app:layout_constraintStart_toStartOf="@+id/imageView8"
                         app:layout_constraintTop_toBottomOf="@+id/imageView8" />
 
-                    <ImageButton
+                    <ImageView
                         android:id="@+id/setting_next_nickname"
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="9dp"
                         android:background="@color/transparent"
+                        android:src="@drawable/ic_btn_more"
                         app:layout_constraintBottom_toBottomOf="@+id/setting_usernickname"
                         app:layout_constraintStart_toEndOf="@+id/setting_usernickname"
-                        app:layout_constraintTop_toTopOf="@+id/setting_usernickname"
-                        android:src="@drawable/ic_btn_more" />
+                        app:layout_constraintTop_toTopOf="@+id/setting_usernickname" />
 
                     <TextView
                         android:id="@+id/setting_useremail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="3dp"
-                        app:layout_constraintEnd_toEndOf="@+id/imageView8"
                         android:layout_marginBottom="28dp"
                         android:fontFamily="@font/roboto_regular"
                         android:includeFontPadding="false"
-                        android:textSize="15sp"
                         android:textColor="#aaaaaa"
+                        android:textSize="15sp"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/imageView8"
                         app:layout_constraintStart_toStartOf="@+id/imageView8"
                         app:layout_constraintTop_toBottomOf="@+id/setting_usernickname" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
