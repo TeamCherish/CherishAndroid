@@ -135,6 +135,10 @@ class SignInActivity : AppCompatActivity() {
                             "needToWaterCherishId",
                             intent.getIntExtra("needToWateringCherishId", -1)
                         )
+                        Log.d(
+                            "SignInActivity intent Test :",
+                            intent.getIntExtra("needToWateringCherishId", -1).toString()
+                        )
                         MainApplication.sharedPreferenceController.apply {
                             setUserId(userId)
                             setUserNickname(userNickName)

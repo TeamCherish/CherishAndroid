@@ -48,8 +48,10 @@
             android:id="@+id/home_plant_watering_animation_image"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginStart="100dp"
             android:wateringAnimation="@{mainViewModel.isWatered()}"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -139,6 +141,7 @@
             android:fontFamily="@font/roboto_bold"
             android:includeFontPadding="false"
             android:textColor="@color/white"
+            android:layout_marginTop="2dp"
             android:textSize="12sp"
             android:textStyle="bold"
             android:setProgressPercentText="@{mainViewModel.selectedCherishUser.growth}"
@@ -152,6 +155,7 @@
             android:layout_height="wrap_content"
             android:font="@font/notosanscjkkr_regular"
             android:text="@string/home_user_affection"
+            android:layout_marginTop="2dp"
             android:includeFontPadding="false"
             android:textColor="@color/white"
             android:textSize="12sp"
@@ -232,6 +236,7 @@
                     android:layout_marginStart="@dimen/margin_8dp"
                     android:layout_marginEnd="@dimen/margin_8dp"
                     android:layout_marginBottom="?attr/actionBarSize"
+                    android:overScrollMode="never"
                     android:paddingBottom="?attr/actionBarSize"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -241,7 +246,8 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/home_user_list"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp" />
+                        android:layout_height="0dp"
+                        android:overScrollMode="never" />
                 </androidx.core.widget.NestedScrollView>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.coordinatorlayout.widget.CoordinatorLayout>

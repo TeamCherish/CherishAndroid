@@ -87,13 +87,13 @@ object CalendarViewBindingAdapter {
     ) {
         flexboxLayout.clearChips()
         flexboxLayout.apply {
-            if (userStatus1 != "null" && userStatus1 != " ") {
+            if (userStatus1 != "null" && userStatus1 != " " && userStatus1 != "") {
                 userStatus1?.let { addChipCalendar(it) }
             }
-            if (userStatus2 != "null" && userStatus2 != " ") {
+            if (userStatus2 != "null" && userStatus2 != " " && userStatus2 != "") {
                 userStatus2?.let { addChipCalendar(it) }
             }
-            if (userStatus3 != "null" && userStatus3 != " ") {
+            if (userStatus3 != "null" && userStatus3 != " " && userStatus3 != "") {
                 userStatus3?.let { addChipCalendar(it) }
             }
         }
