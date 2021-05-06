@@ -571,8 +571,12 @@ class ManagePlantFragment : Fragment(), MainActivity.OnBackPressedListener {
 
     override fun onBack() {
         if (check) {
-            val transaction = parentFragmentManager.beginTransaction()
-            transaction.detach(this).attach(this).commit()
+            //val transaction = parentFragmentManager.beginTransaction()
+            //transaction.detach(this).attach(this).commit()
+            val standardBottomSheetBehavior =
+                BottomSheetBehavior.from(binding.homeStandardBottomSheetMypage)
+            // bottom sheet state 지정
+            standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_HALF_EXPANDED
             check = false
         } else {
             val activity = activity as MainActivity?
