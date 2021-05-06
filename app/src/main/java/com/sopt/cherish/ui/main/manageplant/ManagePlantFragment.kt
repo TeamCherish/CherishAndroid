@@ -53,6 +53,8 @@ class ManagePlantFragment : Fragment(), MainActivity.OnBackPressedListener {
     var check: Boolean = false
 
 
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -105,6 +107,7 @@ class ManagePlantFragment : Fragment(), MainActivity.OnBackPressedListener {
             standardBottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
             if (tabIndex == 1) {
                 binding.myPageAddPlantBtn.visibility = View.INVISIBLE
+                check = true
 
             }
             (activity as MainActivity).replaceFragment(tabIndex, data, isSearched)
