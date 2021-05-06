@@ -12,6 +12,7 @@ import com.sopt.cherish.databinding.ActivityReviewBinding
 import com.sopt.cherish.di.Injection
 import com.sopt.cherish.remote.api.ReviewWateringReq
 import com.sopt.cherish.util.MultiViewDialog
+import com.sopt.cherish.util.SimpleLogger
 import com.sopt.cherish.util.extension.FlexBoxExtension.getChip
 import com.sopt.cherish.util.extension.FlexBoxExtension.getChipsCount
 import com.sopt.cherish.util.extension.countNumberOfCharacters
@@ -95,12 +96,21 @@ class ReviewActivity : AppCompatActivity() {
                     viewModel.sendReviewToServer(
                         reviewWateringReq = ReviewWateringReq(
                             binding.reviewMemo.text.toString(),
-                            binding.reviewFlexBox.getChip(id = 0)?.text.toString(),
-                            binding.reviewFlexBox.getChip(id = 1)?.text.toString(),
-                            binding.reviewFlexBox.getChip(id = 2)?.text.toString(),
+                            if (binding.reviewFlexBox.getChip(0) == null) "" else binding.reviewFlexBox.getChip(
+                                0
+                            )!!.text.toString(),
+                            if (binding.reviewFlexBox.getChip(1) == null) "" else binding.reviewFlexBox.getChip(
+                                1
+                            )!!.text.toString(),
+                            if (binding.reviewFlexBox.getChip(2) == null) "" else binding.reviewFlexBox.getChip(
+                                2
+                            )!!.text.toString(),
                             viewModel.selectedCherishId
                         )
                     )
+                    SimpleLogger.logI(binding.reviewFlexBox.getChip(0)?.text.toString())
+                    SimpleLogger.logI(binding.reviewFlexBox.getChip(1)?.text.toString())
+                    SimpleLogger.logI(binding.reviewFlexBox.getChip(2)?.text.toString())
                     showLoadingDialog()
                 } else {
                     MultiViewDialog(

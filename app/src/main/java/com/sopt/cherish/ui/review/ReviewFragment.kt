@@ -99,11 +99,17 @@ class ReviewFragment : Fragment() {
             } else {
                 if (binding.homeReviewMemo.text.length <= 100) {
                     viewModel.sendReviewToServer(
-                        reviewWateringReq = ReviewWateringReq(
+                        ReviewWateringReq(
                             binding.homeReviewMemo.text.toString(),
-                            binding.homeReviewFlexBox.getChip(id = 0)?.text.toString(),
-                            binding.homeReviewFlexBox.getChip(id = 1)?.text.toString(),
-                            binding.homeReviewFlexBox.getChip(id = 2)?.text.toString(),
+                            if (binding.homeReviewFlexBox.getChip(0) == null) "" else binding.homeReviewFlexBox.getChip(
+                                0
+                            )!!.text.toString(),
+                            if (binding.homeReviewFlexBox.getChip(1) == null) "" else binding.homeReviewFlexBox.getChip(
+                                1
+                            )!!.text.toString(),
+                            if (binding.homeReviewFlexBox.getChip(2) == null) "" else binding.homeReviewFlexBox.getChip(
+                                2
+                            )!!.text.toString(),
                             viewModel.selectedCherishUser.value?.id!!
                         )
                     )
