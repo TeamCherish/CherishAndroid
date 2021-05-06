@@ -39,6 +39,10 @@ class MainActivity : AppCompatActivity() {
         val binding: ActivityMainBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_main)
         viewModel.cherishUserId.value = intent?.getIntExtra("needToWaterCherishId", -1)
+        Log.d(
+            "MainActivity Intent Test:",
+            intent.getIntExtra("needToWaterCherishId", -1).toString()
+        )
         Injection.provideNotificationManager(this).let {
             it.createNeedToWateringUser(this)
             it.createRecallReview(this)
@@ -290,6 +294,5 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
 
 }
