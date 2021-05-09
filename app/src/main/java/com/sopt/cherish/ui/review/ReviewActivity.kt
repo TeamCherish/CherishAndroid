@@ -12,10 +12,10 @@ import com.sopt.cherish.databinding.ActivityReviewBinding
 import com.sopt.cherish.di.Injection
 import com.sopt.cherish.remote.api.ReviewWateringReq
 import com.sopt.cherish.util.MultiViewDialog
+import com.sopt.cherish.util.SimpleLogger
 import com.sopt.cherish.util.extension.FlexBoxExtension.getChip
 import com.sopt.cherish.util.extension.FlexBoxExtension.getChipsCount
 import com.sopt.cherish.util.extension.countNumberOfCharacters
-import com.sopt.cherish.util.extension.hideKeyboard
 import com.sopt.cherish.util.extension.writeKeyword
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -54,30 +54,12 @@ class ReviewActivity : AppCompatActivity() {
     private fun addLimitNumberOfMemoCharacters(binding: ActivityReviewBinding) {
         binding.reviewMemo.countNumberOfCharacters { memo ->
             binding.reviewNumberOfMemo.text = memo?.length.toString()
-            if (memo?.length!! > 100) {
-                MultiViewDialog(R.layout.dialog_warning_review_limit_error, 0.6944f, 0.16875f).show(
-                    supportFragmentManager,
-                    TAG
-                )
-                binding.reviewMemo.hideKeyboard()
-            }
         }
     }
 
     private fun addLimitNumberOfKeywordCharacters(binding: ActivityReviewBinding) {
         binding.reviewEditKeyword.countNumberOfCharacters { keyword ->
             binding.reviewNumberOfCharacters.text = keyword?.length.toString()
-            if (keyword?.length!! > 5) {
-                MultiViewDialog(
-                    R.layout.dialog_warning_keyword_wordcount_limit_error,
-                    0.6944f,
-                    0.16875f
-                ).show(
-                    supportFragmentManager,
-                    TAG
-                )
-                binding.reviewEditKeyword.hideKeyboard()
-            }
         }
     }
 
@@ -114,12 +96,21 @@ class ReviewActivity : AppCompatActivity() {
                     viewModel.sendReviewToServer(
                         reviewWateringReq = ReviewWateringReq(
                             binding.reviewMemo.text.toString(),
-                            binding.reviewFlexBox.getChip(id = 0)?.text.toString(),
-                            binding.reviewFlexBox.getChip(id = 1)?.text.toString(),
-                            binding.reviewFlexBox.getChip(id = 2)?.text.toString(),
+                            if (binding.reviewFlexBox.getChip(0) == null) "" else binding.reviewFlexBox.getChip(
+                                0
+                            )!!.text.toString(),
+                            if (binding.reviewFlexBox.getChip(1) == null) "" else binding.reviewFlexBox.getChip(
+                                1
+                            )!!.text.toString(),
+                            if (binding.reviewFlexBox.getChip(2) == null) "" else binding.reviewFlexBox.getChip(
+                                2
+                            )!!.text.toString(),
                             viewModel.selectedCherishId
                         )
                     )
+                    SimpleLogger.logI(binding.reviewFlexBox.getChip(0)?.text.toString())
+                    SimpleLogger.logI(binding.reviewFlexBox.getChip(1)?.text.toString())
+                    SimpleLogger.logI(binding.reviewFlexBox.getChip(2)?.text.toString())
                     showLoadingDialog()
                 } else {
                     MultiViewDialog(
