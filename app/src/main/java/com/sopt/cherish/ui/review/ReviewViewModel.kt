@@ -1,5 +1,6 @@
 package com.sopt.cherish.ui.review
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sopt.cherish.remote.api.ReviewWateringReq
@@ -19,13 +20,15 @@ class ReviewViewModel(
 
     var reviewWateringRes = ReviewWateringRes(true, " ", 0)
 
+    val errorHandleLiveData = MutableLiveData<String>()
+
     fun sendReviewToServer(reviewWateringReq: ReviewWateringReq) = viewModelScope.launch {
         runCatching {
             reviewRepository.sendReviewData(reviewWateringReq)
         }.onSuccess {
             reviewWateringRes = it
-        }.onFailure {
-            throw it
+        }.onFailure { error ->
+            errorHandleLiveData.value = error.message
         }
     }
 }

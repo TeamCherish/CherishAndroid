@@ -55,13 +55,15 @@ class DetailPlantViewModel(
     val calendarData: MutableLiveData<CalendarRes>
         get() = _calendarData
 
+    val errorHandleLiveData = MutableLiveData<String>()
+
     fun fetchCalendarData() = viewModelScope.launch {
         runCatching {
             detailPlantRepository.fetchCalendarData(cherishId.value!!)
         }.onSuccess {
             _calendarData.value = it
         }.onFailure { error ->
-            throw error
+            errorHandleLiveData.value = error.message
         }
     }
 
@@ -72,7 +74,7 @@ class DetailPlantViewModel(
         }.onSuccess {
             // Toast를 띄우는건?
         }.onFailure { error ->
-            throw error
+            errorHandleLiveData.value = error.message
         }
     }
 
@@ -83,7 +85,7 @@ class DetailPlantViewModel(
         }.onSuccess {
             // Toast
         }.onFailure { error ->
-            throw error
+            errorHandleLiveData.value = error.message
         }
     }
 
@@ -94,8 +96,8 @@ class DetailPlantViewModel(
                 wateringRepository.postponeWateringDate(postponeWateringDateReq)
             }.onSuccess {
                 SimpleLogger.logI(it.message)
-            }.onFailure {
-                throw it
+            }.onFailure { error ->
+                errorHandleLiveData.value = error.message
             }
         }
 

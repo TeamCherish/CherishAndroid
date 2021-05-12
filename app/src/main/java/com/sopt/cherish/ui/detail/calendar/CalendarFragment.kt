@@ -73,7 +73,7 @@ class CalendarFragment : Fragment() {
             parentFragmentManager.beginTransaction().addToBackStack(TAG)
                 .replace(R.id.fragment_detail, ReviseReviewFragment()).commit()
         } else {
-            longToast(requireContext(), "등록된 리뷰가 없어요 ㅠ")
+            longToast(requireContext(), "등록된 리뷰가 없습니다")
         }
     }
 
