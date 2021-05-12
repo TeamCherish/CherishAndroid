@@ -37,6 +37,8 @@ class MainViewModel(
 
     var reviewWateringRes = ReviewWateringRes(true, " ", 0)
 
+    val errorHandleLivedata = MutableLiveData<String>()
+
     init {
         isWatered.value = null
         cherishSelectedPosition.value = 1
@@ -53,7 +55,7 @@ class MainViewModel(
                 _cherishUsers.value = null
             }
         }.onFailure { error ->
-            throw error
+            errorHandleLivedata.value = error.message
         }
     }
 
@@ -68,8 +70,8 @@ class MainViewModel(
             } else {
                 _cherishUsers.value = null
             }
-        }.onFailure {
-            throw it
+        }.onFailure { error ->
+            errorHandleLivedata.value = error.message
         }
     }
 
@@ -80,8 +82,8 @@ class MainViewModel(
             notificationRepository.sendFcmToken(notificationReq)
         }.onSuccess {
             SimpleLogger.logI("send token successful")
-        }.onFailure {
-            throw it
+        }.onFailure { error ->
+            errorHandleLivedata.value = error.message
         }
     }
 
@@ -91,8 +93,8 @@ class MainViewModel(
                 notificationRepository.sendRemindReviewNotification(notificationRemindReviewReq)
             }.onSuccess {
                 SimpleLogger.logI(it.message)
-            }.onFailure {
-                throw it
+            }.onFailure { error ->
+                errorHandleLivedata.value = error.message
             }
         }
 
@@ -106,8 +108,8 @@ class MainViewModel(
             selectedCherishUser.value?.let { calendarRepository.getChipsData(it.id) }
         }.onSuccess {
             _calendarData.value = it
-        }.onFailure {
-            throw it
+        }.onFailure { error ->
+            errorHandleLivedata.value = error.message
         }
     }
 
@@ -126,8 +128,8 @@ class MainViewModel(
                 SimpleLogger.logI(it.message)
                 delay(2000)
                 fetchUsers()
-            }.onFailure {
-                throw it
+            }.onFailure { error ->
+                errorHandleLivedata.value = error.message
             }
         }
 
@@ -137,8 +139,8 @@ class MainViewModel(
             reviewRepository.sendReviewData(reviewWateringReq)
         }.onSuccess {
             reviewWateringRes = it
-        }.onFailure {
-            throw it
+        }.onFailure { error ->
+            errorHandleLivedata.value = error.message
         }
     }
 

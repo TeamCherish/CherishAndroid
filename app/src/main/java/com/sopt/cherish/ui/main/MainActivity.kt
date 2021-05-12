@@ -53,7 +53,14 @@ class MainActivity : AppCompatActivity() {
         showInitialFragment()
         getFirebaseDeviceToken()
         observeFirebaseDeviceToken()
+        observeErrorHandleLiveData()
         setBottomNavigationListener(binding)
+    }
+
+    private fun observeErrorHandleLiveData() {
+        viewModel.errorHandleLivedata.observe(this) {
+            shortToast(this, "네트워크 상태를 확인해주세요")
+        }
     }
 
     // 혹시나 마켓에 올릴 때 이거 없어서 문제생기면 그때 로직 변경
@@ -190,7 +197,6 @@ class MainActivity : AppCompatActivity() {
         val list = mutableListOf<Phonemypage>()
 
         val phonUri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI
-        val phoneUri = ContactsContract.CommonDataKinds.Phone.CONTENT_URI
         // 2.1 전화번호에서 가져올 컬럼 정의
         val projections = arrayOf(
             ContactsContract.CommonDataKinds.Phone.CONTACT_ID,

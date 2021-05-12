@@ -13,11 +13,13 @@ import com.sopt.cherish.remote.api.ReviseReviewReq
 import com.sopt.cherish.ui.detail.DetailPlantActivity
 import com.sopt.cherish.ui.detail.DetailPlantViewModel
 import com.sopt.cherish.util.DateUtil
-import com.sopt.cherish.util.MultiViewDialog
 import com.sopt.cherish.util.SimpleLogger
-import com.sopt.cherish.util.extension.*
 import com.sopt.cherish.util.extension.FlexBoxExtension.addChip
 import com.sopt.cherish.util.extension.FlexBoxExtension.getChip
+import com.sopt.cherish.util.extension.countNumberOfCharacters
+import com.sopt.cherish.util.extension.longToast
+import com.sopt.cherish.util.extension.shortToast
+import com.sopt.cherish.util.extension.writeKeyword
 
 /**
  * Created by SSong-develop on 2021-02-12
@@ -68,13 +70,19 @@ class ReviseReviewFragment : Fragment() {
             }
             binding.reviseReviewFlexBox.apply {
                 it?.userStatus1?.let { userStatus1 ->
-                    if (userStatus1 != "null") addChip(userStatus1)
+                    if (userStatus1 != "null" && userStatus1 != "" && userStatus1 != " ") addChip(
+                        userStatus1
+                    )
                 }
                 it?.userStatus2?.let { userStatus2 ->
-                    if (userStatus2 != "null") addChip(userStatus2)
+                    if (userStatus2 != "null" && userStatus2 != "" && userStatus2 != " ") addChip(
+                        userStatus2
+                    )
                 }
                 it?.userStatus3?.let { userStatus3 ->
-                    if (userStatus3 != "null") addChip(userStatus3)
+                    if (userStatus3 != "null" && userStatus3 != "" && userStatus3 != " ") addChip(
+                        userStatus3
+                    )
                 }
             }
             binding.reviseReviewMemo.setText(it?.review)
@@ -134,29 +142,12 @@ class ReviseReviewFragment : Fragment() {
     private fun addLimitNumberOfMemoCharacters(binding: FragmentReviseReviewBinding) {
         binding.reviseReviewMemo.countNumberOfCharacters { memo ->
             binding.reviseReviewNumberOfMemo.text = memo?.length.toString()
-            if (memo?.length!! == 100) {
-                MultiViewDialog(R.layout.dialog_warning_review_limit_error, 0.6944f, 0.16875f).show(
-                    parentFragmentManager,
-                    TAG
-                )
-                binding.reviseReviewMemo.hideKeyboard()
-            }
         }
     }
 
     private fun addLimitNumberOfKeywordCharacters(binding: FragmentReviseReviewBinding) {
         binding.reviseReviewEditKeyword.countNumberOfCharacters { keyword ->
             binding.reviseReviewNumberOfCharacters.text = keyword?.length.toString()
-            if (keyword?.length!! == 5) {
-                MultiViewDialog(
-                    R.layout.dialog_warning_keyword_wordcount_limit_error,
-                    0.6944f,
-                    0.16875f
-                ).show(
-                    parentFragmentManager,
-                    ReviewActivity.TAG
-                )
-            }
         }
     }
 

@@ -18,7 +18,7 @@ import com.sopt.cherish.ui.dialog.BirthPickerDialogFragment
 import com.sopt.cherish.ui.dialog.ClockPickerDialogFragment
 import com.sopt.cherish.ui.dialog.WeekPickerDialogFragment
 import com.sopt.cherish.ui.enrollment.EnrollModifyPlantFragment
-import com.sopt.cherish.ui.main.manageplant.ManagePlantFragment
+import com.sopt.cherish.util.extension.shortToast
 
 
 /**
@@ -85,6 +85,13 @@ class DetailPlantActivity : AppCompatActivity(),
         setFragment(DetailPlantFragment())
         setActionBarTitle("식물 상세")
         setContentView(binding.root)
+        observeErrorHandleLiveData()
+    }
+
+    private fun observeErrorHandleLiveData() {
+        viewModel.errorHandleLiveData.observe(this) {
+            shortToast(this, "네트워크 상태를 확인해주세요")
+        }
     }
 
 
