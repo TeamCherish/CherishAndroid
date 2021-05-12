@@ -31,13 +31,12 @@ class FirebaseNotificationService : FirebaseMessagingService() {
 
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, FLAG_ONE_SHOT)
         val notification = NotificationCompat.Builder(
-            this,
+            applicationContext,
             this.getString(R.string.notification_cherish_need_to_watering_user_channel_id)
         )
             .setContentTitle(message.notification?.title)
             .setContentText(message.notification?.body)
             .setSmallIcon(R.drawable.login_logo)
-            .setAutoCancel(true)
             .setContentIntent(pendingIntent)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .build()
