@@ -7,11 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sopt.cherish.databinding.FragmentPlantBinding
 import com.sopt.cherish.remote.api.MyPageCherishData
 import com.sopt.cherish.ui.adapter.MyPageBottomSheetAdapter
 import com.sopt.cherish.ui.detail.DetailPlantActivity
+import com.sopt.cherish.ui.main.MainViewModel
 
 /**
  * Create on 01-08 by Yejin
@@ -23,7 +25,7 @@ class PlantFragment(private var data: List<MyPageCherishData>?) : Fragment() {
     private var _binding: FragmentPlantBinding? = null
     private val binding get() = _binding!!
     private lateinit var cherishAdapter: MyPageBottomSheetAdapter
-
+    private val viewModel: MainViewModel by activityViewModels()
 
     lateinit var list: List<MyPageCherishData>
 
@@ -67,6 +69,10 @@ class PlantFragment(private var data: List<MyPageCherishData>?) : Fragment() {
                     intent.putExtra(
                         "Id",
                         data!![position].id
+                    )
+                    intent.putExtra(
+                        "userNickname",
+                        viewModel.userNickName.toString()
                     )
                     Log.d(
                         "Id",
