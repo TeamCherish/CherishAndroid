@@ -38,11 +38,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val binding: ActivityMainBinding =
             DataBindingUtil.setContentView(this, R.layout.activity_main)
-        viewModel.cherishUserId.value = intent?.getIntExtra("needToWaterCherishId", -1)
-        Log.d(
-            "MainActivity Intent Test:",
-            intent.getIntExtra("needToWaterCherishId", -1).toString()
-        )
+
         Injection.provideNotificationManager(this).let {
             it.createNeedToWateringUser(this)
             it.createRecallReview(this)
@@ -161,7 +157,7 @@ class MainActivity : AppCompatActivity() {
                             }
                         }).commit()
                     } else {
-                        shortToast(this, "권한이 설정되어 있지 않아 앱을 사용할 수 없어요 ㅠ")
+                        shortToast(this, "권한이 설정되어 있지 않아 앱을 사용할 수 없습니다")
                         openSettings()
                     }
                     true
@@ -173,10 +169,22 @@ class MainActivity : AppCompatActivity() {
                             ManagePlantFragment().apply {
                                 arguments = Bundle().apply {
                                     putString("phonecount", getPhoneNumbers().toString())
+                                    viewModel.cherishUserId.value?.let { userId ->
+                                        putInt(
+                                            "userId",
+                                            userId
+                                        )
+                                    }
+                                    viewModel.userNickName.value?.let { userNickName ->
+                                        putString(
+                                            "userNickName",
+                                            userNickName
+                                        )
+                                    }
                                 }
                             }).commit()
                     } else {
-                        shortToast(this, "전화번호부 권한을 주지 않아 갈 수 없어요 ㅠ")
+                        shortToast(this, "전화번호부 권한을 주지 않아 갈 수 없습니다")
                         openSettings()
                     }
                     true
