@@ -204,6 +204,7 @@ class DetailPlantFragment : Fragment() {
 
                                 viewModel.cherishPhoneNumber.value=it.data.phone
                                 viewModel.cherishNickname.value=it.data.nickname
+                                viewModel.dDay=it.data.dDay
                                 cherishNickname=it.data.nickname
 
                                 userNickname=it.data.name
