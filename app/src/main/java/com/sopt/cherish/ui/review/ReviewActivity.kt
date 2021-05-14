@@ -16,6 +16,7 @@ import com.sopt.cherish.util.SimpleLogger
 import com.sopt.cherish.util.extension.FlexBoxExtension.getChip
 import com.sopt.cherish.util.extension.FlexBoxExtension.getChipsCount
 import com.sopt.cherish.util.extension.countNumberOfCharacters
+import com.sopt.cherish.util.extension.shortToast
 import com.sopt.cherish.util.extension.writeKeyword
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -35,11 +36,18 @@ class ReviewActivity : AppCompatActivity() {
         binding.reviewViewModel = viewModel
         binding.lifecycleOwner = this
         reviewNotificationViewModel.startNotificationTimer()
+        observeErrorHandleLiveData()
         addUserStatusWithChip(binding)
         addLimitNumberOfKeywordCharacters(binding)
         addLimitNumberOfMemoCharacters(binding)
         sendReviewToServer(binding)
         ignoreSendReviewToServer(binding)
+    }
+
+    private fun observeErrorHandleLiveData() {
+        viewModel.errorHandleLiveData.observe(this) {
+            shortToast(this, "네트워크 상태를 확인해주세요")
+        }
     }
 
     private fun initializeViewModelData() {
