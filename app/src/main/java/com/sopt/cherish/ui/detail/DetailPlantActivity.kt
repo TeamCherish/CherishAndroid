@@ -59,6 +59,8 @@ class DetailPlantActivity : AppCompatActivity(),
         //식물 아이디
         plantId = intent.getIntExtra("plantId", 0)
 
+
+
         //체리쉬아이디 -메인에서오는지 마이페이지에서 오는지 분기처리해줌
         if (intent.getIntExtra("cherishId", 0) == 0) {
             cherishid_main = intent.getIntExtra("Id", 0)
@@ -85,8 +87,13 @@ class DetailPlantActivity : AppCompatActivity(),
         viewModel.selectedUserDday = intent.getIntExtra("selectedUserDday", 0)
 
         mypageuserId=intent.getIntExtra("mypageuserId",0)
+        viewModel.userId.value=mypageuserId
         mypageuserNickname= intent.getStringExtra("mypageuserNickname").toString()
+        viewModel.userNickname.value=mypageuserNickname
 
+        Log.d("mypagephone",cherishPhoneNumber.toString())
+        Log.d("mypagephone",mypageuserId.toString())
+        Log.d("mypagephone",mypageuserNickname.toString())
 
 
         viewModel.fetchCalendarData()
@@ -199,14 +206,14 @@ class DetailPlantActivity : AppCompatActivity(),
 
     override fun onTestDialogweek(dialog: DialogFragment?, someData: String?) {
         Log.d("nana", someData.toString())
-        var textweek: TextView = findViewById(R.id.water_alarm_week)
+        val textweek: TextView = findViewById(R.id.water_alarm_week)
         textweek.text = someData.toString()
 
     }
 
     override fun onTestDialogClock(dialog: DialogFragment?, someData: String?) {
         Log.d("nana", someData.toString())
-        var textclock: TextView = findViewById(R.id.water_alarm_time)
+        val textclock: TextView = findViewById(R.id.water_alarm_time)
 
         textclock.text = someData.toString()
     }
@@ -215,7 +222,7 @@ class DetailPlantActivity : AppCompatActivity(),
     override fun onTestDialogBirth(dialog: DialogFragment?, someData: String?) {
 
 
-        var textbirth: TextView = findViewById(R.id.edit_birth)
+        val textbirth: TextView = findViewById(R.id.edit_birth)
 
         textbirth.text = someData.toString()
     }

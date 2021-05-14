@@ -112,9 +112,11 @@ class DetailPlantFragment : Fragment() {
         Log.d("f",userId.toString());
 
         mypageuserId=arguments?.getInt("mypageuserId")!!
+
         mypageuserNickname=arguments?.getString("mypageuserNickname")!!
         Log.d("ee",mypageuserId.toString());
         Log.d("ff",mypageuserNickname.toString());
+
         //reset()
 
         //circleProgressbar = binding.test
@@ -200,7 +202,7 @@ class DetailPlantFragment : Fragment() {
                                 Log.d("textViewNick", it.data.nickname.toString())
                                 binding.textViewName.text = it.data.name.toString()
 
-                                cherishUserPhoneNumber=it.data.phone
+                                viewModel.cherishPhoneNumber.value=it.data.phone
                                 cherishNickname=it.data.nickname
 
                                 userNickname=it.data.name
