@@ -76,7 +76,7 @@ class PlantFragment(private var data: List<MyPageCherishData>?) : Fragment() {
                     )
                     intent.putExtra(
                         "userNickname",
-                        viewModel.userNickName.toString()
+                        viewModel.userNickName.value
                     )
 
                     startActivity(intent)
