@@ -102,6 +102,12 @@ class DetailPlantFragment : Fragment() {
         cherishNickname = arguments?.getString("cherishNickname_detail")!!
         userNickname = arguments?.getString("userNickname_detail")!!
         userId = arguments?.getInt("userId_detail")!!
+        Log.d("a",plantId.toString());
+        Log.d("b",cherishid.toString());
+        Log.d("c",cherishUserPhoneNumber.toString());
+        Log.d("d",cherishNickname.toString());
+        Log.d("e",userNickname.toString());
+        Log.d("f",userId.toString());
         //reset()
 
         //circleProgressbar = binding.test
@@ -187,6 +193,13 @@ class DetailPlantFragment : Fragment() {
                                 Log.d("textViewNick", it.data.nickname.toString())
                                 binding.textViewName.text = it.data.name.toString()
 
+                                cherishUserPhoneNumber=it.data.phone
+                                cherishNickname=it.data.nickname
+
+                                userNickname=it.data.name
+                                Log.d("c",cherishUserPhoneNumber.toString());
+                                Log.d("d",cherishNickname.toString());
+                                Log.d("e",userNickname.toString());
                                 binding.textViewPlantname.text = it.data.plant_name.toString()
                                 //식물 아이디 받는 곳 이거를 이제 정보 아이콘 누를때 넘겨줘야함
                                 plantId = it.data.plantId
