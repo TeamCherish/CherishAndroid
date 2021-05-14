@@ -81,7 +81,6 @@ class MyPagePhoneBookSearchFragment : Fragment() {
         madapter.setItemClickListener(object : MypagePhoneBookSearchAdapter.ItemClickListener {
             @SuppressLint("ResourceAsColor")
             override fun onchange(radio: Boolean) {
-                Log.d("radio", radio.toString())
                 if (radio) {
                     binding.myPageAddPhoneBtn.setBackgroundColor(Color.parseColor("#1AD287"))
 
@@ -94,7 +93,6 @@ class MyPagePhoneBookSearchFragment : Fragment() {
         }
         binding.myPageAddPhoneBtn.setOnClickListener {
             val phonenumber = madapter.phonenumber
-            Log.d("phonenumbervvvv", phonenumber)
             val user_id = viewModel.cherishUserId.value
             val body = RequestCheckPhoneData(phone = phonenumber.toString(), UserId = user_id!!)
             requestData.checkphoneAPI.checkphone(body)
@@ -111,7 +109,6 @@ class MyPagePhoneBookSearchFragment : Fragment() {
                             call: Call<ResponseCheckPhoneData>,
                             response: Response<ResponseCheckPhoneData>
                         ) {
-                            Log.d("success", response.body().toString())
                             if (response.body() == null) {
                                 CheckPhoneDialogFragment(
                                     R.layout.fragment_check_phone_dialog,
@@ -125,7 +122,6 @@ class MyPagePhoneBookSearchFragment : Fragment() {
                                 it.isSuccessful
                             }?.body()
                                 ?.let { it ->
-                                    Log.d("중복", "중복")
                                     var intent =
                                         Intent(context, EnrollmentPhoneActivity::class.java)
                                     intent.putExtra("name", madapter.phonename)
@@ -215,7 +211,6 @@ class MyPagePhoneBookSearchFragment : Fragment() {
         }
 
         // 결과목록 반환
-        Log.d("listsize", list.size.toString())
         return list.distinct()
     }
 

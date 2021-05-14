@@ -1,7 +1,6 @@
 package com.sopt.cherish.ui.enrollment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.widget.TextView
 import androidx.activity.viewModels
@@ -81,8 +80,6 @@ class EnrollmentPhoneActivity : AppCompatActivity(),
         transaction.replace(R.id.fragment_enroll, fragment.apply {
             arguments = Bundle().apply {
                 putInt("useridenroll", count)
-                Log.d("Enrollmentphoneactiviy", count.toString())
-
             }
         })
         transaction.commit()
@@ -97,30 +94,24 @@ class EnrollmentPhoneActivity : AppCompatActivity(),
                 putString("phonename", intent.getStringExtra("name"))
                 putString("phonenumber", intent.getStringExtra("phone"))
                 putInt("useridend", count)
-
             }
         })
         transaction.commit()
     }
 
     override fun onTestDialogweek(dialog: DialogFragment?, someData: String?) {
-        Log.d("nana", someData.toString())
         var textweek: TextView = findViewById(R.id.water_alarm_week)
         textweek.text = someData.toString()
 
     }
 
     override fun onTestDialogClock(dialog: DialogFragment?, someData: String?) {
-        Log.d("nana", someData.toString())
         var textclock: TextView = findViewById(R.id.water_alarm_time)
-
         textclock.text = someData.toString()
     }
 
     override fun onTestDialogBirth(dialog: DialogFragment?, someData: String?) {
-        Log.d("nana", someData.toString())
         var birthtext: TextView = findViewById(R.id.edit_birth)
-
         birthtext.text = someData.toString()
     }
 

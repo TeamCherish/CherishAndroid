@@ -82,7 +82,6 @@ class EnrollPlantFragment : Fragment() {
                     clockvalue = true
                     if (clockvalue == true && weekvalue == true) {
                         binding.detailOkBtn.isEnabled = true
-                        Log.d("clockvalue", binding.detailOkBtn.isClickable.toString())
 
                         binding.detailOkBtn.setBackgroundColor(Color.parseColor("#1AD287"))
                         binding.detailOkBtn.setTextColor(Color.parseColor("#ffffff"))
@@ -110,8 +109,6 @@ class EnrollPlantFragment : Fragment() {
                         binding.detailOkBtn.isEnabled = true
 
                         binding.detailOkBtn.setBackgroundColor(R.color.cherish_green_main)
-                        Log.d("weekvalue", binding.detailOkBtn.isClickable.toString())
-
                     }
                 }
 
@@ -131,9 +128,6 @@ class EnrollPlantFragment : Fragment() {
 
         binding.detailOkBtn.setOnClickListener {
             //  progressON()
-
-
-            Log.d("username", arguments?.getString("phonename").toString())
 //이름
             if (binding.editNick.text.isEmpty()) {
                 usernickname = binding.editNick.hint.toString()
@@ -142,32 +136,21 @@ class EnrollPlantFragment : Fragment() {
                 usernickname = binding.editNick.text.toString()
                 username = arguments?.getString("phonename").toString()
             }
-            Log.d("usernickname", binding.editNick.text.toString())
 //애칭
-
             if (binding.editBirth.text.isNotEmpty()) {
                 userbirth = binding.editBirth.text.toString()
             } else {
                 userbirth = "00/00"
 
             }
-            Log.d("userbirth", userbirth.toString())
 //생일
             val userphone = arguments?.getString("phonenumber")
-            Log.d("userphone", userphone.toString())
-
-
             val userwater = binding.waterAlarmWeek.text.split(" ")[1]
-
-            Log.d("userwater", binding.waterAlarmWeek.text.toString())
-
 
             val usertime = binding.waterAlarmTime.text.toString()
             val usertime_hour = usertime.substring(0, 5).toString()
-            Log.d("usertime", usertime_hour.toString())
 
             val userid = arguments?.getInt("useridend").toString()
-            Log.d("enrollplnatfrgment", userid.toString())
             val body =
                 RequestEnrollData(
                     name = username.toString(),
@@ -195,17 +178,10 @@ class EnrollPlantFragment : Fragment() {
                             call: Call<ResponseEnrollData>,
                             response: Response<ResponseEnrollData>
                         ) {
-                            Log.d("success", response.body().toString())
                             response.takeIf {
                                 it.isSuccessful
                             }?.body()
                                 ?.let { it ->
-
-                                    Log.d(
-                                        "data success!enroll",
-                                        it.data.plant.flower_meaning
-                                    )
-
                                     plant_id = it.data.plant.PlantStatusId
                                     plant_explanation = it.data.plant.explanation
                                     plant_modify = it.data.plant.modifier

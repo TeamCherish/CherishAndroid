@@ -94,13 +94,11 @@ class ClockPickerDialogFragment(
                 if (list[clock_ampm.value] == "AM") {
                     clocktext =
                         clock_hour.value.toString() + ":0" + clock_minute.value.toString() + " " + list[clock_ampm.value]
-                    Log.d("clock1", clocktext.toString())
                     someAction()
                 } else {
                     val clock = clock_hour.value + 12
                     clocktext =
                         clock.toString() + ":0" + clock_minute.value.toString() + " " + list[clock_ampm.value]
-                    Log.d("clock1", clocktext.toString())
                     someAction()
                 }
             } else {
@@ -108,14 +106,11 @@ class ClockPickerDialogFragment(
                     val clock = clock_hour.value + 12
                     clocktext =
                         clock.toString() + ":" + clock_minute.value.toString() + " " + list[clock_ampm.value]
-                    Log.d("clock2", clocktext.toString())
 
                     someAction()
                 } else {
                     clocktext =
                         clock_hour.value.toString() + ":" + clock_minute.value.toString() + " " + list[clock_ampm.value]
-                    Log.d("clock2", clocktext.toString())
-
                     someAction()
                 }
             }

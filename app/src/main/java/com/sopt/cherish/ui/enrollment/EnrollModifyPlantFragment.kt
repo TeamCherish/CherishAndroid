@@ -60,7 +60,6 @@ class EnrollModifyPlantFragment : Fragment() {
                         call: Call<ResponseUserinfoData>,
                         response: Response<ResponseUserinfoData>
                     ) {
-                        Log.d("식물수정", response.body().toString())
                         response.takeIf {
                             it.isSuccessful
                         }?.body()

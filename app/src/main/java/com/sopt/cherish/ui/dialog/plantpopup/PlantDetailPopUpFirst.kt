@@ -68,7 +68,6 @@ class PlantDetailPopUpFirst(plantId: Int) : Fragment() {
                         }?.body()
                             ?.let { it ->
 
-                                Log.d("image url", it.data.toString())
                                 flowerName = it.data.plantResponse[0].modifier
                                 Glide.with(binding.root.context)
                                     .load(it.data.plantResponse[0].image_url)

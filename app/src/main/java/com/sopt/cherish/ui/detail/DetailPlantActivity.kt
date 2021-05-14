@@ -91,12 +91,6 @@ class DetailPlantActivity : AppCompatActivity(),
         mypageuserNickname= intent.getStringExtra("mypageuserNickname").toString()
         viewModel.userNickname.value=mypageuserNickname
 
-        Log.d("mypagephone",cherishPhoneNumber.toString())
-        Log.d("mypageuserId",mypageuserId.toString())
-        Log.d("mypageuserNickname",mypageuserNickname.toString())
-        Log.d("cherishNickname",cherishNickname.toString())
-
-
         viewModel.fetchCalendarData()
         setFragment(DetailPlantFragment())
         setActionBarTitle("식물 상세")
@@ -206,14 +200,12 @@ class DetailPlantActivity : AppCompatActivity(),
     }
 
     override fun onTestDialogweek(dialog: DialogFragment?, someData: String?) {
-        Log.d("nana", someData.toString())
         val textweek: TextView = findViewById(R.id.water_alarm_week)
         textweek.text = someData.toString()
 
     }
 
     override fun onTestDialogClock(dialog: DialogFragment?, someData: String?) {
-        Log.d("nana", someData.toString())
         val textclock: TextView = findViewById(R.id.water_alarm_time)
 
         textclock.text = someData.toString()
@@ -221,8 +213,6 @@ class DetailPlantActivity : AppCompatActivity(),
 
 
     override fun onTestDialogBirth(dialog: DialogFragment?, someData: String?) {
-
-
         val textbirth: TextView = findViewById(R.id.edit_birth)
 
         textbirth.text = someData.toString()

@@ -94,10 +94,6 @@ class DetailPlantFragment : Fragment() {
             DataBindingUtil.inflate(inflater, R.layout.fragment_detail_plant, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
 
-
-
-
-
         plantId = arguments?.getInt("plantId_detail")!!
 
         cherishid = arguments?.getInt("cherishidmain_detail")!!
@@ -105,18 +101,9 @@ class DetailPlantFragment : Fragment() {
         cherishNickname = arguments?.getString("cherishNickname_detail")!!
         userNickname = arguments?.getString("userNickname_detail")!!
         userId = arguments?.getInt("userId_detail")!!
-        Log.d("a", plantId.toString())
-        Log.d("b", cherishid.toString())
-        Log.d("c", cherishUserPhoneNumber.toString())
-        Log.d("d", cherishNickname.toString())
-        Log.d("e", userNickname.toString())
-        Log.d("f", userId.toString())
-
         mypageuserId = arguments?.getInt("mypageuserId")!!
 
         mypageuserNickname = arguments?.getString("mypageuserNickname")!!
-        Log.d("ee", mypageuserId.toString())
-        Log.d("ff", mypageuserNickname.toString())
 
         //reset()
 
@@ -167,9 +154,6 @@ class DetailPlantFragment : Fragment() {
             }
         }
 
-        Log.d("gogo", cherishid.toString())
-
-
         // memolist 어댑터 연결 부분
         binding.imageButton3detail.setOnClickListener {
 
@@ -209,9 +193,6 @@ class DetailPlantFragment : Fragment() {
                                 cherishNickname = it.data.nickname
 
                                 userNickname = it.data.name
-                                Log.d("c", cherishUserPhoneNumber.toString())
-                                Log.d("d", cherishNickname.toString())
-                                Log.d("e", userNickname.toString())
                                 binding.textViewPlantname.text = it.data.plant_name.toString()
                                 //식물 아이디 받는 곳 이거를 이제 정보 아이콘 누를때 넘겨줘야함
                                 plantId = it.data.plantId
@@ -244,7 +225,6 @@ class DetailPlantFragment : Fragment() {
                                     .into(binding.imageViewDetailUrl)
 
                                 plant_id = it.data.plantId
-                                Log.d("fdfdfd", it.data.plantId.toString())
                                 if (it.data.gage < 0.5) {
 
                                     binding.test.setProgressStartColor(Color.parseColor("#F7596C"))

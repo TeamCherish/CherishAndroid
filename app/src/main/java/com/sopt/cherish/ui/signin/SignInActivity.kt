@@ -89,7 +89,6 @@ class SignInActivity : AppCompatActivity() {
                             it.isSuccessful
                         }?.body()
                             ?.let { it ->
-                                Log.d("isSuccess", response.body().toString())
                                 hasUser(
                                     response.body()?.editUserData?.userId!!,
                                     response.body()!!.editUserData.userNickName,
