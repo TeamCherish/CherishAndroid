@@ -44,6 +44,11 @@ class DetailPlantActivity : AppCompatActivity(),
 
     var cherishuserId = 0
 
+
+    var mypageuserId=0
+    private lateinit var mypageuserNickname: String
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -54,8 +59,7 @@ class DetailPlantActivity : AppCompatActivity(),
         //식물 아이디
         plantId = intent.getIntExtra("plantId", 0)
 
-        Log.d("myPage id",intent.getIntExtra("userId",0).toString())
-        Log.d("myPage nickname",intent.getStringExtra("userNickname").toString())
+
 
         //체리쉬아이디 -메인에서오는지 마이페이지에서 오는지 분기처리해줌
         if (intent.getIntExtra("cherishId", 0) == 0) {
@@ -82,6 +86,14 @@ class DetailPlantActivity : AppCompatActivity(),
         //유저 dDay
         viewModel.selectedUserDday = intent.getIntExtra("selectedUserDday", 0)
 
+        mypageuserId=intent.getIntExtra("mypageuserId",0)
+        viewModel.userId.value=mypageuserId
+        mypageuserNickname= intent.getStringExtra("mypageuserNickname").toString()
+        viewModel.userNickname.value=mypageuserNickname
+
+        Log.d("mypagephone",cherishPhoneNumber.toString())
+        Log.d("mypagephone",mypageuserId.toString())
+        Log.d("mypagephone",mypageuserNickname.toString())
 
 
         viewModel.fetchCalendarData()
@@ -167,6 +179,9 @@ class DetailPlantActivity : AppCompatActivity(),
                 putString("cherishNickname_detail", cherishNickname)
                 putString("userNickname_detail", userNickname)
                 putInt("userId_detail", cherishuserId)
+
+                putInt("mypageuserId",mypageuserId)
+                putString("mypageuserNickname",mypageuserNickname)
 
 
                 //Log.d("nanana", cherishid.toString())
