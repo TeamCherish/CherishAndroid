@@ -52,8 +52,9 @@ class DetailPlantFragment : Fragment() {
     var statusmessagesmall = ""
     var touchimage = false
 
-    lateinit var mypageuserNickname:String
-    var mypageuserId=0
+    lateinit var mypageuserNickname: String
+    var mypageuserId = 0
+
     companion object {
         private val TAG = "DetailPlantFragment"
     }
@@ -104,18 +105,18 @@ class DetailPlantFragment : Fragment() {
         cherishNickname = arguments?.getString("cherishNickname_detail")!!
         userNickname = arguments?.getString("userNickname_detail")!!
         userId = arguments?.getInt("userId_detail")!!
-        Log.d("a",plantId.toString());
-        Log.d("b",cherishid.toString());
-        Log.d("c",cherishUserPhoneNumber.toString());
-        Log.d("d",cherishNickname.toString());
-        Log.d("e",userNickname.toString());
-        Log.d("f",userId.toString());
+        Log.d("a", plantId.toString())
+        Log.d("b", cherishid.toString())
+        Log.d("c", cherishUserPhoneNumber.toString())
+        Log.d("d", cherishNickname.toString())
+        Log.d("e", userNickname.toString())
+        Log.d("f", userId.toString())
 
-        mypageuserId=arguments?.getInt("mypageuserId")!!
+        mypageuserId = arguments?.getInt("mypageuserId")!!
 
-        mypageuserNickname=arguments?.getString("mypageuserNickname")!!
-        Log.d("ee",mypageuserId.toString());
-        Log.d("ff",mypageuserNickname.toString());
+        mypageuserNickname = arguments?.getString("mypageuserNickname")!!
+        Log.d("ee", mypageuserId.toString())
+        Log.d("ff", mypageuserNickname.toString())
 
         //reset()
 
@@ -128,10 +129,10 @@ class DetailPlantFragment : Fragment() {
                 parentFragmentManager,
                 "DetailPlantFragment"
             )*/
-            if (viewModel.dDay <= 0) {
+            if (viewModel.dDay.value!! <= 0) {
                 DetailWateringDialogFragment().show(parentFragmentManager, "DetailPlantFragment")
             } else {
-                longToast(requireContext(), "물 줄수있는 날이 아니에요 ㅠ")
+                longToast(requireContext(), "물 줄수있는 날이 아니에요")
             }
         }
 
@@ -202,19 +203,19 @@ class DetailPlantFragment : Fragment() {
                                 Log.d("textViewNick", it.data.nickname.toString())
                                 binding.textViewName.text = it.data.name.toString()
 
-                                viewModel.cherishPhoneNumber.value=it.data.phone
-                                viewModel.cherishNickname.value=it.data.nickname
-                                viewModel.dDay=it.data.dDay
-                                cherishNickname=it.data.nickname
+                                viewModel.cherishPhoneNumber.value = it.data.phone
+                                viewModel.cherishNickname.value = it.data.nickname
+                                viewModel.dDay.value = it.data.dDay
+                                cherishNickname = it.data.nickname
 
-                                userNickname=it.data.name
-                                Log.d("c",cherishUserPhoneNumber.toString());
-                                Log.d("d",cherishNickname.toString());
-                                Log.d("e",userNickname.toString());
+                                userNickname = it.data.name
+                                Log.d("c", cherishUserPhoneNumber.toString())
+                                Log.d("d", cherishNickname.toString())
+                                Log.d("e", userNickname.toString())
                                 binding.textViewPlantname.text = it.data.plant_name.toString()
                                 //식물 아이디 받는 곳 이거를 이제 정보 아이콘 누를때 넘겨줘야함
                                 plantId = it.data.plantId
-                                viewModel.dDay = it.data.dDay
+                                viewModel.dDay.value = it.data.dDay
                                 if (it.data.dDay > 0) {
                                     binding.textViewDday.text = "D-" + it.data.dDay.toString()
 

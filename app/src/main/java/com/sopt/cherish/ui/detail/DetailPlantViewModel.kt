@@ -39,7 +39,7 @@ class DetailPlantViewModel(
 
     var wateringText = " "
 
-    var dDay = 0
+    var dDay = MutableLiveData<Int>()
 
     val selectedMemoCalendarDay = MutableLiveData<CalendarDay?>()
 
