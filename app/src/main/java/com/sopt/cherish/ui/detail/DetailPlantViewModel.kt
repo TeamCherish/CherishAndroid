@@ -29,7 +29,7 @@ class DetailPlantViewModel(
 
     val userNickname = MutableLiveData<String>()
 
-    val userId = MutableLiveData<Int>()
+    var userId = MutableLiveData<Int>()
 
     val selectedCalendarData = MutableLiveData<CalendarData?>()
 
