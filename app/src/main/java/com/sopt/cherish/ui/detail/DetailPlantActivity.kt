@@ -92,8 +92,9 @@ class DetailPlantActivity : AppCompatActivity(),
         viewModel.userNickname.value=mypageuserNickname
 
         Log.d("mypagephone",cherishPhoneNumber.toString())
-        Log.d("mypagephone",mypageuserId.toString())
-        Log.d("mypagephone",mypageuserNickname.toString())
+        Log.d("mypageuserId",mypageuserId.toString())
+        Log.d("mypageuserNickname",mypageuserNickname.toString())
+        Log.d("cherishNickname",cherishNickname.toString())
 
 
         viewModel.fetchCalendarData()

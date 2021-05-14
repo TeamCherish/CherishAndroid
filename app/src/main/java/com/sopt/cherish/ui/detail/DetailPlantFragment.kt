@@ -203,6 +203,7 @@ class DetailPlantFragment : Fragment() {
                                 binding.textViewName.text = it.data.name.toString()
 
                                 viewModel.cherishPhoneNumber.value=it.data.phone
+                                viewModel.cherishNickname.value=it.data.nickname
                                 cherishNickname=it.data.nickname
 
                                 userNickname=it.data.name
