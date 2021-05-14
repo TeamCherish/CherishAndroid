@@ -44,6 +44,11 @@ class DetailPlantActivity : AppCompatActivity(),
 
     var cherishuserId = 0
 
+
+    var mypageuserId=0
+    private lateinit var mypageuserNickname: String
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -78,6 +83,9 @@ class DetailPlantActivity : AppCompatActivity(),
         viewModel.userId.value = cherishuserId
         //유저 dDay
         viewModel.selectedUserDday = intent.getIntExtra("selectedUserDday", 0)
+
+        mypageuserId=intent.getIntExtra("mypageuserId",0)
+        mypageuserNickname= intent.getStringExtra("mypageuserNickname").toString()
 
 
 
@@ -164,6 +172,9 @@ class DetailPlantActivity : AppCompatActivity(),
                 putString("cherishNickname_detail", cherishNickname)
                 putString("userNickname_detail", userNickname)
                 putInt("userId_detail", cherishuserId)
+
+                putInt("mypageuserId",mypageuserId)
+                putString("mypageuserNickname",mypageuserNickname)
 
 
                 //Log.d("nanana", cherishid.toString())

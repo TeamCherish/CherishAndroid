@@ -52,6 +52,8 @@ class DetailPlantFragment : Fragment() {
     var statusmessagesmall = ""
     var touchimage = false
 
+    lateinit var mypageuserNickname:String
+    var mypageuserId=0
     companion object {
         private val TAG = "DetailPlantFragment"
     }
@@ -108,6 +110,11 @@ class DetailPlantFragment : Fragment() {
         Log.d("d",cherishNickname.toString());
         Log.d("e",userNickname.toString());
         Log.d("f",userId.toString());
+
+        mypageuserId=arguments?.getInt("mypageuserId")!!
+        mypageuserNickname=arguments?.getString("mypageuserNickname")!!
+        Log.d("ee",mypageuserId.toString());
+        Log.d("ff",mypageuserNickname.toString());
         //reset()
 
         //circleProgressbar = binding.test
