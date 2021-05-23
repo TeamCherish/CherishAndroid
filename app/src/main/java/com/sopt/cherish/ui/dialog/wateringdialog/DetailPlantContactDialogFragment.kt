@@ -128,6 +128,8 @@ class DetailPlantContactDialogFragment : DialogFragment(),
     private fun startReview() {
         val intent = Intent(requireContext(), ReviewActivity::class.java)
         intent.putExtra("userNickname", viewModel.userNickname.value)
+        intent.putExtra("myPageUserNickname", viewModel.myPageUserNickname.value)
+        intent.putExtra("myPageUserId", viewModel.myPageUserId.value)
         intent.putExtra("selectedCherishNickname", viewModel.cherishNickname.value)
         intent.putExtra("selectedCherishId", viewModel.cherishId.value)
         startActivityForResult(intent, codeThatGetWatering)

@@ -59,32 +59,6 @@ class DetailPlantFragment : Fragment() {
         private val TAG = "DetailPlantFragment"
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        detailserver()
-
-
-        binding.imageViewDetailUrl.setOnClickListener {
-
-            if (!touchimage) {
-                binding.textViewStatusMessage.text = statusmessagebig
-                binding.textViewStatus.text = statusmessagesmall
-                binding.imageViewDetailDim.isVisible = true
-                binding.textViewStatusMessage.isVisible = true
-                binding.textViewStatus.isVisible = true
-                touchimage = true
-            } else {
-
-                binding.imageViewDetailDim.isVisible = false
-                binding.textViewStatusMessage.isVisible = false
-                binding.textViewStatus.isVisible = false
-                touchimage = false
-            }
-        }
-        //여기에 작성
-    }
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -93,7 +67,6 @@ class DetailPlantFragment : Fragment() {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_detail_plant, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
-
         plantId = arguments?.getInt("plantId_detail")!!
 
         cherishid = arguments?.getInt("cherishidmain_detail")!!
@@ -163,6 +136,31 @@ class DetailPlantFragment : Fragment() {
             //3단계 식물 뷰 들어가는 곳
         }
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        detailserver()
+
+
+        binding.imageViewDetailUrl.setOnClickListener {
+
+            if (!touchimage) {
+                binding.textViewStatusMessage.text = statusmessagebig
+                binding.textViewStatus.text = statusmessagesmall
+                binding.imageViewDetailDim.isVisible = true
+                binding.textViewStatusMessage.isVisible = true
+                binding.textViewStatus.isVisible = true
+                touchimage = true
+            } else {
+
+                binding.imageViewDetailDim.isVisible = false
+                binding.textViewStatusMessage.isVisible = false
+                binding.textViewStatus.isVisible = false
+                touchimage = false
+            }
+        }
+        //여기에 작성
     }
 
 

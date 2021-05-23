@@ -29,6 +29,10 @@ class DetailPlantViewModel(
 
     val userNickname = MutableLiveData<String>()
 
+    val myPageUserNickname = MutableLiveData<String?>()
+
+    val myPageUserId = MutableLiveData<Int?>()
+
     var userId = MutableLiveData<Int>()
 
     val selectedCalendarData = MutableLiveData<CalendarData?>()

@@ -53,8 +53,15 @@ class ReviewActivity : AppCompatActivity() {
         viewModel.userNickname = intent.getStringExtra("userNickname")!!
         viewModel.selectedCherishNickname = intent.getStringExtra("selectedCherishNickname")!!
         viewModel.selectedCherishId = intent.getIntExtra("selectedCherishId", 0)
-        viewModel.reviewText =
+        viewModel.myPageUserId = intent.getIntExtra("myPageUserId", 0)
+        viewModel.myPageUserNickname = intent.getStringExtra("myPageUserNickname")!!
+
+        viewModel.reviewText = if (viewModel.userNickname == "null") {
+            "${viewModel.myPageUserNickname}님! ${viewModel.selectedCherishNickname}님와(과)의"
+        } else {
             "${viewModel.userNickname}님! ${viewModel.selectedCherishNickname}님와(과)의"
+        }
+
         viewModel.reviewSubText = "${viewModel.selectedCherishNickname}와(과)의 물주기를 기록하세요."
 
         SimpleLogger.logI("${viewModel.userNickname},${viewModel.selectedCherishNickname},${viewModel.selectedCherishId}")
