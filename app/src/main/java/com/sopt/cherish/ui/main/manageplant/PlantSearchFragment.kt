@@ -97,6 +97,7 @@ class PlantSearchFragment(private var data: List<MyPageCherishData>?) : Fragment
                         data!![position].id.toString()
                     )
                     startActivity(intent)
+                    // 여기 부분이 클릭하는 부분
                     parentFragmentManager.beginTransaction().replace(
                         R.id.main_fragment_container,
                         HomeFragment()
