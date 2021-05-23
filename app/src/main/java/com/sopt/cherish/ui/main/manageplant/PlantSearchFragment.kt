@@ -9,11 +9,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentPlantSearchBinding
 import com.sopt.cherish.remote.api.MyPageCherishData
 import com.sopt.cherish.ui.adapter.MyPageBottomSheetAdapter
 import com.sopt.cherish.ui.detail.DetailPlantActivity
+import com.sopt.cherish.ui.main.MainViewModel
+import com.sopt.cherish.ui.main.home.HomeFragment
 
 /**
  * Create on 01-08 by Yejin
@@ -25,6 +29,8 @@ class PlantSearchFragment(private var data: List<MyPageCherishData>?) : Fragment
     private var _binding: FragmentPlantSearchBinding? = null
     private val binding get() = _binding!!
     private lateinit var cherishAdapter: MyPageBottomSheetAdapter
+
+    private val viewModel: MainViewModel by activityViewModels()
 
 
     lateinit var list: List<MyPageCherishData>
@@ -78,12 +84,23 @@ class PlantSearchFragment(private var data: List<MyPageCherishData>?) : Fragment
                         "Id",
                         data!![position].id
                     )
+                    intent.putExtra(
+                        "mypageuserId",
+                        viewModel.cherishUserId.value
+                    )
+                    intent.putExtra(
+                        "mypageuserNickname",
+                        viewModel.userNickName.value
+                    )
                     Log.d(
                         "Id",
                         data!![position].id.toString()
                     )
-
                     startActivity(intent)
+                    parentFragmentManager.beginTransaction().replace(
+                        R.id.main_fragment_container,
+                        HomeFragment()
+                    ).commitNow()
                 }
             }
         )

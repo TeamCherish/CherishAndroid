@@ -8,11 +8,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentPlantBinding
 import com.sopt.cherish.remote.api.MyPageCherishData
 import com.sopt.cherish.ui.adapter.MyPageBottomSheetAdapter
 import com.sopt.cherish.ui.detail.DetailPlantActivity
 import com.sopt.cherish.ui.main.MainViewModel
+import com.sopt.cherish.ui.main.home.HomeFragment
 
 /**
  * Create on 01-08 by Yejin
@@ -77,8 +79,9 @@ class PlantFragment(private var data: List<MyPageCherishData>?) : Fragment() {
                         "mypageuserNickname",
                         viewModel.userNickName.value
                     )
-
                     startActivity(intent)
+                    parentFragmentManager.beginTransaction()
+                        .replace(R.id.main_fragment_container, HomeFragment()).commitNow()
                 }
             }
         )
