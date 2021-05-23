@@ -1,6 +1,5 @@
 package com.sopt.cherish.ui.adapter
 
-import android.util.Log
 import android.util.SparseBooleanArray
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -79,8 +78,6 @@ class PhoneBookAdapter(private val phoneBookList: List<Phone>) :
 
             if (isChecked) {
                 radiobutton = true
-
-                Log.d("phonebook", "${phoneBookList[position].name}")
                 phonename = phoneBookList[position].name.toString()
                 phonenumber = phoneBookList[position].phone.toString()
             }

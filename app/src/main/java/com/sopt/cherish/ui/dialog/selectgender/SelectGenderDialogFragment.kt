@@ -5,7 +5,6 @@ import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -61,7 +60,6 @@ class SelectGenderDialogFragment : DialogFragment() {
 
     private fun postGender(binding: DialogSelectGenderBinding) {
         selectGender = binding.selectGenderPicker.value
-        Log.d("postGender", selectGender.toString())
         val intent = Intent()
         intent.putExtra("gender", selectGender)
         targetFragment!!.onActivityResult(targetRequestCode, 101, intent)

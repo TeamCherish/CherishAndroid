@@ -53,8 +53,6 @@ class ManagePlantFragment : Fragment(), MainActivity.OnBackPressedListener {
     var check: Boolean = false
 
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -132,7 +130,7 @@ class ManagePlantFragment : Fragment(), MainActivity.OnBackPressedListener {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        isSearched=false
+        isSearched = false
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -151,6 +149,7 @@ class ManagePlantFragment : Fragment(), MainActivity.OnBackPressedListener {
 
         isSearched = false
     }
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         (context as MainActivity).setOnBackPressedListener(this)
@@ -230,6 +229,7 @@ class ManagePlantFragment : Fragment(), MainActivity.OnBackPressedListener {
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
 
             }
+
             override fun onStateChanged(bottomSheet: View, newState: Int) {
                 binding.myPageBg.setBackgroundColor(
                     ContextCompat.getColor(
@@ -259,18 +259,14 @@ class ManagePlantFragment : Fragment(), MainActivity.OnBackPressedListener {
                         isSearched = (activity as MainActivity).getIsSearched()
                         binding.myPageAddPlantBtn.visibility = View.VISIBLE //식물 추가 visible
                         isCollapsed = false
-                    }
-
-                     else if (newState == BottomSheetBehavior.STATE_DRAGGING) {
+                    } else if (newState == BottomSheetBehavior.STATE_DRAGGING) {
                         binding.myPageBg.setBackgroundColor(
                             ContextCompat.getColor(
                                 binding.root.context,
                                 R.color.cherish_my_page_bg
                             )
                         )
-                    }
-
-                    else if(newState==BottomSheetBehavior.STATE_HALF_EXPANDED){
+                    } else if (newState == BottomSheetBehavior.STATE_HALF_EXPANDED) {
                         binding.myPageBg.setBackgroundColor(
                             ContextCompat.getColor(
                                 binding.root.context,
@@ -282,9 +278,7 @@ class ManagePlantFragment : Fragment(), MainActivity.OnBackPressedListener {
                         binding.myPageAddPlantBtn.visibility = View.INVISIBLE //식물 추가 invisible
                         isCollapsed = true
                         isSearched = false
-                    }
-
-                    else if (newState == BottomSheetBehavior.STATE_COLLAPSED) { //바텀시트 축소됐을 경우
+                    } else if (newState == BottomSheetBehavior.STATE_COLLAPSED) { //바텀시트 축소됐을 경우
                         binding.myPageBg.setBackgroundColor(
                             ContextCompat.getColor(
                                 binding.root.context,
@@ -315,9 +309,7 @@ class ManagePlantFragment : Fragment(), MainActivity.OnBackPressedListener {
                             binding.myPageAddPlantBtn.visibility = View.VISIBLE
                         }
                         isCollapsed = false
-                    }
-
-                    else if(newState==BottomSheetBehavior.STATE_HALF_EXPANDED){
+                    } else if (newState == BottomSheetBehavior.STATE_HALF_EXPANDED) {
                         binding.myPageBg.setBackgroundColor(
                             ContextCompat.getColor(
                                 binding.root.context,
@@ -329,9 +321,7 @@ class ManagePlantFragment : Fragment(), MainActivity.OnBackPressedListener {
                         binding.myPageAddPlantBtn.visibility = View.INVISIBLE //식물 추가 invisible
                         isCollapsed = true
                         isSearched = false
-                    }
-
-                    else if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
+                    } else if (newState == BottomSheetBehavior.STATE_COLLAPSED) {
                         binding.myPageBg.setBackgroundColor(
                             ContextCompat.getColor(
                                 binding.root.context,

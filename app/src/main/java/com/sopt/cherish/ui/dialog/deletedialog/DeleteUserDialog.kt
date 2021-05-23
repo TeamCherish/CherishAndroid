@@ -66,7 +66,6 @@ class DeleteUserDialog(
     }
 
     private fun quitCherish() {
-        Log.d("userId", viewModel.cherishUserId.value!!.toString())
         requestData.userDeleteAPI.deleteUser(
             RequestUserDeleteData(id = viewModel.cherishUserId.value!!)
         ).enqueue(

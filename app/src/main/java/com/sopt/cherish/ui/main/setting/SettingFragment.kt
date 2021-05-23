@@ -220,7 +220,6 @@ class SettingFragment : Fragment(), MainActivity.OnBackPressedListener {
                         call: Call<MyPageUserRes>,
                         response: Response<MyPageUserRes>
                     ) {
-                        Log.d("success", response.body().toString())
                         response.takeIf {
                             it.isSuccessful
                         }?.body()

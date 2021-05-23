@@ -15,6 +15,9 @@ class ReviewViewModel(
     var selectedCherishNickname = " "
     var selectedCherishId: Int = 0
 
+    var myPageUserNickname = " "
+    var myPageUserId: Int = 0
+
     var reviewText = " "
     var reviewSubText = " "
 

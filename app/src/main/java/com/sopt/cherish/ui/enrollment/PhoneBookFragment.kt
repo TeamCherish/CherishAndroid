@@ -87,7 +87,6 @@ class PhoneBookFragment : Fragment() {
                                 call: Call<ResponseCheckPhoneData>,
                                 response: Response<ResponseCheckPhoneData>
                             ) {
-                                Log.d("success", response.body().toString())
                                 if (response.body() == null) {
                                     CheckPhoneDialogFragment(
                                         R.layout.fragment_check_phone_dialog,
@@ -113,7 +112,6 @@ class PhoneBookFragment : Fragment() {
         }
         madapter.setItemClickListener(object : PhoneBookAdapter.ItemClickListener {
             override fun onchange(radio: Boolean) {
-                Log.d("radio", radio.toString())
                 if (radio) {
                     binding.buttonnext.setBackgroundColor(Color.parseColor("#1AD287"))
                     binding.buttonnext.setTextColor(Color.parseColor("#ffffff"))
@@ -152,9 +150,6 @@ class PhoneBookFragment : Fragment() {
                 putString("phonenumber", madapter.phonenumber)
                 putInt("useridend", countphonebook)
             }
-            Log.d("phonebookfragment", countphonebook.toString())
-
-
         })
         transaction.addToBackStack(null)
 
@@ -270,7 +265,6 @@ class PhoneBookFragment : Fragment() {
         }
 
         // 결과목록 반환
-        Log.d("listsize", list.size.toString())
         return list.distinct()
     }
 

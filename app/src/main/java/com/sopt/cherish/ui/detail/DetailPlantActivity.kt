@@ -1,7 +1,6 @@
 package com.sopt.cherish.ui.detail
 
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
@@ -45,7 +44,7 @@ class DetailPlantActivity : AppCompatActivity(),
     var cherishuserId = 0
 
 
-    var mypageuserId=0
+    var mypageuserId = 0
     private lateinit var mypageuserNickname: String
 
 
@@ -54,12 +53,8 @@ class DetailPlantActivity : AppCompatActivity(),
 
         binding = ActivityDetailPlantBinding.inflate(layoutInflater)
 
-
-        Log.d("plantId", intent.getIntExtra("plantId", 100).toString())
         //식물 아이디
         plantId = intent.getIntExtra("plantId", 0)
-
-
 
         //체리쉬아이디 -메인에서오는지 마이페이지에서 오는지 분기처리해줌
         if (intent.getIntExtra("cherishId", 0) == 0) {
@@ -86,16 +81,10 @@ class DetailPlantActivity : AppCompatActivity(),
         //유저 dDay
         viewModel.selectedUserDday = intent.getIntExtra("selectedUserDday", 0)
 
-        mypageuserId=intent.getIntExtra("mypageuserId",0)
-        viewModel.userId.value=mypageuserId
-        mypageuserNickname= intent.getStringExtra("mypageuserNickname").toString()
-        viewModel.userNickname.value=mypageuserNickname
-
-        Log.d("mypagephone",cherishPhoneNumber.toString())
-        Log.d("mypageuserId",mypageuserId.toString())
-        Log.d("mypageuserNickname",mypageuserNickname.toString())
-        Log.d("cherishNickname",cherishNickname.toString())
-
+        mypageuserId = intent.getIntExtra("mypageuserId", 0)
+        viewModel.myPageUserId.value = mypageuserId
+        mypageuserNickname = intent.getStringExtra("mypageuserNickname").toString()
+        viewModel.myPageUserNickname.value = mypageuserNickname
 
         viewModel.fetchCalendarData()
         setFragment(DetailPlantFragment())
@@ -181,11 +170,8 @@ class DetailPlantActivity : AppCompatActivity(),
                 putString("userNickname_detail", userNickname)
                 putInt("userId_detail", cherishuserId)
 
-                putInt("mypageuserId",mypageuserId)
-                putString("mypageuserNickname",mypageuserNickname)
-
-
-                //Log.d("nanana", cherishid.toString())
+                putInt("mypageuserId", mypageuserId)
+                putString("mypageuserNickname", mypageuserNickname)
             }
         })
         transaction.commit()
@@ -206,14 +192,12 @@ class DetailPlantActivity : AppCompatActivity(),
     }
 
     override fun onTestDialogweek(dialog: DialogFragment?, someData: String?) {
-        Log.d("nana", someData.toString())
         val textweek: TextView = findViewById(R.id.water_alarm_week)
         textweek.text = someData.toString()
 
     }
 
     override fun onTestDialogClock(dialog: DialogFragment?, someData: String?) {
-        Log.d("nana", someData.toString())
         val textclock: TextView = findViewById(R.id.water_alarm_time)
 
         textclock.text = someData.toString()
@@ -221,8 +205,6 @@ class DetailPlantActivity : AppCompatActivity(),
 
 
     override fun onTestDialogBirth(dialog: DialogFragment?, someData: String?) {
-
-
         val textbirth: TextView = findViewById(R.id.edit_birth)
 
         textbirth.text = someData.toString()

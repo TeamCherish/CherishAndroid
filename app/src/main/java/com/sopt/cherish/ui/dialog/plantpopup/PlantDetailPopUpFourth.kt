@@ -63,7 +63,6 @@ class PlantDetailPopUpFourth(plantId: Int) : Fragment() {
                             it.isSuccessful
                         }?.body()
                             ?.let { it ->
-                                Log.d("image url", it.data.toString())
                                 Glide.with(binding.root.context)
                                     .load(it.data.plantDetail[2].image_url).into(binding.flowerImg)
                                 chip = it.data.plantDetail[2].level_name

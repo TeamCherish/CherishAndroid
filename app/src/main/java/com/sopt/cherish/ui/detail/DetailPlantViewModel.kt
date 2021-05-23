@@ -29,6 +29,10 @@ class DetailPlantViewModel(
 
     val userNickname = MutableLiveData<String>()
 
+    val myPageUserNickname = MutableLiveData<String?>()
+
+    val myPageUserId = MutableLiveData<Int?>()
+
     var userId = MutableLiveData<Int>()
 
     val selectedCalendarData = MutableLiveData<CalendarData?>()
@@ -39,7 +43,7 @@ class DetailPlantViewModel(
 
     var wateringText = " "
 
-    var dDay = 0
+    var dDay = MutableLiveData<Int>()
 
     val selectedMemoCalendarDay = MutableLiveData<CalendarDay?>()
 

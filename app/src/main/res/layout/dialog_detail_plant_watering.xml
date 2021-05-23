@@ -80,7 +80,7 @@
                 android:onClick="@{() -> dialogDetailWatering.navigateNextTimeContact()}"
                 android:text="@string/next_time"
                 android:textColor="#404040"
-                android:delayVisiblity="@{detailPlantViewModel.selectedUserDday}"
+                android:delayVisiblity="@{detailPlantViewModel.DDay}"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/detail_plant_watering_image_graphic"

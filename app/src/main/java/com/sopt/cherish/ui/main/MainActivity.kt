@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Process
 import android.provider.ContactsContract
-import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -287,11 +286,9 @@ class MainActivity : AppCompatActivity() {
         // 다른 Fragment 에서 리스너를 설정했을 때 처리됩니다.
         if (mBackListener != null) {
             mBackListener!!.onBack()
-            Log.e("!!!", "Listener is not null")
             // 리스너가 설정되지 않은 상태(예를들어 메인Fragment)라면
             // 뒤로가기 버튼을 연속적으로 두번 눌렀을 때 앱이 종료됩니다.
         } else {
-            Log.e("!!!", "Listener is null")
             if (pressedTime == 0L) {
 
                 pressedTime = System.currentTimeMillis()
@@ -302,7 +299,6 @@ class MainActivity : AppCompatActivity() {
                     pressedTime = 0
                 } else {
                     super.onBackPressed()
-                    Log.e("!!!", "onBackPressed : finish, killProcess")
                     finish()
                     Process.killProcess(Process.myPid())
                 }

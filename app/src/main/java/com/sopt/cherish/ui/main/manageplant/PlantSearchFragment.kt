@@ -66,7 +66,6 @@ class PlantSearchFragment(private var data: List<MyPageCherishData>?) : Fragment
         cherishAdapter.setItemClickListener(
             object : MyPageBottomSheetAdapter.ItemClickListener {
                 override fun onClick(view: View, position: Int) {
-                    Log.d("onclick", "success")
 
                     val intent =
                         Intent(context, DetailPlantActivity::class.java)
@@ -143,8 +142,6 @@ class PlantSearchFragment(private var data: List<MyPageCherishData>?) : Fragment
         cherishAdapter.setItemClickListener(
             object : MyPageBottomSheetAdapter.ItemClickListener {
                 override fun onClick(view: View, position: Int) {
-                    Log.d("onclick", "success")
-
                     val intent =
                         Intent(context, DetailPlantActivity::class.java)
 

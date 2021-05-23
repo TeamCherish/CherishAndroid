@@ -14,7 +14,6 @@ import com.sopt.cherish.remote.api.ReviewWateringReq
 import com.sopt.cherish.util.MultiViewDialog
 import com.sopt.cherish.util.SimpleLogger
 import com.sopt.cherish.util.extension.FlexBoxExtension.getChip
-import com.sopt.cherish.util.extension.FlexBoxExtension.getChipsCount
 import com.sopt.cherish.util.extension.countNumberOfCharacters
 import com.sopt.cherish.util.extension.shortToast
 import com.sopt.cherish.util.extension.writeKeyword
@@ -54,9 +53,18 @@ class ReviewActivity : AppCompatActivity() {
         viewModel.userNickname = intent.getStringExtra("userNickname")!!
         viewModel.selectedCherishNickname = intent.getStringExtra("selectedCherishNickname")!!
         viewModel.selectedCherishId = intent.getIntExtra("selectedCherishId", 0)
-        viewModel.reviewText =
+        viewModel.myPageUserId = intent.getIntExtra("myPageUserId", 0)
+        viewModel.myPageUserNickname = intent.getStringExtra("myPageUserNickname")!!
+
+        viewModel.reviewText = if (viewModel.userNickname == "null") {
+            "${viewModel.myPageUserNickname}님! ${viewModel.selectedCherishNickname}님와(과)의"
+        } else {
             "${viewModel.userNickname}님! ${viewModel.selectedCherishNickname}님와(과)의"
+        }
+
         viewModel.reviewSubText = "${viewModel.selectedCherishNickname}와(과)의 물주기를 기록하세요."
+
+        SimpleLogger.logI("${viewModel.userNickname},${viewModel.selectedCherishNickname},${viewModel.selectedCherishId}")
     }
 
     private fun addLimitNumberOfMemoCharacters(binding: ActivityReviewBinding) {
@@ -90,46 +98,32 @@ class ReviewActivity : AppCompatActivity() {
 
     private fun sendReviewToServer(binding: ActivityReviewBinding) {
         binding.reviewAdminAccept.setOnClickListener {
-            if (binding.reviewFlexBox.getChipsCount() == 0 && binding.reviewMemo.text.isEmpty()) {
+            if (binding.reviewMemo.text.length <= 100) {
+                viewModel.sendReviewToServer(
+                    reviewWateringReq = ReviewWateringReq(
+                        binding.reviewMemo.text.toString(),
+                        if (binding.reviewFlexBox.getChip(0) == null) "" else binding.reviewFlexBox.getChip(
+                            0
+                        )!!.text.toString(),
+                        if (binding.reviewFlexBox.getChip(1) == null) "" else binding.reviewFlexBox.getChip(
+                            1
+                        )!!.text.toString(),
+                        if (binding.reviewFlexBox.getChip(2) == null) "" else binding.reviewFlexBox.getChip(
+                            2
+                        )!!.text.toString(),
+                        viewModel.selectedCherishId
+                    )
+                )
+                showLoadingDialog()
+            } else {
                 MultiViewDialog(
-                    R.layout.dialog_warning_review_no_word_warning,
+                    R.layout.dialog_warning_review_limit_error,
                     0.6944f,
                     0.16875f
                 ).show(
                     supportFragmentManager,
-                    ReviewFragment.TAG
+                    TAG
                 )
-            } else {
-                if (binding.reviewMemo.text.length <= 100) {
-                    viewModel.sendReviewToServer(
-                        reviewWateringReq = ReviewWateringReq(
-                            binding.reviewMemo.text.toString(),
-                            if (binding.reviewFlexBox.getChip(0) == null) "" else binding.reviewFlexBox.getChip(
-                                0
-                            )!!.text.toString(),
-                            if (binding.reviewFlexBox.getChip(1) == null) "" else binding.reviewFlexBox.getChip(
-                                1
-                            )!!.text.toString(),
-                            if (binding.reviewFlexBox.getChip(2) == null) "" else binding.reviewFlexBox.getChip(
-                                2
-                            )!!.text.toString(),
-                            viewModel.selectedCherishId
-                        )
-                    )
-                    SimpleLogger.logI(binding.reviewFlexBox.getChip(0)?.text.toString())
-                    SimpleLogger.logI(binding.reviewFlexBox.getChip(1)?.text.toString())
-                    SimpleLogger.logI(binding.reviewFlexBox.getChip(2)?.text.toString())
-                    showLoadingDialog()
-                } else {
-                    MultiViewDialog(
-                        R.layout.dialog_warning_review_limit_error,
-                        0.6944f,
-                        0.16875f
-                    ).show(
-                        supportFragmentManager,
-                        TAG
-                    )
-                }
             }
         }
         reviewNotificationViewModel.cancel()
