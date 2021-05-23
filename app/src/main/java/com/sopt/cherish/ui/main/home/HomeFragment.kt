@@ -78,7 +78,11 @@ class HomeFragment : Fragment(), OnItemClickListener, MainActivity.OnBackPressed
 
     override fun onResume() {
         super.onResume()
-        viewModel.fetchUsers()
+        if (viewModel.isWatered.value == true) {
+            viewModel.delayFetchUsers()
+        } else {
+            viewModel.fetchUsers()
+        }
     }
 
     private fun observeCherishUsers() {
