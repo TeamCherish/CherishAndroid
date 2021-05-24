@@ -8,11 +8,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentPlantBinding
 import com.sopt.cherish.remote.api.MyPageCherishData
 import com.sopt.cherish.ui.adapter.MyPageBottomSheetAdapter
 import com.sopt.cherish.ui.detail.DetailPlantActivity
 import com.sopt.cherish.ui.main.MainViewModel
+import com.sopt.cherish.ui.main.home.HomeFragment
 
 /**
  * Create on 01-08 by Yejin
@@ -60,7 +62,6 @@ class PlantFragment(private var data: List<MyPageCherishData>?) : Fragment() {
                 override fun onClick(view: View, position: Int) {
                     val intent =
                         Intent(context, DetailPlantActivity::class.java)
-
                     intent.putExtra(
                         "plantId",
                         data!![position].plantId
@@ -77,8 +78,11 @@ class PlantFragment(private var data: List<MyPageCherishData>?) : Fragment() {
                         "mypageuserNickname",
                         viewModel.userNickName.value
                     )
-
                     startActivity(intent)
+                    // 여기 부분이 클릭하는 부분
+                    // 저 id값이 cherishId 값인지 확인하고 맞다면 viewModel.selectedCherishId.value를 저녀석으로 바꿔서 처리할 수 있도록 하면 된다.
+                    parentFragmentManager.beginTransaction()
+                        .replace(R.id.main_fragment_container, HomeFragment()).commitNow()
                 }
             }
         )
