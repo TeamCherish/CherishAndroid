@@ -43,7 +43,7 @@
                 android:includeFontPadding="false"
                 android:textColor="@color/cherish_light_black"
                 android:textSize="22sp"
-                android:text="@{detailPlantViewModel.cherishNickname}"
+                android:text="@{detailPlantViewModel.cherishNickname + `와(과)는`}"
                 app:layout_constraintBottom_toTopOf="@id/detail_plant_contact_common_text"
                 app:layout_constraintEnd_toEndOf="@id/detail_plant_contact_image_graphic"
                 app:layout_constraintStart_toStartOf="@id/detail_plant_contact_image_graphic"
