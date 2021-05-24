@@ -62,7 +62,6 @@ class PlantFragment(private var data: List<MyPageCherishData>?) : Fragment() {
                 override fun onClick(view: View, position: Int) {
                     val intent =
                         Intent(context, DetailPlantActivity::class.java)
-
                     intent.putExtra(
                         "plantId",
                         data!![position].plantId
