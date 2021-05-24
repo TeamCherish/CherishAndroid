@@ -78,6 +78,7 @@ class PlantFragment(private var data: List<MyPageCherishData>?) : Fragment() {
                         "mypageuserNickname",
                         viewModel.userNickName.value
                     )
+                    viewModel.cherishSelectedPosition.value = position + 1
                     startActivity(intent)
                     // 여기 부분이 클릭하는 부분
                     // 저 id값이 cherishId 값인지 확인하고 맞다면 viewModel.selectedCherishId.value를 저녀석으로 바꿔서 처리할 수 있도록 하면 된다.
