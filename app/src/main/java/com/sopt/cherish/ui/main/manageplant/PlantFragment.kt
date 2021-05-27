@@ -1,5 +1,6 @@
 package com.sopt.cherish.ui.main.manageplant
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -40,6 +41,15 @@ class PlantFragment(private var data: List<MyPageCherishData>?) : Fragment() {
         setAdapterData()
 
         return binding.root
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode == CODE_MOVE_DETAIL_PLANT) {
+            if (resultCode == Activity.RESULT_OK) {
+                viewModel.isWatered.value = data?.getBooleanExtra("animationTrigger", false)
+            }
+        }
     }
 
     override fun onResume() {
@@ -79,13 +89,15 @@ class PlantFragment(private var data: List<MyPageCherishData>?) : Fragment() {
                         viewModel.userNickName.value
                     )
                     viewModel.cherishSelectedPosition.value = position + 1
-                    startActivity(intent)
-                    // 여기 부분이 클릭하는 부분
-                    // 저 id값이 cherishId 값인지 확인하고 맞다면 viewModel.selectedCherishId.value를 저녀석으로 바꿔서 처리할 수 있도록 하면 된다.
+                    startActivityForResult(intent, CODE_MOVE_DETAIL_PLANT)
                     parentFragmentManager.beginTransaction()
                         .replace(R.id.main_fragment_container, HomeFragment()).commitNow()
                 }
             }
         )
+    }
+
+    companion object {
+        private const val CODE_MOVE_DETAIL_PLANT = 1005
     }
 }

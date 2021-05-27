@@ -176,13 +176,11 @@ class DetailPlantFragment : Fragment() {
                         call: Call<ResponsePlantCardDatas>,
                         response: Response<ResponsePlantCardDatas>
                     ) {
-                        Log.d("식물카드 뷰", response.body().toString())
                         response.takeIf {
                             it.isSuccessful
                         }?.body()
                             ?.let { it ->
                                 binding.textViewNick.text = it.data.nickname
-                                Log.d("textViewNick", it.data.nickname.toString())
                                 binding.textViewName.text = it.data.name.toString()
 
                                 viewModel.cherishPhoneNumber.value = it.data.phone
