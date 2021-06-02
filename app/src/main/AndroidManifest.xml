@@ -45,6 +45,7 @@
             android:name=".ui.notification.FirebaseNotificationService"
             android:enabled="true"
             android:exported="true"
+            android:directBootAware="true"
             android:permission="com.google.android.c2dm.permission.SEND">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
