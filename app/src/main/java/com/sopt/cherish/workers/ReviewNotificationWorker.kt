@@ -13,10 +13,10 @@ class ReviewNotificationWorker(
     private val params: WorkerParameters
 ) : CoroutineWorker(context, params) {
     private val second: Long = 1000L
-    private val minute: Long = second * 1000L
+    private val minute: Long = second * 60L
     override suspend fun doWork(): Result {
         return try {
-            delay(5 * minute)
+            delay(360 * second)
             val notificationManager = Injection.provideNotificationManager(context)
             notificationManager.sendRecallReviewNotification(
                 context.getString(R.string.notification_recall_review_subtitle),
