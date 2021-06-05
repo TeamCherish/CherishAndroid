@@ -48,7 +48,9 @@ class MainActivity : AppCompatActivity() {
         observeFirebaseDeviceToken()
         requestCherishPermissions()
         showInitialFragment()
-        getFirebaseDeviceToken()
+        if (!MainApplication.sharedPreferenceController.isSingleInvoke()) {
+            getFirebaseDeviceToken()
+        }
         observeErrorHandleLiveData()
         setBottomNavigationListener(binding)
     }
@@ -88,6 +90,7 @@ class MainActivity : AppCompatActivity() {
                 return@OnCompleteListener
             }
             val token = task.result
+            SimpleLogger.logI(token.toString())
             viewModel.fcmToken.value = token
         })
     }
