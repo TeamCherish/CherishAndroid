@@ -21,6 +21,7 @@ class ReviewNotificationViewModel(
 
     fun cancel() {
         Injection.provideNotificationManager(app).cancelNotification()
+        reviewNotificationWorker.cancelAllWork()
     }
 
 }
