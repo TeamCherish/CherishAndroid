@@ -68,6 +68,10 @@ fun NotificationManager.sendRecallReviewNotification(messageBody: String, contex
     notify(MyKeyStore.provideRecallReviewNotificationId(), notificationBuilder.build())
 }
 
+fun NotificationManager.sendWateringNotification(meesageBody: String, context: Context) {
+
+}
+
 fun NotificationManager.cancelNotification() {
     cancelAll()
 }

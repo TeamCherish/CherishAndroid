@@ -12,16 +12,17 @@ class ReviewNotificationViewModel(
     private val app: Application
 ) : AndroidViewModel(app) {
     private val reviewNotificationWorker = WorkManager.getInstance(app)
-
+    private val oneTimeJob =
+        OneTimeWorkRequest.Builder(ReviewNotificationWorker::class.java).build()
+    private val oneTimeJobUid = oneTimeJob.id
     fun startNotificationTimer() {
         Injection.provideNotificationManager(app).cancelNotification()
-        val oneTimeJob = OneTimeWorkRequest.Builder(ReviewNotificationWorker::class.java).build()
         reviewNotificationWorker.enqueue(oneTimeJob)
     }
 
     fun cancel() {
         Injection.provideNotificationManager(app).cancelNotification()
-        reviewNotificationWorker.cancelAllWork()
+        reviewNotificationWorker.cancelWorkById(oneTimeJobUid)
     }
 
 }

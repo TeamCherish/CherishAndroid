@@ -98,6 +98,7 @@ class ReviewFragment : Fragment() {
                 )
             } else {
                 if (binding.homeReviewMemo.text.length <= 100) {
+                    reviewNotificationViewModel.cancel()
                     viewModel.sendReviewToServer(
                         ReviewWateringReq(
                             binding.homeReviewMemo.text.toString(),
@@ -126,11 +127,11 @@ class ReviewFragment : Fragment() {
                 }
             }
         }
-        reviewNotificationViewModel.cancel()
     }
 
     private fun ignoreSendReviewToServer(binding: FragmentReviewBinding) {
         binding.homeReviewIgnoreAccept.setOnClickListener {
+            reviewNotificationViewModel.cancel()
             viewModel.sendReviewToServer(
                 reviewWateringReq = ReviewWateringReq(
                     null,
@@ -142,7 +143,6 @@ class ReviewFragment : Fragment() {
             )
             showLoadingDialog()
         }
-        reviewNotificationViewModel.cancel()
     }
 
     companion object {
