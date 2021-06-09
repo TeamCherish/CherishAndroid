@@ -33,4 +33,9 @@ interface OnControlled {
     fun isSingleInvoke(): Boolean
 
     fun singleInvoked()
+
+    // FCM Token
+    fun setFCMToken(token: String)
+
+    fun getFCMToken(): String?
 }

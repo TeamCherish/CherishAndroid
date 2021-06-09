@@ -24,6 +24,7 @@
             isWatered="@{mainViewModel.isWatered()}"
             plantName="@{mainViewModel.selectedCherishUser.plantName}"
             remainDay="@{mainViewModel.selectedCherishUser.DDay}"
+            wateredPlantGrowth="@{mainViewModel.selectedCherishUser.growth}"
             wateredPlantName="@{mainViewModel.selectedCherishUser.plantName}"
             viewModel="@{mainViewModel}"
             app:layout_constraintBottom_toBottomOf="parent"
