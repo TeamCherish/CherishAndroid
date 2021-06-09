@@ -57,6 +57,12 @@ class EncryptedSharedPreferenceController(
         dataStore.edit().putBoolean(cherishSingleInvoked, true).apply()
     }
 
+    override fun setFCMToken(token: String) {
+        dataStore.edit().putString(cherishFCMToken, token).apply()
+    }
+
+    override fun getFCMToken(): String? = dataStore.getString(cherishFCMToken, null)
+
     companion object {
         private val cherishAlarmDataKey = MyKeyStore.provideAlarmKeyName()
         private val cherishLoginTokenKey = MyKeyStore.provideLoginTokenPrefsName()
@@ -64,6 +70,7 @@ class EncryptedSharedPreferenceController(
         private val cherishLoginUserPassword = MyKeyStore.provideLoginUserPassword()
         private val cherishLoginUserNickname = MyKeyStore.provideLoginUserNickname()
         private val cherishSingleInvoked = MyKeyStore.provideSingleInvokeKey()
+        private val cherishFCMToken = MyKeyStore.provideFCMTokenKey()
     }
 
 }

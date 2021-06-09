@@ -90,19 +90,16 @@ class MainActivity : AppCompatActivity() {
                 return@OnCompleteListener
             }
             val token = task.result
-            SimpleLogger.logI(token.toString())
-            viewModel.fcmToken.value = token
+            if (MainApplication.sharedPreferenceController.getFCMToken() != token) {
+                token?.let { MainApplication.sharedPreferenceController.setFCMToken(it) }
+                viewModel.fcmToken.value = token
+            }
         })
     }
 
     private fun observeFirebaseDeviceToken() {
         viewModel.fcmToken.observe(this) {
-            MainApplication.sharedPreferenceController.run {
-                if (!this.isSingleInvoke()) {
-                    this.singleInvoked()
-                    viewModel.sendFcmToken(NotificationReq(viewModel.cherishUserId.value!!, it))
-                }
-            }
+            viewModel.sendFcmToken(NotificationReq(viewModel.cherishUserId.value!!, it))
         }
     }
 

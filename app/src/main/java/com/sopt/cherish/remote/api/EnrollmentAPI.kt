@@ -1,11 +1,9 @@
 package com.sopt.cherish.remote.model
 
-
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.Headers
 import retrofit2.http.POST
-
 
 data class RequestEnrollData(
     val name: String,

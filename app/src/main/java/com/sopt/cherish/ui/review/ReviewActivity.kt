@@ -99,6 +99,7 @@ class ReviewActivity : AppCompatActivity() {
     private fun sendReviewToServer(binding: ActivityReviewBinding) {
         binding.reviewAdminAccept.setOnClickListener {
             if (binding.reviewMemo.text.length <= 100) {
+                reviewNotificationViewModel.cancel()
                 viewModel.sendReviewToServer(
                     reviewWateringReq = ReviewWateringReq(
                         binding.reviewMemo.text.toString(),
@@ -126,11 +127,11 @@ class ReviewActivity : AppCompatActivity() {
                 )
             }
         }
-        reviewNotificationViewModel.cancel()
     }
 
     private fun ignoreSendReviewToServer(binding: ActivityReviewBinding) {
         binding.reviewIgnoreAccept.setOnClickListener {
+            reviewNotificationViewModel.cancel()
             viewModel.sendReviewToServer(
                 reviewWateringReq = ReviewWateringReq(
                     null,
@@ -142,7 +143,6 @@ class ReviewActivity : AppCompatActivity() {
             )
             showLoadingDialog()
         }
-        reviewNotificationViewModel.cancel()
     }
 
     companion object {

@@ -377,13 +377,15 @@ object BindingAdapter {
         }
     }
 
+    // todo : Delay이후에 배경색이 이상해 지는 현상이 있음
     @JvmStatic
-    @BindingAdapter(value = ["isWatered", "remainDay", "wateredPlantName", "viewModel"])
+    @BindingAdapter(value = ["isWatered", "remainDay", "wateredPlantName", "wateredPlantGrowth", "viewModel"])
     fun wateredBackground(
         imageView: ImageView,
         isWatered: Boolean?,
         remainDay: Int,
         plantName: String?,
+        plantGrowth: Int?,
         viewModel: MainViewModel
     ) {
         if (isWatered == true) {
@@ -405,7 +407,8 @@ object BindingAdapter {
                         }
                     )
                 ).apply {
-                    duration = 3000
+                    // 이 duration이 너무 느려서 안맞는 현상이 발생한다.
+                    duration = 2800
                     addUpdateListener {
                         imageView.setBackgroundColor(it.animatedValue as Int)
                     }
@@ -415,36 +418,27 @@ object BindingAdapter {
             viewModel.isWatered.value = null
         }
         if (isWatered == false) {
-            if (remainDay < 0) {
+            imageView.setBackgroundColor(
+                ContextCompat.getColor(
+                    imageView.context, R.color.cherish_light_black
+                )
+            )
+            val delayHandler = Handler(imageView.context.mainLooper)
+            delayHandler.postDelayed({
                 imageView.setBackgroundColor(
                     ContextCompat.getColor(
-                        imageView.context,
-                        R.color.cherish_light_black
+                        imageView.context, when (plantName) {
+                            "민들레" -> R.color.cherish_dandelion_background_color
+                            "로즈마리" -> R.color.cherish_rosemary_background_color
+                            "아메리칸블루" -> R.color.cherish_american_blue_background_color
+                            "스투키" -> R.color.cherish_stuki_background_color
+                            "단모환" -> R.color.cherish_sun_background_color
+                            else -> R.color.white
+                        }
                     )
                 )
-            } else {
-                imageView.setBackgroundColor(
-                    ContextCompat.getColor(
-                        imageView.context, R.color.cherish_light_black
-                    )
-                )
-                val delayHandler = Handler(imageView.context.mainLooper)
-                delayHandler.postDelayed({
-                    imageView.setBackgroundColor(
-                        ContextCompat.getColor(
-                            imageView.context, when (plantName) {
-                                "민들레" -> R.color.cherish_dandelion_background_color
-                                "로즈마리" -> R.color.cherish_rosemary_background_color
-                                "아메리칸블루" -> R.color.cherish_american_blue_background_color
-                                "스투키" -> R.color.cherish_stuki_background_color
-                                "단모환" -> R.color.cherish_sun_background_color
-                                else -> R.color.white
-                            }
-                        )
-                    )
-                }, 3800)
-                viewModel.isWatered.value = null
-            }
+            }, 3000)
+            viewModel.isWatered.value = null
         }
     }
 

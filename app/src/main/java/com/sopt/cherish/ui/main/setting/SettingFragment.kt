@@ -25,6 +25,7 @@ import com.sopt.cherish.ui.main.MainActivity
 import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.ui.splash.SplashActivity
 import com.sopt.cherish.util.ImageSharedPreferences
+import com.sopt.cherish.util.SimpleLogger
 import com.sopt.cherish.util.extension.shortToast
 import retrofit2.Call
 import retrofit2.Callback
@@ -99,6 +100,7 @@ class SettingFragment : Fragment(), MainActivity.OnBackPressedListener {
 
         binding.settingAlarmSetting.setOnCheckedChangeListener { buttonView, isChecked ->
             MainApplication.sharedPreferenceController.setAlarmKey(isChecked)
+            SimpleLogger.logI("${MainApplication.sharedPreferenceController.getAlarmKey()}")
         }
 
         binding.quit.setOnClickListener {

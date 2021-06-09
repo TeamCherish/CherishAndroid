@@ -8,6 +8,7 @@ object MyKeyStore {
     private const val loginUserPassword = "cherishUserPassword"
     private const val loginUserNickname = "cherishUserNickname"
     private const val isSingleInvokeKey = "singleInvoke"
+    private const val FCMTokenKey = "FCMToken"
     private const val NEED_TO_WATERING_NOTIFICATION_ID = 0
     private const val RECALL_REVIEW_NOTIFICATION_ID = 1
 
@@ -28,4 +29,6 @@ object MyKeyStore {
     fun provideRecallReviewNotificationId(): Int = RECALL_REVIEW_NOTIFICATION_ID
 
     fun provideSingleInvokeKey(): String = isSingleInvokeKey
+
+    fun provideFCMTokenKey(): String = FCMTokenKey
 }
