@@ -34,8 +34,8 @@ class FirebaseNotificationService : FirebaseMessagingService() {
             applicationContext,
             this.getString(R.string.notification_cherish_need_to_watering_user_channel_id)
         )
-            .setContentTitle(message.notification?.title)
-            .setContentText(message.notification?.body)
+            .setContentTitle(message.data["title"])
+            .setContentText(message.data["body"])
             .setSmallIcon(R.drawable.login_logo)
             .setContentIntent(pendingIntent)
             .setPriority(NotificationCompat.PRIORITY_HIGH)
