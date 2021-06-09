@@ -72,106 +72,165 @@ object BindingAdapter {
         }
     }
 
+    // todo : Delay이후에 배경색이 이상해 지는 현상이 있음
+    // todo : 그 기존에 줬던 각 단계 별로 시든 이미지로 변경되어야 하지 않을까 싶습니다.
+    // todo : 정확히는 이제 isWatered값이 false 일 경우에 순간적으로 이미지가 변경되는 것이지요
     @JvmStatic
-    @BindingAdapter(value = ["plantName", "growth", "dDay"])
-    fun setPlantImage(imageView: ImageView, plantName: String?, growth: Int?, dDay: Int?) {
+    @BindingAdapter(value = ["plantName", "growth", "dDay", "isWatered"])
+    fun setPlantImage(
+        imageView: ImageView,
+        plantName: String?,
+        growth: Int?,
+        dDay: Int?,
+        isWatered: Boolean?
+    ) {
         if (growth != null) {
-            when {
-                growth <= 25 -> {
-                    if (dDay != null) {
-                        if (dDay < 0) {
-                            Glide.with(imageView)
-                                .asDrawable()
-                                .load(
-                                    when (plantName) {
-                                        "민들레" -> R.drawable.dandelion_grayshadow_1
-                                        "로즈마리" -> R.drawable.rosemary_grayshadow_1
-                                        "아메리칸블루" -> R.drawable.americanblue_grayshadow_1
-                                        "스투키" -> R.drawable.stuckyi_grayshadow_1
-                                        "단모환" -> R.drawable.cactus_grayshadow_1
-                                        else -> R.drawable.img_white
-                                    }
-                                )
-                                .into(imageView)
-                        } else {
-                            Glide.with(imageView)
-                                .asDrawable()
-                                .load(
-                                    when (plantName) {
-                                        "민들레" -> R.drawable.img_dandelion_1
-                                        "로즈마리" -> R.drawable.img_rose_1
-                                        "아메리칸블루" -> R.drawable.img_americanblue_1
-                                        "스투키" -> R.drawable.img_stuki_1
-                                        "단모환" -> R.drawable.img_sun_1
-                                        else -> R.drawable.img_white
-                                    }
-                                )
-                                .into(imageView)
-                        }
+            if (isWatered == false) {
+                when {
+                    growth <= 25 -> {
+                        Glide.with(imageView)
+                            .asDrawable()
+                            .load(
+                                when (plantName) {
+                                    "민들레" -> R.drawable.dandelion_grayshadow_1
+                                    "로즈마리" -> R.drawable.rosemary_grayshadow_1
+                                    "아메리칸블루" -> R.drawable.americanblue_grayshadow_1
+                                    "스투키" -> R.drawable.stuckyi_grayshadow_1
+                                    "단모환" -> R.drawable.cactus_grayshadow_1
+                                    else -> R.drawable.img_white
+                                }
+                            )
+                            .into(imageView)
+                    }
+                    growth in 26..50 -> {
+                        Glide.with(imageView)
+                            .asDrawable()
+                            .load(
+                                when (plantName) {
+                                    "민들레" -> R.drawable.dandelion_grayshadow_2
+                                    "로즈마리" -> R.drawable.rosemary_grayshadow_2
+                                    "아메리칸블루" -> R.drawable.americanblue_grayshadow_2
+                                    "스투키" -> R.drawable.stuckyi_grayshadow_2
+                                    "단모환" -> R.drawable.cactus_grayshadow_2
+                                    else -> R.drawable.img_white
+                                }
+                            )
+                            .into(imageView)
+                    }
+                    else -> {
+                        Glide.with(imageView)
+                            .asDrawable()
+                            .load(
+                                when (plantName) {
+                                    "민들레" -> R.drawable.dandelion_grayshadow_3
+                                    "로즈마리" -> R.drawable.rosemary_grayshadow_3
+                                    "아메리칸블루" -> R.drawable.americanblue_grayshadow_3
+                                    "스투키" -> R.drawable.stuckyi_grayshadow_3
+                                    "단모환" -> R.drawable.cactus_grayshadow_3
+                                    else -> R.drawable.img_white
+                                }
+                            )
+                            .into(imageView)
                     }
                 }
-                growth in 26..50 -> {
-                    if (dDay != null) {
-                        if (dDay < 0) {
-                            Glide.with(imageView)
-                                .asDrawable()
-                                .load(
-                                    when (plantName) {
-                                        "민들레" -> R.drawable.dandelion_grayshadow_2
-                                        "로즈마리" -> R.drawable.rosemary_grayshadow_2
-                                        "아메리칸블루" -> R.drawable.americanblue_grayshadow_2
-                                        "스투키" -> R.drawable.stuckyi_grayshadow_2
-                                        "단모환" -> R.drawable.cactus_grayshadow_2
-                                        else -> R.drawable.img_white
-                                    }
-                                )
-                                .into(imageView)
-                        } else {
-                            Glide.with(imageView)
-                                .asDrawable()
-                                .load(
-                                    when (plantName) {
-                                        "민들레" -> R.drawable.img_dandelion_2
-                                        "로즈마리" -> R.drawable.img_rose_2
-                                        "아메리칸블루" -> R.drawable.img_americanblue_2
-                                        "스투키" -> R.drawable.img_stuki_2
-                                        "단모환" -> R.drawable.img_sun_2
-                                        else -> R.drawable.img_white
-                                    }
-                                )
-                                .into(imageView)
+            } else {
+                when {
+                    growth <= 25 -> {
+                        if (dDay != null) {
+                            if (dDay < 0) {
+                                Glide.with(imageView)
+                                    .asDrawable()
+                                    .load(
+                                        when (plantName) {
+                                            "민들레" -> R.drawable.dandelion_grayshadow_1
+                                            "로즈마리" -> R.drawable.rosemary_grayshadow_1
+                                            "아메리칸블루" -> R.drawable.americanblue_grayshadow_1
+                                            "스투키" -> R.drawable.stuckyi_grayshadow_1
+                                            "단모환" -> R.drawable.cactus_grayshadow_1
+                                            else -> R.drawable.img_white
+                                        }
+                                    )
+                                    .into(imageView)
+                            } else {
+                                Glide.with(imageView)
+                                    .asDrawable()
+                                    .load(
+                                        when (plantName) {
+                                            "민들레" -> R.drawable.img_dandelion_1
+                                            "로즈마리" -> R.drawable.img_rose_1
+                                            "아메리칸블루" -> R.drawable.img_americanblue_1
+                                            "스투키" -> R.drawable.img_stuki_1
+                                            "단모환" -> R.drawable.img_sun_1
+                                            else -> R.drawable.img_white
+                                        }
+                                    )
+                                    .into(imageView)
+                            }
                         }
                     }
-                }
-                else -> {
-                    if (dDay != null) {
-                        if (dDay < 0) {
-                            Glide.with(imageView)
-                                .asDrawable()
-                                .load(
-                                    when (plantName) {
-                                        "민들레" -> R.drawable.dandelion_grayshadow_3
-                                        "로즈마리" -> R.drawable.rosemary_grayshadow_3
-                                        "아메리칸블루" -> R.drawable.americanblue_grayshadow_3
-                                        "스투키" -> R.drawable.stuckyi_grayshadow_3
-                                        "단모환" -> R.drawable.cactus_grayshadow_3
-                                        else -> R.drawable.img_white
-                                    }
-                                )
-                                .into(imageView)
-                        } else {
-                            Glide.with(imageView)
-                                .asGif()
-                                .load(
-                                    when (plantName) {
-                                        "민들레" -> R.raw.min_android
-                                        "로즈마리" -> R.raw.rose_android
-                                        "아메리칸블루" -> R.raw.blue_android
-                                        "스투키" -> R.raw.stuki_android
-                                        "단모환" -> R.raw.sun_android
-                                        else -> R.raw.cherish_loading
-                                    }
-                                ).into(imageView)
+                    growth in 26..50 -> {
+                        if (dDay != null) {
+                            if (dDay < 0) {
+                                Glide.with(imageView)
+                                    .asDrawable()
+                                    .load(
+                                        when (plantName) {
+                                            "민들레" -> R.drawable.dandelion_grayshadow_2
+                                            "로즈마리" -> R.drawable.rosemary_grayshadow_2
+                                            "아메리칸블루" -> R.drawable.americanblue_grayshadow_2
+                                            "스투키" -> R.drawable.stuckyi_grayshadow_2
+                                            "단모환" -> R.drawable.cactus_grayshadow_2
+                                            else -> R.drawable.img_white
+                                        }
+                                    )
+                                    .into(imageView)
+                            } else {
+                                Glide.with(imageView)
+                                    .asDrawable()
+                                    .load(
+                                        when (plantName) {
+                                            "민들레" -> R.drawable.img_dandelion_2
+                                            "로즈마리" -> R.drawable.img_rose_2
+                                            "아메리칸블루" -> R.drawable.img_americanblue_2
+                                            "스투키" -> R.drawable.img_stuki_2
+                                            "단모환" -> R.drawable.img_sun_2
+                                            else -> R.drawable.img_white
+                                        }
+                                    )
+                                    .into(imageView)
+                            }
+                        }
+                    }
+                    else -> {
+                        if (dDay != null) {
+                            if (dDay < 0) {
+                                Glide.with(imageView)
+                                    .asDrawable()
+                                    .load(
+                                        when (plantName) {
+                                            "민들레" -> R.drawable.dandelion_grayshadow_3
+                                            "로즈마리" -> R.drawable.rosemary_grayshadow_3
+                                            "아메리칸블루" -> R.drawable.americanblue_grayshadow_3
+                                            "스투키" -> R.drawable.stuckyi_grayshadow_3
+                                            "단모환" -> R.drawable.cactus_grayshadow_3
+                                            else -> R.drawable.img_white
+                                        }
+                                    )
+                                    .into(imageView)
+                            } else {
+                                Glide.with(imageView)
+                                    .asGif()
+                                    .load(
+                                        when (plantName) {
+                                            "민들레" -> R.raw.min_android
+                                            "로즈마리" -> R.raw.rose_android
+                                            "아메리칸블루" -> R.raw.blue_android
+                                            "스투키" -> R.raw.stuki_android
+                                            "단모환" -> R.raw.sun_android
+                                            else -> R.raw.cherish_loading
+                                        }
+                                    ).into(imageView)
+                            }
                         }
                     }
                 }
@@ -180,167 +239,232 @@ object BindingAdapter {
     }
 
     @JvmStatic
-    @BindingAdapter(value = ["setImageSizePlantName", "setImageSizeGrowth", "setImageSizedDay"])
-    fun setPlantImageViewSize(imageView: ImageView, plantName: String?, growth: Int?, dDay: Int?) {
+    @BindingAdapter(value = ["setImageSizePlantName", "setImageSizeGrowth", "setImageSizedDay", "setIsWatered"])
+    fun setPlantImageViewSize(
+        imageView: ImageView,
+        plantName: String?,
+        growth: Int?,
+        dDay: Int?,
+        isWatered: Boolean?
+    ) {
         if (growth != null) {
-            imageView.apply {
-                when {
-                    growth <= 25 -> {
-                        when (plantName) {
-                            "민들레" -> {
-                                resizeImageView(262, 331)
-                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 40.dp)
-                            }
-                            "로즈마리" -> {
-                                resizeImageView(220, 380)
-                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 44.dp)
-                            }
-                            "아메리칸블루" -> {
-                                resizeImageView(249, 368)
-                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 40.dp)
-                            }
-                            "스투키" -> {
-                                resizeImageView(295, 266.6.toInt())
-                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 40.dp)
-                            }
-                            "단모환" -> {
-                                resizeImageView(275, 229)
-                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 44.dp)
-                            }
-                            else -> {
-
-                            }
-                        }
-                    }
-                    growth in 26..50 -> {
-                        when (plantName) {
-                            "민들레" -> {
-                                resizeImageView(235, 388)
-                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 40.dp)
-                            }
-                            "로즈마리" -> {
-                                resizeImageView(192, 500)
-                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 40.dp)
-                            }
-                            "아메리칸블루" -> {
-                                resizeImageView(204, 461)
-                                setMargin(top = 0.dp, start = 0.dp, end = 22.dp, bottom = 40.dp)
-                            }
-                            "스투키" -> {
-                                resizeImageView(240, 313)
-                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 40.dp)
-                            }
-                            "단모환" -> {
-                                resizeImageView(283, 350)
-                                setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 40.dp)
-                            }
-                            else -> {
-
-                            }
-                        }
-                    }
-                    else -> {
-                        if (dDay != null) {
-                            if (dDay < 0) {
-                                when (plantName) {
-                                    "민들레" -> {
-                                        resizeImageView(235, 388)
-                                        setMargin(
-                                            top = 0.dp,
-                                            start = 0.dp,
-                                            end = 0.dp,
-                                            bottom = 40.dp
-                                        )
-                                    }
-                                    "로즈마리" -> {
-                                        resizeImageView(204, 500)
-                                        setMargin(
-                                            top = 0.dp,
-                                            start = 0.dp,
-                                            end = 0.dp,
-                                            bottom = 40.dp
-                                        )
-                                    }
-                                    "아메리칸블루" -> {
-                                        resizeImageView(204, 461)
-                                        setMargin(
-                                            top = 0.dp,
-                                            start = 0.dp,
-                                            end = 0.dp,
-                                            bottom = 40.dp
-                                        )
-                                    }
-                                    "스투키" -> {
-                                        resizeImageView(305, 440)
-                                        setMargin(
-                                            top = 0.dp,
-                                            start = 0.dp,
-                                            end = 0.dp,
-                                            bottom = 40.dp
-                                        )
-                                    }
-                                    "단모환" -> {
-                                        resizeImageView(283, 350)
-                                        setMargin(
-                                            top = 0.dp,
-                                            start = 0.dp,
-                                            end = 0.dp,
-                                            bottom = 40.dp
-                                        )
-                                    }
-                                    else -> {
-
-                                    }
+            if (isWatered == false) {
+                imageView.apply {
+                    when {
+                        growth >= 50 -> {
+                            when (plantName) {
+                                "민들레" -> {
+                                    resizeImageView(235, 388)
+                                    setMargin(
+                                        top = 0.dp,
+                                        start = 0.dp,
+                                        end = 0.dp,
+                                        bottom = 40.dp
+                                    )
                                 }
-                            } else {
-                                when (plantName) {
-                                    "민들레" -> {
-                                        matchSizeImageView()
-                                        setMargin(
-                                            top = 0.dp,
-                                            start = 0.dp,
-                                            end = 0.dp,
-                                            bottom = 0.dp
-                                        )
-                                    }
-                                    "로즈마리" -> {
-                                        setMargin(
-                                            top = 0.dp,
-                                            start = 0.dp,
-                                            end = 0.dp,
-                                            bottom = 0.dp
-                                        )
-                                        matchSizeImageView()
-                                    }
-                                    "아메리칸블루" -> {
-                                        setMargin(
-                                            top = 0.dp,
-                                            start = 0.dp,
-                                            end = 0.dp,
-                                            bottom = 0.dp
-                                        )
-                                        matchSizeImageView()
-                                    }
-                                    "스투키" -> {
-                                        setMargin(
-                                            top = 0.dp,
-                                            start = 0.dp,
-                                            end = 0.dp,
-                                            bottom = 0.dp
-                                        )
-                                        matchSizeImageView()
-                                    }
-                                    "단모환" -> {
-                                        setMargin(
-                                            top = 0.dp,
-                                            start = 0.dp,
-                                            end = 0.dp,
-                                            bottom = 0.dp
-                                        )
-                                        matchSizeImageView()
-                                    }
-                                    else -> {
+                                "로즈마리" -> {
+                                    resizeImageView(204, 500)
+                                    setMargin(
+                                        top = 0.dp,
+                                        start = 0.dp,
+                                        end = 0.dp,
+                                        bottom = 40.dp
+                                    )
+                                }
+                                "아메리칸블루" -> {
+                                    resizeImageView(204, 461)
+                                    setMargin(
+                                        top = 0.dp,
+                                        start = 0.dp,
+                                        end = 0.dp,
+                                        bottom = 40.dp
+                                    )
+                                }
+                                "스투키" -> {
+                                    resizeImageView(305, 440)
+                                    setMargin(
+                                        top = 0.dp,
+                                        start = 0.dp,
+                                        end = 0.dp,
+                                        bottom = 40.dp
+                                    )
+                                }
+                                "단모환" -> {
+                                    resizeImageView(283, 350)
+                                    setMargin(
+                                        top = 0.dp,
+                                        start = 0.dp,
+                                        end = 0.dp,
+                                        bottom = 40.dp
+                                    )
+                                }
+                                else -> {
 
+                                }
+                            }
+                        }
+                    }
+                }
+            } else {
+                imageView.apply {
+                    when {
+                        growth <= 25 -> { // 1단계인 경우
+                            when (plantName) {
+                                "민들레" -> {
+                                    resizeImageView(262, 331)
+                                    setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 40.dp)
+                                }
+                                "로즈마리" -> {
+                                    resizeImageView(220, 380)
+                                    setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 44.dp)
+                                }
+                                "아메리칸블루" -> {
+                                    resizeImageView(249, 368)
+                                    setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 40.dp)
+                                }
+                                "스투키" -> {
+                                    resizeImageView(295, 266.6.toInt())
+                                    setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 40.dp)
+                                }
+                                "단모환" -> {
+                                    resizeImageView(275, 229)
+                                    setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 44.dp)
+                                }
+                                else -> {
+
+                                }
+                            }
+                        }
+                        growth in 26..50 -> { // 2단계인 경우
+                            when (plantName) {
+                                "민들레" -> {
+                                    resizeImageView(235, 388)
+                                    setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 40.dp)
+                                }
+                                "로즈마리" -> {
+                                    resizeImageView(192, 500)
+                                    setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 40.dp)
+                                }
+                                "아메리칸블루" -> {
+                                    resizeImageView(204, 461)
+                                    setMargin(top = 0.dp, start = 0.dp, end = 22.dp, bottom = 40.dp)
+                                }
+                                "스투키" -> {
+                                    resizeImageView(240, 313)
+                                    setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 40.dp)
+                                }
+                                "단모환" -> {
+                                    resizeImageView(283, 350)
+                                    setMargin(top = 0.dp, start = 0.dp, end = 0.dp, bottom = 40.dp)
+                                }
+                                else -> {
+
+                                }
+                            }
+                        }
+                        else -> { // 3단계인 경우
+                            if (dDay != null) {
+                                if (dDay < 0) {
+                                    when (plantName) {
+                                        "민들레" -> {
+                                            resizeImageView(235, 388)
+                                            setMargin(
+                                                top = 0.dp,
+                                                start = 0.dp,
+                                                end = 0.dp,
+                                                bottom = 40.dp
+                                            )
+                                        }
+                                        "로즈마리" -> {
+                                            resizeImageView(204, 500)
+                                            setMargin(
+                                                top = 0.dp,
+                                                start = 0.dp,
+                                                end = 0.dp,
+                                                bottom = 40.dp
+                                            )
+                                        }
+                                        "아메리칸블루" -> {
+                                            resizeImageView(204, 461)
+                                            setMargin(
+                                                top = 0.dp,
+                                                start = 0.dp,
+                                                end = 0.dp,
+                                                bottom = 40.dp
+                                            )
+                                        }
+                                        "스투키" -> {
+                                            resizeImageView(305, 440)
+                                            setMargin(
+                                                top = 0.dp,
+                                                start = 0.dp,
+                                                end = 0.dp,
+                                                bottom = 40.dp
+                                            )
+                                        }
+                                        "단모환" -> {
+                                            resizeImageView(283, 350)
+                                            setMargin(
+                                                top = 0.dp,
+                                                start = 0.dp,
+                                                end = 0.dp,
+                                                bottom = 40.dp
+                                            )
+                                        }
+                                        else -> {
+
+                                        }
+                                    }
+                                } else { // dDay가 0이 아닌 경우
+                                    when (plantName) {
+                                        "민들레" -> {
+                                            matchSizeImageView()
+                                            setMargin(
+                                                top = 0.dp,
+                                                start = 0.dp,
+                                                end = 0.dp,
+                                                bottom = 0.dp
+                                            )
+                                        }
+                                        "로즈마리" -> {
+                                            setMargin(
+                                                top = 0.dp,
+                                                start = 0.dp,
+                                                end = 0.dp,
+                                                bottom = 0.dp
+                                            )
+                                            matchSizeImageView()
+                                        }
+                                        "아메리칸블루" -> {
+                                            setMargin(
+                                                top = 0.dp,
+                                                start = 0.dp,
+                                                end = 0.dp,
+                                                bottom = 0.dp
+                                            )
+                                            matchSizeImageView()
+                                        }
+                                        "스투키" -> {
+                                            setMargin(
+                                                top = 0.dp,
+                                                start = 0.dp,
+                                                end = 0.dp,
+                                                bottom = 0.dp
+                                            )
+                                            matchSizeImageView()
+                                        }
+                                        "단모환" -> {
+                                            setMargin(
+                                                top = 0.dp,
+                                                start = 0.dp,
+                                                end = 0.dp,
+                                                bottom = 0.dp
+                                            )
+                                            matchSizeImageView()
+                                        }
+                                        else -> {
+
+                                        }
                                     }
                                 }
                             }
@@ -377,15 +501,13 @@ object BindingAdapter {
         }
     }
 
-    // todo : Delay이후에 배경색이 이상해 지는 현상이 있음
     @JvmStatic
-    @BindingAdapter(value = ["isWatered", "remainDay", "wateredPlantName", "wateredPlantGrowth", "viewModel"])
+    @BindingAdapter(value = ["isWatered", "remainDay", "wateredPlantName", "viewModel"])
     fun wateredBackground(
         imageView: ImageView,
         isWatered: Boolean?,
         remainDay: Int,
         plantName: String?,
-        plantGrowth: Int?,
         viewModel: MainViewModel
     ) {
         if (isWatered == true) {
@@ -437,7 +559,7 @@ object BindingAdapter {
                         }
                     )
                 )
-            }, 3000)
+            }, 2800)
             viewModel.isWatered.value = null
         }
     }

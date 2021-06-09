@@ -24,7 +24,6 @@
             isWatered="@{mainViewModel.isWatered()}"
             plantName="@{mainViewModel.selectedCherishUser.plantName}"
             remainDay="@{mainViewModel.selectedCherishUser.DDay}"
-            wateredPlantGrowth="@{mainViewModel.selectedCherishUser.growth}"
             wateredPlantName="@{mainViewModel.selectedCherishUser.plantName}"
             viewModel="@{mainViewModel}"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -39,9 +38,11 @@
             growth="@{mainViewModel.selectedCherishUser.growth}"
             plantName="@{mainViewModel.selectedCherishUser.plantName}"
             dDay="@{mainViewModel.selectedCherishUser.DDay}"
+            isWatered="@{mainViewModel.isWatered()}"
             setImageSizeGrowth="@{mainViewModel.selectedCherishUser.growth}"
             setImageSizePlantName="@{mainViewModel.selectedCherishUser.plantName}"
             setImageSizedDay="@{mainViewModel.selectedCherishUser.DDay}"
+            setIsWatered="@{mainViewModel.isWatered()}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
 
