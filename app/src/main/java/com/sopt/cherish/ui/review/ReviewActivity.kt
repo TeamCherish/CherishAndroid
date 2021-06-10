@@ -43,6 +43,11 @@ class ReviewActivity : AppCompatActivity() {
         ignoreSendReviewToServer(binding)
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        reviewNotificationViewModel.cancel()
+    }
+
     private fun observeErrorHandleLiveData() {
         viewModel.errorHandleLiveData.observe(this) {
             shortToast(this, "네트워크 상태를 확인해주세요")

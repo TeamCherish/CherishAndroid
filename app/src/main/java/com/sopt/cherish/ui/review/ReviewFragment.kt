@@ -54,6 +54,7 @@ class ReviewFragment : Fragment() {
         super.onDestroyView()
         activity?.findViewById<BottomNavigationView>(R.id.main_bottom_navi)?.visibility =
             View.VISIBLE
+        reviewNotificationViewModel.cancel()
     }
 
     private fun addLimitNumberOfMemoCharacters(binding: FragmentReviewBinding) {

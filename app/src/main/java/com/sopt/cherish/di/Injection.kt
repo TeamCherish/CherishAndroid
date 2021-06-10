@@ -7,13 +7,15 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
-import com.sopt.cherish.MainApplication
 import com.sopt.cherish.remote.api.*
 import com.sopt.cherish.remote.singleton.RetrofitBuilder
 import com.sopt.cherish.repository.*
 import com.sopt.cherish.ui.factory.*
 import com.sopt.cherish.util.MyKeyStore
+import okhttp3.ConnectionPool
 import okhttp3.OkHttpClient
+import okhttp3.Protocol
+import java.util.concurrent.TimeUnit
 
 /**
  * Created on 01-03 by SSong-develop
@@ -21,10 +23,6 @@ import okhttp3.OkHttpClient
  * we need to divide file in module like DetailModule
  */
 object Injection {
-    private const val CONNECT_TIMEOUT = 15
-    private const val WRITE_TIMEOUT = 15
-    private const val READ_TIMEOUT = 15
-
     fun provideMainViewModelFactory(): ViewModelProvider.Factory {
         return MainViewModelFactory(
             provideMainRepository(), provideWateringRepository(), provideCalendarRepository(),
@@ -123,14 +121,12 @@ object Injection {
     }
 
     fun provideOkHttpClient() =
-        OkHttpClient.Builder().addInterceptor {
-            val request = it.request().newBuilder()
-                .addHeader(
-                    "Authorization",
-                    "Bearer " + MainApplication.sharedPreferenceController.getToken()
-                )
-                .build()
-            return@addInterceptor it.proceed(request)
-        }.build()
+        OkHttpClient.Builder()
+            .connectTimeout(10, TimeUnit.SECONDS)
+            .writeTimeout(10, TimeUnit.SECONDS)
+            .readTimeout(10, TimeUnit.SECONDS)
+            .connectionPool(ConnectionPool(0, 5, TimeUnit.MINUTES))
+            .protocols(listOf(Protocol.HTTP_1_1, Protocol.HTTP_2))
+            .build()
 
 }

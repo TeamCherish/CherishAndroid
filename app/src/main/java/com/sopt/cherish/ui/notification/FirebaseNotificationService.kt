@@ -8,7 +8,6 @@ import android.content.Intent
 import androidx.core.app.NotificationCompat
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
-import com.sopt.cherish.MainApplication
 import com.sopt.cherish.R
 import com.sopt.cherish.ui.signin.SignInActivity
 import com.sopt.cherish.util.SimpleLogger
@@ -42,10 +41,6 @@ class FirebaseNotificationService : FirebaseMessagingService() {
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .build()
 
-        // todo : 이것도 테스트 해야함
-        // 설정에서 알림키를 꺼놓았을 경우엔 오지 않도록 처리한다.
-        if (MainApplication.sharedPreferenceController.getAlarmKey()) {
-            notificationManager.notify(notificationId, notification)
-        }
+        notificationManager.notify(notificationId, notification)
     }
 }

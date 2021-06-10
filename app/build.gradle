@@ -108,8 +108,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging-ktx'
 
     // okHttp
-    implementation "com.squareup.okhttp3:okhttp:4.9.0"
-    implementation "com.squareup.okhttp3:logging-interceptor:4.7.2"
+    implementation "com.squareup.okhttp3:okhttp:4.9.1"
+    implementation "com.squareup.okhttp3:logging-interceptor:4.9.1"
 
     //viewpagerIndicator
     implementation 'com.github.zhpanvip:viewpagerindicator:1.2.0'
