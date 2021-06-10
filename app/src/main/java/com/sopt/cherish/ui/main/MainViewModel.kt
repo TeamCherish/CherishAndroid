@@ -8,6 +8,7 @@ import com.sopt.cherish.repository.*
 import com.sopt.cherish.util.DateUtil
 import com.sopt.cherish.util.SimpleLogger
 import com.sopt.cherish.util.SingleLiveEvent
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.util.*
@@ -120,16 +121,17 @@ class MainViewModel(
 
     val delayWateringDateText = "${todayMonth}월${todayDay}일에 물주기"
 
+    // todo : 이녀석 timeOut이 발생하는데 이유를 모르겠음;;;
+    // todo : 포스트맨 결과 서버 문제임
     fun postponeWateringDate(postponeWateringDateReq: PostponeWateringDateReq) =
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.Default) {
             runCatching {
                 wateringRepository.postponeWateringDate(postponeWateringDateReq)
             }.onSuccess {
                 SimpleLogger.logI(it.message)
-                delay(2000)
-                fetchUsers()
+                delayFetchUsers()
             }.onFailure { error ->
-                errorHandleLivedata.value = error.message
+                errorHandleLivedata.postValue(error.message)
             }
         }
 
