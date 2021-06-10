@@ -41,7 +41,9 @@
             setImageSizeGrowth="@{mainViewModel.selectedCherishUser.growth}"
             setImageSizePlantName="@{mainViewModel.selectedCherishUser.plantName}"
             setImageSizedDay="@{mainViewModel.selectedCherishUser.DDay}"
-            setIsWatered="@{mainViewModel.isWatered()}"
+            delayPlantGrowth="@{mainViewModel.selectedCherishUser.growth}"
+            delayPlantIsWatered="@{mainViewModel.isWatered()}"
+            delayPlantName="@{mainViewModel.selectedCherishUser.plantName}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
 
