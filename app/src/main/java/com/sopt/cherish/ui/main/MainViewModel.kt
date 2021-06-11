@@ -146,4 +146,16 @@ class MainViewModel(
         }
     }
 
+    // send RemindReview
+    fun remindReviewToServer(notificationRemindReviewReq: NotificationRemindReviewReq) =
+        viewModelScope.launch {
+            runCatching {
+                notificationRepository.sendRemindReviewNotification(notificationRemindReviewReq)
+            }.onSuccess {
+                SimpleLogger.logI(it.message)
+            }.onFailure { error ->
+                errorHandleLivedata.value = error.message
+            }
+        }
+
 }
