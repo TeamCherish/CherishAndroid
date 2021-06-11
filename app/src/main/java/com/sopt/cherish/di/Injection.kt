@@ -88,7 +88,7 @@ object Injection {
 
     // review di
     fun provideReviewViewModelFactory(): ViewModelProvider.Factory {
-        return ReviewViewModelFactory(provideReviewRepository())
+        return ReviewViewModelFactory(provideReviewRepository(), provideNotificationRepository())
     }
 
     // notification di

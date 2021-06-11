@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.ActivityReviewBinding
 import com.sopt.cherish.di.Injection
+import com.sopt.cherish.remote.api.NotificationRemindReviewReq
 import com.sopt.cherish.remote.api.ReviewWateringReq
 import com.sopt.cherish.util.MultiViewDialog
 import com.sopt.cherish.util.SimpleLogger
@@ -34,6 +35,7 @@ class ReviewActivity : AppCompatActivity() {
         initializeViewModelData()
         binding.reviewViewModel = viewModel
         binding.lifecycleOwner = this
+        viewModel.remindReviewToServer(NotificationRemindReviewReq(cherishId = viewModel.selectedCherishId))
         reviewNotificationViewModel.startNotificationTimer()
         observeErrorHandleLiveData()
         addUserStatusWithChip(binding)

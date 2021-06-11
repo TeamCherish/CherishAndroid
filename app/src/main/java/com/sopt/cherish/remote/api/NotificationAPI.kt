@@ -24,6 +24,4 @@ interface NotificationAPI {
     suspend fun sendRemindReviewNotification(
         @Body notificationRemindReviewReq: NotificationRemindReviewReq
     ): UtilResponseWithOutStatus
-
-
 }
