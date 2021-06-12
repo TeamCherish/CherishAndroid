@@ -52,7 +52,6 @@ class ReviewFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewModel.sendRemindReview(NotificationRemindReviewReq(viewModel.selectedCherishUser.value?.id!!))
     }
 
     override fun onDestroyView() {
@@ -92,6 +91,7 @@ class ReviewFragment : Fragment() {
     }
 
     private fun sendReviewToServer(binding: FragmentReviewBinding) {
+        viewModel.sendRemindReview(NotificationRemindReviewReq(viewModel.selectedCherishUser.value?.id!!))
         binding.homeReviewAdminAccept.setOnClickListener {
             if (binding.homeReviewFlexBox.getChipsCount() == 0 && binding.homeReviewMemo.text.isEmpty()) {
                 MultiViewDialog(
@@ -136,6 +136,7 @@ class ReviewFragment : Fragment() {
     }
 
     private fun ignoreSendReviewToServer(binding: FragmentReviewBinding) {
+        viewModel.sendRemindReview(NotificationRemindReviewReq(viewModel.selectedCherishUser.value?.id!!))
         binding.homeReviewIgnoreAccept.setOnClickListener {
             reviewNotificationViewModel.cancel()
             viewModel.sendReviewToServer(
