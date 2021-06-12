@@ -38,16 +38,6 @@
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginStart="9dp" />
 
-    <ImageView
-        android:contentDescription="@null"
-        android:id="@+id/indicator_fourth"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:src="@drawable/sign_up_indicator_off"
-        app:layout_constraintStart_toEndOf="@+id/indicator_third"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginStart="9dp" />
 
     <TextView
         android:id="@+id/email_text"

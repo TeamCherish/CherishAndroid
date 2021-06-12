@@ -66,10 +66,6 @@ class SignUpActivity : AppCompatActivity() {
                     .commit()
 
             2 ->
-                transAction.replace(R.id.fragment_signup, SignUpThirdFragment())
-                    .addToBackStack(null)
-                    .commit()
-            3 ->
                 transAction.replace(R.id.fragment_signup, SignUpFourthFragment())
                     .addToBackStack(null)
                     .commit()
