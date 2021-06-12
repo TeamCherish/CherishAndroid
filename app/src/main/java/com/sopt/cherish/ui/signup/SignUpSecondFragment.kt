@@ -58,7 +58,6 @@ class SignUpSecondFragment : Fragment() {
                 //휴대폰번호 유효성 검사
                 if (isPhoneNumberValid(phoneNumber)) {
                     binding.certificationBtn.setOnClickListener {
-                        Log.d("phoneNumber", phoneNumber)
                         requestServer(phoneNumber)
 
                         binding.certificationBtn.visibility = View.GONE
@@ -129,8 +128,6 @@ class SignUpSecondFragment : Fragment() {
             override fun afterTextChanged(s: Editable?) {
                 certificationNumber = binding.userCertificationNumber.text.toString()
 
-                Log.d("last 입력", certificationNumber)
-                Log.d("last data", authData)
                 if (authData == certificationNumber) {
                     binding.certificationOk.visibility = View.VISIBLE
                     binding.certificationOk.text = "인증번호가 일치합니다."
