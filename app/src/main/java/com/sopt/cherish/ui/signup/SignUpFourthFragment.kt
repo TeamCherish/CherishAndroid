@@ -52,10 +52,8 @@ class SignUpFourthFragment : Fragment() {
         email = bundle.getString("email").toString()
         password = bundle.getString("password").toString()
         phone = bundle.getString("phone").toString()
-        sex = bundle.getBoolean("sex")
-        birth = bundle.getString("birth").toString()
-
-        Log.d("final", sex.toString())
+        sex = true
+        birth = "0000"
 
         initializeLink()
         initializeNickName()
