@@ -103,10 +103,10 @@ class ReviewActivity : AppCompatActivity() {
     }
 
     private fun sendReviewToServer(binding: ActivityReviewBinding) {
-        viewModel.remindReviewToServer(NotificationRemindReviewReq(cherishId = viewModel.selectedCherishId))
         binding.reviewAdminAccept.setOnClickListener {
             if (binding.reviewMemo.text.length <= 100) {
                 reviewNotificationViewModel.cancel()
+                viewModel.remindReviewToServer(NotificationRemindReviewReq(cherishId = viewModel.selectedCherishId))
                 viewModel.sendReviewToServer(
                     reviewWateringReq = ReviewWateringReq(
                         binding.reviewMemo.text.toString(),
@@ -137,8 +137,8 @@ class ReviewActivity : AppCompatActivity() {
     }
 
     private fun ignoreSendReviewToServer(binding: ActivityReviewBinding) {
-        viewModel.remindReviewToServer(NotificationRemindReviewReq(cherishId = viewModel.selectedCherishId))
         binding.reviewIgnoreAccept.setOnClickListener {
+            viewModel.remindReviewToServer(NotificationRemindReviewReq(cherishId = viewModel.selectedCherishId))
             reviewNotificationViewModel.cancel()
             viewModel.sendReviewToServer(
                 reviewWateringReq = ReviewWateringReq(

@@ -12,7 +12,6 @@ import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentReviewBinding
-import com.sopt.cherish.remote.api.NotificationRemindReviewReq
 import com.sopt.cherish.remote.api.ReviewWateringReq
 import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.util.MultiViewDialog
@@ -49,9 +48,6 @@ class ReviewFragment : Fragment() {
         sendReviewToServer(binding)
         ignoreSendReviewToServer(binding)
         return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
     }
 
     override fun onDestroyView() {
@@ -91,7 +87,6 @@ class ReviewFragment : Fragment() {
     }
 
     private fun sendReviewToServer(binding: FragmentReviewBinding) {
-        viewModel.sendRemindReview(NotificationRemindReviewReq(viewModel.selectedCherishUser.value?.id!!))
         binding.homeReviewAdminAccept.setOnClickListener {
             if (binding.homeReviewFlexBox.getChipsCount() == 0 && binding.homeReviewMemo.text.isEmpty()) {
                 MultiViewDialog(
@@ -136,7 +131,6 @@ class ReviewFragment : Fragment() {
     }
 
     private fun ignoreSendReviewToServer(binding: FragmentReviewBinding) {
-        viewModel.sendRemindReview(NotificationRemindReviewReq(viewModel.selectedCherishUser.value?.id!!))
         binding.homeReviewIgnoreAccept.setOnClickListener {
             reviewNotificationViewModel.cancel()
             viewModel.sendReviewToServer(
