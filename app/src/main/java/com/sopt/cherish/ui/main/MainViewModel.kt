@@ -78,24 +78,24 @@ class MainViewModel(
 
 
     // notification
-    fun sendFcmToken(notificationReq: NotificationReq) = viewModelScope.launch {
+    fun sendFcmToken(notificationReq: NotificationReq) = viewModelScope.launch(Dispatchers.IO) {
         runCatching {
             notificationRepository.sendFcmToken(notificationReq)
         }.onSuccess {
             SimpleLogger.logI("send token successful")
         }.onFailure { error ->
-            errorHandleLivedata.value = error.message
+            errorHandleLivedata.postValue(error.message)
         }
     }
 
     fun sendRemindReview(notificationRemindReviewReq: NotificationRemindReviewReq) =
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             runCatching {
                 notificationRepository.sendRemindReviewNotification(notificationRemindReviewReq)
             }.onSuccess {
                 SimpleLogger.logI(it.message)
             }.onFailure { error ->
-                errorHandleLivedata.value = error.message
+                errorHandleLivedata.postValue(error.message)
             }
         }
 
@@ -104,13 +104,13 @@ class MainViewModel(
     val calendarData: MutableLiveData<CalendarRes?>
         get() = _calendarData
 
-    fun fetchCalendarData() = viewModelScope.launch {
+    fun fetchCalendarData() = viewModelScope.launch(Dispatchers.IO) {
         runCatching {
             selectedCherishUser.value?.let { calendarRepository.getChipsData(it.id) }
         }.onSuccess {
-            _calendarData.value = it
+            _calendarData.postValue(it)
         }.onFailure { error ->
-            errorHandleLivedata.value = error.message
+            errorHandleLivedata.postValue(error.message)
         }
     }
 
@@ -156,4 +156,16 @@ class MainViewModel(
             }
         }
 
+    // 푸시알림이 다시 오게끔 하는 api
+    // todo : 일단 작동이 안된다고 해서 서버에서 끝났다고 하는대로 붙일 예정
+    fun remindReviewNotificationToServer(cherishId: Int) =
+        viewModelScope.launch(Dispatchers.IO) {
+            runCatching {
+                notificationRepository.sendRemindNotification(cherishId)
+            }.onSuccess {
+                SimpleLogger.logI(it.message)
+            }.onFailure { error ->
+                errorHandleLivedata.postValue(error.message)
+            }
+        }
 }
