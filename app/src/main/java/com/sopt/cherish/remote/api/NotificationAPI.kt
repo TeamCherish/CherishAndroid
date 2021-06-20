@@ -27,6 +27,6 @@ interface NotificationAPI {
 
     @POST("push")
     suspend fun remindNotification(
-        @Body cherishId: Int
+        @Body notificationRemindReviewReq: NotificationRemindReviewReq
     ): UtilResponseWithOutStatus
 }

@@ -106,7 +106,7 @@ class ReviewActivity : AppCompatActivity() {
         binding.reviewAdminAccept.setOnClickListener {
             if (binding.reviewMemo.text.length <= 100) {
                 reviewNotificationViewModel.cancel()
-                viewModel.remindReviewToServer(NotificationRemindReviewReq(cherishId = viewModel.selectedCherishId))
+                viewModel.remindReviewNotificationToServer(viewModel.selectedCherishId)
                 viewModel.sendReviewToServer(
                     reviewWateringReq = ReviewWateringReq(
                         binding.reviewMemo.text.toString(),

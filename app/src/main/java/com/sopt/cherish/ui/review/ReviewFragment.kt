@@ -100,6 +100,9 @@ class ReviewFragment : Fragment() {
             } else {
                 if (binding.homeReviewMemo.text.length <= 100) {
                     reviewNotificationViewModel.cancel()
+
+                    // todo : 이거 지금 실패하고 있는거 같아요.
+                    viewModel.remindReviewNotificationToServer(viewModel.selectedCherishUser.value!!.id)
                     viewModel.sendReviewToServer(
                         ReviewWateringReq(
                             binding.homeReviewMemo.text.toString(),
@@ -133,6 +136,7 @@ class ReviewFragment : Fragment() {
     private fun ignoreSendReviewToServer(binding: FragmentReviewBinding) {
         binding.homeReviewIgnoreAccept.setOnClickListener {
             reviewNotificationViewModel.cancel()
+            viewModel.remindReviewNotificationToServer(viewModel.selectedCherishUser.value!!.id)
             viewModel.sendReviewToServer(
                 reviewWateringReq = ReviewWateringReq(
                     null,

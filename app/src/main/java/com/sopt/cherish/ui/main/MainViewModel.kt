@@ -157,11 +157,10 @@ class MainViewModel(
         }
 
     // 푸시알림이 다시 오게끔 하는 api
-    // todo : 일단 작동이 안된다고 해서 서버에서 끝났다고 하는대로 붙일 예정
     fun remindReviewNotificationToServer(cherishId: Int) =
         viewModelScope.launch(Dispatchers.IO) {
             runCatching {
-                notificationRepository.sendRemindNotification(cherishId)
+                notificationRepository.sendRemindNotification(NotificationRemindReviewReq(cherishId))
             }.onSuccess {
                 SimpleLogger.logI(it.message)
             }.onFailure { error ->
