@@ -14,6 +14,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.sopt.cherish.MainApplication
@@ -22,6 +23,7 @@ import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.util.PixelUtil.dp
 import com.sopt.cherish.util.animation.ProgressbarAnimation
 import kotlin.math.abs
+
 
 /**
  * Create by SSong-develop
@@ -67,6 +69,7 @@ object BindingAdapter {
                     .asGif()
                     .load(R.raw.watering)
                     .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                    .transition(withCrossFade())
                     .into(imageView)
                 val delayHandler = Handler(imageView.context.mainLooper)
                 delayHandler.postDelayed({

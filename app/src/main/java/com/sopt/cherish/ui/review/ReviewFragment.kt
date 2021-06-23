@@ -12,7 +12,6 @@ import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.sopt.cherish.R
 import com.sopt.cherish.databinding.FragmentReviewBinding
-import com.sopt.cherish.remote.api.NotificationRemindReviewReq
 import com.sopt.cherish.remote.api.ReviewWateringReq
 import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.util.MultiViewDialog
@@ -49,10 +48,6 @@ class ReviewFragment : Fragment() {
         sendReviewToServer(binding)
         ignoreSendReviewToServer(binding)
         return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        viewModel.sendRemindReview(NotificationRemindReviewReq(viewModel.selectedCherishUser.value?.id!!))
     }
 
     override fun onDestroyView() {
@@ -105,6 +100,9 @@ class ReviewFragment : Fragment() {
             } else {
                 if (binding.homeReviewMemo.text.length <= 100) {
                     reviewNotificationViewModel.cancel()
+
+                    // todo : 이거 지금 실패하고 있는거 같아요.
+                    viewModel.remindReviewNotificationToServer(viewModel.selectedCherishUser.value!!.id)
                     viewModel.sendReviewToServer(
                         ReviewWateringReq(
                             binding.homeReviewMemo.text.toString(),
@@ -138,6 +136,7 @@ class ReviewFragment : Fragment() {
     private fun ignoreSendReviewToServer(binding: FragmentReviewBinding) {
         binding.homeReviewIgnoreAccept.setOnClickListener {
             reviewNotificationViewModel.cancel()
+            viewModel.remindReviewNotificationToServer(viewModel.selectedCherishUser.value!!.id)
             viewModel.sendReviewToServer(
                 reviewWateringReq = ReviewWateringReq(
                     null,

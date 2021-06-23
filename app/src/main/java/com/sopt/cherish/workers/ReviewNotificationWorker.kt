@@ -16,7 +16,7 @@ class ReviewNotificationWorker(
     private val minute: Long = second * 60L
     override suspend fun doWork(): Result {
         return try {
-            delay(360 * second)
+            delay(1800 * second)
             val notificationManager = Injection.provideNotificationManager(context)
             notificationManager.sendRecallReviewNotification(
                 context.getString(R.string.notification_recall_review_subtitle),

@@ -78,24 +78,24 @@ class MainViewModel(
 
 
     // notification
-    fun sendFcmToken(notificationReq: NotificationReq) = viewModelScope.launch {
+    fun sendFcmToken(notificationReq: NotificationReq) = viewModelScope.launch(Dispatchers.IO) {
         runCatching {
             notificationRepository.sendFcmToken(notificationReq)
         }.onSuccess {
             SimpleLogger.logI("send token successful")
         }.onFailure { error ->
-            errorHandleLivedata.value = error.message
+            errorHandleLivedata.postValue(error.message)
         }
     }
 
     fun sendRemindReview(notificationRemindReviewReq: NotificationRemindReviewReq) =
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             runCatching {
                 notificationRepository.sendRemindReviewNotification(notificationRemindReviewReq)
             }.onSuccess {
                 SimpleLogger.logI(it.message)
             }.onFailure { error ->
-                errorHandleLivedata.value = error.message
+                errorHandleLivedata.postValue(error.message)
             }
         }
 
@@ -104,13 +104,13 @@ class MainViewModel(
     val calendarData: MutableLiveData<CalendarRes?>
         get() = _calendarData
 
-    fun fetchCalendarData() = viewModelScope.launch {
+    fun fetchCalendarData() = viewModelScope.launch(Dispatchers.IO) {
         runCatching {
             selectedCherishUser.value?.let { calendarRepository.getChipsData(it.id) }
         }.onSuccess {
-            _calendarData.value = it
+            _calendarData.postValue(it)
         }.onFailure { error ->
-            errorHandleLivedata.value = error.message
+            errorHandleLivedata.postValue(error.message)
         }
     }
 
@@ -121,8 +121,6 @@ class MainViewModel(
 
     val delayWateringDateText = "${todayMonth}월${todayDay}일에 물주기"
 
-    // todo : 이녀석 timeOut이 발생하는데 이유를 모르겠음;;;
-    // todo : 포스트맨 결과 서버 문제임
     fun postponeWateringDate(postponeWateringDateReq: PostponeWateringDateReq) =
         viewModelScope.launch(Dispatchers.Default) {
             runCatching {
@@ -158,4 +156,15 @@ class MainViewModel(
             }
         }
 
+    // 푸시알림이 다시 오게끔 하는 api
+    fun remindReviewNotificationToServer(cherishId: Int) =
+        viewModelScope.launch(Dispatchers.IO) {
+            runCatching {
+                notificationRepository.sendRemindNotification(NotificationRemindReviewReq(cherishId))
+            }.onSuccess {
+                SimpleLogger.logI(it.message)
+            }.onFailure { error ->
+                errorHandleLivedata.postValue(error.message)
+            }
+        }
 }

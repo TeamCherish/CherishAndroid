@@ -9,6 +9,7 @@ import com.sopt.cherish.remote.api.ReviewWateringRes
 import com.sopt.cherish.repository.NotificationRepository
 import com.sopt.cherish.repository.ReviewRepository
 import com.sopt.cherish.util.SimpleLogger
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class ReviewViewModel(
@@ -47,6 +48,18 @@ class ReviewViewModel(
                 SimpleLogger.logI(it.message)
             }.onFailure { error ->
                 errorHandleLiveData.value = error.message
+            }
+        }
+
+    // 푸시알림이 다시 오게끔 하는 api
+    fun remindReviewNotificationToServer(cherishId: Int) =
+        viewModelScope.launch(Dispatchers.IO) {
+            runCatching {
+                notificationRepository.sendRemindNotification(NotificationRemindReviewReq(cherishId))
+            }.onSuccess {
+                SimpleLogger.logI(it.message)
+            }.onFailure { error ->
+                errorHandleLiveData.postValue(error.message)
             }
         }
 }

@@ -12,4 +12,7 @@ class NotificationRepository(
 
     suspend fun sendRemindReviewNotification(notificationRemindReviewReq: NotificationRemindReviewReq) =
         notificationAPI.sendRemindReviewNotification(notificationRemindReviewReq)
+
+    suspend fun sendRemindNotification(notificationRemindReviewReq: NotificationRemindReviewReq) =
+        notificationAPI.remindNotification(notificationRemindReviewReq)
 }

@@ -3,6 +3,8 @@ package com.sopt.cherish.util
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade
 import com.sopt.cherish.R
 import com.sopt.cherish.util.PixelUtil.dp
 import com.sopt.cherish.util.extension.ImageViewExtension.matchSizeImageView
@@ -332,7 +334,10 @@ object PlantImageBindingAdapter {
                                         "단모환" -> R.raw.sun_android
                                         else -> R.raw.cherish_loading
                                     }
-                                ).into(imageView)
+                                )
+                                .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                                .transition(withCrossFade())
+                                .into(imageView)
                         }
                     }
                 }
