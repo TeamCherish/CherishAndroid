@@ -20,7 +20,6 @@ import com.sopt.cherish.remote.api.NotificationRemindReviewReq
 import com.sopt.cherish.ui.main.MainViewModel
 import com.sopt.cherish.ui.review.ReviewFragment
 import com.sopt.cherish.util.DialogUtil
-import com.sopt.cherish.util.PermissionUtil
 import com.sopt.cherish.util.extension.ContextExtension.isInstalledApp
 import com.sopt.cherish.util.extension.ContextExtension.moveMarket
 import com.sopt.cherish.util.extension.FlexBoxExtension.addBlackChipModeChoice
@@ -30,6 +29,8 @@ import com.sopt.cherish.util.extension.FlexBoxExtension.clearChips
  * Created on 2020-01-03 by SSong-develop
  * popUp_Contact
  * 끝! 진짜 끝! 멘트만 수정하면 됨!!!
+ *
+ * TODO : 여기 ACTION_DIAL로 변경한 다음에 되는지 안되는지 내일 확인!!!
  */
 
 class ContactDialogFragment : DialogFragment(), View.OnClickListener {
@@ -82,19 +83,23 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
     }
 
     fun navigateCall() {
-        if (PermissionUtil.isCheckedCallPermission(requireContext())) {
-            startPhoneCall()
+/*        if (PermissionUtil.isCheckedCallPermission(requireContext())) {
+
         } else {
             PermissionUtil.openPermissionSettings(requireContext())
-        }
+        }*/
+
+        startPhoneCall()
     }
 
     fun navigateToSendMessage() {
-        if (PermissionUtil.isCheckedSendMessagePermission(requireContext())) {
-            startSendMessage()
+/*        if (PermissionUtil.isCheckedSendMessagePermission(requireContext())) {
+
         } else {
             PermissionUtil.openPermissionSettings(requireContext())
-        }
+        }*/
+
+        startSendMessage()
     }
 
     fun navigateKakao() {
@@ -114,7 +119,7 @@ class ContactDialogFragment : DialogFragment(), View.OnClickListener {
     private fun startPhoneCall() {
         val callIntent =
             Intent(
-                Intent.ACTION_CALL,
+                Intent.ACTION_DIAL,
                 Uri.parse("tel:${viewModel.selectedCherishUser.value!!.phoneNumber}")
             )
         startActivityForResult(

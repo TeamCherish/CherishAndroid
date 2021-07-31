@@ -146,19 +146,21 @@ class MainActivity : AppCompatActivity() {
 
             when (it.itemId) {
                 R.id.main_home -> {
-                    if (PermissionUtil.isCheckedSendMessagePermission(this) && PermissionUtil.isCheckedCallPermission(
+/*                    if (PermissionUtil.isCheckedSendMessagePermission(this) && PermissionUtil.isCheckedCallPermission(
                             this
                         )
                     ) {
-                        transAction.replace(R.id.main_fragment_container, HomeFragment().apply {
-                            arguments = Bundle().apply {
-                                putInt("userid", intent.getIntExtra("userId", 0))
-                            }
-                        }).commit()
+
                     } else {
                         shortToast(this, "권한이 설정되어 있지 않아 앱을 사용할 수 없습니다")
                         openSettings()
-                    }
+                    }*/
+
+                    transAction.replace(R.id.main_fragment_container, HomeFragment().apply {
+                        arguments = Bundle().apply {
+                            putInt("userid", intent.getIntExtra("userId", 0))
+                        }
+                    }).commit()
                     true
                 }
                 R.id.main_manage_plant -> {
