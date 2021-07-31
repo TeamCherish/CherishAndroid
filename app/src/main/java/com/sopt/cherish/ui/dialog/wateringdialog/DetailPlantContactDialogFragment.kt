@@ -17,7 +17,6 @@ import com.sopt.cherish.databinding.DialogDetailPlantContactBinding
 import com.sopt.cherish.ui.detail.DetailPlantViewModel
 import com.sopt.cherish.ui.review.ReviewActivity
 import com.sopt.cherish.util.DialogUtil
-import com.sopt.cherish.util.PermissionUtil
 import com.sopt.cherish.util.extension.ContextExtension.isInstalledApp
 import com.sopt.cherish.util.extension.ContextExtension.moveMarket
 import com.sopt.cherish.util.extension.FlexBoxExtension.addBlackChipModeChoice
@@ -77,19 +76,25 @@ class DetailPlantContactDialogFragment : DialogFragment(),
     }
 
     fun navigateCall() {
+/*
         if (PermissionUtil.isCheckedCallPermission(requireContext())) {
-            startPhoneCall()
+
         } else {
             PermissionUtil.openPermissionSettings(requireContext())
         }
+*/
+
+        startPhoneCall()
     }
 
     fun navigateToSendMessage() {
-        if (PermissionUtil.isCheckedSendMessagePermission(requireContext())) {
-            startSendMessage()
+/*        if (PermissionUtil.isCheckedSendMessagePermission(requireContext())) {
+
         } else {
             PermissionUtil.openPermissionSettings(requireContext())
-        }
+        }*/
+
+        startSendMessage()
     }
 
     fun navigateKakao() {

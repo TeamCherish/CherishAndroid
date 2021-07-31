@@ -25,9 +25,6 @@ object PermissionUtil {
             activity,
             listOf(
                 android.Manifest.permission.READ_CONTACTS,
-                android.Manifest.permission.CALL_PHONE,
-                android.Manifest.permission.SEND_SMS,
-                android.Manifest.permission.CAMERA,
                 android.Manifest.permission.READ_EXTERNAL_STORAGE,
                 android.Manifest.permission.WRITE_EXTERNAL_STORAGE
             ), listener
@@ -82,14 +79,14 @@ object PermissionUtil {
         })
     }
 
-    fun isCheckedCallPermission(context: Context): Boolean {
+/*    fun isCheckedCallPermission(context: Context): Boolean {
         if (ContextCompat.checkSelfPermission(
                 context,
                 android.Manifest.permission.CALL_PHONE
             ) == PackageManager.PERMISSION_GRANTED
         ) return true
         return false
-    }
+    }*/
 
     fun isCheckedReadContactsPermission(context: Context): Boolean {
         if (ContextCompat.checkSelfPermission(
@@ -100,14 +97,14 @@ object PermissionUtil {
         return false
     }
 
-    fun isCheckedSendMessagePermission(context: Context): Boolean {
+/*    fun isCheckedSendMessagePermission(context: Context): Boolean {
         if (ContextCompat.checkSelfPermission(
                 context,
                 android.Manifest.permission.SEND_SMS
             ) == PackageManager.PERMISSION_GRANTED
         ) return true
         return false
-    }
+    }*/
 
     interface PermissionListener {
         /**
