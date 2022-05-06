@@ -7,7 +7,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitBuilder {
-    private const val BaseUrl = "http://cherishserver.com/"
+    private const val BaseUrl = "http://3.39.63.248:8080/"
 
     fun getRetrofit(): Retrofit {
         return Retrofit.Builder()
